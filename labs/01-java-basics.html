@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Set up the JDK and an IDE, then write a first Java program that uses variables, primitive types, type casting, if/switch decisions and the three loops.">
+<meta name="keywords" content="java lab, data types, type casting, switch, for loop, while loop, do-while, cse 202, object oriented programming lab">
+<meta name="author" content="Object Oriented Programming Lab Notes">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#155E63">
+<link rel="canonical" href="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/01-java-basics.html">
+<link rel="icon" type="image/svg+xml" href="../img/logo-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../img/favicon-16.png">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
+<meta property="og:title" content="Lab 1: Java Syntax, Data Types &amp; Control Flow | OOP Lab (CSE 202)">
+<meta property="og:description" content="Set up the JDK and an IDE, then write a first Java program that uses variables, primitive types, type casting, if/switch decisions and the three loops.">
+<meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/01-java-basics.html">
+<meta name="twitter:card" content="summary">
+<title>Lab 1: Java Syntax, Data Types &amp; Control Flow | OOP Lab (CSE 202)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/lab.css">
+</head>
+<body class="deck-page">
+<div class="sr-only" id="live" aria-live="polite"></div>
+<header class="deck-bar">
+  <a class="home-link" href="../index.html" aria-label="Home: all labs"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
+  <div class="deck-title"><span class="badge">1</span><span>Java Syntax, Data Types &amp; Control Flow</span></div>
+  <div class="deck-actions">
+    <button type="button" class="btn sm" id="btn-menu" aria-expanded="false" aria-controls="slide-menu" aria-label="Slides"><svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><rect x="3" y="4.5" width="18" height="3" rx="1"></rect><rect x="3" y="10.5" width="18" height="3" rx="1"></rect><rect x="3" y="16.5" width="18" height="3" rx="1"></rect></svg><span>Slides</span></button>
+    <button type="button" class="btn sm" id="btn-theme" aria-pressed="false" aria-label="Toggle dark mode"><svg class="btn-ic" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"></path></svg><span>Dark mode</span></button>
+    <button type="button" class="btn sm" id="btn-fs" aria-pressed="false" aria-label="Full screen"><svg class="btn-ic" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"></path></svg><span>Full screen</span></button>
+  </div>
+</header>
+<div class="deck-progress"><i id="progress-fill"></i></div>
+<main class="deck" id="deck">
+<section class="slide title-slide" data-title="Java Syntax, Data Types &amp; Control Flow" aria-label="Java Syntax, Data Types &amp; Control Flow" tabindex="-1"><div class="slide-inner">
+<span class="topic-art" data-art="1" aria-hidden="true"></span>
+<span class="badge big">1</span>
+<p class="kicker">Lab Manual I · CSE 202</p>
+<h1>Java Syntax, Data Types & Control Flow</h1>
+<p class="lead">Set up the JDK and an IDE, then write a first Java program that uses variables, primitive types, type casting, if/switch decisions and the three loops.</p>
+<div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
+<p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
+</div></section>
+<section class="slide " data-title="Why this lab" aria-label="Why this lab" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Before we start</p><h2>Why this lab</h2><div class="hook"><p class="q">Every Java program you write this semester — bank systems, threads, GUIs — is built from the same few pieces. Which ones?</p><p>Variables hold data, types say what kind of data, decisions choose a path and loops repeat work. This lab puts all of them in one program, <code>Lab1Demo</code>.</p></div>
+</div></section>
+<section class="slide " data-title="Lab at a glance" aria-label="Lab at a glance" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab 1 of 10</p><h2>Lab at a glance</h2><div class="cols wl"><div><h3>After this lab you can</h3><ul class=""><li>Set up and verify a JDK (11+) with NetBeans, Eclipse or IntelliJ IDEA</li><li>Explain how source code becomes bytecode that the JVM runs</li><li>Declare variables of the eight primitive types and <code>String</code></li><li>Apply widening and narrowing casts</li><li>Use <code>if / else if / else</code> and <code>switch</code></li><li>Repeat work with <code>for</code>, <code>while</code> and <code>do-while</code>; control loops with <code>break</code> and <code>continue</code></li></ul></div>
+<div><h3>Before you start</h3><ul class=""><li>Create folders and save files</li><li>Basic idea of variables, expressions, input and output</li><li>JDK 11+ and an IDE installed</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
+</div></section>
+<section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab 1 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Install Java and NetBeans</a></li><li><a href="#s=9">Theory recap</a></li><li><a href="#s=17">Program design</a></li><li><a href="#s=18">Code walkthrough</a></li><li><a href="#s=29">Expected output</a></li><li><a href="#s=30">Interactive demos</a></li><li><a href="#s=33">In-lab tasks</a></li><li><a href="#s=38">Lab report exercises</a></li><li><a href="#s=41">Viva questions and quiz</a></li></ol>
+</div></section>
+<section class="slide " data-title="Which Java do you need?" aria-label="Which Java do you need?" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Setting up · 1 of 4</p><h2>Which Java do you need?</h2><ul class="big-list"><li>A <b>JDK</b> (Java Development Kit): it contains the compiler <code>javac</code> and the runtime <code>java</code>. A JRE alone cannot compile.</li><li>Use a current <b>LTS</b> release (JDK 21 or 25). The manual needs JDK 11 or later.</li><li>Install the JDK <b>first</b>, then the IDE: this course uses <b>Apache NetBeans</b>.</li><li>On the next slides, pick your operating system and click through the steps.</li></ul>
+</div></section>
+<section class="slide " data-title="Install the JDK" aria-label="Install the JDK" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Setting up · 2 of 4</p><h2>Install the JDK</h2><div class="os-setup" data-setup="jdk"></div>
+</div></section>
+<section class="slide " data-title="Install Apache NetBeans" aria-label="Install Apache NetBeans" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Setting up · 3 of 4</p><h2>Install Apache NetBeans</h2><div class="os-setup" data-setup="nb"></div>
+</div></section>
+<section class="slide " data-title="Your first project in NetBeans" aria-label="Your first project in NetBeans" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Setting up · 4 of 4</p><h2>Your first project in NetBeans</h2><div class="os-setup" data-setup="proj"></div>
+</div></section>
+<section class="slide " data-title="From .java to a running program" aria-label="From .java to a running program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 1 of 6</p><h2>From .java to a running program</h2><figure class="fig" data-fig="jvm-pipeline"></figure><ul class=""><li>You write <code>Lab1Demo.java</code>; <code>javac</code> compiles it to bytecode in <code>Lab1Demo.class</code>.</li><li>The JVM loads the bytecode and starts at <code>main</code>: “write once, run anywhere”.</li><li>A <code>public</code> class must live in a file with the same name.</li></ul>
+</div></section>
+<section class="slide " data-title="Structure of a Java program" aria-label="Structure of a Java program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 2 of 6</p><h2>Structure of a Java program</h2><pre class="code small-code">public class Lab1Demo {
+    public static void main(String[] args) {
+        System.out.println(&quot;Hello, Java!&quot;);
+    }
+}</pre><ul class=""><li>Every statement lives inside a class; execution begins in <code>main</code>.</li><li><code>System.out.println()</code> prints a line to the console.</li><li>Check your setup: compile and run this before starting the tasks.</li></ul>
+</div></section>
+<section class="slide " data-title="Variables and the eight primitive types" aria-label="Variables and the eight primitive types" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 3 of 6</p><h2>Variables and the eight primitive types</h2><div class="scrollx"><table class="doc"><thead><tr><th>Type</th><th>Holds</th><th>Example</th></tr></thead><tbody><tr><td>byte / short</td><td>small integers</td><td><code>byte b = 100;</code></td></tr><tr><td>int</td><td>common integers</td><td><code>int age = 21;</code></td></tr><tr><td>long</td><td>large integers (suffix L)</td><td><code>long pop = 9876543210L;</code></td></tr><tr><td>float</td><td>single-precision (suffix f)</td><td><code>float gpa = 3.75f;</code></td></tr><tr><td>double</td><td>double-precision decimals</td><td><code>double h = 5.91;</code></td></tr><tr><td>char</td><td>one character</td><td><code>char grade = 'A';</code></td></tr><tr><td>boolean</td><td>true / false</td><td><code>boolean ok = true;</code></td></tr></tbody></table></div><ul class=""><li>Java is <b>statically typed</b>: every variable has a declared type. <code>String</code> is a reference type for text.</li></ul>
+</div></section>
+<section class="slide " data-title="Type casting" aria-label="Type casting" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 4 of 6</p><h2>Type casting</h2><figure class="fig" data-fig="widening"></figure><ul class=""><li><b>Widening</b> (small → large) is automatic and safe.</li><li><b>Narrowing</b> needs a cast and may lose data: the fraction is cut off, not rounded.</li></ul>
+</div></section>
+<section class="slide " data-title="Type casting (code)" aria-label="Type casting (code)" tabindex="-1"><div class="slide-inner">
+<h2>Type casting</h2><pre class="code small-code">double d = 25;            // widening: automatic -&gt; 25.0
+int price = (int) 99.99;  // narrowing: explicit -&gt; 99</pre>
+</div></section>
+<section class="slide " data-title="Decisions: if-else and switch" aria-label="Decisions: if-else and switch" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 5 of 6</p><h2>Decisions: if-else and switch</h2><figure class="fig" data-fig="if-flow"></figure><ul class=""><li>Use <code>if / else if / else</code> for ranges and conditions.</li><li>Use <code>switch</code> to compare one value against fixed cases; forget <code>break</code> and execution falls through.</li></ul>
+</div></section>
+<section class="slide " data-title="Decisions: if-else and switch (code)" aria-label="Decisions: if-else and switch (code)" tabindex="-1"><div class="slide-inner">
+<h2>Decisions: if-else and switch</h2><pre class="code small-code">switch (score / 10) {
+    case 10: case 9: grade = &#x27;A&#x27;; break;
+    case 8:          grade = &#x27;B&#x27;; break;
+    default:         grade = &#x27;F&#x27;;
+}</pre>
+</div></section>
+<section class="slide " data-title="Loops, break and continue" aria-label="Loops, break and continue" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 6 of 6</p><h2>Loops, break and continue</h2><figure class="fig" data-fig="loop-flow"></figure><ul class=""><li><code>for</code>: number of iterations known in advance (summation).</li><li><code>while</code>: repeat while a condition holds (reverse digits).</li><li><code>do-while</code>: body runs at least once (Collatz sequence).</li><li><code>break</code> leaves the loop; <code>continue</code> skips to the next iteration.</li></ul>
+</div></section>
+<section class="slide " data-title="Execution flow" aria-label="Execution flow" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Implementation design</p><h2>Execution flow</h2><ol class="flow"><li>Declare and print the eight primitive variables and a String</li><li>Widen an int to double, narrow a double to int, convert char ↔ int</li><li>Classify a number (positive/zero/negative) and a BMI with if-else</li><li>Assign a letter grade with switch</li><li>Sum 1..10 with for; print even numbers using continue and break</li><li>Reverse digits with while</li><li>Print the Collatz sequence of 27 with do-while</li></ol><p class="note-line">Single class, everything inside <code>main</code>: the focus is syntax, not objects.</p>
+</div></section>
+<section class="slide " data-title="Variables of every primitive type" aria-label="Variables of every primitive type" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 1 of 10 · <span class="walk-file">Lab1Demo.java</span></p><h2>Variables of every primitive type</h2><pre class="code walk-code">// 1. Primitive Data Types and String
+byte byteVal = 100;
+short shortVal = 30000;
+int age = 21;
+long bigNum = 9876543210L;
+float gpa = 3.75f;
+double height = 5.91;
+char initial = &#x27;A&#x27;;
+boolean isStudent = true;
+String name = &quot;Mozdaher Abdul Quader&quot;;</pre><ul class="walk-notes"><li>One variable per primitive type, plus a String.</li><li>Note the suffixes: <code>L</code> for long, <code>f</code> for float.</li></ul>
+</div></section>
+<section class="slide " data-title="Printing with labels" aria-label="Printing with labels" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 2 of 10 · <span class="walk-file">Lab1Demo.java</span></p><h2>Printing with labels</h2><pre class="code walk-code wide">System.out.println(&quot;=== Primitive Data Types and String ===&quot;);
+System.out.println(&quot;byte    : &quot; + byteVal);
+System.out.println(&quot;short   : &quot; + shortVal);
+System.out.println(&quot;int     : &quot; + age);
+System.out.println(&quot;long    : &quot; + bigNum);
+System.out.println(&quot;float   : &quot; + gpa);
+System.out.println(&quot;double  : &quot; + height);
+System.out.println(&quot;char    : &quot; + initial + &quot; (Unicode = &quot; + (int) initial + &quot;)&quot;);
+System.out.println(&quot;boolean : &quot; + isStudent);
+System.out.println(&quot;String  : &quot; + name);</pre><ul class="walk-notes"><li><code>+</code> joins text and values into one String.</li><li><code>(int) initial</code> shows the Unicode number of a char.</li></ul>
+</div></section>
+<section class="slide " data-title="Widening and narrowing casts" aria-label="Widening and narrowing casts" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 3 of 10 · <span class="walk-file">Lab1Demo.java</span></p><h2>Widening and narrowing casts</h2><pre class="code walk-code">// 2. Type Casting
+System.out.println(&quot;\n=== Type Casting ===&quot;);
+double ageAsDouble = age;
+System.out.println(&quot;int &quot; + age + &quot; widened to double: &quot; + ageAsDouble);
+
+double pi = 3.14159;
+int piTruncated = (int) pi;
+System.out.println(&quot;double &quot; + pi + &quot; narrowed to int: &quot; + piTruncated);
+
+char letter = &#x27;Z&#x27;;
+int code = letter;
+char nextChar = (char) (code + 1);
+System.out.println(&quot;char &#x27;Z&#x27; as int: &quot; + code + &quot; | next char: &quot; + nextChar);</pre><ul class="walk-notes"><li>int → double happens automatically (widening).</li><li>double → int needs <code>(int)</code> and drops the fraction.</li><li>A char is a number: 90 + 1 is the char after Z.</li></ul>
+</div></section>
+<section class="slide " data-title="if / else if / else" aria-label="if / else if / else" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 4 of 10 · <span class="walk-file">Lab1Demo.java</span></p><h2>if / else if / else</h2><pre class="code walk-code">// 3. Conditional Statement
+System.out.println(&quot;\n=== Conditional Statement ===&quot;);
+int n = 42;
+if (n &gt; 0) {
+    System.out.println(n + &quot; is Positive&quot;);
+} else if (n == 0) {
+    System.out.println(n + &quot; is Zero&quot;);
+} else {
+    System.out.println(n + &quot; is Negative&quot;);
+}</pre><ul class="walk-notes"><li>Only the first true branch runs.</li></ul>
+</div></section>
+<section class="slide " data-title="Ranges with an if-else chain" aria-label="Ranges with an if-else chain" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 5 of 10 · <span class="walk-file">Lab1Demo.java</span></p><h2>Ranges with an if-else chain</h2><pre class="code walk-code">double weightKg = 70.0;
+double heightM = 1.75;
+double bmi = weightKg / (heightM * heightM);
+System.out.printf(&quot;BMI = %.2f =&gt; &quot;, bmi);
+if (bmi &lt; 18.5) {
+    System.out.println(&quot;Underweight&quot;);
+} else if (bmi &lt; 25.0) {
+    System.out.println(&quot;Normal weight&quot;);
+} else if (bmi &lt; 30.0) {
+    System.out.println(&quot;Overweight&quot;);
+} else {
+    System.out.println(&quot;Obese&quot;);
+}</pre><ul class="walk-notes"><li>Each test only needs the upper bound: earlier branches already ruled out smaller values.</li><li><code>printf("%.2f")</code> prints two decimals.</li></ul>
+</div></section>
+<section class="slide " data-title="switch with fall-through" aria-label="switch with fall-through" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 6 of 10 · <span class="walk-file">Lab1Demo.java</span></p><h2>switch with fall-through</h2><div class="walk-side"><pre class="code walk-code">int score = 85;
+char grade;
+switch (score / 10) {
+    case 10:
+    case 9:
+        grade = &#x27;A&#x27;;
+        break;
+    case 8:
+        grade = &#x27;B&#x27;;
+        break;
+    case 7:
+        grade = &#x27;C&#x27;;
+        break;
+    case 6:
+        grade = &#x27;D&#x27;;
+        break;
+    default:
+        grade = &#x27;F&#x27;;
+}</pre><ul class="walk-notes"><li><code>score / 10</code> is integer division: 85 → 8.</li><li><code>case 10:</code> has no break, so it falls through to case 9.</li><li><code>default</code> catches everything else.</li></ul></div>
+</div></section>
+<section class="slide " data-title="for loop: summation" aria-label="for loop: summation" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 7 of 10 · <span class="walk-file">Lab1Demo.java</span></p><h2>for loop: summation</h2><pre class="code walk-code">// 5. For Loop
+System.out.println(&quot;\n=== For Loop: Summation 1 to n ===&quot;);
+int upperBound = 10;
+int sum = 0;
+for (int i = 1; i &lt;= upperBound; i++) {
+    sum = sum + i;
+}
+System.out.println(&quot;Sum of 1 to &quot; + upperBound + &quot; = &quot; + sum);</pre><ul class="walk-notes"><li>Initialise, test, update — all in the loop header.</li></ul>
+</div></section>
+<section class="slide " data-title="continue and break" aria-label="continue and break" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 8 of 10 · <span class="walk-file">Lab1Demo.java</span></p><h2>continue and break</h2><pre class="code walk-code">System.out.print(&quot;Even numbers from 1 to 20, skipping multiples of 6: &quot;);
+for (int i = 1; i &lt;= 20; i++) {
+    if (i % 6 == 0) {
+        continue;
+    }
+    if (i &gt; 18) {
+        break;
+    }
+    if (i % 2 == 0) {
+        System.out.print(i + &quot; &quot;);
+    }
+}
+System.out.println();</pre><ul class="walk-notes"><li><code>continue</code> skips multiples of 6.</li><li><code>break</code> stops the loop once i passes 18.</li></ul>
+</div></section>
+<section class="slide " data-title="while loop: reverse the digits" aria-label="while loop: reverse the digits" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 9 of 10 · <span class="walk-file">Lab1Demo.java</span></p><h2>while loop: reverse the digits</h2><pre class="code walk-code">// 6. While Loop
+System.out.println(&quot;\n=== While Loop: Reverse Digits ===&quot;);
+int number = 12345;
+int temp = number;
+int reversed = 0;
+while (temp != 0) {
+    int digit = temp % 10;
+    reversed = reversed * 10 + digit;
+    temp = temp / 10;
+}
+System.out.println(&quot;Original number: &quot; + number);
+System.out.println(&quot;Reversed number: &quot; + reversed);</pre><ul class="walk-notes"><li><code>% 10</code> takes the last digit; <code>/ 10</code> removes it.</li><li>The loop runs until no digits are left.</li></ul>
+</div></section>
+<section class="slide " data-title="do-while: the Collatz sequence" aria-label="do-while: the Collatz sequence" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 10 of 10 · <span class="walk-file">Lab1Demo.java</span></p><h2>do-while: the Collatz sequence</h2><pre class="code walk-code">// 7. Do-While Loop
+System.out.println(&quot;\n=== Do-While Loop: Collatz Sequence ===&quot;);
+long collatz = 27;
+int steps = 0;
+System.out.print(&quot;Sequence: &quot;);
+do {
+    System.out.print(collatz + &quot; &quot;);
+    if (collatz % 2 == 0) {
+        collatz = collatz / 2;
+    } else {
+        collatz = 3 * collatz + 1;
+    }
+    steps++;
+} while (collatz != 1);
+System.out.println(&quot;1&quot;);
+System.out.println(&quot;Steps to reach 1: &quot; + steps);</pre><ul class="walk-notes"><li>The body runs before the test, so 27 is printed first.</li><li>Even → halve; odd → 3n + 1; stop at 1.</li></ul>
+</div></section>
+<section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">For reference · 1 file</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Lab1Demo.java">public class Lab1Demo {
+    public static void main(String[] args) {
+
+        // 1. Primitive Data Types and String
+        byte byteVal = 100;
+        short shortVal = 30000;
+        int age = 21;
+        long bigNum = 9876543210L;
+        float gpa = 3.75f;
+        double height = 5.91;
+        char initial = &#x27;A&#x27;;
+        boolean isStudent = true;
+        String name = &quot;Mozdaher Abdul Quader&quot;;
+
+        System.out.println(&quot;=== Primitive Data Types and String ===&quot;);
+        System.out.println(&quot;byte    : &quot; + byteVal);
+        System.out.println(&quot;short   : &quot; + shortVal);
+        System.out.println(&quot;int     : &quot; + age);
+        System.out.println(&quot;long    : &quot; + bigNum);
+        System.out.println(&quot;float   : &quot; + gpa);
+        System.out.println(&quot;double  : &quot; + height);
+        System.out.println(&quot;char    : &quot; + initial + &quot; (Unicode = &quot; + (int) initial + &quot;)&quot;);
+        System.out.println(&quot;boolean : &quot; + isStudent);
+        System.out.println(&quot;String  : &quot; + name);
+
+        // 2. Type Casting
+        System.out.println(&quot;\n=== Type Casting ===&quot;);
+        double ageAsDouble = age;
+        System.out.println(&quot;int &quot; + age + &quot; widened to double: &quot; + ageAsDouble);
+
+        double pi = 3.14159;
+        int piTruncated = (int) pi;
+        System.out.println(&quot;double &quot; + pi + &quot; narrowed to int: &quot; + piTruncated);
+
+        char letter = &#x27;Z&#x27;;
+        int code = letter;
+        char nextChar = (char) (code + 1);
+        System.out.println(&quot;char &#x27;Z&#x27; as int: &quot; + code + &quot; | next char: &quot; + nextChar);
+
+        // 3. Conditional Statement
+        System.out.println(&quot;\n=== Conditional Statement ===&quot;);
+        int n = 42;
+        if (n &gt; 0) {
+            System.out.println(n + &quot; is Positive&quot;);
+        } else if (n == 0) {
+            System.out.println(n + &quot; is Zero&quot;);
+        } else {
+            System.out.println(n + &quot; is Negative&quot;);
+        }
+
+        double weightKg = 70.0;
+        double heightM = 1.75;
+        double bmi = weightKg / (heightM * heightM);
+        System.out.printf(&quot;BMI = %.2f =&gt; &quot;, bmi);
+        if (bmi &lt; 18.5) {
+            System.out.println(&quot;Underweight&quot;);
+        } else if (bmi &lt; 25.0) {
+            System.out.println(&quot;Normal weight&quot;);
+        } else if (bmi &lt; 30.0) {
+            System.out.println(&quot;Overweight&quot;);
+        } else {
+            System.out.println(&quot;Obese&quot;);
+        }
+
+        // 4. Switch Statement
+        System.out.println(&quot;\n=== Switch Statement: Grade Classifier ===&quot;);
+        int score = 85;
+        char grade;
+        switch (score / 10) {
+            case 10:
+            case 9:
+                grade = &#x27;A&#x27;;
+                break;
+            case 8:
+                grade = &#x27;B&#x27;;
+                break;
+            case 7:
+                grade = &#x27;C&#x27;;
+                break;
+            case 6:
+                grade = &#x27;D&#x27;;
+                break;
+            default:
+                grade = &#x27;F&#x27;;
+        }
+        System.out.println(&quot;Score: &quot; + score + &quot; =&gt; Grade: &quot; + grade);
+
+        // 5. For Loop
+        System.out.println(&quot;\n=== For Loop: Summation 1 to n ===&quot;);
+        int upperBound = 10;
+        int sum = 0;
+        for (int i = 1; i &lt;= upperBound; i++) {
+            sum = sum + i;
+        }
+        System.out.println(&quot;Sum of 1 to &quot; + upperBound + &quot; = &quot; + sum);
+
+        System.out.print(&quot;Even numbers from 1 to 20, skipping multiples of 6: &quot;);
+        for (int i = 1; i &lt;= 20; i++) {
+            if (i % 6 == 0) {
+                continue;
+            }
+            if (i &gt; 18) {
+                break;
+            }
+            if (i % 2 == 0) {
+                System.out.print(i + &quot; &quot;);
+            }
+        }
+        System.out.println();
+
+        // 6. While Loop
+        System.out.println(&quot;\n=== While Loop: Reverse Digits ===&quot;);
+        int number = 12345;
+        int temp = number;
+        int reversed = 0;
+        while (temp != 0) {
+            int digit = temp % 10;
+            reversed = reversed * 10 + digit;
+            temp = temp / 10;
+        }
+        System.out.println(&quot;Original number: &quot; + number);
+        System.out.println(&quot;Reversed number: &quot; + reversed);
+
+        // 7. Do-While Loop
+        System.out.println(&quot;\n=== Do-While Loop: Collatz Sequence ===&quot;);
+        long collatz = 27;
+        int steps = 0;
+        System.out.print(&quot;Sequence: &quot;);
+        do {
+            System.out.print(collatz + &quot; &quot;);
+            if (collatz % 2 == 0) {
+                collatz = collatz / 2;
+            } else {
+                collatz = 3 * collatz + 1;
+            }
+            steps++;
+        } while (collatz != 1);
+        System.out.println(&quot;1&quot;);
+        System.out.println(&quot;Steps to reach 1: &quot; + steps);
+    }
+}</pre></div><p class="muted">Copy or download each file, save it under the same name, then compile and run: <code>javac *.java</code> → <code>java Lab1Demo</code></p>
+</div></section>
+<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Implementation</p><h2>Expected output</h2><div class="runbox" data-cmd="java Lab1Demo"><pre class="run-src" hidden>=== Primitive Data Types and String ===
+byte    : 100
+short   : 30000
+int     : 21
+long    : 9876543210
+float   : 3.75
+double  : 5.91
+char    : A (Unicode = 65)
+boolean : true
+String  : Mozdaher Abdul Quader
+
+=== Type Casting ===
+int 21 widened to double: 21.0
+double 3.14159 narrowed to int: 3
+char &#x27;Z&#x27; as int: 90 | next char: [
+
+=== Conditional Statement ===
+42 is Positive
+BMI = 22.86 =&gt; Normal weight
+
+=== Switch Statement: Grade Classifier ===
+Score: 85 =&gt; Grade: B
+
+=== For Loop: Summation 1 to n ===
+Sum of 1 to 10 = 55
+Even numbers from 1 to 20, skipping multiples of 6: 2 4 8 10 14 16 18
+
+=== While Loop: Reverse Digits ===
+Original number: 12345
+Reversed number: 54321
+
+=== Do-While Loop: Collatz Sequence ===
+Sequence: 27 82 41 124 62 31 94 47 142 71 214 107 322 161 484 242 121 364 182 91 274 137 412 206 103 310 155 466 233 700 350 175 526 263 790 395 1186 593 1780 890 445 1336 668 334 167 502 251 754 377 1132 566 283 850 425 1276 638 319 958 479 1438 719 2158 1079 3238 1619 4858 2429 7288 3644 1822 911 2734 1367 4102 2051 6154 3077 9232 4616 2308 1154 577 1732 866 433 1300 650 325 976 488 244 122 61 184 92 46 23 70 35 106 53 160 80 40 20 10 5 16 8 4 2 1
+Steps to reach 1: 111</pre></div><p class="note-line">Why is the next char after Z a “[”? Characters are numbers: 'Z' is 90, and 91 is '['.</p>
+</div></section>
+<section class="slide " data-title="Try widening and narrowing" aria-label="Try widening and narrowing" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Interactive 1 of 3</p><h2>Try widening and narrowing</h2><div data-demo="casting"></div>
+</div></section>
+<section class="slide " data-title="Watch switch and fall-through" aria-label="Watch switch and fall-through" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Interactive 2 of 3</p><h2>Watch switch and fall-through</h2><div data-demo="switch"></div>
+</div></section>
+<section class="slide " data-title="Compare the three loops" aria-label="Compare the three loops" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Interactive 3 of 3</p><h2>Compare the three loops</h2><div data-demo="loops"></div>
+</div></section>
+<section class="slide " data-title="Task 1: Temperature converter" aria-label="Task 1: Temperature converter" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 1 of 4</p><h2>Task 1: Temperature converter</h2><div class="ex task"><div class="qq">Read a temperature in Celsius and convert it to Fahrenheit, Kelvin and Rankine: F = C × 1.8 + 32, K = C + 273.15, R = F + 459.67.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l1t0r0" data-key="l1t0r0"><label for="l1t0r0">Use <code>double</code> variables for all temperatures</label></li><li><input type="checkbox" id="l1t0r1" data-key="l1t0r1"><label for="l1t0r1">Print every converted value with a clear label</label></li><li><input type="checkbox" id="l1t0r2" data-key="l1t0r2"><label for="l1t0r2">Use meaningful variable names</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Read with <code>Scanner sc = new Scanner(System.in); double c = sc.nextDouble();</code> and compute F first, because R depends on it.</div></details></div>
+</div></section>
+<section class="slide " data-title="Task 2: FizzBuzz extended" aria-label="Task 2: FizzBuzz extended" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 2 of 4</p><h2>Task 2: FizzBuzz extended</h2><div class="ex task"><div class="qq">Print 1 to 50: FizzBuzz if divisible by 3 and 5, Fizz for 3, Buzz for 5, Boom for 7, otherwise the number.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l1t1r0" data-key="l1t1r0"><label for="l1t1r0">Use a <code>for</code> loop</label></li><li><input type="checkbox" id="l1t1r1" data-key="l1t1r1"><label for="l1t1r1">Use <code>if / else if / else</code></label></li><li><input type="checkbox" id="l1t1r2" data-key="l1t1r2"><label for="l1t1r2">Test “3 and 5” <b>before</b> 3 or 5 alone</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Order matters: once one branch of an if-else chain matches, the rest are skipped. Use <code>i % 15 == 0</code> or <code>i % 3 == 0 && i % 5 == 0</code> first.</div></details></div>
+</div></section>
+<section class="slide " data-title="Task 3: Number system classifier" aria-label="Task 3: Number system classifier" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 3 of 4</p><h2>Task 3: Number system classifier</h2><div class="ex task"><div class="qq">Read an integer and classify it by the remainder when divided by 4: 0 → Divisible by 4, 1 or 3 → Odd, 2 → Even, not divisible by 4.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l1t2r0" data-key="l1t2r0"><label for="l1t2r0">Read input with <code>Scanner</code></label></li><li><input type="checkbox" id="l1t2r1" data-key="l1t2r1"><label for="l1t2r1">Use a traditional <code>switch</code></label></li><li><input type="checkbox" id="l1t2r2" data-key="l1t2r2"><label for="l1t2r2">Print the number and its classification</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans"><code>case 1: case 3:</code> can share one body. Careful with negative numbers: <code>-3 % 4</code> is <code>-3</code> in Java.</div></details></div>
+</div></section>
+<section class="slide " data-title="Task 4: Digit frequency counter" aria-label="Task 4: Digit frequency counter" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 4 of 4</p><h2>Task 4: Digit frequency counter</h2><div class="ex task"><div class="qq">Read a positive integer and count how often each digit 0–9 appears.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l1t3r0" data-key="l1t3r0"><label for="l1t3r0">Repeat input with <code>do-while</code> until the number is positive</label></li><li><input type="checkbox" id="l1t3r1" data-key="l1t3r1"><label for="l1t3r1">Store counts in an <code>int[10]</code></label></li><li><input type="checkbox" id="l1t3r2" data-key="l1t3r2"><label for="l1t3r2">Extract digits with a <code>while</code> loop</label></li><li><input type="checkbox" id="l1t3r3" data-key="l1t3r3"><label for="l1t3r3">Print the frequency of each digit</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Inside the loop: <code>freq[n % 10]++; n /= 10;</code>. Use <code>long</code> if you want very large inputs.</div></details></div>
+</div></section>
+<section class="slide " data-title="Show your work" aria-label="Show your work" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
+</div></section>
+<section class="slide " data-title="Report exercise 1" aria-label="Report exercise 1" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report · exercise 1 of 2</p><h2>Student grade management system</h2><div class="ex task report"><div class="qq">Manage the marks of five students in Mathematics, Physics and Chemistry.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l1e0r0" data-key="l1e0r0"><label for="l1e0r0">Store the marks of 5 students × 3 subjects in arrays</label></li><li><input type="checkbox" id="l1e0r1" data-key="l1e0r1"><label for="l1e0r1">Compute each student’s average with loops</label></li><li><input type="checkbox" id="l1e0r2" data-key="l1e0r2"><label for="l1e0r2">Assign grades with if-else: ≥80 A, ≥70 B, ≥60 C, ≥50 D, else F</label></li><li><input type="checkbox" id="l1e0r3" data-key="l1e0r3"><label for="l1e0r3">Find and print the highest and lowest scorer</label></li><li><input type="checkbox" id="l1e0r4" data-key="l1e0r4"><label for="l1e0r4">Print a motivational message per grade using <code>switch</code></label></li><li><input type="checkbox" id="l1e0r5" data-key="l1e0r5"><label for="l1e0r5">Display the results in a clear table</label></li></ul></div>
+</div></section>
+<section class="slide " data-title="Report exercise 2" aria-label="Report exercise 2" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report · exercise 2 of 2</p><h2>Pattern & sequence explorer</h2><div class="ex task report"><div class="qq">A menu-driven program: 1. Pascal’s triangle, 2. Primes by the Sieve of Eratosthenes, 3. Perfect numbers up to 10000, 4. Exit.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l1e1r0" data-key="l1e1r0"><label for="l1e1r0">Repeat the menu with <code>do-while</code></label></li><li><input type="checkbox" id="l1e1r1" data-key="l1e1r1"><label for="l1e1r1">Handle choices with <code>switch</code></label></li><li><input type="checkbox" id="l1e1r2" data-key="l1e1r2"><label for="l1e1r2">Use nested loops where needed</label></li><li><input type="checkbox" id="l1e1r3" data-key="l1e1r3"><label for="l1e1r3">Use arrays where appropriate (the sieve)</label></li><li><input type="checkbox" id="l1e1r4" data-key="l1e1r4"><label for="l1e1r4">Validate user input</label></li></ul></div>
+</div></section>
+<section class="slide " data-title="Writing the lab report" aria-label="Writing the lab report" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report</p><h2>Writing the lab report</h2><ul class="big-list"><li>Problem statement and your design (classes, fields, methods)</li><li>Complete source code, formatted and commented</li><li>Sample output or screenshots for normal <b>and</b> edge cases</li><li>A short discussion: what each OOP concept did in your program</li></ul><div class="integrity"><h3>Academic integrity</h3><p>Copying from the internet, classmates, seniors or any other unauthorized source is strictly prohibited. Full marks may be deducted if plagiarism, copied work or academic dishonesty is detected. Complete the tasks, implementation, output analysis and report yourself.</p></div>
+</div></section>
+<section class="slide " data-title="Viva questions (1 of 2)" aria-label="Viva questions (1 of 2)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Discussion and analysis</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">Why is Java called statically typed, and how does that help?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Every variable must be declared with a type before use, so the compiler catches type errors (for example assigning 3.7 to an int without a cast) before the program runs.</div></details></div><div class="ex"><div class="qq">What does <code>(int) 99.99</code> give, and why must the cast be written?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">99. Narrowing can lose data (the fraction is truncated), so Java makes you state it explicitly.</div></details></div>
+</div></section>
+<section class="slide " data-title="Viva questions (2 of 2)" aria-label="Viva questions (2 of 2)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Discussion and analysis</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq">When would you choose <code>do-while</code> over <code>while</code>?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">When the body must run at least once, such as showing a menu or the first value of the Collatz sequence.</div></details></div><div class="ex"><div class="qq">What happens if you remove a <code>break</code> from a switch case?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Execution falls through into the next case and runs its statements too, until a break or the end of the switch.</div></details></div>
+</div></section>
+<section class="slide " data-title="Quiz" aria-label="Quiz" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="lab1"></div><script type="application/json" class="quiz-json">[{"q": "What is the output of <code>System.out.println((int) 7.9);<\/code>?", "o": ["8", "7", "7.9", "compile error"], "a": 1, "w": "Narrowing casts truncate the fraction."}, {"q": "Which literal fits in a <code>long<\/code> but needs a suffix?", "o": ["9876543210L", "3.75f", "'A'", "100"], "a": 0, "w": "Integer literals larger than int need the L suffix."}, {"q": "Which loop always runs its body at least once?", "o": ["for", "while", "do-while", "for-each"], "a": 2, "w": "do-while checks the condition after the body."}, {"q": "<code>continue<\/code> inside a loop\u2026", "o": ["ends the program", "leaves the loop", "skips to the next iteration", "restarts the loop from 0"], "a": 2, "w": "It skips the rest of the current iteration only."}, {"q": "Which file does <code>javac Lab1Demo.java<\/code> produce?", "o": ["Lab1Demo.exe", "Lab1Demo.class", "Lab1Demo.jar", "Lab1Demo.obj"], "a": 1, "w": "javac produces bytecode in a .class file."}]</script></div>
+</div></section>
+<section class="slide " data-title="Summary" aria-label="Summary" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Summary</p><h2>Summary</h2><ul class="sumlist"><li>javac turns .java source into .class bytecode; the JVM runs it starting from main.</li><li>Eight primitive types plus String; Java checks types at compile time.</li><li>Widening is automatic; narrowing needs a cast and can lose data.</li><li>if-else for conditions and ranges, switch for fixed values (remember break).</li><li>for when the count is known, while for conditions, do-while to run at least once.</li></ul><div class="nextcard"><a class="btn pri" href="02-classes-and-objects.html">Next: Lab 2 · Classes and objects</a><a class="btn" href="../index.html">All labs</a></div>
+</div></section>
+</main>
+<footer class="deck-foot">
+  <button type="button" class="btn" id="prev">Previous</button>
+  <span class="counter" id="counter">1 / 44</span>
+  <button type="button" class="btn pri" id="next">Next</button>
+</footer>
+<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
+<noscript><p style="padding:20px">This lab needs JavaScript for the slides and the interactive examples.</p></noscript>
+<script src="../js/core.js"></script>
+<script src="../js/art.js"></script>
+<script src="../js/java.js"></script>
+<script src="../js/tracer.js"></script>
+<script src="../js/figs.js"></script>
+<script src="../js/lab-figs.js"></script>
+<script src="../js/demos-basics.js"></script>
+<script src="../js/demos-oop.js"></script>
+<script src="../js/demos-adv.js"></script>
+<script src="../js/quiz.js"></script>
+<script src="../js/page.js"></script>
+<script src="../js/lab.js"></script>
+<script>window.OOP_TOPIC = {"id": 1, "prev": null, "next": "02-classes-and-objects.html", "nextLabel": "Next lab"};</script>
+<script>mountPage();</script>
+<script src="../js/slides.js"></script>
+<script src="../js/annotate.js"></script>
+<script src="../js/analytics.js"
+        data-endpoint="https://analytics-proxy.ayansarkar1829.workers.dev"
+        data-project="CSE-202 OOP Lab"></script>
+<script src="../js/course-events.js"></script>
+</body>
+</html>

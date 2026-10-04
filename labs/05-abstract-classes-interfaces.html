@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Use an abstract Animal class for shared state and required behaviour, and the Drawable and Eatable interfaces for optional capabilities, then treat objects through both kinds of reference.">
+<meta name="keywords" content="java abstract class, abstract method, interface, implements, multiple interfaces, polymorphism, instanceof, lab, cse 202, object oriented programming lab">
+<meta name="author" content="Object Oriented Programming Lab Notes">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#155E63">
+<link rel="canonical" href="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/05-abstract-classes-interfaces.html">
+<link rel="icon" type="image/svg+xml" href="../img/logo-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../img/favicon-16.png">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
+<meta property="og:title" content="Lab 5: Abstract Classes &amp; Interfaces | OOP Lab (CSE 202)">
+<meta property="og:description" content="Use an abstract Animal class for shared state and required behaviour, and the Drawable and Eatable interfaces for optional capabilities, then treat objects through both kinds of reference.">
+<meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/05-abstract-classes-interfaces.html">
+<meta name="twitter:card" content="summary">
+<title>Lab 5: Abstract Classes &amp; Interfaces | OOP Lab (CSE 202)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/lab.css">
+</head>
+<body class="deck-page">
+<div class="sr-only" id="live" aria-live="polite"></div>
+<header class="deck-bar">
+  <a class="home-link" href="../index.html" aria-label="Home: all labs"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
+  <div class="deck-title"><span class="badge">5</span><span>Abstract Classes &amp; Interfaces</span></div>
+  <div class="deck-actions">
+    <button type="button" class="btn sm" id="btn-menu" aria-expanded="false" aria-controls="slide-menu" aria-label="Slides"><svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><rect x="3" y="4.5" width="18" height="3" rx="1"></rect><rect x="3" y="10.5" width="18" height="3" rx="1"></rect><rect x="3" y="16.5" width="18" height="3" rx="1"></rect></svg><span>Slides</span></button>
+    <button type="button" class="btn sm" id="btn-theme" aria-pressed="false" aria-label="Toggle dark mode"><svg class="btn-ic" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"></path></svg><span>Dark mode</span></button>
+    <button type="button" class="btn sm" id="btn-fs" aria-pressed="false" aria-label="Full screen"><svg class="btn-ic" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"></path></svg><span>Full screen</span></button>
+  </div>
+</header>
+<div class="deck-progress"><i id="progress-fill"></i></div>
+<main class="deck" id="deck">
+<section class="slide title-slide" data-title="Abstract Classes &amp; Interfaces" aria-label="Abstract Classes &amp; Interfaces" tabindex="-1"><div class="slide-inner">
+<span class="topic-art" data-art="9" aria-hidden="true"></span>
+<span class="badge big">5</span>
+<p class="kicker">Lab Manual V · CSE 202</p>
+<h1>Abstract Classes & Interfaces</h1>
+<p class="lead">Use an abstract Animal class for shared state and required behaviour, and the Drawable and Eatable interfaces for optional capabilities, then treat objects through both kinds of reference.</p>
+<div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
+<p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
+</div></section>
+<section class="slide " data-title="Why this lab" aria-label="Why this lab" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Before we start</p><h2>Why this lab</h2><div class="hook"><p class="q">Every animal makes a sound, but there is no such thing as a plain “animal” sound. And only some animals can be drawn on screen or eaten. How do we say that in Java?</p><p>An <b>abstract class</b> says “every animal must…”; an <b>interface</b> says “this one can also…”. Dog, Bird and Fish combine both.</p></div>
+</div></section>
+<section class="slide " data-title="Lab at a glance" aria-label="Lab at a glance" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab 5 of 10</p><h2>Lab at a glance</h2><div class="cols wl"><div><h3>After this lab you can</h3><ul class=""><li>Explain the purpose of abstract classes and declare them with <code>abstract</code></li><li>Implement abstract methods in concrete subclasses</li><li>Define interfaces as behavioural contracts and implement them</li><li>Choose between an abstract class and an interface</li><li>Use abstract-class and interface references polymorphically</li><li>Check interface implementation with <code>instanceof</code></li></ul></div>
+<div><h3>Before you start</h3><ul class=""><li>Lab 4: inheritance, extends, super, overriding, polymorphism</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
+</div></section>
+<section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab 5 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=10">Program design</a></li><li><a href="#s=11">Code walkthrough</a></li><li><a href="#s=20">Expected output</a></li><li><a href="#s=21">Interactive demos</a></li><li><a href="#s=22">In-lab tasks</a></li><li><a href="#s=26">Lab report exercises</a></li><li><a href="#s=29">Viva questions and quiz</a></li></ol>
+</div></section>
+<section class="slide " data-title="Abstract classes and methods" aria-label="Abstract classes and methods" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 1 of 5</p><h2>Abstract classes and methods</h2><pre class="code small-code">public abstract class Animal {
+    protected String name;
+    protected int age;
+
+    protected Animal(String name, int age) { ... }
+
+    public abstract void makeSound();   // no body
+    public abstract void eat();
+
+    public void displayInfo() { ... }   // shared code
+}</pre><ul class=""><li>An abstract class cannot be instantiated: <code>new Animal(…)</code> is a compile error.</li><li>Concrete subclasses must implement every abstract method (or be abstract themselves).</li><li>It can still have fields, constructors (called with super) and normal methods.</li></ul>
+</div></section>
+<section class="slide " data-title="Interfaces" aria-label="Interfaces" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 2 of 5</p><h2>Interfaces</h2><pre class="code small-code">public interface Drawable {
+    void draw();
+    void hide();
+}
+
+public class Dog extends Animal implements Drawable { ... }</pre><ul class=""><li>An interface lists methods an implementing class promises to provide.</li><li>A class extends <b>one</b> class but may implement <b>many</b> interfaces: <code>implements Drawable, Eatable</code>.</li></ul>
+</div></section>
+<section class="slide " data-title="The lab’s design" aria-label="The lab’s design" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 3 of 5</p><h2>The lab’s design</h2><figure class="fig" data-fig="lab5-animal-uml"></figure><ul class=""><li>Dog and Bird are Animals that can be drawn; Fish is an Animal that can be eaten.</li></ul>
+</div></section>
+<section class="slide " data-title="Abstract class or interface?" aria-label="Abstract class or interface?" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 4 of 5</p><h2>Abstract class or interface?</h2><div class="scrollx"><table class="doc"><thead><tr><th></th><th>Abstract class</th><th>Interface</th></tr></thead><tbody><tr><td>Relationship</td><td>is-a (Dog is an Animal)</td><td>can-do (Dog can be drawn)</td></tr><tr><td>State</td><td>fields and constructors</td><td>constants only</td></tr><tr><td>Inheritance</td><td>extend one</td><td>implement many</td></tr><tr><td>Use when</td><td>related classes share code</td><td>unrelated classes share behaviour</td></tr></tbody></table></div>
+</div></section>
+<section class="slide " data-title="Polymorphism through both reference types" aria-label="Polymorphism through both reference types" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 5 of 5</p><h2>Polymorphism through both reference types</h2><pre class="code small-code">Animal[]   animals   = {dog, bird, fish};
+Drawable[] drawables = {dog, bird};
+
+if (animal instanceof Drawable) {
+    ((Drawable) animal).draw();
+}</pre><ul class=""><li>An Animal reference can call makeSound() and eat(); a Drawable reference can call draw() and hide().</li><li><code>instanceof</code> works with interfaces too.</li></ul>
+</div></section>
+<section class="slide " data-title="Execution flow" aria-label="Execution flow" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Implementation design</p><h2>Execution flow</h2><ol class="flow"><li>Create a Dog, a Bird and a Fish</li><li>Loop over an Animal[]: displayInfo(), makeSound(), eat()</li><li>Loop over a Drawable[]: draw(), hide()</li><li>Use the Fish through an Eatable reference</li><li>Show that Animal cannot be instantiated</li><li>Test instanceof with both interfaces</li><li>Cast an Animal reference back to Dog</li></ol><p class="note-line">Animal holds shared state and forces sound/eat; interfaces add optional capabilities.</p>
+</div></section>
+<section class="slide " data-title="An abstract class" aria-label="An abstract class" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 1 of 8 · <span class="walk-file">Animal.java</span></p><h2>An abstract class</h2><div class="walk-side"><pre class="code walk-code">public abstract class Animal {
+
+    protected String name;
+    protected int age;
+
+    protected Animal(String name, int age) {
+        this.name = name;
+        if (age &gt;= 0) {
+            this.age = age;
+        } else {
+            this.age = 0;
+        }
+    }
+
+    public abstract void makeSound();
+
+    public abstract void eat();</pre><ul class="walk-notes"><li>Shared fields and a constructor, plus two methods with no body.</li><li>Every concrete subclass must implement makeSound() and eat().</li></ul></div>
+</div></section>
+<section class="slide " data-title="Two interfaces" aria-label="Two interfaces" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 2 of 8 · <span class="walk-file">Drawable.java · Eatable.java</span></p><h2>Two interfaces</h2><pre class="code walk-code">public interface Drawable {
+    void draw();
+    void hide();
+}
+
+public interface Eatable {
+    boolean isPoisonous();
+    int getNutrition();
+}</pre><ul class="walk-notes"><li>Contracts only: method names, no state.</li><li>A class lists the ones it supports with <code>implements</code>.</li></ul>
+</div></section>
+<section class="slide " data-title="Dog: extends one, implements one" aria-label="Dog: extends one, implements one" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 3 of 8 · <span class="walk-file">Dog.java</span></p><h2>Dog: extends one, implements one</h2><pre class="code walk-code">public class Dog extends Animal implements Drawable {
+
+    private String breed;
+
+    public Dog(String name, int age, String breed) {
+        super(name, age);
+        this.breed = breed;
+    }
+
+    @Override
+    public void makeSound() {
+        System.out.println(name + &quot; barks: Woof! Woof!&quot;);
+    }
+
+    @Override
+    public void eat() {
+        System.out.println(name + &quot; is eating dog food from a bowl.&quot;);
+    }</pre><ul class="walk-notes"><li><code>extends Animal implements Drawable</code>: one superclass, any number of interfaces.</li><li>First, the two abstract methods from Animal.</li></ul>
+</div></section>
+<section class="slide " data-title="Dog keeps the Drawable contract" aria-label="Dog keeps the Drawable contract" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 4 of 8 · <span class="walk-file">Dog.java</span></p><h2>Dog keeps the Drawable contract</h2><pre class="code walk-code">@Override
+public void draw() {
+    System.out.println(&quot;[Drawing] &quot; + name + &quot; (&quot; + breed + &quot;) as a dog.&quot;);
+}
+
+@Override
+public void hide() {
+    System.out.println(&quot;[Hiding] &quot; + name + &quot; is no longer visible.&quot;);
+}</pre><ul class="walk-notes"><li>Without draw() and hide(), Dog would not compile: it promised to be Drawable.</li></ul>
+</div></section>
+<section class="slide " data-title="Fish implements Eatable" aria-label="Fish implements Eatable" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 5 of 8 · <span class="walk-file">Fish.java</span></p><h2>Fish implements Eatable</h2><pre class="code walk-code">@Override
+public boolean isPoisonous() {
+    return false;
+}
+
+@Override
+public int getNutrition() {
+    return 65;
+}</pre><ul class="walk-notes"><li>A different capability for a different animal.</li></ul>
+</div></section>
+<section class="slide " data-title="Methods that take the abstract type or an interface" aria-label="Methods that take the abstract type or an interface" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 6 of 8 · <span class="walk-file">Lab5Demo.java</span></p><h2>Methods that take the abstract type or an interface</h2><pre class="code walk-code">static void demonstratePolymorphism(Animal animal) {
+    animal.displayInfo();
+    animal.makeSound();
+    animal.eat();
+}
+
+static void demonstrateDrawable(Drawable drawable) {
+    drawable.draw();
+    drawable.hide();
+}
+
+static void demonstrateEatable(Eatable eatable) {
+    System.out.println(&quot;Poisonous : &quot; + eatable.isPoisonous());
+    System.out.println(&quot;Nutrition : &quot; + eatable.getNutrition());
+}</pre><ul class="walk-notes"><li>Each method accepts any object that is an Animal, a Drawable or an Eatable.</li></ul>
+</div></section>
+<section class="slide " data-title="Arrays of abstract and interface types" aria-label="Arrays of abstract and interface types" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 7 of 8 · <span class="walk-file">Lab5Demo.java</span></p><h2>Arrays of abstract and interface types</h2><pre class="code walk-code">// 2. Polymorphism through Animal References
+System.out.println(&quot;\n=== Polymorphism through Animal References ===&quot;);
+Animal[] animals = {dog, bird, fish};
+for (Animal animal : animals) {
+    System.out.println(&quot;-------------------------------&quot;);
+    demonstratePolymorphism(animal);
+}
+
+// 3. Drawable Interface
+System.out.println(&quot;\n=== Drawable Interface ===&quot;);
+Drawable[] drawables = {dog, bird};
+for (Drawable drawable : drawables) {
+    System.out.println(&quot;-------------------------------&quot;);
+    demonstrateDrawable(drawable);
+}</pre><ul class="walk-notes"><li><code>Animal[]</code> holds all three; <code>Drawable[]</code> only Dog and Bird.</li></ul>
+</div></section>
+<section class="slide " data-title="instanceof with interfaces, then a cast" aria-label="instanceof with interfaces, then a cast" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 8 of 8 · <span class="walk-file">Lab5Demo.java</span></p><h2>instanceof with interfaces, then a cast</h2><pre class="code walk-code">// 6. instanceof with Interfaces
+System.out.println(&quot;\n=== instanceof with Interfaces ===&quot;);
+System.out.println(&quot;dog instanceof Drawable  : &quot; + (dog instanceof Drawable));
+System.out.println(&quot;dog instanceof Eatable   : &quot; + (dog instanceof Eatable));
+System.out.println(&quot;fish instanceof Drawable : &quot; + (fish instanceof Drawable));
+System.out.println(&quot;fish instanceof Eatable  : &quot; + (fish instanceof Eatable));
+
+// 7. Safe Casting
+System.out.println(&quot;\n=== Safe Casting ===&quot;);
+Animal animalRef = dog;
+if (animalRef instanceof Dog) {
+    Dog castedDog = (Dog) animalRef;
+    System.out.println(&quot;Casted Dog breed: &quot; + castedDog.getBreed());
+}</pre><ul class="walk-notes"><li>instanceof also answers “does this object implement Drawable?”.</li></ul>
+</div></section>
+<section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">For reference · 7 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Animal.java">public abstract class Animal {
+
+    protected String name;
+    protected int age;
+
+    protected Animal(String name, int age) {
+        this.name = name;
+        if (age &gt;= 0) {
+            this.age = age;
+        } else {
+            this.age = 0;
+        }
+    }
+
+    public abstract void makeSound();
+
+    public abstract void eat();
+
+    public String getName() { return name; }
+    public int getAge() { return age; }
+
+    public void displayInfo() {
+        System.out.println(&quot;Name: &quot; + name + &quot;, Age: &quot; + age + &quot; years&quot;);
+    }
+}</pre><pre class="code small-code" data-file="Drawable.java">public interface Drawable {
+    void draw();
+    void hide();
+}</pre><pre class="code small-code" data-file="Eatable.java">public interface Eatable {
+    boolean isPoisonous();
+    int getNutrition();
+}</pre><pre class="code small-code" data-file="Dog.java">public class Dog extends Animal implements Drawable {
+
+    private String breed;
+
+    public Dog(String name, int age, String breed) {
+        super(name, age);
+        this.breed = breed;
+    }
+
+    @Override
+    public void makeSound() {
+        System.out.println(name + &quot; barks: Woof! Woof!&quot;);
+    }
+
+    @Override
+    public void eat() {
+        System.out.println(name + &quot; is eating dog food from a bowl.&quot;);
+    }
+
+    @Override
+    public void draw() {
+        System.out.println(&quot;[Drawing] &quot; + name + &quot; (&quot; + breed + &quot;) as a dog.&quot;);
+    }
+
+    @Override
+    public void hide() {
+        System.out.println(&quot;[Hiding] &quot; + name + &quot; is no longer visible.&quot;);
+    }
+
+    public String getBreed() { return breed; }
+}</pre><pre class="code small-code" data-file="Bird.java">public class Bird extends Animal implements Drawable {
+
+    private double wingSpan;
+
+    public Bird(String name, int age, double wingSpan) {
+        super(name, age);
+        if (wingSpan &gt; 0.0) {
+            this.wingSpan = wingSpan;
+        } else {
+            this.wingSpan = 0.1;
+        }
+    }
+
+    @Override
+    public void makeSound() {
+        System.out.println(name + &quot; chirps: Tweet! Tweet!&quot;);
+    }
+
+    @Override
+    public void eat() {
+        System.out.println(name + &quot; is pecking at seeds and insects.&quot;);
+    }
+
+    @Override
+    public void draw() {
+        System.out.println(&quot;[Drawing] &quot; + name + &quot; with wingspan &quot; + wingSpan + &quot;m as a bird.&quot;);
+    }
+
+    @Override
+    public void hide() {
+        System.out.println(&quot;[Hiding] &quot; + name + &quot; flies away and disappears.&quot;);
+    }
+
+    public double getWingSpan() { return wingSpan; }
+}</pre><pre class="code small-code" data-file="Fish.java">public class Fish extends Animal implements Eatable {
+
+    private int waterDepth;
+
+    public Fish(String name, int age, int waterDepth) {
+        super(name, age);
+        if (waterDepth &gt; 0) {
+            this.waterDepth = waterDepth;
+        } else {
+            this.waterDepth = 1;
+        }
+    }
+
+    @Override
+    public void makeSound() {
+        System.out.println(name + &quot; bubbles: Blub! Blub!&quot;);
+    }
+
+    @Override
+    public void eat() {
+        System.out.println(name + &quot; is eating algae and small organisms.&quot;);
+    }
+
+    @Override
+    public boolean isPoisonous() {
+        return false;
+    }
+
+    @Override
+    public int getNutrition() {
+        return 65;
+    }
+
+    public int getWaterDepth() { return waterDepth; }
+}</pre><pre class="code small-code" data-file="Lab5Demo.java">public class Lab5Demo {
+
+    static void demonstratePolymorphism(Animal animal) {
+        animal.displayInfo();
+        animal.makeSound();
+        animal.eat();
+    }
+
+    static void demonstrateDrawable(Drawable drawable) {
+        drawable.draw();
+        drawable.hide();
+    }
+
+    static void demonstrateEatable(Eatable eatable) {
+        System.out.println(&quot;Poisonous : &quot; + eatable.isPoisonous());
+        System.out.println(&quot;Nutrition : &quot; + eatable.getNutrition());
+    }
+
+    public static void main(String[] args) {
+
+        // 1. Object Creation
+        System.out.println(&quot;=== Object Creation ===&quot;);
+        Dog dog = new Dog(&quot;Rex&quot;, 5, &quot;Golden Retriever&quot;);
+        Bird bird = new Bird(&quot;Tweety&quot;, 2, 0.5);
+        Fish fish = new Fish(&quot;Nemo&quot;, 1, 20);
+        System.out.println(&quot;Created Dog : &quot; + dog.getName());
+        System.out.println(&quot;Created Bird: &quot; + bird.getName());
+        System.out.println(&quot;Created Fish: &quot; + fish.getName());
+
+        // 2. Polymorphism through Animal References
+        System.out.println(&quot;\n=== Polymorphism through Animal References ===&quot;);
+        Animal[] animals = {dog, bird, fish};
+        for (Animal animal : animals) {
+            System.out.println(&quot;-------------------------------&quot;);
+            demonstratePolymorphism(animal);
+        }
+
+        // 3. Drawable Interface
+        System.out.println(&quot;\n=== Drawable Interface ===&quot;);
+        Drawable[] drawables = {dog, bird};
+        for (Drawable drawable : drawables) {
+            System.out.println(&quot;-------------------------------&quot;);
+            demonstrateDrawable(drawable);
+        }
+
+        // 4. Eatable Interface
+        System.out.println(&quot;\n=== Eatable Interface ===&quot;);
+        demonstrateEatable(fish);
+
+        // 5. Abstract Class Instantiation Rule
+        System.out.println(&quot;\n=== Abstract Class Instantiation Rule ===&quot;);
+        System.out.println(&quot;Animal cannot be instantiated directly.&quot;);
+        System.out.println(&quot;Use concrete subclasses such as Dog, Bird, and Fish.&quot;);
+
+        // 6. instanceof with Interfaces
+        System.out.println(&quot;\n=== instanceof with Interfaces ===&quot;);
+        System.out.println(&quot;dog instanceof Drawable  : &quot; + (dog instanceof Drawable));
+        System.out.println(&quot;dog instanceof Eatable   : &quot; + (dog instanceof Eatable));
+        System.out.println(&quot;fish instanceof Drawable : &quot; + (fish instanceof Drawable));
+        System.out.println(&quot;fish instanceof Eatable  : &quot; + (fish instanceof Eatable));
+
+        // 7. Safe Casting
+        System.out.println(&quot;\n=== Safe Casting ===&quot;);
+        Animal animalRef = dog;
+        if (animalRef instanceof Dog) {
+            Dog castedDog = (Dog) animalRef;
+            System.out.println(&quot;Casted Dog breed: &quot; + castedDog.getBreed());
+        }
+    }
+}</pre></div><p class="muted">Copy or download each file, save it under the same name, then compile and run: <code>javac *.java</code> → <code>java Lab5Demo</code></p>
+</div></section>
+<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Implementation</p><h2>Expected output</h2><div class="runbox" data-cmd="java Lab5Demo"><pre class="run-src" hidden>=== Object Creation ===
+Created Dog : Rex
+Created Bird: Tweety
+Created Fish: Nemo
+
+=== Polymorphism through Animal References ===
+-------------------------------
+Name: Rex, Age: 5 years
+Rex barks: Woof! Woof!
+Rex is eating dog food from a bowl.
+-------------------------------
+Name: Tweety, Age: 2 years
+Tweety chirps: Tweet! Tweet!
+Tweety is pecking at seeds and insects.
+-------------------------------
+Name: Nemo, Age: 1 years
+Nemo bubbles: Blub! Blub!
+Nemo is eating algae and small organisms.
+
+=== Drawable Interface ===
+-------------------------------
+[Drawing] Rex (Golden Retriever) as a dog.
+[Hiding] Rex is no longer visible.
+-------------------------------
+[Drawing] Tweety with wingspan 0.5m as a bird.
+[Hiding] Tweety flies away and disappears.
+
+=== Eatable Interface ===
+Poisonous : false
+Nutrition : 65
+
+=== Abstract Class Instantiation Rule ===
+Animal cannot be instantiated directly.
+Use concrete subclasses such as Dog, Bird, and Fish.
+
+=== instanceof with Interfaces ===
+dog instanceof Drawable  : true
+dog instanceof Eatable   : false
+fish instanceof Drawable : false
+fish instanceof Eatable  : true
+
+=== Safe Casting ===
+Casted Dog breed: Golden Retriever</pre></div><p class="note-line">The same three method calls produce three different results — that is polymorphism through the abstract class.</p>
+</div></section>
+<section class="slide " data-title="Which types does each object satisfy?" aria-label="Which types does each object satisfy?" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Interactive 1 of 1</p><h2>Which types does each object satisfy?</h2><div data-demo="iface"></div>
+</div></section>
+<section class="slide " data-title="Task 1: Add a Cat class" aria-label="Task 1: Add a Cat class" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 1 of 3</p><h2>Task 1: Add a Cat class</h2><div class="ex task"><div class="qq">A concrete Animal that is also Drawable.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l5t0r0" data-key="l5t0r0"><label for="l5t0r0">Field <code>private String colour</code> with <code>getColour()</code></label></li><li><input type="checkbox" id="l5t0r1" data-key="l5t0r1"><label for="l5t0r1">Implement makeSound(), eat(), draw() and hide()</label></li><li><input type="checkbox" id="l5t0r2" data-key="l5t0r2"><label for="l5t0r2">Create a Cat in Lab5Demo</label></li><li><input type="checkbox" id="l5t0r3" data-key="l5t0r3"><label for="l5t0r3">Pass it to demonstratePolymorphism() and demonstrateDrawable()</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">If you forget one abstract or interface method, the compiler tells you exactly which.</div></details></div>
+</div></section>
+<section class="slide " data-title="Task 2: Create a Trainable interface" aria-label="Task 2: Create a Trainable interface" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 2 of 3</p><h2>Task 2: Create a Trainable interface</h2><div class="ex task"><div class="qq">A capability shared by Dog and Cat.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l5t1r0" data-key="l5t1r0"><label for="l5t1r0"><code>void train(String command)</code> and <code>void obey(String command)</code></label></li><li><input type="checkbox" id="l5t1r1" data-key="l5t1r1"><label for="l5t1r1">Dog and Cat implement Trainable (Dog already implements Drawable: list both)</label></li><li><input type="checkbox" id="l5t1r2" data-key="l5t1r2"><label for="l5t1r2">Create a <code>Trainable[]</code> in main</label></li><li><input type="checkbox" id="l5t1r3" data-key="l5t1r3"><label for="l5t1r3">Call train() and obey() on each</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans"><code>class Dog extends Animal implements Drawable, Trainable</code></div></details></div>
+</div></section>
+<section class="slide " data-title="Task 3: Interface-based parameters" aria-label="Task 3: Interface-based parameters" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 3 of 3</p><h2>Task 3: Interface-based parameters</h2><div class="ex task"><div class="qq">Write <code>feedAnimal(Eatable eatable)</code>.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l5t2r0" data-key="l5t2r0"><label for="l5t2r0">Call it with a Fish</label></li><li><input type="checkbox" id="l5t2r1" data-key="l5t2r1"><label for="l5t2r1">Print whether the object is poisonous</label></li><li><input type="checkbox" id="l5t2r2" data-key="l5t2r2"><label for="l5t2r2">Print its nutrition value</label></li><li><input type="checkbox" id="l5t2r3" data-key="l5t2r3"><label for="l5t2r3">Explain in a comment why <code>feedAnimal(dog)</code> does not compile</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">The parameter type is the contract: only objects whose class implements Eatable can be passed.</div></details></div>
+</div></section>
+<section class="slide " data-title="Show your work" aria-label="Show your work" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
+</div></section>
+<section class="slide " data-title="Report exercise 1" aria-label="Report exercise 1" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report · exercise 1 of 2</p><h2>Shape hierarchy with multiple interfaces</h2><div class="ex task report"><div class="qq">Abstract Shape with Resizable and Colorable interfaces.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l5e0r0" data-key="l5e0r0"><label for="l5e0r0">Resizable: <code>scale</code>, <code>getArea</code>, <code>getPerimeter</code>; Colorable: <code>setColor</code>, <code>getColor</code>, <code>describe</code></label></li><li><input type="checkbox" id="l5e0r1" data-key="l5e0r1"><label for="l5e0r1">Abstract Shape: name, color; abstract getArea, getPerimeter, display; getName</label></li><li><input type="checkbox" id="l5e0r2" data-key="l5e0r2"><label for="l5e0r2">Circle and Rectangle implement Resizable and Colorable; Triangle implements Resizable only</label></li><li><input type="checkbox" id="l5e0r3" data-key="l5e0r3"><label for="l5e0r3">≥2 of each; Shape[], Resizable[] and Colorable[] arrays</label></li><li><input type="checkbox" id="l5e0r4" data-key="l5e0r4"><label for="l5e0r4">Use instanceof to check Colorable</label></li></ul></div>
+</div></section>
+<section class="slide " data-title="Report exercise 2" aria-label="Report exercise 2" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report · exercise 2 of 2</p><h2>Employee management with role interfaces</h2><div class="ex task report"><div class="qq">Abstract Employee with Payable and Evaluable.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l5e1r0" data-key="l5e1r0"><label for="l5e1r0">Payable: calculateSalary, getPaymentMethod; Evaluable: evaluate, getPerformanceRating</label></li><li><input type="checkbox" id="l5e1r1" data-key="l5e1r1"><label for="l5e1r1">Abstract Employee: id, name, baseSalary; abstract calculateSalary, getRole, display</label></li><li><input type="checkbox" id="l5e1r2" data-key="l5e1r2"><label for="l5e1r2">Manager and Developer implement Payable and Evaluable; Intern implements Payable</label></li><li><input type="checkbox" id="l5e1r3" data-key="l5e1r3"><label for="l5e1r3">Employee[] with polymorphic display() and calculateSalary()</label></li><li><input type="checkbox" id="l5e1r4" data-key="l5e1r4"><label for="l5e1r4">Total payroll through Payable references; evaluate Evaluable ones via instanceof</label></li><li><input type="checkbox" id="l5e1r5" data-key="l5e1r5"><label for="l5e1r5">Print a payroll summary table</label></li></ul></div>
+</div></section>
+<section class="slide " data-title="Writing the lab report" aria-label="Writing the lab report" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report</p><h2>Writing the lab report</h2><ul class="big-list"><li>Problem statement and your design (classes, fields, methods)</li><li>Complete source code, formatted and commented</li><li>Sample output or screenshots for normal <b>and</b> edge cases</li><li>A short discussion: what each OOP concept did in your program</li></ul><div class="integrity"><h3>Academic integrity</h3><p>Copying from the internet, classmates, seniors or any other unauthorized source is strictly prohibited. Full marks may be deducted if plagiarism, copied work or academic dishonesty is detected. Complete the tasks, implementation, output analysis and report yourself.</p></div>
+</div></section>
+<section class="slide " data-title="Viva questions (1 of 2)" aria-label="Viva questions (1 of 2)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Discussion and analysis</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">Why is Animal abstract instead of a normal class?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">There is no meaningful generic animal sound or diet; making it abstract forbids plain Animal objects and forces every subclass to provide them.</div></details></div><div class="ex"><div class="qq">Can an abstract class have a constructor?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Yes. It initialises the shared fields and is called from subclass constructors with super(…).</div></details></div>
+</div></section>
+<section class="slide " data-title="Viva questions (2 of 2)" aria-label="Viva questions (2 of 2)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Discussion and analysis</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq">Why are Drawable and Eatable interfaces and not abstract classes?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">They are capabilities that only some animals have, and a class can implement several interfaces but extend only one class.</div></details></div><div class="ex"><div class="qq"><code>fish instanceof Drawable</code> is false. Why does it still compile?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">instanceof is checked at run time against the object; the compiler allows it because some Animal subclass could be Drawable.</div></details></div>
+</div></section>
+<section class="slide " data-title="Quiz" aria-label="Quiz" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="lab5"></div><script type="application/json" class="quiz-json">[{"q": "<code>new Animal(\"x\", 1)<\/code> where Animal is abstract\u2026", "o": ["works", "is a compile error", "throws at run time", "returns null"], "a": 1, "w": "Abstract classes cannot be instantiated."}, {"q": "How many interfaces can a class implement?", "o": ["one", "two", "any number", "none if it extends a class"], "a": 2, "w": "Implement many, extend one."}, {"q": "A Drawable reference can call\u2026", "o": ["draw() and hide()", "makeSound()", "getBreed()", "eat()"], "a": 0, "w": "Only the methods the interface declares."}, {"q": "A class that does not implement an inherited abstract method must be\u2026", "o": ["final", "static", "abstract", "an interface"], "a": 2, "w": "Otherwise it will not compile."}, {"q": "Interfaces mostly describe\u2026", "o": ["is-a relationships", "can-do capabilities", "constructors", "private state"], "a": 1, "w": "Abstract classes model is-a; interfaces model can-do."}]</script></div>
+</div></section>
+<section class="slide " data-title="Summary" aria-label="Summary" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Summary</p><h2>Summary</h2><ul class="sumlist"><li>Abstract classes share state and code and force subclasses to implement abstract methods.</li><li>They cannot be instantiated but can have constructors.</li><li>Interfaces are contracts; a class can implement many.</li><li>Use abstract classes for is-a, interfaces for can-do.</li><li>Both work as reference types for polymorphism; instanceof checks interfaces too.</li></ul><div class="nextcard"><a class="btn pri" href="06-exception-handling.html">Next: Lab 6 · Exception handling</a><a class="btn" href="../index.html">All labs</a></div>
+</div></section>
+</main>
+<footer class="deck-foot">
+  <button type="button" class="btn" id="prev">Previous</button>
+  <span class="counter" id="counter">1 / 32</span>
+  <button type="button" class="btn pri" id="next">Next</button>
+</footer>
+<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
+<noscript><p style="padding:20px">This lab needs JavaScript for the slides and the interactive examples.</p></noscript>
+<script src="../js/core.js"></script>
+<script src="../js/art.js"></script>
+<script src="../js/java.js"></script>
+<script src="../js/tracer.js"></script>
+<script src="../js/figs.js"></script>
+<script src="../js/lab-figs.js"></script>
+<script src="../js/demos-basics.js"></script>
+<script src="../js/demos-oop.js"></script>
+<script src="../js/demos-adv.js"></script>
+<script src="../js/quiz.js"></script>
+<script src="../js/page.js"></script>
+<script src="../js/lab.js"></script>
+<script>window.OOP_TOPIC = {"id": 5, "prev": "04-inheritance-polymorphism.html", "next": "06-exception-handling.html", "nextLabel": "Next lab"};</script>
+<script>mountPage();</script>
+<script src="../js/slides.js"></script>
+<script src="../js/annotate.js"></script>
+<script src="../js/analytics.js"
+        data-endpoint="https://analytics-proxy.ayansarkar1829.workers.dev"
+        data-project="CSE-202 OOP Lab"></script>
+<script src="../js/course-events.js"></script>
+</body>
+</html>

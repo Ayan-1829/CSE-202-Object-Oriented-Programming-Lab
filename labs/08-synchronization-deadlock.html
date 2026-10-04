@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Protect bank balances with synchronized methods and blocks, watch two transfers deadlock when they lock accounts in opposite order, and prevent it with lock ordering.">
+<meta name="keywords" content="java synchronization, race condition, critical section, deadlock, lock ordering, resource allocation graph, wait notify, lab, cse 202, object oriented programming lab">
+<meta name="author" content="Object Oriented Programming Lab Notes">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#155E63">
+<link rel="canonical" href="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/08-synchronization-deadlock.html">
+<link rel="icon" type="image/svg+xml" href="../img/logo-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../img/favicon-16.png">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
+<meta property="og:title" content="Lab 8: Synchronization, Deadlock &amp; Resource Allocation | OOP Lab (CSE 202)">
+<meta property="og:description" content="Protect bank balances with synchronized methods and blocks, watch two transfers deadlock when they lock accounts in opposite order, and prevent it with lock ordering.">
+<meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/08-synchronization-deadlock.html">
+<meta name="twitter:card" content="summary">
+<title>Lab 8: Synchronization, Deadlock &amp; Resource Allocation | OOP Lab (CSE 202)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/lab.css">
+</head>
+<body class="deck-page">
+<div class="sr-only" id="live" aria-live="polite"></div>
+<header class="deck-bar">
+  <a class="home-link" href="../index.html" aria-label="Home: all labs"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
+  <div class="deck-title"><span class="badge">8</span><span>Synchronization, Deadlock &amp; Resource Allocation</span></div>
+  <div class="deck-actions">
+    <button type="button" class="btn sm" id="btn-menu" aria-expanded="false" aria-controls="slide-menu" aria-label="Slides"><svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><rect x="3" y="4.5" width="18" height="3" rx="1"></rect><rect x="3" y="10.5" width="18" height="3" rx="1"></rect><rect x="3" y="16.5" width="18" height="3" rx="1"></rect></svg><span>Slides</span></button>
+    <button type="button" class="btn sm" id="btn-theme" aria-pressed="false" aria-label="Toggle dark mode"><svg class="btn-ic" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"></path></svg><span>Dark mode</span></button>
+    <button type="button" class="btn sm" id="btn-fs" aria-pressed="false" aria-label="Full screen"><svg class="btn-ic" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"></path></svg><span>Full screen</span></button>
+  </div>
+</header>
+<div class="deck-progress"><i id="progress-fill"></i></div>
+<main class="deck" id="deck">
+<section class="slide title-slide" data-title="Synchronization, Deadlock &amp; Resource Allocation" aria-label="Synchronization, Deadlock &amp; Resource Allocation" tabindex="-1"><div class="slide-inner">
+<span class="topic-art" data-art="6" aria-hidden="true"></span>
+<span class="badge big">8</span>
+<p class="kicker">Lab Manual VIII · CSE 202</p>
+<h1>Synchronization, Deadlock & Resource Allocation</h1>
+<p class="lead">Protect bank balances with synchronized methods and blocks, watch two transfers deadlock when they lock accounts in opposite order, and prevent it with lock ordering.</p>
+<div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
+<p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
+</div></section>
+<section class="slide " data-title="Why this lab" aria-label="Why this lab" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Before we start</p><h2>Why this lab</h2><div class="hook"><p class="q">Thread 1 moves money from A to B while thread 2 moves money from B to A. Each grabs one account and waits for the other — forever. How do we stop that?</p><p>That is a <b>deadlock</b>. In this lab you cause one on purpose, then remove it with a simple rule: always lock accounts in the same order.</p></div>
+</div></section>
+<section class="slide " data-title="Lab at a glance" aria-label="Lab at a glance" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab 8 of 10</p><h2>Lab at a glance</h2><div class="cols wl"><div><h3>After this lab you can</h3><ul class=""><li>Explain why shared data needs synchronization</li><li>Describe race conditions and critical sections</li><li>Use synchronized methods and synchronized blocks</li><li>Explain monitor (object) locks</li><li>Name the four necessary conditions for deadlock</li><li>Demonstrate and prevent deadlock with lock ordering</li><li>Use <code>wait()</code>, <code>notify()</code> and <code>notifyAll()</code> for coordination</li></ul></div>
+<div><h3>Before you start</h3><ul class=""><li>Lab 7: Thread, Runnable, states, sleep() and join()</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
+</div></section>
+<section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab 8 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=11">Program design</a></li><li><a href="#s=12">Code walkthrough</a></li><li><a href="#s=22">Expected output</a></li><li><a href="#s=23">Interactive demos</a></li><li><a href="#s=25">In-lab tasks</a></li><li><a href="#s=29">Lab report exercises</a></li><li><a href="#s=32">Viva questions and quiz</a></li></ol>
+</div></section>
+<section class="slide " data-title="Race conditions and critical sections" aria-label="Race conditions and critical sections" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 1 of 6</p><h2>Race conditions and critical sections</h2><pre class="code small-code">balance = balance + amount;   // read, add, write: three steps</pre><ul class=""><li>If two threads interleave those steps, one update can overwrite the other — a <b>race condition</b>.</li><li>Code that touches shared data is a <b>critical section</b>; only one thread should run it at a time.</li></ul>
+</div></section>
+<section class="slide " data-title="synchronized methods and blocks" aria-label="synchronized methods and blocks" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 2 of 6</p><h2>synchronized methods and blocks</h2><pre class="code small-code">public synchronized void deposit(double amount) { balance += amount; }
+
+synchronized (account) {        // lock a chosen object
+    account.withdraw(amount);
+}</pre><ul class=""><li>Entering either form acquires the object’s <b>monitor lock</b>; other threads wait (BLOCKED) until it is released.</li><li>Methods protect the whole body; blocks protect only what needs it and let you pick the lock — used to lock two accounts in transfer().</li></ul>
+</div></section>
+<section class="slide " data-title="Deadlock" aria-label="Deadlock" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 3 of 6</p><h2>Deadlock</h2><figure class="fig" data-fig="deadlock"></figure><ul class=""><li>Four conditions must all hold: <b>mutual exclusion</b>, <b>hold and wait</b>, <b>no preemption</b>, <b>circular wait</b>.</li><li>Break any one of them and deadlock cannot happen.</li></ul>
+</div></section>
+<section class="slide " data-title="Resource allocation graph" aria-label="Resource allocation graph" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 4 of 6</p><h2>Resource allocation graph</h2><figure class="fig" data-fig="lab8-rag"></figure><ul class=""><li>Threads are circles, resources are squares. Request edge: thread → resource; assignment edge: resource → thread.</li><li>A cycle in the graph means a possible deadlock.</li></ul>
+</div></section>
+<section class="slide " data-title="Prevention: lock ordering" aria-label="Prevention: lock ordering" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 5 of 6</p><h2>Prevention: lock ordering</h2><pre class="code small-code">BankAccount first  = accountId.compareTo(target.accountId) &lt; 0 ? this : target;
+BankAccount second = (first == this) ? target : this;
+
+synchronized (first) {
+    synchronized (second) {
+        this.withdraw(amount);
+        target.deposit(amount);
+    }
+}</pre><ul class=""><li>Every thread locks the account with the smaller ID first, so a circular wait is impossible.</li></ul>
+</div></section>
+<section class="slide " data-title="wait(), notify() and notifyAll()" aria-label="wait(), notify() and notifyAll()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 6 of 6</p><h2>wait(), notify() and notifyAll()</h2><pre class="code small-code">synchronized (buffer) {
+    while (bufferIsEmpty) {
+        buffer.wait();      // releases the lock while waiting
+    }
+    ...
+    buffer.notifyAll();
+}</pre><ul class=""><li>Call them only while holding the object’s lock.</li><li>Always re-check the condition in a <code>while</code> loop: a woken thread may find the condition false again.</li></ul>
+</div></section>
+<section class="slide " data-title="Execution flow" aria-label="Execution flow" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Implementation design</p><h2>Execution flow</h2><ol class="flow"><li>Create ACC-001 (5000) and ACC-002 (3000)</li><li>Do one safe transfer with lock ordering</li><li>Run two threads transferring 100 back and forth five times each</li><li>join() them and check the total is still 8000</li><li>Start two risky transfers that lock in opposite order</li><li>join(3000): if a thread is still alive, report a possible deadlock</li></ol><p class="note-line">BankAccount has synchronized deposit/withdraw/getBalance and an ordered transfer(); DeadlockProneTransfer shows the unsafe way.</p>
+</div></section>
+<section class="slide " data-title="A synchronized withdrawal" aria-label="A synchronized withdrawal" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 1 of 9 · <span class="walk-file">BankAccount.java</span></p><h2>A synchronized withdrawal</h2><pre class="code walk-code">public synchronized void withdraw(double amount) {
+    if (amount &lt;= 0.0) {
+        throw new IllegalArgumentException(&quot;Amount must be positive.&quot;);
+    }
+    if (amount &gt; balance) {
+        throw new IllegalArgumentException(&quot;Insufficient funds in &quot; + accountId
+                + &quot;. Requested: &quot; + amount + &quot;, Available: &quot; + balance);
+    }
+    balance = balance - amount;
+    System.out.println(Thread.currentThread().getName() + &quot; withdrew &quot; + amount
+            + &quot; from &quot; + accountId + &quot;. New balance: &quot; + balance);
+}</pre><ul class="walk-notes"><li>Check and update happen while holding the account’s lock.</li></ul>
+</div></section>
+<section class="slide " data-title="Choosing the lock order" aria-label="Choosing the lock order" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 2 of 9 · <span class="walk-file">BankAccount.java</span></p><h2>Choosing the lock order</h2><pre class="code walk-code">// Locks are acquired in a fixed order to prevent deadlock.
+public void transfer(BankAccount target, double amount) {
+    if (target == null) {
+        throw new IllegalArgumentException(&quot;Target account cannot be null.&quot;);
+    }
+    BankAccount first;
+    BankAccount second;
+    if (this.accountId.compareTo(target.accountId) &lt; 0) {
+        first = this;
+        second = target;
+    } else {
+        first = target;
+        second = this;
+    }</pre><ul class="walk-notes"><li>The account with the smaller ID always becomes <code>first</code>, whichever direction the money moves.</li></ul>
+</div></section>
+<section class="slide " data-title="Locking both accounts in that order" aria-label="Locking both accounts in that order" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 3 of 9 · <span class="walk-file">BankAccount.java</span></p><h2>Locking both accounts in that order</h2><pre class="code walk-code wide">synchronized (first) {
+    synchronized (second) {
+        System.out.println(Thread.currentThread().getName() + &quot; transferring &quot;
+                + amount + &quot; from &quot; + this.accountId + &quot; to &quot; + target.accountId);
+        this.withdraw(amount);
+        target.deposit(amount);
+        System.out.println(Thread.currentThread().getName() + &quot; completed transfer.&quot;);
+    }
+}</pre><ul class="walk-notes"><li>Both locks are held during the whole transfer.</li><li>Two opposite transfers can never wait for each other in a circle.</li></ul>
+</div></section>
+<section class="slide " data-title="The risky way: lock the source" aria-label="The risky way: lock the source" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 4 of 9 · <span class="walk-file">DeadlockProneTransfer.java</span></p><h2>The risky way: lock the source</h2><pre class="code walk-code wide">// Inconsistent lock ordering: source first, then target.
+@Override
+public void run() {
+    synchronized (from) {
+        System.out.println(Thread.currentThread().getName() + &quot; locked &quot; + from.getAccountId());
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }</pre><ul class="walk-notes"><li>Each thread locks its own source first, then sleeps while holding it.</li></ul>
+</div></section>
+<section class="slide " data-title="…then wait for the target" aria-label="…then wait for the target" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 5 of 9 · <span class="walk-file">DeadlockProneTransfer.java</span></p><h2>…then wait for the target</h2><pre class="code walk-code wide">synchronized (to) {
+    System.out.println(Thread.currentThread().getName() + &quot; locked &quot; + to.getAccountId());
+    try {
+        from.withdraw(amount);
+        to.deposit(amount);
+        System.out.println(Thread.currentThread().getName() + &quot; completed risky transfer.&quot;);
+    } catch (IllegalArgumentException e) {
+        System.out.println(&quot;Risky transfer failed: &quot; + e.getMessage());
+    }
+}</pre><ul class="walk-notes"><li>Opposite transfers → each holds the lock the other needs. Neither can continue.</li></ul>
+</div></section>
+<section class="slide " data-title="Two threads, opposite transfers, safely" aria-label="Two threads, opposite transfers, safely" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 6 of 9 · <span class="walk-file">Lab8Demo.java</span></p><h2>Two threads, opposite transfers, safely</h2><pre class="code walk-code">Thread safeThread1 = new Thread(() -&gt; {
+    for (int i = 0; i &lt; 5; i++) {
+        safeAccount1.transfer(safeAccount2, 100.0);
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+}, &quot;SafeThread-1&quot;);</pre><ul class="walk-notes"><li>The lambda is the Runnable.</li><li>safeThread2 is the same with the two accounts swapped.</li><li>transfer() orders the locks, so this cannot deadlock.</li></ul>
+</div></section>
+<section class="slide " data-title="Checking that no money was lost" aria-label="Checking that no money was lost" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 7 of 9 · <span class="walk-file">Lab8Demo.java</span></p><h2>Checking that no money was lost</h2><pre class="code walk-code">safeThread1.start();
+safeThread2.start();
+try {
+    safeThread1.join();
+    safeThread2.join();
+} catch (InterruptedException e) {
+    System.out.println(&quot;Main thread interrupted.&quot;);
+    Thread.currentThread().interrupt();
+}
+System.out.println(&quot;\nAfter concurrent safe transfers:&quot;);
+safeAccount1.display();
+safeAccount2.display();
+double safeTotal = safeAccount1.getBalance() + safeAccount2.getBalance();
+System.out.println(&quot;Total balance: &quot; + safeTotal);</pre><ul class="walk-notes"><li>After join(), the total must still be 8000.</li></ul>
+</div></section>
+<section class="slide " data-title="Provoking the deadlock" aria-label="Provoking the deadlock" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 8 of 9 · <span class="walk-file">Lab8Demo.java</span></p><h2>Provoking the deadlock</h2><pre class="code walk-code wide">BankAccount riskAccount1 = new BankAccount(&quot;ACC-001&quot;, 5000.0);
+BankAccount riskAccount2 = new BankAccount(&quot;ACC-002&quot;, 3000.0);
+Thread riskyThread1 = new Thread(
+        new DeadlockProneTransfer(riskAccount1, riskAccount2, 500.0), &quot;RiskyThread-1&quot;);
+Thread riskyThread2 = new Thread(
+        new DeadlockProneTransfer(riskAccount2, riskAccount1, 700.0), &quot;RiskyThread-2&quot;);</pre><ul class="walk-notes"><li>Same two accounts, opposite directions, no ordering.</li></ul>
+</div></section>
+<section class="slide " data-title="Detecting it with a timeout" aria-label="Detecting it with a timeout" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 9 of 9 · <span class="walk-file">Lab8Demo.java</span></p><h2>Detecting it with a timeout</h2><pre class="code walk-code wide">riskyThread1.start();
+riskyThread2.start();
+try {
+    riskyThread1.join(3000);
+    riskyThread2.join(3000);
+} catch (InterruptedException e) {
+    System.out.println(&quot;Main thread interrupted during deadlock test.&quot;);
+    Thread.currentThread().interrupt();
+}
+if (riskyThread1.isAlive() || riskyThread2.isAlive()) {
+    System.out.println(&quot;\nPossible deadlock detected.&quot;);
+    System.out.println(&quot;At least one risky thread did not finish within timeout.&quot;);
+    System.out.println(&quot;This happens because locks may be acquired in opposite order.&quot;);
+} else {
+    System.out.println(&quot;\nRisky threads completed in this run.&quot;);
+    System.out.println(&quot;Deadlock did not occur this time, but the design is unsafe.&quot;);
+}</pre><ul class="walk-notes"><li><code>join(3000)</code> waits at most 3 s; a thread still alive means it is stuck.</li></ul>
+</div></section>
+<section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">For reference · 3 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="BankAccount.java">public class BankAccount {
+
+    private String accountId;
+    private double balance;
+
+    public BankAccount(String accountId, double initialBalance) {
+        this.accountId = accountId;
+        if (initialBalance &gt;= 0.0) {
+            this.balance = initialBalance;
+        } else {
+            this.balance = 0.0;
+        }
+    }
+
+    public synchronized void withdraw(double amount) {
+        if (amount &lt;= 0.0) {
+            throw new IllegalArgumentException(&quot;Amount must be positive.&quot;);
+        }
+        if (amount &gt; balance) {
+            throw new IllegalArgumentException(&quot;Insufficient funds in &quot; + accountId
+                    + &quot;. Requested: &quot; + amount + &quot;, Available: &quot; + balance);
+        }
+        balance = balance - amount;
+        System.out.println(Thread.currentThread().getName() + &quot; withdrew &quot; + amount
+                + &quot; from &quot; + accountId + &quot;. New balance: &quot; + balance);
+    }
+
+    public synchronized void deposit(double amount) {
+        if (amount &lt;= 0.0) {
+            throw new IllegalArgumentException(&quot;Amount must be positive.&quot;);
+        }
+        balance = balance + amount;
+        System.out.println(Thread.currentThread().getName() + &quot; deposited &quot; + amount
+                + &quot; into &quot; + accountId + &quot;. New balance: &quot; + balance);
+    }
+
+    public synchronized double getBalance() {
+        return balance;
+    }
+
+    public String getAccountId() {
+        return accountId;
+    }
+
+    // Locks are acquired in a fixed order to prevent deadlock.
+    public void transfer(BankAccount target, double amount) {
+        if (target == null) {
+            throw new IllegalArgumentException(&quot;Target account cannot be null.&quot;);
+        }
+        BankAccount first;
+        BankAccount second;
+        if (this.accountId.compareTo(target.accountId) &lt; 0) {
+            first = this;
+            second = target;
+        } else {
+            first = target;
+            second = this;
+        }
+        synchronized (first) {
+            synchronized (second) {
+                System.out.println(Thread.currentThread().getName() + &quot; transferring &quot;
+                        + amount + &quot; from &quot; + this.accountId + &quot; to &quot; + target.accountId);
+                this.withdraw(amount);
+                target.deposit(amount);
+                System.out.println(Thread.currentThread().getName() + &quot; completed transfer.&quot;);
+            }
+        }
+    }
+
+    public void display() {
+        System.out.println(&quot;Account: &quot; + accountId + &quot; | Balance: &quot; + getBalance());
+    }
+}</pre><pre class="code small-code" data-file="DeadlockProneTransfer.java">public class DeadlockProneTransfer implements Runnable {
+
+    private BankAccount from;
+    private BankAccount to;
+    private double amount;
+
+    public DeadlockProneTransfer(BankAccount from, BankAccount to, double amount) {
+        this.from = from;
+        this.to = to;
+        this.amount = amount;
+    }
+
+    // Inconsistent lock ordering: source first, then target.
+    @Override
+    public void run() {
+        synchronized (from) {
+            System.out.println(Thread.currentThread().getName() + &quot; locked &quot; + from.getAccountId());
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            synchronized (to) {
+                System.out.println(Thread.currentThread().getName() + &quot; locked &quot; + to.getAccountId());
+                try {
+                    from.withdraw(amount);
+                    to.deposit(amount);
+                    System.out.println(Thread.currentThread().getName() + &quot; completed risky transfer.&quot;);
+                } catch (IllegalArgumentException e) {
+                    System.out.println(&quot;Risky transfer failed: &quot; + e.getMessage());
+                }
+            }
+        }
+    }
+}</pre><pre class="code small-code" data-file="Lab8Demo.java">public class Lab8Demo {
+
+    public static void main(String[] args) {
+
+        // 1. Creating Accounts
+        System.out.println(&quot;=== Synchronization and Deadlock Demo ===&quot;);
+        BankAccount account1 = new BankAccount(&quot;ACC-001&quot;, 5000.0);
+        BankAccount account2 = new BankAccount(&quot;ACC-002&quot;, 3000.0);
+        System.out.println(&quot;\n=== Initial Account States ===&quot;);
+        account1.display();
+        account2.display();
+
+        // 2. Safe Transfer using Lock Ordering
+        System.out.println(&quot;\n=== Safe Transfer using Lock Ordering ===&quot;);
+        account1.transfer(account2, 1000.0);
+        System.out.println(&quot;\nAfter safe transfer:&quot;);
+        account1.display();
+        account2.display();
+
+        // 3. Concurrent Safe Transfers
+        System.out.println(&quot;\n=== Concurrent Safe Transfers ===&quot;);
+        BankAccount safeAccount1 = new BankAccount(&quot;ACC-001&quot;, 5000.0);
+        BankAccount safeAccount2 = new BankAccount(&quot;ACC-002&quot;, 3000.0);
+
+        Thread safeThread1 = new Thread(() -&gt; {
+            for (int i = 0; i &lt; 5; i++) {
+                safeAccount1.transfer(safeAccount2, 100.0);
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        }, &quot;SafeThread-1&quot;);
+
+        Thread safeThread2 = new Thread(() -&gt; {
+            for (int i = 0; i &lt; 5; i++) {
+                safeAccount2.transfer(safeAccount1, 100.0);
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        }, &quot;SafeThread-2&quot;);
+
+        safeThread1.start();
+        safeThread2.start();
+        try {
+            safeThread1.join();
+            safeThread2.join();
+        } catch (InterruptedException e) {
+            System.out.println(&quot;Main thread interrupted.&quot;);
+            Thread.currentThread().interrupt();
+        }
+        System.out.println(&quot;\nAfter concurrent safe transfers:&quot;);
+        safeAccount1.display();
+        safeAccount2.display();
+        double safeTotal = safeAccount1.getBalance() + safeAccount2.getBalance();
+        System.out.println(&quot;Total balance: &quot; + safeTotal);
+
+        // 4. Deadlock Risk Demonstration
+        System.out.println(&quot;\n=== Deadlock Risk Demonstration ===&quot;);
+        System.out.println(&quot;The following example starts two risky transfer tasks.&quot;);
+        System.out.println(&quot;If both threads remain alive after timeout, deadlock is possible.&quot;);
+        BankAccount riskAccount1 = new BankAccount(&quot;ACC-001&quot;, 5000.0);
+        BankAccount riskAccount2 = new BankAccount(&quot;ACC-002&quot;, 3000.0);
+        Thread riskyThread1 = new Thread(
+                new DeadlockProneTransfer(riskAccount1, riskAccount2, 500.0), &quot;RiskyThread-1&quot;);
+        Thread riskyThread2 = new Thread(
+                new DeadlockProneTransfer(riskAccount2, riskAccount1, 700.0), &quot;RiskyThread-2&quot;);
+        riskyThread1.start();
+        riskyThread2.start();
+        try {
+            riskyThread1.join(3000);
+            riskyThread2.join(3000);
+        } catch (InterruptedException e) {
+            System.out.println(&quot;Main thread interrupted during deadlock test.&quot;);
+            Thread.currentThread().interrupt();
+        }
+        if (riskyThread1.isAlive() || riskyThread2.isAlive()) {
+            System.out.println(&quot;\nPossible deadlock detected.&quot;);
+            System.out.println(&quot;At least one risky thread did not finish within timeout.&quot;);
+            System.out.println(&quot;This happens because locks may be acquired in opposite order.&quot;);
+        } else {
+            System.out.println(&quot;\nRisky threads completed in this run.&quot;);
+            System.out.println(&quot;Deadlock did not occur this time, but the design is unsafe.&quot;);
+        }
+
+        // 5. Final Message
+        System.out.println(&quot;\n=== Final Observation ===&quot;);
+        System.out.println(&quot;Use consistent lock ordering to prevent circular wait.&quot;);
+        System.out.println(&quot;Program demonstration completed.&quot;);
+    }
+}</pre></div><p class="muted">Copy or download each file, save it under the same name, then compile and run: <code>javac *.java</code> → <code>java Lab8Demo</code></p>
+</div></section>
+<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Implementation</p><h2>Expected output</h2><div class="runbox" data-cmd="java Lab8Demo"><pre class="run-src" hidden>=== Synchronization and Deadlock Demo ===
+
+=== Initial Account States ===
+Account: ACC-001 | Balance: 5000.0
+Account: ACC-002 | Balance: 3000.0
+
+=== Safe Transfer using Lock Ordering ===
+main transferring 1000.0 from ACC-001 to ACC-002
+main withdrew 1000.0 from ACC-001. New balance: 4000.0
+main deposited 1000.0 into ACC-002. New balance: 4000.0
+main completed transfer.
+
+After safe transfer:
+Account: ACC-001 | Balance: 4000.0
+Account: ACC-002 | Balance: 4000.0
+
+=== Concurrent Safe Transfers ===
+SafeThread-1 transferring 100.0 from ACC-001 to ACC-002
+SafeThread-1 withdrew 100.0 from ACC-001. New balance: 4900.0
+SafeThread-1 deposited 100.0 into ACC-002. New balance: 3100.0
+SafeThread-1 completed transfer.
+SafeThread-2 transferring 100.0 from ACC-002 to ACC-001
+SafeThread-2 withdrew 100.0 from ACC-002. New balance: 3000.0
+SafeThread-2 deposited 100.0 into ACC-001. New balance: 5000.0
+SafeThread-2 completed transfer.
+...
+After concurrent safe transfers:
+Account: ACC-001 | Balance: 5000.0
+Account: ACC-002 | Balance: 3000.0
+Total balance: 8000.0
+
+=== Deadlock Risk Demonstration ===
+The following example starts two risky transfer tasks.
+If both threads remain alive after timeout, deadlock is possible.
+RiskyThread-1 locked ACC-001
+RiskyThread-2 locked ACC-002
+
+Possible deadlock detected.
+At least one risky thread did not finish within timeout.
+This happens because locks may be acquired in opposite order.
+
+=== Final Observation ===
+Use consistent lock ordering to prevent circular wait.
+Program demonstration completed.</pre></div><p class="note-line">The risky threads usually deadlock (each holds one lock, then sleeps); on some runs they finish. Note the JVM will not exit while deadlocked threads are alive — stop it from the IDE.</p>
+</div></section>
+<section class="slide " data-title="Race condition lab" aria-label="Race condition lab" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Interactive 1 of 2</p><h2>Race condition lab</h2><div data-demo="race"></div>
+</div></section>
+<section class="slide " data-title="Producer–consumer with wait and notify" aria-label="Producer–consumer with wait and notify" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Interactive 2 of 2</p><h2>Producer–consumer with wait and notify</h2><div data-demo="prodcons"></div>
+</div></section>
+<section class="slide " data-title="Task 1: Synchronized printBalance()" aria-label="Task 1: Synchronized printBalance()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 1 of 3</p><h2>Task 1: Synchronized printBalance()</h2><div class="ex task"><div class="qq">Show that the balance stays consistent under concurrent deposits and withdrawals.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l8t0r0" data-key="l8t0r0"><label for="l8t0r0">Add <code>public synchronized void printBalance()</code></label></li><li><input type="checkbox" id="l8t0r1" data-key="l8t0r1"><label for="l8t0r1">One thread repeatedly deposits 100</label></li><li><input type="checkbox" id="l8t0r2" data-key="l8t0r2"><label for="l8t0r2">Another repeatedly withdraws 100 when the balance allows</label></li><li><input type="checkbox" id="l8t0r3" data-key="l8t0r3"><label for="l8t0r3">Call printBalance() after each operation</label></li><li><input type="checkbox" id="l8t0r4" data-key="l8t0r4"><label for="l8t0r4">Verify the balance stays consistent</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Check-then-withdraw must happen inside one synchronized region, otherwise another thread can change the balance in between.</div></details></div>
+</div></section>
+<section class="slide " data-title="Task 2: A simple wait()/notify() buffer" aria-label="Task 2: A simple wait()/notify() buffer" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 2 of 3</p><h2>Task 2: A simple wait()/notify() buffer</h2><div class="ex task"><div class="qq">SharedBuffer holds one integer at a time.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l8t1r0" data-key="l8t1r0"><label for="l8t1r0">Fields: the value and a boolean <code>full</code></label></li><li><input type="checkbox" id="l8t1r1" data-key="l8t1r1"><label for="l8t1r1"><code>synchronized void put(int)</code> and <code>synchronized int take()</code></label></li><li><input type="checkbox" id="l8t1r2" data-key="l8t1r2"><label for="l8t1r2">take() waits while empty; put() waits while full</label></li><li><input type="checkbox" id="l8t1r3" data-key="l8t1r3"><label for="l8t1r3">Call notify() after each change</label></li><li><input type="checkbox" id="l8t1r4" data-key="l8t1r4"><label for="l8t1r4">Producer puts 10 items; consumer takes 10</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Use <code>while (!full) wait();</code> — never <code>if</code>.</div></details></div>
+</div></section>
+<section class="slide " data-title="Task 3: Deadlock detection with timeout" aria-label="Task 3: Deadlock detection with timeout" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 3 of 3</p><h2>Task 3: Deadlock detection with timeout</h2><div class="ex task"><div class="qq">Make the deadlock happen reliably and detect it.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l8t2r0" data-key="l8t2r0"><label for="l8t2r0">Explicit synchronized blocks</label></li><li><input type="checkbox" id="l8t2r1" data-key="l8t2r1"><label for="l8t2r1">Two threads lock in opposite order</label></li><li><input type="checkbox" id="l8t2r2" data-key="l8t2r2"><label for="l8t2r2">Thread.sleep() after the first lock</label></li><li><input type="checkbox" id="l8t2r3" data-key="l8t2r3"><label for="l8t2r3">Wait at most 3 s with <code>join(3000)</code></label></li><li><input type="checkbox" id="l8t2r4" data-key="l8t2r4"><label for="l8t2r4">Print a warning if a thread is still alive</label></li><li><input type="checkbox" id="l8t2r5" data-key="l8t2r5"><label for="l8t2r5">Explain which four conditions held</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Mark the threads as daemon (<code>setDaemon(true)</code>) so the program can exit after detecting the deadlock.</div></details></div>
+</div></section>
+<section class="slide " data-title="Show your work" aria-label="Show your work" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
+</div></section>
+<section class="slide " data-title="Report exercise 1" aria-label="Report exercise 1" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report · exercise 1 of 2</p><h2>Thread-safe bounded queue with wait()/notifyAll()</h2><div class="ex task report"><div class="qq">A generic BoundedQueue shared by one producer and two consumers.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l8e0r0" data-key="l8e0r0"><label for="l8e0r0">Array storage, capacity, front, rear and count</label></li><li><input type="checkbox" id="l8e0r1" data-key="l8e0r1"><label for="l8e0r1">Synchronized <code>put(T item)</code> and <code>T take()</code></label></li><li><input type="checkbox" id="l8e0r2" data-key="l8e0r2"><label for="l8e0r2">wait() when full / empty, inside <b>while</b> loops; notifyAll() after each change</label></li><li><input type="checkbox" id="l8e0r3" data-key="l8e0r3"><label for="l8e0r3">Producer generates 1–50; two consumers remove and print</label></li><li><input type="checkbox" id="l8e0r4" data-key="l8e0r4"><label for="l8e0r4">join() all threads</label></li></ul></div>
+</div></section>
+<section class="slide " data-title="Report exercise 2" aria-label="Report exercise 2" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report · exercise 2 of 2</p><h2>Dining philosophers without deadlock</h2><div class="ex task report"><div class="qq">Five philosophers, five forks, timeout-based acquisition.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l8e1r0" data-key="l8e1r0"><label for="l8e1r0">Fork: forkId, availability; <code>acquire(long timeout)</code>, <code>release()</code></label></li><li><input type="checkbox" id="l8e1r1" data-key="l8e1r1"><label for="l8e1r1">Philosopher implements Runnable: think, then eat with two forks</label></li><li><input type="checkbox" id="l8e1r2" data-key="l8e1r2"><label for="l8e1r2">If the second fork is not acquired in time, release the first and retry</label></li><li><input type="checkbox" id="l8e1r3" data-key="l8e1r3"><label for="l8e1r3">Arrange 5 philosophers and 5 forks in a circle</label></li><li><input type="checkbox" id="l8e1r4" data-key="l8e1r4"><label for="l8e1r4">Run 10 seconds, stop everyone safely and show no deadlock occurred</label></li></ul></div>
+</div></section>
+<section class="slide " data-title="Writing the lab report" aria-label="Writing the lab report" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report</p><h2>Writing the lab report</h2><ul class="big-list"><li>Problem statement and your design (classes, fields, methods)</li><li>Complete source code, formatted and commented</li><li>Sample output or screenshots for normal <b>and</b> edge cases</li><li>A short discussion: what each OOP concept did in your program</li></ul><div class="integrity"><h3>Academic integrity</h3><p>Copying from the internet, classmates, seniors or any other unauthorized source is strictly prohibited. Full marks may be deducted if plagiarism, copied work or academic dishonesty is detected. Complete the tasks, implementation, output analysis and report yourself.</p></div>
+</div></section>
+<section class="slide " data-title="Viva questions (1 of 2)" aria-label="Viva questions (1 of 2)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Discussion and analysis</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">Name the four conditions for deadlock.</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Mutual exclusion, hold and wait, no preemption and circular wait — all four at once.</div></details></div><div class="ex"><div class="qq">Which condition does lock ordering remove?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Circular wait: if every thread takes locks in the same global order, no cycle can form.</div></details></div>
+</div></section>
+<section class="slide " data-title="Viva questions (2 of 2)" aria-label="Viva questions (2 of 2)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Discussion and analysis</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq">Why does transfer() use synchronized blocks rather than a synchronized method?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">It needs to hold two different objects’ locks, chosen in a specific order; a synchronized method locks only this.</div></details></div><div class="ex"><div class="qq">Why must wait() be inside a while loop?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">A woken thread may find the condition false again (another thread got there first, or a spurious wake-up), so it must re-check.</div></details></div>
+</div></section>
+<section class="slide " data-title="Quiz" aria-label="Quiz" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="lab8"></div><script type="application/json" class="quiz-json">[{"q": "A race condition happens when\u2026", "o": ["a loop never ends", "the result depends on thread timing", "two classes share a name", "a thread sleeps"], "a": 1, "w": "Unsynchronized interleavings give different results."}, {"q": "Which is NOT a deadlock condition?", "o": ["mutual exclusion", "hold and wait", "preemption", "circular wait"], "a": 2, "w": "The condition is NO preemption."}, {"q": "wait() must be called\u2026", "o": ["anywhere", "while holding the object\u2019s lock", "only in main", "after join()"], "a": 1, "w": "Otherwise IllegalMonitorStateException."}, {"q": "Lock ordering prevents deadlock by removing\u2026", "o": ["mutual exclusion", "circular wait", "threads", "locks"], "a": 1, "w": "Same order everywhere means no cycle."}, {"q": "A thread waiting to enter a synchronized block is\u2026", "o": ["NEW", "BLOCKED", "TERMINATED", "RUNNABLE"], "a": 1, "w": "It is blocked on the monitor lock."}]</script></div>
+</div></section>
+<section class="slide " data-title="Summary" aria-label="Summary" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Summary</p><h2>Summary</h2><ul class="sumlist"><li>Shared data + concurrent writes = race conditions; protect critical sections.</li><li>synchronized methods and blocks take an object’s monitor lock.</li><li>Deadlock needs mutual exclusion, hold and wait, no preemption and circular wait.</li><li>Consistent lock ordering removes circular wait.</li><li>wait/notify/notifyAll coordinate threads; always wait in a while loop.</li></ul><div class="nextcard"><a class="btn pri" href="09-gui-swing.html">Next: Lab 9 · GUI and drawing</a><a class="btn" href="../index.html">All labs</a></div>
+</div></section>
+</main>
+<footer class="deck-foot">
+  <button type="button" class="btn" id="prev">Previous</button>
+  <span class="counter" id="counter">1 / 35</span>
+  <button type="button" class="btn pri" id="next">Next</button>
+</footer>
+<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
+<noscript><p style="padding:20px">This lab needs JavaScript for the slides and the interactive examples.</p></noscript>
+<script src="../js/core.js"></script>
+<script src="../js/art.js"></script>
+<script src="../js/java.js"></script>
+<script src="../js/tracer.js"></script>
+<script src="../js/figs.js"></script>
+<script src="../js/lab-figs.js"></script>
+<script src="../js/demos-basics.js"></script>
+<script src="../js/demos-oop.js"></script>
+<script src="../js/demos-adv.js"></script>
+<script src="../js/quiz.js"></script>
+<script src="../js/page.js"></script>
+<script src="../js/lab.js"></script>
+<script>window.OOP_TOPIC = {"id": 8, "prev": "07-threads.html", "next": "09-gui-swing.html", "nextLabel": "Next lab"};</script>
+<script>mountPage();</script>
+<script src="../js/slides.js"></script>
+<script src="../js/annotate.js"></script>
+<script src="../js/analytics.js"
+        data-endpoint="https://analytics-proxy.ayansarkar1829.workers.dev"
+        data-project="CSE-202 OOP Lab"></script>
+<script src="../js/course-events.js"></script>
+</body>
+</html>

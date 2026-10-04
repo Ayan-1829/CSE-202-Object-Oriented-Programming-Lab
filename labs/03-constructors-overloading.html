@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Give a Rectangle class default, parameterised and copy constructors chained with this(…), overload area() and describe(), and find out exactly what Java passes to a method.">
+<meta name="keywords" content="java constructor, copy constructor, constructor chaining, method overloading, pass by value, object reference, lab, cse 202, object oriented programming lab">
+<meta name="author" content="Object Oriented Programming Lab Notes">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#155E63">
+<link rel="canonical" href="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/03-constructors-overloading.html">
+<link rel="icon" type="image/svg+xml" href="../img/logo-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../img/favicon-16.png">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
+<meta property="og:title" content="Lab 3: Constructors, Overloading &amp; Reference Passing | OOP Lab (CSE 202)">
+<meta property="og:description" content="Give a Rectangle class default, parameterised and copy constructors chained with this(…), overload area() and describe(), and find out exactly what Java passes to a method.">
+<meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/03-constructors-overloading.html">
+<meta name="twitter:card" content="summary">
+<title>Lab 3: Constructors, Overloading &amp; Reference Passing | OOP Lab (CSE 202)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/lab.css">
+</head>
+<body class="deck-page">
+<div class="sr-only" id="live" aria-live="polite"></div>
+<header class="deck-bar">
+  <a class="home-link" href="../index.html" aria-label="Home: all labs"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
+  <div class="deck-title"><span class="badge">3</span><span>Constructors, Overloading &amp; Reference Passing</span></div>
+  <div class="deck-actions">
+    <button type="button" class="btn sm" id="btn-menu" aria-expanded="false" aria-controls="slide-menu" aria-label="Slides"><svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><rect x="3" y="4.5" width="18" height="3" rx="1"></rect><rect x="3" y="10.5" width="18" height="3" rx="1"></rect><rect x="3" y="16.5" width="18" height="3" rx="1"></rect></svg><span>Slides</span></button>
+    <button type="button" class="btn sm" id="btn-theme" aria-pressed="false" aria-label="Toggle dark mode"><svg class="btn-ic" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"></path></svg><span>Dark mode</span></button>
+    <button type="button" class="btn sm" id="btn-fs" aria-pressed="false" aria-label="Full screen"><svg class="btn-ic" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"></path></svg><span>Full screen</span></button>
+  </div>
+</header>
+<div class="deck-progress"><i id="progress-fill"></i></div>
+<main class="deck" id="deck">
+<section class="slide title-slide" data-title="Constructors, Overloading &amp; Reference Passing" aria-label="Constructors, Overloading &amp; Reference Passing" tabindex="-1"><div class="slide-inner">
+<span class="topic-art" data-art="5" aria-hidden="true"></span>
+<span class="badge big">3</span>
+<p class="kicker">Lab Manual III · CSE 202</p>
+<h1>Constructors, Overloading & Reference Passing</h1>
+<p class="lead">Give a Rectangle class default, parameterised and copy constructors chained with this(…), overload area() and describe(), and find out exactly what Java passes to a method.</p>
+<div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
+<p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
+</div></section>
+<section class="slide " data-title="Why this lab" aria-label="Why this lab" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Before we start</p><h2>Why this lab</h2><div class="hook"><p class="q">You pass a rectangle to a method and it comes back twice as big. You pass a number and it comes back unchanged. Why the difference?</p><p>Java always passes <b>a copy</b>: a copy of the number, or a copy of the reference to the object. This lab proves it with a <code>Rectangle</code> class.</p></div>
+</div></section>
+<section class="slide " data-title="Lab at a glance" aria-label="Lab at a glance" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab 3 of 10</p><h2>Lab at a glance</h2><div class="cols wl"><div><h3>After this lab you can</h3><ul class=""><li>Define default, parameterised and copy constructors</li><li>Chain constructors with <code>this(…)</code> to avoid repeated code</li><li>Overload methods by changing the parameter list</li><li>Explain how the compiler picks an overload</li><li>Distinguish passing primitives from passing object references</li><li>Explain why reassigning a parameter does not affect the caller</li></ul></div>
+<div><h3>Before you start</h3><ul class=""><li>Lab 2: classes, objects, constructors, encapsulation</li><li>Primitive vs reference types</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
+</div></section>
+<section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab 3 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=12">Program design</a></li><li><a href="#s=14">Code walkthrough</a></li><li><a href="#s=28">Expected output</a></li><li><a href="#s=29">Interactive demos</a></li><li><a href="#s=30">In-lab tasks</a></li><li><a href="#s=34">Lab report exercises</a></li><li><a href="#s=37">Viva questions and quiz</a></li></ol>
+</div></section>
+<section class="slide " data-title="Default, parameterised and copy constructors" aria-label="Default, parameterised and copy constructors" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 1 of 5</p><h2>Default, parameterised and copy constructors</h2><pre class="code small-code">public Rectangle()                         // default: 1 x 1, White
+public Rectangle(double side)              // square
+public Rectangle(double w, double h)       // rectangle
+public Rectangle(double w, double h, String colour)
+public Rectangle(Rectangle other)          // copy</pre><ul class=""><li>Java writes a no-argument constructor only if you write none yourself.</li><li>A copy constructor builds a <b>new, independent</b> object with the same field values.</li></ul>
+</div></section>
+<section class="slide " data-title="Constructor chaining with this(…)" aria-label="Constructor chaining with this(…)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 2 of 5</p><h2>Constructor chaining with this(…)</h2><figure class="fig" data-fig="lab3-chain"></figure><ul class=""><li>Simpler constructors delegate to the full one, so validation lives in one place.</li></ul>
+</div></section>
+<section class="slide " data-title="Constructor chaining with this(…) (code)" aria-label="Constructor chaining with this(…) (code)" tabindex="-1"><div class="slide-inner">
+<h2>Constructor chaining with this(…)</h2><pre class="code small-code">public Rectangle(double side) {
+    this(side, side, &quot;White&quot;);   // must be the first statement
+}</pre>
+</div></section>
+<section class="slide " data-title="Method overloading" aria-label="Method overloading" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 3 of 5</p><h2>Method overloading</h2><pre class="code small-code">public double area()                                   // own fields
+public double area(double scaleFactor)                 // scaled
+public static double area(double width, double height) // any size</pre><ul class=""><li>Same name, different parameter lists (number, type or order).</li><li>Resolved by the compiler at <b>compile time</b>.</li><li>A different return type or access modifier alone is <b>not</b> an overload — compile error.</li></ul>
+</div></section>
+<section class="slide " data-title="Passing a primitive" aria-label="Passing a primitive" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 4 of 5</p><h2>Passing a primitive</h2><figure class="fig" data-fig="lab3-prim"></figure><ul class=""><li>The method gets a copy of the value; changing the copy cannot touch the caller’s variable.</li></ul>
+</div></section>
+<section class="slide " data-title="Passing a primitive (code)" aria-label="Passing a primitive (code)" tabindex="-1"><div class="slide-inner">
+<h2>Passing a primitive</h2><pre class="code small-code">static void passPrimitive(double side) { side = side * 2; }
+
+double side = 10.0;
+passPrimitive(side);   // side is still 10.0</pre>
+</div></section>
+<section class="slide " data-title="Passing an object reference" aria-label="Passing an object reference" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 5 of 5</p><h2>Passing an object reference</h2><figure class="fig" data-fig="lab3-ref"></figure><ul class=""><li>The method gets a copy of the <b>reference</b>: both point to the same object, so <code>r.scale(2.0)</code> is visible to the caller.</li><li>Reassigning the parameter (<code>r = new Rectangle(…)</code>) only moves the copy; the caller still sees the original.</li><li>So Java is <b>always pass-by-value</b> — for objects the value is a reference.</li></ul>
+</div></section>
+<section class="slide " data-title="Program design" aria-label="Program design" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Implementation design</p><h2>Program design</h2><figure class="fig" data-fig="lab3-rect-uml"></figure>
+</div></section>
+<section class="slide " data-title="Execution flow" aria-label="Execution flow" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Implementation design</p><h2>Execution flow</h2><ol class="flow"><li>Build rectangles with each of the five constructors</li><li>Copy r3, change r3’s colour and show the copy is unchanged</li><li>Call the three area() overloads and the two describe() overloads</li><li>Pass a primitive: unchanged after the call</li><li>Pass a reference and scale: the change is visible</li><li>Reassign the parameter: the caller’s object is untouched</li></ol><p class="note-line">All constructors funnel into the full one, which validates width and height.</p>
+</div></section>
+<section class="slide " data-title="Constructor chaining" aria-label="Constructor chaining" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 1 of 13 · <span class="walk-file">Rectangle.java</span></p><h2>Constructor chaining</h2><pre class="code walk-code">public Rectangle() {
+    this(1.0, 1.0, &quot;White&quot;);
+}
+
+public Rectangle(double side) {
+    this(side, side, &quot;White&quot;);
+}
+
+public Rectangle(double width, double height) {
+    this(width, height, &quot;White&quot;);
+}</pre><ul class="walk-notes"><li>Each simple constructor passes defaults to the full one with <code>this(…)</code>.</li></ul>
+</div></section>
+<section class="slide " data-title="The full constructor validates" aria-label="The full constructor validates" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 2 of 13 · <span class="walk-file">Rectangle.java</span></p><h2>The full constructor validates</h2><pre class="code walk-code">public Rectangle(double width, double height, String colour) {
+    if (width &gt; 0) {
+        this.width = width;
+    } else {
+        this.width = 1.0;
+    }
+    if (height &gt; 0) {
+        this.height = height;
+    } else {
+        this.height = 1.0;
+    }
+    this.colour = colour;
+}</pre><ul class="walk-notes"><li>All checks live in one place, whichever constructor was called.</li></ul>
+</div></section>
+<section class="slide " data-title="The copy constructor" aria-label="The copy constructor" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 3 of 13 · <span class="walk-file">Rectangle.java</span></p><h2>The copy constructor</h2><pre class="code walk-code">// Copy constructor
+public Rectangle(Rectangle other) {
+    this(other.width, other.height, other.colour);
+}</pre><ul class="walk-notes"><li>Builds a new object from another one’s values; it can read <code>other</code>’s private fields because it is the same class.</li></ul>
+</div></section>
+<section class="slide " data-title="Three overloads of area()" aria-label="Three overloads of area()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 4 of 13 · <span class="walk-file">Rectangle.java</span></p><h2>Three overloads of area()</h2><pre class="code walk-code">public double area() {
+    return width * height;
+}
+
+public double area(double scaleFactor) {
+    return area() * scaleFactor;
+}
+
+public static double area(double width, double height) {
+    return width * height;
+}</pre><ul class="walk-notes"><li>Same name, different parameters.</li><li>The static one needs no object: <code>Rectangle.area(3, 8)</code>.</li></ul>
+</div></section>
+<section class="slide " data-title="describe() overloads and scale()" aria-label="describe() overloads and scale()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 5 of 13 · <span class="walk-file">Rectangle.java</span></p><h2>describe() overloads and scale()</h2><pre class="code walk-code">public String describe() {
+    return String.format(&quot;Rectangle[%.2f x %.2f, colour=%s, area=%.2f]&quot;,
+            width, height, colour, area());
+}
+
+public String describe(String prefix) {
+    return prefix + &quot;: &quot; + describe();
+}
+
+public void scale(double factor) {
+    if (factor &gt; 0) {
+        width = width * factor;
+        height = height * factor;
+    }
+}</pre><ul class="walk-notes"><li><code>describe(prefix)</code> reuses <code>describe()</code>.</li><li><code>scale()</code> changes the object itself.</li></ul>
+</div></section>
+<section class="slide " data-title="Passing a primitive" aria-label="Passing a primitive" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 6 of 13 · <span class="walk-file">Lab3Demo.java</span></p><h2>Passing a primitive</h2><pre class="code walk-code">static void passPrimitive(double side) {
+    System.out.println(&quot;Inside passPrimitive: side before = &quot; + side);
+    side = side * 2;
+    System.out.println(&quot;Inside passPrimitive: side after  = &quot; + side);
+}</pre><ul class="walk-notes"><li><code>side</code> here is a copy; doubling it cannot change the caller’s variable.</li></ul>
+</div></section>
+<section class="slide " data-title="Passing a reference" aria-label="Passing a reference" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 7 of 13 · <span class="walk-file">Lab3Demo.java</span></p><h2>Passing a reference</h2><pre class="code walk-code wide">static void passReference(Rectangle rectangle) {
+    System.out.println(&quot;Inside passReference before scaling: &quot; + rectangle.describe());
+    rectangle.scale(2.0);
+    System.out.println(&quot;Inside passReference after scaling : &quot; + rectangle.describe());
+}</pre><ul class="walk-notes"><li>The parameter points to the caller’s object, so scaling is visible after the call.</li></ul>
+</div></section>
+<section class="slide " data-title="Reassigning the parameter" aria-label="Reassigning the parameter" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 8 of 13 · <span class="walk-file">Lab3Demo.java</span></p><h2>Reassigning the parameter</h2><pre class="code walk-code">static void tryReassignReference(Rectangle rectangle) {
+    rectangle = new Rectangle(99.0, 99.0, &quot;Invisible&quot;);
+    System.out.println(&quot;Inside tryReassignReference: &quot; + rectangle.describe());
+}</pre><ul class="walk-notes"><li>Only the local copy of the reference moves to the new object.</li></ul>
+</div></section>
+<section class="slide " data-title="Using every constructor" aria-label="Using every constructor" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 9 of 13 · <span class="walk-file">Lab3Demo.java</span></p><h2>Using every constructor</h2><pre class="code walk-code">// 1. Constructor Variants
+System.out.println(&quot;=== Constructor Variants ===&quot;);
+Rectangle r0 = new Rectangle();
+System.out.println(&quot;Default constructor    : &quot; + r0.describe());
+Rectangle r1 = new Rectangle(5.0);
+System.out.println(&quot;Square constructor     : &quot; + r1.describe());
+Rectangle r2 = new Rectangle(4.0, 7.0);
+System.out.println(&quot;Two-arg constructor    : &quot; + r2.describe());
+Rectangle r3 = new Rectangle(3.0, 6.0, &quot;Blue&quot;);
+System.out.println(&quot;Full constructor       : &quot; + r3.describe());
+Rectangle r4 = new Rectangle(r3);
+System.out.println(&quot;Copy constructor       : &quot; + r4.describe());</pre><ul class="walk-notes"><li>The compiler picks a constructor by the arguments.</li></ul>
+</div></section>
+<section class="slide " data-title="Copies are independent" aria-label="Copies are independent" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 10 of 13 · <span class="walk-file">Lab3Demo.java</span></p><h2>Copies are independent</h2><pre class="code walk-code">// 2. Copy Constructor Independence
+System.out.println(&quot;\n=== Copy Constructor Independence ===&quot;);
+r3.setColour(&quot;Green&quot;);
+System.out.println(&quot;Original after change  : &quot; + r3.describe());
+System.out.println(&quot;Copy remains unchanged : &quot; + r4.describe());</pre><ul class="walk-notes"><li>Changing r3 does not affect r4.</li></ul>
+</div></section>
+<section class="slide " data-title="Calling the overloads" aria-label="Calling the overloads" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 11 of 13 · <span class="walk-file">Lab3Demo.java</span></p><h2>Calling the overloads</h2><pre class="code walk-code">// 3. Method Overloading
+System.out.println(&quot;\n=== Method Overloading: area() ===&quot;);
+Rectangle rect = new Rectangle(6.0, 4.0, &quot;Yellow&quot;);
+System.out.printf(&quot;area()          = %.2f%n&quot;, rect.area());
+System.out.printf(&quot;area(1.5)       = %.2f%n&quot;, rect.area(1.5));
+System.out.printf(&quot;area(3.0, 8.0)  = %.2f%n&quot;, Rectangle.area(3.0, 8.0));
+
+System.out.println(&quot;\n=== Method Overloading: describe() ===&quot;);
+System.out.println(rect.describe());
+System.out.println(rect.describe(&quot;Main rectangle&quot;));</pre><ul class="walk-notes"><li>Arguments decide which area() and describe() run.</li></ul>
+</div></section>
+<section class="slide " data-title="Pass-by-value: a primitive" aria-label="Pass-by-value: a primitive" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 12 of 13 · <span class="walk-file">Lab3Demo.java</span></p><h2>Pass-by-value: a primitive</h2><pre class="code walk-code">// 4. Passing Primitive Value
+System.out.println(&quot;\n=== Passing a Primitive Value ===&quot;);
+double side = 10.0;
+System.out.println(&quot;Before method call: side = &quot; + side);
+passPrimitive(side);
+System.out.println(&quot;After method call : side = &quot; + side);</pre><ul class="walk-notes"><li>side is still 10.0 after the call: the method doubled a copy.</li></ul>
+</div></section>
+<section class="slide " data-title="Pass-by-value: references" aria-label="Pass-by-value: references" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 13 of 13 · <span class="walk-file">Lab3Demo.java</span></p><h2>Pass-by-value: references</h2><pre class="code walk-code">// 5. Passing Object Reference
+System.out.println(&quot;\n=== Passing an Object Reference ===&quot;);
+Rectangle ref = new Rectangle(5.0, 5.0, &quot;Blue&quot;);
+System.out.println(&quot;Before method call: &quot; + ref.describe());
+passReference(ref);
+System.out.println(&quot;After method call : &quot; + ref.describe());
+
+// 6. Reassigning Reference Parameter
+System.out.println(&quot;\n=== Reassigning Reference Parameter ===&quot;);
+Rectangle original = new Rectangle(2.0, 3.0, &quot;Pink&quot;);
+System.out.println(&quot;Before method call: &quot; + original.describe());
+tryReassignReference(original);
+System.out.println(&quot;After method call : &quot; + original.describe());</pre><ul class="walk-notes"><li>Mutating through the reference: the change is visible.</li><li>Reassigning the reference: the caller still sees the Pink 2 × 3 rectangle.</li></ul>
+</div></section>
+<section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">For reference · 2 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Rectangle.java">public class Rectangle {
+
+    private double width;
+    private double height;
+    private String colour;
+
+    public Rectangle() {
+        this(1.0, 1.0, &quot;White&quot;);
+    }
+
+    public Rectangle(double side) {
+        this(side, side, &quot;White&quot;);
+    }
+
+    public Rectangle(double width, double height) {
+        this(width, height, &quot;White&quot;);
+    }
+
+    public Rectangle(double width, double height, String colour) {
+        if (width &gt; 0) {
+            this.width = width;
+        } else {
+            this.width = 1.0;
+        }
+        if (height &gt; 0) {
+            this.height = height;
+        } else {
+            this.height = 1.0;
+        }
+        this.colour = colour;
+    }
+
+    // Copy constructor
+    public Rectangle(Rectangle other) {
+        this(other.width, other.height, other.colour);
+    }
+
+    public double area() {
+        return width * height;
+    }
+
+    public double area(double scaleFactor) {
+        return area() * scaleFactor;
+    }
+
+    public static double area(double width, double height) {
+        return width * height;
+    }
+
+    public String describe() {
+        return String.format(&quot;Rectangle[%.2f x %.2f, colour=%s, area=%.2f]&quot;,
+                width, height, colour, area());
+    }
+
+    public String describe(String prefix) {
+        return prefix + &quot;: &quot; + describe();
+    }
+
+    public void scale(double factor) {
+        if (factor &gt; 0) {
+            width = width * factor;
+            height = height * factor;
+        }
+    }
+
+    public double getWidth() { return width; }
+    public double getHeight() { return height; }
+    public String getColour() { return colour; }
+    public void setColour(String colour) { this.colour = colour; }
+
+    @Override
+    public String toString() {
+        return describe();
+    }
+}</pre><pre class="code small-code" data-file="Lab3Demo.java">public class Lab3Demo {
+
+    static void passPrimitive(double side) {
+        System.out.println(&quot;Inside passPrimitive: side before = &quot; + side);
+        side = side * 2;
+        System.out.println(&quot;Inside passPrimitive: side after  = &quot; + side);
+    }
+
+    static void passReference(Rectangle rectangle) {
+        System.out.println(&quot;Inside passReference before scaling: &quot; + rectangle.describe());
+        rectangle.scale(2.0);
+        System.out.println(&quot;Inside passReference after scaling : &quot; + rectangle.describe());
+    }
+
+    static void tryReassignReference(Rectangle rectangle) {
+        rectangle = new Rectangle(99.0, 99.0, &quot;Invisible&quot;);
+        System.out.println(&quot;Inside tryReassignReference: &quot; + rectangle.describe());
+    }
+
+    public static void main(String[] args) {
+
+        // 1. Constructor Variants
+        System.out.println(&quot;=== Constructor Variants ===&quot;);
+        Rectangle r0 = new Rectangle();
+        System.out.println(&quot;Default constructor    : &quot; + r0.describe());
+        Rectangle r1 = new Rectangle(5.0);
+        System.out.println(&quot;Square constructor     : &quot; + r1.describe());
+        Rectangle r2 = new Rectangle(4.0, 7.0);
+        System.out.println(&quot;Two-arg constructor    : &quot; + r2.describe());
+        Rectangle r3 = new Rectangle(3.0, 6.0, &quot;Blue&quot;);
+        System.out.println(&quot;Full constructor       : &quot; + r3.describe());
+        Rectangle r4 = new Rectangle(r3);
+        System.out.println(&quot;Copy constructor       : &quot; + r4.describe());
+
+        // 2. Copy Constructor Independence
+        System.out.println(&quot;\n=== Copy Constructor Independence ===&quot;);
+        r3.setColour(&quot;Green&quot;);
+        System.out.println(&quot;Original after change  : &quot; + r3.describe());
+        System.out.println(&quot;Copy remains unchanged : &quot; + r4.describe());
+
+        // 3. Method Overloading
+        System.out.println(&quot;\n=== Method Overloading: area() ===&quot;);
+        Rectangle rect = new Rectangle(6.0, 4.0, &quot;Yellow&quot;);
+        System.out.printf(&quot;area()          = %.2f%n&quot;, rect.area());
+        System.out.printf(&quot;area(1.5)       = %.2f%n&quot;, rect.area(1.5));
+        System.out.printf(&quot;area(3.0, 8.0)  = %.2f%n&quot;, Rectangle.area(3.0, 8.0));
+
+        System.out.println(&quot;\n=== Method Overloading: describe() ===&quot;);
+        System.out.println(rect.describe());
+        System.out.println(rect.describe(&quot;Main rectangle&quot;));
+
+        // 4. Passing Primitive Value
+        System.out.println(&quot;\n=== Passing a Primitive Value ===&quot;);
+        double side = 10.0;
+        System.out.println(&quot;Before method call: side = &quot; + side);
+        passPrimitive(side);
+        System.out.println(&quot;After method call : side = &quot; + side);
+
+        // 5. Passing Object Reference
+        System.out.println(&quot;\n=== Passing an Object Reference ===&quot;);
+        Rectangle ref = new Rectangle(5.0, 5.0, &quot;Blue&quot;);
+        System.out.println(&quot;Before method call: &quot; + ref.describe());
+        passReference(ref);
+        System.out.println(&quot;After method call : &quot; + ref.describe());
+
+        // 6. Reassigning Reference Parameter
+        System.out.println(&quot;\n=== Reassigning Reference Parameter ===&quot;);
+        Rectangle original = new Rectangle(2.0, 3.0, &quot;Pink&quot;);
+        System.out.println(&quot;Before method call: &quot; + original.describe());
+        tryReassignReference(original);
+        System.out.println(&quot;After method call : &quot; + original.describe());
+    }
+}</pre></div><p class="muted">Copy or download each file, save it under the same name, then compile and run: <code>javac *.java</code> → <code>java Lab3Demo</code></p>
+</div></section>
+<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Implementation</p><h2>Expected output</h2><div class="runbox" data-cmd="java Lab3Demo"><pre class="run-src" hidden>=== Constructor Variants ===
+Default constructor    : Rectangle[1.00 x 1.00, colour=White, area=1.00]
+Square constructor     : Rectangle[5.00 x 5.00, colour=White, area=25.00]
+Two-arg constructor    : Rectangle[4.00 x 7.00, colour=White, area=28.00]
+Full constructor       : Rectangle[3.00 x 6.00, colour=Blue, area=18.00]
+Copy constructor       : Rectangle[3.00 x 6.00, colour=Blue, area=18.00]
+
+=== Copy Constructor Independence ===
+Original after change  : Rectangle[3.00 x 6.00, colour=Green, area=18.00]
+Copy remains unchanged : Rectangle[3.00 x 6.00, colour=Blue, area=18.00]
+
+=== Method Overloading: area() ===
+area()          = 24.00
+area(1.5)       = 36.00
+area(3.0, 8.0)  = 24.00
+
+=== Method Overloading: describe() ===
+Rectangle[6.00 x 4.00, colour=Yellow, area=24.00]
+Main rectangle: Rectangle[6.00 x 4.00, colour=Yellow, area=24.00]
+
+=== Passing a Primitive Value ===
+Before method call: side = 10.0
+Inside passPrimitive: side before = 10.0
+Inside passPrimitive: side after  = 20.0
+After method call : side = 10.0
+
+=== Passing an Object Reference ===
+Before method call: Rectangle[5.00 x 5.00, colour=Blue, area=25.00]
+Inside passReference before scaling: Rectangle[5.00 x 5.00, colour=Blue, area=25.00]
+Inside passReference after scaling : Rectangle[10.00 x 10.00, colour=Blue, area=100.00]
+After method call : Rectangle[10.00 x 10.00, colour=Blue, area=100.00]
+
+=== Reassigning Reference Parameter ===
+Before method call: Rectangle[2.00 x 3.00, colour=Pink, area=6.00]
+Inside tryReassignReference: Rectangle[99.00 x 99.00, colour=Invisible, area=9801.00]
+After method call : Rectangle[2.00 x 3.00, colour=Pink, area=6.00]</pre></div><p class="note-line">Compare the last three sections: the primitive is unchanged, the scaled object changed, the reassigned parameter left the original alone.</p>
+</div></section>
+<section class="slide " data-title="Which overload does the compiler pick?" aria-label="Which overload does the compiler pick?" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Interactive 1 of 1</p><h2>Which overload does the compiler pick?</h2><div data-demo="overload"></div>
+</div></section>
+<section class="slide " data-title="Task 1: Overloaded perimeter() methods" aria-label="Task 1: Overloaded perimeter() methods" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 1 of 3</p><h2>Task 1: Overloaded perimeter() methods</h2><div class="ex task"><div class="qq">Add three overloads to Rectangle and call each from main.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l3t0r0" data-key="l3t0r0"><label for="l3t0r0"><code>double perimeter()</code> from the object’s fields</label></li><li><input type="checkbox" id="l3t0r1" data-key="l3t0r1"><label for="l3t0r1"><code>double perimeter(double scaleFactor)</code></label></li><li><input type="checkbox" id="l3t0r2" data-key="l3t0r2"><label for="l3t0r2"><code>static double perimeter(double width, double height)</code></label></li><li><input type="checkbox" id="l3t0r3" data-key="l3t0r3"><label for="l3t0r3">Demonstrate all three</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Mirror the three area() overloads; the scaled version can call <code>perimeter()</code>.</div></details></div>
+</div></section>
+<section class="slide " data-title="Task 2: Copy constructor independence test" aria-label="Task 2: Copy constructor independence test" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 2 of 3</p><h2>Task 2: Copy constructor independence test</h2><div class="ex task"><div class="qq">Prove that a copy is a separate object.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l3t1r0" data-key="l3t1r0"><label for="l3t1r0"><code>Rectangle a = new Rectangle(4.0, 8.0, "Red");</code></label></li><li><input type="checkbox" id="l3t1r1" data-key="l3t1r1"><label for="l3t1r1"><code>Rectangle b = new Rectangle(a);</code></label></li><li><input type="checkbox" id="l3t1r2" data-key="l3t1r2"><label for="l3t1r2">Call <code>a.scale(3.0)</code></label></li><li><input type="checkbox" id="l3t1r3" data-key="l3t1r3"><label for="l3t1r3">Print a and b and show b is unchanged</label></li><li><input type="checkbox" id="l3t1r4" data-key="l3t1r4"><label for="l3t1r4">Explain in a comment why b is independent</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">The copy constructor copied the <i>values</i> of width and height into a new object.</div></details></div>
+</div></section>
+<section class="slide " data-title="Task 3: Design a Circle class" aria-label="Task 3: Design a Circle class" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 3 of 3</p><h2>Task 3: Design a Circle class</h2><div class="ex task"><div class="qq">Constructors, overloads and reference passing with circles.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l3t2r0" data-key="l3t2r0"><label for="l3t2r0">Fields <code>radius</code> and <code>colour</code></label></li><li><input type="checkbox" id="l3t2r1" data-key="l3t2r1"><label for="l3t2r1">Default (1.0, White), radius, radius+colour and copy constructors</label></li><li><input type="checkbox" id="l3t2r2" data-key="l3t2r2"><label for="l3t2r2"><code>area()</code>, <code>area(scale)</code>, <code>circumference()</code>, <code>circumference(scale)</code>, <code>scale()</code>, <code>display()</code></label></li><li><input type="checkbox" id="l3t2r3" data-key="l3t2r3"><label for="l3t2r3">Create ≥3 circles and demonstrate every constructor and overload</label></li><li><input type="checkbox" id="l3t2r4" data-key="l3t2r4"><label for="l3t2r4">Pass a circle to a method that doubles its radius; show the change in main</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Chain the constructors to <code>Circle(double radius, String colour)</code> and validate radius there.</div></details></div>
+</div></section>
+<section class="slide " data-title="Show your work" aria-label="Show your work" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
+</div></section>
+<section class="slide " data-title="Report exercise 1" aria-label="Report exercise 1" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report · exercise 1 of 2</p><h2>Geometric shape library</h2><div class="ex task report"><div class="qq">Classes <code>Triangle</code> and <code>Cylinder</code> with a driver class.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l3e0r0" data-key="l3e0r0"><label for="l3e0r0">Triangle: sides a, b, c and type; default, equilateral, isosceles, general and copy constructors</label></li><li><input type="checkbox" id="l3e0r1" data-key="l3e0r1"><label for="l3e0r1">Triangle: <code>area()</code> by Heron’s formula, <code>area(scale)</code>, <code>isValid()</code>, <code>display()</code></label></li><li><input type="checkbox" id="l3e0r2" data-key="l3e0r2"><label for="l3e0r2">Cylinder: radius, height; default, two-arg and copy constructors</label></li><li><input type="checkbox" id="l3e0r3" data-key="l3e0r3"><label for="l3e0r3">Cylinder: <code>volume()</code>, <code>volume(scale)</code>, <code>surfaceArea()</code>, <code>surfaceArea(boolean includeCaps)</code></label></li><li><input type="checkbox" id="l3e0r4" data-key="l3e0r4"><label for="l3e0r4">Create ≥3 of each with different constructors; show copy independence and every overload</label></li></ul></div>
+</div></section>
+<section class="slide " data-title="Report exercise 2" aria-label="Report exercise 2" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report · exercise 2 of 2</p><h2>Student record mutation study</h2><div class="ex task report"><div class="qq">A <code>StudentRecord</code> with a <code>double[] grades</code> array, to study copying and mutation.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l3e1r0" data-key="l3e1r0"><label for="l3e1r0">Default, full and copy constructors; getters, setters, <code>average()</code>, <code>display()</code>, <code>applyBonus()</code></label></li><li><input type="checkbox" id="l3e1r1" data-key="l3e1r1"><label for="l3e1r1">s1 with grades {85, 90, 78, 92, 88}; s2 as a copy of s1</label></li><li><input type="checkbox" id="l3e1r2" data-key="l3e1r2"><label for="l3e1r2">Pass s1 to <code>applyBonus(StudentRecord, double)</code> and display both</label></li><li><input type="checkbox" id="l3e1r3" data-key="l3e1r3"><label for="l3e1r3">Explain whether the copy is independent (shallow vs deep copy of the array)</label></li><li><input type="checkbox" id="l3e1r4" data-key="l3e1r4"><label for="l3e1r4">Show with <code>tryEditPrimitive(double)</code> that a primitive grade is unchanged</label></li></ul></div>
+</div></section>
+<section class="slide " data-title="Writing the lab report" aria-label="Writing the lab report" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report</p><h2>Writing the lab report</h2><ul class="big-list"><li>Problem statement and your design (classes, fields, methods)</li><li>Complete source code, formatted and commented</li><li>Sample output or screenshots for normal <b>and</b> edge cases</li><li>A short discussion: what each OOP concept did in your program</li></ul><div class="integrity"><h3>Academic integrity</h3><p>Copying from the internet, classmates, seniors or any other unauthorized source is strictly prohibited. Full marks may be deducted if plagiarism, copied work or academic dishonesty is detected. Complete the tasks, implementation, output analysis and report yourself.</p></div>
+</div></section>
+<section class="slide " data-title="Viva questions (1 of 2)" aria-label="Viva questions (1 of 2)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Discussion and analysis</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">Why must <code>this(…)</code> be the first statement in a constructor?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">The object must be fully initialised by the delegated constructor before any other code runs; Java enforces it at compile time.</div></details></div><div class="ex"><div class="qq">Can two methods differ only in return type?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">No. The call <code>calculate()</code> would be ambiguous, so it is a compile error.</div></details></div>
+</div></section>
+<section class="slide " data-title="Viva questions (2 of 2)" aria-label="Viva questions (2 of 2)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Discussion and analysis</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq">Is Java pass-by-reference for objects?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">No. It passes the reference by value: mutation through the copy is visible, but reassigning the parameter is not.</div></details></div><div class="ex"><div class="qq">When does a copy constructor fail to give independence?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">When a field is itself a reference (such as an array) and only the reference is copied — a shallow copy. Copy the array too for a deep copy.</div></details></div>
+</div></section>
+<section class="slide " data-title="Quiz" aria-label="Quiz" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="lab3"></div><script type="application/json" class="quiz-json">[{"q": "Which call runs <code>Rectangle(double side)<\/code>?", "o": ["new Rectangle()", "new Rectangle(5.0)", "new Rectangle(5, 5)", "new Rectangle(r)"], "a": 1, "w": "One double argument matches the square constructor."}, {"q": "After <code>passPrimitive(side)<\/code> doubles its parameter, the caller\u2019s <code>side<\/code> is\u2026", "o": ["doubled", "unchanged", "0", "undefined"], "a": 1, "w": "The method changed only a copy."}, {"q": "Overloads must differ in\u2026", "o": ["return type", "parameter list", "access modifier", "method body"], "a": 1, "w": "Only the parameter list distinguishes overloads."}, {"q": "<code>tryReassignReference(r)<\/code> sets its parameter to a new object. Afterwards <code>r<\/code> refers to\u2026", "o": ["the new object", "the original object", "null", "a copy"], "a": 1, "w": "Only the parameter\u2019s copy of the reference moved."}, {"q": "Constructor chaining is written as\u2026", "o": ["super(\u2026)", "this(\u2026)", "Rectangle(\u2026)", "new this(\u2026)"], "a": 1, "w": "this(\u2026) calls another constructor of the same class."}]</script></div>
+</div></section>
+<section class="slide " data-title="Summary" aria-label="Summary" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Summary</p><h2>Summary</h2><ul class="sumlist"><li>Default, parameterised and copy constructors give flexible object creation.</li><li>Chain constructors with this(…) so validation lives in one place.</li><li>Overloads share a name but differ in parameters; the compiler chooses.</li><li>Java passes copies: of values for primitives, of references for objects.</li><li>Mutation through a reference is visible; reassigning the parameter is not.</li></ul><div class="nextcard"><a class="btn pri" href="04-inheritance-polymorphism.html">Next: Lab 4 · Inheritance and polymorphism</a><a class="btn" href="../index.html">All labs</a></div>
+</div></section>
+</main>
+<footer class="deck-foot">
+  <button type="button" class="btn" id="prev">Previous</button>
+  <span class="counter" id="counter">1 / 40</span>
+  <button type="button" class="btn pri" id="next">Next</button>
+</footer>
+<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
+<noscript><p style="padding:20px">This lab needs JavaScript for the slides and the interactive examples.</p></noscript>
+<script src="../js/core.js"></script>
+<script src="../js/art.js"></script>
+<script src="../js/java.js"></script>
+<script src="../js/tracer.js"></script>
+<script src="../js/figs.js"></script>
+<script src="../js/lab-figs.js"></script>
+<script src="../js/demos-basics.js"></script>
+<script src="../js/demos-oop.js"></script>
+<script src="../js/demos-adv.js"></script>
+<script src="../js/quiz.js"></script>
+<script src="../js/page.js"></script>
+<script src="../js/lab.js"></script>
+<script>window.OOP_TOPIC = {"id": 3, "prev": "02-classes-and-objects.html", "next": "04-inheritance-polymorphism.html", "nextLabel": "Next lab"};</script>
+<script>mountPage();</script>
+<script src="../js/slides.js"></script>
+<script src="../js/annotate.js"></script>
+<script src="../js/analytics.js"
+        data-endpoint="https://analytics-proxy.ayansarkar1829.workers.dev"
+        data-project="CSE-202 OOP Lab"></script>
+<script src="../js/course-events.js"></script>
+</body>
+</html>

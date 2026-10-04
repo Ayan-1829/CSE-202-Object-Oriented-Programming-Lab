@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Create threads by extending Thread and by implementing Runnable, watch them move through NEW, RUNNABLE, TIMED_WAITING and TERMINATED, and protect a shared counter with synchronized methods.">
+<meta name="keywords" content="java thread, runnable, start vs run, thread states, sleep, join, synchronized, lab, cse 202, object oriented programming lab">
+<meta name="author" content="Object Oriented Programming Lab Notes">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#155E63">
+<link rel="canonical" href="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/07-threads.html">
+<link rel="icon" type="image/svg+xml" href="../img/logo-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../img/favicon-16.png">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
+<meta property="og:title" content="Lab 7: Thread Creation &amp; Thread States | OOP Lab (CSE 202)">
+<meta property="og:description" content="Create threads by extending Thread and by implementing Runnable, watch them move through NEW, RUNNABLE, TIMED_WAITING and TERMINATED, and protect a shared counter with synchronized methods.">
+<meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/07-threads.html">
+<meta name="twitter:card" content="summary">
+<title>Lab 7: Thread Creation &amp; Thread States | OOP Lab (CSE 202)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/lab.css">
+</head>
+<body class="deck-page">
+<div class="sr-only" id="live" aria-live="polite"></div>
+<header class="deck-bar">
+  <a class="home-link" href="../index.html" aria-label="Home: all labs"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
+  <div class="deck-title"><span class="badge">7</span><span>Thread Creation &amp; Thread States</span></div>
+  <div class="deck-actions">
+    <button type="button" class="btn sm" id="btn-menu" aria-expanded="false" aria-controls="slide-menu" aria-label="Slides"><svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><rect x="3" y="4.5" width="18" height="3" rx="1"></rect><rect x="3" y="10.5" width="18" height="3" rx="1"></rect><rect x="3" y="16.5" width="18" height="3" rx="1"></rect></svg><span>Slides</span></button>
+    <button type="button" class="btn sm" id="btn-theme" aria-pressed="false" aria-label="Toggle dark mode"><svg class="btn-ic" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"></path></svg><span>Dark mode</span></button>
+    <button type="button" class="btn sm" id="btn-fs" aria-pressed="false" aria-label="Full screen"><svg class="btn-ic" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"></path></svg><span>Full screen</span></button>
+  </div>
+</header>
+<div class="deck-progress"><i id="progress-fill"></i></div>
+<main class="deck" id="deck">
+<section class="slide title-slide" data-title="Thread Creation &amp; Thread States" aria-label="Thread Creation &amp; Thread States" tabindex="-1"><div class="slide-inner">
+<span class="topic-art" data-art="11" aria-hidden="true"></span>
+<span class="badge big">7</span>
+<p class="kicker">Lab Manual VII · CSE 202</p>
+<h1>Thread Creation & Thread States</h1>
+<p class="lead">Create threads by extending Thread and by implementing Runnable, watch them move through NEW, RUNNABLE, TIMED_WAITING and TERMINATED, and protect a shared counter with synchronized methods.</p>
+<div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
+<p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
+</div></section>
+<section class="slide " data-title="Why this lab" aria-label="Why this lab" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Before we start</p><h2>Why this lab</h2><div class="hook"><p class="q">Three workers update one shared counter at the same time. Will the final value always be correct?</p><p>Only if they take turns. This lab starts one <code>IncrementThread</code> and two <code>DecrementRunnable</code> threads on a shared <code>Counter</code> whose methods are <code>synchronized</code>.</p></div>
+</div></section>
+<section class="slide " data-title="Lab at a glance" aria-label="Lab at a glance" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab 7 of 10</p><h2>Lab at a glance</h2><div class="cols wl"><div><h3>After this lab you can</h3><ul class=""><li>Explain a thread as a lightweight path of execution</li><li>Distinguish a process from a thread</li><li>Create threads by extending <code>Thread</code> and by implementing <code>Runnable</code></li><li>Explain <code>start()</code> vs <code>run()</code></li><li>Describe NEW, RUNNABLE, TIMED_WAITING and TERMINATED</li><li>Use <code>Thread.sleep()</code> and <code>join()</code></li><li>Protect shared data with <code>synchronized</code> methods</li></ul></div>
+<div><h3>Before you start</h3><ul class=""><li>Labs 4–6: inheritance, interfaces, overriding, try-catch with InterruptedException</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
+</div></section>
+<section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab 7 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=10">Program design</a></li><li><a href="#s=12">Code walkthrough</a></li><li><a href="#s=20">Expected output</a></li><li><a href="#s=21">Interactive demos</a></li><li><a href="#s=23">In-lab tasks</a></li><li><a href="#s=27">Lab report exercises</a></li><li><a href="#s=30">Viva questions and quiz</a></li></ol>
+</div></section>
+<section class="slide " data-title="Process and thread" aria-label="Process and thread" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 1 of 5</p><h2>Process and thread</h2><figure class="fig" data-fig="threads-mem"></figure><ul class=""><li>A process has its own memory; threads inside it share the heap but each has its own stack.</li><li>Shared objects are convenient — and dangerous when several threads modify them.</li></ul>
+</div></section>
+<section class="slide " data-title="Two ways to create a thread" aria-label="Two ways to create a thread" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 2 of 5</p><h2>Two ways to create a thread</h2><pre class="code small-code">class MyThread extends Thread {          // way 1
+    @Override public void run() { ... }
+}
+new MyThread().start();
+
+class MyTask implements Runnable {      // way 2
+    @Override public void run() { ... }
+}
+new Thread(new MyTask()).start();</pre><ul class=""><li>Runnable is usually preferred: your class can still extend another class, and the task is separate from the thread.</li></ul>
+</div></section>
+<section class="slide " data-title="start() vs run()" aria-label="start() vs run()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 3 of 5</p><h2>start() vs run()</h2><pre class="code small-code">thread.start();   // creates a new thread, which calls run()
+thread.run();     // just a normal method call in the current thread</pre><ul class=""><li>Only <code>start()</code> gives concurrent execution. Calling <code>start()</code> twice throws <code>IllegalThreadStateException</code>.</li></ul>
+</div></section>
+<section class="slide " data-title="Java thread states" aria-label="Java thread states" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 4 of 5</p><h2>Java thread states</h2><figure class="fig" data-fig="lab7-states"></figure><ul class=""><li><code>getState()</code> returns the enum value. <code>sleep(ms)</code> puts a thread in TIMED_WAITING; waiting for a lock is BLOCKED.</li></ul>
+</div></section>
+<section class="slide " data-title="sleep(), join() and synchronized" aria-label="sleep(), join() and synchronized" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 5 of 5</p><h2>sleep(), join() and synchronized</h2><pre class="code small-code">try {
+    Thread.sleep(100);          // pause this thread
+    worker.join();              // wait until worker finishes
+} catch (InterruptedException e) {
+    Thread.currentThread().interrupt();
+}
+
+public synchronized void increment() { value++; }</pre><ul class=""><li><code>join()</code> makes main wait so the final value is printed only after all workers finish.</li><li><code>synchronized</code> lets one thread at a time run the method on the same object, preventing lost updates.</li></ul>
+</div></section>
+<section class="slide " data-title="Program design" aria-label="Program design" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Implementation design</p><h2>Program design</h2><figure class="fig" data-fig="lab7-counter-uml"></figure>
+</div></section>
+<section class="slide " data-title="Execution flow" aria-label="Execution flow" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Implementation design</p><h2>Execution flow</h2><ol class="flow"><li>Create a shared Counter at 0</li><li>Create IncrementThread (3 increments) and two DecrementRunnable threads (3 and 2 decrements)</li><li>Print every thread’s state: NEW</li><li>start() all three and print states: RUNNABLE</li><li>Each thread updates the counter and sleeps 100 ms</li><li>main joins each thread</li><li>Print the final value (3 increments, 5 decrements: −2) and the TERMINATED states</li></ol><p class="note-line">The message order changes between runs; synchronization keeps every individual update correct.</p>
+</div></section>
+<section class="slide " data-title="synchronized methods on the shared Counter" aria-label="synchronized methods on the shared Counter" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 1 of 7 · <span class="walk-file">Counter.java</span></p><h2>synchronized methods on the shared Counter</h2><pre class="code walk-code">public synchronized void increment() {
+    value++;
+    System.out.println(Thread.currentThread().getName()
+            + &quot; incremented &quot; + name + &quot; to &quot; + value);
+}
+
+public synchronized void decrement() {
+    value--;
+    System.out.println(Thread.currentThread().getName()
+            + &quot; decremented &quot; + name + &quot; to &quot; + value);
+}
+
+public synchronized int getValue() {
+    return value;
+}</pre><ul class="walk-notes"><li>One thread at a time per Counter object, so no update is lost.</li></ul>
+</div></section>
+<section class="slide " data-title="Way 1: extend Thread" aria-label="Way 1: extend Thread" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 2 of 7 · <span class="walk-file">IncrementThread.java</span></p><h2>Way 1: extend Thread</h2><pre class="code walk-code">public class IncrementThread extends Thread {
+
+    private Counter counter;
+    private int iterations;
+
+    public IncrementThread(String name, Counter counter, int iterations) {
+        super(name);
+        this.counter = counter;
+        this.iterations = iterations;
+    }</pre><ul class="walk-notes"><li>The class <b>is</b> a thread.</li><li><code>super(name)</code> passes the name to Thread.</li></ul>
+</div></section>
+<section class="slide " data-title="The work goes in run()" aria-label="The work goes in run()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 3 of 7 · <span class="walk-file">IncrementThread.java</span></p><h2>The work goes in run()</h2><pre class="code walk-code">@Override
+public void run() {
+    for (int i = 0; i &lt; iterations; i++) {
+        counter.increment();
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            System.out.println(getName() + &quot; was interrupted.&quot;);
+            Thread.currentThread().interrupt();
+            break;
+        }
+    }
+    System.out.println(getName() + &quot; finished.&quot;);
+}</pre><ul class="walk-notes"><li><code>sleep(100)</code> pauses so other threads get a turn.</li><li>If interrupted, restore the flag and stop.</li></ul>
+</div></section>
+<section class="slide " data-title="Way 2: implement Runnable" aria-label="Way 2: implement Runnable" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 4 of 7 · <span class="walk-file">DecrementRunnable.java</span></p><h2>Way 2: implement Runnable</h2><pre class="code walk-code wide">@Override
+public void run() {
+    for (int i = 0; i &lt; iterations; i++) {
+        counter.decrement();
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            System.out.println(Thread.currentThread().getName() + &quot; was interrupted.&quot;);
+            Thread.currentThread().interrupt();
+            break;
+        }
+    }
+    System.out.println(Thread.currentThread().getName() + &quot; finished.&quot;);
+}</pre><ul class="walk-notes"><li>Same loop, but the class is only a task.</li><li><code>Thread.currentThread()</code> gives the thread running it.</li></ul>
+</div></section>
+<section class="slide " data-title="Creating the threads" aria-label="Creating the threads" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 5 of 7 · <span class="walk-file">Lab7Demo.java</span></p><h2>Creating the threads</h2><pre class="code walk-code wide">// 2. Creating Threads
+System.out.println(&quot;\n=== Creating Threads ===&quot;);
+IncrementThread incrementThread = new IncrementThread(&quot;IncrementThread-1&quot;, counter, 3);
+DecrementRunnable decrementTask1 = new DecrementRunnable(counter, 3);
+DecrementRunnable decrementTask2 = new DecrementRunnable(counter, 2);
+Thread decrementThread1 = new Thread(decrementTask1, &quot;DecrementThread-1&quot;);
+Thread decrementThread2 = new Thread(decrementTask2, &quot;DecrementThread-2&quot;);
+
+System.out.println(&quot;IncrementThread-1 state: &quot; + incrementThread.getState());
+System.out.println(&quot;DecrementThread-1 state: &quot; + decrementThread1.getState());
+System.out.println(&quot;DecrementThread-2 state: &quot; + decrementThread2.getState());</pre><ul class="walk-notes"><li>A Runnable is wrapped in a Thread.</li><li>Before start(), every state is NEW.</li></ul>
+</div></section>
+<section class="slide " data-title="start() all three" aria-label="start() all three" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 6 of 7 · <span class="walk-file">Lab7Demo.java</span></p><h2>start() all three</h2><pre class="code walk-code wide">// 3. Starting Threads
+System.out.println(&quot;\n=== Starting Threads ===&quot;);
+incrementThread.start();
+decrementThread1.start();
+decrementThread2.start();
+System.out.println(&quot;All threads started.&quot;);
+System.out.println(&quot;IncrementThread-1 state after start: &quot; + incrementThread.getState());
+System.out.println(&quot;DecrementThread-1 state after start: &quot; + decrementThread1.getState());
+System.out.println(&quot;DecrementThread-2 state after start: &quot; + decrementThread2.getState());</pre><ul class="walk-notes"><li>start() makes a new thread call run(); the states become RUNNABLE.</li></ul>
+</div></section>
+<section class="slide " data-title="join(): wait for the workers" aria-label="join(): wait for the workers" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 7 of 7 · <span class="walk-file">Lab7Demo.java</span></p><h2>join(): wait for the workers</h2><pre class="code walk-code">// 4. Waiting for Threads using join()
+System.out.println(&quot;\n=== Waiting for Threads to Complete ===&quot;);
+try {
+    incrementThread.join();
+    System.out.println(&quot;IncrementThread-1 has terminated.&quot;);
+    decrementThread1.join();
+    System.out.println(&quot;DecrementThread-1 has terminated.&quot;);
+    decrementThread2.join();
+    System.out.println(&quot;DecrementThread-2 has terminated.&quot;);
+} catch (InterruptedException e) {
+    System.out.println(&quot;Main thread was interrupted.&quot;);
+    Thread.currentThread().interrupt();
+}</pre><ul class="walk-notes"><li>main pauses until each thread has terminated.</li></ul>
+</div></section>
+<section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">For reference · 4 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Counter.java">public class Counter {
+
+    private int value;
+    private String name;
+
+    public Counter(String name, int initialValue) {
+        this.name = name;
+        this.value = initialValue;
+    }
+
+    public synchronized void increment() {
+        value++;
+        System.out.println(Thread.currentThread().getName()
+                + &quot; incremented &quot; + name + &quot; to &quot; + value);
+    }
+
+    public synchronized void decrement() {
+        value--;
+        System.out.println(Thread.currentThread().getName()
+                + &quot; decremented &quot; + name + &quot; to &quot; + value);
+    }
+
+    public synchronized int getValue() {
+        return value;
+    }
+
+    public void display() {
+        System.out.println(name + &quot; = &quot; + getValue());
+    }
+}</pre><pre class="code small-code" data-file="IncrementThread.java">public class IncrementThread extends Thread {
+
+    private Counter counter;
+    private int iterations;
+
+    public IncrementThread(String name, Counter counter, int iterations) {
+        super(name);
+        this.counter = counter;
+        this.iterations = iterations;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; iterations; i++) {
+            counter.increment();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                System.out.println(getName() + &quot; was interrupted.&quot;);
+                Thread.currentThread().interrupt();
+                break;
+            }
+        }
+        System.out.println(getName() + &quot; finished.&quot;);
+    }
+}</pre><pre class="code small-code" data-file="DecrementRunnable.java">public class DecrementRunnable implements Runnable {
+
+    private Counter counter;
+    private int iterations;
+
+    public DecrementRunnable(Counter counter, int iterations) {
+        this.counter = counter;
+        this.iterations = iterations;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; iterations; i++) {
+            counter.decrement();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                System.out.println(Thread.currentThread().getName() + &quot; was interrupted.&quot;);
+                Thread.currentThread().interrupt();
+                break;
+            }
+        }
+        System.out.println(Thread.currentThread().getName() + &quot; finished.&quot;);
+    }
+}</pre><pre class="code small-code" data-file="Lab7Demo.java">public class Lab7Demo {
+
+    public static void main(String[] args) {
+
+        // 1. Shared Counter Creation
+        System.out.println(&quot;=== Thread Creation and Lifecycle Demo ===&quot;);
+        Counter counter = new Counter(&quot;SharedCounter&quot;, 0);
+        System.out.println(&quot;Initial counter state:&quot;);
+        counter.display();
+
+        // 2. Creating Threads
+        System.out.println(&quot;\n=== Creating Threads ===&quot;);
+        IncrementThread incrementThread = new IncrementThread(&quot;IncrementThread-1&quot;, counter, 3);
+        DecrementRunnable decrementTask1 = new DecrementRunnable(counter, 3);
+        DecrementRunnable decrementTask2 = new DecrementRunnable(counter, 2);
+        Thread decrementThread1 = new Thread(decrementTask1, &quot;DecrementThread-1&quot;);
+        Thread decrementThread2 = new Thread(decrementTask2, &quot;DecrementThread-2&quot;);
+
+        System.out.println(&quot;IncrementThread-1 state: &quot; + incrementThread.getState());
+        System.out.println(&quot;DecrementThread-1 state: &quot; + decrementThread1.getState());
+        System.out.println(&quot;DecrementThread-2 state: &quot; + decrementThread2.getState());
+
+        // 3. Starting Threads
+        System.out.println(&quot;\n=== Starting Threads ===&quot;);
+        incrementThread.start();
+        decrementThread1.start();
+        decrementThread2.start();
+        System.out.println(&quot;All threads started.&quot;);
+        System.out.println(&quot;IncrementThread-1 state after start: &quot; + incrementThread.getState());
+        System.out.println(&quot;DecrementThread-1 state after start: &quot; + decrementThread1.getState());
+        System.out.println(&quot;DecrementThread-2 state after start: &quot; + decrementThread2.getState());
+
+        // 4. Waiting for Threads using join()
+        System.out.println(&quot;\n=== Waiting for Threads to Complete ===&quot;);
+        try {
+            incrementThread.join();
+            System.out.println(&quot;IncrementThread-1 has terminated.&quot;);
+            decrementThread1.join();
+            System.out.println(&quot;DecrementThread-1 has terminated.&quot;);
+            decrementThread2.join();
+            System.out.println(&quot;DecrementThread-2 has terminated.&quot;);
+        } catch (InterruptedException e) {
+            System.out.println(&quot;Main thread was interrupted.&quot;);
+            Thread.currentThread().interrupt();
+        }
+
+        // 5. Final State
+        System.out.println(&quot;\n=== Final State ===&quot;);
+        counter.display();
+        System.out.println(&quot;IncrementThread-1 final state: &quot; + incrementThread.getState());
+        System.out.println(&quot;DecrementThread-1 final state: &quot; + decrementThread1.getState());
+        System.out.println(&quot;DecrementThread-2 final state: &quot; + decrementThread2.getState());
+        System.out.println(&quot;All threads have completed.&quot;);
+        System.out.println(&quot;Main thread exiting.&quot;);
+    }
+}</pre></div><p class="muted">Copy or download each file, save it under the same name, then compile and run: <code>javac *.java</code> → <code>java Lab7Demo</code></p>
+</div></section>
+<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Implementation</p><h2>Expected output</h2><div class="runbox" data-cmd="java Lab7Demo"><pre class="run-src" hidden>=== Thread Creation and Lifecycle Demo ===
+Initial counter state:
+SharedCounter = 0
+
+=== Creating Threads ===
+IncrementThread-1 state: NEW
+DecrementThread-1 state: NEW
+DecrementThread-2 state: NEW
+
+=== Starting Threads ===
+All threads started.
+IncrementThread-1 state after start: RUNNABLE
+DecrementThread-1 state after start: RUNNABLE
+DecrementThread-2 state after start: RUNNABLE
+
+=== Waiting for Threads to Complete ===
+IncrementThread-1 incremented SharedCounter to 1
+DecrementThread-1 decremented SharedCounter to 0
+DecrementThread-2 decremented SharedCounter to -1
+IncrementThread-1 incremented SharedCounter to 0
+DecrementThread-1 decremented SharedCounter to -1
+DecrementThread-2 decremented SharedCounter to -2
+IncrementThread-1 incremented SharedCounter to -1
+DecrementThread-1 decremented SharedCounter to -2
+DecrementThread-2 finished.
+IncrementThread-1 finished.
+IncrementThread-1 has terminated.
+DecrementThread-1 finished.
+DecrementThread-1 has terminated.
+DecrementThread-2 has terminated.
+
+=== Final State ===
+SharedCounter = -2
+IncrementThread-1 final state: TERMINATED
+DecrementThread-1 final state: TERMINATED
+DecrementThread-2 final state: TERMINATED
+All threads have completed.
+Main thread exiting.</pre></div><p class="note-line">One possible run: the order of thread messages changes every time, but the final value is always 3 − (3 + 2) = −2. (The sample printed in the manual ends at −3 with one decrement too many.)</p>
+</div></section>
+<section class="slide " data-title="Two threads, many possible outputs" aria-label="Two threads, many possible outputs" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Interactive 1 of 2</p><h2>Two threads, many possible outputs</h2><div data-demo="interleave"></div>
+</div></section>
+<section class="slide " data-title="Race condition lab: with and without synchronized" aria-label="Race condition lab: with and without synchronized" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Interactive 2 of 2</p><h2>Race condition lab: with and without synchronized</h2><div data-demo="race"></div>
+</div></section>
+<section class="slide " data-title="Task 1: Implement a PrinterThread" aria-label="Task 1: Implement a PrinterThread" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 1 of 3</p><h2>Task 1: Implement a PrinterThread</h2><div class="ex task"><div class="qq">A thread that prints 1 to 10.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l7t0r0" data-key="l7t0r0"><label for="l7t0r0">Extend <code>Thread</code></label></li><li><input type="checkbox" id="l7t0r1" data-key="l7t0r1"><label for="l7t0r1">Print 1–10, sleeping 200 ms after each number</label></li><li><input type="checkbox" id="l7t0r2" data-key="l7t0r2"><label for="l7t0r2">Create and start three PrinterThread objects</label></li><li><input type="checkbox" id="l7t0r3" data-key="l7t0r3"><label for="l7t0r3">Print <code>isAlive()</code> before and after <code>join()</code></label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Give each thread a name with <code>super(name)</code> so the interleaved output is readable.</div></details></div>
+</div></section>
+<section class="slide " data-title="Task 2: Add reset() to Counter" aria-label="Task 2: Add reset() to Counter" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 2 of 3</p><h2>Task 2: Add reset() to Counter</h2><div class="ex task"><div class="qq">A synchronized reset that races with the workers.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l7t1r0" data-key="l7t1r0"><label for="l7t1r0">Add <code>public synchronized void reset()</code> that sets value to 0</label></li><li><input type="checkbox" id="l7t1r1" data-key="l7t1r1"><label for="l7t1r1">Start two increment threads and one decrement thread</label></li><li><input type="checkbox" id="l7t1r2" data-key="l7t1r2"><label for="l7t1r2">Another thread calls reset() after a short delay</label></li><li><input type="checkbox" id="l7t1r3" data-key="l7t1r3"><label for="l7t1r3">Print the final value</label></li><li><input type="checkbox" id="l7t1r4" data-key="l7t1r4"><label for="l7t1r4">Explain why reset() must be synchronized</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Without synchronized, reset could run between another thread’s read and write of value.</div></details></div>
+</div></section>
+<section class="slide " data-title="Task 3: Demonstrate Thread.yield()" aria-label="Task 3: Demonstrate Thread.yield()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 3 of 3</p><h2>Task 3: Demonstrate Thread.yield()</h2><div class="ex task"><div class="qq">Compare a thread that yields with one that does not.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l7t2r0" data-key="l7t2r0"><label for="l7t2r0">One thread calls <code>Thread.yield()</code> in every iteration</label></li><li><input type="checkbox" id="l7t2r1" data-key="l7t2r1"><label for="l7t2r1">Another thread does not</label></li><li><input type="checkbox" id="l7t2r2" data-key="l7t2r2"><label for="l7t2r2">Run both and observe the output</label></li><li><input type="checkbox" id="l7t2r3" data-key="l7t2r3"><label for="l7t2r3">Measure time with <code>System.currentTimeMillis()</code></label></li><li><input type="checkbox" id="l7t2r4" data-key="l7t2r4"><label for="l7t2r4">Explain whether yield() guarantees a switch</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">yield() is only a hint to the scheduler; the result can differ between machines and runs.</div></details></div>
+</div></section>
+<section class="slide " data-title="Show your work" aria-label="Show your work" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
+</div></section>
+<section class="slide " data-title="Report exercise 1" aria-label="Report exercise 1" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report · exercise 1 of 2</p><h2>Countdown timer with cancellation</h2><div class="ex task report"><div class="qq">A countdown that runs in its own thread and can be cancelled.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l7e0r0" data-key="l7e0r0"><label for="l7e0r0">CountdownTimer: <code>secondsRemaining</code>, <code>running</code>; start(), cancel(), getTimeRemaining()</label></li><li><input type="checkbox" id="l7e0r1" data-key="l7e0r1"><label for="l7e0r1">TimerThread implements Runnable: decrease every second with <code>Thread.sleep(1000)</code> and print the time</label></li><li><input type="checkbox" id="l7e0r2" data-key="l7e0r2"><label for="l7e0r2">Stop at zero, or early when cancel() is called</label></li><li><input type="checkbox" id="l7e0r3" data-key="l7e0r3"><label for="l7e0r3">main waits 3 seconds, cancels, joins and prints the remaining time</label></li></ul></div>
+</div></section>
+<section class="slide " data-title="Report exercise 2" aria-label="Report exercise 2" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report · exercise 2 of 2</p><h2>Producer-consumer with a bounded buffer</h2><div class="ex task report"><div class="qq">One producer and two consumers sharing a fixed-size buffer.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l7e1r0" data-key="l7e1r0"><label for="l7e1r0">BoundedBuffer: array, capacity, insert/remove positions, item count</label></li><li><input type="checkbox" id="l7e1r1" data-key="l7e1r1"><label for="l7e1r1">Synchronized <code>put(item)</code> and <code>take()</code></label></li><li><input type="checkbox" id="l7e1r2" data-key="l7e1r2"><label for="l7e1r2"><code>wait()</code> when full or empty; <code>notifyAll()</code> after each change</label></li><li><input type="checkbox" id="l7e1r3" data-key="l7e1r3"><label for="l7e1r3">Producer makes 1–20 (100 ms apart); consumers print items (150 ms apart)</label></li><li><input type="checkbox" id="l7e1r4" data-key="l7e1r4"><label for="l7e1r4">Start all threads, join them and print a completion message</label></li></ul></div>
+</div></section>
+<section class="slide " data-title="Writing the lab report" aria-label="Writing the lab report" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report</p><h2>Writing the lab report</h2><ul class="big-list"><li>Problem statement and your design (classes, fields, methods)</li><li>Complete source code, formatted and commented</li><li>Sample output or screenshots for normal <b>and</b> edge cases</li><li>A short discussion: what each OOP concept did in your program</li></ul><div class="integrity"><h3>Academic integrity</h3><p>Copying from the internet, classmates, seniors or any other unauthorized source is strictly prohibited. Full marks may be deducted if plagiarism, copied work or academic dishonesty is detected. Complete the tasks, implementation, output analysis and report yourself.</p></div>
+</div></section>
+<section class="slide " data-title="Viva questions (1 of 2)" aria-label="Viva questions (1 of 2)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Discussion and analysis</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">What is the difference between <code>start()</code> and <code>run()</code>?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">start() creates a new thread that calls run(); calling run() directly executes it in the current thread like any method.</div></details></div><div class="ex"><div class="qq">Why is Runnable often preferred over extending Thread?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Java has single inheritance; implementing Runnable leaves the class free to extend another class and separates the task from the thread.</div></details></div>
+</div></section>
+<section class="slide " data-title="Viva questions (2 of 2)" aria-label="Viva questions (2 of 2)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Discussion and analysis</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq">Why do we call <code>join()</code> before printing the final counter?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Otherwise main could print while the workers are still updating it.</div></details></div><div class="ex"><div class="qq">What state is a thread in while it sleeps?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">TIMED_WAITING; after run() returns it is TERMINATED.</div></details></div>
+</div></section>
+<section class="slide " data-title="Quiz" aria-label="Quiz" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="lab7"></div><script type="application/json" class="quiz-json">[{"q": "Which call starts a new thread?", "o": ["run()", "start()", "sleep()", "join()"], "a": 1, "w": "run() alone stays in the current thread."}, {"q": "A thread created but not yet started is in state\u2026", "o": ["RUNNABLE", "NEW", "BLOCKED", "TERMINATED"], "a": 1, "w": "NEW until start() is called."}, {"q": "<code>t.join()<\/code> makes\u2026", "o": ["t wait for main", "the current thread wait for t to finish", "t restart", "both threads stop"], "a": 1, "w": "The caller waits for t."}, {"q": "Thread.sleep() may throw\u2026", "o": ["IOException", "InterruptedException", "IllegalStateException", "nothing"], "a": 1, "w": "It must be caught or declared."}, {"q": "synchronized on an instance method locks\u2026", "o": ["the class", "the current object", "all objects", "the thread"], "a": 1, "w": "One thread at a time per object."}]</script></div>
+</div></section>
+<section class="slide " data-title="Summary" aria-label="Summary" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Summary</p><h2>Summary</h2><ul class="sumlist"><li>Threads share the heap but have their own stacks.</li><li>Create them by extending Thread or implementing Runnable; always call start().</li><li>States: NEW → RUNNABLE ⇄ TIMED_WAITING/BLOCKED/WAITING → TERMINATED.</li><li>sleep() pauses; join() waits for another thread.</li><li>synchronized methods keep shared data consistent.</li></ul><div class="nextcard"><a class="btn pri" href="08-synchronization-deadlock.html">Next: Lab 8 · Synchronization and deadlock</a><a class="btn" href="../index.html">All labs</a></div>
+</div></section>
+</main>
+<footer class="deck-foot">
+  <button type="button" class="btn" id="prev">Previous</button>
+  <span class="counter" id="counter">1 / 33</span>
+  <button type="button" class="btn pri" id="next">Next</button>
+</footer>
+<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
+<noscript><p style="padding:20px">This lab needs JavaScript for the slides and the interactive examples.</p></noscript>
+<script src="../js/core.js"></script>
+<script src="../js/art.js"></script>
+<script src="../js/java.js"></script>
+<script src="../js/tracer.js"></script>
+<script src="../js/figs.js"></script>
+<script src="../js/lab-figs.js"></script>
+<script src="../js/demos-basics.js"></script>
+<script src="../js/demos-oop.js"></script>
+<script src="../js/demos-adv.js"></script>
+<script src="../js/quiz.js"></script>
+<script src="../js/page.js"></script>
+<script src="../js/lab.js"></script>
+<script>window.OOP_TOPIC = {"id": 7, "prev": "06-exception-handling.html", "next": "08-synchronization-deadlock.html", "nextLabel": "Next lab"};</script>
+<script>mountPage();</script>
+<script src="../js/slides.js"></script>
+<script src="../js/annotate.js"></script>
+<script src="../js/analytics.js"
+        data-endpoint="https://analytics-proxy.ayansarkar1829.workers.dev"
+        data-project="CSE-202 OOP Lab"></script>
+<script src="../js/course-events.js"></script>
+</body>
+</html>

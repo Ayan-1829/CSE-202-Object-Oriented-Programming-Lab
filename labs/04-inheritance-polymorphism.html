@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Build a Vehicle hierarchy with Car, Motorcycle and ElectricCar: reuse code with extends and super, override display(), and let one loop drive every kind of vehicle.">
+<meta name="keywords" content="java inheritance, extends, super, method overriding, polymorphism, dynamic dispatch, instanceof, lab, cse 202, object oriented programming lab">
+<meta name="author" content="Object Oriented Programming Lab Notes">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#155E63">
+<link rel="canonical" href="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/04-inheritance-polymorphism.html">
+<link rel="icon" type="image/svg+xml" href="../img/logo-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../img/favicon-16.png">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
+<meta property="og:title" content="Lab 4: Inheritance, Polymorphism &amp; Overriding | OOP Lab (CSE 202)">
+<meta property="og:description" content="Build a Vehicle hierarchy with Car, Motorcycle and ElectricCar: reuse code with extends and super, override display(), and let one loop drive every kind of vehicle.">
+<meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/04-inheritance-polymorphism.html">
+<meta name="twitter:card" content="summary">
+<title>Lab 4: Inheritance, Polymorphism &amp; Overriding | OOP Lab (CSE 202)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/lab.css">
+</head>
+<body class="deck-page">
+<div class="sr-only" id="live" aria-live="polite"></div>
+<header class="deck-bar">
+  <a class="home-link" href="../index.html" aria-label="Home: all labs"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
+  <div class="deck-title"><span class="badge">4</span><span>Inheritance, Polymorphism &amp; Overriding</span></div>
+  <div class="deck-actions">
+    <button type="button" class="btn sm" id="btn-menu" aria-expanded="false" aria-controls="slide-menu" aria-label="Slides"><svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><rect x="3" y="4.5" width="18" height="3" rx="1"></rect><rect x="3" y="10.5" width="18" height="3" rx="1"></rect><rect x="3" y="16.5" width="18" height="3" rx="1"></rect></svg><span>Slides</span></button>
+    <button type="button" class="btn sm" id="btn-theme" aria-pressed="false" aria-label="Toggle dark mode"><svg class="btn-ic" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"></path></svg><span>Dark mode</span></button>
+    <button type="button" class="btn sm" id="btn-fs" aria-pressed="false" aria-label="Full screen"><svg class="btn-ic" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"></path></svg><span>Full screen</span></button>
+  </div>
+</header>
+<div class="deck-progress"><i id="progress-fill"></i></div>
+<main class="deck" id="deck">
+<section class="slide title-slide" data-title="Inheritance, Polymorphism &amp; Overriding" aria-label="Inheritance, Polymorphism &amp; Overriding" tabindex="-1"><div class="slide-inner">
+<span class="topic-art" data-art="7" aria-hidden="true"></span>
+<span class="badge big">4</span>
+<p class="kicker">Lab Manual IV · CSE 202</p>
+<h1>Inheritance, Polymorphism & Overriding</h1>
+<p class="lead">Build a Vehicle hierarchy with Car, Motorcycle and ElectricCar: reuse code with extends and super, override display(), and let one loop drive every kind of vehicle.</p>
+<div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
+<p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
+</div></section>
+<section class="slide " data-title="Why this lab" aria-label="Why this lab" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Before we start</p><h2>Why this lab</h2><div class="hook"><p class="q">A car, a motorcycle and an electric car all accelerate and brake the same way, but each shows different details. Do we write accelerate() three times?</p><p>No: write it once in <code>Vehicle</code> and <b>inherit</b> it. Each subclass then <b>overrides</b> only what differs, and one <code>Vehicle[]</code> array can hold them all.</p></div>
+</div></section>
+<section class="slide " data-title="Lab at a glance" aria-label="Lab at a glance" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab 4 of 10</p><h2>Lab at a glance</h2><div class="cols wl"><div><h3>After this lab you can</h3><ul class=""><li>Explain inheritance as code reuse and an is-a relationship</li><li>Create subclasses with <code>extends</code></li><li>Call superclass constructors with <code>super(…)</code></li><li>Override methods with <code>@Override</code></li><li>Distinguish overriding from overloading</li><li>Use superclass references to subclass objects (polymorphism)</li><li>Cast safely with <code>instanceof</code></li></ul></div>
+<div><h3>Before you start</h3><ul class=""><li>Labs 2–3: classes, constructors, encapsulation, constructor chaining, overloading</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
+</div></section>
+<section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab 4 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=10">Program design</a></li><li><a href="#s=11">Code walkthrough</a></li><li><a href="#s=22">Expected output</a></li><li><a href="#s=23">Interactive demos</a></li><li><a href="#s=25">In-lab tasks</a></li><li><a href="#s=29">Lab report exercises</a></li><li><a href="#s=32">Viva questions and quiz</a></li></ol>
+</div></section>
+<section class="slide " data-title="Inheritance and extends" aria-label="Inheritance and extends" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 1 of 5</p><h2>Inheritance and extends</h2><figure class="fig" data-fig="lab4-vehicle-uml"></figure><ul class=""><li><code>class Car extends Vehicle</code>: a Car <b>is a</b> Vehicle and inherits its accessible fields and methods.</li><li>Java classes have <b>single inheritance</b>, but chains are allowed: ElectricCar → Car → Vehicle.</li></ul>
+</div></section>
+<section class="slide " data-title="super and protected" aria-label="super and protected" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 2 of 5</p><h2>super and protected</h2><pre class="code small-code">public Car(String make, int year, int numDoors, double fuelLevel) {
+    super(make, year);          // Vehicle part first
+    this.numDoors = numDoors;
+    ...
+}</pre><ul class=""><li><code>super(…)</code> runs the superclass constructor and must be the first statement.</li><li><code>protected</code> fields (make, year, speed) are visible to subclasses; subclass-only fields stay <code>private</code>.</li></ul>
+</div></section>
+<section class="slide " data-title="Overriding vs overloading" aria-label="Overriding vs overloading" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 3 of 5</p><h2>Overriding vs overloading</h2><div class="scrollx"><table class="doc"><thead><tr><th></th><th>Overloading</th><th>Overriding</th></tr></thead><tbody><tr><td>Where</td><td>same class</td><td>subclass</td></tr><tr><td>Signature</td><td>different parameters</td><td>same name, parameters, return type</td></tr><tr><td>Chosen</td><td>at compile time</td><td>at run time (object type)</td></tr><tr><td>Example</td><td>display() / display(String)</td><td>Car.display() replaces Vehicle.display()</td></tr></tbody></table></div><ul class=""><li><code>@Override</code> makes the compiler check that you really override something.</li></ul>
+</div></section>
+<section class="slide " data-title="Polymorphism: one call, many behaviours" aria-label="Polymorphism: one call, many behaviours" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 4 of 5</p><h2>Polymorphism: one call, many behaviours</h2><pre class="code small-code">Vehicle[] vehicles = {vehicle, car, motorcycle, electricCar};
+for (Vehicle v : vehicles) {
+    v.display();   // Car, Motorcycle or ElectricCar version
+}</pre><ul class=""><li>The reference type (Vehicle) decides what you may call; the object type decides <b>which version</b> runs.</li><li>This is <b>dynamic method dispatch</b>.</li></ul>
+</div></section>
+<section class="slide " data-title="instanceof and safe casting" aria-label="instanceof and safe casting" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 5 of 5</p><h2>instanceof and safe casting</h2><pre class="code small-code">Vehicle v = new Car(&quot;Honda Civic&quot;, 2021, 2, 60.0);
+if (v instanceof Car) {
+    Car c = (Car) v;
+    System.out.println(c.getNumDoors());
+}</pre><ul class=""><li>A Vehicle reference cannot call <code>getNumDoors()</code>; cast it first.</li><li>Check with <code>instanceof</code> before casting to avoid a <code>ClassCastException</code>.</li></ul>
+</div></section>
+<section class="slide " data-title="Execution flow" aria-label="Execution flow" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Implementation design</p><h2>Execution flow</h2><ol class="flow"><li>Create a Vehicle, a Car, a Motorcycle and an ElectricCar</li><li>Call display() on each directly</li><li>Store them in a Vehicle[] and display them polymorphically</li><li>Call inherited accelerate() and brake()</li><li>Call subclass-only refuel(), wheelie() and charge()</li><li>Test instanceof and cast a Vehicle reference to Car</li><li>Verify overriding through Vehicle references</li><li>Show brake() never makes speed negative</li></ol><p class="note-line">Common state in Vehicle; each subclass adds fields and overrides display().</p>
+</div></section>
+<section class="slide " data-title="The superclass" aria-label="The superclass" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 1 of 10 · <span class="walk-file">Vehicle.java</span></p><h2>The superclass</h2><pre class="code walk-code">// Protected fields are accessible in subclasses
+protected String make;
+protected int year;
+protected int speed;
+
+public Vehicle(String make, int year) {
+    this.make = make;
+    this.year = year;
+    this.speed = 0;
+}</pre><ul class="walk-notes"><li><code>protected</code> fields are visible to subclasses.</li></ul>
+</div></section>
+<section class="slide " data-title="Methods every vehicle inherits" aria-label="Methods every vehicle inherits" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 2 of 10 · <span class="walk-file">Vehicle.java</span></p><h2>Methods every vehicle inherits</h2><pre class="code walk-code">public void accelerate(int delta) {
+    if (delta &gt; 0) {
+        this.speed = this.speed + delta;
+    }
+}
+
+public void brake(int delta) {
+    if (delta &gt; 0) {
+        this.speed = Math.max(0, this.speed - delta);
+    }
+}
+
+public void display() {
+    System.out.println(&quot;------- Vehicle -------&quot;);
+    System.out.println(&quot;Make  : &quot; + make);
+    System.out.println(&quot;Year  : &quot; + year);
+    System.out.println(&quot;Speed : &quot; + speed + &quot; km/h&quot;);
+    System.out.println(&quot;-----------------------&quot;);
+}</pre><ul class="walk-notes"><li>Car, Motorcycle and ElectricCar get these without writing them again.</li></ul>
+</div></section>
+<section class="slide " data-title="Car extends Vehicle" aria-label="Car extends Vehicle" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 3 of 10 · <span class="walk-file">Car.java</span></p><h2>Car extends Vehicle</h2><pre class="code walk-code">public class Car extends Vehicle {
+
+    private int numDoors;
+    private double fuelLevel;
+
+    public Car(String make, int year, int numDoors, double fuelLevel) {
+        super(make, year);
+        if (numDoors &gt; 0) {
+            this.numDoors = numDoors;
+        } else {
+            this.numDoors = 4;
+        }
+        if (fuelLevel &gt;= 0.0 &amp;&amp; fuelLevel &lt;= 100.0) {
+            this.fuelLevel = fuelLevel;
+        } else {
+            this.fuelLevel = 0.0;
+        }
+    }</pre><ul class="walk-notes"><li><code>super(make, year)</code> builds the Vehicle part first.</li><li>Then Car validates its own fields.</li></ul>
+</div></section>
+<section class="slide " data-title="Overriding display()" aria-label="Overriding display()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 4 of 10 · <span class="walk-file">Car.java</span></p><h2>Overriding display()</h2><pre class="code walk-code">@Override
+public void display() {
+    System.out.println(&quot;------- Car -------&quot;);
+    System.out.println(&quot;Make      : &quot; + make);
+    System.out.println(&quot;Year      : &quot; + year);
+    System.out.println(&quot;Speed     : &quot; + speed + &quot; km/h&quot;);
+    System.out.println(&quot;Doors     : &quot; + numDoors);
+    System.out.printf(&quot;Fuel Level: %.1f%%%n&quot;, fuelLevel);
+    System.out.println(&quot;-------------------&quot;);
+}</pre><ul class="walk-notes"><li>Same signature as Vehicle.display(); <code>@Override</code> lets the compiler check it.</li><li>make, year and speed are inherited protected fields.</li></ul>
+</div></section>
+<section class="slide " data-title="Motorcycle: another subclass" aria-label="Motorcycle: another subclass" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 5 of 10 · <span class="walk-file">Motorcycle.java</span></p><h2>Motorcycle: another subclass</h2><pre class="code walk-code">public class Motorcycle extends Vehicle {
+
+    private boolean hasStorage;
+
+    public Motorcycle(String make, int year, boolean hasStorage) {
+        super(make, year);
+        this.hasStorage = hasStorage;
+    }
+
+    public void wheelie() {
+        System.out.println(make + &quot; is performing a wheelie!&quot;);
+    }</pre><ul class="walk-notes"><li>Adds its own field and a method only motorcycles have.</li><li>Its display() override follows the same pattern as Car’s.</li></ul>
+</div></section>
+<section class="slide " data-title="ElectricCar: a chain of inheritance" aria-label="ElectricCar: a chain of inheritance" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 6 of 10 · <span class="walk-file">ElectricCar.java</span></p><h2>ElectricCar: a chain of inheritance</h2><pre class="code walk-code">public class ElectricCar extends Car {
+
+    private double batteryCapacity;
+    private double chargeLevel;
+
+    public ElectricCar(String make, int year, int numDoors,
+                       double batteryCapacity, double chargeLevel) {
+        super(make, year, numDoors, 100.0);
+        if (batteryCapacity &gt; 0.0) {
+            this.batteryCapacity = batteryCapacity;
+        } else {
+            this.batteryCapacity = 50.0;
+        }
+        if (chargeLevel &gt;= 0.0 &amp;&amp; chargeLevel &lt;= 100.0) {
+            this.chargeLevel = chargeLevel;
+        } else {
+            this.chargeLevel = 0.0;
+        }
+    }</pre><ul class="walk-notes"><li>ElectricCar → Car → Vehicle. <code>super(…)</code> calls Car’s constructor.</li></ul>
+</div></section>
+<section class="slide " data-title="Polymorphic dispatch" aria-label="Polymorphic dispatch" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 7 of 10 · <span class="walk-file">Lab4Demo.java</span></p><h2>Polymorphic dispatch</h2><pre class="code walk-code">// 3. Polymorphism with Superclass References
+System.out.println(&quot;\n=== Polymorphic Dispatch ===&quot;);
+Vehicle[] vehicles = {vehicle, car, motorcycle, electricCar};
+for (int i = 0; i &lt; vehicles.length; i++) {
+    System.out.println(&quot;vehicles[&quot; + i + &quot;]:&quot;);
+    displayVehicle(vehicles[i]);
+}</pre><ul class="walk-notes"><li>One Vehicle[] holds every kind of vehicle.</li><li>Each element runs its own display().</li></ul>
+</div></section>
+<section class="slide " data-title="Inherited and subclass-only methods" aria-label="Inherited and subclass-only methods" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 8 of 10 · <span class="walk-file">Lab4Demo.java</span></p><h2>Inherited and subclass-only methods</h2><pre class="code walk-code">// 5. Subclass-Specific Methods
+System.out.println(&quot;\n=== Subclass-Specific Methods ===&quot;);
+car.refuel(20.0);
+System.out.println(&quot;After car.refuel(20.0):&quot;);
+car.display();
+motorcycle.wheelie();
+electricCar.charge(15.0);
+System.out.println(&quot;After electricCar.charge(15.0):&quot;);
+electricCar.display();</pre><ul class="walk-notes"><li>refuel, wheelie and charge exist only in their subclasses.</li></ul>
+</div></section>
+<section class="slide " data-title="instanceof and a safe cast" aria-label="instanceof and a safe cast" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 9 of 10 · <span class="walk-file">Lab4Demo.java</span></p><h2>instanceof and a safe cast</h2><pre class="code walk-code wide">// 6. instanceof and Safe Casting
+System.out.println(&quot;\n=== instanceof and Safe Casting ===&quot;);
+Vehicle v = new Car(&quot;Honda Civic&quot;, 2021, 2, 60.0);
+System.out.println(&quot;v instanceof Vehicle    : &quot; + (v instanceof Vehicle));
+System.out.println(&quot;v instanceof Car        : &quot; + (v instanceof Car));
+System.out.println(&quot;v instanceof Motorcycle : &quot; + (v instanceof Motorcycle));
+if (v instanceof Car) {
+    Car castedCar = (Car) v;
+    System.out.println(&quot;Number of doors after casting: &quot; + castedCar.getNumDoors());
+}</pre><ul class="walk-notes"><li>Check the real type, then cast to reach Car-only methods.</li></ul>
+</div></section>
+<section class="slide " data-title="Overriding through Vehicle references" aria-label="Overriding through Vehicle references" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 10 of 10 · <span class="walk-file">Lab4Demo.java</span></p><h2>Overriding through Vehicle references</h2><pre class="code walk-code">// 7. Method Overriding Verification
+System.out.println(&quot;\n=== Method Overriding Verification ===&quot;);
+Vehicle ref1 = new Car(&quot;Ford Mustang&quot;, 2020, 2, 50.0);
+Vehicle ref2 = new Motorcycle(&quot;Harley-Davidson&quot;, 2022, false);
+Vehicle ref3 = new ElectricCar(&quot;Nissan Leaf&quot;, 2023, 4, 62.0, 70.0);
+ref1.display();
+ref2.display();
+ref3.display();</pre><ul class="walk-notes"><li>The reference type is Vehicle, but each object’s own display() runs.</li></ul>
+</div></section>
+<section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">For reference · 5 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Vehicle.java">public class Vehicle {
+
+    // Protected fields are accessible in subclasses
+    protected String make;
+    protected int year;
+    protected int speed;
+
+    public Vehicle(String make, int year) {
+        this.make = make;
+        this.year = year;
+        this.speed = 0;
+    }
+
+    public void accelerate(int delta) {
+        if (delta &gt; 0) {
+            this.speed = this.speed + delta;
+        }
+    }
+
+    public void brake(int delta) {
+        if (delta &gt; 0) {
+            this.speed = Math.max(0, this.speed - delta);
+        }
+    }
+
+    public void display() {
+        System.out.println(&quot;------- Vehicle -------&quot;);
+        System.out.println(&quot;Make  : &quot; + make);
+        System.out.println(&quot;Year  : &quot; + year);
+        System.out.println(&quot;Speed : &quot; + speed + &quot; km/h&quot;);
+        System.out.println(&quot;-----------------------&quot;);
+    }
+
+    public int getYear() {
+        return year;
+    }
+}</pre><pre class="code small-code" data-file="Car.java">public class Car extends Vehicle {
+
+    private int numDoors;
+    private double fuelLevel;
+
+    public Car(String make, int year, int numDoors, double fuelLevel) {
+        super(make, year);
+        if (numDoors &gt; 0) {
+            this.numDoors = numDoors;
+        } else {
+            this.numDoors = 4;
+        }
+        if (fuelLevel &gt;= 0.0 &amp;&amp; fuelLevel &lt;= 100.0) {
+            this.fuelLevel = fuelLevel;
+        } else {
+            this.fuelLevel = 0.0;
+        }
+    }
+
+    public void refuel(double amount) {
+        if (amount &gt; 0.0) {
+            this.fuelLevel = Math.min(100.0, this.fuelLevel + amount);
+        }
+    }
+
+    @Override
+    public void display() {
+        System.out.println(&quot;------- Car -------&quot;);
+        System.out.println(&quot;Make      : &quot; + make);
+        System.out.println(&quot;Year      : &quot; + year);
+        System.out.println(&quot;Speed     : &quot; + speed + &quot; km/h&quot;);
+        System.out.println(&quot;Doors     : &quot; + numDoors);
+        System.out.printf(&quot;Fuel Level: %.1f%%%n&quot;, fuelLevel);
+        System.out.println(&quot;-------------------&quot;);
+    }
+
+    public int getNumDoors() { return numDoors; }
+    public double getFuelLevel() { return fuelLevel; }
+}</pre><pre class="code small-code" data-file="Motorcycle.java">public class Motorcycle extends Vehicle {
+
+    private boolean hasStorage;
+
+    public Motorcycle(String make, int year, boolean hasStorage) {
+        super(make, year);
+        this.hasStorage = hasStorage;
+    }
+
+    public void wheelie() {
+        System.out.println(make + &quot; is performing a wheelie!&quot;);
+    }
+
+    @Override
+    public void display() {
+        System.out.println(&quot;------- Motorcycle -------&quot;);
+        System.out.println(&quot;Make        : &quot; + make);
+        System.out.println(&quot;Year        : &quot; + year);
+        System.out.println(&quot;Speed       : &quot; + speed + &quot; km/h&quot;);
+        System.out.println(&quot;Has Storage : &quot; + (hasStorage ? &quot;Yes&quot; : &quot;No&quot;));
+        System.out.println(&quot;--------------------------&quot;);
+    }
+
+    public boolean hasStorage() { return hasStorage; }
+}</pre><pre class="code small-code" data-file="ElectricCar.java">public class ElectricCar extends Car {
+
+    private double batteryCapacity;
+    private double chargeLevel;
+
+    public ElectricCar(String make, int year, int numDoors,
+                       double batteryCapacity, double chargeLevel) {
+        super(make, year, numDoors, 100.0);
+        if (batteryCapacity &gt; 0.0) {
+            this.batteryCapacity = batteryCapacity;
+        } else {
+            this.batteryCapacity = 50.0;
+        }
+        if (chargeLevel &gt;= 0.0 &amp;&amp; chargeLevel &lt;= 100.0) {
+            this.chargeLevel = chargeLevel;
+        } else {
+            this.chargeLevel = 0.0;
+        }
+    }
+
+    public void charge(double amount) {
+        if (amount &gt; 0.0) {
+            this.chargeLevel = Math.min(100.0, this.chargeLevel + amount);
+        }
+    }
+
+    @Override
+    public void display() {
+        System.out.println(&quot;------- Electric Car -------&quot;);
+        System.out.println(&quot;Make             : &quot; + make);
+        System.out.println(&quot;Year             : &quot; + year);
+        System.out.println(&quot;Speed            : &quot; + speed + &quot; km/h&quot;);
+        System.out.println(&quot;Doors            : &quot; + getNumDoors());
+        System.out.printf(&quot;Battery Capacity : %.1f kWh%n&quot;, batteryCapacity);
+        System.out.printf(&quot;Charge Level     : %.1f%%%n&quot;, chargeLevel);
+        System.out.println(&quot;----------------------------&quot;);
+    }
+
+    public double getBatteryCapacity() { return batteryCapacity; }
+    public double getChargeLevel() { return chargeLevel; }
+}</pre><pre class="code small-code" data-file="Lab4Demo.java">public class Lab4Demo {
+
+    static void displayVehicle(Vehicle vehicle) {
+        vehicle.display();
+    }
+
+    public static void main(String[] args) {
+
+        // 1. Object Creation
+        System.out.println(&quot;=== Object Creation ===&quot;);
+        Vehicle vehicle = new Vehicle(&quot;Generic Vehicle&quot;, 2020);
+        Car car = new Car(&quot;Toyota Camry&quot;, 2022, 4, 75.0);
+        Motorcycle motorcycle = new Motorcycle(&quot;Yamaha YZF&quot;, 2021, true);
+        ElectricCar electricCar = new ElectricCar(&quot;Tesla Model 3&quot;, 2023, 4, 75.0, 85.0);
+
+        // 2. Direct Method Calls
+        System.out.println(&quot;\n=== Direct Method Calls ===&quot;);
+        vehicle.display();
+        car.display();
+        motorcycle.display();
+        electricCar.display();
+
+        // 3. Polymorphism with Superclass References
+        System.out.println(&quot;\n=== Polymorphic Dispatch ===&quot;);
+        Vehicle[] vehicles = {vehicle, car, motorcycle, electricCar};
+        for (int i = 0; i &lt; vehicles.length; i++) {
+            System.out.println(&quot;vehicles[&quot; + i + &quot;]:&quot;);
+            displayVehicle(vehicles[i]);
+        }
+
+        // 4. Inherited Methods
+        System.out.println(&quot;\n=== Inherited Methods ===&quot;);
+        car.accelerate(50);
+        System.out.println(&quot;After car.accelerate(50):&quot;);
+        car.display();
+        motorcycle.accelerate(80);
+        System.out.println(&quot;After motorcycle.accelerate(80):&quot;);
+        motorcycle.display();
+        electricCar.accelerate(40);
+        System.out.println(&quot;After electricCar.accelerate(40):&quot;);
+        electricCar.display();
+
+        // 5. Subclass-Specific Methods
+        System.out.println(&quot;\n=== Subclass-Specific Methods ===&quot;);
+        car.refuel(20.0);
+        System.out.println(&quot;After car.refuel(20.0):&quot;);
+        car.display();
+        motorcycle.wheelie();
+        electricCar.charge(15.0);
+        System.out.println(&quot;After electricCar.charge(15.0):&quot;);
+        electricCar.display();
+
+        // 6. instanceof and Safe Casting
+        System.out.println(&quot;\n=== instanceof and Safe Casting ===&quot;);
+        Vehicle v = new Car(&quot;Honda Civic&quot;, 2021, 2, 60.0);
+        System.out.println(&quot;v instanceof Vehicle    : &quot; + (v instanceof Vehicle));
+        System.out.println(&quot;v instanceof Car        : &quot; + (v instanceof Car));
+        System.out.println(&quot;v instanceof Motorcycle : &quot; + (v instanceof Motorcycle));
+        if (v instanceof Car) {
+            Car castedCar = (Car) v;
+            System.out.println(&quot;Number of doors after casting: &quot; + castedCar.getNumDoors());
+        }
+
+        // 7. Method Overriding Verification
+        System.out.println(&quot;\n=== Method Overriding Verification ===&quot;);
+        Vehicle ref1 = new Car(&quot;Ford Mustang&quot;, 2020, 2, 50.0);
+        Vehicle ref2 = new Motorcycle(&quot;Harley-Davidson&quot;, 2022, false);
+        Vehicle ref3 = new ElectricCar(&quot;Nissan Leaf&quot;, 2023, 4, 62.0, 70.0);
+        ref1.display();
+        ref2.display();
+        ref3.display();
+
+        // 8. Inherited brake() Method
+        System.out.println(&quot;\n=== Inherited brake() Method ===&quot;);
+        Car testCar = new Car(&quot;Subaru Outback&quot;, 2019, 5, 45.0);
+        testCar.accelerate(100);
+        System.out.println(&quot;After testCar.accelerate(100):&quot;);
+        testCar.display();
+        testCar.brake(30);
+        System.out.println(&quot;After testCar.brake(30):&quot;);
+        testCar.display();
+        testCar.brake(200);
+        System.out.println(&quot;After testCar.brake(200):&quot;);
+        testCar.display();
+    }
+}</pre></div><p class="muted">Copy or download each file, save it under the same name, then compile and run: <code>javac *.java</code> → <code>java Lab4Demo</code></p>
+</div></section>
+<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Implementation</p><h2>Expected output</h2><div class="runbox" data-cmd="java Lab4Demo"><pre class="run-src" hidden>=== Object Creation ===
+
+=== Direct Method Calls ===
+------- Vehicle -------
+Make  : Generic Vehicle
+Year  : 2020
+Speed : 0 km/h
+-----------------------
+------- Car -------
+Make      : Toyota Camry
+Year      : 2022
+Speed     : 0 km/h
+Doors     : 4
+Fuel Level: 75.0%
+-------------------
+------- Motorcycle -------
+Make        : Yamaha YZF
+Year        : 2021
+Speed       : 0 km/h
+Has Storage : Yes
+--------------------------
+------- Electric Car -------
+Make             : Tesla Model 3
+Year             : 2023
+Speed            : 0 km/h
+Doors            : 4
+Battery Capacity : 75.0 kWh
+Charge Level     : 85.0%
+----------------------------
+
+=== Polymorphic Dispatch ===
+vehicles[0]:
+------- Vehicle -------
+  … (the same four blocks again, one per array element)
+
+=== Inherited Methods ===
+After car.accelerate(50):            Speed : 50 km/h
+After motorcycle.accelerate(80):     Speed : 80 km/h
+After electricCar.accelerate(40):    Speed : 40 km/h
+
+=== Subclass-Specific Methods ===
+After car.refuel(20.0):              Fuel Level: 95.0%
+Yamaha YZF is performing a wheelie!
+After electricCar.charge(15.0):      Charge Level : 100.0%
+
+=== instanceof and Safe Casting ===
+v instanceof Vehicle    : true
+v instanceof Car        : true
+v instanceof Motorcycle : false
+Number of doors after casting: 2
+
+=== Method Overriding Verification ===
+------- Car -------          (Ford Mustang)
+------- Motorcycle -------   (Harley-Davidson, Has Storage : No)
+------- Electric Car -------  (Nissan Leaf, 62.0 kWh, 70.0%)
+
+=== Inherited brake() Method ===
+After testCar.accelerate(100):  Speed : 100 km/h
+After testCar.brake(30):        Speed : 70 km/h
+After testCar.brake(200):       Speed : 0 km/h</pre></div><p class="note-line">Shortened: repeated display blocks are summarised. The full output is in the lab manual, section 4.5.2.</p>
+</div></section>
+<section class="slide " data-title="Reference type vs object type" aria-label="Reference type vs object type" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Interactive 1 of 2</p><h2>Reference type vs object type</h2><div data-demo="dispatch"></div>
+</div></section>
+<section class="slide " data-title="When is a cast safe?" aria-label="When is a cast safe?" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Interactive 2 of 2</p><h2>When is a cast safe?</h2><div data-demo="downcast"></div>
+</div></section>
+<section class="slide " data-title="Task 1: Add a Bus class" aria-label="Task 1: Add a Bus class" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 1 of 3</p><h2>Task 1: Add a Bus class</h2><div class="ex task"><div class="qq">A new Vehicle subclass that sells tickets.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l4t0r0" data-key="l4t0r0"><label for="l4t0r0">Private fields <code>numSeats</code> and <code>ticketPrice</code> with getters</label></li><li><input type="checkbox" id="l4t0r1" data-key="l4t0r1"><label for="l4t0r1">Constructor that calls <code>super(make, year)</code></label></li><li><input type="checkbox" id="l4t0r2" data-key="l4t0r2"><label for="l4t0r2">Override <code>display()</code></label></li><li><input type="checkbox" id="l4t0r3" data-key="l4t0r3"><label for="l4t0r3"><code>calculateRevenue(int passengersBoarded)</code></label></li><li><input type="checkbox" id="l4t0r4" data-key="l4t0r4"><label for="l4t0r4">Demonstrate accelerate/brake, display and revenue in Lab4Demo</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Cap revenue at the number of seats: <code>Math.min(passengersBoarded, numSeats) * ticketPrice</code>.</div></details></div>
+</div></section>
+<section class="slide " data-title="Task 2: Create a HybridCar class" aria-label="Task 2: Create a HybridCar class" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 2 of 3</p><h2>Task 2: Create a HybridCar class</h2><div class="ex task"><div class="qq">A Car subclass that can run on fuel or battery.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l4t1r0" data-key="l4t1r0"><label for="l4t1r0">Fields <code>batteryLevel</code> and <code>currentMode</code></label></li><li><input type="checkbox" id="l4t1r1" data-key="l4t1r1"><label for="l4t1r1"><code>useBattery(double)</code> and <code>switchMode(String)</code> ("Fuel" / "Battery")</label></li><li><input type="checkbox" id="l4t1r2" data-key="l4t1r2"><label for="l4t1r2">Override <code>display()</code></label></li><li><input type="checkbox" id="l4t1r3" data-key="l4t1r3"><label for="l4t1r3">Store it in a Vehicle reference and call display()</label></li><li><input type="checkbox" id="l4t1r4" data-key="l4t1r4"><label for="l4t1r4">Cast to HybridCar to call its own methods</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Calling <code>v.switchMode("Battery")</code> on a Vehicle reference will not compile — that is the point of the cast.</div></details></div>
+</div></section>
+<section class="slide " data-title="Task 3: Test instanceof and casting" aria-label="Task 3: Test instanceof and casting" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 3 of 3</p><h2>Task 3: Test instanceof and casting</h2><div class="ex task"><div class="qq">Process a mixed array safely.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l4t2r0" data-key="l4t2r0"><label for="l4t2r0">Array with Car, Motorcycle, ElectricCar and Bus objects</label></li><li><input type="checkbox" id="l4t2r1" data-key="l4t2r1"><label for="l4t2r1">Loop over it</label></li><li><input type="checkbox" id="l4t2r2" data-key="l4t2r2"><label for="l4t2r2">Identify each actual type with <code>instanceof</code></label></li><li><input type="checkbox" id="l4t2r3" data-key="l4t2r3"><label for="l4t2r3">Call type-specific methods after a safe cast</label></li><li><input type="checkbox" id="l4t2r4" data-key="l4t2r4"><label for="l4t2r4">Print clear output</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Test the most specific type first: an ElectricCar is also a Car.</div></details></div>
+</div></section>
+<section class="slide " data-title="Show your work" aria-label="Show your work" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
+</div></section>
+<section class="slide " data-title="Report exercise 1" aria-label="Report exercise 1" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report · exercise 1 of 2</p><h2>Employee hierarchy and payroll</h2><div class="ex task report"><div class="qq">Employee with Manager, Developer and Intern subclasses.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l4e0r0" data-key="l4e0r0"><label for="l4e0r0">Employee: protected empId, name, salary, department; getters/setters, <code>display()</code>, <code>calculateBonus()</code> = 5% of salary</label></li><li><input type="checkbox" id="l4e0r1" data-key="l4e0r1"><label for="l4e0r1">Manager: teamSize, responsibilityBonus; override bonus and display; add/remove team member</label></li><li><input type="checkbox" id="l4e0r2" data-key="l4e0r2"><label for="l4e0r2">Developer: programmingLanguage, yearsExperience; override bonus and display; upgradeLanguage, gainExperience</label></li><li><input type="checkbox" id="l4e0r3" data-key="l4e0r3"><label for="l4e0r3">Intern: university, monthsRemaining; bonus 0.0; decrementMonths</label></li><li><input type="checkbox" id="l4e0r4" data-key="l4e0r4"><label for="l4e0r4">≥2 objects of each subclass in an <code>Employee[]</code></label></li><li><input type="checkbox" id="l4e0r5" data-key="l4e0r5"><label for="l4e0r5">Print total salary, total bonus and average bonus using polymorphic calls</label></li></ul></div>
+</div></section>
+<section class="slide " data-title="Report exercise 2" aria-label="Report exercise 2" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report · exercise 2 of 2</p><h2>Zoo animal classification</h2><div class="ex task report"><div class="qq">Animal → Mammal (Lion, Elephant) and Bird (Eagle).</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l4e1r0" data-key="l4e1r0"><label for="l4e1r0">Animal: species, age, weight, enclosure; eat, sleep, makeSound, display</label></li><li><input type="checkbox" id="l4e1r1" data-key="l4e1r1"><label for="l4e1r1">Mammal (hasFur) and Bird (canFly) override makeSound and display</label></li><li><input type="checkbox" id="l4e1r2" data-key="l4e1r2"><label for="l4e1r2">Lion "ROAR!" + hunt(prey); Elephant "TRUMPET!" + spray(); Eagle "SCREECH!" + dive()</label></li><li><input type="checkbox" id="l4e1r3" data-key="l4e1r3"><label for="l4e1r3">≥2 objects of each concrete class in an <code>Animal[]</code></label></li><li><input type="checkbox" id="l4e1r4" data-key="l4e1r4"><label for="l4e1r4">Simulate a day: everyone eats, sleeps and makes a sound</label></li><li><input type="checkbox" id="l4e1r5" data-key="l4e1r5"><label for="l4e1r5">Call class-specific methods safely with instanceof</label></li></ul></div>
+</div></section>
+<section class="slide " data-title="Writing the lab report" aria-label="Writing the lab report" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report</p><h2>Writing the lab report</h2><ul class="big-list"><li>Problem statement and your design (classes, fields, methods)</li><li>Complete source code, formatted and commented</li><li>Sample output or screenshots for normal <b>and</b> edge cases</li><li>A short discussion: what each OOP concept did in your program</li></ul><div class="integrity"><h3>Academic integrity</h3><p>Copying from the internet, classmates, seniors or any other unauthorized source is strictly prohibited. Full marks may be deducted if plagiarism, copied work or academic dishonesty is detected. Complete the tasks, implementation, output analysis and report yourself.</p></div>
+</div></section>
+<section class="slide " data-title="Viva questions (1 of 2)" aria-label="Viva questions (1 of 2)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Discussion and analysis</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">Why does Car’s constructor start with <code>super(make, year)</code>?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">The Vehicle part of the object (make, year, speed) must be initialised first, and only Vehicle’s constructor knows how.</div></details></div><div class="ex"><div class="qq">Why are Vehicle’s fields protected instead of private?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">So subclasses such as Car can use make, year and speed directly in their display() methods.</div></details></div>
+</div></section>
+<section class="slide " data-title="Viva questions (2 of 2)" aria-label="Viva questions (2 of 2)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Discussion and analysis</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq"><code>Vehicle v = new Motorcycle(…); v.display();</code> — which display runs?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Motorcycle’s. The object type decides at run time (dynamic dispatch).</div></details></div><div class="ex"><div class="qq">Why can’t <code>v.wheelie()</code> compile?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">The compiler only knows v is a Vehicle, and Vehicle has no wheelie(). Check instanceof and cast to Motorcycle first.</div></details></div>
+</div></section>
+<section class="slide " data-title="Quiz" aria-label="Quiz" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="lab4"></div><script type="application/json" class="quiz-json">[{"q": "Which keyword calls the superclass constructor?", "o": ["this", "super", "extends", "base"], "a": 1, "w": "super(\u2026) must be the first statement."}, {"q": "An ElectricCar is also a\u2026", "o": ["Motorcycle", "Car and Vehicle", "Vehicle only", "nothing else"], "a": 1, "w": "ElectricCar \u2192 Car \u2192 Vehicle."}, {"q": "Overriding is resolved\u2026", "o": ["at compile time", "at run time", "by the programmer", "never"], "a": 1, "w": "The JVM picks the version from the actual object."}, {"q": "<code>(Car) v<\/code> where v refers to a Motorcycle throws\u2026", "o": ["NullPointerException", "ClassCastException", "nothing", "compile error only"], "a": 1, "w": "Check with instanceof first."}, {"q": "Which access modifier lets subclasses see a field?", "o": ["private", "protected", "none of these", "static"], "a": 1, "w": "protected: same package and subclasses."}]</script></div>
+</div></section>
+<section class="slide " data-title="Summary" aria-label="Summary" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Summary</p><h2>Summary</h2><ul class="sumlist"><li>extends creates an is-a relationship and reuses superclass code.</li><li>super(…) initialises the inherited part first.</li><li>Overriding replaces an inherited method; @Override lets the compiler check it.</li><li>Superclass references + overriding = polymorphism (dynamic dispatch).</li><li>Use instanceof before downcasting.</li></ul><div class="nextcard"><a class="btn pri" href="05-abstract-classes-interfaces.html">Next: Lab 5 · Abstract classes and interfaces</a><a class="btn" href="../index.html">All labs</a></div>
+</div></section>
+</main>
+<footer class="deck-foot">
+  <button type="button" class="btn" id="prev">Previous</button>
+  <span class="counter" id="counter">1 / 35</span>
+  <button type="button" class="btn pri" id="next">Next</button>
+</footer>
+<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
+<noscript><p style="padding:20px">This lab needs JavaScript for the slides and the interactive examples.</p></noscript>
+<script src="../js/core.js"></script>
+<script src="../js/art.js"></script>
+<script src="../js/java.js"></script>
+<script src="../js/tracer.js"></script>
+<script src="../js/figs.js"></script>
+<script src="../js/lab-figs.js"></script>
+<script src="../js/demos-basics.js"></script>
+<script src="../js/demos-oop.js"></script>
+<script src="../js/demos-adv.js"></script>
+<script src="../js/quiz.js"></script>
+<script src="../js/page.js"></script>
+<script src="../js/lab.js"></script>
+<script>window.OOP_TOPIC = {"id": 4, "prev": "03-constructors-overloading.html", "next": "05-abstract-classes-interfaces.html", "nextLabel": "Next lab"};</script>
+<script>mountPage();</script>
+<script src="../js/slides.js"></script>
+<script src="../js/annotate.js"></script>
+<script src="../js/analytics.js"
+        data-endpoint="https://analytics-proxy.ayansarkar1829.workers.dev"
+        data-project="CSE-202 OOP Lab"></script>
+<script src="../js/course-events.js"></script>
+</body>
+</html>

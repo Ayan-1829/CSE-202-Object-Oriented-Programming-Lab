@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Model a real thing as a class with private fields, a constructor and methods; create objects, use getters and setters, a static counter, and see two variables share one object.">
+<meta name="keywords" content="java class, object, constructor, this keyword, encapsulation, static, reference semantics, lab, cse 202, object oriented programming lab">
+<meta name="author" content="Object Oriented Programming Lab Notes">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#155E63">
+<link rel="canonical" href="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/02-classes-and-objects.html">
+<link rel="icon" type="image/svg+xml" href="../img/logo-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../img/favicon-16.png">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
+<meta property="og:title" content="Lab 2: Classes, Objects, Instances &amp; Methods | OOP Lab (CSE 202)">
+<meta property="og:description" content="Model a real thing as a class with private fields, a constructor and methods; create objects, use getters and setters, a static counter, and see two variables share one object.">
+<meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/02-classes-and-objects.html">
+<meta name="twitter:card" content="summary">
+<title>Lab 2: Classes, Objects, Instances &amp; Methods | OOP Lab (CSE 202)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/lab.css">
+</head>
+<body class="deck-page">
+<div class="sr-only" id="live" aria-live="polite"></div>
+<header class="deck-bar">
+  <a class="home-link" href="../index.html" aria-label="Home: all labs"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
+  <div class="deck-title"><span class="badge">2</span><span>Classes, Objects, Instances &amp; Methods</span></div>
+  <div class="deck-actions">
+    <button type="button" class="btn sm" id="btn-menu" aria-expanded="false" aria-controls="slide-menu" aria-label="Slides"><svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><rect x="3" y="4.5" width="18" height="3" rx="1"></rect><rect x="3" y="10.5" width="18" height="3" rx="1"></rect><rect x="3" y="16.5" width="18" height="3" rx="1"></rect></svg><span>Slides</span></button>
+    <button type="button" class="btn sm" id="btn-theme" aria-pressed="false" aria-label="Toggle dark mode"><svg class="btn-ic" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"></path></svg><span>Dark mode</span></button>
+    <button type="button" class="btn sm" id="btn-fs" aria-pressed="false" aria-label="Full screen"><svg class="btn-ic" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"></path></svg><span>Full screen</span></button>
+  </div>
+</header>
+<div class="deck-progress"><i id="progress-fill"></i></div>
+<main class="deck" id="deck">
+<section class="slide title-slide" data-title="Classes, Objects, Instances &amp; Methods" aria-label="Classes, Objects, Instances &amp; Methods" tabindex="-1"><div class="slide-inner">
+<span class="topic-art" data-art="4" aria-hidden="true"></span>
+<span class="badge big">2</span>
+<p class="kicker">Lab Manual II · CSE 202</p>
+<h1>Classes, Objects, Instances & Methods</h1>
+<p class="lead">Model a real thing as a class with private fields, a constructor and methods; create objects, use getters and setters, a static counter, and see two variables share one object.</p>
+<div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
+<p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
+</div></section>
+<section class="slide " data-title="Why this lab" aria-label="Why this lab" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Before we start</p><h2>Why this lab</h2><div class="hook"><p class="q">A car park holds hundreds of cars, all different, all built to one design. How does a program describe the design once and make many cars?</p><p>The design is a <b>class</b>; each car is an <b>object</b> with its own make, speed and fuel. In this lab you build a <code>Car</code> class and drive two of them.</p></div>
+</div></section>
+<section class="slide " data-title="Lab at a glance" aria-label="Lab at a glance" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab 2 of 10</p><h2>Lab at a glance</h2><div class="cols wl"><div><h3>After this lab you can</h3><ul class=""><li>Explain the difference between a class and an object</li><li>Define a class with fields, a constructor and methods</li><li>Create objects with <code>new</code> and call their methods</li><li>Apply encapsulation with private fields, getters and setters</li><li>Use <code>this</code> to refer to the current object</li><li>Use a <code>static</code> field and method for class-level data</li><li>Show that two reference variables can point to the same object</li></ul></div>
+<div><h3>Before you start</h3><ul class=""><li>Lab 1: program structure, types, decisions and loops</li><li>Compiling and running Java files from an IDE</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
+</div></section>
+<section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab 2 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=11">Program design</a></li><li><a href="#s=13">Code walkthrough</a></li><li><a href="#s=24">Expected output</a></li><li><a href="#s=25">Interactive demos</a></li><li><a href="#s=27">In-lab tasks</a></li><li><a href="#s=31">Lab report exercises</a></li><li><a href="#s=34">Viva questions and quiz</a></li></ol>
+</div></section>
+<section class="slide " data-title="Class and object" aria-label="Class and object" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 1 of 5</p><h2>Class and object</h2><figure class="fig" data-fig="lab2-car-objects"></figure><ul class=""><li>A <b>class</b> is a blueprint: it lists the data (fields) and actions (methods) every object will have.</li><li>An <b>object</b> is a runtime instance made with <code>new</code>; each one has its own copy of the fields.</li></ul>
+</div></section>
+<section class="slide " data-title="Fields, constructor and this" aria-label="Fields, constructor and this" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 2 of 5</p><h2>Fields, constructor and this</h2><pre class="code small-code">public class Car {
+    private String make;
+    private int speed;
+    private double fuelLevel;
+
+    public Car(String make, double fuelLevel) {
+        this.make = make;          // field = parameter
+        this.speed = 0;
+        this.fuelLevel = fuelLevel;
+    }
+}</pre><ul class=""><li>A constructor has the class name and no return type; it runs once, when the object is created.</li><li><code>this.make</code> is the field of the current object; <code>make</code> alone is the parameter.</li></ul>
+</div></section>
+<section class="slide " data-title="Encapsulation: getters and validating setters" aria-label="Encapsulation: getters and validating setters" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 3 of 5</p><h2>Encapsulation: getters and validating setters</h2><pre class="code small-code">public void setFuelLevel(double fuelLevel) {
+    if (fuelLevel &gt;= 0.0 &amp;&amp; fuelLevel &lt;= 100.0) {
+        this.fuelLevel = fuelLevel;   // invalid values are rejected
+    }
+}</pre><ul class=""><li>Fields are <code>private</code>: outside code cannot change them directly.</li><li>Public methods give controlled access, so an object can never hold an invalid fuel level.</li></ul>
+</div></section>
+<section class="slide " data-title="Instance members vs static members" aria-label="Instance members vs static members" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 4 of 5</p><h2>Instance members vs static members</h2><figure class="fig" data-fig="lab2-static"></figure><ul class=""><li>Each object has its own <code>make</code>, <code>speed</code> and <code>fuelLevel</code>.</li><li><code>private static int count</code> belongs to the class: one copy shared by all cars.</li><li>Call a static method on the class: <code>Car.getCount()</code>.</li></ul>
+</div></section>
+<section class="slide " data-title="References, stack and heap" aria-label="References, stack and heap" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 5 of 5</p><h2>References, stack and heap</h2><figure class="fig" data-fig="lab2-refs"></figure><ul class=""><li>Objects live on the <b>heap</b>; variables on the <b>stack</b> hold references to them.</li><li>Assigning a reference copies the arrow, not the object: <code>car1</code> and <code>car3</code> are aliases.</li></ul>
+</div></section>
+<section class="slide " data-title="References, stack and heap (code)" aria-label="References, stack and heap (code)" tabindex="-1"><div class="slide-inner">
+<h2>References, stack and heap</h2><pre class="code small-code">Car car3 = car1;      // no new object!
+car3.accelerate(20);
+System.out.println(car1.getSpeed());  // changed too</pre>
+</div></section>
+<section class="slide " data-title="Program design" aria-label="Program design" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Implementation design</p><h2>Program design</h2><figure class="fig" data-fig="lab2-car-uml"></figure>
+</div></section>
+<section class="slide " data-title="Execution flow" aria-label="Execution flow" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Implementation design</p><h2>Execution flow</h2><ol class="flow"><li>Create two Car objects; the constructor increments the static count</li><li>Print the count with <code>Car.getCount()</code></li><li>Accelerate and brake car1, showing state after each call (speed never goes below 0)</li><li>Accelerate and refuel car2 (fuel never exceeds 100)</li><li>Read with getters, change make with a setter</li><li>Alias car3 = car1 and show the shared speed</li><li>Print the final count</li></ol><p class="note-line"><code>Car</code> defines state and behaviour; <code>Lab2Demo</code> only tests it.</p>
+</div></section>
+<section class="slide " data-title="Fields: instance and static" aria-label="Fields: instance and static" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 1 of 10 · <span class="walk-file">Car.java</span></p><h2>Fields: instance and static</h2><pre class="code walk-code">// Private instance fields
+private String make;
+private int speed;
+private double fuelLevel;
+
+// Static field shared by all Car objects
+private static int count = 0;</pre><ul class="walk-notes"><li>Each Car object gets its own make, speed and fuelLevel.</li><li><code>count</code> is static: one copy for the whole class.</li></ul>
+</div></section>
+<section class="slide " data-title="The constructor" aria-label="The constructor" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 2 of 10 · <span class="walk-file">Car.java</span></p><h2>The constructor</h2><pre class="code walk-code">public Car(String make, double fuelLevel) {
+    this.make = make;
+    this.speed = 0;
+    if (fuelLevel &gt;= 0.0 &amp;&amp; fuelLevel &lt;= 100.0) {
+        this.fuelLevel = fuelLevel;
+    } else {
+        this.fuelLevel = 0.0;
+    }
+    count++;
+}</pre><ul class="walk-notes"><li><code>this.make</code> is the field, <code>make</code> the parameter.</li><li>Invalid fuel is replaced by 0.0.</li><li><code>count++</code> counts every car created.</li></ul>
+</div></section>
+<section class="slide " data-title="Behaviour: accelerate and brake" aria-label="Behaviour: accelerate and brake" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 3 of 10 · <span class="walk-file">Car.java</span></p><h2>Behaviour: accelerate and brake</h2><pre class="code walk-code">public void accelerate(int delta) {
+    if (delta &gt; 0) {
+        this.speed = this.speed + delta;
+    }
+}
+
+public void brake(int delta) {
+    if (delta &gt; 0) {
+        this.speed = Math.max(0, this.speed - delta);
+    }
+}</pre><ul class="walk-notes"><li>Methods change the object’s own state.</li><li><code>Math.max(0, …)</code> keeps the speed from going negative.</li></ul>
+</div></section>
+<section class="slide " data-title="refuel() and display()" aria-label="refuel() and display()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 4 of 10 · <span class="walk-file">Car.java</span></p><h2>refuel() and display()</h2><pre class="code walk-code">public void refuel(double amount) {
+    if (amount &gt; 0.0) {
+        this.fuelLevel = Math.min(100.0, this.fuelLevel + amount);
+    }
+}
+
+public void display() {
+    System.out.println(&quot;-------------------------------&quot;);
+    System.out.println(&quot;Make      : &quot; + make);
+    System.out.println(&quot;Speed     : &quot; + speed + &quot; km/h&quot;);
+    System.out.printf(&quot;Fuel Level: %.1f%%%n&quot;, fuelLevel);
+    System.out.println(&quot;-------------------------------&quot;);
+}</pre><ul class="walk-notes"><li><code>Math.min(100.0, …)</code> caps the fuel at 100%.</li><li><code>%%</code> prints a percent sign in printf.</li></ul>
+</div></section>
+<section class="slide " data-title="Getters, setters and a static method" aria-label="Getters, setters and a static method" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 5 of 10 · <span class="walk-file">Car.java</span></p><h2>Getters, setters and a static method</h2><pre class="code walk-code">// Getter methods
+public String getMake() { return make; }
+public int getSpeed() { return speed; }
+public double getFuelLevel() { return fuelLevel; }
+
+// Setter methods
+public void setMake(String make) { this.make = make; }
+
+public void setFuelLevel(double fuelLevel) {
+    if (fuelLevel &gt;= 0.0 &amp;&amp; fuelLevel &lt;= 100.0) {
+        this.fuelLevel = fuelLevel;
+    }
+}
+
+// Static method
+public static int getCount() { return count; }</pre><ul class="walk-notes"><li>Getters read private fields; the setter validates before changing.</li><li><code>getCount()</code> is static: call it as <code>Car.getCount()</code>.</li></ul>
+</div></section>
+<section class="slide " data-title="Creating objects" aria-label="Creating objects" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 6 of 10 · <span class="walk-file">Lab2Demo.java</span></p><h2>Creating objects</h2><pre class="code walk-code">// 1. Object Creation
+System.out.println(&quot;=== Object Creation ===&quot;);
+Car car1 = new Car(&quot;Sedan&quot;, 80.5);
+Car car2 = new Car(&quot;SUV&quot;, 100.0);
+System.out.println(&quot;Total Car objects created: &quot; + Car.getCount());</pre><ul class="walk-notes"><li><code>new</code> runs the constructor twice, so count becomes 2.</li></ul>
+</div></section>
+<section class="slide " data-title="Calling methods on car1" aria-label="Calling methods on car1" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 7 of 10 · <span class="walk-file">Lab2Demo.java</span></p><h2>Calling methods on car1</h2><pre class="code walk-code">// 2. Method Invocation on car1
+System.out.println(&quot;\n=== car1 initial state ===&quot;);
+car1.display();
+car1.accelerate(30);
+System.out.println(&quot;After accelerate(30):&quot;);
+car1.display();
+car1.brake(10);
+System.out.println(&quot;After brake(10):&quot;);
+car1.display();
+car1.brake(100);
+System.out.println(&quot;After brake(100):&quot;);
+car1.display();</pre><ul class="walk-notes"><li>Every call changes only car1.</li><li><code>brake(100)</code> stops at 0, not −80.</li></ul>
+</div></section>
+<section class="slide " data-title="car2 has its own state" aria-label="car2 has its own state" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 8 of 10 · <span class="walk-file">Lab2Demo.java</span></p><h2>car2 has its own state</h2><pre class="code walk-code">// 3. Method Invocation on car2
+System.out.println(&quot;\n=== car2 initial state ===&quot;);
+car2.display();
+car2.accelerate(60);
+car2.refuel(5.0);
+System.out.println(&quot;After accelerate(60) and refuel(5.0):&quot;);
+car2.display();</pre><ul class="walk-notes"><li>car2 is already at 100%, so refuel(5.0) changes nothing.</li></ul>
+</div></section>
+<section class="slide " data-title="Getters and setters in use" aria-label="Getters and setters in use" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 9 of 10 · <span class="walk-file">Lab2Demo.java</span></p><h2>Getters and setters in use</h2><pre class="code walk-code">// 4. Getters and Setters
+System.out.println(&quot;\n=== Getters and Setters ===&quot;);
+System.out.println(&quot;car1 make via getter : &quot; + car1.getMake());
+System.out.println(&quot;car2 speed via getter: &quot; + car2.getSpeed());
+car1.setMake(&quot;Hatchback&quot;);
+System.out.println(&quot;car1 make after setter: &quot; + car1.getMake());</pre><ul class="walk-notes"><li>Read through getters, change through the setter.</li></ul>
+</div></section>
+<section class="slide " data-title="Two references, one object" aria-label="Two references, one object" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 10 of 10 · <span class="walk-file">Lab2Demo.java</span></p><h2>Two references, one object</h2><pre class="code walk-code">// 5. Reference Semantics
+System.out.println(&quot;\n=== Reference Semantics ===&quot;);
+Car car3 = car1;
+car3.accelerate(20);
+System.out.println(&quot;car1.getSpeed() = &quot; + car1.getSpeed());
+System.out.println(&quot;car3.getSpeed() = &quot; + car3.getSpeed());
+System.out.println(&quot;car1 and car3 refer to the same object.&quot;);
+
+// 6. Static Member
+System.out.println(&quot;\n=== Static Member ===&quot;);
+System.out.println(&quot;Total Car objects ever created: &quot; + Car.getCount());</pre><ul class="walk-notes"><li><code>car3 = car1</code> copies the reference, not the car.</li><li>The count is still 2: no object was created.</li></ul>
+</div></section>
+<section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">For reference · 2 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Car.java">public class Car {
+
+    // Private instance fields
+    private String make;
+    private int speed;
+    private double fuelLevel;
+
+    // Static field shared by all Car objects
+    private static int count = 0;
+
+    public Car(String make, double fuelLevel) {
+        this.make = make;
+        this.speed = 0;
+        if (fuelLevel &gt;= 0.0 &amp;&amp; fuelLevel &lt;= 100.0) {
+            this.fuelLevel = fuelLevel;
+        } else {
+            this.fuelLevel = 0.0;
+        }
+        count++;
+    }
+
+    public void accelerate(int delta) {
+        if (delta &gt; 0) {
+            this.speed = this.speed + delta;
+        }
+    }
+
+    public void brake(int delta) {
+        if (delta &gt; 0) {
+            this.speed = Math.max(0, this.speed - delta);
+        }
+    }
+
+    public void refuel(double amount) {
+        if (amount &gt; 0.0) {
+            this.fuelLevel = Math.min(100.0, this.fuelLevel + amount);
+        }
+    }
+
+    public void display() {
+        System.out.println(&quot;-------------------------------&quot;);
+        System.out.println(&quot;Make      : &quot; + make);
+        System.out.println(&quot;Speed     : &quot; + speed + &quot; km/h&quot;);
+        System.out.printf(&quot;Fuel Level: %.1f%%%n&quot;, fuelLevel);
+        System.out.println(&quot;-------------------------------&quot;);
+    }
+
+    // Getter methods
+    public String getMake() { return make; }
+    public int getSpeed() { return speed; }
+    public double getFuelLevel() { return fuelLevel; }
+
+    // Setter methods
+    public void setMake(String make) { this.make = make; }
+
+    public void setFuelLevel(double fuelLevel) {
+        if (fuelLevel &gt;= 0.0 &amp;&amp; fuelLevel &lt;= 100.0) {
+            this.fuelLevel = fuelLevel;
+        }
+    }
+
+    // Static method
+    public static int getCount() { return count; }
+}</pre><pre class="code small-code" data-file="Lab2Demo.java">public class Lab2Demo {
+
+    public static void main(String[] args) {
+
+        // 1. Object Creation
+        System.out.println(&quot;=== Object Creation ===&quot;);
+        Car car1 = new Car(&quot;Sedan&quot;, 80.5);
+        Car car2 = new Car(&quot;SUV&quot;, 100.0);
+        System.out.println(&quot;Total Car objects created: &quot; + Car.getCount());
+
+        // 2. Method Invocation on car1
+        System.out.println(&quot;\n=== car1 initial state ===&quot;);
+        car1.display();
+        car1.accelerate(30);
+        System.out.println(&quot;After accelerate(30):&quot;);
+        car1.display();
+        car1.brake(10);
+        System.out.println(&quot;After brake(10):&quot;);
+        car1.display();
+        car1.brake(100);
+        System.out.println(&quot;After brake(100):&quot;);
+        car1.display();
+
+        // 3. Method Invocation on car2
+        System.out.println(&quot;\n=== car2 initial state ===&quot;);
+        car2.display();
+        car2.accelerate(60);
+        car2.refuel(5.0);
+        System.out.println(&quot;After accelerate(60) and refuel(5.0):&quot;);
+        car2.display();
+
+        // 4. Getters and Setters
+        System.out.println(&quot;\n=== Getters and Setters ===&quot;);
+        System.out.println(&quot;car1 make via getter : &quot; + car1.getMake());
+        System.out.println(&quot;car2 speed via getter: &quot; + car2.getSpeed());
+        car1.setMake(&quot;Hatchback&quot;);
+        System.out.println(&quot;car1 make after setter: &quot; + car1.getMake());
+
+        // 5. Reference Semantics
+        System.out.println(&quot;\n=== Reference Semantics ===&quot;);
+        Car car3 = car1;
+        car3.accelerate(20);
+        System.out.println(&quot;car1.getSpeed() = &quot; + car1.getSpeed());
+        System.out.println(&quot;car3.getSpeed() = &quot; + car3.getSpeed());
+        System.out.println(&quot;car1 and car3 refer to the same object.&quot;);
+
+        // 6. Static Member
+        System.out.println(&quot;\n=== Static Member ===&quot;);
+        System.out.println(&quot;Total Car objects ever created: &quot; + Car.getCount());
+    }
+}</pre></div><p class="muted">Copy or download each file, save it under the same name, then compile and run: <code>javac *.java</code> → <code>java Lab2Demo</code></p>
+</div></section>
+<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Implementation</p><h2>Expected output</h2><div class="runbox" data-cmd="java Lab2Demo"><pre class="run-src" hidden>=== Object Creation ===
+Total Car objects created: 2
+
+=== car1 initial state ===
+-------------------------------
+Make      : Sedan
+Speed     : 0 km/h
+Fuel Level: 80.5%
+-------------------------------
+After accelerate(30):
+-------------------------------
+Make      : Sedan
+Speed     : 30 km/h
+Fuel Level: 80.5%
+-------------------------------
+After brake(10):
+-------------------------------
+Make      : Sedan
+Speed     : 20 km/h
+Fuel Level: 80.5%
+-------------------------------
+After brake(100):
+-------------------------------
+Make      : Sedan
+Speed     : 0 km/h
+Fuel Level: 80.5%
+-------------------------------
+
+=== car2 initial state ===
+-------------------------------
+Make      : SUV
+Speed     : 0 km/h
+Fuel Level: 100.0%
+-------------------------------
+After accelerate(60) and refuel(5.0):
+-------------------------------
+Make      : SUV
+Speed     : 60 km/h
+Fuel Level: 100.0%
+-------------------------------
+
+=== Getters and Setters ===
+car1 make via getter : Sedan
+car2 speed via getter: 60
+car1 make after setter: Hatchback
+
+=== Reference Semantics ===
+car1.getSpeed() = 20
+car3.getSpeed() = 20
+car1 and car3 refer to the same object.
+
+=== Static Member ===
+Total Car objects ever created: 2</pre></div><p class="note-line">car3 = car1 creates no object, so the count stays 2 and both variables report speed 20.</p>
+</div></section>
+<section class="slide " data-title="Create objects and follow the references" aria-label="Create objects and follow the references" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Interactive 1 of 2</p><h2>Create objects and follow the references</h2><div data-demo="objects"></div>
+</div></section>
+<section class="slide " data-title="What can static code use?" aria-label="What can static code use?" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Interactive 2 of 2</p><h2>What can static code use?</h2><div data-demo="static-rules"></div>
+</div></section>
+<section class="slide " data-title="Task 1: Extend the Car class" aria-label="Task 1: Extend the Car class" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 1 of 3</p><h2>Task 1: Extend the Car class</h2><div class="ex task"><div class="qq">Add an engine to the car: it may only accelerate while the engine is on.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l2t0r0" data-key="l2t0r0"><label for="l2t0r0">Add a private boolean field <code>engineOn</code>, false in the constructor</label></li><li><input type="checkbox" id="l2t0r1" data-key="l2t0r1"><label for="l2t0r1">Add <code>startEngine()</code> and <code>stopEngine()</code></label></li><li><input type="checkbox" id="l2t0r2" data-key="l2t0r2"><label for="l2t0r2">Make <code>accelerate()</code> work only when the engine is on</label></li><li><input type="checkbox" id="l2t0r3" data-key="l2t0r3"><label for="l2t0r3">Print a message when accelerating with the engine off</label></li><li><input type="checkbox" id="l2t0r4" data-key="l2t0r4"><label for="l2t0r4">Demonstrate it from <code>main</code></label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Wrap the existing body of <code>accelerate</code> in <code>if (engineOn) { … } else { System.out.println(…); }</code>.</div></details></div>
+</div></section>
+<section class="slide " data-title="Task 2: Design a BankAccount class" aria-label="Task 2: Design a BankAccount class" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 2 of 3</p><h2>Task 2: Design a BankAccount class</h2><div class="ex task"><div class="qq">A simple account with an owner, a balance and a count of all accounts.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l2t1r0" data-key="l2t1r0"><label for="l2t1r0">Fields: <code>private String owner</code>, <code>private double balance</code>, <code>private static int totalAccounts</code></label></li><li><input type="checkbox" id="l2t1r1" data-key="l2t1r1"><label for="l2t1r1">Constructor, <code>deposit</code>, <code>withdraw</code>, <code>getBalance</code>, <code>display</code>, <code>static getTotalAccounts</code></label></li><li><input type="checkbox" id="l2t1r2" data-key="l2t1r2"><label for="l2t1r2">Reject negative deposits and withdrawals larger than the balance</label></li><li><input type="checkbox" id="l2t1r3" data-key="l2t1r3"><label for="l2t1r3">Create at least three accounts and print the total</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Increment <code>totalAccounts</code> in the constructor, exactly like <code>count</code> in Car.</div></details></div>
+</div></section>
+<section class="slide " data-title="Task 3: Demonstrate reference sharing" aria-label="Task 3: Demonstrate reference sharing" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 3 of 3</p><h2>Task 3: Demonstrate reference sharing</h2><div class="ex task"><div class="qq">Show that two variables can refer to one BankAccount.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l2t2r0" data-key="l2t2r0"><label for="l2t2r0">Create <code>account1</code></label></li><li><input type="checkbox" id="l2t2r1" data-key="l2t2r1"><label for="l2t2r1">Assign it to <code>account2</code></label></li><li><input type="checkbox" id="l2t2r2" data-key="l2t2r2"><label for="l2t2r2">Deposit through <code>account2</code></label></li><li><input type="checkbox" id="l2t2r3" data-key="l2t2r3"><label for="l2t2r3">Print the balance through both</label></li><li><input type="checkbox" id="l2t2r4" data-key="l2t2r4"><label for="l2t2r4">Add a comment explaining why both balances are the same</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Draw the stack and heap first: two arrows, one object.</div></details></div>
+</div></section>
+<section class="slide " data-title="Show your work" aria-label="Show your work" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
+</div></section>
+<section class="slide " data-title="Report exercise 1" aria-label="Report exercise 1" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report · exercise 1 of 2</p><h2>University student registration</h2><div class="ex task report"><div class="qq">Classes <code>Student</code>, <code>Course</code> and <code>Enrollment</code> (a student enrolled in a course for a semester, with a grade).</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l2e0r0" data-key="l2e0r0"><label for="l2e0r0">Student: id, name, cgpa, department, static totalStudents; getters/setters, <code>display()</code>, <code>isHonours()</code> (cgpa ≥ 3.75)</label></li><li><input type="checkbox" id="l2e0r1" data-key="l2e0r1"><label for="l2e0r1">Course: code, title, credit hours, instructor; getters and <code>display()</code></label></li><li><input type="checkbox" id="l2e0r2" data-key="l2e0r2"><label for="l2e0r2">Enrollment: Student, Course, semester, grade; <code>display()</code></label></li><li><input type="checkbox" id="l2e0r3" data-key="l2e0r3"><label for="l2e0r3">Create ≥3 students, ≥2 courses and ≥4 enrollments</label></li><li><input type="checkbox" id="l2e0r4" data-key="l2e0r4"><label for="l2e0r4">Change a student with a setter and show that the enrollment reflects it</label></li><li><input type="checkbox" id="l2e0r5" data-key="l2e0r5"><label for="l2e0r5">Print the total number of students with the static method</label></li></ul></div>
+</div></section>
+<section class="slide " data-title="Report exercise 2" aria-label="Report exercise 2" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report · exercise 2 of 2</p><h2>Retail store inventory</h2><div class="ex task report"><div class="qq">Classes <code>Product</code> and <code>Inventory</code> (an array of products).</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l2e1r0" data-key="l2e1r0"><label for="l2e1r0">Product: id, name, price, stockQuantity, static productCount; validating setters</label></li><li><input type="checkbox" id="l2e1r1" data-key="l2e1r1"><label for="l2e1r1"><code>sell(qty)</code> and <code>restock(qty)</code> with the validation rules</label></li><li><input type="checkbox" id="l2e1r2" data-key="l2e1r2"><label for="l2e1r2">Inventory: <code>addProduct</code>, <code>findById</code>, <code>listAll</code>, <code>totalInventoryValue</code></label></li><li><input type="checkbox" id="l2e1r3" data-key="l2e1r3"><label for="l2e1r3">Create ≥6 products and perform ≥10 operations</label></li><li><input type="checkbox" id="l2e1r4" data-key="l2e1r4"><label for="l2e1r4">Print the total inventory value and product count</label></li></ul></div>
+</div></section>
+<section class="slide " data-title="Writing the lab report" aria-label="Writing the lab report" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report</p><h2>Writing the lab report</h2><ul class="big-list"><li>Problem statement and your design (classes, fields, methods)</li><li>Complete source code, formatted and commented</li><li>Sample output or screenshots for normal <b>and</b> edge cases</li><li>A short discussion: what each OOP concept did in your program</li></ul><div class="integrity"><h3>Academic integrity</h3><p>Copying from the internet, classmates, seniors or any other unauthorized source is strictly prohibited. Full marks may be deducted if plagiarism, copied work or academic dishonesty is detected. Complete the tasks, implementation, output analysis and report yourself.</p></div>
+</div></section>
+<section class="slide " data-title="Viva questions (1 of 2)" aria-label="Viva questions (1 of 2)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Discussion and analysis</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">Why are the fields of Car private?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Encapsulation: only Car’s own methods can change them, so rules such as “speed never below 0” and “fuel 0–100” are always enforced.</div></details></div><div class="ex"><div class="qq">Why is <code>count</code> static but <code>speed</code> is not?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">count describes the class (how many cars exist) and must be shared; speed describes one particular car.</div></details></div>
+</div></section>
+<section class="slide " data-title="Viva questions (2 of 2)" aria-label="Viva questions (2 of 2)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Discussion and analysis</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq">After <code>Car car3 = car1;</code>, how many Car objects exist?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Still two. Only the reference was copied; car1 and car3 point to the same object.</div></details></div><div class="ex"><div class="qq">What would happen without <code>this</code> in <code>this.make = make;</code>?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">make = make assigns the parameter to itself; the field stays null.</div></details></div>
+</div></section>
+<section class="slide " data-title="Quiz" aria-label="Quiz" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="lab2"></div><script type="application/json" class="quiz-json">[{"q": "What does <code>new Car(\"SUV\", 100.0)<\/code> do?", "o": ["declares a class", "creates an object and runs the constructor", "copies car1", "calls a static method"], "a": 1, "w": "new allocates the object on the heap and runs the constructor."}, {"q": "Which call is correct for a static method?", "o": ["car1.Car.getCount()", "Car.getCount()", "new getCount()", "this.getCount(Car)"], "a": 1, "w": "Static members are accessed through the class name."}, {"q": "<code>car1.brake(100)<\/code> when speed is 20 leaves speed at\u2026", "o": ["-80", "0", "20", "100"], "a": 1, "w": "Math.max(0, \u2026) stops speed going negative."}, {"q": "A constructor\u2026", "o": ["has a return type void", "has the class name and no return type", "must be static", "is called with car.Car()"], "a": 1, "w": "Constructors have no return type."}, {"q": "<code>Car c3 = c1; c3.accelerate(20);<\/code> \u2014 what happens to <code>c1.getSpeed()<\/code>?", "o": ["unchanged", "increases by 20", "becomes 0", "compile error"], "a": 1, "w": "c1 and c3 refer to the same object."}]</script></div>
+</div></section>
+<section class="slide " data-title="Summary" aria-label="Summary" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Summary</p><h2>Summary</h2><ul class="sumlist"><li>A class is a blueprint; objects are instances created with new.</li><li>Constructors initialise objects; this names the current object.</li><li>Private fields + public methods = encapsulation and validation.</li><li>Static fields and methods belong to the class and are shared.</li><li>Variables hold references: assignment creates aliases, not copies.</li></ul><div class="nextcard"><a class="btn pri" href="03-constructors-overloading.html">Next: Lab 3 · Constructors and overloading</a><a class="btn" href="../index.html">All labs</a></div>
+</div></section>
+</main>
+<footer class="deck-foot">
+  <button type="button" class="btn" id="prev">Previous</button>
+  <span class="counter" id="counter">1 / 37</span>
+  <button type="button" class="btn pri" id="next">Next</button>
+</footer>
+<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
+<noscript><p style="padding:20px">This lab needs JavaScript for the slides and the interactive examples.</p></noscript>
+<script src="../js/core.js"></script>
+<script src="../js/art.js"></script>
+<script src="../js/java.js"></script>
+<script src="../js/tracer.js"></script>
+<script src="../js/figs.js"></script>
+<script src="../js/lab-figs.js"></script>
+<script src="../js/demos-basics.js"></script>
+<script src="../js/demos-oop.js"></script>
+<script src="../js/demos-adv.js"></script>
+<script src="../js/quiz.js"></script>
+<script src="../js/page.js"></script>
+<script src="../js/lab.js"></script>
+<script>window.OOP_TOPIC = {"id": 2, "prev": "01-java-basics.html", "next": "03-constructors-overloading.html", "nextLabel": "Next lab"};</script>
+<script>mountPage();</script>
+<script src="../js/slides.js"></script>
+<script src="../js/annotate.js"></script>
+<script src="../js/analytics.js"
+        data-endpoint="https://analytics-proxy.ayansarkar1829.workers.dev"
+        data-project="CSE-202 OOP Lab"></script>
+<script src="../js/course-events.js"></script>
+</body>
+</html>

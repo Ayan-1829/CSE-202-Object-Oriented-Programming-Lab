@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Build a Swing drawing application: a JFrame with layout managers, buttons and a colour box, event listeners, and a custom JPanel that draws rectangles and circles with Graphics.">
+<meta name="keywords" content="java swing, awt, jframe, jpanel, layout manager, actionlistener, paintComponent, graphics, event dispatch thread, lab, cse 202, object oriented programming lab">
+<meta name="author" content="Object Oriented Programming Lab Notes">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#155E63">
+<link rel="canonical" href="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/09-gui-swing.html">
+<link rel="icon" type="image/svg+xml" href="../img/logo-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../img/favicon-16.png">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
+<meta property="og:title" content="Lab 9: GUI Components, Drawing, AWT &amp; Swing | OOP Lab (CSE 202)">
+<meta property="og:description" content="Build a Swing drawing application: a JFrame with layout managers, buttons and a colour box, event listeners, and a custom JPanel that draws rectangles and circles with Graphics.">
+<meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/09-gui-swing.html">
+<meta name="twitter:card" content="summary">
+<title>Lab 9: GUI Components, Drawing, AWT &amp; Swing | OOP Lab (CSE 202)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/lab.css">
+</head>
+<body class="deck-page">
+<div class="sr-only" id="live" aria-live="polite"></div>
+<header class="deck-bar">
+  <a class="home-link" href="../index.html" aria-label="Home: all labs"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
+  <div class="deck-title"><span class="badge">9</span><span>GUI Components, Drawing, AWT &amp; Swing</span></div>
+  <div class="deck-actions">
+    <button type="button" class="btn sm" id="btn-menu" aria-expanded="false" aria-controls="slide-menu" aria-label="Slides"><svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><rect x="3" y="4.5" width="18" height="3" rx="1"></rect><rect x="3" y="10.5" width="18" height="3" rx="1"></rect><rect x="3" y="16.5" width="18" height="3" rx="1"></rect></svg><span>Slides</span></button>
+    <button type="button" class="btn sm" id="btn-theme" aria-pressed="false" aria-label="Toggle dark mode"><svg class="btn-ic" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"></path></svg><span>Dark mode</span></button>
+    <button type="button" class="btn sm" id="btn-fs" aria-pressed="false" aria-label="Full screen"><svg class="btn-ic" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"></path></svg><span>Full screen</span></button>
+  </div>
+</header>
+<div class="deck-progress"><i id="progress-fill"></i></div>
+<main class="deck" id="deck">
+<section class="slide title-slide" data-title="GUI Components, Drawing, AWT &amp; Swing" aria-label="GUI Components, Drawing, AWT &amp; Swing" tabindex="-1"><div class="slide-inner">
+<span class="topic-art" data-art="13" aria-hidden="true"></span>
+<span class="badge big">9</span>
+<p class="kicker">Lab Manual IX · CSE 202</p>
+<h1>GUI Components, Drawing, AWT & Swing</h1>
+<p class="lead">Build a Swing drawing application: a JFrame with layout managers, buttons and a colour box, event listeners, and a custom JPanel that draws rectangles and circles with Graphics.</p>
+<div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
+<p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
+</div></section>
+<section class="slide " data-title="Why this lab" aria-label="Why this lab" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Before we start</p><h2>Why this lab</h2><div class="hook"><p class="q">Every desktop app is a window full of boxes that react to clicks. How does Java put a button on screen and know when it is pressed?</p><p>Swing gives you components (<code>JFrame</code>, <code>JButton</code>…), layout managers to arrange them and listeners that run your code on each click. You will build a small paint program.</p></div>
+</div></section>
+<section class="slide " data-title="Lab at a glance" aria-label="Lab at a glance" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab 9 of 10</p><h2>Lab at a glance</h2><div class="cols wl"><div><h3>After this lab you can</h3><ul class=""><li>Explain the purpose of GUIs and distinguish AWT from Swing</li><li>Use JFrame, JPanel, JButton, JLabel, JTextField and JComboBox</li><li>Arrange components with BorderLayout, FlowLayout and GridLayout</li><li>Handle events with ActionListener</li><li>Draw shapes by overriding <code>paintComponent()</code> and using Graphics</li><li>Start Swing safely on the Event Dispatch Thread</li></ul></div>
+<div><h3>Before you start</h3><ul class=""><li>Labs 4–5: inheritance, abstract classes, overriding</li><li>Lab 7: threads (for the EDT idea)</li><li>ArrayList basics</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
+</div></section>
+<section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab 9 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=12">Program design</a></li><li><a href="#s=14">Code walkthrough</a></li><li><a href="#s=25">Expected output</a></li><li><a href="#s=26">Interactive demos</a></li><li><a href="#s=28">In-lab tasks</a></li><li><a href="#s=32">Lab report exercises</a></li><li><a href="#s=35">Viva questions and quiz</a></li></ol>
+</div></section>
+<section class="slide " data-title="AWT, Swing and applets" aria-label="AWT, Swing and applets" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 1 of 6</p><h2>AWT, Swing and applets</h2><ul class=""><li><b>AWT</b> is the original toolkit using native OS components; <b>Swing</b> is built on it with lightweight, platform-independent components whose names start with J.</li><li><b>Applets</b> ran inside browsers; browsers no longer support them, so this lab uses a <code>JFrame</code> desktop app — the drawing and event ideas are the same.</li></ul>
+</div></section>
+<section class="slide " data-title="Components and containers" aria-label="Components and containers" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 2 of 6</p><h2>Components and containers</h2><figure class="fig" data-fig="lab9-tree"></figure><ul class=""><li>A container holds components: the JFrame holds panels, panels hold buttons, labels and the drawing canvas.</li></ul>
+</div></section>
+<section class="slide " data-title="Layout managers" aria-label="Layout managers" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 3 of 6</p><h2>Layout managers</h2><figure class="fig" data-fig="lab9-border"></figure><ul class=""><li><b>BorderLayout</b>: NORTH, SOUTH, EAST, WEST, CENTER. <b>FlowLayout</b>: left to right. <b>GridLayout</b>: equal cells in rows and columns.</li></ul>
+</div></section>
+<section class="slide " data-title="Layout managers (code)" aria-label="Layout managers (code)" tabindex="-1"><div class="slide-inner">
+<h2>Layout managers</h2><pre class="code small-code">JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEFT));
+buttons.add(new JButton(&quot;Add Rectangle&quot;));
+mainPanel.add(drawingPanel, BorderLayout.CENTER);</pre>
+</div></section>
+<section class="slide " data-title="Event handling" aria-label="Event handling" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 4 of 6</p><h2>Event handling</h2><pre class="code small-code">rectangleButton.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        drawingPanel.addRectangle(x, y, 100, 80);
+        updateStatus();
+    }
+});</pre><ul class=""><li>GUI programs are event-driven: Swing calls <code>actionPerformed</code> when the button is clicked.</li></ul>
+</div></section>
+<section class="slide " data-title="Custom drawing and repaint()" aria-label="Custom drawing and repaint()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 5 of 6</p><h2>Custom drawing and repaint()</h2><pre class="code small-code">@Override
+protected void paintComponent(Graphics g) {
+    super.paintComponent(g);     // clear the background first
+    for (Shape shape : shapes) {
+        shape.draw(g);           // polymorphic draw
+    }
+}</pre><ul class=""><li>Graphics offers drawLine, drawRect, fillRect, drawOval, fillOval, drawString.</li><li>Change the data, then call <code>repaint()</code>; Swing calls paintComponent for you. Never call it yourself.</li></ul>
+</div></section>
+<section class="slide " data-title="The Event Dispatch Thread" aria-label="The Event Dispatch Thread" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 6 of 6</p><h2>The Event Dispatch Thread</h2><pre class="code small-code">SwingUtilities.invokeLater(new Runnable() {
+    @Override
+    public void run() { new DrawingApp(); }
+});</pre><ul class=""><li>Swing is not thread-safe: create and update components only on the EDT.</li></ul>
+</div></section>
+<section class="slide " data-title="Program design" aria-label="Program design" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Implementation design</p><h2>Program design</h2><figure class="fig" data-fig="lab9-uml"></figure>
+</div></section>
+<section class="slide " data-title="Execution flow" aria-label="Execution flow" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Implementation design</p><h2>Execution flow</h2><ol class="flow"><li>main schedules GUI creation on the EDT</li><li>DrawingApp builds the window: title (NORTH), canvas (CENTER), controls and status (SOUTH)</li><li>Listeners are registered on the three buttons</li><li>Add Rectangle / Add Circle: set colour, add a shape, repaint, update status</li><li>Clear All: empty the list and repaint</li><li>Closing the window ends the program</li></ol><p class="note-line">Layout (DrawingApp), drawing (DrawingPanel) and shape behaviour (Shape subclasses) are separate, so adding a TriangleShape is easy.</p>
+</div></section>
+<section class="slide " data-title="An abstract drawable shape" aria-label="An abstract drawable shape" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 1 of 10 · <span class="walk-file">Shape.java</span></p><h2>An abstract drawable shape</h2><div class="walk-side"><pre class="code walk-code">public abstract class Shape {
+
+    protected int x;
+    protected int y;
+    protected Color colour;
+
+    public Shape(int x, int y, Color colour) {
+        this.x = x;
+        this.y = y;
+        this.colour = colour;
+    }
+
+    public abstract void draw(Graphics g);
+}</pre><ul class="walk-notes"><li>Position and colour for every shape; each subclass decides how to draw.</li></ul></div>
+</div></section>
+<section class="slide " data-title="RectangleShape.draw()" aria-label="RectangleShape.draw()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 2 of 10 · <span class="walk-file">RectangleShape.java</span></p><h2>RectangleShape.draw()</h2><pre class="code walk-code">@Override
+public void draw(Graphics g) {
+    g.setColor(colour);
+    g.fillRect(x, y, width, height);
+    g.setColor(Color.BLACK);
+    g.drawRect(x, y, width, height);
+}</pre><ul class="walk-notes"><li>Fill in the shape’s colour, then outline in black.</li></ul>
+</div></section>
+<section class="slide " data-title="CircleShape.draw()" aria-label="CircleShape.draw()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 3 of 10 · <span class="walk-file">CircleShape.java</span></p><h2>CircleShape.draw()</h2><pre class="code walk-code">@Override
+public void draw(Graphics g) {
+    int diameter = 2 * radius;
+    g.setColor(colour);
+    g.fillOval(x - radius, y - radius, diameter, diameter);
+    g.setColor(Color.BLACK);
+    g.drawOval(x - radius, y - radius, diameter, diameter);
+}</pre><ul class="walk-notes"><li>fillOval takes the top-left corner, so subtract the radius from the centre.</li></ul>
+</div></section>
+<section class="slide " data-title="paintComponent draws the frame" aria-label="paintComponent draws the frame" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 4 of 10 · <span class="walk-file">DrawingPanel.java</span></p><h2>paintComponent draws the frame</h2><div class="walk-side"><pre class="code walk-code">@Override
+protected void paintComponent(Graphics g) {
+    super.paintComponent(g);
+    drawGrid(g);
+    for (Shape shape : shapes) {
+        shape.draw(g);
+    }
+}
+
+private void drawGrid(Graphics g) {
+    g.setColor(new Color(220, 220, 220));
+    for (int x = 0; x &lt; getWidth(); x += 50) {
+        g.drawLine(x, 0, x, getHeight());
+    }
+    for (int y = 0; y &lt; getHeight(); y += 50) {
+        g.drawLine(0, y, getWidth(), y);
+    }
+}</pre><ul class="walk-notes"><li>Clear, draw the grid, then call draw(g) on every shape (polymorphism).</li></ul></div>
+</div></section>
+<section class="slide " data-title="Changing the picture" aria-label="Changing the picture" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 5 of 10 · <span class="walk-file">DrawingPanel.java</span></p><h2>Changing the picture</h2><pre class="code walk-code">public void addRectangle(int x, int y, int width, int height) {
+    shapes.add(new RectangleShape(x, y, width, height, currentColor));
+    repaint();
+}
+
+public void addCircle(int x, int y, int radius) {
+    shapes.add(new CircleShape(x, y, radius, currentColor));
+    repaint();
+}
+
+public void clear() {
+    shapes.clear();
+    repaint();
+}</pre><ul class="walk-notes"><li>Change the list, then <code>repaint()</code>; never call paintComponent yourself.</li></ul>
+</div></section>
+<section class="slide " data-title="Building the window: north and centre" aria-label="Building the window: north and centre" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 6 of 10 · <span class="walk-file">DrawingApp.java</span></p><h2>Building the window: north and centre</h2><pre class="code walk-code">private void setupUI() {
+    JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
+    mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+    JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    JLabel titleLabel = new JLabel(&quot;Drawing Application&quot;);
+    titleLabel.setFont(new Font(&quot;Arial&quot;, Font.BOLD, 16));
+    topPanel.add(titleLabel);
+
+    drawingPanel = new DrawingPanel();
+    drawingPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));</pre><ul class="walk-notes"><li>BorderLayout for the frame, FlowLayout for the title row.</li></ul>
+</div></section>
+<section class="slide " data-title="Building the window: the controls" aria-label="Building the window: the controls" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 7 of 10 · <span class="walk-file">DrawingApp.java</span></p><h2>Building the window: the controls</h2><pre class="code walk-code">JPanel controlPanel = new JPanel(new BorderLayout());
+JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+JLabel colorLabel = new JLabel(&quot;Colour:&quot;);
+colorComboBox = new JComboBox&lt;String&gt;(
+        new String[] {&quot;Blue&quot;, &quot;Red&quot;, &quot;Green&quot;, &quot;Yellow&quot;, &quot;Orange&quot;, &quot;Purple&quot;});
+rectangleButton = new JButton(&quot;Add Rectangle&quot;);
+circleButton = new JButton(&quot;Add Circle&quot;);
+clearButton = new JButton(&quot;Clear All&quot;);
+
+buttonPanel.add(colorLabel);
+buttonPanel.add(colorComboBox);
+buttonPanel.add(rectangleButton);
+buttonPanel.add(circleButton);
+buttonPanel.add(clearButton);</pre><ul class="walk-notes"><li>Create each component, then add it to a FlowLayout row.</li></ul>
+</div></section>
+<section class="slide " data-title="Placing the panels" aria-label="Placing the panels" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 8 of 10 · <span class="walk-file">DrawingApp.java</span></p><h2>Placing the panels</h2><pre class="code walk-code">statusLabel = new JLabel(&quot;Ready. Shapes: 0&quot;);
+controlPanel.add(buttonPanel, BorderLayout.CENTER);
+controlPanel.add(statusLabel, BorderLayout.SOUTH);
+
+mainPanel.add(topPanel, BorderLayout.NORTH);
+mainPanel.add(drawingPanel, BorderLayout.CENTER);
+mainPanel.add(controlPanel, BorderLayout.SOUTH);
+setContentPane(mainPanel);</pre><ul class="walk-notes"><li>Panels nest: the button row and status go in controlPanel, which goes in SOUTH.</li></ul>
+</div></section>
+<section class="slide " data-title="Responding to clicks" aria-label="Responding to clicks" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 9 of 10 · <span class="walk-file">DrawingApp.java</span></p><h2>Responding to clicks</h2><pre class="code walk-code">private void addActionListeners() {
+    rectangleButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            drawingPanel.setCurrentColor(getSelectedColor());
+            int x = (int) (Math.random() * 600);
+            int y = (int) (Math.random() * 350);
+            drawingPanel.addRectangle(x, y, 100, 80);
+            updateStatus();
+        }
+    });</pre><ul class="walk-notes"><li>actionPerformed runs on each click: pick the colour, add a shape, update the label.</li></ul>
+</div></section>
+<section class="slide " data-title="Starting on the Event Dispatch Thread" aria-label="Starting on the Event Dispatch Thread" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 10 of 10 · <span class="walk-file">Lab9Demo.java</span></p><h2>Starting on the Event Dispatch Thread</h2><pre class="code walk-code">public static void main(String[] args) {
+    SwingUtilities.invokeLater(new Runnable() {
+        @Override
+        public void run() {
+            new DrawingApp();
+        }
+    });
+}</pre><ul class="walk-notes"><li>invokeLater runs the GUI code on Swing’s own thread.</li></ul>
+</div></section>
+<section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">For reference · 6 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Shape.java">import java.awt.Color;
+import java.awt.Graphics;
+
+public abstract class Shape {
+
+    protected int x;
+    protected int y;
+    protected Color colour;
+
+    public Shape(int x, int y, Color colour) {
+        this.x = x;
+        this.y = y;
+        this.colour = colour;
+    }
+
+    public abstract void draw(Graphics g);
+}</pre><pre class="code small-code" data-file="RectangleShape.java">import java.awt.Color;
+import java.awt.Graphics;
+
+public class RectangleShape extends Shape {
+
+    private int width;
+    private int height;
+
+    public RectangleShape(int x, int y, int width, int height, Color colour) {
+        super(x, y, colour);
+        this.width = (width &gt; 0) ? width : 100;
+        this.height = (height &gt; 0) ? height : 80;
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        g.setColor(colour);
+        g.fillRect(x, y, width, height);
+        g.setColor(Color.BLACK);
+        g.drawRect(x, y, width, height);
+    }
+}</pre><pre class="code small-code" data-file="CircleShape.java">import java.awt.Color;
+import java.awt.Graphics;
+
+public class CircleShape extends Shape {
+
+    private int radius;
+
+    public CircleShape(int x, int y, int radius, Color colour) {
+        super(x, y, colour);
+        this.radius = (radius &gt; 0) ? radius : 50;
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        int diameter = 2 * radius;
+        g.setColor(colour);
+        g.fillOval(x - radius, y - radius, diameter, diameter);
+        g.setColor(Color.BLACK);
+        g.drawOval(x - radius, y - radius, diameter, diameter);
+    }
+}</pre><pre class="code small-code" data-file="DrawingPanel.java">import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.util.ArrayList;
+
+public class DrawingPanel extends JPanel {
+
+    private ArrayList&lt;Shape&gt; shapes;
+    private Color currentColor;
+
+    public DrawingPanel() {
+        shapes = new ArrayList&lt;Shape&gt;();
+        currentColor = Color.BLUE;
+        setBackground(Color.WHITE);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        drawGrid(g);
+        for (Shape shape : shapes) {
+            shape.draw(g);
+        }
+    }
+
+    private void drawGrid(Graphics g) {
+        g.setColor(new Color(220, 220, 220));
+        for (int x = 0; x &lt; getWidth(); x += 50) {
+            g.drawLine(x, 0, x, getHeight());
+        }
+        for (int y = 0; y &lt; getHeight(); y += 50) {
+            g.drawLine(0, y, getWidth(), y);
+        }
+    }
+
+    public void addRectangle(int x, int y, int width, int height) {
+        shapes.add(new RectangleShape(x, y, width, height, currentColor));
+        repaint();
+    }
+
+    public void addCircle(int x, int y, int radius) {
+        shapes.add(new CircleShape(x, y, radius, currentColor));
+        repaint();
+    }
+
+    public void clear() {
+        shapes.clear();
+        repaint();
+    }
+
+    public void setCurrentColor(Color colour) {
+        this.currentColor = colour;
+    }
+
+    public int getShapeCount() {
+        return shapes.size();
+    }
+}</pre><pre class="code small-code" data-file="DrawingApp.java">import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class DrawingApp extends JFrame {
+
+    private DrawingPanel drawingPanel;
+    private JLabel statusLabel;
+    private JButton rectangleButton;
+    private JButton circleButton;
+    private JButton clearButton;
+    private JComboBox&lt;String&gt; colorComboBox;
+
+    public DrawingApp() {
+        setTitle(&quot;Drawing Application&quot;);
+        setSize(800, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setupUI();
+        addActionListeners();
+        setVisible(true);
+    }
+
+    private void setupUI() {
+        JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JLabel titleLabel = new JLabel(&quot;Drawing Application&quot;);
+        titleLabel.setFont(new Font(&quot;Arial&quot;, Font.BOLD, 16));
+        topPanel.add(titleLabel);
+
+        drawingPanel = new DrawingPanel();
+        drawingPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+
+        JPanel controlPanel = new JPanel(new BorderLayout());
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JLabel colorLabel = new JLabel(&quot;Colour:&quot;);
+        colorComboBox = new JComboBox&lt;String&gt;(
+                new String[] {&quot;Blue&quot;, &quot;Red&quot;, &quot;Green&quot;, &quot;Yellow&quot;, &quot;Orange&quot;, &quot;Purple&quot;});
+        rectangleButton = new JButton(&quot;Add Rectangle&quot;);
+        circleButton = new JButton(&quot;Add Circle&quot;);
+        clearButton = new JButton(&quot;Clear All&quot;);
+
+        buttonPanel.add(colorLabel);
+        buttonPanel.add(colorComboBox);
+        buttonPanel.add(rectangleButton);
+        buttonPanel.add(circleButton);
+        buttonPanel.add(clearButton);
+
+        statusLabel = new JLabel(&quot;Ready. Shapes: 0&quot;);
+        controlPanel.add(buttonPanel, BorderLayout.CENTER);
+        controlPanel.add(statusLabel, BorderLayout.SOUTH);
+
+        mainPanel.add(topPanel, BorderLayout.NORTH);
+        mainPanel.add(drawingPanel, BorderLayout.CENTER);
+        mainPanel.add(controlPanel, BorderLayout.SOUTH);
+        setContentPane(mainPanel);
+    }
+
+    private void addActionListeners() {
+        rectangleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                drawingPanel.setCurrentColor(getSelectedColor());
+                int x = (int) (Math.random() * 600);
+                int y = (int) (Math.random() * 350);
+                drawingPanel.addRectangle(x, y, 100, 80);
+                updateStatus();
+            }
+        });
+        circleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                drawingPanel.setCurrentColor(getSelectedColor());
+                int x = 60 + (int) (Math.random() * 600);
+                int y = 60 + (int) (Math.random() * 350);
+                drawingPanel.addCircle(x, y, 50);
+                updateStatus();
+            }
+        });
+        clearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                drawingPanel.clear();
+                updateStatus();
+            }
+        });
+    }
+
+    private Color getSelectedColor() {
+        String selected = (String) colorComboBox.getSelectedItem();
+        if (&quot;Red&quot;.equals(selected)) {
+            return Color.RED;
+        } else if (&quot;Green&quot;.equals(selected)) {
+            return Color.GREEN;
+        } else if (&quot;Yellow&quot;.equals(selected)) {
+            return Color.YELLOW;
+        } else if (&quot;Orange&quot;.equals(selected)) {
+            return new Color(255, 165, 0);
+        } else if (&quot;Purple&quot;.equals(selected)) {
+            return new Color(128, 0, 128);
+        } else {
+            return Color.BLUE;
+        }
+    }
+
+    private void updateStatus() {
+        statusLabel.setText(&quot;Ready. Shapes: &quot; + drawingPanel.getShapeCount());
+    }
+}</pre><pre class="code small-code" data-file="Lab9Demo.java">import javax.swing.SwingUtilities;
+
+public class Lab9Demo {
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new DrawingApp();
+            }
+        });
+    }
+}</pre></div><p class="muted">Copy or download each file, save it under the same name, then compile and run: <code>javac *.java</code> → <code>java Lab9Demo</code></p>
+</div></section>
+<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Implementation</p><h2>Expected output</h2><p>The program opens a window instead of printing to the console. When it works you should see:</p><ul class=""><li>A window titled “Drawing Application” with a white canvas and a light grey grid</li><li>A colour box and Add Rectangle, Add Circle and Clear All buttons</li><li>Each Add button draws a filled shape in the selected colour at a random position</li><li>Clear All empties the canvas</li><li>The status label shows the current number of shapes</li></ul>
+</div></section>
+<section class="slide " data-title="Try the drawing application" aria-label="Try the drawing application" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Interactive</p><h2>Try the drawing application</h2><div data-demo="lab9-paint"></div>
+</div></section>
+<section class="slide " data-title="Explore layout managers" aria-label="Explore layout managers" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Interactive 1 of 1</p><h2>Explore layout managers</h2><div data-demo="layouts"></div>
+</div></section>
+<section class="slide " data-title="Task 1: Add a TriangleShape" aria-label="Task 1: Add a TriangleShape" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 1 of 3</p><h2>Task 1: Add a TriangleShape</h2><div class="ex task"><div class="qq">Support triangles in the drawing app.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l9t0r0" data-key="l9t0r0"><label for="l9t0r0"><code>TriangleShape extends Shape</code></label></li><li><input type="checkbox" id="l9t0r1" data-key="l9t0r1"><label for="l9t0r1">Store three points or compute them from a starting point</label></li><li><input type="checkbox" id="l9t0r2" data-key="l9t0r2"><label for="l9t0r2">Override <code>draw(Graphics g)</code>: filled triangle + black outline</label></li><li><input type="checkbox" id="l9t0r3" data-key="l9t0r3"><label for="l9t0r3">Add an “Add Triangle” button</label></li><li><input type="checkbox" id="l9t0r4" data-key="l9t0r4"><label for="l9t0r4">Update the status label</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Use <code>g.fillPolygon(xs, ys, 3)</code> and <code>g.drawPolygon(xs, ys, 3)</code> with two int arrays.</div></details></div>
+</div></section>
+<section class="slide " data-title="Task 2: Mouse-click drawing" aria-label="Task 2: Mouse-click drawing" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 2 of 3</p><h2>Task 2: Mouse-click drawing</h2><div class="ex task"><div class="qq">Draw where the user clicks.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l9t1r0" data-key="l9t1r0"><label for="l9t1r0">Add a mouse listener to DrawingPanel</label></li><li><input type="checkbox" id="l9t1r1" data-key="l9t1r1"><label for="l9t1r1">Draw a small circle at the clicked point</label></li><li><input type="checkbox" id="l9t1r2" data-key="l9t1r2"><label for="l9t1r2">Use the current colour</label></li><li><input type="checkbox" id="l9t1r3" data-key="l9t1r3"><label for="l9t1r3">Update the shape count</label></li><li><input type="checkbox" id="l9t1r4" data-key="l9t1r4"><label for="l9t1r4">Show the clicked coordinates in the status label</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Extend <code>MouseAdapter</code> and override only <code>mouseClicked(MouseEvent e)</code>; read <code>e.getX()</code>, <code>e.getY()</code>.</div></details></div>
+</div></section>
+<section class="slide " data-title="Task 3: Colour picker" aria-label="Task 3: Colour picker" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab task 3 of 3</p><h2>Task 3: Colour picker</h2><div class="ex task"><div class="qq">Choose any colour with JColorChooser.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l9t2r0" data-key="l9t2r0"><label for="l9t2r0">Add a “Choose Colour” button</label></li><li><input type="checkbox" id="l9t2r1" data-key="l9t2r1"><label for="l9t2r1">Open <code>JColorChooser</code> on click</label></li><li><input type="checkbox" id="l9t2r2" data-key="l9t2r2"><label for="l9t2r2">Store the result as the current colour</label></li><li><input type="checkbox" id="l9t2r3" data-key="l9t2r3"><label for="l9t2r3">Use it for new shapes</label></li><li><input type="checkbox" id="l9t2r4" data-key="l9t2r4"><label for="l9t2r4">Show its name or RGB value in the status label</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans"><code>JColorChooser.showDialog(this, "Pick a colour", current)</code> returns null if the user cancels.</div></details></div>
+</div></section>
+<section class="slide " data-title="Show your work" aria-label="Show your work" tabindex="-1"><div class="slide-inner">
+<p class="kicker">In-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
+</div></section>
+<section class="slide " data-title="Report exercise 1" aria-label="Report exercise 1" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report · exercise 1 of 2</p><h2>Undo and redo</h2><div class="ex task report"><div class="qq">Extend the drawing app with history.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l9e0r0" data-key="l9e0r0"><label for="l9e0r0">Undo stack of previous states and redo stack of undone states</label></li><li><input type="checkbox" id="l9e0r1" data-key="l9e0r1"><label for="l9e0r1"><code>undo()</code> and <code>redo()</code> in DrawingPanel</label></li><li><input type="checkbox" id="l9e0r2" data-key="l9e0r2"><label for="l9e0r2">Undo and Redo buttons</label></li><li><input type="checkbox" id="l9e0r3" data-key="l9e0r3"><label for="l9e0r3">Ignore or disable them when there is nothing to undo/redo</label></li><li><input type="checkbox" id="l9e0r4" data-key="l9e0r4"><label for="l9e0r4">Clear the redo stack when a new shape is added</label></li><li><input type="checkbox" id="l9e0r5" data-key="l9e0r5"><label for="l9e0r5">Update the status label after each operation</label></li></ul></div>
+</div></section>
+<section class="slide " data-title="Report exercise 2" aria-label="Report exercise 2" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report · exercise 2 of 2</p><h2>Freehand drawing with mouse drag</h2><div class="ex task report"><div class="qq">Draw by dragging the mouse.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l9e1r0" data-key="l9e1r0"><label for="l9e1r0">Add a MouseMotionListener to DrawingPanel</label></li><li><input type="checkbox" id="l9e1r1" data-key="l9e1r1"><label for="l9e1r1">Store the line segments created while dragging</label></li><li><input type="checkbox" id="l9e1r2" data-key="l9e1r2"><label for="l9e1r2">Draw each segment in the selected colour</label></li><li><input type="checkbox" id="l9e1r3" data-key="l9e1r3"><label for="l9e1r3">Freehand Mode toggle and a brush size selector (Small, Medium, Large)</label></li><li><input type="checkbox" id="l9e1r4" data-key="l9e1r4"><label for="l9e1r4">Use Graphics2D to set the line thickness</label></li><li><input type="checkbox" id="l9e1r5" data-key="l9e1r5"><label for="l9e1r5">Switch between shape mode and freehand mode</label></li></ul></div>
+</div></section>
+<section class="slide " data-title="Writing the lab report" aria-label="Writing the lab report" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab report</p><h2>Writing the lab report</h2><ul class="big-list"><li>Problem statement and your design (classes, fields, methods)</li><li>Complete source code, formatted and commented</li><li>Sample output or screenshots for normal <b>and</b> edge cases</li><li>A short discussion: what each OOP concept did in your program</li></ul><div class="integrity"><h3>Academic integrity</h3><p>Copying from the internet, classmates, seniors or any other unauthorized source is strictly prohibited. Full marks may be deducted if plagiarism, copied work or academic dishonesty is detected. Complete the tasks, implementation, output analysis and report yourself.</p></div>
+</div></section>
+<section class="slide " data-title="Viva questions (1 of 2)" aria-label="Viva questions (1 of 2)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Discussion and analysis</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">Why call <code>super.paintComponent(g)</code> first?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">It paints the background and clears the previous frame; without it old drawings remain as trails.</div></details></div><div class="ex"><div class="qq">Why should you call repaint() instead of paintComponent() directly?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">repaint() asks Swing to redraw at the right time on the EDT with a proper Graphics object.</div></details></div>
+</div></section>
+<section class="slide " data-title="Viva questions (2 of 2)" aria-label="Viva questions (2 of 2)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Discussion and analysis</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq">How does the program show polymorphism?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">DrawingPanel keeps an ArrayList&lt;Shape&gt; and calls draw(g) on each; Java runs the RectangleShape or CircleShape version.</div></details></div><div class="ex"><div class="qq">Why start the GUI with SwingUtilities.invokeLater?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Swing is not thread-safe; invokeLater runs the creation code on the Event Dispatch Thread.</div></details></div>
+</div></section>
+<section class="slide " data-title="Quiz" aria-label="Quiz" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="lab9"></div><script type="application/json" class="quiz-json">[{"q": "Which layout divides a container into NORTH, SOUTH, EAST, WEST and CENTER?", "o": ["FlowLayout", "GridLayout", "BorderLayout", "BoxLayout"], "a": 2, "w": "BorderLayout has five regions."}, {"q": "A button click is handled by\u2026", "o": ["ActionListener.actionPerformed", "paintComponent", "main", "repaint"], "a": 0, "w": "Register an ActionListener on the button."}, {"q": "Custom drawing in Swing goes in\u2026", "o": ["paint() of JFrame", "paintComponent() of a JPanel", "the constructor", "main"], "a": 1, "w": "Override paintComponent on a JPanel."}, {"q": "To redraw after changing the shape list, call\u2026", "o": ["paintComponent(g)", "repaint()", "update()", "draw()"], "a": 1, "w": "Swing then calls paintComponent."}, {"q": "Swing components should be created on\u2026", "o": ["any thread", "the main thread", "the Event Dispatch Thread", "a worker thread"], "a": 2, "w": "Use SwingUtilities.invokeLater."}]</script></div>
+</div></section>
+<section class="slide " data-title="Summary" aria-label="Summary" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Summary</p><h2>Summary</h2><ul class="sumlist"><li>Swing builds on AWT with lightweight J-components; applets are obsolete.</li><li>Containers hold components; layout managers position them.</li><li>Listeners make the GUI event-driven.</li><li>Draw in paintComponent and trigger it with repaint().</li><li>Create and update Swing on the Event Dispatch Thread.</li></ul><div class="nextcard"><a class="btn pri" href="10-animation.html">Next: Lab 10 · Animation</a><a class="btn" href="../index.html">All labs</a></div>
+</div></section>
+</main>
+<footer class="deck-foot">
+  <button type="button" class="btn" id="prev">Previous</button>
+  <span class="counter" id="counter">1 / 38</span>
+  <button type="button" class="btn pri" id="next">Next</button>
+</footer>
+<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
+<noscript><p style="padding:20px">This lab needs JavaScript for the slides and the interactive examples.</p></noscript>
+<script src="../js/core.js"></script>
+<script src="../js/art.js"></script>
+<script src="../js/java.js"></script>
+<script src="../js/tracer.js"></script>
+<script src="../js/figs.js"></script>
+<script src="../js/lab-figs.js"></script>
+<script src="../js/demos-basics.js"></script>
+<script src="../js/demos-oop.js"></script>
+<script src="../js/demos-adv.js"></script>
+<script src="../js/quiz.js"></script>
+<script src="../js/page.js"></script>
+<script src="../js/lab.js"></script>
+<script>window.OOP_TOPIC = {"id": 9, "prev": "08-synchronization-deadlock.html", "next": "10-animation.html", "nextLabel": "Next lab"};</script>
+<script>mountPage();</script>
+<script src="../js/slides.js"></script>
+<script src="../js/annotate.js"></script>
+<script src="../js/analytics.js"
+        data-endpoint="https://analytics-proxy.ayansarkar1829.workers.dev"
+        data-project="CSE-202 OOP Lab"></script>
+<script src="../js/course-events.js"></script>
+</body>
+</html>
