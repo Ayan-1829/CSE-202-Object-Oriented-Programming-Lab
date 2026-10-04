@@ -44,6 +44,8 @@
 .os-tab{font:700 20px var(--f-head);padding:8px 20px;border:2px solid var(--line);border-radius:999px;background:var(--sheet);color:var(--ink);cursor:pointer}
 .os-tab.on{background:var(--ac);border-color:var(--ac);color:#fff}
 .btn.yt{background:#CC0000;border-color:#CC0000;color:#fff}
+.os-dl{display:flex;flex-wrap:wrap;gap:8px;margin:-4px 0 14px}
+.os-dl .btn{font-size:18px}
 .os-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:22px;align-items:start}
 @media (max-width:900px){.os-grid{grid-template-columns:1fr}}
 .slide .os-steps{margin:0;padding-left:1.4em}

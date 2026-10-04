@@ -185,6 +185,7 @@ DEMOS['lab10-balls'] = (root) => {
    Each guide has one tab per operating system. Every step pairs an instruction with a sketch of
    the window you will see; the highlighted control is the one to click. */
 (function () {
+  const NBI = 'https://installers.friendsofapachenetbeans.org/';
   const YT = (q) => 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q);
   const B = (t) => '<span class="mk-btn">' + t + '</span>';
   const GO = (t) => '<span class="mk-btn go">' + t + '</span>';
@@ -196,8 +197,8 @@ DEMOS['lab10-balls'] = (root) => {
 
   const GUIDES = {
     jdk: {
-      win: { label: 'Windows', video: YT('install java jdk 21 windows 11 adoptium temurin'), steps: [
-        ['Open <b>adoptium.net</b> in your browser. It detects Windows: click the big download button to get the <b>.msi</b> installer.',
+      win: { label: 'Windows', video: YT('install java jdk 21 windows 11 adoptium temurin'), dl: [['JDK 21 · Windows x64 (.msi)', 'https://api.adoptium.net/v3/installer/latest/21/ga/windows/x64/jdk/hotspot/normal/eclipse'], ['All versions', 'https://adoptium.net/temurin/releases/?os=windows&package=jdk']], steps: [
+        ['Click the <b>Download</b> button above, or open <b>adoptium.net</b> and click the big download button, to get the <b>.msi</b> installer.',
           { k: 'browser', url: 'adoptium.net', body: '<h4>Eclipse Temurin™</h4><p>Latest LTS Release</p>' + GO('⬇ Latest LTS Release — JDK 21, Windows x64') + '<p class="mk-dim">Other platforms and versions</p>' }],
         ['Open the downloaded file from the browser’s download list. The setup wizard starts: click <b>Next</b>.',
           { k: 'wiz', title: 'Eclipse Temurin JDK Setup', body: '<h4>Welcome to the Eclipse Temurin JDK Setup Wizard</h4><p>The wizard will install the JDK on your computer.</p>' + FOOT(B('Back'), GO('Next'), B('Cancel')) }],
@@ -209,8 +210,8 @@ DEMOS['lab10-balls'] = (root) => {
           { k: 'wiz', title: 'Eclipse Temurin JDK Setup', body: '<h4>Completed the Eclipse Temurin JDK Setup Wizard</h4><div class="mk-bar"><i></i></div>' + FOOT(B('Back'), GO('Finish'), B('Cancel')) }],
         ['Optional check: press <kbd>Win</kbd>, type <b>cmd</b>, open Command Prompt and type <code>java -version</code>. A version number means it worked.',
           TERM(VERIFY, VOUT)]] },
-      mac: { label: 'macOS', video: YT('install java jdk 21 mac os temurin pkg'), steps: [
-        ['Open <b>adoptium.net</b>. Choose the <b>.pkg</b> for your Mac: <b>aarch64</b> for Apple M1–M4, <b>x64</b> for Intel (Apple menu → About This Mac).',
+      mac: { label: 'macOS', video: YT('install java jdk 21 mac os temurin pkg'), dl: [['JDK 21 · Apple M-series (.pkg)', 'https://api.adoptium.net/v3/installer/latest/21/ga/mac/aarch64/jdk/hotspot/normal/eclipse'], ['JDK 21 · Intel Mac (.pkg)', 'https://api.adoptium.net/v3/installer/latest/21/ga/mac/x64/jdk/hotspot/normal/eclipse']], steps: [
+        ['Click the matching <b>Download</b> button above (or get it from <b>adoptium.net</b>): <b>aarch64</b> for Apple M1–M4, <b>x64</b> for Intel (Apple menu → About This Mac).',
           { k: 'browser', url: 'adoptium.net/temurin/releases', body: '<h4>Temurin 21 · macOS</h4>' + GO('⬇ aarch64 · JDK · .pkg') + ' ' + B('⬇ x64 · JDK · .pkg') }],
         ['Open <b>Downloads</b> in Finder and double-click the <b>.pkg</b> file.',
           { k: 'finder', title: 'Downloads', body: '<div class="mk-file go">📦 OpenJDK21U-jdk_aarch64_mac.pkg</div><div class="mk-file">📄 notes.pdf</div>' }],
@@ -222,42 +223,42 @@ DEMOS['lab10-balls'] = (root) => {
           { k: 'wiz', title: 'Install Eclipse Temurin', body: '<h4>The installation was completed successfully.</h4><p class="mk-ok">✔ The software was installed.</p>' + FOOT(B('Go Back'), GO('Close')) }],
         ['Optional check: open <b>Terminal</b> (Spotlight: <kbd>⌘</kbd> <kbd>Space</kbd>, type Terminal) and type <code>java -version</code>.',
           TERM(VERIFY, VOUT)]] },
-      linux: { label: 'Linux', video: YT('install java jdk 21 ubuntu'), steps: [
+      linux: { label: 'Linux', video: YT('install java jdk 21 ubuntu'), dl: [['JDK 21 · Ubuntu/Debian x64 (.deb)', 'https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.deb'], ['JDK 21 · Fedora x64 (.rpm)', 'https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.rpm']], steps: [
         ['Ubuntu / Mint: open <b>App Center</b> (or <i>Software Manager</i> on Mint) and search for <b>openjdk</b>.',
           { k: 'store', title: 'App Center', body: '<div class="mk-search">🔍 openjdk</div><div class="mk-file go">☕ OpenJDK 21 Development Kit (openjdk-21-jdk)</div><div class="mk-file">☕ OpenJDK 21 Runtime (headless)</div>' }],
         ['Pick the <b>Development Kit</b> (JDK), not just the runtime, and click <b>Install</b>. Enter your password when asked.',
           { k: 'store', title: 'App Center', body: '<h4>OpenJDK 21 Development Kit</h4><p>Java compiler, tools and runtime.</p>' + GO('Install') }],
-        ['No JDK in your store? Download the <b>x64 Debian Package</b> (.deb) from <b>oracle.com/java</b> → Linux, then double-click it to open it in App Center and click Install.',
+        ['No JDK in your store? Click the <b>.deb</b> (or <b>.rpm</b>) download button above, double-click the file to open it in App Center and click Install.',
           { k: 'browser', url: 'oracle.com/java/technologies/downloads', body: '<h4>JDK 21 · Linux</h4>' + B('x64 Compressed Archive') + ' ' + GO('⬇ x64 Debian Package') + ' ' + B('x64 RPM Package') }],
         ['Optional check: open a <b>Terminal</b> (<kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>) and type <code>java -version</code>.',
           TERM(VERIFY, 'openjdk version "21.0.4" 2024-07-16\nOpenJDK Runtime Environment (build 21.0.4+7-Ubuntu)')]] },
     },
     nb: {
-      win: { label: 'Windows', video: YT('install apache netbeans windows 11'), steps: [
-        ['Open <b>netbeans.apache.org</b> → <b>Download</b>. Under the latest release, click the Windows installer <b>…-bin-windows-x64.exe</b>.',
-          { k: 'browser', url: 'netbeans.apache.org/download', body: '<h4>Apache NetBeans 2x</h4><p>Installers</p>' + GO('⬇ Apache-NetBeans-2x-bin-windows-x64.exe') + ' ' + B('…-macosx.pkg') + ' ' + B('…_all.deb') }],
+      win: { label: 'Windows', video: YT('install apache netbeans windows 11'), dl: [['NetBeans 31 · Windows (.exe)', 'https://github.com/Friends-of-Apache-NetBeans/netbeans-installers/releases/download/nb31/Apache-NetBeans-31.exe'], ['Latest release', NBI]], steps: [
+        ['Click the <b>Download</b> button above (or netbeans.apache.org → Download → <i>Installers</i>) to get <b>Apache-NetBeans-31.exe</b>.',
+          { k: 'browser', url: 'installers.friendsofapachenetbeans.org', body: '<h4>Apache NetBeans 31</h4><p>Installers</p>' + GO('⬇ Apache-NetBeans-31.exe') + ' ' + B('…-arm64.pkg') + ' ' + B('…_amd64.deb') }],
         ['Run it. The installer looks for your JDK first; when the welcome page appears, click <b>Next</b>.',
           { k: 'wiz', title: 'Apache NetBeans IDE Installer', body: '<h4>Welcome to the Apache NetBeans IDE installer</h4><p>Base IDE · Java SE · Java EE · HTML5/JavaScript · PHP</p>' + FOOT(GO('Next'), B('Cancel')) }],
         ['Tick <b>I accept the terms in the license agreement</b>, then Next.',
           { k: 'wiz', title: 'Apache NetBeans IDE Installer', body: '<h4>License Agreement</h4><div class="mk-text">Apache License, Version 2.0 …</div><div class="mk-chk go"><i></i>I accept the terms in the license agreement</div>' + FOOT(B('Back'), GO('Next'), B('Cancel')) }],
         ['Keep the folders. Check that the <b>JDK</b> box shows the JDK you installed, then Next.',
-          { k: 'wiz', title: 'Apache NetBeans IDE Installer', body: '<h4>Apache NetBeans IDE Installation</h4>' + FLD('Install to', 'C:\\Program Files\\NetBeans-2x') + '<div class="mk-fld go"><span>JDK for the IDE</span><b>C:\\Program Files\\Eclipse Adoptium\\jdk-21</b></div>' + FOOT(B('Back'), GO('Next'), B('Cancel')) }],
+          { k: 'wiz', title: 'Apache NetBeans IDE Installer', body: '<h4>Apache NetBeans IDE Installation</h4>' + FLD('Install to', 'C:\\Program Files\\NetBeans-31') + '<div class="mk-fld go"><span>JDK for the IDE</span><b>C:\\Program Files\\Eclipse Adoptium\\jdk-21</b></div>' + FOOT(B('Back'), GO('Next'), B('Cancel')) }],
         ['Click <b>Install</b> and wait, then <b>Finish</b>. Start it from the Start menu: <b>Apache NetBeans</b>.',
           { k: 'wiz', title: 'Apache NetBeans IDE Installer', body: '<h4>Summary</h4>' + CHK('Check for updates', 1) + '<p>Total installation size: 700 MB</p>' + FOOT(B('Back'), GO('Install'), B('Cancel')) }]] },
-      mac: { label: 'macOS', video: YT('install apache netbeans mac os'), steps: [
-        ['Open <b>netbeans.apache.org</b> → <b>Download</b> and click the macOS installer <b>…-macosx.pkg</b>.',
-          { k: 'browser', url: 'netbeans.apache.org/download', body: '<h4>Apache NetBeans 2x</h4><p>Installers</p>' + B('…-windows-x64.exe') + ' ' + GO('⬇ Apache-NetBeans-2x-macosx.pkg') + ' ' + B('…_all.deb') }],
+      mac: { label: 'macOS', video: YT('install apache netbeans mac os'), dl: [['NetBeans 31 · Apple M-series (.pkg)', 'https://github.com/Friends-of-Apache-NetBeans/netbeans-installers/releases/download/nb31/Apache-NetBeans-31-arm64.pkg'], ['NetBeans 31 · Intel Mac (.pkg)', 'https://github.com/Friends-of-Apache-NetBeans/netbeans-installers/releases/download/nb31/Apache-NetBeans-31-x86_64.pkg']], steps: [
+        ['Click the <b>Download</b> button above for your Mac: <b>arm64</b> for Apple M-series, <b>x86_64</b> for Intel.',
+          { k: 'browser', url: 'installers.friendsofapachenetbeans.org', body: '<h4>Apache NetBeans 31</h4><p>Installers</p>' + B('…31.exe') + ' ' + GO('⬇ Apache-NetBeans-31-arm64.pkg') + ' ' + B('…_amd64.deb') }],
         ['Double-click the <b>.pkg</b> in Downloads. Click <b>Continue</b>, then <b>Agree</b> to the licence.',
           { k: 'wiz', title: 'Install Apache NetBeans', body: '<h4>Software License Agreement</h4><p>To continue installing the software you must agree to the terms.</p>' + FOOT(B('Disagree'), GO('Agree')) }],
         ['Click <b>Install</b> and enter your password. Close the installer when it says the installation was successful.',
           { k: 'wiz', title: 'Install Apache NetBeans', body: '<h4>Standard Install on “Macintosh HD”</h4>' + FOOT(B('Go Back'), GO('Install')) }],
         ['Open <b>Applications → Apache NetBeans</b>. If macOS blocks it, right-click the app → <b>Open</b> → Open.',
           { k: 'finder', title: 'Applications', body: '<div class="mk-file go">🟧 Apache NetBeans.app</div><div class="mk-file">🧭 Safari.app</div>' }]] },
-      linux: { label: 'Linux', video: YT('install apache netbeans ubuntu'), steps: [
+      linux: { label: 'Linux', video: YT('install apache netbeans ubuntu'), dl: [['NetBeans 31 · Ubuntu/Debian (.deb)', 'https://github.com/Friends-of-Apache-NetBeans/netbeans-installers/releases/download/nb31/apache-netbeans_31-1_amd64.deb'], ['NetBeans 31 · Fedora (.rpm)', 'https://github.com/Friends-of-Apache-NetBeans/netbeans-installers/releases/download/nb31/apache-netbeans-31-0.x86_64.rpm']], steps: [
         ['Open <b>App Center</b>, search <b>netbeans</b>, choose <b>Apache NetBeans</b> and click <b>Install</b>.',
           { k: 'store', title: 'App Center', body: '<div class="mk-search">🔍 netbeans</div><div class="mk-file go">🟧 Apache NetBeans — IDE for Java</div>' + GO('Install') }],
-        ['Or download the <b>…_all.deb</b> from <b>netbeans.apache.org</b> → Download, double-click it and click Install.',
-          { k: 'browser', url: 'netbeans.apache.org/download', body: '<h4>Apache NetBeans 2x</h4><p>Installers</p>' + B('…-windows-x64.exe') + ' ' + B('…-macosx.pkg') + ' ' + GO('⬇ apache-netbeans_2x-1_all.deb') }],
+        ['Or click the <b>.deb</b> download button above, double-click the file and click Install.',
+          { k: 'browser', url: 'installers.friendsofapachenetbeans.org', body: '<h4>Apache NetBeans 31</h4><p>Installers</p>' + B('…31.exe') + ' ' + B('…-arm64.pkg') + ' ' + GO('⬇ apache-netbeans_31-1_amd64.deb') }],
         ['Start it from the app menu: <b>Apache NetBeans</b>. The first start takes a minute.',
           { k: 'finder', title: 'Show Apps', body: '<div class="mk-file go">🟧 Apache NetBeans</div><div class="mk-file">📁 Files</div><div class="mk-file">⌨ Terminal</div>' }]] },
     },
@@ -286,6 +287,7 @@ DEMOS['lab10-balls'] = (root) => {
     let os = keys.includes(guess()) ? guess() : keys[0], step = 0;
     const tabs = h('div', { class: 'os-tabs', role: 'tablist' });
     const yt = h('a', { class: 'btn sm yt', target: '_blank', rel: 'noopener' }, '▶ Watch on YouTube');
+    const dls = h('div', { class: 'os-dl' });
     const list = h('ol', { class: 'os-steps' });
     const shot = h('div', { class: 'mk-win' });
     const prev = h('button', { type: 'button', class: 'btn sm', onclick: () => go(step - 1) }, '← Previous step');
@@ -293,13 +295,16 @@ DEMOS['lab10-balls'] = (root) => {
     const count = h('span', { class: 'os-count' });
     const btns = keys.map((k) => h('button', { type: 'button', role: 'tab', class: 'os-tab', onclick: () => { os = k; go(0); } }, g[k].label));
     if (keys.length > 1) btns.forEach((b) => tabs.append(b));
-    root.append(h('div', { class: 'os-bar' }, tabs, yt),
+    root.append(h('div', { class: 'os-bar' }, tabs, yt), dls,
       h('div', { class: 'os-grid' }, h('div', null, list, h('div', { class: 'os-nav' }, prev, count, next)), shot));
     function go(i) {
       const st = g[os].steps;
       step = Math.max(0, Math.min(st.length - 1, i));
       btns.forEach((b, k) => { b.classList.toggle('on', keys[k] === os); b.setAttribute('aria-selected', String(keys[k] === os)); });
       yt.href = g[os].video;
+      dls.innerHTML = '';
+      dls.hidden = !g[os].dl;
+      (g[os].dl || []).forEach(([t, u], k) => dls.append(h('a', { class: 'btn sm' + (k === 0 ? ' pri' : ''), href: u, target: '_blank', rel: 'noopener' }, '⬇ ' + t)));
       list.innerHTML = '';
       st.forEach(([txt], k) => { const li = h('li', { class: k === step ? 'on' : k < step ? 'done' : '' }); li.innerHTML = txt; li.onclick = () => go(k); list.append(li); });
       const w = st[step][1];
