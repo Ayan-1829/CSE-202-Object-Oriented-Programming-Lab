@@ -234,12 +234,16 @@ DEMOS['lab10-balls'] = (root) => {
           'Start <b>Apache NetBeans</b> from the app menu. The first start takes a minute.'] },
     },
     proj: {
-      all: { label: 'Any OS', video: YT('netbeans create first java project hello world'),
-        steps: ['<b>File → New Project…</b> → <i>Java with Ant</i> → <i>Java Application</i> → <b>Next</b>.',
-          'Project name <b>Lab1</b>. Tick <b>Create Main Class</b> and type <code>Lab1Demo</code>. Click <b>Finish</b>.',
-          'Type your code inside <code>main</code>. The class name must match the file name <b>Lab1Demo.java</b>.',
-          'Click <b>▶ Run Project</b> (or press <kbd>F6</kbd>). The result appears in the <b>Output</b> window at the bottom.',
-          'For later labs with several classes: right-click the package → <b>New → Java Class…</b>, one file per class.'] },
+      all: { label: 'Any OS', video: YT('netbeans create first java project maven hello world'),
+        dl: [['NetBeans Java Quick Start (official tutorial)', 'https://netbeans.apache.org/tutorial/main/kb/docs/java/quickstart/']],
+        credit: 'Screenshots: Apache NetBeans Java Quick Start tutorial (Apache License 2.0), marks added.',
+        steps: [
+          ['<b>File → New Project…</b> Choose <b>Java with Maven</b> → <b>Java Application</b>, then <b>Next</b>.', '../img/setup/nbp-1.jpg'],
+          ['Type the project name, e.g. <b>Lab1</b>, keep the location, and click <b>Finish</b>.', '../img/setup/nbp-2.jpg'],
+          ['Add a class: in <b>Source Packages</b>, right-click your package → <b>New → Java Class…</b>', '../img/setup/nbp-3.jpg'],
+          ['Class name <code>Lab1Demo</code> → <b>Finish</b>. The file name always matches the class name.', '../img/setup/nbp-4.jpg'],
+          ['Write <code>public static void main(String[] args)</code> and put your code inside it.', '../img/setup/nbp-5.jpg'],
+          ['Run with the green <b>▶ Run Project</b> button or <kbd>F6</kbd> (one file: <kbd>Shift</kbd>+<kbd>F6</kbd>). Your output and <b>BUILD SUCCESS</b> appear in the <b>Output</b> window.', '../img/setup/nbp-6.jpg']] },
     },
   };
 
@@ -263,13 +267,23 @@ DEMOS['lab10-balls'] = (root) => {
       yt.href = o.video;
       dls.innerHTML = ''; dls.hidden = !o.dl;
       (o.dl || []).forEach(([t, u], k) => dls.append(h('a', { class: 'btn sm' + (k === 0 ? ' pri' : ''), href: u, target: '_blank', rel: 'noopener' }, '⬇ ' + t)));
-      body.classList.toggle('one', !o.shot);
-      body.innerHTML = '<ol class="os-steps">' + o.steps.map((t) => '<li>' + t + '</li>').join('') + '</ol>'
-        + (o.shot ? '<figure class="os-shot"><button type="button" class="os-zoom" title="Click to enlarge"><img src="' + o.shot[0] + '" alt="Screenshot of the official download page with the steps marked" loading="lazy"></button><figcaption>' + o.shot[1] + ' · <i>click to enlarge</i></figcaption></figure>' : '');
+      const stepper = Array.isArray(o.steps[0]);
+      body.classList.toggle('one', !o.shot && !stepper);
+      const shotHtml = (src, cap) => '<figure class="os-shot"><button type="button" class="os-zoom" title="Click to enlarge"><img src="' + src + '" alt="Screenshot with the step marked" loading="lazy"></button><figcaption>' + cap + ' · <i>click to enlarge</i></figcaption></figure>';
+      if (stepper) {
+        const cur = Math.min(o.cur || 0, o.steps.length - 1);
+        body.innerHTML = '<div><ol class="os-steps pick">' + o.steps.map(([t], k) => '<li class="' + (k === cur ? 'on' : '') + '" data-k="' + k + '">' + t + '</li>').join('') + '</ol>'
+          + '<div class="os-nav"><button type="button" class="btn sm" data-d="-1"' + (cur ? '' : ' disabled') + '>← Previous step</button><span class="os-count">Step ' + (cur + 1) + ' of ' + o.steps.length + '</span><button type="button" class="btn pri sm" data-d="1"' + (cur < o.steps.length - 1 ? '' : ' disabled') + '>Next step →</button></div></div>'
+          + shotHtml(o.steps[cur][1], 'Step ' + (cur + 1) + (o.credit ? '. ' + o.credit : ''));
+        body.querySelectorAll('.os-steps li').forEach((li) => { li.onclick = () => { o.cur = +li.dataset.k; show(); }; });
+        body.querySelectorAll('.os-nav button').forEach((b) => { b.onclick = () => { o.cur = cur + +b.dataset.d; show(); }; });
+      } else {
+        body.innerHTML = '<ol class="os-steps">' + o.steps.map((t) => '<li>' + t + '</li>').join('') + '</ol>' + (o.shot ? shotHtml(o.shot[0], o.shot[1]) : '');
+      }
       const z = body.querySelector('.os-zoom');
       if (z) z.onclick = () => {
         const ov = h('div', { class: 'os-lightbox', role: 'dialog', 'aria-label': 'Enlarged screenshot', tabindex: '-1' });
-        ov.innerHTML = '<img src="' + o.shot[0] + '" alt="">';
+        ov.innerHTML = '<img src="' + z.querySelector('img').getAttribute('src') + '" alt="">';
         const close = (e) => { if (e && e.type === 'keydown' && e.key !== 'Escape') return; ov.remove(); document.removeEventListener('keydown', close, true); };
         ov.onclick = () => close();
         document.addEventListener('keydown', close, true);

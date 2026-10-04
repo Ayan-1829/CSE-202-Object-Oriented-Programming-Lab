@@ -57,7 +57,7 @@
 <div><h3>Before you start</h3><ul class=""><li>Lab 1: program structure, types, decisions and loops</li><li>Compiling and running Java files from an IDE</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 2 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=11">Program design</a></li><li><a href="#s=13">Code walkthrough</a></li><li><a href="#s=24">Expected output</a></li><li><a href="#s=25">Interactive demos</a></li><li><a href="#s=27">In-lab tasks</a></li><li><a href="#s=31">Lab report exercises</a></li><li><a href="#s=34">Viva questions and quiz</a></li></ol>
+<p class="kicker">Lab 2 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=11">Program design</a></li><li><a href="#s=13">Code walkthrough</a></li><li><a href="#s=23">Step-through traces: stack, heap and output</a></li><li><a href="#s=25">Expected output</a></li><li><a href="#s=26">Interactive demos</a></li><li><a href="#s=29">In-lab tasks</a></li><li><a href="#s=33">Lab report exercises</a></li><li><a href="#s=36">Viva questions and quiz</a></li></ol>
 </div></section>
 <section class="slide " data-title="Class and object" aria-label="Class and object" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Theory 1 of 5</p><h2>Class and object</h2><figure class="fig" data-fig="lab2-car-objects"></figure><ul class=""><li>A <b>class</b> is a blueprint: it lists the data (fields) and actions (methods) every object will have.</li><li>An <b>object</b> is a runtime instance made with <code>new</code>; each one has its own copy of the fields.</li></ul>
@@ -216,6 +216,9 @@ System.out.println(&quot;car1 and car3 refer to the same object.&quot;);
 // 6. Static Member
 System.out.println(&quot;\n=== Static Member ===&quot;);
 System.out.println(&quot;Total Car objects ever created: &quot; + Car.getCount());</pre><ul class="walk-notes"><li><code>car3 = car1</code> copies the reference, not the car.</li><li>The count is still 2: no object was created.</li></ul>
+</div></section>
+<section class="slide " data-title="Trace: objects, references and a static counter" aria-label="Trace: objects, references and a static counter" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code</p><h2>Trace: objects, references and a static counter</h2><p class="muted">See the objects on the heap, the references on the stack, and the one shared <code>count</code>.</p><div data-trace="lab2-car"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 2 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Car.java">public class Car {
@@ -389,10 +392,13 @@ car1 and car3 refer to the same object.
 Total Car objects ever created: 2</pre></div><p class="note-line">car3 = car1 creates no object, so the count stays 2 and both variables report speed 20.</p>
 </div></section>
 <section class="slide " data-title="Create objects and follow the references" aria-label="Create objects and follow the references" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Interactive 1 of 2</p><h2>Create objects and follow the references</h2><div data-demo="objects"></div>
+<p class="kicker">Interactive 1 of 3</p><h2>Create objects and follow the references</h2><div data-demo="objects"></div>
+</div></section>
+<section class="slide " data-title="Who can see a private field?" aria-label="Who can see a private field?" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Interactive 2 of 3</p><h2>Who can see a private field?</h2><div data-demo="access"></div>
 </div></section>
 <section class="slide " data-title="What can static code use?" aria-label="What can static code use?" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Interactive 2 of 2</p><h2>What can static code use?</h2><div data-demo="static-rules"></div>
+<p class="kicker">Interactive 3 of 3</p><h2>What can static code use?</h2><div data-demo="static-rules"></div>
 </div></section>
 <section class="slide " data-title="Task 1: Extend the Car class" aria-label="Task 1: Extend the Car class" tabindex="-1"><div class="slide-inner">
 <p class="kicker">In-lab task 1 of 3</p><h2>Task 1: Extend the Car class</h2><div class="ex task"><div class="qq">Add an engine to the car: it may only accelerate while the engine is on.</div>
@@ -435,7 +441,7 @@ Total Car objects ever created: 2</pre></div><p class="note-line">car3 = car1 cr
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 37</span>
+  <span class="counter" id="counter">1 / 39</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
@@ -444,6 +450,8 @@ Total Car objects ever created: 2</pre></div><p class="note-line">car3 = car1 cr
 <script src="../js/art.js"></script>
 <script src="../js/java.js"></script>
 <script src="../js/tracer.js"></script>
+<script src="../js/traces.js"></script>
+<script src="../js/lab-traces.js"></script>
 <script src="../js/figs.js"></script>
 <script src="../js/lab-figs.js"></script>
 <script src="../js/demos-basics.js"></script>

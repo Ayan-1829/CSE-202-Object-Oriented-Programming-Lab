@@ -1,56 +1,73 @@
+<div align="center">
+
+<img src="img/logo.svg" alt="CSE 202 logo" height="76">
+
 # CSE 202 · Object Oriented Programming Lab
 
-Interactive slide decks for the ten Java lab sessions of the CSE 202 lab manual.
+**Interactive slide decks for the ten Java lab sessions of the CSE 202 lab manual.**
 
-### 🌐 Live site: **[https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/)**
+<a href="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"><img alt="Live site: open" src="https://img.shields.io/badge/Live_site-open-E07A1F?style=for-the-badge&logo=githubpages&logoColor=white"></a>
+<img alt="Labs: 10" src="https://img.shields.io/badge/Labs-10-555555?style=for-the-badge">
+<img alt="Slides: 385" src="https://img.shields.io/badge/Slides-385-555555?style=for-the-badge">
+<img alt="Build step: none" src="https://img.shields.io/badge/Build_step-none-555555?style=for-the-badge&logo=html5&logoColor=white">
 
-Also on the site: [CSE 201 theory notes](https://ayan-1829.github.io/CSE-201-Object-Oriented-Programming/)
+### [🌐 Open the live site →](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/)
 
-## What’s inside
+</div>
 
-- Java (JDK 25 from the official oracle.com/java site) and Apache NetBeans setup for Windows, macOS and Linux: direct download links, screenshots marked step by step, and video guides
-- Every lab program explained in small code sections, followed by the complete source with Copy and Download
-- Expected output in a “Run program” console, live demos, and browser versions of the Swing programs
-- In-lab tasks with hints, report exercises with saved checklists, viva questions and a quiz per lab
+<br>
 
-## Labs
+<p align="center"><img src="docs/screenshots/home.png" alt="All labs" width="32%"> <img src="docs/screenshots/slide.png" alt="Step-through trace" width="32%"> <img src="docs/screenshots/setup.png" alt="Java setup guide" width="32%"></p>
 
-10 decks, 367 slides. Each link opens the live deck.
+<p align="center"><a href="https://ayan-1829.github.io/CSE-201-Object-Oriented-Programming/">CSE 201 theory notes</a></p>
+
+## ✨ Highlights
+
+<table>
+<tr><td width="50%" valign="top">🧭&nbsp; Java (JDK 25 from the official oracle.com/java site) and Apache NetBeans setup for Windows, macOS and Linux: direct download links, screenshots marked step by step, and video guides</td><td width="50%" valign="top">🔍&nbsp; Every lab program explained in small code sections, plus <b>step-through traces</b> that show the call stack, heap objects and output line by line</td></tr>
+<tr><td width="50%" valign="top">🧩&nbsp; Expected output in a “Run program” console, live demos, and browser versions of the Swing programs</td><td width="50%" valign="top">📝&nbsp; In-lab tasks with hints, report exercises with saved checklists, viva questions and a quiz per lab</td></tr>
+</table>
+
+## 📚 Labs
+
+10 decks · 385 slides. Each title opens the live deck.
 
 | # | Lab | Slides |
-|---|---|---|
-| 1 | [Java Syntax, Data Types & Control Flow](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/01-java-basics.html) | 44 |
-| 2 | [Classes, Objects, Instances & Methods](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/02-classes-and-objects.html) | 37 |
-| 3 | [Constructors, Overloading & Reference Passing](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/03-constructors-overloading.html) | 40 |
-| 4 | [Inheritance, Polymorphism & Overriding](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/04-inheritance-polymorphism.html) | 35 |
-| 5 | [Abstract Classes & Interfaces](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/05-abstract-classes-interfaces.html) | 32 |
-| 6 | [Exception Handling & Custom Exceptions](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/06-exception-handling.html) | 36 |
-| 7 | [Thread Creation & Thread States](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/07-threads.html) | 33 |
-| 8 | [Synchronization, Deadlock & Resource Allocation](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/08-synchronization-deadlock.html) | 35 |
-| 9 | [GUI Components, Drawing, AWT & Swing](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/09-gui-swing.html) | 38 |
-| 10 | [Animation with Threads](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/10-animation.html) | 37 |
+|:--:|---|:--:|
+| **1** | [Java Syntax, Data Types & Control Flow](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/01-java-basics.html) | 48 |
+| **2** | [Classes, Objects, Instances & Methods](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/02-classes-and-objects.html) | 39 |
+| **3** | [Constructors, Overloading & Reference Passing](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/03-constructors-overloading.html) | 42 |
+| **4** | [Inheritance, Polymorphism & Overriding](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/04-inheritance-polymorphism.html) | 36 |
+| **5** | [Abstract Classes & Interfaces](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/05-abstract-classes-interfaces.html) | 34 |
+| **6** | [Exception Handling & Custom Exceptions](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/06-exception-handling.html) | 38 |
+| **7** | [Thread Creation & Thread States](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/07-threads.html) | 34 |
+| **8** | [Synchronization, Deadlock & Resource Allocation](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/08-synchronization-deadlock.html) | 36 |
+| **9** | [GUI Components, Drawing, AWT & Swing](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/09-gui-swing.html) | 40 |
+| **10** | [Animation with Threads](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/10-animation.html) | 38 |
 
-## Using the slides
+## ⌨️ Using the slides
 
 | Key | Action |
-|---|---|
-| <kbd>←</kbd> <kbd>→</kbd> / <kbd>Space</kbd> | previous / next slide |
-| <kbd>Home</kbd> / <kbd>End</kbd> | first / last slide |
-| <kbd>F</kbd> | full screen |
+|:--:|---|
+| <kbd>←</kbd> <kbd>→</kbd> · <kbd>Space</kbd> | previous / next slide |
+| <kbd>Home</kbd> · <kbd>End</kbd> | first / last slide |
+| <kbd>F</kbd> | full screen for teaching |
 | <kbd>M</kbd> | slide list |
-| ✏️ button | draw on the slide |
+| ✏️ | draw on any slide |
 
-The address bar shows `#s=N` for slide N, so you can link straight to any slide. Light and dark themes are built in.
+The address bar shows `#s=N`, so you can link straight to a slide. Light and dark themes follow your system, with a toggle in the header.
 
-## Run it locally
+## 🚀 Run it locally
 
-No build step or server is needed: download or clone the repository and open `index.html` in a browser.
+No build step, no server: clone the repository and open `index.html` in any modern browser.
 
 ```bash
 git clone https://github.com/Ayan-1829/CSE-202-Object-Oriented-Programming-Lab.git
+open CSE-202-Object-Oriented-Programming-Lab/index.html      # macOS · use start on Windows, xdg-open on Linux
 ```
 
-## Developer notes
+<details>
+<summary><b>🛠 Developer notes: folder layout and how the pages are built</b></summary>
 
 ```text
 Structure:
@@ -58,6 +75,7 @@ Structure:
   labs/*.html     10 lab decks (←/→, F full screen, M slide list)
   js/lab.js       code viewer, run console, saved checklists, Lab 1 setup guides, browser versions of the Swing programs
   img/setup/      screenshots of the official JDK and NetBeans download pages
+  js/lab-traces.js step-through traces of the lab programs (added to TRACES from js/traces.js)
   js/lab-figs.js  lab diagrams (added to the figure registry in js/figs.js)
   css/lab.css     lab-specific styles
   Shared engine copied from the CSE 201 site: css/style.css, js/core, java, figs, quiz, page, slides, annotate, demos-*, art
@@ -65,15 +83,17 @@ Structure:
 The pages are generated by tools/build.py (kept next to this folder, not published).
 ```
 
-## All courses
+</details>
 
-| Course | Live site | Repository |
-|---|---|---|
-| CSE 201 · Object Oriented Programming | [https://ayan-1829.github.io/CSE-201-Object-Oriented-Programming/](https://ayan-1829.github.io/CSE-201-Object-Oriented-Programming/) | [CSE-201-Object-Oriented-Programming](https://github.com/Ayan-1829/CSE-201-Object-Oriented-Programming) |
-| CSE 202 · Object Oriented Programming Lab (this one) | [https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/) | [CSE-202-Object-Oriented-Programming-Lab](https://github.com/Ayan-1829/CSE-202-Object-Oriented-Programming-Lab) |
-| CSE 203 · Digital Logic Design | [https://ayan-1829.github.io/CSE-203-Digital-Logic-Design/](https://ayan-1829.github.io/CSE-203-Digital-Logic-Design/) | [CSE-203-Digital-Logic-Design](https://github.com/Ayan-1829/CSE-203-Digital-Logic-Design) |
-| CSE 308 · Design Project I | [https://ayan-1829.github.io/CSE-308-Design-Project-I/](https://ayan-1829.github.io/CSE-308-Design-Project-I/) | [CSE-308-Design-Project-I](https://github.com/Ayan-1829/CSE-308-Design-Project-I) |
+## 🎓 All courses
+
+| | Course | Live site | Repository |
+|:--:|---|:--:|:--:|
+| <img src="https://raw.githubusercontent.com/Ayan-1829/CSE-201-Object-Oriented-Programming/main/img/logo-mark.svg" height="28"> | **CSE 201** · Object Oriented Programming | [Open](https://ayan-1829.github.io/CSE-201-Object-Oriented-Programming/) | [GitHub](https://github.com/Ayan-1829/CSE-201-Object-Oriented-Programming) |
+| <img src="https://raw.githubusercontent.com/Ayan-1829/CSE-202-Object-Oriented-Programming-Lab/main/img/logo-mark.svg" height="28"> | **CSE 202** · Object Oriented Programming Lab **(this one)** | [Open](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/) | [GitHub](https://github.com/Ayan-1829/CSE-202-Object-Oriented-Programming-Lab) |
+| <img src="https://raw.githubusercontent.com/Ayan-1829/CSE-203-Digital-Logic-Design/main/img/logo-mark.svg" height="28"> | **CSE 203** · Digital Logic Design | [Open](https://ayan-1829.github.io/CSE-203-Digital-Logic-Design/) | [GitHub](https://github.com/Ayan-1829/CSE-203-Digital-Logic-Design) |
+| <img src="https://raw.githubusercontent.com/Ayan-1829/CSE-308-Design-Project-I/main/img/logo-mark.svg" height="28"> | **CSE 308** · Design Project I | [Open](https://ayan-1829.github.io/CSE-308-Design-Project-I/) | [GitHub](https://github.com/Ayan-1829/CSE-308-Design-Project-I) |
 
 ---
 
-© Ayan Sarkar · Green University of Bangladesh
+<p align="center">Made by <b>Ayan Sarkar</b> · Green University of Bangladesh</p>

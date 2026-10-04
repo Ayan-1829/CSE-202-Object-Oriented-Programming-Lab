@@ -57,7 +57,7 @@
 <div><h3>Before you start</h3><ul class=""><li>Lab 2: classes, objects, constructors, encapsulation</li><li>Primitive vs reference types</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 3 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=12">Program design</a></li><li><a href="#s=14">Code walkthrough</a></li><li><a href="#s=28">Expected output</a></li><li><a href="#s=29">Interactive demos</a></li><li><a href="#s=30">In-lab tasks</a></li><li><a href="#s=34">Lab report exercises</a></li><li><a href="#s=37">Viva questions and quiz</a></li></ol>
+<p class="kicker">Lab 3 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=12">Program design</a></li><li><a href="#s=14">Code walkthrough</a></li><li><a href="#s=27">Step-through traces: stack, heap and output</a></li><li><a href="#s=30">Expected output</a></li><li><a href="#s=31">Interactive demos</a></li><li><a href="#s=32">In-lab tasks</a></li><li><a href="#s=36">Lab report exercises</a></li><li><a href="#s=39">Viva questions and quiz</a></li></ol>
 </div></section>
 <section class="slide " data-title="Default, parameterised and copy constructors" aria-label="Default, parameterised and copy constructors" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Theory 1 of 5</p><h2>Default, parameterised and copy constructors</h2><pre class="code small-code">public Rectangle()                         // default: 1 x 1, White
@@ -236,6 +236,12 @@ Rectangle original = new Rectangle(2.0, 3.0, &quot;Pink&quot;);
 System.out.println(&quot;Before method call: &quot; + original.describe());
 tryReassignReference(original);
 System.out.println(&quot;After method call : &quot; + original.describe());</pre><ul class="walk-notes"><li>Mutating through the reference: the change is visible.</li><li>Reassigning the reference: the caller still sees the Pink 2 × 3 rectangle.</li></ul>
+</div></section>
+<section class="slide " data-title="Trace: constructor chaining with this(…)" aria-label="Trace: constructor chaining with this(…)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: constructor chaining with this(…)</h2><p class="muted">The stack grows by one frame when one constructor hands over to another.</p><div data-trace="lab3-chain"></div>
+</div></section>
+<section class="slide " data-title="Trace: pass-by-value, three ways" aria-label="Trace: pass-by-value, three ways" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: pass-by-value, three ways</h2><p class="muted">Before stepping, predict which call changes something the caller can see.</p><div data-trace="lab3-pass"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 2 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Rectangle.java">public class Rectangle {
@@ -468,7 +474,7 @@ After method call : Rectangle[2.00 x 3.00, colour=Pink, area=6.00]</pre></div><p
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 40</span>
+  <span class="counter" id="counter">1 / 42</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
@@ -477,6 +483,8 @@ After method call : Rectangle[2.00 x 3.00, colour=Pink, area=6.00]</pre></div><p
 <script src="../js/art.js"></script>
 <script src="../js/java.js"></script>
 <script src="../js/tracer.js"></script>
+<script src="../js/traces.js"></script>
+<script src="../js/lab-traces.js"></script>
 <script src="../js/figs.js"></script>
 <script src="../js/lab-figs.js"></script>
 <script src="../js/demos-basics.js"></script>

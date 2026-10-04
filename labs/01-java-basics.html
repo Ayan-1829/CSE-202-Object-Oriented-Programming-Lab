@@ -57,7 +57,7 @@
 <div><h3>Before you start</h3><ul class=""><li>Create folders and save files</li><li>Basic idea of variables, expressions, input and output</li><li>JDK 11+ and an IDE installed</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 1 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Install Java and NetBeans</a></li><li><a href="#s=9">Theory recap</a></li><li><a href="#s=17">Program design</a></li><li><a href="#s=18">Code walkthrough</a></li><li><a href="#s=29">Expected output</a></li><li><a href="#s=30">Interactive demos</a></li><li><a href="#s=33">In-lab tasks</a></li><li><a href="#s=38">Lab report exercises</a></li><li><a href="#s=41">Viva questions and quiz</a></li></ol>
+<p class="kicker">Lab 1 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Install Java and NetBeans</a></li><li><a href="#s=9">Theory recap</a></li><li><a href="#s=17">Program design</a></li><li><a href="#s=18">Code walkthrough</a></li><li><a href="#s=28">Step-through traces: stack, heap and output</a></li><li><a href="#s=31">Expected output</a></li><li><a href="#s=32">Interactive demos</a></li><li><a href="#s=37">In-lab tasks</a></li><li><a href="#s=42">Lab report exercises</a></li><li><a href="#s=45">Viva questions and quiz</a></li></ol>
 </div></section>
 <section class="slide " data-title="Which Java do you need?" aria-label="Which Java do you need?" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Setting up · 1 of 4</p><h2>Which Java do you need?</h2><ul class="big-list"><li>A <b>JDK</b> (Java Development Kit): it contains the compiler <code>javac</code> and the runtime <code>java</code>. A JRE alone cannot compile.</li><li>Use the current <b>LTS</b> release, <b>JDK 25</b>, from the official Java site <code>oracle.com/java</code>. The manual needs JDK 11 or later.</li><li>Install the JDK <b>first</b>, then the IDE: this course uses <b>Apache NetBeans</b>.</li><li>On the next slides, pick your operating system: each slide has direct download links, the steps and a YouTube video link.</li></ul>
@@ -251,6 +251,12 @@ do {
 System.out.println(&quot;1&quot;);
 System.out.println(&quot;Steps to reach 1: &quot; + steps);</pre><ul class="walk-notes"><li>The body runs before the test, so 27 is printed first.</li><li>Even → halve; odd → 3n + 1; stop at 1.</li></ul>
 </div></section>
+<section class="slide " data-title="Trace: widening and narrowing" aria-label="Trace: widening and narrowing" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: widening and narrowing</h2><p class="muted">Watch each variable appear in main’s stack frame and see exactly what a cast keeps.</p><div data-trace="lab1-cast"></div>
+</div></section>
+<section class="slide " data-title="Trace: reversing the digits" aria-label="Trace: reversing the digits" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: reversing the digits</h2><p class="muted">Follow temp, digit and reversed through every pass of the while loop.</p><div data-trace="lab1-reverse"></div>
+</div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 1 file</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Lab1Demo.java">public class Lab1Demo {
     public static void main(String[] args) {
@@ -431,13 +437,19 @@ Sequence: 27 82 41 124 62 31 94 47 142 71 214 107 322 161 484 242 121 364 182 91
 Steps to reach 1: 111</pre></div><p class="note-line">Why is the next char after Z a “[”? Characters are numbers: 'Z' is 90, and 91 is '['.</p>
 </div></section>
 <section class="slide " data-title="Try widening and narrowing" aria-label="Try widening and narrowing" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Interactive 1 of 3</p><h2>Try widening and narrowing</h2><div data-demo="casting"></div>
+<p class="kicker">Interactive 1 of 5</p><h2>Try widening and narrowing</h2><div data-demo="casting"></div>
+</div></section>
+<section class="slide " data-title="Evaluate operators step by step" aria-label="Evaluate operators step by step" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Interactive 2 of 5</p><h2>Evaluate operators step by step</h2><div data-demo="operators"></div>
+</div></section>
+<section class="slide " data-title="Follow an if-else ladder" aria-label="Follow an if-else ladder" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Interactive 3 of 5</p><h2>Follow an if-else ladder</h2><div data-demo="grades"></div>
 </div></section>
 <section class="slide " data-title="Watch switch and fall-through" aria-label="Watch switch and fall-through" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Interactive 2 of 3</p><h2>Watch switch and fall-through</h2><div data-demo="switch"></div>
+<p class="kicker">Interactive 4 of 5</p><h2>Watch switch and fall-through</h2><div data-demo="switch"></div>
 </div></section>
 <section class="slide " data-title="Compare the three loops" aria-label="Compare the three loops" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Interactive 3 of 3</p><h2>Compare the three loops</h2><div data-demo="loops"></div>
+<p class="kicker">Interactive 5 of 5</p><h2>Compare the three loops</h2><div data-demo="loops"></div>
 </div></section>
 <section class="slide " data-title="Task 1: Temperature converter" aria-label="Task 1: Temperature converter" tabindex="-1"><div class="slide-inner">
 <p class="kicker">In-lab task 1 of 4</p><h2>Task 1: Temperature converter</h2><div class="ex task"><div class="qq">Read a temperature in Celsius and convert it to Fahrenheit, Kelvin and Rankine: F = C × 1.8 + 32, K = C + 273.15, R = F + 459.67.</div>
@@ -484,7 +496,7 @@ Steps to reach 1: 111</pre></div><p class="note-line">Why is the next char after
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 44</span>
+  <span class="counter" id="counter">1 / 48</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
@@ -493,6 +505,8 @@ Steps to reach 1: 111</pre></div><p class="note-line">Why is the next char after
 <script src="../js/art.js"></script>
 <script src="../js/java.js"></script>
 <script src="../js/tracer.js"></script>
+<script src="../js/traces.js"></script>
+<script src="../js/lab-traces.js"></script>
 <script src="../js/figs.js"></script>
 <script src="../js/lab-figs.js"></script>
 <script src="../js/demos-basics.js"></script>

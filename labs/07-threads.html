@@ -57,7 +57,7 @@
 <div><h3>Before you start</h3><ul class=""><li>Labs 4–6: inheritance, interfaces, overriding, try-catch with InterruptedException</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 7 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=10">Program design</a></li><li><a href="#s=12">Code walkthrough</a></li><li><a href="#s=20">Expected output</a></li><li><a href="#s=21">Interactive demos</a></li><li><a href="#s=23">In-lab tasks</a></li><li><a href="#s=27">Lab report exercises</a></li><li><a href="#s=30">Viva questions and quiz</a></li></ol>
+<p class="kicker">Lab 7 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=10">Program design</a></li><li><a href="#s=12">Code walkthrough</a></li><li><a href="#s=19">Step-through traces: stack, heap and output</a></li><li><a href="#s=21">Expected output</a></li><li><a href="#s=22">Interactive demos</a></li><li><a href="#s=24">In-lab tasks</a></li><li><a href="#s=28">Lab report exercises</a></li><li><a href="#s=31">Viva questions and quiz</a></li></ol>
 </div></section>
 <section class="slide " data-title="Process and thread" aria-label="Process and thread" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Theory 1 of 5</p><h2>Process and thread</h2><figure class="fig" data-fig="threads-mem"></figure><ul class=""><li>A process has its own memory; threads inside it share the heap but each has its own stack.</li><li>Shared objects are convenient — and dangerous when several threads modify them.</li></ul>
@@ -195,6 +195,9 @@ try {
     System.out.println(&quot;Main thread was interrupted.&quot;);
     Thread.currentThread().interrupt();
 }</pre><ul class="walk-notes"><li>main pauses until each thread has terminated.</li></ul>
+</div></section>
+<section class="slide " data-title="Trace: Thread objects and their states" aria-label="Trace: Thread objects and their states" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code</p><h2>Trace: Thread objects and their states</h2><p class="muted">The Thread objects and the shared Counter live on the heap; watch their state change from NEW to TERMINATED.</p><div data-trace="lab7-states"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 4 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Counter.java">public class Counter {
@@ -419,7 +422,7 @@ Main thread exiting.</pre></div><p class="note-line">One possible run: the order
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 33</span>
+  <span class="counter" id="counter">1 / 34</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
@@ -428,6 +431,8 @@ Main thread exiting.</pre></div><p class="note-line">One possible run: the order
 <script src="../js/art.js"></script>
 <script src="../js/java.js"></script>
 <script src="../js/tracer.js"></script>
+<script src="../js/traces.js"></script>
+<script src="../js/lab-traces.js"></script>
 <script src="../js/figs.js"></script>
 <script src="../js/lab-figs.js"></script>
 <script src="../js/demos-basics.js"></script>

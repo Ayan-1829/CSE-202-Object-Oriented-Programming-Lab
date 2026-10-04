@@ -57,7 +57,7 @@
 <div><h3>Before you start</h3><ul class=""><li>Labs 2–3: classes, constructors, encapsulation, constructor chaining, overloading</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 4 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=10">Program design</a></li><li><a href="#s=11">Code walkthrough</a></li><li><a href="#s=22">Expected output</a></li><li><a href="#s=23">Interactive demos</a></li><li><a href="#s=25">In-lab tasks</a></li><li><a href="#s=29">Lab report exercises</a></li><li><a href="#s=32">Viva questions and quiz</a></li></ol>
+<p class="kicker">Lab 4 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=10">Program design</a></li><li><a href="#s=11">Code walkthrough</a></li><li><a href="#s=21">Step-through traces: stack, heap and output</a></li><li><a href="#s=23">Expected output</a></li><li><a href="#s=24">Interactive demos</a></li><li><a href="#s=26">In-lab tasks</a></li><li><a href="#s=30">Lab report exercises</a></li><li><a href="#s=33">Viva questions and quiz</a></li></ol>
 </div></section>
 <section class="slide " data-title="Inheritance and extends" aria-label="Inheritance and extends" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Theory 1 of 5</p><h2>Inheritance and extends</h2><figure class="fig" data-fig="lab4-vehicle-uml"></figure><ul class=""><li><code>class Car extends Vehicle</code>: a Car <b>is a</b> Vehicle and inherits its accessible fields and methods.</li><li>Java classes have <b>single inheritance</b>, but chains are allowed: ElectricCar → Car → Vehicle.</li></ul>
@@ -229,6 +229,9 @@ Vehicle ref3 = new ElectricCar(&quot;Nissan Leaf&quot;, 2023, 4, 62.0, 70.0);
 ref1.display();
 ref2.display();
 ref3.display();</pre><ul class="walk-notes"><li>The reference type is Vehicle, but each object’s own display() runs.</li></ul>
+</div></section>
+<section class="slide " data-title="Trace: super(…) and dynamic dispatch" aria-label="Trace: super(…) and dynamic dispatch" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code</p><h2>Trace: super(…) and dynamic dispatch</h2><p class="muted">Watch super(…) build the inherited part, then one call site run two different display() methods.</p><div data-trace="lab4-dispatch"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 5 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Vehicle.java">public class Vehicle {
@@ -565,7 +568,7 @@ After testCar.brake(200):       Speed : 0 km/h</pre></div><p class="note-line">S
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 35</span>
+  <span class="counter" id="counter">1 / 36</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
@@ -574,6 +577,8 @@ After testCar.brake(200):       Speed : 0 km/h</pre></div><p class="note-line">S
 <script src="../js/art.js"></script>
 <script src="../js/java.js"></script>
 <script src="../js/tracer.js"></script>
+<script src="../js/traces.js"></script>
+<script src="../js/lab-traces.js"></script>
 <script src="../js/figs.js"></script>
 <script src="../js/lab-figs.js"></script>
 <script src="../js/demos-basics.js"></script>

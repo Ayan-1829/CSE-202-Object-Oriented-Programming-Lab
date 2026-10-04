@@ -57,7 +57,7 @@
 <div><h3>Before you start</h3><ul class=""><li>Lab 7: threads and Runnable</li><li>Lab 8: synchronized methods</li><li>Lab 9: JFrame, JPanel, paintComponent, ActionListener</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 10 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=12">Program design</a></li><li><a href="#s=14">Code walkthrough</a></li><li><a href="#s=25">Expected output</a></li><li><a href="#s=26">Interactive demos</a></li><li><a href="#s=27">In-lab tasks</a></li><li><a href="#s=31">Lab report exercises</a></li><li><a href="#s=34">Viva questions and quiz</a></li></ol>
+<p class="kicker">Lab 10 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=12">Program design</a></li><li><a href="#s=14">Code walkthrough</a></li><li><a href="#s=24">Step-through traces: stack, heap and output</a></li><li><a href="#s=26">Expected output</a></li><li><a href="#s=27">Interactive demos</a></li><li><a href="#s=28">In-lab tasks</a></li><li><a href="#s=32">Lab report exercises</a></li><li><a href="#s=35">Viva questions and quiz</a></li></ol>
 </div></section>
 <section class="slide " data-title="Frame-based animation" aria-label="Frame-based animation" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Theory 1 of 5</p><h2>Frame-based animation</h2><figure class="fig" data-fig="lab10-loop"></figure><ul class=""><li>Each frame: update the state, redraw, wait. Repeated quickly, the eye sees smooth motion.</li><li>About 16 ms per frame gives roughly 60 frames per second.</li></ul>
@@ -219,6 +219,9 @@ if (sleepTime &gt; 0) {
     animationThread.setDaemon(true);
     animationThread.start();
 }</pre><ul class="walk-notes"><li>A daemon thread does not keep the program alive after the window closes.</li></ul>
+</div></section>
+<section class="slide " data-title="Trace: one animation frame" aria-label="Trace: one animation frame" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code</p><h2>Trace: one animation frame</h2><p class="muted">Move, bounce off the wall, detect a collision and swap velocities.</p><div data-trace="lab10-ball"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 5 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Ball.java">import java.awt.BasicStroke;
@@ -563,7 +566,7 @@ public class Lab10Demo {
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 37</span>
+  <span class="counter" id="counter">1 / 38</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
@@ -572,6 +575,8 @@ public class Lab10Demo {
 <script src="../js/art.js"></script>
 <script src="../js/java.js"></script>
 <script src="../js/tracer.js"></script>
+<script src="../js/traces.js"></script>
+<script src="../js/lab-traces.js"></script>
 <script src="../js/figs.js"></script>
 <script src="../js/lab-figs.js"></script>
 <script src="../js/demos-basics.js"></script>
