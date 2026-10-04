@@ -38,56 +38,25 @@
 .integrity{margin-top:18px;padding:14px 18px;border:1px solid var(--line);border-left:4px solid var(--bad);border-radius:10px;background:var(--sheet)}
 .integrity h3{margin:0 0 6px;font-size:20px;color:var(--bad)}
 .integrity p{margin:0;font-size:19px}
-/* click-through installation guides */
+/* installation guides */
 .os-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:4px 0 14px}
 .os-tabs{display:flex;gap:6px}
 .os-tab{font:700 20px var(--f-head);padding:8px 20px;border:2px solid var(--line);border-radius:999px;background:var(--sheet);color:var(--ink);cursor:pointer}
 .os-tab.on{background:var(--ac);border-color:var(--ac);color:#fff}
 .btn.yt{background:#CC0000;border-color:#CC0000;color:#fff}
-.os-dl{display:flex;flex-wrap:wrap;gap:8px;margin:-4px 0 14px}
+.os-dl{display:flex;flex-wrap:wrap;gap:8px;margin:-4px 0 16px}
 .os-dl .btn{font-size:18px}
-.os-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:22px;align-items:start}
+.os-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:24px;align-items:start}
+.os-grid.one{grid-template-columns:1fr}
 @media (max-width:900px){.os-grid{grid-template-columns:1fr}}
 .slide .os-steps{margin:0;padding-left:1.4em}
-.slide .os-steps li{font-size:19px;line-height:1.4;text-align:left;hyphens:none;margin-bottom:6px;padding:6px 10px;border-radius:8px;cursor:pointer;color:var(--ink-3)}
-.slide .os-steps li.on{color:var(--ink);background:var(--ac-soft);font-size:21px}
-.slide .os-steps li.done{color:var(--ink-2)}
-.os-nav{display:flex;gap:10px;align-items:center;margin-top:10px}
-.os-count{font:600 16px var(--f-head);color:var(--ink-3);flex:1;text-align:center}
-.mk-win{border:1px solid #9AA3AD;border-radius:10px;overflow:hidden;background:#fff;color:#1d2228;box-shadow:0 8px 24px rgba(0,0,0,.12);font:500 18px system-ui,-apple-system,"Segoe UI",sans-serif;min-height:300px}
-.mk-title{display:flex;align-items:center;gap:6px;padding:7px 10px;background:linear-gradient(#F4F4F4,#DCDCDC);border-bottom:1px solid #BDBDBD;font-weight:600;font-size:15px}
-.mk-title i{width:11px;height:11px;border-radius:50%;background:#EF6B5E}.mk-title i:nth-child(2){background:#F4BF4F}.mk-title i:nth-child(3){background:#61C454}
-.mk-title span{margin-left:8px}
-.mk-url{padding:6px 12px;margin:8px 10px 0;background:#EEF1F4;border-radius:999px;font-size:15px;color:#444}
-.mk-body{padding:14px 16px;line-height:1.5}
-.mk-body h4{margin:0 0 6px;font-size:20px}.mk-body p{margin:0 0 10px;font-size:17px}
-.mk-dim{color:#777;font-size:14px!important;margin:6px 0 4px!important}
-.mk-ok{color:#15803D}
-.mk-btn{display:inline-block;margin:4px 6px 4px 0;padding:6px 14px;border:1px solid #9AA0A6;border-radius:6px;background:linear-gradient(#fff,#E8EAED);font-size:16px;white-space:nowrap}
-.mk-btn.go,.mk-file.go,.mk-chk.go,.mk-fld.go{outline:3px solid #E07A1F;outline-offset:2px;animation:mkpulse 1.4s ease-in-out infinite}
-.mk-btn.go{background:linear-gradient(#2F8FE0,#1A6FC0);border-color:#1A6FC0;color:#fff;font-weight:700}
-@keyframes mkpulse{50%{outline-color:rgba(224,122,31,.25)}}
-@media (prefers-reduced-motion:reduce){.mk-btn.go,.mk-file.go,.mk-chk.go,.mk-fld.go{animation:none}}
-.mk-foot{display:flex;justify-content:flex-end;gap:4px;margin-top:16px;padding-top:10px;border-top:1px solid #E1E3E6}
-.mk-chk{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:16px}
-.mk-chk i{width:16px;height:16px;border:1.5px solid #666;border-radius:3px;flex:none}
-.mk-chk.on i,.mk-chk.go i{background:#1A6FC0;border-color:#1A6FC0;box-shadow:inset 0 0 0 3px #fff}
-.mk-fld{display:flex;flex-direction:column;margin:6px 0 10px;font-size:14px;color:#555}
-.mk-fld b{font:500 15px ui-monospace,monospace;color:#111;border:1px solid #BFC4CA;border-radius:4px;padding:5px 8px;margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.mk-bar{height:14px;border-radius:7px;background:#E3E6EA;overflow:hidden;margin:12px 0}.mk-bar i{display:block;height:100%;width:100%;background:#2FA84F}
-.mk-file{padding:7px 10px;margin:4px 0;border-radius:6px;font-size:16px}
-.mk-file.sel{background:#DCE8F7}
-.mk-search{padding:7px 12px;border:1px solid #BFC4CA;border-radius:999px;margin-bottom:10px;font-size:16px}
-.mk-text{height:54px;border:1px solid #D0D4D8;padding:6px 8px;font-size:14px;color:#666;margin-bottom:8px}
-.mk-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.mk-tb{display:flex;gap:2px;padding-bottom:8px;border-bottom:1px solid #E1E3E6;margin-bottom:8px}
-.mk-tb .mk-btn{padding:3px 10px}
-.mk-code{margin:0;font:500 15px/1.5 ui-monospace,monospace;background:#FAFAF7;border:1px solid #E5E5E0;padding:8px 10px;white-space:pre;overflow:auto}
-.mk-out{margin-top:10px;border-top:2px solid #CCD;padding-top:4px;font:500 15px/1.5 ui-monospace,monospace;white-space:pre}
-.mk-sub{margin-left:40px;border:1px solid #CCD;border-radius:6px;padding:4px;box-shadow:0 4px 12px rgba(0,0,0,.12);display:inline-block;min-width:220px}
-.mk-win.k-term{background:#0F1A1C;color:#D8F3E8}
-.mk-win.k-term pre.mk-body{margin:0;font:500 16px/1.55 ui-monospace,monospace;white-space:pre-wrap;padding:14px 16px}
-.mk-p{color:#6BD49A}
+.slide .os-steps li{font-size:21px;line-height:1.45;margin-bottom:10px;text-align:left;hyphens:none}
+.os-shot{margin:0}
+.os-zoom{display:block;padding:0;border:0;background:none;cursor:zoom-in;width:100%}
+.os-lightbox{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.82);display:flex;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
+.os-lightbox img{max-width:100%;max-height:100%;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.os-shot img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.12)}
+.os-shot figcaption{margin-top:8px;font-size:16px;color:var(--ink-3)}
 /* browser versions of the Swing programs */
 .swing-frame{border:1px solid #9AA3AD;border-radius:10px;overflow:hidden;background:#EEEEEE;color:#111;max-width:800px}
 .swing-title{display:flex;align-items:center;gap:6px;padding:7px 10px;background:linear-gradient(#F4F4F4,#DADADA);border-bottom:1px solid #B5B5B5;font:600 15px system-ui,sans-serif}
