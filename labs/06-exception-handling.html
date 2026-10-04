@@ -6,7 +6,7 @@
 <meta name="description" content="Make a bank account that refuses bad input: throw and declare exceptions, catch them with try-catch-finally, write checked and unchecked custom exceptions and wrap low-level failures in a meaningful one.">
 <meta name="keywords" content="java exception handling, try catch finally, throw, throws, checked exception, custom exception, exception chaining, lab, cse 202, object oriented programming lab">
 <meta name="author" content="Object Oriented Programming Lab Notes">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#155E63">
 <link rel="canonical" href="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/06-exception-handling.html">
 <link rel="icon" type="image/svg+xml" href="../img/logo-mark.svg">
@@ -19,7 +19,18 @@
 <meta property="og:title" content="Lab 6: Exception Handling &amp; Custom Exceptions | OOP Lab (CSE 202)">
 <meta property="og:description" content="Make a bank account that refuses bad input: throw and declare exceptions, catch them with try-catch-finally, write checked and unchecked custom exceptions and wrap low-level failures in a meaningful one.">
 <meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/06-exception-handling.html">
-<meta name="twitter:card" content="summary">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/06-exception-handling.png?v=2">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Lab 6 of 10: Exception Handling &amp; Custom Exceptions – CSE 202 Object Oriented Programming Lab">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lab 6: Exception Handling &amp; Custom Exceptions | OOP Lab (CSE 202)">
+<meta name="twitter:description" content="Make a bank account that refuses bad input: throw and declare exceptions, catch them with try-catch-finally, write checked and unchecked custom exceptions and wrap low-level failures in a meaningful one.">
+<meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/06-exception-handling.png?v=2">
+<meta name="twitter:image:alt" content="Lab 6 of 10: Exception Handling &amp; Custom Exceptions – CSE 202 Object Oriented Programming Lab">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Exception Handling & Custom Exceptions", "description": "Make a bank account that refuses bad input: throw and declare exceptions, catch them with try-catch-finally, write checked and unchecked custom exceptions and wrap low-level failures in a meaningful one.", "position": 6, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 39, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/06-exception-handling.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/06-exception-handling.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
 <title>Lab 6: Exception Handling &amp; Custom Exceptions | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,7 +68,7 @@
 <div><h3>Before you start</h3><ul class=""><li>Labs 2–4: classes, constructors, inheritance</li><li>Conditionals and validation logic</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 6 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=12">Program design</a></li><li><a href="#s=13">Code walkthrough</a></li><li><a href="#s=23">Step-through traces: stack, heap and output</a></li><li><a href="#s=26">Expected output</a></li><li><a href="#s=27">Interactive demos</a></li><li><a href="#s=28">In-lab tasks</a></li><li><a href="#s=32">Lab report exercises</a></li><li><a href="#s=35">Viva questions and quiz</a></li></ol>
+<p class="kicker">Lab 6 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=12">Program design</a></li><li><a href="#s=13">Code walkthrough</a></li><li><a href="#s=23">Step-through traces: stack, heap and output</a></li><li><a href="#s=27">Expected output</a></li><li><a href="#s=28">Interactive demos</a></li><li><a href="#s=29">In-lab tasks</a></li><li><a href="#s=33">Lab report exercises</a></li><li><a href="#s=36">Viva questions and quiz</a></li></ol>
 </div></section>
 <section class="slide " data-title="What is an exception?" aria-label="What is an exception?" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Theory 1 of 5</p><h2>What is an exception?</h2><figure class="fig" data-fig="ex-flow"></figure><ul class=""><li>An exception is an object thrown when something abnormal happens; it interrupts the normal flow.</li><li>A matching <code>catch</code> handles it; if nobody catches it, the program stops with a stack trace.</li></ul>
@@ -236,10 +247,13 @@ try {
 }</pre><ul class="walk-notes"><li><code>getCause()</code> returns the original InsufficientFundsException.</li></ul>
 </div></section>
 <section class="slide " data-title="Trace: a constructor that throws" aria-label="Trace: a constructor that throws" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: a constructor that throws</h2><p class="muted">Pick an input. An invalid account is never created and never counted.</p><div data-trace="lab6-create"></div>
+<p class="kicker">Step through the code · 1 of 3</p><h2>Trace: a constructor that throws</h2><p class="muted">Pick an input. An invalid account is never created and never counted.</p><div data-trace="lab6-create"></div>
 </div></section>
 <section class="slide " data-title="Trace: withdraw, catch and finally" aria-label="Trace: withdraw, catch and finally" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: withdraw, catch and finally</h2><p class="muted">Pick an amount and follow the exception (if any) to its catch block.</p><div data-trace="lab6-withdraw"></div>
+<p class="kicker">Step through the code · 2 of 3</p><h2>Trace: withdraw, catch and finally</h2><p class="muted">Pick an amount and follow the exception (if any) to its catch block.</p><div data-trace="lab6-withdraw"></div>
+</div></section>
+<section class="slide " data-title="Trace: wrapping an exception with its cause" aria-label="Trace: wrapping an exception with its cause" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code · 3 of 3</p><h2>Trace: wrapping an exception with its cause</h2><p class="muted">A low-level InsufficientFundsException becomes a TransactionException. Follow the cause arrow back to the original.</p><div data-trace="lab6-wrap"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 5 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="InvalidAccountException.java">public class InvalidAccountException extends Exception {
@@ -551,7 +565,7 @@ Total accounts created: 2</pre></div><p class="note-line">Only 2 accounts are co
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 38</span>
+  <span class="counter" id="counter">1 / 39</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>

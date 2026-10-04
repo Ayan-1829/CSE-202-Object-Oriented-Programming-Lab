@@ -6,7 +6,7 @@
 <meta name="description" content="Model a real thing as a class with private fields, a constructor and methods; create objects, use getters and setters, a static counter, and see two variables share one object.">
 <meta name="keywords" content="java class, object, constructor, this keyword, encapsulation, static, reference semantics, lab, cse 202, object oriented programming lab">
 <meta name="author" content="Object Oriented Programming Lab Notes">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#155E63">
 <link rel="canonical" href="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/02-classes-and-objects.html">
 <link rel="icon" type="image/svg+xml" href="../img/logo-mark.svg">
@@ -19,7 +19,18 @@
 <meta property="og:title" content="Lab 2: Classes, Objects, Instances &amp; Methods | OOP Lab (CSE 202)">
 <meta property="og:description" content="Model a real thing as a class with private fields, a constructor and methods; create objects, use getters and setters, a static counter, and see two variables share one object.">
 <meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/02-classes-and-objects.html">
-<meta name="twitter:card" content="summary">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/02-classes-and-objects.png?v=2">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Lab 2 of 10: Classes, Objects, Instances &amp; Methods – CSE 202 Object Oriented Programming Lab">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lab 2: Classes, Objects, Instances &amp; Methods | OOP Lab (CSE 202)">
+<meta name="twitter:description" content="Model a real thing as a class with private fields, a constructor and methods; create objects, use getters and setters, a static counter, and see two variables share one object.">
+<meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/02-classes-and-objects.png?v=2">
+<meta name="twitter:image:alt" content="Lab 2 of 10: Classes, Objects, Instances &amp; Methods – CSE 202 Object Oriented Programming Lab">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Classes, Objects, Instances & Methods", "description": "Model a real thing as a class with private fields, a constructor and methods; create objects, use getters and setters, a static counter, and see two variables share one object.", "position": 2, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 40, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/02-classes-and-objects.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/02-classes-and-objects.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
 <title>Lab 2: Classes, Objects, Instances &amp; Methods | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,7 +68,7 @@
 <div><h3>Before you start</h3><ul class=""><li>Lab 1: program structure, types, decisions and loops</li><li>Compiling and running Java files from an IDE</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 2 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=11">Program design</a></li><li><a href="#s=13">Code walkthrough</a></li><li><a href="#s=23">Step-through traces: stack, heap and output</a></li><li><a href="#s=25">Expected output</a></li><li><a href="#s=26">Interactive demos</a></li><li><a href="#s=29">In-lab tasks</a></li><li><a href="#s=33">Lab report exercises</a></li><li><a href="#s=36">Viva questions and quiz</a></li></ol>
+<p class="kicker">Lab 2 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=11">Program design</a></li><li><a href="#s=13">Code walkthrough</a></li><li><a href="#s=23">Step-through traces: stack, heap and output</a></li><li><a href="#s=26">Expected output</a></li><li><a href="#s=27">Interactive demos</a></li><li><a href="#s=30">In-lab tasks</a></li><li><a href="#s=34">Lab report exercises</a></li><li><a href="#s=37">Viva questions and quiz</a></li></ol>
 </div></section>
 <section class="slide " data-title="Class and object" aria-label="Class and object" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Theory 1 of 5</p><h2>Class and object</h2><figure class="fig" data-fig="lab2-car-objects"></figure><ul class=""><li>A <b>class</b> is a blueprint: it lists the data (fields) and actions (methods) every object will have.</li><li>An <b>object</b> is a runtime instance made with <code>new</code>; each one has its own copy of the fields.</li></ul>
@@ -218,7 +229,10 @@ System.out.println(&quot;\n=== Static Member ===&quot;);
 System.out.println(&quot;Total Car objects ever created: &quot; + Car.getCount());</pre><ul class="walk-notes"><li><code>car3 = car1</code> copies the reference, not the car.</li><li>The count is still 2: no object was created.</li></ul>
 </div></section>
 <section class="slide " data-title="Trace: objects, references and a static counter" aria-label="Trace: objects, references and a static counter" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code</p><h2>Trace: objects, references and a static counter</h2><p class="muted">See the objects on the heap, the references on the stack, and the one shared <code>count</code>.</p><div data-trace="lab2-car"></div>
+<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: objects, references and a static counter</h2><p class="muted">See the objects on the heap, the references on the stack, and the one shared <code>count</code>.</p><div data-trace="lab2-car"></div>
+</div></section>
+<section class="slide " data-title="Trace: methods that guard the object" aria-label="Trace: methods that guard the object" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: methods that guard the object</h2><p class="muted">Each call works on the object <code>this</code> points to. Watch brake(100) and refuel(5.0) refuse to break the rules.</p><div data-trace="lab2-methods"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 2 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Car.java">public class Car {
@@ -441,7 +455,7 @@ Total Car objects ever created: 2</pre></div><p class="note-line">car3 = car1 cr
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 39</span>
+  <span class="counter" id="counter">1 / 40</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>

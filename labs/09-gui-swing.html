@@ -6,7 +6,7 @@
 <meta name="description" content="Build a Swing drawing application: a JFrame with layout managers, buttons and a colour box, event listeners, and a custom JPanel that draws rectangles and circles with Graphics.">
 <meta name="keywords" content="java swing, awt, jframe, jpanel, layout manager, actionlistener, paintComponent, graphics, event dispatch thread, lab, cse 202, object oriented programming lab">
 <meta name="author" content="Object Oriented Programming Lab Notes">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#155E63">
 <link rel="canonical" href="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/09-gui-swing.html">
 <link rel="icon" type="image/svg+xml" href="../img/logo-mark.svg">
@@ -19,7 +19,18 @@
 <meta property="og:title" content="Lab 9: GUI Components, Drawing, AWT &amp; Swing | OOP Lab (CSE 202)">
 <meta property="og:description" content="Build a Swing drawing application: a JFrame with layout managers, buttons and a colour box, event listeners, and a custom JPanel that draws rectangles and circles with Graphics.">
 <meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/09-gui-swing.html">
-<meta name="twitter:card" content="summary">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/09-gui-swing.png?v=2">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Lab 9 of 10: GUI Components, Drawing, AWT &amp; Swing – CSE 202 Object Oriented Programming Lab">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lab 9: GUI Components, Drawing, AWT &amp; Swing | OOP Lab (CSE 202)">
+<meta name="twitter:description" content="Build a Swing drawing application: a JFrame with layout managers, buttons and a colour box, event listeners, and a custom JPanel that draws rectangles and circles with Graphics.">
+<meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/09-gui-swing.png?v=2">
+<meta name="twitter:image:alt" content="Lab 9 of 10: GUI Components, Drawing, AWT &amp; Swing – CSE 202 Object Oriented Programming Lab">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "GUI Components, Drawing, AWT & Swing", "description": "Build a Swing drawing application: a JFrame with layout managers, buttons and a colour box, event listeners, and a custom JPanel that draws rectangles and circles with Graphics.", "position": 9, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 41, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/09-gui-swing.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/09-gui-swing.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
 <title>Lab 9: GUI Components, Drawing, AWT &amp; Swing | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,7 +68,7 @@
 <div><h3>Before you start</h3><ul class=""><li>Labs 4–5: inheritance, abstract classes, overriding</li><li>Lab 7: threads (for the EDT idea)</li><li>ArrayList basics</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 9 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=12">Program design</a></li><li><a href="#s=14">Code walkthrough</a></li><li><a href="#s=24">Step-through traces: stack, heap and output</a></li><li><a href="#s=26">Expected output</a></li><li><a href="#s=27">Interactive demos</a></li><li><a href="#s=30">In-lab tasks</a></li><li><a href="#s=34">Lab report exercises</a></li><li><a href="#s=37">Viva questions and quiz</a></li></ol>
+<p class="kicker">Lab 9 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=12">Program design</a></li><li><a href="#s=14">Code walkthrough</a></li><li><a href="#s=24">Step-through traces: stack, heap and output</a></li><li><a href="#s=27">Expected output</a></li><li><a href="#s=28">Interactive demos</a></li><li><a href="#s=31">In-lab tasks</a></li><li><a href="#s=35">Lab report exercises</a></li><li><a href="#s=38">Viva questions and quiz</a></li></ol>
 </div></section>
 <section class="slide " data-title="AWT, Swing and applets" aria-label="AWT, Swing and applets" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Theory 1 of 6</p><h2>AWT, Swing and applets</h2><ul class=""><li><b>AWT</b> is the original toolkit using native OS components; <b>Swing</b> is built on it with lightweight, platform-independent components whose names start with J.</li><li><b>Applets</b> ran inside browsers; browsers no longer support them, so this lab uses a <code>JFrame</code> desktop app — the drawing and event ideas are the same.</li></ul>
@@ -237,7 +248,10 @@ setContentPane(mainPanel);</pre><ul class="walk-notes"><li>Panels nest: the butt
 }</pre><ul class="walk-notes"><li>invokeLater runs the GUI code on Swing’s own thread.</li></ul>
 </div></section>
 <section class="slide " data-title="Trace: change the model, then repaint()" aria-label="Trace: change the model, then repaint()" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code</p><h2>Trace: change the model, then repaint()</h2><p class="muted">Each click adds a shape to the list; paintComponent draws whatever is in the list.</p><div data-trace="lab9-repaint"></div>
+<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: change the model, then repaint()</h2><p class="muted">Each click adds a shape to the list; paintComponent draws whatever is in the list.</p><div data-trace="lab9-repaint"></div>
+</div></section>
+<section class="slide " data-title="Trace: main, the EDT and a click" aria-label="Trace: main, the EDT and a click" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: main, the EDT and a click</h2><p class="muted">invokeLater hands the work to the Event Dispatch Thread. Every listener and every paint then runs on that one thread.</p><div data-trace="lab9-edt"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 6 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Shape.java">import java.awt.Color;
@@ -532,7 +546,7 @@ public class Lab9Demo {
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 40</span>
+  <span class="counter" id="counter">1 / 41</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>

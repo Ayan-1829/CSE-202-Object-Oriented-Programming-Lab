@@ -6,7 +6,7 @@
 <meta name="description" content="Protect bank balances with synchronized methods and blocks, watch two transfers deadlock when they lock accounts in opposite order, and prevent it with lock ordering.">
 <meta name="keywords" content="java synchronization, race condition, critical section, deadlock, lock ordering, resource allocation graph, wait notify, lab, cse 202, object oriented programming lab">
 <meta name="author" content="Object Oriented Programming Lab Notes">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#155E63">
 <link rel="canonical" href="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/08-synchronization-deadlock.html">
 <link rel="icon" type="image/svg+xml" href="../img/logo-mark.svg">
@@ -19,7 +19,18 @@
 <meta property="og:title" content="Lab 8: Synchronization, Deadlock &amp; Resource Allocation | OOP Lab (CSE 202)">
 <meta property="og:description" content="Protect bank balances with synchronized methods and blocks, watch two transfers deadlock when they lock accounts in opposite order, and prevent it with lock ordering.">
 <meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/08-synchronization-deadlock.html">
-<meta name="twitter:card" content="summary">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/08-synchronization-deadlock.png?v=2">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Lab 8 of 10: Synchronization, Deadlock &amp; Resource Allocation – CSE 202 Object Oriented Programming Lab">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lab 8: Synchronization, Deadlock &amp; Resource Allocation | OOP Lab (CSE 202)">
+<meta name="twitter:description" content="Protect bank balances with synchronized methods and blocks, watch two transfers deadlock when they lock accounts in opposite order, and prevent it with lock ordering.">
+<meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/08-synchronization-deadlock.png?v=2">
+<meta name="twitter:image:alt" content="Lab 8 of 10: Synchronization, Deadlock &amp; Resource Allocation – CSE 202 Object Oriented Programming Lab">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Synchronization, Deadlock & Resource Allocation", "description": "Protect bank balances with synchronized methods and blocks, watch two transfers deadlock when they lock accounts in opposite order, and prevent it with lock ordering.", "position": 8, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 37, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/08-synchronization-deadlock.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/08-synchronization-deadlock.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
 <title>Lab 8: Synchronization, Deadlock &amp; Resource Allocation | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,7 +68,7 @@
 <div><h3>Before you start</h3><ul class=""><li>Lab 7: Thread, Runnable, states, sleep() and join()</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 8 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=11">Program design</a></li><li><a href="#s=12">Code walkthrough</a></li><li><a href="#s=21">Step-through traces: stack, heap and output</a></li><li><a href="#s=23">Expected output</a></li><li><a href="#s=24">Interactive demos</a></li><li><a href="#s=26">In-lab tasks</a></li><li><a href="#s=30">Lab report exercises</a></li><li><a href="#s=33">Viva questions and quiz</a></li></ol>
+<p class="kicker">Lab 8 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=11">Program design</a></li><li><a href="#s=12">Code walkthrough</a></li><li><a href="#s=21">Step-through traces: stack, heap and output</a></li><li><a href="#s=24">Expected output</a></li><li><a href="#s=25">Interactive demos</a></li><li><a href="#s=27">In-lab tasks</a></li><li><a href="#s=31">Lab report exercises</a></li><li><a href="#s=34">Viva questions and quiz</a></li></ol>
 </div></section>
 <section class="slide " data-title="Race conditions and critical sections" aria-label="Race conditions and critical sections" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Theory 1 of 6</p><h2>Race conditions and critical sections</h2><pre class="code small-code">balance = balance + amount;   // read, add, write: three steps</pre><ul class=""><li>If two threads interleave those steps, one update can overwrite the other — a <b>race condition</b>.</li><li>Code that touches shared data is a <b>critical section</b>; only one thread should run it at a time.</li></ul>
@@ -219,7 +230,10 @@ if (riskyThread1.isAlive() || riskyThread2.isAlive()) {
 }</pre><ul class="walk-notes"><li><code>join(3000)</code> waits at most 3 s; a thread still alive means it is stuck.</li></ul>
 </div></section>
 <section class="slide " data-title="Trace: lock ordering in transfer()" aria-label="Trace: lock ordering in transfer()" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code</p><h2>Trace: lock ordering in transfer()</h2><p class="muted">Try both directions: the locks are always taken in the same order, ACC-A first.</p><div data-trace="lab8-lock"></div>
+<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: lock ordering in transfer()</h2><p class="muted">Try both directions: the locks are always taken in the same order, ACC-A first.</p><div data-trace="lab8-lock"></div>
+</div></section>
+<section class="slide " data-title="Trace: how a deadlock happens" aria-label="Trace: how a deadlock happens" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: how a deadlock happens</h2><p class="muted">Two transfers in opposite directions. Choose the timing and watch both threads end up BLOCKED, each holding the lock the other needs.</p><div data-trace="lab8-deadlock"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 3 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="BankAccount.java">public class BankAccount {
@@ -517,7 +531,7 @@ Program demonstration completed.</pre></div><p class="note-line">The risky threa
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 36</span>
+  <span class="counter" id="counter">1 / 37</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/index.html</loc></url>
-  <url><loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/01-java-basics.html</loc></url>
-  <url><loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/02-classes-and-objects.html</loc></url>
-  <url><loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/03-constructors-overloading.html</loc></url>
-  <url><loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/04-inheritance-polymorphism.html</loc></url>
-  <url><loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/05-abstract-classes-interfaces.html</loc></url>
-  <url><loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/06-exception-handling.html</loc></url>
-  <url><loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/07-threads.html</loc></url>
-  <url><loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/08-synchronization-deadlock.html</loc></url>
-  <url><loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/09-gui-swing.html</loc></url>
-  <url><loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/10-animation.html</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url><loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/index.html</loc><image:image><image:loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/home.png</image:loc></image:image></url>
+  <url><loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/01-java-basics.html</loc><image:image><image:loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/01-java-basics.png</image:loc></image:image></url>
+  <url><loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/02-classes-and-objects.html</loc><image:image><image:loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/02-classes-and-objects.png</image:loc></image:image></url>
+  <url><loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/03-constructors-overloading.html</loc><image:image><image:loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/03-constructors-overloading.png</image:loc></image:image></url>
+  <url><loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/04-inheritance-polymorphism.html</loc><image:image><image:loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/04-inheritance-polymorphism.png</image:loc></image:image></url>
+  <url><loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/05-abstract-classes-interfaces.html</loc><image:image><image:loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/05-abstract-classes-interfaces.png</image:loc></image:image></url>
+  <url><loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/06-exception-handling.html</loc><image:image><image:loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/06-exception-handling.png</image:loc></image:image></url>
+  <url><loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/07-threads.html</loc><image:image><image:loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/07-threads.png</image:loc></image:image></url>
+  <url><loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/08-synchronization-deadlock.html</loc><image:image><image:loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/08-synchronization-deadlock.png</image:loc></image:image></url>
+  <url><loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/09-gui-swing.html</loc><image:image><image:loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/09-gui-swing.png</image:loc></image:image></url>
+  <url><loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/10-animation.html</loc><image:image><image:loc>https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/10-animation.png</image:loc></image:image></url>
 </urlset>

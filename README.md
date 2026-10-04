@@ -8,7 +8,7 @@
 
 <a href="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"><img alt="Live site: open" src="https://img.shields.io/badge/Live_site-open-E07A1F?style=for-the-badge&logo=githubpages&logoColor=white"></a>
 <img alt="Labs: 10" src="https://img.shields.io/badge/Labs-10-555555?style=for-the-badge">
-<img alt="Slides: 385" src="https://img.shields.io/badge/Slides-385-555555?style=for-the-badge">
+<img alt="Slides: 395" src="https://img.shields.io/badge/Slides-395-555555?style=for-the-badge">
 <img alt="Build step: none" src="https://img.shields.io/badge/Build_step-none-555555?style=for-the-badge&logo=html5&logoColor=white">
 
 ### [🌐 Open the live site →](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/)
@@ -30,20 +30,20 @@
 
 ## 📚 Labs
 
-10 decks · 385 slides. Each title opens the live deck.
+10 decks · 395 slides. Each title opens the live deck.
 
 | # | Lab | Slides |
 |:--:|---|:--:|
-| **1** | [Java Syntax, Data Types & Control Flow](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/01-java-basics.html) | 48 |
-| **2** | [Classes, Objects, Instances & Methods](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/02-classes-and-objects.html) | 39 |
-| **3** | [Constructors, Overloading & Reference Passing](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/03-constructors-overloading.html) | 42 |
-| **4** | [Inheritance, Polymorphism & Overriding](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/04-inheritance-polymorphism.html) | 36 |
-| **5** | [Abstract Classes & Interfaces](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/05-abstract-classes-interfaces.html) | 34 |
-| **6** | [Exception Handling & Custom Exceptions](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/06-exception-handling.html) | 38 |
-| **7** | [Thread Creation & Thread States](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/07-threads.html) | 34 |
-| **8** | [Synchronization, Deadlock & Resource Allocation](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/08-synchronization-deadlock.html) | 36 |
-| **9** | [GUI Components, Drawing, AWT & Swing](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/09-gui-swing.html) | 40 |
-| **10** | [Animation with Threads](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/10-animation.html) | 38 |
+| **1** | [Java Syntax, Data Types & Control Flow](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/01-java-basics.html) | 49 |
+| **2** | [Classes, Objects, Instances & Methods](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/02-classes-and-objects.html) | 40 |
+| **3** | [Constructors, Overloading & Reference Passing](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/03-constructors-overloading.html) | 43 |
+| **4** | [Inheritance, Polymorphism & Overriding](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/04-inheritance-polymorphism.html) | 37 |
+| **5** | [Abstract Classes & Interfaces](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/05-abstract-classes-interfaces.html) | 35 |
+| **6** | [Exception Handling & Custom Exceptions](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/06-exception-handling.html) | 39 |
+| **7** | [Thread Creation & Thread States](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/07-threads.html) | 35 |
+| **8** | [Synchronization, Deadlock & Resource Allocation](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/08-synchronization-deadlock.html) | 37 |
+| **9** | [GUI Components, Drawing, AWT & Swing](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/09-gui-swing.html) | 41 |
+| **10** | [Animation with Threads](https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/10-animation.html) | 39 |
 
 ## ⌨️ Using the slides
 

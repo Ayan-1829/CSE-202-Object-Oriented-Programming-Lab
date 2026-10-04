@@ -6,7 +6,7 @@
 <meta name="description" content="Build a Vehicle hierarchy with Car, Motorcycle and ElectricCar: reuse code with extends and super, override display(), and let one loop drive every kind of vehicle.">
 <meta name="keywords" content="java inheritance, extends, super, method overriding, polymorphism, dynamic dispatch, instanceof, lab, cse 202, object oriented programming lab">
 <meta name="author" content="Object Oriented Programming Lab Notes">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#155E63">
 <link rel="canonical" href="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/04-inheritance-polymorphism.html">
 <link rel="icon" type="image/svg+xml" href="../img/logo-mark.svg">
@@ -19,7 +19,18 @@
 <meta property="og:title" content="Lab 4: Inheritance, Polymorphism &amp; Overriding | OOP Lab (CSE 202)">
 <meta property="og:description" content="Build a Vehicle hierarchy with Car, Motorcycle and ElectricCar: reuse code with extends and super, override display(), and let one loop drive every kind of vehicle.">
 <meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/04-inheritance-polymorphism.html">
-<meta name="twitter:card" content="summary">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/04-inheritance-polymorphism.png?v=2">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Lab 4 of 10: Inheritance, Polymorphism &amp; Overriding – CSE 202 Object Oriented Programming Lab">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lab 4: Inheritance, Polymorphism &amp; Overriding | OOP Lab (CSE 202)">
+<meta name="twitter:description" content="Build a Vehicle hierarchy with Car, Motorcycle and ElectricCar: reuse code with extends and super, override display(), and let one loop drive every kind of vehicle.">
+<meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/04-inheritance-polymorphism.png?v=2">
+<meta name="twitter:image:alt" content="Lab 4 of 10: Inheritance, Polymorphism &amp; Overriding – CSE 202 Object Oriented Programming Lab">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Inheritance, Polymorphism & Overriding", "description": "Build a Vehicle hierarchy with Car, Motorcycle and ElectricCar: reuse code with extends and super, override display(), and let one loop drive every kind of vehicle.", "position": 4, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 37, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/04-inheritance-polymorphism.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/04-inheritance-polymorphism.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
 <title>Lab 4: Inheritance, Polymorphism &amp; Overriding | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,7 +68,7 @@
 <div><h3>Before you start</h3><ul class=""><li>Labs 2–3: classes, constructors, encapsulation, constructor chaining, overloading</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 4 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=10">Program design</a></li><li><a href="#s=11">Code walkthrough</a></li><li><a href="#s=21">Step-through traces: stack, heap and output</a></li><li><a href="#s=23">Expected output</a></li><li><a href="#s=24">Interactive demos</a></li><li><a href="#s=26">In-lab tasks</a></li><li><a href="#s=30">Lab report exercises</a></li><li><a href="#s=33">Viva questions and quiz</a></li></ol>
+<p class="kicker">Lab 4 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=10">Program design</a></li><li><a href="#s=11">Code walkthrough</a></li><li><a href="#s=21">Step-through traces: stack, heap and output</a></li><li><a href="#s=24">Expected output</a></li><li><a href="#s=25">Interactive demos</a></li><li><a href="#s=27">In-lab tasks</a></li><li><a href="#s=31">Lab report exercises</a></li><li><a href="#s=34">Viva questions and quiz</a></li></ol>
 </div></section>
 <section class="slide " data-title="Inheritance and extends" aria-label="Inheritance and extends" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Theory 1 of 5</p><h2>Inheritance and extends</h2><figure class="fig" data-fig="lab4-vehicle-uml"></figure><ul class=""><li><code>class Car extends Vehicle</code>: a Car <b>is a</b> Vehicle and inherits its accessible fields and methods.</li><li>Java classes have <b>single inheritance</b>, but chains are allowed: ElectricCar → Car → Vehicle.</li></ul>
@@ -231,7 +242,10 @@ ref2.display();
 ref3.display();</pre><ul class="walk-notes"><li>The reference type is Vehicle, but each object’s own display() runs.</li></ul>
 </div></section>
 <section class="slide " data-title="Trace: super(…) and dynamic dispatch" aria-label="Trace: super(…) and dynamic dispatch" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code</p><h2>Trace: super(…) and dynamic dispatch</h2><p class="muted">Watch super(…) build the inherited part, then one call site run two different display() methods.</p><div data-trace="lab4-dispatch"></div>
+<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: super(…) and dynamic dispatch</h2><p class="muted">Watch super(…) build the inherited part, then one call site run two different display() methods.</p><div data-trace="lab4-dispatch"></div>
+</div></section>
+<section class="slide " data-title="Trace: instanceof before every cast" aria-label="Trace: instanceof before every cast" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: instanceof before every cast</h2><p class="muted">One loop over a Vehicle[]: the check decides whether the cast is safe. The last line shows what happens without it.</p><div data-trace="lab4-cast"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 5 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Vehicle.java">public class Vehicle {
@@ -568,7 +582,7 @@ After testCar.brake(200):       Speed : 0 km/h</pre></div><p class="note-line">S
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 36</span>
+  <span class="counter" id="counter">1 / 37</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>

@@ -6,7 +6,7 @@
 <meta name="description" content="Set up the JDK and an IDE, then write a first Java program that uses variables, primitive types, type casting, if/switch decisions and the three loops.">
 <meta name="keywords" content="java lab, data types, type casting, switch, for loop, while loop, do-while, cse 202, object oriented programming lab">
 <meta name="author" content="Object Oriented Programming Lab Notes">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#155E63">
 <link rel="canonical" href="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/01-java-basics.html">
 <link rel="icon" type="image/svg+xml" href="../img/logo-mark.svg">
@@ -19,7 +19,18 @@
 <meta property="og:title" content="Lab 1: Java Syntax, Data Types &amp; Control Flow | OOP Lab (CSE 202)">
 <meta property="og:description" content="Set up the JDK and an IDE, then write a first Java program that uses variables, primitive types, type casting, if/switch decisions and the three loops.">
 <meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/01-java-basics.html">
-<meta name="twitter:card" content="summary">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/01-java-basics.png?v=2">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Lab 1 of 10: Java Syntax, Data Types &amp; Control Flow – CSE 202 Object Oriented Programming Lab">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lab 1: Java Syntax, Data Types &amp; Control Flow | OOP Lab (CSE 202)">
+<meta name="twitter:description" content="Set up the JDK and an IDE, then write a first Java program that uses variables, primitive types, type casting, if/switch decisions and the three loops.">
+<meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/01-java-basics.png?v=2">
+<meta name="twitter:image:alt" content="Lab 1 of 10: Java Syntax, Data Types &amp; Control Flow – CSE 202 Object Oriented Programming Lab">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Java Syntax, Data Types & Control Flow", "description": "Set up the JDK and an IDE, then write a first Java program that uses variables, primitive types, type casting, if/switch decisions and the three loops.", "position": 1, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 49, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/01-java-basics.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/01-java-basics.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
 <title>Lab 1: Java Syntax, Data Types &amp; Control Flow | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,7 +68,7 @@
 <div><h3>Before you start</h3><ul class=""><li>Create folders and save files</li><li>Basic idea of variables, expressions, input and output</li><li>JDK 11+ and an IDE installed</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 1 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Install Java and NetBeans</a></li><li><a href="#s=9">Theory recap</a></li><li><a href="#s=17">Program design</a></li><li><a href="#s=18">Code walkthrough</a></li><li><a href="#s=28">Step-through traces: stack, heap and output</a></li><li><a href="#s=31">Expected output</a></li><li><a href="#s=32">Interactive demos</a></li><li><a href="#s=37">In-lab tasks</a></li><li><a href="#s=42">Lab report exercises</a></li><li><a href="#s=45">Viva questions and quiz</a></li></ol>
+<p class="kicker">Lab 1 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Install Java and NetBeans</a></li><li><a href="#s=9">Theory recap</a></li><li><a href="#s=17">Program design</a></li><li><a href="#s=18">Code walkthrough</a></li><li><a href="#s=28">Step-through traces: stack, heap and output</a></li><li><a href="#s=32">Expected output</a></li><li><a href="#s=33">Interactive demos</a></li><li><a href="#s=38">In-lab tasks</a></li><li><a href="#s=43">Lab report exercises</a></li><li><a href="#s=46">Viva questions and quiz</a></li></ol>
 </div></section>
 <section class="slide " data-title="Which Java do you need?" aria-label="Which Java do you need?" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Setting up · 1 of 4</p><h2>Which Java do you need?</h2><ul class="big-list"><li>A <b>JDK</b> (Java Development Kit): it contains the compiler <code>javac</code> and the runtime <code>java</code>. A JRE alone cannot compile.</li><li>Use the current <b>LTS</b> release, <b>JDK 25</b>, from the official Java site <code>oracle.com/java</code>. The manual needs JDK 11 or later.</li><li>Install the JDK <b>first</b>, then the IDE: this course uses <b>Apache NetBeans</b>.</li><li>On the next slides, pick your operating system: each slide has direct download links, the steps and a YouTube video link.</li></ul>
@@ -252,10 +263,13 @@ System.out.println(&quot;1&quot;);
 System.out.println(&quot;Steps to reach 1: &quot; + steps);</pre><ul class="walk-notes"><li>The body runs before the test, so 27 is printed first.</li><li>Even → halve; odd → 3n + 1; stop at 1.</li></ul>
 </div></section>
 <section class="slide " data-title="Trace: widening and narrowing" aria-label="Trace: widening and narrowing" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: widening and narrowing</h2><p class="muted">Watch each variable appear in main’s stack frame and see exactly what a cast keeps.</p><div data-trace="lab1-cast"></div>
+<p class="kicker">Step through the code · 1 of 3</p><h2>Trace: widening and narrowing</h2><p class="muted">Watch each variable appear in main’s stack frame and see exactly what a cast keeps.</p><div data-trace="lab1-cast"></div>
 </div></section>
 <section class="slide " data-title="Trace: reversing the digits" aria-label="Trace: reversing the digits" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: reversing the digits</h2><p class="muted">Follow temp, digit and reversed through every pass of the while loop.</p><div data-trace="lab1-reverse"></div>
+<p class="kicker">Step through the code · 2 of 3</p><h2>Trace: reversing the digits</h2><p class="muted">Follow temp, digit and reversed through every pass of the while loop.</p><div data-trace="lab1-reverse"></div>
+</div></section>
+<section class="slide " data-title="Trace: switch, case by case" aria-label="Trace: switch, case by case" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code · 3 of 3</p><h2>Trace: switch, case by case</h2><p class="muted">Pick a score. See which case the switch jumps to, how 100 falls through into case 9, and what break does.</p><div data-trace="lab1-switch"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 1 file</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Lab1Demo.java">public class Lab1Demo {
@@ -496,7 +510,7 @@ Steps to reach 1: 111</pre></div><p class="note-line">Why is the next char after
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 48</span>
+  <span class="counter" id="counter">1 / 49</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
