@@ -72,6 +72,8 @@
 </div></section>
 <section class="slide " data-title="Frame-based animation" aria-label="Frame-based animation" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Theory 1 of 5</p><h2>Frame-based animation</h2><figure class="fig" data-fig="lab10-loop"></figure><ul class=""><li>Each frame: update the state, redraw, wait. Repeated quickly, the eye sees smooth motion.</li><li>About 16 ms per frame gives roughly 60 frames per second.</li></ul>
+
+<div class="applinks" role="group" aria-label="Explore further"><span class="al-h">Explore further</span><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/disp-scanout.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">GPU scan-out engine</span></a><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/monitor.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">Monitor</span></a></div>
 </div></section>
 <section class="slide " data-title="Frame-based animation (code)" aria-label="Frame-based animation (code)" tabindex="-1"><div class="slide-inner">
 <h2>Frame-based animation</h2><pre class="code small-code">x = x + vx;
@@ -89,6 +91,8 @@ y = y + vy;</pre>
 Graphics2D g2d = buffer.createGraphics();
 // ... draw everything on g2d ...
 g.drawImage(buffer, 0, 0, null);</pre><ul class=""><li>Draw the whole frame off-screen, then copy it at once: no half-drawn frames, no flicker.</li><li>Swing already double-buffers; doing it by hand shows the idea.</li></ul>
+
+<div class="applinks" role="group" aria-label="Explore further"><span class="al-h">Explore further</span><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/vram.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">VRAM (frame buffer)</span></a><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/disp-scanout.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">GPU scan-out engine</span></a></div>
 </div></section>
 <section class="slide " data-title="Collisions" aria-label="Collisions" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Theory 4 of 5</p><h2>Collisions</h2><figure class="fig" data-fig="lab10-collide"></figure><ul class=""><li>Wall: reverse the velocity component. Ball–ball: centres closer than the sum of radii.</li></ul>
@@ -588,7 +592,7 @@ public class Lab10Demo {
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 42</span>
+  <span class="counter" id="counter">1 / 39</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>

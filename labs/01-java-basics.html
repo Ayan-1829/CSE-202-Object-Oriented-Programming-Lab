@@ -84,6 +84,8 @@
 </div></section>
 <section class="slide " data-title="From .java to a running program" aria-label="From .java to a running program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Theory 1 of 6</p><h2>From .java to a running program</h2><figure class="fig" data-fig="jvm-pipeline"></figure><ul class=""><li>You write <code>Lab1Demo.java</code>; <code>javac</code> compiles it to bytecode in <code>Lab1Demo.class</code>.</li><li>The JVM loads the bytecode and starts at <code>main</code>: “write once, run anywhere”.</li><li>A <code>public</code> class must live in a file with the same name.</li></ul>
+
+<div class="applinks" role="group" aria-label="Explore further"><span class="al-h">Explore further</span><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/cpu.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">CPU</span></a><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/decoder.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">Instruction decoder</span></a><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/i8086.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">Intel 8086 simulator</span></a></div>
 </div></section>
 <section class="slide " data-title="Structure of a Java program" aria-label="Structure of a Java program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Theory 2 of 6</p><h2>Structure of a Java program</h2><pre class="code small-code">public class Lab1Demo {
@@ -94,6 +96,8 @@
 </div></section>
 <section class="slide " data-title="Variables and the eight primitive types" aria-label="Variables and the eight primitive types" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Theory 3 of 6</p><h2>Variables and the eight primitive types</h2><div class="scrollx"><table class="doc"><thead><tr><th>Type</th><th>Holds</th><th>Example</th></tr></thead><tbody><tr><td>byte / short</td><td>small integers</td><td><code>byte b = 100;</code></td></tr><tr><td>int</td><td>common integers</td><td><code>int age = 21;</code></td></tr><tr><td>long</td><td>large integers (suffix L)</td><td><code>long pop = 9876543210L;</code></td></tr><tr><td>float</td><td>single-precision (suffix f)</td><td><code>float gpa = 3.75f;</code></td></tr><tr><td>double</td><td>double-precision decimals</td><td><code>double h = 5.91;</code></td></tr><tr><td>char</td><td>one character</td><td><code>char grade = 'A';</code></td></tr><tr><td>boolean</td><td>true / false</td><td><code>boolean ok = true;</code></td></tr></tbody></table></div><ul class=""><li>Java is <b>statically typed</b>: every variable has a declared type. <code>String</code> is a reference type for text.</li></ul>
+
+<div class="applinks" role="group" aria-label="Explore further"><span class="al-h">Explore further</span><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/memory-cells.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">Memory cells</span></a><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/registers.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">Registers</span></a></div>
 </div></section>
 <section class="slide " data-title="Type casting" aria-label="Type casting" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Theory 4 of 6</p><h2>Type casting</h2><figure class="fig" data-fig="widening"></figure><ul class=""><li><b>Widening</b> (small → large) is automatic and safe.</li><li><b>Narrowing</b> needs a cast and may lose data: the fraction is cut off, not rounded.</li></ul>
@@ -470,6 +474,8 @@ Steps to reach 1: 111</pre></div><p class="note-line">Why is the next char after
 </div></section>
 <section class="slide " data-title="Evaluate operators step by step" aria-label="Evaluate operators step by step" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Interactive 2 of 5</p><h2>Evaluate operators step by step</h2><div data-demo="operators"></div>
+
+<div class="applinks" role="group" aria-label="Explore further"><span class="al-h">Explore further</span><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/alu.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">ALU</span></a><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/logic-unit.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">Logic unit</span></a></div>
 </div></section>
 <section class="slide " data-title="Follow an if-else ladder" aria-label="Follow an if-else ladder" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Interactive 3 of 5</p><h2>Follow an if-else ladder</h2><div data-demo="grades"></div>
@@ -525,7 +531,7 @@ Steps to reach 1: 111</pre></div><p class="note-line">Why is the next char after
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 55</span>
+  <span class="counter" id="counter">1 / 49</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>

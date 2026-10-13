@@ -92,6 +92,8 @@ mainPanel.add(drawingPanel, BorderLayout.CENTER);</pre>
         updateStatus();
     }
 });</pre><ul class=""><li>GUI programs are event-driven: Swing calls <code>actionPerformed</code> when the button is clicked.</li></ul>
+
+<div class="applinks" role="group" aria-label="Explore further"><span class="al-h">Explore further</span><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/mouse.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">Mouse</span></a><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/keyboard.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">Keyboard</span></a></div>
 </div></section>
 <section class="slide " data-title="Custom drawing and repaint()" aria-label="Custom drawing and repaint()" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Theory 5 of 6</p><h2>Custom drawing and repaint()</h2><pre class="code small-code">@Override
@@ -101,6 +103,8 @@ protected void paintComponent(Graphics g) {
         shape.draw(g);           // polymorphic draw
     }
 }</pre><ul class=""><li>Graphics offers drawLine, drawRect, fillRect, drawOval, fillOval, drawString.</li><li>Change the data, then call <code>repaint()</code>; Swing calls paintComponent for you. Never call it yourself.</li></ul>
+
+<div class="applinks" role="group" aria-label="Explore further"><span class="al-h">Explore further</span><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/gpu.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">GPU</span></a><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/monitor.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">Monitor</span></a></div>
 </div></section>
 <section class="slide " data-title="The Event Dispatch Thread" aria-label="The Event Dispatch Thread" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Theory 6 of 6</p><h2>The Event Dispatch Thread</h2><pre class="code small-code">SwingUtilities.invokeLater(new Runnable() {
@@ -552,7 +556,7 @@ public class Lab9Demo {
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 43</span>
+  <span class="counter" id="counter">1 / 41</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
