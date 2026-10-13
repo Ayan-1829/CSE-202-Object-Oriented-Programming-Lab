@@ -248,10 +248,16 @@ setContentPane(mainPanel);</pre><ul class="walk-notes"><li>Panels nest: the butt
 }</pre><ul class="walk-notes"><li>invokeLater runs the GUI code on Swing’s own thread.</li></ul>
 </div></section>
 <section class="slide " data-title="Trace: change the model, then repaint()" aria-label="Trace: change the model, then repaint()" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: change the model, then repaint()</h2><p class="muted">Each click adds a shape to the list; paintComponent draws whatever is in the list.</p><div data-trace="lab9-repaint"></div>
+<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: change the model, then repaint()</h2><p class="muted">Each click adds a shape to the list; paintComponent draws whatever is in the list.</p>
+</div></section>
+<section class="slide " data-title="Trace: change the model, then repaint() (cont.)" aria-label="Trace: change the model, then repaint() (cont.)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: change the model, then repaint() (cont.)</h2><div data-trace="lab9-repaint"></div>
 </div></section>
 <section class="slide " data-title="Trace: main, the EDT and a click" aria-label="Trace: main, the EDT and a click" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: main, the EDT and a click</h2><p class="muted">invokeLater hands the work to the Event Dispatch Thread. Every listener and every paint then runs on that one thread.</p><div data-trace="lab9-edt"></div>
+<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: main, the EDT and a click</h2><p class="muted">invokeLater hands the work to the Event Dispatch Thread. Every listener and every paint then runs on that one thread.</p>
+</div></section>
+<section class="slide " data-title="Trace: main, the EDT and a click (cont.)" aria-label="Trace: main, the EDT and a click (cont.)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: main, the EDT and a click (cont.)</h2><div data-trace="lab9-edt"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 6 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Shape.java">import java.awt.Color;
@@ -546,7 +552,7 @@ public class Lab9Demo {
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 41</span>
+  <span class="counter" id="counter">1 / 43</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>

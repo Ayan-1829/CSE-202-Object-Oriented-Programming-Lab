@@ -149,8 +149,10 @@ public interface Eatable {
     }
 
     @Override
-    public void makeSound() {
-        System.out.println(name + &quot; barks: Woof! Woof!&quot;);
+    public void makeSound() {</pre>
+</div></section>
+<section class="slide " data-title="Dog: extends one, implements one (cont.)" aria-label="Dog: extends one, implements one (cont.)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 3 of 8 · <span class="walk-file">Dog.java</span></p><h2>Dog: extends one, implements one (cont.)</h2><pre data-start="12" class="code walk-code">        System.out.println(name + &quot; barks: Woof! Woof!&quot;);
     }
 
     @Override
@@ -231,10 +233,16 @@ if (animalRef instanceof Dog) {
 }</pre><ul class="walk-notes"><li>instanceof also answers “does this object implement Drawable?”.</li></ul>
 </div></section>
 <section class="slide " data-title="Trace: abstract methods and instanceof" aria-label="Trace: abstract methods and instanceof" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: abstract methods and instanceof</h2><p class="muted">One loop over an Animal[]: each object runs its own makeSound(), and only Drawable objects are drawn.</p><div data-trace="lab5-iface"></div>
+<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: abstract methods and instanceof</h2><p class="muted">One loop over an Animal[]: each object runs its own makeSound(), and only Drawable objects are drawn.</p>
+</div></section>
+<section class="slide " data-title="Trace: abstract methods and instanceof (cont.)" aria-label="Trace: abstract methods and instanceof (cont.)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: abstract methods and instanceof (cont.)</h2><div data-trace="lab5-iface"></div>
 </div></section>
 <section class="slide " data-title="Trace: an abstract class still has a constructor" aria-label="Trace: an abstract class still has a constructor" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: an abstract class still has a constructor</h2><p class="muted">Animal can never be created on its own, yet its constructor runs inside every Dog.</p><div data-trace="lab5-abstract"></div>
+<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: an abstract class still has a constructor</h2><p class="muted">Animal can never be created on its own, yet its constructor runs inside every Dog.</p>
+</div></section>
+<section class="slide " data-title="Trace: an abstract class still has a constructor (cont.)" aria-label="Trace: an abstract class still has a constructor (cont.)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: an abstract class still has a constructor (cont.)</h2><div data-trace="lab5-abstract"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 7 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Animal.java">public abstract class Animal {
@@ -528,7 +536,7 @@ Casted Dog breed: Golden Retriever</pre></div><p class="note-line">The same thre
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 35</span>
+  <span class="counter" id="counter">1 / 38</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>

@@ -113,7 +113,10 @@ int price = (int) 99.99;  // narrowing: explicit -&gt; 99</pre>
 }</pre>
 </div></section>
 <section class="slide " data-title="Loops, break and continue" aria-label="Loops, break and continue" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 6 of 6</p><h2>Loops, break and continue</h2><figure class="fig" data-fig="loop-flow"></figure><ul class=""><li><code>for</code>: number of iterations known in advance (summation).</li><li><code>while</code>: repeat while a condition holds (reverse digits).</li><li><code>do-while</code>: body runs at least once (Collatz sequence).</li><li><code>break</code> leaves the loop; <code>continue</code> skips to the next iteration.</li></ul>
+<p class="kicker">Theory 6 of 6</p><h2>Loops, break and continue</h2><figure class="fig" data-fig="loop-flow"></figure>
+</div></section>
+<section class="slide " data-title="Loops, break and continue (cont.)" aria-label="Loops, break and continue (cont.)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Theory 6 of 6</p><h2>Loops, break and continue (cont.)</h2><ul class=""><li><code>for</code>: number of iterations known in advance (summation).</li><li><code>while</code>: repeat while a condition holds (reverse digits).</li><li><code>do-while</code>: body runs at least once (Collatz sequence).</li><li><code>break</code> leaves the loop; <code>continue</code> skips to the next iteration.</li></ul>
 </div></section>
 <section class="slide " data-title="Execution flow" aria-label="Execution flow" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Implementation design</p><h2>Execution flow</h2><ol class="flow"><li>Declare and print the eight primitive variables and a String</li><li>Widen an int to double, narrow a double to int, convert char ↔ int</li><li>Classify a number (positive/zero/negative) and a BMI with if-else</li><li>Assign a letter grade with switch</li><li>Sum 1..10 with for; print even numbers using continue and break</li><li>Reverse digits with while</li><li>Print the Collatz sequence of 27 with do-while</li></ol><p class="note-line">Single class, everything inside <code>main</code>: the focus is syntax, not objects.</p>
@@ -150,9 +153,10 @@ System.out.println(&quot;int &quot; + age + &quot; widened to double: &quot; + a
 
 double pi = 3.14159;
 int piTruncated = (int) pi;
-System.out.println(&quot;double &quot; + pi + &quot; narrowed to int: &quot; + piTruncated);
-
-char letter = &#x27;Z&#x27;;
+System.out.println(&quot;double &quot; + pi + &quot; narrowed to int: &quot; + piTruncated);</pre>
+</div></section>
+<section class="slide " data-title="Widening and narrowing casts (cont.)" aria-label="Widening and narrowing casts (cont.)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 3 of 10 · <span class="walk-file">Lab1Demo.java</span></p><h2>Widening and narrowing casts (cont.)</h2><pre data-start="10" class="code walk-code">char letter = &#x27;Z&#x27;;
 int code = letter;
 char nextChar = (char) (code + 1);
 System.out.println(&quot;char &#x27;Z&#x27; as int: &quot; + code + &quot; | next char: &quot; + nextChar);</pre><ul class="walk-notes"><li>int → double happens automatically (widening).</li><li>double → int needs <code>(int)</code> and drops the fraction.</li><li>A char is a number: 90 + 1 is the char after Z.</li></ul>
@@ -254,8 +258,10 @@ do {
     System.out.print(collatz + &quot; &quot;);
     if (collatz % 2 == 0) {
         collatz = collatz / 2;
-    } else {
-        collatz = 3 * collatz + 1;
+    } else {</pre>
+</div></section>
+<section class="slide " data-title="do-while: the Collatz sequence (cont.)" aria-label="do-while: the Collatz sequence (cont.)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 10 of 10 · <span class="walk-file">Lab1Demo.java</span></p><h2>do-while: the Collatz sequence (cont.)</h2><pre data-start="11" class="code walk-code">        collatz = 3 * collatz + 1;
     }
     steps++;
 } while (collatz != 1);
@@ -263,13 +269,22 @@ System.out.println(&quot;1&quot;);
 System.out.println(&quot;Steps to reach 1: &quot; + steps);</pre><ul class="walk-notes"><li>The body runs before the test, so 27 is printed first.</li><li>Even → halve; odd → 3n + 1; stop at 1.</li></ul>
 </div></section>
 <section class="slide " data-title="Trace: widening and narrowing" aria-label="Trace: widening and narrowing" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 3</p><h2>Trace: widening and narrowing</h2><p class="muted">Watch each variable appear in main’s stack frame and see exactly what a cast keeps.</p><div data-trace="lab1-cast"></div>
+<p class="kicker">Step through the code · 1 of 3</p><h2>Trace: widening and narrowing</h2><p class="muted">Watch each variable appear in main’s stack frame and see exactly what a cast keeps.</p>
+</div></section>
+<section class="slide " data-title="Trace: widening and narrowing (cont.)" aria-label="Trace: widening and narrowing (cont.)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code · 1 of 3</p><h2>Trace: widening and narrowing (cont.)</h2><div data-trace="lab1-cast"></div>
 </div></section>
 <section class="slide " data-title="Trace: reversing the digits" aria-label="Trace: reversing the digits" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 3</p><h2>Trace: reversing the digits</h2><p class="muted">Follow temp, digit and reversed through every pass of the while loop.</p><div data-trace="lab1-reverse"></div>
+<p class="kicker">Step through the code · 2 of 3</p><h2>Trace: reversing the digits</h2><p class="muted">Follow temp, digit and reversed through every pass of the while loop.</p>
+</div></section>
+<section class="slide " data-title="Trace: reversing the digits (cont.)" aria-label="Trace: reversing the digits (cont.)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code · 2 of 3</p><h2>Trace: reversing the digits (cont.)</h2><div data-trace="lab1-reverse"></div>
 </div></section>
 <section class="slide " data-title="Trace: switch, case by case" aria-label="Trace: switch, case by case" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 3 of 3</p><h2>Trace: switch, case by case</h2><p class="muted">Pick a score. See which case the switch jumps to, how 100 falls through into case 9, and what break does.</p><div data-trace="lab1-switch"></div>
+<p class="kicker">Step through the code · 3 of 3</p><h2>Trace: switch, case by case</h2><p class="muted">Pick a score. See which case the switch jumps to, how 100 falls through into case 9, and what break does.</p>
+</div></section>
+<section class="slide " data-title="Trace: switch, case by case (cont.)" aria-label="Trace: switch, case by case (cont.)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code · 3 of 3</p><h2>Trace: switch, case by case (cont.)</h2><div data-trace="lab1-switch"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 1 file</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Lab1Demo.java">public class Lab1Demo {
@@ -510,7 +525,7 @@ Steps to reach 1: 111</pre></div><p class="note-line">Why is the next char after
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 49</span>
+  <span class="counter" id="counter">1 / 55</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>

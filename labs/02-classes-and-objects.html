@@ -169,8 +169,10 @@ public double getFuelLevel() { return fuelLevel; }
 public void setMake(String make) { this.make = make; }
 
 public void setFuelLevel(double fuelLevel) {
-    if (fuelLevel &gt;= 0.0 &amp;&amp; fuelLevel &lt;= 100.0) {
-        this.fuelLevel = fuelLevel;
+    if (fuelLevel &gt;= 0.0 &amp;&amp; fuelLevel &lt;= 100.0) {</pre>
+</div></section>
+<section class="slide " data-title="Getters, setters and a static method (cont.)" aria-label="Getters, setters and a static method (cont.)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 5 of 10 · <span class="walk-file">Car.java</span></p><h2>Getters, setters and a static method (cont.)</h2><pre data-start="11" class="code walk-code">        this.fuelLevel = fuelLevel;
     }
 }
 
@@ -229,10 +231,16 @@ System.out.println(&quot;\n=== Static Member ===&quot;);
 System.out.println(&quot;Total Car objects ever created: &quot; + Car.getCount());</pre><ul class="walk-notes"><li><code>car3 = car1</code> copies the reference, not the car.</li><li>The count is still 2: no object was created.</li></ul>
 </div></section>
 <section class="slide " data-title="Trace: objects, references and a static counter" aria-label="Trace: objects, references and a static counter" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: objects, references and a static counter</h2><p class="muted">See the objects on the heap, the references on the stack, and the one shared <code>count</code>.</p><div data-trace="lab2-car"></div>
+<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: objects, references and a static counter</h2><p class="muted">See the objects on the heap, the references on the stack, and the one shared <code>count</code>.</p>
+</div></section>
+<section class="slide " data-title="Trace: objects, references and a static counter (cont.)" aria-label="Trace: objects, references and a static counter (cont.)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: objects, references and a static counter (cont.)</h2><div data-trace="lab2-car"></div>
 </div></section>
 <section class="slide " data-title="Trace: methods that guard the object" aria-label="Trace: methods that guard the object" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: methods that guard the object</h2><p class="muted">Each call works on the object <code>this</code> points to. Watch brake(100) and refuel(5.0) refuse to break the rules.</p><div data-trace="lab2-methods"></div>
+<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: methods that guard the object</h2><p class="muted">Each call works on the object <code>this</code> points to. Watch brake(100) and refuel(5.0) refuse to break the rules.</p>
+</div></section>
+<section class="slide " data-title="Trace: methods that guard the object (cont.)" aria-label="Trace: methods that guard the object (cont.)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: methods that guard the object (cont.)</h2><div data-trace="lab2-methods"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 2 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Car.java">public class Car {
@@ -455,7 +463,7 @@ Total Car objects ever created: 2</pre></div><p class="note-line">car3 = car1 cr
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 40</span>
+  <span class="counter" id="counter">1 / 43</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>

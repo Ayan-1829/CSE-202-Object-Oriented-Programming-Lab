@@ -220,8 +220,10 @@ try {
     System.out.println(&quot;Main thread interrupted during deadlock test.&quot;);
     Thread.currentThread().interrupt();
 }
-if (riskyThread1.isAlive() || riskyThread2.isAlive()) {
-    System.out.println(&quot;\nPossible deadlock detected.&quot;);
+if (riskyThread1.isAlive() || riskyThread2.isAlive()) {</pre>
+</div></section>
+<section class="slide " data-title="Detecting it with a timeout (cont.)" aria-label="Detecting it with a timeout (cont.)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 9 of 9 · <span class="walk-file">Lab8Demo.java</span></p><h2>Detecting it with a timeout (cont.)</h2><pre data-start="11" class="code walk-code wide">    System.out.println(&quot;\nPossible deadlock detected.&quot;);
     System.out.println(&quot;At least one risky thread did not finish within timeout.&quot;);
     System.out.println(&quot;This happens because locks may be acquired in opposite order.&quot;);
 } else {
@@ -230,10 +232,16 @@ if (riskyThread1.isAlive() || riskyThread2.isAlive()) {
 }</pre><ul class="walk-notes"><li><code>join(3000)</code> waits at most 3 s; a thread still alive means it is stuck.</li></ul>
 </div></section>
 <section class="slide " data-title="Trace: lock ordering in transfer()" aria-label="Trace: lock ordering in transfer()" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: lock ordering in transfer()</h2><p class="muted">Try both directions: the locks are always taken in the same order, ACC-A first.</p><div data-trace="lab8-lock"></div>
+<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: lock ordering in transfer()</h2><p class="muted">Try both directions: the locks are always taken in the same order, ACC-A first.</p>
+</div></section>
+<section class="slide " data-title="Trace: lock ordering in transfer() (cont.)" aria-label="Trace: lock ordering in transfer() (cont.)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: lock ordering in transfer() (cont.)</h2><div data-trace="lab8-lock"></div>
 </div></section>
 <section class="slide " data-title="Trace: how a deadlock happens" aria-label="Trace: how a deadlock happens" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: how a deadlock happens</h2><p class="muted">Two transfers in opposite directions. Choose the timing and watch both threads end up BLOCKED, each holding the lock the other needs.</p><div data-trace="lab8-deadlock"></div>
+<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: how a deadlock happens</h2><p class="muted">Two transfers in opposite directions. Choose the timing and watch both threads end up BLOCKED, each holding the lock the other needs.</p>
+</div></section>
+<section class="slide " data-title="Trace: how a deadlock happens (cont.)" aria-label="Trace: how a deadlock happens (cont.)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: how a deadlock happens (cont.)</h2><div data-trace="lab8-deadlock"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 3 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="BankAccount.java">public class BankAccount {
@@ -531,7 +539,7 @@ Program demonstration completed.</pre></div><p class="note-line">The risky threa
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 37</span>
+  <span class="counter" id="counter">1 / 40</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>

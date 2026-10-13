@@ -131,8 +131,10 @@ if (d &lt;= r1 + r2) { /* balls touch: swap velocities */ }</pre>
 }
 
 public void bounceOff(Ball other) {
-    double tempVx = this.vx;
-    double tempVy = this.vy;
+    double tempVx = this.vx;</pre>
+</div></section>
+<section class="slide " data-title="Ball-to-ball collisions (cont.)" aria-label="Ball-to-ball collisions (cont.)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Code walkthrough 2 of 10 · <span class="walk-file">Ball.java</span></p><h2>Ball-to-ball collisions (cont.)</h2><pre data-start="10" class="code walk-code">    double tempVy = this.vy;
     this.vx = other.vx;
     this.vy = other.vy;
     other.vx = tempVx;
@@ -232,10 +234,16 @@ if (sleepTime &gt; 0) {
 }</pre><ul class="walk-notes"><li>A daemon thread does not keep the program alive after the window closes.</li></ul>
 </div></section>
 <section class="slide " data-title="Trace: one animation frame" aria-label="Trace: one animation frame" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: one animation frame</h2><p class="muted">Move, bounce off the wall, detect a collision and swap velocities.</p><div data-trace="lab10-ball"></div>
+<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: one animation frame</h2><p class="muted">Move, bounce off the wall, detect a collision and swap velocities.</p>
+</div></section>
+<section class="slide " data-title="Trace: one animation frame (cont.)" aria-label="Trace: one animation frame (cont.)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: one animation frame (cont.)</h2><div data-trace="lab10-ball"></div>
 </div></section>
 <section class="slide " data-title="Trace: the animation thread and the EDT" aria-label="Trace: the animation thread and the EDT" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: the animation thread and the EDT</h2><p class="muted">The Animator moves the balls, the EDT draws them. The panel’s lock makes sure the EDT never paints a half-moved frame.</p><div data-trace="lab10-worker"></div>
+<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: the animation thread and the EDT</h2><p class="muted">The Animator moves the balls, the EDT draws them. The panel’s lock makes sure the EDT never paints a half-moved frame.</p>
+</div></section>
+<section class="slide " data-title="Trace: the animation thread and the EDT (cont.)" aria-label="Trace: the animation thread and the EDT (cont.)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: the animation thread and the EDT (cont.)</h2><div data-trace="lab10-worker"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 5 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Ball.java">import java.awt.BasicStroke;
@@ -580,7 +588,7 @@ public class Lab10Demo {
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 39</span>
+  <span class="counter" id="counter">1 / 42</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
