@@ -4,7 +4,7 @@
 
 # CSE 202 · Object Oriented Programming Lab
 
-**Interactive slide decks for the ten Java lab sessions of the CSE 202 lab manual.**
+**Interactive slide decks for the ten Java lab sessions of CSE 202.**
 
 <a href="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"><img alt="Live site: open" src="https://img.shields.io/badge/Live_site-open-E07A1F?style=for-the-badge&logo=githubpages&logoColor=white"></a>
 <img alt="Labs: 10" src="https://img.shields.io/badge/Labs-10-555555?style=for-the-badge">

@@ -54,7 +54,7 @@
 <section class="slide title-slide" data-title="Java Syntax, Data Types &amp; Control Flow" aria-label="Java Syntax, Data Types &amp; Control Flow" tabindex="-1"><div class="slide-inner">
 <span class="topic-art" data-art="1" aria-hidden="true"></span>
 <span class="badge big">1</span>
-<p class="kicker">Lab Manual I · CSE 202</p>
+<p class="kicker">Lab I · CSE 202</p>
 <h1>Java Syntax, Data Types & Control Flow</h1>
 <p class="lead">Set up the JDK and an IDE, then write a first Java program that uses variables, primitive types, type casting, if/switch decisions and the three loops.</p>
 <div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
@@ -71,9 +71,9 @@
 <p class="kicker">Lab 1 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Install Java and NetBeans</a></li><li><a href="#s=9">Theory recap</a></li><li><a href="#s=17">Program design</a></li><li><a href="#s=18">Code walkthrough</a></li><li><a href="#s=28">Step-through traces: stack, heap and output</a></li><li><a href="#s=32">Expected output</a></li><li><a href="#s=33">Interactive demos</a></li><li><a href="#s=38">In-lab tasks</a></li><li><a href="#s=43">Lab report exercises</a></li><li><a href="#s=46">Viva questions and quiz</a></li></ol>
 </div></section>
 <section class="slide " data-title="Which Java do you need?" aria-label="Which Java do you need?" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Setting up · 1 of 4</p><h2>Which Java do you need?</h2><ul class="big-list"><li>A <b>JDK</b> (Java Development Kit): it contains the compiler <code>javac</code> and the runtime <code>java</code>. A JRE alone cannot compile.</li><li>Use the current <b>LTS</b> release, <b>JDK 25</b>, from the official Java site <code>oracle.com/java</code>. The manual needs JDK 11 or later.</li><li>Install the JDK <b>first</b>, then the IDE: this course uses <b>Apache NetBeans</b>.</li><li>On the next slides, pick your operating system: each slide has direct download links, the steps and a YouTube video link.</li></ul>
+<p class="kicker">Setting up · 1 of 4</p><h2>Which Java do you need?</h2><ul class="big-list"><li>A <b>JDK</b> (Java Development Kit): it contains the compiler <code>javac</code> and the runtime <code>java</code>. A JRE alone cannot compile.</li><li>Use the current <b>LTS</b> release, <b>JDK 25</b>, from the official Java site <code>oracle.com/java</code>. These labs need JDK 11 or later.</li><li>Install the JDK <b>first</b>, then the IDE: this course uses <b>Apache NetBeans</b>.</li><li>On the next slides, pick your operating system: each slide has direct download links, the steps and a YouTube video link.</li></ul>
 </div></section>
-<section class="slide " data-title="Install the JDK" aria-label="Install the JDK" tabindex="-1"><div class="slide-inner">
+<section class="slide " data-title="Install the JDK" aria-label="Install the JDK" tabindex="-1"><div style="zoom:0.90;" class="slide-inner">
 <p class="kicker">Setting up · 2 of 4</p><h2>Install the JDK</h2><div class="os-setup" data-setup="jdk"></div>
 </div></section>
 <section class="slide " data-title="Install Apache NetBeans" aria-label="Install Apache NetBeans" tabindex="-1"><div class="slide-inner">
@@ -116,11 +116,8 @@ int price = (int) 99.99;  // narrowing: explicit -&gt; 99</pre>
     default:         grade = &#x27;F&#x27;;
 }</pre>
 </div></section>
-<section class="slide " data-title="Loops, break and continue" aria-label="Loops, break and continue" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 6 of 6</p><h2>Loops, break and continue</h2><figure class="fig" data-fig="loop-flow"></figure>
-</div></section>
-<section class="slide " data-title="Loops, break and continue (cont.)" aria-label="Loops, break and continue (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 6 of 6</p><h2>Loops, break and continue (cont.)</h2><ul class=""><li><code>for</code>: number of iterations known in advance (summation).</li><li><code>while</code>: repeat while a condition holds (reverse digits).</li><li><code>do-while</code>: body runs at least once (Collatz sequence).</li><li><code>break</code> leaves the loop; <code>continue</code> skips to the next iteration.</li></ul>
+<section class="slide " data-title="Loops, break and continue" aria-label="Loops, break and continue" tabindex="-1"><div style="zoom:0.91;" class="slide-inner">
+<p class="kicker">Theory 6 of 6</p><h2>Loops, break and continue</h2><figure class="fig" data-fig="loop-flow"></figure><ul class=""><li><code>for</code>: number of iterations known in advance (summation).</li><li><code>while</code>: repeat while a condition holds (reverse digits).</li><li><code>do-while</code>: body runs at least once (Collatz sequence).</li><li><code>break</code> leaves the loop; <code>continue</code> skips to the next iteration.</li></ul>
 </div></section>
 <section class="slide " data-title="Execution flow" aria-label="Execution flow" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Implementation design</p><h2>Execution flow</h2><ol class="flow"><li>Declare and print the eight primitive variables and a String</li><li>Widen an int to double, narrow a double to int, convert char ↔ int</li><li>Classify a number (positive/zero/negative) and a BMI with if-else</li><li>Assign a letter grade with switch</li><li>Sum 1..10 with for; print even numbers using continue and break</li><li>Reverse digits with while</li><li>Print the Collatz sequence of 27 with do-while</li></ol><p class="note-line">Single class, everything inside <code>main</code>: the focus is syntax, not objects.</p>
@@ -149,7 +146,7 @@ System.out.println(&quot;char    : &quot; + initial + &quot; (Unicode = &quot; +
 System.out.println(&quot;boolean : &quot; + isStudent);
 System.out.println(&quot;String  : &quot; + name);</pre><ul class="walk-notes"><li><code>+</code> joins text and values into one String.</li><li><code>(int) initial</code> shows the Unicode number of a char.</li></ul>
 </div></section>
-<section class="slide " data-title="Widening and narrowing casts" aria-label="Widening and narrowing casts" tabindex="-1"><div class="slide-inner">
+<section class="slide " data-title="Widening and narrowing casts" aria-label="Widening and narrowing casts" tabindex="-1"><div style="zoom:0.98;" class="slide-inner">
 <p class="kicker">Code walkthrough 3 of 10 · <span class="walk-file">Lab1Demo.java</span></p><h2>Widening and narrowing casts</h2><pre class="code walk-code">// 2. Type Casting
 System.out.println(&quot;\n=== Type Casting ===&quot;);
 double ageAsDouble = age;
@@ -157,10 +154,9 @@ System.out.println(&quot;int &quot; + age + &quot; widened to double: &quot; + a
 
 double pi = 3.14159;
 int piTruncated = (int) pi;
-System.out.println(&quot;double &quot; + pi + &quot; narrowed to int: &quot; + piTruncated);</pre>
-</div></section>
-<section class="slide " data-title="Widening and narrowing casts (cont.)" aria-label="Widening and narrowing casts (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 3 of 10 · <span class="walk-file">Lab1Demo.java</span></p><h2>Widening and narrowing casts (cont.)</h2><pre data-start="10" class="code walk-code">char letter = &#x27;Z&#x27;;
+System.out.println(&quot;double &quot; + pi + &quot; narrowed to int: &quot; + piTruncated);
+
+char letter = &#x27;Z&#x27;;
 int code = letter;
 char nextChar = (char) (code + 1);
 System.out.println(&quot;char &#x27;Z&#x27; as int: &quot; + code + &quot; | next char: &quot; + nextChar);</pre><ul class="walk-notes"><li>int → double happens automatically (widening).</li><li>double → int needs <code>(int)</code> and drops the fraction.</li><li>A char is a number: 90 + 1 is the char after Z.</li></ul>
@@ -192,7 +188,7 @@ if (bmi &lt; 18.5) {
     System.out.println(&quot;Obese&quot;);
 }</pre><ul class="walk-notes"><li>Each test only needs the upper bound: earlier branches already ruled out smaller values.</li><li><code>printf("%.2f")</code> prints two decimals.</li></ul>
 </div></section>
-<section class="slide " data-title="switch with fall-through" aria-label="switch with fall-through" tabindex="-1"><div class="slide-inner">
+<section class="slide " data-title="switch with fall-through" aria-label="switch with fall-through" tabindex="-1"><div style="zoom:0.95;" class="slide-inner">
 <p class="kicker">Code walkthrough 6 of 10 · <span class="walk-file">Lab1Demo.java</span></p><h2>switch with fall-through</h2><div class="walk-side"><pre class="code walk-code">int score = 85;
 char grade;
 switch (score / 10) {
@@ -252,7 +248,7 @@ while (temp != 0) {
 System.out.println(&quot;Original number: &quot; + number);
 System.out.println(&quot;Reversed number: &quot; + reversed);</pre><ul class="walk-notes"><li><code>% 10</code> takes the last digit; <code>/ 10</code> removes it.</li><li>The loop runs until no digits are left.</li></ul>
 </div></section>
-<section class="slide " data-title="do-while: the Collatz sequence" aria-label="do-while: the Collatz sequence" tabindex="-1"><div class="slide-inner">
+<section class="slide " data-title="do-while: the Collatz sequence" aria-label="do-while: the Collatz sequence" tabindex="-1"><div style="zoom:0.92;" class="slide-inner">
 <p class="kicker">Code walkthrough 10 of 10 · <span class="walk-file">Lab1Demo.java</span></p><h2>do-while: the Collatz sequence</h2><pre class="code walk-code">// 7. Do-While Loop
 System.out.println(&quot;\n=== Do-While Loop: Collatz Sequence ===&quot;);
 long collatz = 27;
@@ -262,33 +258,22 @@ do {
     System.out.print(collatz + &quot; &quot;);
     if (collatz % 2 == 0) {
         collatz = collatz / 2;
-    } else {</pre>
-</div></section>
-<section class="slide " data-title="do-while: the Collatz sequence (cont.)" aria-label="do-while: the Collatz sequence (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 10 of 10 · <span class="walk-file">Lab1Demo.java</span></p><h2>do-while: the Collatz sequence (cont.)</h2><pre data-start="11" class="code walk-code">        collatz = 3 * collatz + 1;
+    } else {
+        collatz = 3 * collatz + 1;
     }
     steps++;
 } while (collatz != 1);
 System.out.println(&quot;1&quot;);
 System.out.println(&quot;Steps to reach 1: &quot; + steps);</pre><ul class="walk-notes"><li>The body runs before the test, so 27 is printed first.</li><li>Even → halve; odd → 3n + 1; stop at 1.</li></ul>
 </div></section>
-<section class="slide " data-title="Trace: widening and narrowing" aria-label="Trace: widening and narrowing" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 3</p><h2>Trace: widening and narrowing</h2><p class="muted">Watch each variable appear in main’s stack frame and see exactly what a cast keeps.</p>
+<section class="slide " data-title="Trace: widening and narrowing" aria-label="Trace: widening and narrowing" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
+<p class="kicker">Step through the code · 1 of 3</p><h2>Trace: widening and narrowing</h2><p class="muted">Watch each variable appear in main’s stack frame and see exactly what a cast keeps.</p><div data-trace="lab1-cast"></div>
 </div></section>
-<section class="slide " data-title="Trace: widening and narrowing (cont.)" aria-label="Trace: widening and narrowing (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 3</p><h2>Trace: widening and narrowing (cont.)</h2><div data-trace="lab1-cast"></div>
+<section class="slide " data-title="Trace: reversing the digits" aria-label="Trace: reversing the digits" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
+<p class="kicker">Step through the code · 2 of 3</p><h2>Trace: reversing the digits</h2><p class="muted">Follow temp, digit and reversed through every pass of the while loop.</p><div data-trace="lab1-reverse"></div>
 </div></section>
-<section class="slide " data-title="Trace: reversing the digits" aria-label="Trace: reversing the digits" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 3</p><h2>Trace: reversing the digits</h2><p class="muted">Follow temp, digit and reversed through every pass of the while loop.</p>
-</div></section>
-<section class="slide " data-title="Trace: reversing the digits (cont.)" aria-label="Trace: reversing the digits (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 3</p><h2>Trace: reversing the digits (cont.)</h2><div data-trace="lab1-reverse"></div>
-</div></section>
-<section class="slide " data-title="Trace: switch, case by case" aria-label="Trace: switch, case by case" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 3 of 3</p><h2>Trace: switch, case by case</h2><p class="muted">Pick a score. See which case the switch jumps to, how 100 falls through into case 9, and what break does.</p>
-</div></section>
-<section class="slide " data-title="Trace: switch, case by case (cont.)" aria-label="Trace: switch, case by case (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 3 of 3</p><h2>Trace: switch, case by case (cont.)</h2><div data-trace="lab1-switch"></div>
+<section class="slide " data-title="Trace: switch, case by case" aria-label="Trace: switch, case by case" tabindex="-1"><div style="zoom:0.91;" class="slide-inner">
+<p class="kicker">Step through the code · 3 of 3</p><h2>Trace: switch, case by case</h2><p class="muted">Pick a score. See which case the switch jumps to, how 100 falls through into case 9, and what break does.</p><div data-trace="lab1-switch"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 1 file</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Lab1Demo.java">public class Lab1Demo {

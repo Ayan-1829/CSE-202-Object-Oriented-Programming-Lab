@@ -54,7 +54,7 @@
 <section class="slide title-slide" data-title="Inheritance, Polymorphism &amp; Overriding" aria-label="Inheritance, Polymorphism &amp; Overriding" tabindex="-1"><div class="slide-inner">
 <span class="topic-art" data-art="7" aria-hidden="true"></span>
 <span class="badge big">4</span>
-<p class="kicker">Lab Manual IV · CSE 202</p>
+<p class="kicker">Lab IV · CSE 202</p>
 <h1>Inheritance, Polymorphism & Overriding</h1>
 <p class="lead">Build a Vehicle hierarchy with Car, Motorcycle and ElectricCar: reuse code with extends and super, override display(), and let one loop drive every kind of vehicle.</p>
 <div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
@@ -246,17 +246,11 @@ ref1.display();
 ref2.display();
 ref3.display();</pre><ul class="walk-notes"><li>The reference type is Vehicle, but each object’s own display() runs.</li></ul>
 </div></section>
-<section class="slide " data-title="Trace: super(…) and dynamic dispatch" aria-label="Trace: super(…) and dynamic dispatch" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: super(…) and dynamic dispatch</h2><p class="muted">Watch super(…) build the inherited part, then one call site run two different display() methods.</p>
+<section class="slide " data-title="Trace: super(…) and dynamic dispatch" aria-label="Trace: super(…) and dynamic dispatch" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
+<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: super(…) and dynamic dispatch</h2><p class="muted">Watch super(…) build the inherited part, then one call site run two different display() methods.</p><div data-trace="lab4-dispatch"></div>
 </div></section>
-<section class="slide " data-title="Trace: super(…) and dynamic dispatch (cont.)" aria-label="Trace: super(…) and dynamic dispatch (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: super(…) and dynamic dispatch (cont.)</h2><div data-trace="lab4-dispatch"></div>
-</div></section>
-<section class="slide " data-title="Trace: instanceof before every cast" aria-label="Trace: instanceof before every cast" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: instanceof before every cast</h2><p class="muted">One loop over a Vehicle[]: the check decides whether the cast is safe. The last line shows what happens without it.</p>
-</div></section>
-<section class="slide " data-title="Trace: instanceof before every cast (cont.)" aria-label="Trace: instanceof before every cast (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: instanceof before every cast (cont.)</h2><div data-trace="lab4-cast"></div>
+<section class="slide " data-title="Trace: instanceof before every cast" aria-label="Trace: instanceof before every cast" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
+<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: instanceof before every cast</h2><p class="muted">One loop over a Vehicle[]: the check decides whether the cast is safe. The last line shows what happens without it.</p><div data-trace="lab4-cast"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 5 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Vehicle.java">public class Vehicle {
@@ -544,9 +538,9 @@ Number of doors after casting: 2
 === Inherited brake() Method ===
 After testCar.accelerate(100):  Speed : 100 km/h
 After testCar.brake(30):        Speed : 70 km/h
-After testCar.brake(200):       Speed : 0 km/h</pre></div><p class="note-line">Shortened: repeated display blocks are summarised. The full output is in the lab manual, section 4.5.2.</p>
+After testCar.brake(200):       Speed : 0 km/h</pre></div><p class="note-line">Shortened: repeated display blocks are summarised. Run the program to see every block in full.</p>
 </div></section>
-<section class="slide " data-title="Reference type vs object type" aria-label="Reference type vs object type" tabindex="-1"><div class="slide-inner">
+<section class="slide " data-title="Reference type vs object type" aria-label="Reference type vs object type" tabindex="-1"><div style="zoom:0.90;" class="slide-inner">
 <p class="kicker">Interactive 1 of 2</p><h2>Reference type vs object type</h2><div data-demo="dispatch"></div>
 </div></section>
 <section class="slide " data-title="When is a cast safe?" aria-label="When is a cast safe?" tabindex="-1"><div class="slide-inner">

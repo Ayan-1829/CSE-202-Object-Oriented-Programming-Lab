@@ -54,7 +54,7 @@
 <section class="slide title-slide" data-title="Thread Creation &amp; Thread States" aria-label="Thread Creation &amp; Thread States" tabindex="-1"><div class="slide-inner">
 <span class="topic-art" data-art="11" aria-hidden="true"></span>
 <span class="badge big">7</span>
-<p class="kicker">Lab Manual VII · CSE 202</p>
+<p class="kicker">Lab VII · CSE 202</p>
 <h1>Thread Creation & Thread States</h1>
 <p class="lead">Create threads by extending Thread and by implementing Runnable, watch them move through NEW, RUNNABLE, TIMED_WAITING and TERMINATED, and protect a shared counter with synchronized methods.</p>
 <div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
@@ -209,17 +209,11 @@ try {
     Thread.currentThread().interrupt();
 }</pre><ul class="walk-notes"><li>main pauses until each thread has terminated.</li></ul>
 </div></section>
-<section class="slide " data-title="Trace: Thread objects and their states" aria-label="Trace: Thread objects and their states" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: Thread objects and their states</h2><p class="muted">The Thread objects and the shared Counter live on the heap; watch their state change from NEW to TERMINATED.</p>
+<section class="slide " data-title="Trace: Thread objects and their states" aria-label="Trace: Thread objects and their states" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
+<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: Thread objects and their states</h2><p class="muted">The Thread objects and the shared Counter live on the heap; watch their state change from NEW to TERMINATED.</p><div data-trace="lab7-states"></div>
 </div></section>
-<section class="slide " data-title="Trace: Thread objects and their states (cont.)" aria-label="Trace: Thread objects and their states (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: Thread objects and their states (cont.)</h2><div data-trace="lab7-states"></div>
-</div></section>
-<section class="slide " data-title="Trace: start() vs run()" aria-label="Trace: start() vs run()" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: start() vs run()</h2><p class="muted">The same run() method, called two ways. Only start() gives it a new thread and a new stack.</p>
-</div></section>
-<section class="slide " data-title="Trace: start() vs run() (cont.)" aria-label="Trace: start() vs run() (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: start() vs run() (cont.)</h2><div data-trace="lab7-startrun"></div>
+<section class="slide " data-title="Trace: start() vs run()" aria-label="Trace: start() vs run()" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
+<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: start() vs run()</h2><p class="muted">The same run() method, called two ways. Only start() gives it a new thread and a new stack.</p><div data-trace="lab7-startrun"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 4 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Counter.java">public class Counter {
@@ -395,7 +389,7 @@ IncrementThread-1 final state: TERMINATED
 DecrementThread-1 final state: TERMINATED
 DecrementThread-2 final state: TERMINATED
 All threads have completed.
-Main thread exiting.</pre></div><p class="note-line">One possible run: the order of thread messages changes every time, but the final value is always 3 − (3 + 2) = −2. (The sample printed in the manual ends at −3 with one decrement too many.)</p>
+Main thread exiting.</pre></div><p class="note-line">One possible run: the order of thread messages changes every time, but the final value is always 3 − (3 + 2) = −2. (A common mistake is to print −3 here, one decrement too many.)</p>
 </div></section>
 <section class="slide " data-title="Two threads, many possible outputs" aria-label="Two threads, many possible outputs" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Interactive 1 of 2</p><h2>Two threads, many possible outputs</h2><div data-demo="interleave"></div>

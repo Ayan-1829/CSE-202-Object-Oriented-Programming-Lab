@@ -95,7 +95,7 @@ I18N_BN_ADD({
 "Copy or download each file, save it under the same name, then compile and run: <code>javac *.java</code> → <code>java Lab7Demo</code>": "প্রতিটি ফাইল কপি বা ডাউনলোড করুন, একই নামে সংরক্ষণ করুন, তারপর compile করে চালান: <code>javac *.java</code> → <code>java Lab7Demo</code>",
 "▶ Run program": "▶ প্রোগ্রাম চালান",
 "Clear": "মুছুন",
-"One possible run: the order of thread messages changes every time, but the final value is always 3 − (3 + 2) = −2. (The sample printed in the manual ends at −3 with one decrement too many.)": "একটি সম্ভাব্য run: thread-এর বার্তার ক্রম প্রতিবার বদলায়, কিন্তু চূড়ান্ত মান সবসময় 3 − (3 + 2) = −2। (ম্যানুয়ালে ছাপা নমুনা একটি অতিরিক্ত decrement-সহ −3-এ শেষ হয়।)",
+"One possible run: the order of thread messages changes every time, but the final value is always 3 − (3 + 2) = −2. (A common mistake is to print −3 here, one decrement too many.)": "একটি সম্ভাব্য run: প্রতিবার thread-এর বার্তার ক্রম বদলায়, কিন্তু চূড়ান্ত মান সবসময় 3 − (3 + 2) = −2। (এখানে −3 ছাপানো একটি প্রচলিত ভুল, একবার বেশি decrement।)",
 "Two threads, many possible outputs": "দুটি thread, অনেক সম্ভাব্য output",
 "The scheduler decides when each thread runs, so every run can interleave differently. Each thread keeps its own order, though.": "প্রতিটি thread কখন চলবে তা scheduler ঠিক করে, তাই প্রতিবার ভিন্নভাবে interleave হতে পারে। তবে প্রতিটি thread নিজের ক্রম ধরে রাখে।",
 "↻ Run the program again": "↻ প্রোগ্রাম আবার চালান",

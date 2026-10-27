@@ -54,7 +54,7 @@
 <section class="slide title-slide" data-title="Constructors, Overloading &amp; Reference Passing" aria-label="Constructors, Overloading &amp; Reference Passing" tabindex="-1"><div class="slide-inner">
 <span class="topic-art" data-art="5" aria-hidden="true"></span>
 <span class="badge big">3</span>
-<p class="kicker">Lab Manual III · CSE 202</p>
+<p class="kicker">Lab III · CSE 202</p>
 <h1>Constructors, Overloading & Reference Passing</h1>
 <p class="lead">Give a Rectangle class default, parameterised and copy constructors chained with this(…), overload area() and describe(), and find out exactly what Java passes to a method.</p>
 <div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
@@ -155,7 +155,7 @@ public static double area(double width, double height) {
     return width * height;
 }</pre><ul class="walk-notes"><li>Same name, different parameters.</li><li>The static one needs no object: <code>Rectangle.area(3, 8)</code>.</li></ul>
 </div></section>
-<section class="slide " data-title="describe() overloads and scale()" aria-label="describe() overloads and scale()" tabindex="-1"><div class="slide-inner">
+<section class="slide " data-title="describe() overloads and scale()" aria-label="describe() overloads and scale()" tabindex="-1"><div style="zoom:0.95;" class="slide-inner">
 <p class="kicker">Code walkthrough 5 of 13 · <span class="walk-file">Rectangle.java</span></p><h2>describe() overloads and scale()</h2><pre class="code walk-code">public String describe() {
     return String.format(&quot;Rectangle[%.2f x %.2f, colour=%s, area=%.2f]&quot;,
             width, height, colour, area());
@@ -165,10 +165,8 @@ public String describe(String prefix) {
     return prefix + &quot;: &quot; + describe();
 }
 
-public void scale(double factor) {</pre>
-</div></section>
-<section class="slide " data-title="describe() overloads and scale() (cont.)" aria-label="describe() overloads and scale() (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 5 of 13 · <span class="walk-file">Rectangle.java</span></p><h2>describe() overloads and scale() (cont.)</h2><pre data-start="11" class="code walk-code">    if (factor &gt; 0) {
+public void scale(double factor) {
+    if (factor &gt; 0) {
         width = width * factor;
         height = height * factor;
     }
@@ -250,23 +248,14 @@ System.out.println(&quot;Before method call: &quot; + original.describe());
 tryReassignReference(original);
 System.out.println(&quot;After method call : &quot; + original.describe());</pre><ul class="walk-notes"><li>Mutating through the reference: the change is visible.</li><li>Reassigning the reference: the caller still sees the Pink 2 × 3 rectangle.</li></ul>
 </div></section>
-<section class="slide " data-title="Trace: constructor chaining with this(…)" aria-label="Trace: constructor chaining with this(…)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 3</p><h2>Trace: constructor chaining with this(…)</h2><p class="muted">The stack grows by one frame when one constructor hands over to another.</p>
+<section class="slide " data-title="Trace: constructor chaining with this(…)" aria-label="Trace: constructor chaining with this(…)" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
+<p class="kicker">Step through the code · 1 of 3</p><h2>Trace: constructor chaining with this(…)</h2><p class="muted">The stack grows by one frame when one constructor hands over to another.</p><div data-trace="lab3-chain"></div>
 </div></section>
-<section class="slide " data-title="Trace: constructor chaining with this(…) (cont.)" aria-label="Trace: constructor chaining with this(…) (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 3</p><h2>Trace: constructor chaining with this(…) (cont.)</h2><div data-trace="lab3-chain"></div>
+<section class="slide " data-title="Trace: pass-by-value, three ways" aria-label="Trace: pass-by-value, three ways" tabindex="-1"><div style="zoom:0.94;" class="slide-inner">
+<p class="kicker">Step through the code · 2 of 3</p><h2>Trace: pass-by-value, three ways</h2><p class="muted">Before stepping, predict which call changes something the caller can see.</p><div data-trace="lab3-pass"></div>
 </div></section>
-<section class="slide " data-title="Trace: pass-by-value, three ways" aria-label="Trace: pass-by-value, three ways" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 3</p><h2>Trace: pass-by-value, three ways</h2><p class="muted">Before stepping, predict which call changes something the caller can see.</p>
-</div></section>
-<section class="slide " data-title="Trace: pass-by-value, three ways (cont.)" aria-label="Trace: pass-by-value, three ways (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 3</p><h2>Trace: pass-by-value, three ways (cont.)</h2><div data-trace="lab3-pass"></div>
-</div></section>
-<section class="slide " data-title="Trace: copy or alias?" aria-label="Trace: copy or alias?" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 3 of 3</p><h2>Trace: copy or alias?</h2><p class="muted">r4 is a copy made by the copy constructor; r5 is just another reference. Which one changes when r3 does?</p>
-</div></section>
-<section class="slide " data-title="Trace: copy or alias? (cont.)" aria-label="Trace: copy or alias? (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 3 of 3</p><h2>Trace: copy or alias? (cont.)</h2><div data-trace="lab3-copy"></div>
+<section class="slide " data-title="Trace: copy or alias?" aria-label="Trace: copy or alias?" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
+<p class="kicker">Step through the code · 3 of 3</p><h2>Trace: copy or alias?</h2><p class="muted">r4 is a copy made by the copy constructor; r5 is just another reference. Which one changes when r3 does?</p><div data-trace="lab3-copy"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 2 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Rectangle.java">public class Rectangle {

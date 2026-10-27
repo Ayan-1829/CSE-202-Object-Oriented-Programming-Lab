@@ -138,8 +138,16 @@
     });
     return out;
   }
-  /* used by the extraction tool (_tools/i18n): every key on this page */
-  window.I18N = { collect: () => { const set = new Set(); roots().forEach((r) => collect(r).forEach((x) => set.add(x.key))); quizKeys().forEach((k) => set.add(k)); animKeys().forEach((k) => set.add(k)); return Array.from(set); }, dict: DICT };
+  /* hover texts on diagram elements (data-tip, see diagram.js) are keys too */
+  function tipKeys() {
+    const out = [];
+    document.querySelectorAll('[data-tip]').forEach((el) => { const k = norm(esc(el.getAttribute('data-tip') || '')); if (hasWords(k)) out.push(k); });
+    return out;
+  }
+  /* used by the extraction tool (_tools/i18n): every key on this page.
+     tip(raw): the HTML to show for a hover text — Bengali when chosen and translated, else the English */
+  window.I18N = { collect: () => { const set = new Set(); roots().forEach((r) => collect(r).forEach((x) => set.add(x.key))); quizKeys().forEach((k) => set.add(k)); animKeys().forEach((k) => set.add(k)); tipKeys().forEach((k) => set.add(k)); return Array.from(set); }, dict: DICT,
+    tip: (raw) => { const k = norm(esc(String(raw))); const t = lang === 'bn' ? look(k) : null; return t != null ? t : k; } };
 
   /* translate what the slides' tools draw later (demos re-render, the quiz moves on) */
   let lang = 'en', busy = false, pending = new Set(), raf = 0;

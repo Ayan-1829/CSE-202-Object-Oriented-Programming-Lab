@@ -54,7 +54,7 @@
 <section class="slide title-slide" data-title="Animation with Threads" aria-label="Animation with Threads" tabindex="-1"><div class="slide-inner">
 <span class="topic-art" data-art="14" aria-hidden="true"></span>
 <span class="badge big">10</span>
-<p class="kicker">Lab Manual X · CSE 202</p>
+<p class="kicker">Lab X · CSE 202</p>
 <h1>Animation with Threads</h1>
 <p class="lead">Animate bouncing balls: a worker thread updates positions about 60 times a second, a custom panel draws each frame with double buffering, and Start, Pause and Reset buttons control it.</p>
 <div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
@@ -126,7 +126,7 @@ if (d &lt;= r1 + r2) { /* balls touch: swap velocities */ }</pre>
     }
 }</pre><ul class="walk-notes"><li>Add the velocity each frame; reverse it at a wall and keep the ball inside.</li></ul>
 </div></section>
-<section class="slide " data-title="Ball-to-ball collisions" aria-label="Ball-to-ball collisions" tabindex="-1"><div class="slide-inner">
+<section class="slide " data-title="Ball-to-ball collisions" aria-label="Ball-to-ball collisions" tabindex="-1"><div style="zoom:0.96;" class="slide-inner">
 <p class="kicker">Code walkthrough 2 of 10 · <span class="walk-file">Ball.java</span></p><h2>Ball-to-ball collisions</h2><pre class="code walk-code">public boolean collidesWith(Ball other) {
     double dx = this.x - other.x;
     double dy = this.y - other.y;
@@ -135,10 +135,8 @@ if (d &lt;= r1 + r2) { /* balls touch: swap velocities */ }</pre>
 }
 
 public void bounceOff(Ball other) {
-    double tempVx = this.vx;</pre>
-</div></section>
-<section class="slide " data-title="Ball-to-ball collisions (cont.)" aria-label="Ball-to-ball collisions (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 2 of 10 · <span class="walk-file">Ball.java</span></p><h2>Ball-to-ball collisions (cont.)</h2><pre data-start="10" class="code walk-code">    double tempVy = this.vy;
+    double tempVx = this.vx;
+    double tempVy = this.vy;
     this.vx = other.vx;
     this.vy = other.vy;
     other.vx = tempVx;

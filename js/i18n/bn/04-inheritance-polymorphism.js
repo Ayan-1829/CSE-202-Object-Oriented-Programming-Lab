@@ -114,7 +114,7 @@ I18N_BN_ADD({
 "Copy or download each file, save it under the same name, then compile and run: <code>javac *.java</code> → <code>java Lab4Demo</code>": "প্রতিটি ফাইল কপি বা ডাউনলোড করুন, একই নামে সংরক্ষণ করুন, তারপর compile করে চালান: <code>javac *.java</code> → <code>java Lab4Demo</code>",
 "▶ Run program": "▶ প্রোগ্রাম চালান",
 "Clear": "মুছুন",
-"Shortened: repeated display blocks are summarised. The full output is in the lab manual, section 4.5.2.": "সংক্ষিপ্ত: পুনরাবৃত্ত display অংশগুলো সারসংক্ষেপ করা। পূর্ণ output ল্যাব ম্যানুয়ালের 4.5.2 অংশে আছে।",
+"Shortened: repeated display blocks are summarised. Run the program to see every block in full.": "সংক্ষেপিত: পুনরাবৃত্ত display block-গুলো সংক্ষেপে দেখানো হয়েছে। প্রতিটি block পুরোপুরি দেখতে program-টি চালান।",
 "Reference type vs object type": "Reference type বনাম object type",
 "The reference type decides what you are ALLOWED to call (checked at compile time). The object type decides WHICH version runs (chosen at run time).": "Reference type ঠিক করে আপনি কী call করতে পারবেন (compile time-এ যাচাই)। Object type ঠিক করে কোন সংস্করণ চলবে (run time-এ বাছাই)।",
 "✓ Compiles, because Animal declares sound().": "✓ Compile হয়, কারণ Animal sound() ঘোষণা করে।",

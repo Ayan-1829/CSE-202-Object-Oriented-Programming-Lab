@@ -54,7 +54,7 @@
 <section class="slide title-slide" data-title="Abstract Classes &amp; Interfaces" aria-label="Abstract Classes &amp; Interfaces" tabindex="-1"><div class="slide-inner">
 <span class="topic-art" data-art="9" aria-hidden="true"></span>
 <span class="badge big">5</span>
-<p class="kicker">Lab Manual V · CSE 202</p>
+<p class="kicker">Lab V · CSE 202</p>
 <h1>Abstract Classes & Interfaces</h1>
 <p class="lead">Use an abstract Animal class for shared state and required behaviour, and the Drawable and Eatable interfaces for optional capabilities, then treat objects through both kinds of reference.</p>
 <div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
@@ -232,17 +232,11 @@ if (animalRef instanceof Dog) {
     System.out.println(&quot;Casted Dog breed: &quot; + castedDog.getBreed());
 }</pre><ul class="walk-notes"><li>instanceof also answers “does this object implement Drawable?”.</li></ul>
 </div></section>
-<section class="slide " data-title="Trace: abstract methods and instanceof" aria-label="Trace: abstract methods and instanceof" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: abstract methods and instanceof</h2><p class="muted">One loop over an Animal[]: each object runs its own makeSound(), and only Drawable objects are drawn.</p>
+<section class="slide " data-title="Trace: abstract methods and instanceof" aria-label="Trace: abstract methods and instanceof" tabindex="-1"><div style="zoom:0.94;" class="slide-inner">
+<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: abstract methods and instanceof</h2><p class="muted">One loop over an Animal[]: each object runs its own makeSound(), and only Drawable objects are drawn.</p><div data-trace="lab5-iface"></div>
 </div></section>
-<section class="slide " data-title="Trace: abstract methods and instanceof (cont.)" aria-label="Trace: abstract methods and instanceof (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: abstract methods and instanceof (cont.)</h2><div data-trace="lab5-iface"></div>
-</div></section>
-<section class="slide " data-title="Trace: an abstract class still has a constructor" aria-label="Trace: an abstract class still has a constructor" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: an abstract class still has a constructor</h2><p class="muted">Animal can never be created on its own, yet its constructor runs inside every Dog.</p>
-</div></section>
-<section class="slide " data-title="Trace: an abstract class still has a constructor (cont.)" aria-label="Trace: an abstract class still has a constructor (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: an abstract class still has a constructor (cont.)</h2><div data-trace="lab5-abstract"></div>
+<section class="slide " data-title="Trace: an abstract class still has a constructor" aria-label="Trace: an abstract class still has a constructor" tabindex="-1"><div style="zoom:0.94;" class="slide-inner">
+<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: an abstract class still has a constructor</h2><p class="muted">Animal can never be created on its own, yet its constructor runs inside every Dog.</p><div data-trace="lab5-abstract"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 7 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Animal.java">public abstract class Animal {

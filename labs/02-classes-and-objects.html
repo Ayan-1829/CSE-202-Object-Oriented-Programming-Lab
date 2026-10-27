@@ -54,7 +54,7 @@
 <section class="slide title-slide" data-title="Classes, Objects, Instances &amp; Methods" aria-label="Classes, Objects, Instances &amp; Methods" tabindex="-1"><div class="slide-inner">
 <span class="topic-art" data-art="4" aria-hidden="true"></span>
 <span class="badge big">2</span>
-<p class="kicker">Lab Manual II · CSE 202</p>
+<p class="kicker">Lab II · CSE 202</p>
 <h1>Classes, Objects, Instances & Methods</h1>
 <p class="lead">Model a real thing as a class with private fields, a constructor and methods; create objects, use getters and setters, a static counter, and see two variables share one object.</p>
 <div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
@@ -161,7 +161,7 @@ public void display() {
     System.out.println(&quot;-------------------------------&quot;);
 }</pre><ul class="walk-notes"><li><code>Math.min(100.0, …)</code> caps the fuel at 100%.</li><li><code>%%</code> prints a percent sign in printf.</li></ul>
 </div></section>
-<section class="slide " data-title="Getters, setters and a static method" aria-label="Getters, setters and a static method" tabindex="-1"><div class="slide-inner">
+<section class="slide " data-title="Getters, setters and a static method" aria-label="Getters, setters and a static method" tabindex="-1"><div style="zoom:0.92;" class="slide-inner">
 <p class="kicker">Code walkthrough 5 of 10 · <span class="walk-file">Car.java</span></p><h2>Getters, setters and a static method</h2><pre class="code walk-code">// Getter methods
 public String getMake() { return make; }
 public int getSpeed() { return speed; }
@@ -171,10 +171,8 @@ public double getFuelLevel() { return fuelLevel; }
 public void setMake(String make) { this.make = make; }
 
 public void setFuelLevel(double fuelLevel) {
-    if (fuelLevel &gt;= 0.0 &amp;&amp; fuelLevel &lt;= 100.0) {</pre>
-</div></section>
-<section class="slide " data-title="Getters, setters and a static method (cont.)" aria-label="Getters, setters and a static method (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 5 of 10 · <span class="walk-file">Car.java</span></p><h2>Getters, setters and a static method (cont.)</h2><pre data-start="11" class="code walk-code">        this.fuelLevel = fuelLevel;
+    if (fuelLevel &gt;= 0.0 &amp;&amp; fuelLevel &lt;= 100.0) {
+        this.fuelLevel = fuelLevel;
     }
 }
 
@@ -232,17 +230,11 @@ System.out.println(&quot;car1 and car3 refer to the same object.&quot;);
 System.out.println(&quot;\n=== Static Member ===&quot;);
 System.out.println(&quot;Total Car objects ever created: &quot; + Car.getCount());</pre><ul class="walk-notes"><li><code>car3 = car1</code> copies the reference, not the car.</li><li>The count is still 2: no object was created.</li></ul>
 </div></section>
-<section class="slide " data-title="Trace: objects, references and a static counter" aria-label="Trace: objects, references and a static counter" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: objects, references and a static counter</h2><p class="muted">See the objects on the heap, the references on the stack, and the one shared <code>count</code>.</p>
+<section class="slide " data-title="Trace: objects, references and a static counter" aria-label="Trace: objects, references and a static counter" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
+<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: objects, references and a static counter</h2><p class="muted">See the objects on the heap, the references on the stack, and the one shared <code>count</code>.</p><div data-trace="lab2-car"></div>
 </div></section>
-<section class="slide " data-title="Trace: objects, references and a static counter (cont.)" aria-label="Trace: objects, references and a static counter (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: objects, references and a static counter (cont.)</h2><div data-trace="lab2-car"></div>
-</div></section>
-<section class="slide " data-title="Trace: methods that guard the object" aria-label="Trace: methods that guard the object" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: methods that guard the object</h2><p class="muted">Each call works on the object <code>this</code> points to. Watch brake(100) and refuel(5.0) refuse to break the rules.</p>
-</div></section>
-<section class="slide " data-title="Trace: methods that guard the object (cont.)" aria-label="Trace: methods that guard the object (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: methods that guard the object (cont.)</h2><div data-trace="lab2-methods"></div>
+<section class="slide " data-title="Trace: methods that guard the object" aria-label="Trace: methods that guard the object" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
+<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: methods that guard the object</h2><p class="muted">Each call works on the object <code>this</code> points to. Watch brake(100) and refuel(5.0) refuse to break the rules.</p><div data-trace="lab2-methods"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 2 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Car.java">public class Car {

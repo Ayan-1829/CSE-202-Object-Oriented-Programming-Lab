@@ -54,7 +54,7 @@
 <section class="slide title-slide" data-title="Exception Handling &amp; Custom Exceptions" aria-label="Exception Handling &amp; Custom Exceptions" tabindex="-1"><div class="slide-inner">
 <span class="topic-art" data-art="10" aria-hidden="true"></span>
 <span class="badge big">6</span>
-<p class="kicker">Lab Manual VI · CSE 202</p>
+<p class="kicker">Lab VI · CSE 202</p>
 <h1>Exception Handling & Custom Exceptions</h1>
 <p class="lead">Make a bank account that refuses bad input: throw and declare exceptions, catch them with try-catch-finally, write checked and unchecked custom exceptions and wrap low-level failures in a meaningful one.</p>
 <div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
@@ -253,23 +253,14 @@ try {
     System.out.println(&quot;Root cause: &quot; + e.getCause().getMessage());
 }</pre><ul class="walk-notes"><li><code>getCause()</code> returns the original InsufficientFundsException.</li></ul>
 </div></section>
-<section class="slide " data-title="Trace: a constructor that throws" aria-label="Trace: a constructor that throws" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 3</p><h2>Trace: a constructor that throws</h2><p class="muted">Pick an input. An invalid account is never created and never counted.</p>
+<section class="slide " data-title="Trace: a constructor that throws" aria-label="Trace: a constructor that throws" tabindex="-1"><div style="zoom:0.91;" class="slide-inner">
+<p class="kicker">Step through the code · 1 of 3</p><h2>Trace: a constructor that throws</h2><p class="muted">Pick an input. An invalid account is never created and never counted.</p><div data-trace="lab6-create"></div>
 </div></section>
-<section class="slide " data-title="Trace: a constructor that throws (cont.)" aria-label="Trace: a constructor that throws (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 3</p><h2>Trace: a constructor that throws (cont.)</h2><div data-trace="lab6-create"></div>
+<section class="slide " data-title="Trace: withdraw, catch and finally" aria-label="Trace: withdraw, catch and finally" tabindex="-1"><div style="zoom:0.91;" class="slide-inner">
+<p class="kicker">Step through the code · 2 of 3</p><h2>Trace: withdraw, catch and finally</h2><p class="muted">Pick an amount and follow the exception (if any) to its catch block.</p><div data-trace="lab6-withdraw"></div>
 </div></section>
-<section class="slide " data-title="Trace: withdraw, catch and finally" aria-label="Trace: withdraw, catch and finally" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 3</p><h2>Trace: withdraw, catch and finally</h2><p class="muted">Pick an amount and follow the exception (if any) to its catch block.</p>
-</div></section>
-<section class="slide " data-title="Trace: withdraw, catch and finally (cont.)" aria-label="Trace: withdraw, catch and finally (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 3</p><h2>Trace: withdraw, catch and finally (cont.)</h2><div data-trace="lab6-withdraw"></div>
-</div></section>
-<section class="slide " data-title="Trace: wrapping an exception with its cause" aria-label="Trace: wrapping an exception with its cause" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 3 of 3</p><h2>Trace: wrapping an exception with its cause</h2><p class="muted">A low-level InsufficientFundsException becomes a TransactionException. Follow the cause arrow back to the original.</p>
-</div></section>
-<section class="slide " data-title="Trace: wrapping an exception with its cause (cont.)" aria-label="Trace: wrapping an exception with its cause (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 3 of 3</p><h2>Trace: wrapping an exception with its cause (cont.)</h2><div data-trace="lab6-wrap"></div>
+<section class="slide " data-title="Trace: wrapping an exception with its cause" aria-label="Trace: wrapping an exception with its cause" tabindex="-1"><div style="zoom:0.90;" class="slide-inner">
+<p class="kicker">Step through the code · 3 of 3</p><h2>Trace: wrapping an exception with its cause</h2><p class="muted">A low-level InsufficientFundsException becomes a TransactionException. Follow the cause arrow back to the original.</p><div data-trace="lab6-wrap"></div>
 </div></section>
 <section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
 <p class="kicker">For reference · 5 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="InvalidAccountException.java">public class InvalidAccountException extends Exception {
@@ -537,7 +528,7 @@ Account: ACC001 | Owner: Alice | Balance: 4000.0
 Account: ACC002 | Owner: Bob | Balance: 4000.0
 Total accounts created: 2</pre></div><p class="note-line">Only 2 accounts are counted: the constructor throws before <code>totalAccounts++</code> for the invalid ones.</p>
 </div></section>
-<section class="slide " data-title="Which catch block handles it?" aria-label="Which catch block handles it?" tabindex="-1"><div class="slide-inner">
+<section class="slide " data-title="Which catch block handles it?" aria-label="Which catch block handles it?" tabindex="-1"><div style="zoom:0.93;" class="slide-inner">
 <p class="kicker">Interactive 1 of 1</p><h2>Which catch block handles it?</h2><div data-demo="exmatch"></div>
 </div></section>
 <section class="slide " data-title="Task 1: Add a FrozenAccountException" aria-label="Task 1: Add a FrozenAccountException" tabindex="-1"><div class="slide-inner">

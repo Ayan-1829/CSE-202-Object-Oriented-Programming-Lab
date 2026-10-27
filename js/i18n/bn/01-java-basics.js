@@ -36,7 +36,7 @@ I18N_BN_ADD({
 "Setting up · 1 of 4": "সেটআপ · 1 / 4",
 "Which Java do you need?": "কোন Java দরকার?",
 "A <b>JDK</b> (Java Development Kit): it contains the compiler <code>javac</code> and the runtime <code>java</code>. A JRE alone cannot compile.": "একটি <b>JDK</b> (Java Development Kit): এতে compiler <code>javac</code> ও runtime <code>java</code> থাকে। শুধু JRE দিয়ে compile করা যায় না।",
-"Use the current <b>LTS</b> release, <b>JDK 25</b>, from the official Java site <code>oracle.com/java</code>. The manual needs JDK 11 or later.": "অফিসিয়াল Java সাইট <code>oracle.com/java</code> থেকে বর্তমান <b>LTS</b> রিলিজ, <b>JDK 25</b>, ব্যবহার করুন। ম্যানুয়ালে JDK 11 বা পরবর্তী সংস্করণ লাগে।",
+"Use the current <b>LTS</b> release, <b>JDK 25</b>, from the official Java site <code>oracle.com/java</code>. These labs need JDK 11 or later.": "বর্তমান <b>LTS</b> release, <b>JDK 25</b>, ব্যবহার করুন, অফিসিয়াল Java সাইট <code>oracle.com/java</code> থেকে। এই lab-গুলোর জন্য JDK 11 বা পরবর্তী version দরকার।",
 "Install the JDK <b>first</b>, then the IDE: this course uses <b>Apache NetBeans</b>.": "আগে JDK ইনস্টল করুন (<b>first</b>), তারপর IDE: এই কোর্সে <b>Apache NetBeans</b> ব্যবহার হয়।",
 "On the next slides, pick your operating system: each slide has direct download links, the steps and a YouTube video link.": "পরের স্লাইডগুলোতে আপনার অপারেটিং সিস্টেম বাছুন: প্রতিটি স্লাইডে সরাসরি ডাউনলোড লিংক, ধাপগুলো ও একটি YouTube ভিডিও লিংক আছে।",
 "Setting up · 2 of 4": "সেটআপ · 2 / 4",
