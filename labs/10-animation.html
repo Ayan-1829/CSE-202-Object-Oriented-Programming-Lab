@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Animate bouncing balls: a worker thread updates positions about 60 times a second, a custom panel draws each frame with double buffering, and Start, Pause and Reset buttons control it.">
-<meta name="keywords" content="java animation, game loop, frame rate, worker thread, double buffering, collision detection, swing, lab, cse 202, object oriented programming lab">
+<meta name="description" content="The finished game. A game-loop thread updates every object about 60 times a second, Rectangle collisions decide what is hit, drones bob, tanks fire shells, and Swing paints each frame. Every chapter so far comes together here.">
+<meta name="keywords" content="java animation, game loop, frame rate, worker thread, double buffering, collision detection, swing, lab, java game, game programming, cse 202, object oriented programming lab">
 <meta name="author" content="Object Oriented Programming Lab Notes">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#155E63">
@@ -16,32 +16,33 @@
 <link rel="manifest" href="../site.webmanifest">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
-<meta property="og:title" content="Lab 10: Animation with Threads | OOP Lab (CSE 202)">
-<meta property="og:description" content="Animate bouncing balls: a worker thread updates positions about 60 times a second, a custom panel draws each frame with double buffering, and Start, Pause and Reset buttons control it.">
+<meta property="og:title" content="Chapter 10: Animation with Threads | OOP Lab (CSE 202)">
+<meta property="og:description" content="The finished game. A game-loop thread updates every object about 60 times a second, Rectangle collisions decide what is hit, drones bob, tanks fire shells, and Swing paints each frame. Every chapter so far comes together here.">
 <meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/10-animation.html">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/10-animation.png?v=2">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Lab 10 of 10: Animation with Threads – CSE 202 Object Oriented Programming Lab">
+<meta property="og:image:alt" content="Chapter 10 of 10: Animation with Threads – CSE 202 Object Oriented Programming Lab">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Lab 10: Animation with Threads | OOP Lab (CSE 202)">
-<meta name="twitter:description" content="Animate bouncing balls: a worker thread updates positions about 60 times a second, a custom panel draws each frame with double buffering, and Start, Pause and Reset buttons control it.">
+<meta name="twitter:title" content="Chapter 10: Animation with Threads | OOP Lab (CSE 202)">
+<meta name="twitter:description" content="The finished game. A game-loop thread updates every object about 60 times a second, Rectangle collisions decide what is hit, drones bob, tanks fire shells, and Swing paints each frame. Every chapter so far comes together here.">
 <meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/10-animation.png?v=2">
-<meta name="twitter:image:alt" content="Lab 10 of 10: Animation with Threads – CSE 202 Object Oriented Programming Lab">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Animation with Threads", "description": "Animate bouncing balls: a worker thread updates positions about 60 times a second, a custom panel draws each frame with double buffering, and Start, Pause and Reset buttons control it.", "position": 10, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 39, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/10-animation.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/10-animation.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
-<title>Lab 10: Animation with Threads | OOP Lab (CSE 202)</title>
+<meta name="twitter:image:alt" content="Chapter 10 of 10: Animation with Threads – CSE 202 Object Oriented Programming Lab">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Animation with Threads", "description": "The finished game. A game-loop thread updates every object about 60 times a second, Rectangle collisions decide what is hit, drones bob, tanks fire shells, and Swing paints each frame. Every chapter so far comes together here.", "position": 10, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 55, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/10-animation.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/10-animation.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
+<title>Chapter 10: Animation with Threads | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/lab.css">
+<link rel="stylesheet" href="../css/game.css">
 </head>
 <body class="deck-page">
 <div class="sr-only" id="live" aria-live="polite"></div>
 <header class="deck-bar">
-  <a class="home-link" href="../index.html" aria-label="Home: all labs"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
+  <a class="home-link" href="../index.html" aria-label="Home: all chapters"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
   <div class="deck-title"><span class="badge">10</span><span>Animation with Threads</span></div>
   <div class="deck-actions">
     <button type="button" class="btn sm" id="btn-menu" aria-expanded="false" aria-controls="slide-menu" aria-label="Slides"><svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><rect x="3" y="4.5" width="18" height="3" rx="1"></rect><rect x="3" y="10.5" width="18" height="3" rx="1"></rect><rect x="3" y="16.5" width="18" height="3" rx="1"></rect></svg><span>Slides</span></button>
@@ -52,203 +53,1058 @@
 <div class="deck-progress"><i id="progress-fill"></i></div>
 <main class="deck" id="deck">
 <section class="slide title-slide" data-title="Animation with Threads" aria-label="Animation with Threads" tabindex="-1"><div class="slide-inner">
-<span class="topic-art" data-art="14" aria-hidden="true"></span>
+<div class="topic-art g-title-art" data-demo="g-title" data-ch="10" aria-hidden="true"></div>
 <span class="badge big">10</span>
-<p class="kicker">Lab X · CSE 202</p>
+<p class="kicker">Chapter 10 · Lab X · CSE 202</p>
 <h1>Animation with Threads</h1>
-<p class="lead">Animate bouncing balls: a worker thread updates positions about 60 times a second, a custom panel draws each frame with double buffering, and Start, Pause and Reset buttons control it.</p>
-<div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
+<p class="g-mission">Mission 10 · Bring it to life</p>
+<p class="lead">The finished game. A game-loop thread updates every object about 60 times a second, Rectangle collisions decide what is hit, drones bob, tanks fire shells, and Swing paints each frame. Every chapter so far comes together here.</p>
+<div class="row"><a class="btn pri" href="#s=2">Start the mission</a><a class="btn" href="../index.html">All chapters</a></div>
 <p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
 </div></section>
-<section class="slide " data-title="Why this lab" aria-label="Why this lab" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Before we start</p><h2>Why this lab</h2><div class="hook"><p class="q">A film is just still pictures shown quickly. How can a Java program make a ball look like it is moving?</p><p>Draw it, move it a little, draw it again — about 60 times a second. A <b>worker thread</b> runs that loop while Swing keeps the window responsive.</p></div>
+<section class="slide " data-title="Your mission" aria-label="Your mission" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Mission 10 · Bring it to life</p><h2>Your mission</h2><div class="hook"><p class="q">The Chapter 9 game only changes when you press a key. How do the drones fly on their own?</p><p>A separate <b>thread</b> runs the <b>game loop</b>: update everything, check collisions, <code>repaint()</code>, sleep 16 ms, and again, about 60 times a second. Each frame is a slightly different picture: that is <b>animation</b>.</p></div>
 </div></section>
-<section class="slide " data-title="Lab at a glance" aria-label="Lab at a glance" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 10 of 10</p><h2>Lab at a glance</h2><div class="cols wl"><div><h3>After this lab you can</h3><ul class=""><li>Explain frame-based animation</li><li>Implement an update–repaint–sleep animation loop in a worker thread</li><li>Control the frame rate with <code>Thread.sleep()</code></li><li>Draw frames with paintComponent and Graphics2D</li><li>Detect collisions with walls and between balls</li><li>Control the animation with Start, Pause and Reset buttons</li></ul></div>
-<div><h3>Before you start</h3><ul class=""><li>Lab 7: threads and Runnable</li><li>Lab 8: synchronized methods</li><li>Lab 9: JFrame, JPanel, paintComponent, ActionListener</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
+<section class="slide " data-title="Chapter at a glance" aria-label="Chapter at a glance" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Chapter 10 of 10</p><h2>Chapter at a glance</h2><div class="cols wl"><div><h3>After this chapter you can</h3><ul class=""><li>Explain frame-based animation and the game loop</li><li>Run the loop on a worker thread and paint on the Event Dispatch Thread</li><li>Share the game objects safely between the two threads</li><li>Detect collisions with Rectangle.intersects</li><li>Explain double buffering</li><li>Read and extend the complete Code Commando program</li></ul></div>
+<div><h3>Before you start</h3><ul class=""><li>Every earlier chapter: this one uses classes, inheritance, abstract classes, threads, synchronization and Swing</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Topics: the idea, then the game</li><li>Run the game program</li><li>Game practice tasks</li><li>Official lab and graded tasks</li><li>Report exercises at home</li></ol></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 10 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=12">Program design</a></li><li><a href="#s=14">Code walkthrough</a></li><li><a href="#s=24">Step-through traces: stack, heap and output</a></li><li><a href="#s=27">Expected output</a></li><li><a href="#s=28">Interactive demos</a></li><li><a href="#s=29">In-lab tasks</a></li><li><a href="#s=33">Lab report exercises</a></li><li><a href="#s=36">Viva questions and quiz</a></li></ol>
+<p class="kicker">Chapter 10 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=35">Run the game</a></li><li><a href="#s=36">Game practice tasks</a></li><li><a href="#s=39">The official lab program</a></li><li><a href="#s=45">Official in-lab tasks</a></li><li><a href="#s=49">Lab report exercises</a></li><li><a href="#s=52">Viva questions and quiz</a></li></ol>
 </div></section>
-<section class="slide " data-title="Frame-based animation" aria-label="Frame-based animation" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 1 of 5</p><h2>Frame-based animation</h2><figure class="fig" data-fig="lab10-loop"></figure><ul class=""><li>Each frame: update the state, redraw, wait. Repeated quickly, the eye sees smooth motion.</li><li>About 16 ms per frame gives roughly 60 frames per second.</li></ul>
+<section class="slide " data-title="Today’s build" aria-label="Today’s build" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Build the game · Chapter 10</p><h2>Today’s build</h2><ul class="pts"><li>Ten files: the abstract <code>GameObject</code> with <code>Player</code>, <code>Bullet</code>, <code>Explosion</code> and the abstract <code>Enemy</code> (<code>Drone</code>, <code>Tank</code>). <code>GamePanel</code> runs the loop, <code>CodeCommando</code> opens the window, <code>Sprites</code> comes from Chapter 9.</li></ul>
+<div class="cols wl"><div><h3>What the program does</h3><ol class="flow"><li>Open the window and start the GameLoop thread</li><li>Each frame: move the player from the keys, fire when Space is held</li><li>Spawn a drone or a tank now and then, faster as the score grows</li><li>Move every enemy, bullet and explosion</li><li>Check bullets against enemies and the player, and enemies against the player</li><li>Remove finished objects; GAME OVER at 0 HP; R restarts</li></ol></div><div><h3>Files</h3><ul class="g-files"><li><code>GameObject.java</code> <span class="muted">(30 lines)</span></li><li><code>Bullet.java</code> <span class="muted">(27 lines)</span></li><li><code>Player.java</code> <span class="muted">(47 lines)</span></li><li><code>Enemy.java</code> <span class="muted">(35 lines)</span></li><li><code>Drone.java</code> <span class="muted">(24 lines)</span></li><li><code>Tank.java</code> <span class="muted">(30 lines)</span></li><li><code>GamePanel.java</code> <span class="muted">(213 lines)</span></li><li><code>Explosion.java</code> <span class="muted">(22 lines)</span></li><li><code>Sprites.java</code> <span class="muted">(112 lines)</span></li><li><code>CodeCommando.java</code> <span class="muted">(19 lines)</span></li></ul><p class="muted">559 lines in all. Each topic below shows the part of the program that uses it.</p></div></div>
+</div></section>
+<section class="slide " data-title="The finished game" aria-label="The finished game" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 6 · in the game</p><h2>The finished game</h2><div data-demo="g-play"></div><ul class="pts pts-row"><li>Click the game, then move with the arrow keys and fire with Space.</li><li>Drones are worth 100 points, tanks 300 (they take three hits).</li><li>R restarts after GAME OVER.</li></ul>
+</div></section>
+<section class="slide " data-title="GameObject: the abstract base" aria-label="GameObject: the abstract base" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 6 · our game program · 1 of 10 · <span class="walk-file">GameObject.java</span></p><h2>GameObject: the abstract base</h2><div class="walk-side g-walk"><pre class="code walk-code">// Everything on screen: it has a box, moves every frame and draws itself
+public abstract class GameObject {
+    protected double x, y;                  // top-left corner of the box
+    protected final int w, h;               // size of the box
+    protected boolean active = true;        // false = remove it next frame
 
-<div class="applinks" role="group" aria-label="Explore further"><span class="al-h">Explore further</span><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/disp-scanout.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">GPU scan-out engine</span></a><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/monitor.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">Monitor</span></a></div>
-</div></section>
-<section class="slide " data-title="Frame-based animation (code)" aria-label="Frame-based animation (code)" tabindex="-1"><div class="slide-inner">
-<h2>Frame-based animation</h2><pre class="code small-code">x = x + vx;
-y = y + vy;</pre>
-</div></section>
-<section class="slide " data-title="The worker thread and the EDT" aria-label="The worker thread and the EDT" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 2 of 5</p><h2>The worker thread and the EDT</h2><pre class="code small-code">while (true) {
-    panel.updateAnimation();   // move the balls
-    panel.repaint();           // ask Swing to draw
-    Thread.sleep(16);          // ~60 FPS
-}</pre><ul class=""><li>The loop runs in <code>AnimationThread</code> so the Event Dispatch Thread stays free for clicks and painting.</li><li>Both threads touch the balls, so AnimationPanel’s methods are <code>synchronized</code>.</li></ul>
-</div></section>
-<section class="slide " data-title="Double buffering" aria-label="Double buffering" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 3 of 5</p><h2>Double buffering</h2><pre class="code small-code">BufferedImage buffer = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
-Graphics2D g2d = buffer.createGraphics();
-// ... draw everything on g2d ...
-g.drawImage(buffer, 0, 0, null);</pre><ul class=""><li>Draw the whole frame off-screen, then copy it at once: no half-drawn frames, no flicker.</li><li>Swing already double-buffers; doing it by hand shows the idea.</li></ul>
+    public GameObject(double x, double y, int w, int h) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+    }
 
-<div class="applinks" role="group" aria-label="Explore further"><span class="al-h">Explore further</span><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/vram.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">VRAM (frame buffer)</span></a><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/disp-scanout.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">GPU scan-out engine</span></a></div>
+    public abstract void update();
+    public abstract void draw(Graphics2D g);</pre><ul class="walk-notes"><li>A box (x, y, w, h), an active flag, and two abstract methods.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Bullet" aria-label="Bullet" tabindex="-1"><div style="zoom:0.91;" class="slide-inner">
+<p class="kicker">Topic 1 of 6 · our game program · 2 of 10 · <span class="walk-file">Bullet.java</span></p><h2>Bullet</h2><div class="walk-side g-walk"><pre class="code walk-code wide">public class Bullet extends GameObject {
+    private final double speed;             // pixels per frame; negative flies left
+    private final boolean fromEnemy;
+
+    public Bullet(double x, double y, double speed, boolean fromEnemy) {
+        super(x - 5, y - 2, 10, 4);
+        this.speed = speed;
+        this.fromEnemy = fromEnemy;
+    }
+
+    @Override
+    public void update() {
+        x += speed;
+        if (x &lt; -20 || x &gt; GamePanel.W + 20) {
+            destroy();                      // left the screen
+        }
+    }
+
+    @Override
+    public void draw(Graphics2D g) {
+        Sprites.drawBullet(g, (int) x + 5, (int) y + 2, fromEnemy);
+    }
+
+    public boolean isFromEnemy() { return fromEnemy; }
+}</pre><ul class="walk-notes"><li>Moves by speed every frame; leaves the screen and is destroyed.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Player: moving" aria-label="Player: moving" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 6 · our game program · 3 of 10 · <span class="walk-file">Player.java</span></p><h2>Player: moving</h2><div class="walk-side g-walk"><pre class="code walk-code">public class Player extends GameObject {
+    private int health = 100;
+    private int cooldown = 0;               // frames until the next shot
+    private int flash = 0;                  // frames to show the muzzle flash
+
+    public Player(double x, double groundY) {
+        super(x, groundY - 66, 40, 66);
+    }
+
+    // dx, dy come from the arrow keys: -1, 0 or +1
+    public void move(int dx, int dy) {
+        x = Math.max(10, Math.min(GamePanel.W / 2.0, x + dx * 4));
+        y = Math.max(90, Math.min(GamePanel.GROUND - h, y + dy * 4));
+    }</pre><ul class="walk-notes"><li>move() keeps the player in the left half of the arena.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Player: the rifle" aria-label="Player: the rifle" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 6 · our game program · 4 of 10 · <span class="walk-file">Player.java</span></p><h2>Player: the rifle</h2><div class="walk-side g-walk"><pre class="code walk-code">@Override
+public void update() {
+    if (cooldown &gt; 0) cooldown--;
+    if (flash &gt; 0) flash--;
+}
+
+// Returns a new bullet, or null while the rifle is cooling down
+public Bullet tryShoot() {
+    if (cooldown &gt; 0) {
+        return null;
+    }
+    cooldown = 10;
+    flash = 3;
+    return new Bullet(x + w / 2.0 + 40, y + h - 36, 9, false);
+}</pre><ul class="walk-notes"><li>A cooldown stops the rifle firing every frame.</li><li>tryShoot() returns null while it cools down.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Player: damage and drawing" aria-label="Player: damage and drawing" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 6 · our game program · 5 of 10 · <span class="walk-file">Player.java</span></p><h2>Player: damage and drawing</h2><div class="walk-side g-walk"><pre class="code walk-code">public void takeDamage(int amount) {
+    health = Math.max(0, health - amount);
+    if (health == 0) {
+        destroy();
+    }
+}
+
+public int getHealth() { return health; }
+
+@Override
+public void draw(Graphics2D g) {
+    Sprites.drawCommando(g, (int) x + w / 2, (int) y + h, flash &gt; 0);
+}</pre><ul class="walk-notes"><li>At 0 HP the player is destroyed, which ends the game.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Enemy: the abstract middle class" aria-label="Enemy: the abstract middle class" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 6 · our game program · 6 of 10 · <span class="walk-file">Enemy.java</span></p><h2>Enemy: the abstract middle class</h2><pre class="code walk-code wide">// Shared enemy behaviour; each kind decides how it moves, looks and fights
+public abstract class Enemy extends GameObject {
+    protected int health;
+    protected final int points;
+    protected final int touchDamage;
+
+    public Enemy(double x, double y, int w, int h, int health, int points, int touchDamage) {
+        super(x, y, w, h);
+        this.health = health;
+        this.points = points;
+        this.touchDamage = touchDamage;
+    }</pre><ul class="walk-notes"><li>Health, points and touch damage for every enemy.</li></ul>
+</div></section>
+<section class="slide " data-title="Enemy: hits, shots and leaving the screen" aria-label="Enemy: hits, shots and leaving the screen" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 6 · our game program · 7 of 10 · <span class="walk-file">Enemy.java</span></p><h2>Enemy: hits, shots and leaving the screen</h2><div class="walk-side g-walk"><pre class="code walk-code">public void takeHit() {
+    health--;
+    if (health &lt;= 0) {
+        destroy();
+    }
+}
+
+// Most enemies never shoot; Tank overrides this
+public Bullet tryShoot() {
+    return null;
+}
+
+public int getPoints()      { return points; }
+public int getTouchDamage() { return touchDamage; }
+
+@Override
+public void update() {
+    if (x + w &lt; 0) {
+        active = false;                 // flew past the player: gone, no points
+    }
+}</pre><ul class="walk-notes"><li>Most enemies never shoot: tryShoot() returns null.</li><li>An enemy that flies past is removed without points.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Drone" aria-label="Drone" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 6 · our game program · 8 of 10 · <span class="walk-file">Drone.java</span></p><h2>Drone</h2><div class="walk-side g-walk"><pre class="code walk-code">public class Drone extends Enemy {
+    private final double baseY;
+    private int age = 0;
+
+    public Drone(double x, double y) {
+        super(x, y, 60, 22, 1, 100, 15);    // one hit destroys it
+        baseY = y;
+    }
+
+    @Override
+    public void update() {
+        age++;
+        x -= 2.6;
+        y = baseY + Math.sin(age / 12.0) * 18;   // bobs up and down
+        super.update();
+    }
+
+    @Override
+    public void draw(Graphics2D g) {
+        Sprites.drawDrone(g, (int) x + w / 2, (int) y + 14);
+    }
+}</pre><ul class="walk-notes"><li>A drone bobs on a sine wave while it flies left.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Tank" aria-label="Tank" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 6 · our game program · 9 of 10 · <span class="walk-file">Tank.java</span></p><h2>Tank</h2><div class="walk-side g-walk"><pre class="code walk-code">public class Tank extends Enemy {
+    private int reload = 60;
+
+    public Tank(double x) {
+        super(x, GamePanel.GROUND - 40, 80, 40, 3, 300, 30);   // takes 3 hits
+    }
+
+    @Override
+    public void update() {
+        x -= 1.1;
+        if (reload &gt; 0) reload--;
+        super.update();
+    }</pre><ul class="walk-notes"><li>Slow, and three hits to destroy.</li><li>It counts down a reload timer every frame.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Tank: firing shells" aria-label="Tank: firing shells" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 6 · our game program · 10 of 10 · <span class="walk-file">Tank.java</span></p><h2>Tank: firing shells</h2><div class="walk-side g-walk"><pre class="code walk-code wide">@Override
+public Bullet tryShoot() {
+    if (reload &gt; 0 || x &gt; GamePanel.W - 40) {
+        return null;
+    }
+    reload = 110;
+    return new Bullet(x, y + 6, -5, true);  // a shell from the cannon, flying left
+}
+
+@Override
+public void draw(Graphics2D g) {
+    Sprites.drawTank(g, (int) x + 10, (int) y + h);
+}</pre><ul class="walk-notes"><li>It overrides tryShoot() to fire a shell once the reload is done.</li></ul></div>
+</div></section>
+<section class="slide " data-title="The game loop" aria-label="The game loop" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 2 of 6</p><h2>The game loop</h2><div class="g-codeside g-topic"><div><div class="kicker g-wk"><div class="walk-file">GamePanel.java</div><div>·</div><div>Starting and stopping the loop</div></div><pre class="code small-code">public void start() {
+    running = true;
+    gameThread = new Thread(this, &quot;GameLoop&quot;);
+    gameThread.start();
+}
+
+public void stop() {
+    running = false;
+}</pre></div><ul class="pts"><li>A game repeats one cycle many times a second: <b>update</b>, <b>draw</b>, <b>wait</b>.</li><li>Update moves things; draw shows them; the wait (about 16 ms) gives 60 frames per second.</li><li>In the game it runs on its own thread, about 60 times a second.</li><li>start() creates the GameLoop thread.</li><li>stop() just clears a volatile flag; the loop ends by itself.</li></ul></div>
+</div></section>
+<section class="slide " data-title="The game loop" aria-label="The game loop" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 2 of 6 · in the game</p><h2>The game loop</h2><div data-demo="g-loop"></div><ul class="pts pts-row"><li>One frame: <code>update()</code>, then collisions, then <code>repaint()</code>, then <code>sleep</code> about 16 ms.</li><li>About 60 frames a second looks like smooth motion.</li><li>Each object moves a few pixels per frame: speed is pixels per frame.</li></ul>
+</div></section>
+<section class="slide " data-title="The game loop" aria-label="The game loop" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 2 of 6 · our game program · 1 of 3 · <span class="walk-file">GamePanel.java</span></p><h2>The game loop</h2><div class="walk-side g-walk"><pre class="code walk-code">// The game loop: update, then repaint, then sleep until the next frame
+@Override
+public void run() {
+    while (running) {
+        long begin = System.currentTimeMillis();
+        synchronized (lock) {
+            update();
+        }
+        repaint();
+        long wait = 16 - (System.currentTimeMillis() - begin);
+        try {
+            Thread.sleep(Math.max(2, wait));
+        } catch (InterruptedException e) {
+            return;
+        }
+    }
+}</pre><ul class="walk-notes"><li>update() runs while holding the lock; repaint() asks the EDT to draw.</li><li>The sleep time subtracts the time the frame already took.</li></ul></div>
+</div></section>
+<section class="slide " data-title="update(): the player" aria-label="update(): the player" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 2 of 6 · our game program · 2 of 3 · <span class="walk-file">GamePanel.java</span></p><h2>update(): the player</h2><div class="walk-side g-walk"><pre class="code walk-code wide">private void update() {
+    if (gameOver) {
+        if (restart) {
+            restart = false;
+            newGame();
+        }
+        return;
+    }
+    frame++;
+
+    // 1. the player
+    player.move((right ? 1 : 0) - (left ? 1 : 0), (down ? 1 : 0) - (up ? 1 : 0));
+    player.update();
+    if (firing) {
+        Bullet b = player.tryShoot();
+        if (b != null) bullets.add(b);
+    }</pre><ul class="walk-notes"><li>After GAME OVER, update() only waits for R.</li><li>The key flags become a direction and a trigger.</li></ul></div>
+</div></section>
+<section class="slide " data-title="update(): spawning and moving" aria-label="update(): spawning and moving" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 2 of 6 · our game program · 3 of 3 · <span class="walk-file">GamePanel.java</span></p><h2>update(): spawning and moving</h2><div class="walk-side g-walk"><pre class="code walk-code">// 2. new enemies, a little faster as the score grows
+spawnTimer--;
+if (spawnTimer &lt;= 0) {
+    if (random.nextInt(4) == 0) {
+        enemies.add(new Tank(W + 10));
+    } else {
+        enemies.add(new Drone(W + 10, 90 + random.nextInt(170)));
+    }
+    spawnTimer = Math.max(30, 80 - score / 200);
+}
+
+// 3. move everything
+for (Enemy e : enemies) {
+    e.update();
+    Bullet shell = e.tryShoot();
+    if (shell != null) bullets.add(shell);
+}
+for (Bullet b : bullets) b.update();
+for (Explosion x : explosions) x.update();</pre><ul class="walk-notes"><li>The spawn timer gets shorter as the score grows.</li><li>Each enemy may return a shell.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Two threads sharing data" aria-label="Two threads sharing data" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 6</p><h2>Two threads sharing data</h2><div class="g-ingame"><div>In the game:</div><div>Two threads: the loop and the EDT</div></div><div class="g-codeside"><pre class="code small-code">public void run() {                       // the game thread
+    while (running) {
+        synchronized (lock) {
+            update();                     // changes the lists
+        }
+        repaint();                        // the EDT will paint
+        Thread.sleep(16);
+    }
+}
+
+protected void paintComponent(Graphics g0) {   // the EDT
+    synchronized (lock) {
+        // draw every object
+    }
+}</pre><ul class="pts"><li>One thread runs the loop; the Swing thread handles keys and painting.</li><li>A flag one thread writes and another reads should be <code>volatile</code>, so the change is seen at once.</li><li>In the game: the key flags and the running flag are volatile.</li><li>The game thread changes the objects; the EDT draws them.</li><li>Both lock the same object, so painting never sees a half-updated list (Chapter 8).</li><li>Key flags are <code>volatile</code>: written by the EDT, read by the game thread.</li></ul></div>
+</div></section>
+<section class="slide " data-title="GamePanel: state shared by two threads" aria-label="GamePanel: state shared by two threads" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
+<p class="kicker">Topic 3 of 6 · our game program · 1 of 3 · <span class="walk-file">GamePanel.java</span></p><h2>GamePanel: state shared by two threads</h2><div class="walk-side g-walk"><pre class="code walk-code wide">public class GamePanel extends JPanel implements Runnable, KeyListener {
+    public static final int W = 760, H = 380, GROUND = 330;
+
+    private final Object lock = new Object();           // guards the lists below
+    private final ArrayList&lt;Enemy&gt; enemies = new ArrayList&lt;&gt;();
+    private final ArrayList&lt;Bullet&gt; bullets = new ArrayList&lt;&gt;();
+    private final ArrayList&lt;Explosion&gt; explosions = new ArrayList&lt;&gt;();
+    private final Random random = new Random();
+    private Player player;
+    private int score, frame, spawnTimer;
+    private boolean gameOver;
+
+    // Written by the Event Dispatch Thread, read by the game thread
+    private volatile boolean left, right, up, down, firing, restart;
+    private volatile boolean running;
+    private Thread gameThread;
+
+    public GamePanel() {
+        setPreferredSize(new Dimension(W, H));
+        setFocusable(true);
+        addKeyListener(this);
+        newGame();
+    }</pre><ul class="walk-notes"><li><code>lock</code> guards the lists.</li><li>The key flags are volatile.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Keys: flags for the game thread" aria-label="Keys: flags for the game thread" tabindex="-1"><div style="zoom:0.94;" class="slide-inner">
+<p class="kicker">Topic 3 of 6 · our game program · 2 of 3 · <span class="walk-file">GamePanel.java</span></p><h2>Keys: flags for the game thread</h2><div class="walk-side g-walk"><pre class="code walk-code">@Override
+public void keyPressed(KeyEvent e) {
+    setKey(e.getKeyCode(), true);
+}
+
+@Override
+public void keyReleased(KeyEvent e) {
+    setKey(e.getKeyCode(), false);
+}
+
+private void setKey(int code, boolean down) {
+    switch (code) {
+        case KeyEvent.VK_LEFT:  left = down; break;
+        case KeyEvent.VK_RIGHT: right = down; break;
+        case KeyEvent.VK_UP:    up = down; break;
+        case KeyEvent.VK_DOWN:  this.down = down; break;
+        case KeyEvent.VK_SPACE: firing = down; break;
+        case KeyEvent.VK_R:     if (down) restart = true; break;
+        default: break;
+    }
+}
+
+@Override
+public void keyTyped(KeyEvent e) { }</pre><ul class="walk-notes"><li>The EDT only sets flags; the game thread reads them every frame.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Keys and main" aria-label="Keys and main" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 6 · our game program · 3 of 3 · <span class="walk-file">CodeCommando.java</span></p><h2>Keys and main</h2><div class="walk-side g-walk"><pre class="code walk-code">public class CodeCommando {
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -&gt; {
+            JFrame window = new JFrame(&quot;Code Commando&quot;);
+            GamePanel game = new GamePanel();
+            window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            window.add(game);
+            window.pack();
+            window.setResizable(false);
+            window.setLocationRelativeTo(null);
+            window.setVisible(true);
+            game.requestFocusInWindow();
+            game.start();                   // the game thread begins here
+        });
+    }
+}</pre><ul class="walk-notes"><li>The window is built on the EDT; then the game thread starts.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Collision detection" aria-label="Collision detection" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 4 of 6</p><h2>Collision detection</h2><div class="g-ingame"><div>In the game:</div><div>Collisions</div></div><div class="g-codeside g-topic"><div><div class="kicker g-wk"><div class="walk-file">GameObject.java</div><div>·</div><div>GameObject: boxes and collisions</div></div><pre class="code small-code">public Rectangle getBounds() {
+    return new Rectangle((int) x, (int) y, w, h);
+}
+
+public boolean collidesWith(GameObject other) {
+    return getBounds().intersects(other.getBounds());
+}
+
+public boolean isActive() { return active; }
+public void destroy()     { active = false; }</pre></div><ul class="pts"><li>Give every object a <b>bounding box</b>: a rectangle around it.</li><li>Two objects touch when their boxes overlap: <code>a.intersects(b)</code>.</li><li><code>java.awt.Rectangle</code> takes x, y, width, height.</li><li><code>collidesWith</code> is the whole collision test.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Collisions" aria-label="Collisions" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 4 of 5</p><h2>Collisions</h2><figure class="fig" data-fig="lab10-collide"></figure><ul class=""><li>Wall: reverse the velocity component. Ball–ball: centres closer than the sum of radii.</li></ul>
+<p class="kicker">Topic 4 of 6 · in the game</p><h2>Collisions</h2><div data-demo="g-collide"></div><ul class="pts pts-row"><li>Every GameObject has a bounding box: <code>getBounds()</code> returns a <code>Rectangle</code>.</li><li>Two objects collide when their boxes overlap: <code>a.getBounds().intersects(b.getBounds())</code>.</li><li>Boxes are a little bigger than the drawing, which keeps the game fair and simple.</li></ul>
 </div></section>
-<section class="slide " data-title="Collisions (code)" aria-label="Collisions (code)" tabindex="-1"><div class="slide-inner">
-<h2>Collisions</h2><pre class="code small-code">if (x - radius &lt; 0 || x + radius &gt; panelWidth) vx = -vx;   // wall
-
-double d = Math.sqrt(dx * dx + dy * dy);
-if (d &lt;= r1 + r2) { /* balls touch: swap velocities */ }</pre>
-</div></section>
-<section class="slide " data-title="Applets and modern animation" aria-label="Applets and modern animation" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 5 of 5</p><h2>Applets and modern animation</h2><ul class=""><li>Classic textbook animations used applets; browsers dropped them, so this lab animates in a JFrame.</li><li>The ideas — update state, repaint, control timing — are exactly the same.</li></ul>
-</div></section>
-<section class="slide " data-title="Program design" aria-label="Program design" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Implementation design</p><h2>Program design</h2><figure class="fig" data-fig="lab10-uml"></figure>
-</div></section>
-<section class="slide " data-title="Execution flow" aria-label="Execution flow" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Implementation design</p><h2>Execution flow</h2><ol class="flow"><li>main creates AnimationApp on the EDT</li><li>AnimationApp builds the panel and buttons and starts a daemon AnimationThread</li><li>The thread loops: updateAnimation(), repaint(), sleep the rest of the 16 ms frame</li><li>updateAnimation moves balls only while running and handles collisions</li><li>Start / Pause flip the running flag; Reset restores the three balls</li><li>Closing the window ends the program (the thread is a daemon)</li></ol><p class="note-line">Ball = model, AnimationPanel = rendering + state, AnimationThread = loop, AnimationApp = controls.</p>
-</div></section>
-<section class="slide " data-title="Moving and bouncing" aria-label="Moving and bouncing" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 1 of 10 · <span class="walk-file">Ball.java</span></p><h2>Moving and bouncing</h2><pre class="code walk-code">public void update(int panelWidth, int panelHeight) {
-    x = x + vx;
-    y = y + vy;
-    if (x - radius &lt; 0 || x + radius &gt; panelWidth) {
-        vx = -vx;
-        x = Math.max(radius, Math.min(panelWidth - radius, x));
+<section class="slide " data-title="update(): bullets hit things" aria-label="update(): bullets hit things" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 4 of 6 · our game program · 1 of 2 · <span class="walk-file">GamePanel.java</span></p><h2>update(): bullets hit things</h2><div class="walk-side g-walk"><pre class="code walk-code">// 4. collisions
+for (Bullet b : bullets) {
+    if (!b.isActive()) continue;
+    if (b.isFromEnemy()) {
+        if (b.collidesWith(player)) {
+            b.destroy();
+            player.takeDamage(20);
+        }
+        continue;
     }
-    if (y - radius &lt; 0 || y + radius &gt; panelHeight) {
-        vy = -vy;
-        y = Math.max(radius, Math.min(panelHeight - radius, y));
-    }
-}</pre><ul class="walk-notes"><li>Add the velocity each frame; reverse it at a wall and keep the ball inside.</li></ul>
-</div></section>
-<section class="slide " data-title="Ball-to-ball collisions" aria-label="Ball-to-ball collisions" tabindex="-1"><div style="zoom:0.96;" class="slide-inner">
-<p class="kicker">Code walkthrough 2 of 10 · <span class="walk-file">Ball.java</span></p><h2>Ball-to-ball collisions</h2><pre class="code walk-code">public boolean collidesWith(Ball other) {
-    double dx = this.x - other.x;
-    double dy = this.y - other.y;
-    double distance = Math.sqrt(dx * dx + dy * dy);
-    return distance &lt;= this.radius + other.radius;
-}
-
-public void bounceOff(Ball other) {
-    double tempVx = this.vx;
-    double tempVy = this.vy;
-    this.vx = other.vx;
-    this.vy = other.vy;
-    other.vx = tempVx;
-    other.vy = tempVy;
-}</pre><ul class="walk-notes"><li>Touching when the centres are closer than the radii added together.</li><li>Swapping velocities is a simple bounce.</li></ul>
-</div></section>
-<section class="slide " data-title="Double buffering: draw off screen" aria-label="Double buffering: draw off screen" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 3 of 10 · <span class="walk-file">AnimationPanel.java</span></p><h2>Double buffering: draw off screen</h2><pre class="code walk-code">@Override
-protected void paintComponent(Graphics g) {
-    super.paintComponent(g);
-    if (getWidth() &lt;= 0 || getHeight() &lt;= 0) {
-        return;
-    }
-    BufferedImage buffer = new BufferedImage(getWidth(), getHeight(),
-            BufferedImage.TYPE_INT_RGB);
-    Graphics2D g2d = buffer.createGraphics();
-    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-            RenderingHints.VALUE_ANTIALIAS_ON);
-    g2d.setColor(Color.WHITE);
-    g2d.fillRect(0, 0, getWidth(), getHeight());
-    drawGrid(g2d);</pre><ul class="walk-notes"><li>Draw the whole frame into a BufferedImage first, so the screen never shows half a frame.</li></ul>
-</div></section>
-<section class="slide " data-title="…then copy it at once" aria-label="…then copy it at once" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 4 of 10 · <span class="walk-file">AnimationPanel.java</span></p><h2>…then copy it at once</h2><pre class="code walk-code">synchronized (this) {
-    for (Ball ball : balls) {
-        ball.draw(g2d);
-    }
-    g2d.setColor(Color.BLACK);
-    g2d.drawString(&quot;Balls: &quot; + balls.size() + &quot; | &quot;
-            + (running ? &quot;Running&quot; : &quot;Paused&quot;), 10, getHeight() - 10);
-}
-g.drawImage(buffer, 0, 0, null);
-g2d.dispose();</pre><ul class="walk-notes"><li>The synchronized block reads the balls safely while the worker thread may update them.</li><li>One drawImage call shows the finished frame.</li></ul>
-</div></section>
-<section class="slide " data-title="One animation step: move" aria-label="One animation step: move" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 5 of 10 · <span class="walk-file">AnimationPanel.java</span></p><h2>One animation step: move</h2><pre class="code walk-code">public synchronized void updateAnimation() {
-    if (!running) {
-        return;
-    }
-    int width = getWidth();
-    int height = getHeight();
-    if (width &lt;= 0 || height &lt;= 0) {
-        return;
-    }
-    for (Ball ball : balls) {
-        ball.update(width, height);
-    }</pre><ul class="walk-notes"><li>Nothing happens while paused.</li><li>Each ball moves and bounces off the walls.</li></ul>
-</div></section>
-<section class="slide " data-title="One animation step: collide" aria-label="One animation step: collide" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 6 of 10 · <span class="walk-file">AnimationPanel.java</span></p><h2>One animation step: collide</h2><pre class="code walk-code">for (int i = 0; i &lt; balls.size(); i++) {
-    for (int j = i + 1; j &lt; balls.size(); j++) {
-        Ball first = balls.get(i);
-        Ball second = balls.get(j);
-        if (first.collidesWith(second)) {
-            first.bounceOff(second);
+    for (Enemy e : enemies) {
+        if (e.isActive() &amp;&amp; b.collidesWith(e)) {
+            b.destroy();
+            e.takeHit();
+            if (!e.isActive()) {
+                score += e.getPoints();
+                explosions.add(new Explosion(e.x + e.w / 2.0, e.y + e.h / 2.0));
+            }
+            break;
         }
     }
-}</pre><ul class="walk-notes"><li><code>j</code> starts at <code>i + 1</code>, so each pair is tested once.</li></ul>
+}</pre><ul class="walk-notes"><li>Enemy shells hurt the player; player bullets hurt enemies.</li><li>A destroyed enemy adds points and an explosion.</li></ul></div>
 </div></section>
-<section class="slide " data-title="The animation loop" aria-label="The animation loop" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 7 of 10 · <span class="walk-file">AnimationThread.java</span></p><h2>The animation loop</h2><pre class="code walk-code">@Override
-public void run() {
-    while (true) {
-        long frameStartTime = System.currentTimeMillis();
-
-        panel.updateAnimation();
-        panel.repaint();</pre><ul class="walk-notes"><li>An endless loop: one pass per frame.</li><li>Update the positions, then ask Swing to repaint.</li></ul>
-</div></section>
-<section class="slide " data-title="Keeping a steady frame rate" aria-label="Keeping a steady frame rate" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 8 of 10 · <span class="walk-file">AnimationThread.java</span></p><h2>Keeping a steady frame rate</h2><pre class="code walk-code">long elapsedTime = System.currentTimeMillis() - frameStartTime;
-long sleepTime = FRAME_TIME_MS - elapsedTime;
-if (sleepTime &gt; 0) {
-    try {
-        Thread.sleep(sleepTime);
-    } catch (InterruptedException e) {
-        System.out.println(&quot;Animation thread interrupted.&quot;);
-        Thread.currentThread().interrupt();
-        break;
-    }
-}</pre><ul class="walk-notes"><li>Sleep only for what is left of the 16 ms frame (about 60 FPS).</li><li>An interrupt ends the loop.</li></ul>
-</div></section>
-<section class="slide " data-title="Buttons control a flag" aria-label="Buttons control a flag" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 9 of 10 · <span class="walk-file">AnimationApp.java</span></p><h2>Buttons control a flag</h2><pre class="code walk-code">private void addActionListeners() {
-    startButton.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            animationPanel.startAnimation();
-            updateStatus(&quot;Running&quot;);
+<section class="slide " data-title="update(): crashes and clean-up" aria-label="update(): crashes and clean-up" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 4 of 6 · our game program · 2 of 2 · <span class="walk-file">GamePanel.java</span></p><h2>update(): crashes and clean-up</h2><div class="walk-side g-walk"><pre class="code walk-code">    // enemies that crash into the player
+    for (Enemy e : enemies) {
+        if (e.isActive() &amp;&amp; e.collidesWith(player)) {
+            e.destroy();
+            player.takeDamage(e.getTouchDamage());
+            explosions.add(new Explosion(e.x + e.w / 2.0, e.y + e.h / 2.0));
         }
-    });</pre><ul class="walk-notes"><li>Start only sets <code>running</code>; the loop keeps going.</li><li>Pause and Reset are written the same way.</li></ul>
+    }
+
+    // 5. remove what is finished
+    enemies.removeIf(e -&gt; !e.isActive());
+    bullets.removeIf(b -&gt; !b.isActive());
+    explosions.removeIf(x -&gt; !x.isActive());
+    if (!player.isActive()) {
+        gameOver = true;
+    }
+}</pre><ul class="walk-notes"><li><code>removeIf</code> drops everything that is no longer active.</li><li>At 0 HP the game is over.</li></ul></div>
 </div></section>
-<section class="slide " data-title="Starting the worker thread" aria-label="Starting the worker thread" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 10 of 10 · <span class="walk-file">AnimationApp.java</span></p><h2>Starting the worker thread</h2><pre class="code walk-code">private void startWorkerThread() {
-    animationThread = new Thread(new AnimationThread(animationPanel));
-    animationThread.setDaemon(true);
-    animationThread.start();
-}</pre><ul class="walk-notes"><li>A daemon thread does not keep the program alive after the window closes.</li></ul>
+<section class="slide " data-title="Double buffering" aria-label="Double buffering" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 6</p><h2>Double buffering</h2><div class="g-ingame"><div>In the game:</div><div>Double buffering and smooth animation</div></div><ul class="pts"><li>Draw the whole frame on a hidden image first, then copy it to the screen in one go.</li><li>The viewer never sees a half-drawn frame, so nothing flickers.</li><li>Swing’s <code>JPanel</code> does this for you, so the game does not flicker.</li><li>Drawing straight onto the screen can flicker: you see half-finished frames.</li><li><b>Double buffering</b> draws the whole frame off-screen first, then shows it in one go.</li><li>Swing’s JPanel is double-buffered by default, so the game does not flicker.</li><li>javax.swing.Timer is another way to run a loop: it calls your code on the EDT itself.</li></ul>
+</div></section>
+<section class="slide " data-title="Painting" aria-label="Painting" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 6 · our game program · 1 of 2 · <span class="walk-file">GamePanel.java</span></p><h2>Painting</h2><div class="walk-side g-walk"><pre class="code walk-code wide">@Override
+protected void paintComponent(Graphics g0) {
+    super.paintComponent(g0);
+    Graphics2D g = (Graphics2D) g0;
+    g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    synchronized (lock) {               // never draw while the game thread changes the lists
+        Sprites.drawBackground(g, W, H, GROUND);
+        for (Enemy e : enemies) e.draw(g);
+        for (Bullet b : bullets) b.draw(g);
+        if (player.isActive()) player.draw(g);
+        for (Explosion x : explosions) x.draw(g);
+        drawHud(g);
+    }
+}</pre><ul class="walk-notes"><li>Painting holds the same lock as update().</li></ul></div>
+</div></section>
+<section class="slide " data-title="The HUD" aria-label="The HUD" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 6 · our game program · 2 of 2 · <span class="walk-file">GamePanel.java</span></p><h2>The HUD</h2><div class="walk-side g-walk"><pre class="code walk-code wide">private void drawHud(Graphics2D g) {
+    g.setColor(new Color(0, 0, 0, 120));
+    g.fillRect(10, 10, 210, 22);
+    g.setColor(new Color(220, 60, 60));
+    g.fillRect(10, 10, player.getHealth() * 2, 22);
+    g.setColor(Color.WHITE);
+    g.setFont(new Font(&quot;SansSerif&quot;, Font.BOLD, 16));
+    g.drawString(&quot;HP &quot; + player.getHealth(), 16, 27);
+    g.drawString(&quot;Score &quot; + score, W - 130, 27);
+    if (gameOver) {
+        g.setFont(new Font(&quot;SansSerif&quot;, Font.BOLD, 40));
+        g.drawString(&quot;GAME OVER&quot;, W / 2 - 120, H / 2 - 10);
+        g.setFont(new Font(&quot;SansSerif&quot;, Font.PLAIN, 18));
+        g.drawString(&quot;Score &quot; + score + &quot;  -  press R to play again&quot;, W / 2 - 150, H / 2 + 24);
+    }
+}</pre><ul class="walk-notes"><li>The health bar is 2 pixels per HP.</li></ul></div>
+</div></section>
+<section class="slide " data-title="How the whole course fits together (in code)" aria-label="How the whole course fits together (in code)" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 6 of 6 · in the game, in code</p><h2>How the whole course fits together</h2><div class="scrollx"><table class="doc"><thead><tr><th>Chapter</th><th>Where it is in the game</th></tr></thead><tbody><tr><td>1 Variables, loops</td><td>health, score, the while (running) loop</td></tr><tr><td>2–3 Classes, constructors</td><td>Player, Bullet, Drone, Tank objects</td></tr><tr><td>4 Inheritance</td><td>Drone and Tank extend Enemy, Enemy extends GameObject</td></tr><tr><td>5 Abstract classes</td><td>GameObject with abstract update() and draw()</td></tr><tr><td>6 Exceptions</td><td>InterruptedException in the loop</td></tr><tr><td>7 Threads</td><td>the GameLoop thread</td></tr><tr><td>8 Synchronization</td><td>the lock shared by update() and paintComponent()</td></tr><tr><td>9 Swing</td><td>GamePanel, keys, Graphics drawing</td></tr></tbody></table></div>
+</div></section>
+<section class="slide " data-title="The complete game program" aria-label="The complete game program" tabindex="-1"><div style="zoom:0.96;" class="slide-inner">
+<p class="kicker">Build the game · 10 files</p><h2>The complete game program</h2><div class="codeview"><pre class="code small-code" data-file="GameObject.java">import java.awt.Graphics2D;
+import java.awt.Rectangle;
+
+// Everything on screen: it has a box, moves every frame and draws itself
+public abstract class GameObject {
+    protected double x, y;                  // top-left corner of the box
+    protected final int w, h;               // size of the box
+    protected boolean active = true;        // false = remove it next frame
+
+    public GameObject(double x, double y, int w, int h) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+    }
+
+    public abstract void update();
+    public abstract void draw(Graphics2D g);
+
+    public Rectangle getBounds() {
+        return new Rectangle((int) x, (int) y, w, h);
+    }
+
+    public boolean collidesWith(GameObject other) {
+        return getBounds().intersects(other.getBounds());
+    }
+
+    public boolean isActive() { return active; }
+    public void destroy()     { active = false; }
+}</pre><pre class="code small-code" data-file="Bullet.java">import java.awt.Graphics2D;
+
+public class Bullet extends GameObject {
+    private final double speed;             // pixels per frame; negative flies left
+    private final boolean fromEnemy;
+
+    public Bullet(double x, double y, double speed, boolean fromEnemy) {
+        super(x - 5, y - 2, 10, 4);
+        this.speed = speed;
+        this.fromEnemy = fromEnemy;
+    }
+
+    @Override
+    public void update() {
+        x += speed;
+        if (x &lt; -20 || x &gt; GamePanel.W + 20) {
+            destroy();                      // left the screen
+        }
+    }
+
+    @Override
+    public void draw(Graphics2D g) {
+        Sprites.drawBullet(g, (int) x + 5, (int) y + 2, fromEnemy);
+    }
+
+    public boolean isFromEnemy() { return fromEnemy; }
+}</pre><pre class="code small-code" data-file="Player.java">import java.awt.Graphics2D;
+
+public class Player extends GameObject {
+    private int health = 100;
+    private int cooldown = 0;               // frames until the next shot
+    private int flash = 0;                  // frames to show the muzzle flash
+
+    public Player(double x, double groundY) {
+        super(x, groundY - 66, 40, 66);
+    }
+
+    // dx, dy come from the arrow keys: -1, 0 or +1
+    public void move(int dx, int dy) {
+        x = Math.max(10, Math.min(GamePanel.W / 2.0, x + dx * 4));
+        y = Math.max(90, Math.min(GamePanel.GROUND - h, y + dy * 4));
+    }
+
+    @Override
+    public void update() {
+        if (cooldown &gt; 0) cooldown--;
+        if (flash &gt; 0) flash--;
+    }
+
+    // Returns a new bullet, or null while the rifle is cooling down
+    public Bullet tryShoot() {
+        if (cooldown &gt; 0) {
+            return null;
+        }
+        cooldown = 10;
+        flash = 3;
+        return new Bullet(x + w / 2.0 + 40, y + h - 36, 9, false);
+    }
+
+    public void takeDamage(int amount) {
+        health = Math.max(0, health - amount);
+        if (health == 0) {
+            destroy();
+        }
+    }
+
+    public int getHealth() { return health; }
+
+    @Override
+    public void draw(Graphics2D g) {
+        Sprites.drawCommando(g, (int) x + w / 2, (int) y + h, flash &gt; 0);
+    }
+}</pre><pre class="code small-code" data-file="Enemy.java">// Shared enemy behaviour; each kind decides how it moves, looks and fights
+public abstract class Enemy extends GameObject {
+    protected int health;
+    protected final int points;
+    protected final int touchDamage;
+
+    public Enemy(double x, double y, int w, int h, int health, int points, int touchDamage) {
+        super(x, y, w, h);
+        this.health = health;
+        this.points = points;
+        this.touchDamage = touchDamage;
+    }
+
+    public void takeHit() {
+        health--;
+        if (health &lt;= 0) {
+            destroy();
+        }
+    }
+
+    // Most enemies never shoot; Tank overrides this
+    public Bullet tryShoot() {
+        return null;
+    }
+
+    public int getPoints()      { return points; }
+    public int getTouchDamage() { return touchDamage; }
+
+    @Override
+    public void update() {
+        if (x + w &lt; 0) {
+            active = false;                 // flew past the player: gone, no points
+        }
+    }
+}</pre><pre class="code small-code" data-file="Drone.java">import java.awt.Graphics2D;
+
+public class Drone extends Enemy {
+    private final double baseY;
+    private int age = 0;
+
+    public Drone(double x, double y) {
+        super(x, y, 60, 22, 1, 100, 15);    // one hit destroys it
+        baseY = y;
+    }
+
+    @Override
+    public void update() {
+        age++;
+        x -= 2.6;
+        y = baseY + Math.sin(age / 12.0) * 18;   // bobs up and down
+        super.update();
+    }
+
+    @Override
+    public void draw(Graphics2D g) {
+        Sprites.drawDrone(g, (int) x + w / 2, (int) y + 14);
+    }
+}</pre><pre class="code small-code" data-file="Tank.java">import java.awt.Graphics2D;
+
+public class Tank extends Enemy {
+    private int reload = 60;
+
+    public Tank(double x) {
+        super(x, GamePanel.GROUND - 40, 80, 40, 3, 300, 30);   // takes 3 hits
+    }
+
+    @Override
+    public void update() {
+        x -= 1.1;
+        if (reload &gt; 0) reload--;
+        super.update();
+    }
+
+    @Override
+    public Bullet tryShoot() {
+        if (reload &gt; 0 || x &gt; GamePanel.W - 40) {
+            return null;
+        }
+        reload = 110;
+        return new Bullet(x, y + 6, -5, true);  // a shell from the cannon, flying left
+    }
+
+    @Override
+    public void draw(Graphics2D g) {
+        Sprites.drawTank(g, (int) x + 10, (int) y + h);
+    }
+}</pre><pre class="code small-code" data-file="GamePanel.java">import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.Random;
+import javax.swing.JPanel;
+
+// The game: a thread updates the world about 60 times a second, Swing paints it
+public class GamePanel extends JPanel implements Runnable, KeyListener {
+    public static final int W = 760, H = 380, GROUND = 330;
+
+    private final Object lock = new Object();           // guards the lists below
+    private final ArrayList&lt;Enemy&gt; enemies = new ArrayList&lt;&gt;();
+    private final ArrayList&lt;Bullet&gt; bullets = new ArrayList&lt;&gt;();
+    private final ArrayList&lt;Explosion&gt; explosions = new ArrayList&lt;&gt;();
+    private final Random random = new Random();
+    private Player player;
+    private int score, frame, spawnTimer;
+    private boolean gameOver;
+
+    // Written by the Event Dispatch Thread, read by the game thread
+    private volatile boolean left, right, up, down, firing, restart;
+    private volatile boolean running;
+    private Thread gameThread;
+
+    public GamePanel() {
+        setPreferredSize(new Dimension(W, H));
+        setFocusable(true);
+        addKeyListener(this);
+        newGame();
+    }
+
+    private void newGame() {
+        synchronized (lock) {
+            enemies.clear();
+            bullets.clear();
+            explosions.clear();
+            player = new Player(70, GROUND);
+            score = 0;
+            frame = 0;
+            spawnTimer = 0;
+            gameOver = false;
+        }
+    }
+
+    public void start() {
+        running = true;
+        gameThread = new Thread(this, &quot;GameLoop&quot;);
+        gameThread.start();
+    }
+
+    public void stop() {
+        running = false;
+    }
+
+    // The game loop: update, then repaint, then sleep until the next frame
+    @Override
+    public void run() {
+        while (running) {
+            long begin = System.currentTimeMillis();
+            synchronized (lock) {
+                update();
+            }
+            repaint();
+            long wait = 16 - (System.currentTimeMillis() - begin);
+            try {
+                Thread.sleep(Math.max(2, wait));
+            } catch (InterruptedException e) {
+                return;
+            }
+        }
+    }
+
+    private void update() {
+        if (gameOver) {
+            if (restart) {
+                restart = false;
+                newGame();
+            }
+            return;
+        }
+        frame++;
+
+        // 1. the player
+        player.move((right ? 1 : 0) - (left ? 1 : 0), (down ? 1 : 0) - (up ? 1 : 0));
+        player.update();
+        if (firing) {
+            Bullet b = player.tryShoot();
+            if (b != null) bullets.add(b);
+        }
+
+        // 2. new enemies, a little faster as the score grows
+        spawnTimer--;
+        if (spawnTimer &lt;= 0) {
+            if (random.nextInt(4) == 0) {
+                enemies.add(new Tank(W + 10));
+            } else {
+                enemies.add(new Drone(W + 10, 90 + random.nextInt(170)));
+            }
+            spawnTimer = Math.max(30, 80 - score / 200);
+        }
+
+        // 3. move everything
+        for (Enemy e : enemies) {
+            e.update();
+            Bullet shell = e.tryShoot();
+            if (shell != null) bullets.add(shell);
+        }
+        for (Bullet b : bullets) b.update();
+        for (Explosion x : explosions) x.update();
+
+        // 4. collisions
+        for (Bullet b : bullets) {
+            if (!b.isActive()) continue;
+            if (b.isFromEnemy()) {
+                if (b.collidesWith(player)) {
+                    b.destroy();
+                    player.takeDamage(20);
+                }
+                continue;
+            }
+            for (Enemy e : enemies) {
+                if (e.isActive() &amp;&amp; b.collidesWith(e)) {
+                    b.destroy();
+                    e.takeHit();
+                    if (!e.isActive()) {
+                        score += e.getPoints();
+                        explosions.add(new Explosion(e.x + e.w / 2.0, e.y + e.h / 2.0));
+                    }
+                    break;
+                }
+            }
+        }
+        // enemies that crash into the player
+        for (Enemy e : enemies) {
+            if (e.isActive() &amp;&amp; e.collidesWith(player)) {
+                e.destroy();
+                player.takeDamage(e.getTouchDamage());
+                explosions.add(new Explosion(e.x + e.w / 2.0, e.y + e.h / 2.0));
+            }
+        }
+
+        // 5. remove what is finished
+        enemies.removeIf(e -&gt; !e.isActive());
+        bullets.removeIf(b -&gt; !b.isActive());
+        explosions.removeIf(x -&gt; !x.isActive());
+        if (!player.isActive()) {
+            gameOver = true;
+        }
+    }
+
+    @Override
+    protected void paintComponent(Graphics g0) {
+        super.paintComponent(g0);
+        Graphics2D g = (Graphics2D) g0;
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        synchronized (lock) {               // never draw while the game thread changes the lists
+            Sprites.drawBackground(g, W, H, GROUND);
+            for (Enemy e : enemies) e.draw(g);
+            for (Bullet b : bullets) b.draw(g);
+            if (player.isActive()) player.draw(g);
+            for (Explosion x : explosions) x.draw(g);
+            drawHud(g);
+        }
+    }
+
+    private void drawHud(Graphics2D g) {
+        g.setColor(new Color(0, 0, 0, 120));
+        g.fillRect(10, 10, 210, 22);
+        g.setColor(new Color(220, 60, 60));
+        g.fillRect(10, 10, player.getHealth() * 2, 22);
+        g.setColor(Color.WHITE);
+        g.setFont(new Font(&quot;SansSerif&quot;, Font.BOLD, 16));
+        g.drawString(&quot;HP &quot; + player.getHealth(), 16, 27);
+        g.drawString(&quot;Score &quot; + score, W - 130, 27);
+        if (gameOver) {
+            g.setFont(new Font(&quot;SansSerif&quot;, Font.BOLD, 40));
+            g.drawString(&quot;GAME OVER&quot;, W / 2 - 120, H / 2 - 10);
+            g.setFont(new Font(&quot;SansSerif&quot;, Font.PLAIN, 18));
+            g.drawString(&quot;Score &quot; + score + &quot;  -  press R to play again&quot;, W / 2 - 150, H / 2 + 24);
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        setKey(e.getKeyCode(), true);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        setKey(e.getKeyCode(), false);
+    }
+
+    private void setKey(int code, boolean down) {
+        switch (code) {
+            case KeyEvent.VK_LEFT:  left = down; break;
+            case KeyEvent.VK_RIGHT: right = down; break;
+            case KeyEvent.VK_UP:    up = down; break;
+            case KeyEvent.VK_DOWN:  this.down = down; break;
+            case KeyEvent.VK_SPACE: firing = down; break;
+            case KeyEvent.VK_R:     if (down) restart = true; break;
+            default: break;
+        }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) { }
+}</pre><pre class="code small-code" data-file="Explosion.java">import java.awt.Graphics2D;
+
+public class Explosion extends GameObject {
+    private int age = 0;
+
+    public Explosion(double cx, double cy) {
+        super(cx, cy, 0, 0);
+    }
+
+    @Override
+    public void update() {
+        age++;
+        if (age &gt; 20) {
+            destroy();
+        }
+    }
+
+    @Override
+    public void draw(Graphics2D g) {
+        Sprites.drawExplosion(g, (int) x, (int) y, age);
+    }
+}</pre><pre class="code small-code" data-file="Sprites.java">import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Graphics2D;
+
+// Draws every character from simple shapes: rectangles, ovals and arcs
+public final class Sprites {
+    private Sprites() { }
+
+    static final Color SKY_TOP    = new Color(14, 26, 46);
+    static final Color SKY_BOTTOM = new Color(34, 56, 90);
+    static final Color CITY       = new Color(26, 42, 64);
+    static final Color DIRT       = new Color(59, 47, 37);
+    static final Color GRASS      = new Color(76, 122, 58);
+
+    public static void drawBackground(Graphics2D g, int w, int h, int ground) {
+        g.setPaint(new GradientPaint(0, 0, SKY_TOP, 0, ground, SKY_BOTTOM));
+        g.fillRect(0, 0, w, ground);
+        g.setColor(CITY);
+        int[] tops = { 60, 90, 40, 110, 70, 50, 95, 65 };
+        int bw = w / tops.length;
+        for (int i = 0; i &lt; tops.length; i++) {
+            g.fillRect(i * bw + 6, ground - tops[i], bw - 12, tops[i]);
+        }
+        g.setColor(DIRT);
+        g.fillRect(0, ground, w, h - ground);
+        g.setColor(GRASS);
+        g.fillRect(0, ground, w, 4);
+    }
+
+    // (x, y) = the point between the boots, on the ground
+    public static void drawCommando(Graphics2D g, int x, int y, boolean firing) {
+        Color dark = new Color(47, 93, 44), green = new Color(62, 123, 58);
+        Color skin = new Color(224, 180, 138), metal = new Color(34, 34, 34);
+        g.setColor(dark);
+        g.fillRect(x - 18, y - 44, 7, 18);                  // backpack
+        g.fillRect(x - 10, y - 22, 8, 22);                  // back leg
+        g.fillRect(x + 2, y - 22, 8, 22);                   // front leg
+        g.setColor(Color.BLACK);
+        g.fillRect(x - 12, y - 4, 12, 4);                   // boots
+        g.fillRect(x + 1, y - 4, 12, 4);
+        g.setColor(green);
+        g.fillRect(x - 12, y - 46, 24, 26);                 // body
+        g.setColor(new Color(110, 80, 40));
+        g.fillRect(x - 12, y - 24, 24, 3);                  // belt
+        g.setColor(skin);
+        g.fillOval(x - 8, y - 60, 16, 16);                  // head
+        g.setColor(dark);
+        g.fillArc(x - 10, y - 66, 20, 16, 0, 180);          // helmet
+        g.fillRect(x - 10, y - 59, 22, 3);                  // helmet brim
+        g.setColor(Color.BLACK);
+        g.fillRect(x + 3, y - 55, 4, 3);                    // eye
+        g.setColor(metal);
+        g.fillRect(x + 2, y - 38, 26, 6);                   // rifle
+        g.fillRect(x + 28, y - 37, 8, 3);                   // barrel
+        g.setColor(green);
+        g.fillRect(x - 2, y - 40, 14, 6);                   // arm
+        g.setColor(skin);
+        g.fillOval(x + 9, y - 41, 7, 7);                    // hand
+        if (firing) {
+            g.setColor(new Color(255, 210, 60));
+            g.fillOval(x + 36, y - 41, 12, 10);             // muzzle flash
+        }
+    }
+
+    // (cx, cy) = the centre of the drone
+    public static void drawDrone(Graphics2D g, int cx, int cy) {
+        g.setColor(new Color(58, 63, 71));
+        g.fillRect(cx - 24, cy - 10, 48, 3);                // arms
+        g.setColor(new Color(170, 178, 189));
+        g.fillOval(cx - 30, cy - 14, 16, 4);                // rotors
+        g.fillOval(cx + 14, cy - 14, 16, 4);
+        g.setColor(new Color(90, 98, 112));
+        g.fillOval(cx - 16, cy - 8, 32, 16);                // body
+        g.setColor(new Color(255, 77, 77));
+        g.fillOval(cx - 5, cy - 4, 10, 8);                  // red eye
+    }
+
+    // (x, y) = the left end of the tracks, on the ground
+    public static void drawTank(Graphics2D g, int x, int y) {
+        g.setColor(new Color(51, 51, 51));
+        g.fillRoundRect(x, y - 14, 70, 14, 12, 12);         // tracks
+        g.setColor(new Color(122, 106, 58));
+        g.fillRect(x + 6, y - 28, 58, 14);                  // hull
+        g.setColor(new Color(106, 90, 48));
+        g.fillRoundRect(x + 20, y - 40, 28, 14, 8, 8);      // turret
+        g.setColor(new Color(68, 68, 68));
+        g.fillRect(x - 10, y - 36, 32, 5);                  // cannon, pointing left
+    }
+
+    public static void drawBullet(Graphics2D g, int x, int y, boolean enemy) {
+        g.setColor(enemy ? new Color(255, 120, 60) : new Color(255, 214, 90));
+        g.fillRoundRect(x - 5, y - 2, 10, 4, 4, 4);
+    }
+
+    // age runs from 0 (bang) to 20 (gone)
+    public static void drawExplosion(Graphics2D g, int cx, int cy, int age) {
+        int r = 6 + age * 2;
+        int alpha = Math.max(0, 220 - age * 11);
+        g.setColor(new Color(255, 140, 40, alpha));
+        g.fillOval(cx - r, cy - r, 2 * r, 2 * r);
+        g.setColor(new Color(255, 230, 120, alpha));
+        g.fillOval(cx - r / 2, cy - r / 2, r, r);
+    }
+
+    public static void drawLaser(Graphics2D g, int x1, int y, int x2) {
+        g.setColor(new Color(255, 220, 80));
+        g.setStroke(new BasicStroke(3));
+        g.drawLine(x1, y, x2, y);
+        g.setStroke(new BasicStroke(1));
+    }
+}</pre><pre class="code small-code" data-file="CodeCommando.java">import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
+public class CodeCommando {
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -&gt; {
+            JFrame window = new JFrame(&quot;Code Commando&quot;);
+            GamePanel game = new GamePanel();
+            window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            window.add(game);
+            window.pack();
+            window.setResizable(false);
+            window.setLocationRelativeTo(null);
+            window.setVisible(true);
+            game.requestFocusInWindow();
+            game.start();                   // the game thread begins here
+        });
+    }
+}</pre></div><p class="muted">Save every file in one folder, then compile and run: <code>javac *.java</code> → <code>java CodeCommando</code></p>
+</div></section>
+<section class="slide " data-title="What you should see" aria-label="What you should see" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Run the game</p><h2>What you should see</h2><p>The program opens a window instead of printing. When it works:</p><ul class="pts"><li>A window titled “Code Commando”</li><li>The commando on the left, drones and tanks coming from the right</li><li>A health bar and the score at the top</li><li>Arrow keys move, Space fires; tanks fire shells back</li><li>GAME OVER at 0 HP; R starts a new game</li></ul>
+</div></section>
+<section class="slide " data-title="Game task 1: Health packs" aria-label="Game task 1: Health packs" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 1 of 3</p><h2>Game task 1: Health packs</h2><div class="ex task g-task"><div class="qq">Bring back Chapter 5’s Collectible.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g10t0r0" data-key="g10t0r0"><label for="g10t0r0">A <code>HealthPack</code> class that extends GameObject and floats in from the right</label></li><li><input type="checkbox" id="g10t0r1" data-key="g10t0r1"><label for="g10t0r1">Spawn one every 15 seconds</label></li><li><input type="checkbox" id="g10t0r2" data-key="g10t0r2"><label for="g10t0r2">When the player touches it, heal 25 (never above 100) and remove it</label></li><li><input type="checkbox" id="g10t0r3" data-key="g10t0r3"><label for="g10t0r3">Draw it with a new Sprites method</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Keep the packs in their own list, update them in update(), and check <code>player.collidesWith(pack)</code>.</div></details></div>
+</div></section>
+<section class="slide " data-title="Game task 2: A Sniper enemy" aria-label="Game task 2: A Sniper enemy" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 2 of 3</p><h2>Game task 2: A Sniper enemy</h2><div class="ex task g-task"><div class="qq">Chapter 4’s third enemy joins the game.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g10t1r0" data-key="g10t1r0"><label for="g10t1r0"><code>Sniper extends Enemy</code>: it stops at x = 600 and fires fast, straight bullets</label></li><li><input type="checkbox" id="g10t1r1" data-key="g10t1r1"><label for="g10t1r1">Worth 200 points, two hits to destroy</label></li><li><input type="checkbox" id="g10t1r2" data-key="g10t1r2"><label for="g10t1r2">Draw it with a new Sprites method</label></li><li><input type="checkbox" id="g10t1r3" data-key="g10t1r3"><label for="g10t1r3">Spawn it as one in five enemies</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Override update() so x stops decreasing once it reaches 600, and tryShoot() with a shorter reload than the tank’s.</div></details></div>
+</div></section>
+<section class="slide " data-title="Game task 3: Levels and a high score" aria-label="Game task 3: Levels and a high score" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 3 of 3</p><h2>Game task 3: Levels and a high score</h2><div class="ex task g-task"><div class="qq">Game rules on top of the loop.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g10t2r0" data-key="g10t2r0"><label for="g10t2r0">Every 1500 points, show “LEVEL n” for two seconds and make enemies 10% faster</label></li><li><input type="checkbox" id="g10t2r1" data-key="g10t2r1"><label for="g10t2r1">Keep the best score while the program runs</label></li><li><input type="checkbox" id="g10t2r2" data-key="g10t2r2"><label for="g10t2r2">Show both on the HUD</label></li><li><input type="checkbox" id="g10t2r3" data-key="g10t2r3"><label for="g10t2r3">Use a custom exception if a level file cannot be loaded (Chapter 6)</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Store a speed multiplier in GamePanel and pass it to the enemies when they are created.</div></details></div>
+</div></section>
+<section class="slide " data-title="The official lab program" aria-label="The official lab program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Official lab · from the lab manual</p><h2>The official lab program</h2>
+<p class="g-official">The graded in-lab tasks and report exercises build on this program, not on the game. Read it and run it before you start them.</p>
+<ol class="flow"><li>main creates AnimationApp on the EDT</li><li>AnimationApp builds the panel and buttons and starts a daemon AnimationThread</li><li>The thread loops: updateAnimation(), repaint(), sleep the rest of the 16 ms frame</li><li>updateAnimation moves balls only while running and handles collisions</li><li>Start / Pause flip the running flag; Reset restores the three balls</li><li>Closing the window ends the program (the thread is a daemon)</li></ol><p class="note-line">Ball = model, AnimationPanel = rendering + state, AnimationThread = loop, AnimationApp = controls.</p>
 </div></section>
 <section class="slide " data-title="Trace: one animation frame" aria-label="Trace: one animation frame" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: one animation frame</h2><p class="muted">Move, bounce off the wall, detect a collision and swap velocities.</p>
+<p class="kicker">Official lab · step through the code · 1 of 2</p><h2>Trace: one animation frame</h2><p class="muted">Move, bounce off the wall, detect a collision and swap velocities.</p>
 </div></section>
-<section class="slide " data-title="Trace: one animation frame (cont.)" aria-label="Trace: one animation frame (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: one animation frame (cont.)</h2><div data-trace="lab10-ball"></div>
+<section class="slide " data-title="Trace: one animation frame (cont.)" aria-label="Trace: one animation frame (cont.)" tabindex="-1"><div style="zoom:0.93;" class="slide-inner">
+<p class="kicker">Official lab · step through the code · 1 of 2</p><h2>Trace: one animation frame (cont.)</h2><div data-trace="lab10-ball"></div>
 </div></section>
 <section class="slide " data-title="Trace: the animation thread and the EDT" aria-label="Trace: the animation thread and the EDT" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: the animation thread and the EDT</h2><p class="muted">The Animator moves the balls, the EDT draws them. The panel’s lock makes sure the EDT never paints a half-moved frame.</p>
+<p class="kicker">Official lab · step through the code · 2 of 2</p><h2>Trace: the animation thread and the EDT</h2><p class="muted">The Animator moves the balls, the EDT draws them. The panel’s lock makes sure the EDT never paints a half-moved frame.</p>
 </div></section>
 <section class="slide " data-title="Trace: the animation thread and the EDT (cont.)" aria-label="Trace: the animation thread and the EDT (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: the animation thread and the EDT (cont.)</h2><div data-trace="lab10-worker"></div>
+<p class="kicker">Official lab · step through the code · 2 of 2</p><h2>Trace: the animation thread and the EDT (cont.)</h2><div data-trace="lab10-worker"></div>
 </div></section>
-<section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
-<p class="kicker">For reference · 5 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Ball.java">import java.awt.BasicStroke;
+<section class="slide " data-title="The official program" aria-label="The official program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Official lab · 5 files</p><h2>The official program</h2><div class="codeview"><pre class="code small-code" data-file="Ball.java">import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
@@ -541,28 +1397,28 @@ public class Lab10Demo {
             }
         });
     }
-}</pre></div><p class="muted">Copy or download each file, save it under the same name, then compile and run: <code>javac *.java</code> → <code>java Lab10Demo</code></p>
+}</pre></div><p class="muted">Compile and run: <code>javac *.java</code> → <code>java Lab10Demo</code></p>
 </div></section>
-<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Implementation</p><h2>Expected output</h2><p>The program opens a window instead of printing to the console. When it works you should see:</p><ul class=""><li>A window titled “Bouncing Balls Animation” with a gridded white panel and three coloured balls</li><li>Start moves the balls; they bounce off the walls and swap directions when they collide</li><li>Pause freezes them; Reset puts them back and pauses</li><li>The panel shows the ball count and Running / Paused</li></ul>
+<section class="slide " data-title="Official program: expected output" aria-label="Official program: expected output" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Official lab</p><h2>Official program: expected output</h2><p>The program opens a window. When it works you should see:</p><ul class=""><li>A window titled “Bouncing Balls Animation” with a gridded white panel and three coloured balls</li><li>Start moves the balls; they bounce off the walls and swap directions when they collide</li><li>Pause freezes them; Reset puts them back and pauses</li><li>The panel shows the ball count and Running / Paused</li></ul>
 </div></section>
 <section class="slide " data-title="Try the bouncing balls" aria-label="Try the bouncing balls" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Interactive</p><h2>Try the bouncing balls</h2><div data-demo="lab10-balls"></div>
+<p class="kicker">Official lab · in the browser</p><h2>Try the bouncing balls</h2><div data-demo="lab10-balls"></div>
 </div></section>
 <section class="slide " data-title="Task 1: Add a fourth ball" aria-label="Task 1: Add a fourth ball" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 1 of 3</p><h2>Task 1: Add a fourth ball</h2><div class="ex task"><div class="qq">One more ball in the simulation.</div>
+<p class="kicker">Official in-lab task 1 of 3</p><h2>Task 1: Add a fourth ball</h2><div class="ex task"><div class="qq">One more ball in the simulation.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l10t0r0" data-key="l10t0r0"><label for="l10t0r0">Add it in <code>initializeBalls()</code></label></li><li><input type="checkbox" id="l10t0r1" data-key="l10t0r1"><label for="l10t0r1">Use a new colour (yellow or orange)</label></li><li><input type="checkbox" id="l10t0r2" data-key="l10t0r2"><label for="l10t0r2">Give it its own start position and velocity</label></li><li><input type="checkbox" id="l10t0r3" data-key="l10t0r3"><label for="l10t0r3">Check it moves, bounces and collides</label></li><li><input type="checkbox" id="l10t0r4" data-key="l10t0r4"><label for="l10t0r4">Show the correct ball count</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Start it away from the other balls so it does not overlap at frame 0.</div></details></div>
 </div></section>
 <section class="slide " data-title="Task 2: Velocity damping" aria-label="Task 2: Velocity damping" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 2 of 3</p><h2>Task 2: Velocity damping</h2><div class="ex task"><div class="qq">Make the balls slow down gradually.</div>
+<p class="kicker">Official in-lab task 2 of 3</p><h2>Task 2: Velocity damping</h2><div class="ex task"><div class="qq">Make the balls slow down gradually.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l10t1r0" data-key="l10t1r0"><label for="l10t1r0">A damping factor such as 0.99</label></li><li><input type="checkbox" id="l10t1r1" data-key="l10t1r1"><label for="l10t1r1">Multiply vx and vy by it after each update</label></li><li><input type="checkbox" id="l10t1r2" data-key="l10t1r2"><label for="l10t1r2">Observe the slowdown</label></li><li><input type="checkbox" id="l10t1r3" data-key="l10t1r3"><label for="l10t1r3">Stop balls whose speed becomes tiny</label></li><li><input type="checkbox" id="l10t1r4" data-key="l10t1r4"><label for="l10t1r4">Explain how damping models friction or air resistance</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">After damping: <code>if (Math.abs(vx) &lt; 0.05) vx = 0;</code> and the same for vy.</div></details></div>
 </div></section>
 <section class="slide " data-title="Task 3: Frame-rate display" aria-label="Task 3: Frame-rate display" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 3 of 3</p><h2>Task 3: Frame-rate display</h2><div class="ex task"><div class="qq">Show the actual frames per second.</div>
+<p class="kicker">Official in-lab task 3 of 3</p><h2>Task 3: Frame-rate display</h2><div class="ex task"><div class="qq">Show the actual frames per second.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l10t2r0" data-key="l10t2r0"><label for="l10t2r0">Count frames and track elapsed time</label></li><li><input type="checkbox" id="l10t2r1" data-key="l10t2r1"><label for="l10t2r1">Compute FPS with <code>System.currentTimeMillis()</code></label></li><li><input type="checkbox" id="l10t2r2" data-key="l10t2r2"><label for="l10t2r2">Show it on the panel or status label</label></li><li><input type="checkbox" id="l10t2r3" data-key="l10t2r3"><label for="l10t2r3">Observe it while running</label></li><li><input type="checkbox" id="l10t2r4" data-key="l10t2r4"><label for="l10t2r4">Explain why actual FPS can differ from the target</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Every second: fps = frames counted during that second; then reset the counter.</div></details></div>
 </div></section>
 <section class="slide " data-title="Show your work" aria-label="Show your work" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
+<p class="kicker">Official in-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
 </div></section>
 <section class="slide " data-title="Report exercise 1" aria-label="Report exercise 1" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Lab report · exercise 1 of 2</p><h2>Physics: gravity and bounce</h2><div class="ex task report"><div class="qq">Add gravity and energy loss.</div>
@@ -576,25 +1432,25 @@ public class Lab10Demo {
 <p class="kicker">Lab report</p><h2>Writing the lab report</h2><ul class="big-list"><li>Problem statement and your design (classes, fields, methods)</li><li>Complete source code, formatted and commented</li><li>Sample output or screenshots for normal <b>and</b> edge cases</li><li>A short discussion: what each OOP concept did in your program</li></ul><div class="integrity"><h3>Academic integrity</h3><p>Copying from the internet, classmates, seniors or any other unauthorized source is strictly prohibited. Full marks may be deducted if plagiarism, copied work or academic dishonesty is detected. Complete the tasks, implementation, output analysis and report yourself.</p></div>
 </div></section>
 <section class="slide " data-title="Viva questions (1 of 2)" aria-label="Viva questions (1 of 2)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Discussion and analysis</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">Why run the animation loop in a worker thread and not in an ActionListener?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">A loop on the EDT would block it: the window could not repaint or respond to clicks.</div></details></div><div class="ex"><div class="qq">Why are AnimationPanel’s methods synchronized?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">The worker thread updates the ball list while the EDT paints it; synchronization stops them seeing it half-updated.</div></details></div>
+<p class="kicker">Discussion</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">Why does the game loop run on its own thread instead of on the EDT?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">A loop with sleep() on the EDT would freeze the window: it could not handle keys or paint while it sleeps.</div></details></div><div class="ex"><div class="qq">What would go wrong without <code>synchronized (lock)</code> in paintComponent?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">The EDT could draw while the game thread is removing objects from a list, giving a ConcurrentModificationException or a half-updated frame.</div></details></div>
 </div></section>
 <section class="slide " data-title="Viva questions (2 of 2)" aria-label="Viva questions (2 of 2)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Discussion and analysis</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq">What problem does double buffering solve?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Flicker: the user only ever sees complete frames.</div></details></div><div class="ex"><div class="qq">Why is the thread a daemon?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">So it does not keep the JVM alive after the window is closed.</div></details></div>
+<p class="kicker">Discussion</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq">Why are the key flags volatile?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">They are written on the EDT and read on the game thread; volatile makes every write visible to the other thread at once.</div></details></div><div class="ex"><div class="qq">How does the game decide that a bullet hit a drone?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">It checks whether their bounding rectangles overlap with Rectangle.intersects.</div></details></div>
 </div></section>
 <section class="slide " data-title="Quiz" aria-label="Quiz" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="lab10"></div><script type="application/json" class="quiz-json">[{"q": "About how long is one frame at 60 FPS?", "o": ["1 ms", "16 ms", "60 ms", "1 s"], "a": 1, "w": "1000 / 60 \u2248 16.7 ms."}, {"q": "A ball hits the right wall. What changes?", "o": ["vy = -vy", "vx = -vx", "radius", "colour"], "a": 1, "w": "Reverse the horizontal velocity."}, {"q": "Two balls collide when the distance between centres is\u2026", "o": ["> r1 + r2", "<= r1 + r2", "== 0", "< 0"], "a": 1, "w": "They overlap or touch."}, {"q": "Double buffering means\u2026", "o": ["two threads", "drawing off-screen then copying", "two panels", "drawing twice as fast"], "a": 1, "w": "The finished image is shown at once."}, {"q": "Which call asks Swing to draw the next frame?", "o": ["paintComponent()", "repaint()", "draw()", "run()"], "a": 1, "w": "Swing schedules paintComponent."}]</script></div>
+<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="game10"></div><script type="application/json" class="quiz-json">[{"q": "At about 60 frames a second, one frame lasts about\u2026", "o": ["1 ms", "16 ms", "100 ms", "1 second"], "a": 1, "w": "1000 ms / 60 \u2248 16.7 ms."}, {"q": "Which Swing call asks for the next frame to be drawn?", "o": ["paint()", "repaint()", "update()", "draw()"], "a": 1, "w": "repaint() schedules paintComponent on the EDT."}, {"q": "Two objects collide when\u2026", "o": ["they have the same x", "their bounding boxes intersect", "they are the same class", "one is a Bullet"], "a": 1, "w": "Rectangle.intersects tests for overlap."}, {"q": "Double buffering prevents\u2026", "o": ["deadlock", "flicker", "exceptions", "garbage collection"], "a": 1, "w": "The frame is shown only when it is complete."}, {"q": "Why does Enemy have an abstract parent instead of being drawn directly by GamePanel?", "o": ["it is required by Swing", "so the loop can treat every object the same way through GameObject", "it makes the game faster", "Java needs it for threads"], "a": 1, "w": "Polymorphism: update() and draw() on every object."}]</script></div>
 </div></section>
 <section class="slide " data-title="Summary" aria-label="Summary" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Summary</p><h2>Summary</h2><ul class="sumlist"><li>Animation = update state, redraw, wait — repeated about 60 times a second.</li><li>A worker thread runs the loop; the EDT handles painting and events.</li><li>Synchronize state shared between the two threads.</li><li>Double buffering draws complete frames off-screen.</li><li>Walls reverse a velocity; overlapping balls swap velocities.</li></ul><div class="nextcard"><a class="btn" href="../index.html">All labs</a></div>
+<p class="kicker">Mission debrief</p><h2>Summary</h2><ul class="sumlist"><li>Animation is many slightly different frames, about 60 a second.</li><li>The game loop: update, collisions, repaint, sleep, on its own thread.</li><li>Painting happens on the EDT; a shared lock keeps the two threads apart.</li><li>Rectangle.intersects decides every hit.</li><li>Swing double-buffers, so the game does not flicker.</li><li>Mission complete: every topic of the course now lives in one working game.</li></ul><div class="nextcard"><a class="btn pri" href="10-animation.html#s=1">Replay the final game</a><a class="btn" href="../index.html">All chapters</a></div>
 </div></section>
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 39</span>
+  <span class="counter" id="counter">1 / 55</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
-<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
-<noscript><p style="padding:20px">This lab needs JavaScript for the slides and the interactive examples.</p></noscript>
+<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this chapter</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
+<noscript><p style="padding:20px">This chapter needs JavaScript for the slides, the game scenes and the interactive examples.</p></noscript>
 <script src="../js/core.js"></script>
 <script src="../js/art.js"></script>
 <script src="../js/java.js"></script>
@@ -606,10 +1462,14 @@ public class Lab10Demo {
 <script src="../js/demos-basics.js"></script>
 <script src="../js/demos-oop.js"></script>
 <script src="../js/demos-adv.js"></script>
+<script src="../js/game-core.js"></script>
+<script src="../js/game-scenes-a.js"></script>
+<script src="../js/game-scenes-b.js"></script>
+<script src="../js/game-scenes-c.js"></script>
 <script src="../js/quiz.js"></script>
 <script src="../js/page.js"></script>
 <script src="../js/lab.js"></script>
-<script>window.OOP_TOPIC = {"id": 10, "prev": "09-gui-swing.html", "next": null, "nextLabel": "Next lab"};</script>
+<script>window.OOP_TOPIC = {"id": 10, "prev": "09-gui-swing.html", "next": null, "nextLabel": "Next chapter"};</script>
 <script>mountPage();</script>
 <script src="../js/slides.js"></script>
 <script src="../js/annotate.js"></script>

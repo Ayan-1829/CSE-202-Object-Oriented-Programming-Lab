@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Use an abstract Animal class for shared state and required behaviour, and the Drawable and Eatable interfaces for optional capabilities, then treat objects through both kinds of reference.">
-<meta name="keywords" content="java abstract class, abstract method, interface, implements, multiple interfaces, polymorphism, instanceof, lab, cse 202, object oriented programming lab">
+<meta name="description" content="Everything on screen is a GameObject that must update() itself and say how it looks, yet nobody can create a plain GameObject. Interfaces add abilities across the tree: Damageable, Shooter and Collectible.">
+<meta name="keywords" content="java abstract class, abstract method, interface, implements, multiple interfaces, polymorphism, instanceof, lab, java game, game programming, cse 202, object oriented programming lab">
 <meta name="author" content="Object Oriented Programming Lab Notes">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#155E63">
@@ -16,32 +16,33 @@
 <link rel="manifest" href="../site.webmanifest">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
-<meta property="og:title" content="Lab 5: Abstract Classes &amp; Interfaces | OOP Lab (CSE 202)">
-<meta property="og:description" content="Use an abstract Animal class for shared state and required behaviour, and the Drawable and Eatable interfaces for optional capabilities, then treat objects through both kinds of reference.">
+<meta property="og:title" content="Chapter 5: Abstract Classes &amp; Interfaces | OOP Lab (CSE 202)">
+<meta property="og:description" content="Everything on screen is a GameObject that must update() itself and say how it looks, yet nobody can create a plain GameObject. Interfaces add abilities across the tree: Damageable, Shooter and Collectible.">
 <meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/05-abstract-classes-interfaces.html">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/05-abstract-classes-interfaces.png?v=2">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Lab 5 of 10: Abstract Classes &amp; Interfaces – CSE 202 Object Oriented Programming Lab">
+<meta property="og:image:alt" content="Chapter 5 of 10: Abstract Classes &amp; Interfaces – CSE 202 Object Oriented Programming Lab">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Lab 5: Abstract Classes &amp; Interfaces | OOP Lab (CSE 202)">
-<meta name="twitter:description" content="Use an abstract Animal class for shared state and required behaviour, and the Drawable and Eatable interfaces for optional capabilities, then treat objects through both kinds of reference.">
+<meta name="twitter:title" content="Chapter 5: Abstract Classes &amp; Interfaces | OOP Lab (CSE 202)">
+<meta name="twitter:description" content="Everything on screen is a GameObject that must update() itself and say how it looks, yet nobody can create a plain GameObject. Interfaces add abilities across the tree: Damageable, Shooter and Collectible.">
 <meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/05-abstract-classes-interfaces.png?v=2">
-<meta name="twitter:image:alt" content="Lab 5 of 10: Abstract Classes &amp; Interfaces – CSE 202 Object Oriented Programming Lab">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Abstract Classes & Interfaces", "description": "Use an abstract Animal class for shared state and required behaviour, and the Drawable and Eatable interfaces for optional capabilities, then treat objects through both kinds of reference.", "position": 5, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 35, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/05-abstract-classes-interfaces.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/05-abstract-classes-interfaces.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
-<title>Lab 5: Abstract Classes &amp; Interfaces | OOP Lab (CSE 202)</title>
+<meta name="twitter:image:alt" content="Chapter 5 of 10: Abstract Classes &amp; Interfaces – CSE 202 Object Oriented Programming Lab">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Abstract Classes & Interfaces", "description": "Everything on screen is a GameObject that must update() itself and say how it looks, yet nobody can create a plain GameObject. Interfaces add abilities across the tree: Damageable, Shooter and Collectible.", "position": 5, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 47, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/05-abstract-classes-interfaces.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/05-abstract-classes-interfaces.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
+<title>Chapter 5: Abstract Classes &amp; Interfaces | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/lab.css">
+<link rel="stylesheet" href="../css/game.css">
 </head>
 <body class="deck-page">
 <div class="sr-only" id="live" aria-live="polite"></div>
 <header class="deck-bar">
-  <a class="home-link" href="../index.html" aria-label="Home: all labs"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
+  <a class="home-link" href="../index.html" aria-label="Home: all chapters"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
   <div class="deck-title"><span class="badge">5</span><span>Abstract Classes &amp; Interfaces</span></div>
   <div class="deck-actions">
     <button type="button" class="btn sm" id="btn-menu" aria-expanded="false" aria-controls="slide-menu" aria-label="Slides"><svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><rect x="3" y="4.5" width="18" height="3" rx="1"></rect><rect x="3" y="10.5" width="18" height="3" rx="1"></rect><rect x="3" y="16.5" width="18" height="3" rx="1"></rect></svg><span>Slides</span></button>
@@ -52,194 +53,577 @@
 <div class="deck-progress"><i id="progress-fill"></i></div>
 <main class="deck" id="deck">
 <section class="slide title-slide" data-title="Abstract Classes &amp; Interfaces" aria-label="Abstract Classes &amp; Interfaces" tabindex="-1"><div class="slide-inner">
-<span class="topic-art" data-art="9" aria-hidden="true"></span>
+<div class="topic-art g-title-art" data-demo="g-title" data-ch="5" aria-hidden="true"></div>
 <span class="badge big">5</span>
-<p class="kicker">Lab V · CSE 202</p>
+<p class="kicker">Chapter 5 · Lab V · CSE 202</p>
 <h1>Abstract Classes & Interfaces</h1>
-<p class="lead">Use an abstract Animal class for shared state and required behaviour, and the Drawable and Eatable interfaces for optional capabilities, then treat objects through both kinds of reference.</p>
-<div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
+<p class="g-mission">Mission 5 · Rules every object follows</p>
+<p class="lead">Everything on screen is a GameObject that must update() itself and say how it looks, yet nobody can create a plain GameObject. Interfaces add abilities across the tree: Damageable, Shooter and Collectible.</p>
+<div class="row"><a class="btn pri" href="#s=2">Start the mission</a><a class="btn" href="../index.html">All chapters</a></div>
 <p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
 </div></section>
-<section class="slide " data-title="Why this lab" aria-label="Why this lab" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Before we start</p><h2>Why this lab</h2><div class="hook"><p class="q">Every animal makes a sound, but there is no such thing as a plain “animal” sound. And only some animals can be drawn on screen or eaten. How do we say that in Java?</p><p>An <b>abstract class</b> says “every animal must…”; an <b>interface</b> says “this one can also…”. Dog, Bird and Fish combine both.</p></div>
+<section class="slide " data-title="Your mission" aria-label="Your mission" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Mission 5 · Rules every object follows</p><h2>Your mission</h2><div class="hook"><p class="q">Bullets, drones, health packs and the player all move and get drawn. But what would a plain “game object” look like?</p><p>Nothing: it is only an idea. Make <code>GameObject</code> <b>abstract</b> so every real object must fill in <code>update()</code> and <code>symbol()</code>. Use <b>interfaces</b> for abilities that cut across the tree, such as being Damageable.</p></div>
 </div></section>
-<section class="slide " data-title="Lab at a glance" aria-label="Lab at a glance" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 5 of 10</p><h2>Lab at a glance</h2><div class="cols wl"><div><h3>After this lab you can</h3><ul class=""><li>Explain the purpose of abstract classes and declare them with <code>abstract</code></li><li>Implement abstract methods in concrete subclasses</li><li>Define interfaces as behavioural contracts and implement them</li><li>Choose between an abstract class and an interface</li><li>Use abstract-class and interface references polymorphically</li><li>Check interface implementation with <code>instanceof</code></li></ul></div>
-<div><h3>Before you start</h3><ul class=""><li>Lab 4: inheritance, extends, super, overriding, polymorphism</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
+<section class="slide " data-title="Chapter at a glance" aria-label="Chapter at a glance" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Chapter 5 of 10</p><h2>Chapter at a glance</h2><div class="cols wl"><div><h3>After this chapter you can</h3><ul class=""><li>Declare an abstract class with abstract and concrete methods</li><li>Explain why an abstract class cannot be instantiated</li><li>Define interfaces with constants and default methods</li><li>Implement several interfaces in one class</li><li>Choose between an abstract class and an interface</li><li>Use both as reference types for polymorphism</li></ul></div>
+<div><h3>Before you start</h3><ul class=""><li>Chapter 4: inheritance and overriding</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Topics: the idea, then the game</li><li>Run the game program</li><li>Game practice tasks</li><li>Official lab and graded tasks</li><li>Report exercises at home</li></ol></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 5 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=10">Program design</a></li><li><a href="#s=11">Code walkthrough</a></li><li><a href="#s=19">Step-through traces: stack, heap and output</a></li><li><a href="#s=22">Expected output</a></li><li><a href="#s=23">Interactive demos</a></li><li><a href="#s=25">In-lab tasks</a></li><li><a href="#s=29">Lab report exercises</a></li><li><a href="#s=32">Viva questions and quiz</a></li></ol>
+<p class="kicker">Chapter 5 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=28">Run the game</a></li><li><a href="#s=29">Game practice tasks</a></li><li><a href="#s=32">The official lab program</a></li><li><a href="#s=37">Official in-lab tasks</a></li><li><a href="#s=41">Lab report exercises</a></li><li><a href="#s=44">Viva questions and quiz</a></li></ol>
 </div></section>
-<section class="slide " data-title="Abstract classes and methods" aria-label="Abstract classes and methods" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 1 of 5</p><h2>Abstract classes and methods</h2><pre class="code small-code">public abstract class Animal {
+<section class="slide " data-title="Today’s build" aria-label="Today’s build" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Build the game · Chapter 5</p><h2>Today’s build</h2><ul class="pts"><li>Nine small files: the abstract <code>GameObject</code>, three interfaces, four concrete classes (<code>Bullet</code>, <code>Player</code>, <code>Drone</code>, <code>HealthPack</code>) and <code>World</code>, which prints a one-line text map of the game.</li></ul>
+<div class="cols wl"><div><h3>What the program does</h3><ol class="flow"><li>Create a player, a drone and a health pack</li><li>Store them in one GameObject[] and update them for three ticks, printing the map</li><li>Let every Shooter fire</li><li>Damage only the objects that are Damageable</li><li>Collect the health pack through a Collectible reference</li></ol></div><div><h3>Files</h3><ul class="g-files"><li><code>GameObject.java</code> <span class="muted">(21 lines)</span></li><li><code>Damageable.java</code> <span class="muted">(5 lines)</span></li><li><code>Shooter.java</code> <span class="muted">(6 lines)</span></li><li><code>Collectible.java</code> <span class="muted">(9 lines)</span></li><li><code>Bullet.java</code> <span class="muted">(18 lines)</span></li><li><code>Player.java</code> <span class="muted">(43 lines)</span></li><li><code>Drone.java</code> <span class="muted">(33 lines)</span></li><li><code>HealthPack.java</code> <span class="muted">(29 lines)</span></li><li><code>World.java</code> <span class="muted">(59 lines)</span></li></ul><p class="muted">223 lines in all. Each topic below shows the part of the program that uses it.</p></div></div>
+</div></section>
+<section class="slide " data-title="Abstract classes" aria-label="Abstract classes" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 5</p><h2>Abstract classes</h2><div class="g-ingame"><div>In the game:</div><div>An abstract GameObject</div></div><ul class="pts big-list"><li>An <code>abstract</code> class is an idea, not a finished thing: you cannot <code>new</code> it.</li><li>It can hold fields, constructors and normal methods for its subclasses.</li><li>In the game there is no plain “GameObject”, only players, drones, bullets, …</li></ul>
+</div></section>
+<section class="slide " data-title="An abstract GameObject" aria-label="An abstract GameObject" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 5 · in the game</p><h2>An abstract GameObject</h2><div data-demo="g-abstract"></div><ul class="pts pts-row"><li>An <b>abstract class</b> is a base that is never created on its own.</li><li>An <b>abstract method</b> has no body: every concrete subclass must write one.</li><li>It can still have fields and normal methods, such as <code>position()</code>.</li></ul>
+</div></section>
+<section class="slide " data-title="GameObject: abstract and concrete methods" aria-label="GameObject: abstract and concrete methods" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 5 · our game program · 1 of 1 · <span class="walk-file">GameObject.java</span></p><h2>GameObject: abstract and concrete methods</h2><div class="walk-side g-walk"><pre class="code walk-code">public abstract class GameObject {
     protected String name;
-    protected int age;
+    protected int x;                        // column on the map, 0..19
 
-    protected Animal(String name, int age) { ... }
+    public GameObject(String name, int x) {
+        this.name = name;
+        this.x = x;
+    }
 
-    public abstract void makeSound();   // no body
-    public abstract void eat();
+    // Abstract: every kind of object must say how it moves and how it looks
+    public abstract void update();
+    public abstract char symbol();
 
-    public void displayInfo() { ... }   // shared code
-}</pre><ul class=""><li>An abstract class cannot be instantiated: <code>new Animal(…)</code> is a compile error.</li><li>Concrete subclasses must implement every abstract method (or be abstract themselves).</li><li>It can still have fields, constructors (called with super) and normal methods.</li></ul>
+    // Concrete: shared by every subclass
+    public String getName() { return name; }
+    public int getX()       { return x; }
+
+    public String position() {
+        return name + &quot; at x=&quot; + x;
+    }
+}</pre><ul class="walk-notes"><li>Two abstract methods, three concrete ones.</li><li>The constructor runs when a subclass calls <code>super(…)</code>.</li></ul></div>
 </div></section>
-<section class="slide " data-title="Interfaces" aria-label="Interfaces" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 2 of 5</p><h2>Interfaces</h2><pre class="code small-code">public interface Drawable {
-    void draw();
-    void hide();
+<section class="slide " data-title="Abstract methods" aria-label="Abstract methods" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 2 of 5</p><h2>Abstract methods</h2><div class="g-ingame"><div>In the game:</div><div>Abstract methods in code</div></div><div class="g-codeside"><pre class="code small-code">public abstract class GameObject {
+    protected String name;
+    protected int x;
+
+    public abstract void update();      // no body: subclasses decide
+    public abstract char symbol();
+
+    public String position() {          // a normal, shared method
+        return name + &quot; at x=&quot; + x;
+    }
 }
 
-public class Dog extends Animal implements Drawable { ... }</pre><ul class=""><li>An interface lists methods an implementing class promises to provide.</li><li>A class extends <b>one</b> class but may implement <b>many</b> interfaces: <code>implements Drawable, Eatable</code>.</li></ul>
+public class Bullet extends GameObject {
+    @Override public void update() { x += 3 * direction; }
+    @Override public char symbol() { return direction &gt; 0 ? &#x27;&gt;&#x27; : &#x27;&lt;&#x27;; }
+}</pre><ul class="pts"><li>An <b>abstract method</b> has no body, only a heading ending in <code>;</code>.</li><li>Every concrete subclass <b>must</b> override it, or be abstract itself.</li><li>The parent can still call it: each subclass fills it in its own way.</li><li>An abstract method ends with <code>;</code> instead of a body.</li><li>Bullet must override both, or be abstract itself.</li><li><code>new GameObject(…)</code> does not compile.</li></ul></div>
 </div></section>
-<section class="slide " data-title="The lab’s design" aria-label="The lab’s design" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 3 of 5</p><h2>The lab’s design</h2><figure class="fig" data-fig="lab5-animal-uml"></figure><ul class=""><li>Dog and Bird are Animals that can be drawn; Fish is an Animal that can be eaten.</li></ul>
-</div></section>
-<section class="slide " data-title="Abstract class or interface?" aria-label="Abstract class or interface?" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 4 of 5</p><h2>Abstract class or interface?</h2><div class="scrollx"><table class="doc"><thead><tr><th></th><th>Abstract class</th><th>Interface</th></tr></thead><tbody><tr><td>Relationship</td><td>is-a (Dog is an Animal)</td><td>can-do (Dog can be drawn)</td></tr><tr><td>State</td><td>fields and constructors</td><td>constants only</td></tr><tr><td>Inheritance</td><td>extend one</td><td>implement many</td></tr><tr><td>Use when</td><td>related classes share code</td><td>unrelated classes share behaviour</td></tr></tbody></table></div>
-</div></section>
-<section class="slide " data-title="Polymorphism through both reference types" aria-label="Polymorphism through both reference types" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 5 of 5</p><h2>Polymorphism through both reference types</h2><pre class="code small-code">Animal[]   animals   = {dog, bird, fish};
-Drawable[] drawables = {dog, bird};
+<section class="slide " data-title="Bullet" aria-label="Bullet" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 2 of 5 · our game program · 1 of 5 · <span class="walk-file">Bullet.java</span></p><h2>Bullet</h2><div class="walk-side g-walk"><pre class="code walk-code">public class Bullet extends GameObject {
+    private int direction;                  // +1 flies right, -1 flies left
 
-if (animal instanceof Drawable) {
-    ((Drawable) animal).draw();
-}</pre><ul class=""><li>An Animal reference can call makeSound() and eat(); a Drawable reference can call draw() and hide().</li><li><code>instanceof</code> works with interfaces too.</li></ul>
-</div></section>
-<section class="slide " data-title="Execution flow" aria-label="Execution flow" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Implementation design</p><h2>Execution flow</h2><ol class="flow"><li>Create a Dog, a Bird and a Fish</li><li>Loop over an Animal[]: displayInfo(), makeSound(), eat()</li><li>Loop over a Drawable[]: draw(), hide()</li><li>Use the Fish through an Eatable reference</li><li>Show that Animal cannot be instantiated</li><li>Test instanceof with both interfaces</li><li>Cast an Animal reference back to Dog</li></ol><p class="note-line">Animal holds shared state and forces sound/eat; interfaces add optional capabilities.</p>
-</div></section>
-<section class="slide " data-title="An abstract class" aria-label="An abstract class" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 1 of 8 · <span class="walk-file">Animal.java</span></p><h2>An abstract class</h2><div class="walk-side"><pre class="code walk-code">public abstract class Animal {
+    public Bullet(String name, int x, int direction) {
+        super(name, x);
+        this.direction = direction;
+    }
 
-    protected String name;
-    protected int age;
+    @Override
+    public void update() {
+        x += 3 * direction;                 // bullets are fast
+    }
 
-    protected Animal(String name, int age) {
-        this.name = name;
-        if (age &gt;= 0) {
-            this.age = age;
-        } else {
-            this.age = 0;
+    @Override
+    public char symbol() {
+        return direction &gt; 0 ? &#x27;&gt;&#x27; : &#x27;&lt;&#x27;;
+    }
+}</pre><ul class="walk-notes"><li>The simplest concrete GameObject: it flies and has a symbol.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Drone: moving and drawing" aria-label="Drone: moving and drawing" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 2 of 5 · our game program · 2 of 5 · <span class="walk-file">Drone.java</span></p><h2>Drone: moving and drawing</h2><div class="walk-side g-walk"><pre class="code walk-code">public class Drone extends GameObject implements Damageable, Shooter {
+    private int health = 30;
+
+    public Drone(String name, int x) {
+        super(name, x);
+    }
+
+    @Override
+    public void update() {
+        x -= 1;                             // flies left, towards the player
+    }
+
+    @Override
+    public char symbol() {
+        return isDestroyed() ? &#x27;*&#x27; : &#x27;D&#x27;;
+    }</pre><ul class="walk-notes"><li>The same abstract methods as the player, filled in differently: it flies left.</li></ul></div>
+</div></section>
+<section class="slide " data-title="HealthPack" aria-label="HealthPack" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 2 of 5 · our game program · 3 of 5 · <span class="walk-file">HealthPack.java</span></p><h2>HealthPack</h2><div class="walk-side g-walk"><pre class="code walk-code">public class HealthPack extends GameObject implements Collectible {
+    private int amount;
+
+    public HealthPack(int x, int amount) {
+        super(&quot;HealthPack&quot;, x);
+        this.amount = amount;
+    }
+
+    @Override
+    public void update() {
+        // a health pack lies still: an empty body is still an implementation
+    }
+
+    @Override
+    public char symbol() {
+        return &#x27;+&#x27;;
+    }</pre><ul class="walk-notes"><li>An empty update() body is still an implementation.</li><li>It is Collectible but not Damageable.</li></ul></div>
+</div></section>
+<section class="slide " data-title="World: drawing the map" aria-label="World: drawing the map" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 2 of 5 · our game program · 4 of 5 · <span class="walk-file">World.java</span></p><h2>World: drawing the map</h2><pre class="code walk-code">// Draws a one-line map, 20 cells wide, from any GameObjects
+static void drawMap(String label, GameObject[] objects) {
+    char[] row = &quot;....................&quot;.toCharArray();
+    for (GameObject o : objects) {
+        if (o.getX() &gt;= 0 &amp;&amp; o.getX() &lt; row.length) {
+            row[o.getX()] = o.symbol();
         }
     }
-
-    public abstract void makeSound();
-
-    public abstract void eat();</pre><ul class="walk-notes"><li>Shared fields and a constructor, plus two methods with no body.</li><li>Every concrete subclass must implement makeSound() and eat().</li></ul></div>
+    System.out.println(label + &quot;  |&quot; + new String(row) + &quot;|&quot;);
+}</pre><ul class="walk-notes"><li>It accepts any GameObject: it only needs getX() and symbol().</li></ul>
 </div></section>
-<section class="slide " data-title="Two interfaces" aria-label="Two interfaces" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 2 of 8 · <span class="walk-file">Drawable.java · Eatable.java</span></p><h2>Two interfaces</h2><pre class="code walk-code">public interface Drawable {
-    void draw();
-    void hide();
-}
+<section class="slide " data-title="World: one abstract type, many objects" aria-label="World: one abstract type, many objects" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 2 of 5 · our game program · 5 of 5 · <span class="walk-file">World.java</span></p><h2>World: one abstract type, many objects</h2><div class="walk-side g-walk"><pre class="code walk-code wide">Player ranger = new Player(&quot;Ranger&quot;, 1);
+Drone drone = new Drone(&quot;Drone-1&quot;, 15);
+HealthPack pack = new HealthPack(4, 25);
 
-public interface Eatable {
-    boolean isPoisonous();
-    int getNutrition();
-}</pre><ul class="walk-notes"><li>Contracts only: method names, no state.</li><li>A class lists the ones it supports with <code>implements</code>.</li></ul>
+// GameObject g = new GameObject(&quot;ghost&quot;, 0);   // compile error: GameObject is abstract
+
+System.out.println(&quot;=== One abstract type, many objects ===&quot;);
+GameObject[] world = { pack, drone, ranger };     // drawn in this order: the player on top
+drawMap(&quot;start &quot;, world);
+for (int tick = 1; tick &lt;= 3; tick++) {
+    for (GameObject o : world) {
+        o.update();                 // each class moves in its own way
+    }
+    drawMap(&quot;tick &quot; + tick, world);
+}</pre><ul class="walk-notes"><li>The commented line would not compile: GameObject is abstract.</li><li>One loop updates every kind of object.</li></ul></div>
 </div></section>
-<section class="slide " data-title="Dog: extends one, implements one" aria-label="Dog: extends one, implements one" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 3 of 8 · <span class="walk-file">Dog.java</span></p><h2>Dog: extends one, implements one</h2><pre class="code walk-code">public class Dog extends Animal implements Drawable {
+<section class="slide " data-title="Interfaces" aria-label="Interfaces" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 5</p><h2>Interfaces</h2><div class="g-ingame"><div>In the game:</div><div>Interfaces: abilities</div></div><div class="g-codeside g-topic"><div><div class="kicker g-wk"><div class="walk-file">Damageable.java</div><div>·</div><div>Damageable</div></div><pre class="code small-code">public interface Damageable {
+    void takeDamage(int amount);
+    boolean isDestroyed();
+}</pre></div><ul class="pts"><li>An <code>interface</code> is a list of abilities: methods a class promises to have.</li><li>A class <code>implements</code> it and must write those methods.</li><li>One class can implement many interfaces.</li><li>Two promises: take damage, say whether it is destroyed.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Interfaces: abilities" aria-label="Interfaces: abilities" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 5 · in the game</p><h2>Interfaces: abilities</h2><div data-demo="g-badges"></div><ul class="pts pts-row"><li>An <b>interface</b> lists methods a class promises to provide.</li><li>A class can implement many: <code>Player extends GameObject implements Damageable, Shooter</code>.</li><li>Interfaces cut across the tree: the player and the drone are both Damageable.</li></ul>
+</div></section>
+<section class="slide " data-title="Shooter" aria-label="Shooter" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 5 · our game program · 1 of 5 · <span class="walk-file">Shooter.java</span></p><h2>Shooter</h2><pre class="code walk-code wide">public interface Shooter {
+    int RANGE = 8;                          // interface fields are public static final
 
-    private String breed;
+    Bullet shoot();
+}</pre><ul class="walk-notes"><li>A constant and one method that returns a new Bullet.</li></ul>
+</div></section>
+<section class="slide " data-title="Player: one superclass, two interfaces" aria-label="Player: one superclass, two interfaces" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 5 · our game program · 2 of 5 · <span class="walk-file">Player.java</span></p><h2>Player: one superclass, two interfaces</h2><div class="walk-side g-walk"><pre class="code walk-code">public class Player extends GameObject implements Damageable, Shooter {
+    private int health = 100;
+    private int shots = 0;
 
-    public Dog(String name, int age, String breed) {
-        super(name, age);
-        this.breed = breed;
+    public Player(String name, int x) {
+        super(name, x);
     }
 
     @Override
-    public void makeSound() {</pre>
-</div></section>
-<section class="slide " data-title="Dog: extends one, implements one (cont.)" aria-label="Dog: extends one, implements one (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 3 of 8 · <span class="walk-file">Dog.java</span></p><h2>Dog: extends one, implements one (cont.)</h2><pre data-start="12" class="code walk-code">        System.out.println(name + &quot; barks: Woof! Woof!&quot;);
+    public void update() {
+        x += 1;                             // walks right one step
     }
 
     @Override
-    public void eat() {
-        System.out.println(name + &quot; is eating dog food from a bowl.&quot;);
-    }</pre><ul class="walk-notes"><li><code>extends Animal implements Drawable</code>: one superclass, any number of interfaces.</li><li>First, the two abstract methods from Animal.</li></ul>
+    public char symbol() {
+        return &#x27;P&#x27;;
+    }</pre><ul class="walk-notes"><li><code>extends</code> one class, <code>implements</code> two interfaces.</li><li>update() and symbol() satisfy GameObject.</li></ul></div>
 </div></section>
-<section class="slide " data-title="Dog keeps the Drawable contract" aria-label="Dog keeps the Drawable contract" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 4 of 8 · <span class="walk-file">Dog.java</span></p><h2>Dog keeps the Drawable contract</h2><pre class="code walk-code">@Override
-public void draw() {
-    System.out.println(&quot;[Drawing] &quot; + name + &quot; (&quot; + breed + &quot;) as a dog.&quot;);
+<section class="slide " data-title="Player: keeping the interface promises" aria-label="Player: keeping the interface promises" tabindex="-1"><div style="zoom:0.94;" class="slide-inner">
+<p class="kicker">Topic 3 of 5 · our game program · 3 of 5 · <span class="walk-file">Player.java</span></p><h2>Player: keeping the interface promises</h2><div class="walk-side g-walk"><pre class="code walk-code">@Override
+public void takeDamage(int amount) {
+    health = Math.max(0, health - amount);
+    System.out.println(&quot;  &quot; + name + &quot; is hit: health &quot; + health);
 }
 
 @Override
-public void hide() {
-    System.out.println(&quot;[Hiding] &quot; + name + &quot; is no longer visible.&quot;);
-}</pre><ul class="walk-notes"><li>Without draw() and hide(), Dog would not compile: it promised to be Drawable.</li></ul>
-</div></section>
-<section class="slide " data-title="Fish implements Eatable" aria-label="Fish implements Eatable" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 5 of 8 · <span class="walk-file">Fish.java</span></p><h2>Fish implements Eatable</h2><pre class="code walk-code">@Override
-public boolean isPoisonous() {
-    return false;
+public boolean isDestroyed() {
+    return health == 0;
 }
 
 @Override
-public int getNutrition() {
-    return 65;
-}</pre><ul class="walk-notes"><li>A different capability for a different animal.</li></ul>
-</div></section>
-<section class="slide " data-title="Methods that take the abstract type or an interface" aria-label="Methods that take the abstract type or an interface" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 6 of 8 · <span class="walk-file">Lab5Demo.java</span></p><h2>Methods that take the abstract type or an interface</h2><pre class="code walk-code">static void demonstratePolymorphism(Animal animal) {
-    animal.displayInfo();
-    animal.makeSound();
-    animal.eat();
+public Bullet shoot() {
+    shots++;
+    return new Bullet(name + &quot;-bullet&quot; + shots, x + 1, +1);
 }
 
-static void demonstrateDrawable(Drawable drawable) {
-    drawable.draw();
-    drawable.hide();
+public void heal(int amount) {
+    health = Math.min(100, health + amount);
 }
 
-static void demonstrateEatable(Eatable eatable) {
-    System.out.println(&quot;Poisonous : &quot; + eatable.isPoisonous());
-    System.out.println(&quot;Nutrition : &quot; + eatable.getNutrition());
-}</pre><ul class="walk-notes"><li>Each method accepts any object that is an Animal, a Drawable or an Eatable.</li></ul>
+public int getHealth() {
+    return health;
+}</pre><ul class="walk-notes"><li>takeDamage and isDestroyed for Damageable; shoot for Shooter.</li><li>heal() is an ordinary extra method.</li></ul></div>
 </div></section>
-<section class="slide " data-title="Arrays of abstract and interface types" aria-label="Arrays of abstract and interface types" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 7 of 8 · <span class="walk-file">Lab5Demo.java</span></p><h2>Arrays of abstract and interface types</h2><pre class="code walk-code">// 2. Polymorphism through Animal References
-System.out.println(&quot;\n=== Polymorphism through Animal References ===&quot;);
-Animal[] animals = {dog, bird, fish};
-for (Animal animal : animals) {
-    System.out.println(&quot;-------------------------------&quot;);
-    demonstratePolymorphism(animal);
+<section class="slide " data-title="Drone: Damageable and Shooter" aria-label="Drone: Damageable and Shooter" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 5 · our game program · 4 of 5 · <span class="walk-file">Drone.java</span></p><h2>Drone: Damageable and Shooter</h2><div class="walk-side g-walk"><pre class="code walk-code">@Override
+public void takeDamage(int amount) {
+    health = Math.max(0, health - amount);
+    System.out.println(&quot;  &quot; + name + &quot; is hit: health &quot; + health);
 }
 
-// 3. Drawable Interface
-System.out.println(&quot;\n=== Drawable Interface ===&quot;);
-Drawable[] drawables = {dog, bird};
-for (Drawable drawable : drawables) {
-    System.out.println(&quot;-------------------------------&quot;);
-    demonstrateDrawable(drawable);
-}</pre><ul class="walk-notes"><li><code>Animal[]</code> holds all three; <code>Drawable[]</code> only Dog and Bird.</li></ul>
-</div></section>
-<section class="slide " data-title="instanceof with interfaces, then a cast" aria-label="instanceof with interfaces, then a cast" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 8 of 8 · <span class="walk-file">Lab5Demo.java</span></p><h2>instanceof with interfaces, then a cast</h2><pre class="code walk-code">// 6. instanceof with Interfaces
-System.out.println(&quot;\n=== instanceof with Interfaces ===&quot;);
-System.out.println(&quot;dog instanceof Drawable  : &quot; + (dog instanceof Drawable));
-System.out.println(&quot;dog instanceof Eatable   : &quot; + (dog instanceof Eatable));
-System.out.println(&quot;fish instanceof Drawable : &quot; + (fish instanceof Drawable));
-System.out.println(&quot;fish instanceof Eatable  : &quot; + (fish instanceof Eatable));
+@Override
+public boolean isDestroyed() {
+    return health == 0;
+}
 
-// 7. Safe Casting
-System.out.println(&quot;\n=== Safe Casting ===&quot;);
-Animal animalRef = dog;
-if (animalRef instanceof Dog) {
-    Dog castedDog = (Dog) animalRef;
-    System.out.println(&quot;Casted Dog breed: &quot; + castedDog.getBreed());
-}</pre><ul class="walk-notes"><li>instanceof also answers “does this object implement Drawable?”.</li></ul>
+@Override
+public Bullet shoot() {
+    return new Bullet(name + &quot;-laser&quot;, x - 1, -1);
+}</pre><ul class="walk-notes"><li>The same abilities as the player, with different behaviour.</li><li>A destroyed drone shows <code>*</code> on the map.</li></ul></div>
+</div></section>
+<section class="slide " data-title="HealthPack: being collected" aria-label="HealthPack: being collected" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 5 · our game program · 5 of 5 · <span class="walk-file">HealthPack.java</span></p><h2>HealthPack: being collected</h2><pre class="code walk-code wide">@Override
+public void collectBy(Player p) {
+    p.heal(amount);
+    System.out.println(&quot;  &quot; + p.getName() + &quot; &quot; + pickupMessage() + &quot; -&gt; health &quot; + p.getHealth());
+}
+
+@Override
+public String pickupMessage() {
+    return &quot;grabs a health pack (+&quot; + amount + &quot;)&quot;;
+}</pre><ul class="walk-notes"><li>collectBy() heals the player it is given.</li><li>It overrides the interface’s default message.</li></ul>
+</div></section>
+<section class="slide " data-title="Inside an interface" aria-label="Inside an interface" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 4 of 5</p><h2>Inside an interface</h2><div class="g-codeside"><pre class="code small-code">public interface Shooter {
+    int RANGE = 8;                // public static final: a constant
+    Bullet shoot();               // public and abstract
+}
+
+public interface Collectible {
+    void collectBy(Player p);
+
+    default String pickupMessage() {   // has a body
+        return &quot;picked up&quot;;
+    }
+}</pre><ul class="pts"><li>Methods are <code>public abstract</code> unless marked otherwise.</li><li>Fields are <code>public static final</code>: constants.</li><li>A <code>default</code> method has a body that implementing classes get for free.</li><li>Interface fields are constants: <code>Shooter.RANGE</code>.</li><li>A <code>default</code> method has a body; implementers may keep it or override it.</li><li>Interfaces have no constructors and no instance fields.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Collectible and a default method" aria-label="Collectible and a default method" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 4 of 5 · our game program · 1 of 1 · <span class="walk-file">Collectible.java</span></p><h2>Collectible and a default method</h2><pre class="code walk-code">public interface Collectible {
+    void collectBy(Player p);
+
+    // A default method: implementers get it for free and may override it
+    default String pickupMessage() {
+        return &quot;picked up&quot;;
+    }
+}</pre><ul class="walk-notes"><li>HealthPack keeps collectBy() abstract but overrides the default message.</li></ul>
+</div></section>
+<section class="slide " data-title="Abstract class or interface?" aria-label="Abstract class or interface?" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 5</p><h2>Abstract class or interface?</h2><div class="scrollx"><table class="doc"><thead><tr><th></th><th>Abstract class</th><th>Interface</th></tr></thead><tbody><tr><td>A class can…</td><td>extend one</td><td>implement many</td></tr><tr><td>Fields</td><td>any fields</td><td>constants only</td></tr><tr><td>Constructors</td><td>yes</td><td>no</td></tr><tr><td>Methods</td><td>abstract and normal</td><td>abstract, default and static</td></tr><tr><td>In the game</td><td>GameObject: what every object is</td><td>Damageable, Shooter, Collectible: what it can do</td></tr></tbody></table></div><ul class="pts"><li><b>Abstract class</b>: shared code and state for close relatives (“is a”). A class extends only one.</li><li><b>Interface</b>: an ability unrelated classes can share (“can do”). A class implements many.</li><li>Often both: <code>class Drone extends GameObject implements Damageable, Shooter</code>.</li><li>Use an abstract class for a shared base with shared code.</li><li>Use an interface for an ability that unrelated classes can share.</li></ul>
+</div></section>
+<section class="slide " data-title="World: interfaces as types" aria-label="World: interfaces as types" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 5 · our game program · 1 of 2 · <span class="walk-file">World.java</span></p><h2>World: interfaces as types</h2><pre class="code walk-code wide">System.out.println(&quot;\n=== Interfaces as types ===&quot;);
+Shooter[] shooters = { ranger, drone };
+for (Shooter s : shooters) {
+    Bullet b = s.shoot();
+    System.out.println(b.getName() + &quot; fired, flying &#x27;&quot; + b.symbol() + &quot;&#x27; from x=&quot; + b.getX());
+}
+System.out.println(&quot;Shooter.RANGE = &quot; + Shooter.RANGE);</pre><ul class="walk-notes"><li>A Shooter[] holds the player and the drone.</li><li>Each shoot() returns a new Bullet.</li></ul>
+</div></section>
+<section class="slide " data-title="World: Damageable and Collectible" aria-label="World: Damageable and Collectible" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 5 · our game program · 2 of 2 · <span class="walk-file">World.java</span></p><h2>World: Damageable and Collectible</h2><div class="walk-side g-walk"><pre class="code walk-code">System.out.println(&quot;\n=== Damage only what is Damageable ===&quot;);
+drone.takeDamage(10);
+ranger.takeDamage(30);
+for (GameObject o : world) {
+    if (o instanceof Damageable) {
+        Damageable d = (Damageable) o;
+        d.takeDamage(20);
+    } else {
+        System.out.println(&quot;  &quot; + o.getName() + &quot; is not Damageable: skipped&quot;);
+    }
+}
+System.out.println(&quot;Drone destroyed? &quot; + drone.isDestroyed());
+
+System.out.println(&quot;\n=== Picking up a Collectible ===&quot;);
+Collectible c = pack;
+c.collectBy(ranger);
+
+System.out.println(&quot;\n=== Final map ===&quot;);
+drawMap(&quot;end   &quot;, world);</pre><ul class="walk-notes"><li><code>instanceof Damageable</code> skips the health pack.</li><li>The pack is collected through a Collectible reference.</li></ul></div>
+</div></section>
+<section class="slide " data-title="The complete game program" aria-label="The complete game program" tabindex="-1"><div style="zoom:0.96;" class="slide-inner">
+<p class="kicker">Build the game · 9 files</p><h2>The complete game program</h2><div class="codeview"><pre class="code small-code" data-file="GameObject.java">public abstract class GameObject {
+    protected String name;
+    protected int x;                        // column on the map, 0..19
+
+    public GameObject(String name, int x) {
+        this.name = name;
+        this.x = x;
+    }
+
+    // Abstract: every kind of object must say how it moves and how it looks
+    public abstract void update();
+    public abstract char symbol();
+
+    // Concrete: shared by every subclass
+    public String getName() { return name; }
+    public int getX()       { return x; }
+
+    public String position() {
+        return name + &quot; at x=&quot; + x;
+    }
+}</pre><pre class="code small-code" data-file="Damageable.java">// Anything that can be hit and destroyed
+public interface Damageable {
+    void takeDamage(int amount);
+    boolean isDestroyed();
+}</pre><pre class="code small-code" data-file="Shooter.java">// Anything that can fire bullets
+public interface Shooter {
+    int RANGE = 8;                          // interface fields are public static final
+
+    Bullet shoot();
+}</pre><pre class="code small-code" data-file="Collectible.java">// Anything the player can pick up
+public interface Collectible {
+    void collectBy(Player p);
+
+    // A default method: implementers get it for free and may override it
+    default String pickupMessage() {
+        return &quot;picked up&quot;;
+    }
+}</pre><pre class="code small-code" data-file="Bullet.java">public class Bullet extends GameObject {
+    private int direction;                  // +1 flies right, -1 flies left
+
+    public Bullet(String name, int x, int direction) {
+        super(name, x);
+        this.direction = direction;
+    }
+
+    @Override
+    public void update() {
+        x += 3 * direction;                 // bullets are fast
+    }
+
+    @Override
+    public char symbol() {
+        return direction &gt; 0 ? &#x27;&gt;&#x27; : &#x27;&lt;&#x27;;
+    }
+}</pre><pre class="code small-code" data-file="Player.java">public class Player extends GameObject implements Damageable, Shooter {
+    private int health = 100;
+    private int shots = 0;
+
+    public Player(String name, int x) {
+        super(name, x);
+    }
+
+    @Override
+    public void update() {
+        x += 1;                             // walks right one step
+    }
+
+    @Override
+    public char symbol() {
+        return &#x27;P&#x27;;
+    }
+
+    @Override
+    public void takeDamage(int amount) {
+        health = Math.max(0, health - amount);
+        System.out.println(&quot;  &quot; + name + &quot; is hit: health &quot; + health);
+    }
+
+    @Override
+    public boolean isDestroyed() {
+        return health == 0;
+    }
+
+    @Override
+    public Bullet shoot() {
+        shots++;
+        return new Bullet(name + &quot;-bullet&quot; + shots, x + 1, +1);
+    }
+
+    public void heal(int amount) {
+        health = Math.min(100, health + amount);
+    }
+
+    public int getHealth() {
+        return health;
+    }
+}</pre><pre class="code small-code" data-file="Drone.java">public class Drone extends GameObject implements Damageable, Shooter {
+    private int health = 30;
+
+    public Drone(String name, int x) {
+        super(name, x);
+    }
+
+    @Override
+    public void update() {
+        x -= 1;                             // flies left, towards the player
+    }
+
+    @Override
+    public char symbol() {
+        return isDestroyed() ? &#x27;*&#x27; : &#x27;D&#x27;;
+    }
+
+    @Override
+    public void takeDamage(int amount) {
+        health = Math.max(0, health - amount);
+        System.out.println(&quot;  &quot; + name + &quot; is hit: health &quot; + health);
+    }
+
+    @Override
+    public boolean isDestroyed() {
+        return health == 0;
+    }
+
+    @Override
+    public Bullet shoot() {
+        return new Bullet(name + &quot;-laser&quot;, x - 1, -1);
+    }
+}</pre><pre class="code small-code" data-file="HealthPack.java">public class HealthPack extends GameObject implements Collectible {
+    private int amount;
+
+    public HealthPack(int x, int amount) {
+        super(&quot;HealthPack&quot;, x);
+        this.amount = amount;
+    }
+
+    @Override
+    public void update() {
+        // a health pack lies still: an empty body is still an implementation
+    }
+
+    @Override
+    public char symbol() {
+        return &#x27;+&#x27;;
+    }
+
+    @Override
+    public void collectBy(Player p) {
+        p.heal(amount);
+        System.out.println(&quot;  &quot; + p.getName() + &quot; &quot; + pickupMessage() + &quot; -&gt; health &quot; + p.getHealth());
+    }
+
+    @Override
+    public String pickupMessage() {
+        return &quot;grabs a health pack (+&quot; + amount + &quot;)&quot;;
+    }
+}</pre><pre class="code small-code" data-file="World.java">public class World {
+
+    // Draws a one-line map, 20 cells wide, from any GameObjects
+    static void drawMap(String label, GameObject[] objects) {
+        char[] row = &quot;....................&quot;.toCharArray();
+        for (GameObject o : objects) {
+            if (o.getX() &gt;= 0 &amp;&amp; o.getX() &lt; row.length) {
+                row[o.getX()] = o.symbol();
+            }
+        }
+        System.out.println(label + &quot;  |&quot; + new String(row) + &quot;|&quot;);
+    }
+
+    public static void main(String[] args) {
+        Player ranger = new Player(&quot;Ranger&quot;, 1);
+        Drone drone = new Drone(&quot;Drone-1&quot;, 15);
+        HealthPack pack = new HealthPack(4, 25);
+
+        // GameObject g = new GameObject(&quot;ghost&quot;, 0);   // compile error: GameObject is abstract
+
+        System.out.println(&quot;=== One abstract type, many objects ===&quot;);
+        GameObject[] world = { pack, drone, ranger };     // drawn in this order: the player on top
+        drawMap(&quot;start &quot;, world);
+        for (int tick = 1; tick &lt;= 3; tick++) {
+            for (GameObject o : world) {
+                o.update();                 // each class moves in its own way
+            }
+            drawMap(&quot;tick &quot; + tick, world);
+        }
+
+        System.out.println(&quot;\n=== Interfaces as types ===&quot;);
+        Shooter[] shooters = { ranger, drone };
+        for (Shooter s : shooters) {
+            Bullet b = s.shoot();
+            System.out.println(b.getName() + &quot; fired, flying &#x27;&quot; + b.symbol() + &quot;&#x27; from x=&quot; + b.getX());
+        }
+        System.out.println(&quot;Shooter.RANGE = &quot; + Shooter.RANGE);
+
+        System.out.println(&quot;\n=== Damage only what is Damageable ===&quot;);
+        drone.takeDamage(10);
+        ranger.takeDamage(30);
+        for (GameObject o : world) {
+            if (o instanceof Damageable) {
+                Damageable d = (Damageable) o;
+                d.takeDamage(20);
+            } else {
+                System.out.println(&quot;  &quot; + o.getName() + &quot; is not Damageable: skipped&quot;);
+            }
+        }
+        System.out.println(&quot;Drone destroyed? &quot; + drone.isDestroyed());
+
+        System.out.println(&quot;\n=== Picking up a Collectible ===&quot;);
+        Collectible c = pack;
+        c.collectBy(ranger);
+
+        System.out.println(&quot;\n=== Final map ===&quot;);
+        drawMap(&quot;end   &quot;, world);
+    }
+}</pre></div><p class="muted">Save every file in one folder, then compile and run: <code>javac *.java</code> → <code>java World</code></p>
+</div></section>
+<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Run the game</p><h2>Expected output</h2><div class="runbox" data-cmd="java World"><pre class="run-src" hidden>=== One abstract type, many objects ===
+start   |.P..+..........D....|
+tick 1  |..P.+.........D.....|
+tick 2  |...P+........D......|
+tick 3  |....P.......D.......|
+
+=== Interfaces as types ===
+Ranger-bullet1 fired, flying &#x27;&gt;&#x27; from x=5
+Drone-1-laser fired, flying &#x27;&lt;&#x27; from x=11
+Shooter.RANGE = 8
+
+=== Damage only what is Damageable ===
+  Drone-1 is hit: health 20
+  Ranger is hit: health 70
+  HealthPack is not Damageable: skipped
+  Drone-1 is hit: health 0
+  Ranger is hit: health 50
+Drone destroyed? true
+
+=== Picking up a Collectible ===
+  Ranger grabs a health pack (+25) -&gt; health 75
+
+=== Final map ===
+end     |....P.......*.......|</pre></div>
+</div></section>
+<section class="slide " data-title="Game task 1: A Mine" aria-label="Game task 1: A Mine" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 1 of 3</p><h2>Game task 1: A Mine</h2><div class="ex task g-task"><div class="qq">A new object with one ability.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g5t0r0" data-key="g5t0r0"><label for="g5t0r0"><code>Mine extends GameObject implements Damageable</code>; it never moves</label></li><li><input type="checkbox" id="g5t0r1" data-key="g5t0r1"><label for="g5t0r1">symbol() is <code>'x'</code>, or <code>'*'</code> once destroyed</label></li><li><input type="checkbox" id="g5t0r2" data-key="g5t0r2"><label for="g5t0r2">Add it to the world array and show it on the map</label></li><li><input type="checkbox" id="g5t0r3" data-key="g5t0r3"><label for="g5t0r3">Shoot it and show that the Damageable loop handles it with no change</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Copy Drone’s Damageable methods; update() can have an empty body, like HealthPack’s.</div></details></div>
+</div></section>
+<section class="slide " data-title="Game task 2: An AmmoBox" aria-label="Game task 2: An AmmoBox" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 2 of 3</p><h2>Game task 2: An AmmoBox</h2><div class="ex task g-task"><div class="qq">A second Collectible.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g5t1r0" data-key="g5t1r0"><label for="g5t1r0"><code>AmmoBox extends GameObject implements Collectible</code></label></li><li><input type="checkbox" id="g5t1r1" data-key="g5t1r1"><label for="g5t1r1">Give Player an <code>ammo</code> field and an <code>addAmmo(int)</code> method</label></li><li><input type="checkbox" id="g5t1r2" data-key="g5t1r2"><label for="g5t1r2">Keep the default pickupMessage() (do not override it)</label></li><li><input type="checkbox" id="g5t1r3" data-key="g5t1r3"><label for="g5t1r3">Collect it through a Collectible reference</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">If you do not override pickupMessage(), the interface’s default version runs.</div></details></div>
+</div></section>
+<section class="slide " data-title="Game task 3: Sort the world by ability" aria-label="Game task 3: Sort the world by ability" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 3 of 3</p><h2>Game task 3: Sort the world by ability</h2><div class="ex task g-task"><div class="qq">Who can do what?</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g5t2r0" data-key="g5t2r0"><label for="g5t2r0">Loop over the world array once</label></li><li><input type="checkbox" id="g5t2r1" data-key="g5t2r1"><label for="g5t2r1">Print every object’s name followed by the interfaces it implements</label></li><li><input type="checkbox" id="g5t2r2" data-key="g5t2r2"><label for="g5t2r2">Count how many are Damageable, Shooter and Collectible</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">One object can match several instanceof tests: use separate if statements, not else if.</div></details></div>
+</div></section>
+<section class="slide " data-title="The official lab program" aria-label="The official lab program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Official lab · from the lab manual</p><h2>The official lab program</h2>
+<p class="g-official">The graded in-lab tasks and report exercises build on this program, not on the game. Read it and run it before you start them.</p>
+<ol class="flow"><li>Create a Dog, a Bird and a Fish</li><li>Loop over an Animal[]: displayInfo(), makeSound(), eat()</li><li>Loop over a Drawable[]: draw(), hide()</li><li>Use the Fish through an Eatable reference</li><li>Show that Animal cannot be instantiated</li><li>Test instanceof with both interfaces</li><li>Cast an Animal reference back to Dog</li></ol><p class="note-line">Animal holds shared state and forces sound/eat; interfaces add optional capabilities.</p>
 </div></section>
 <section class="slide " data-title="Trace: abstract methods and instanceof" aria-label="Trace: abstract methods and instanceof" tabindex="-1"><div style="zoom:0.94;" class="slide-inner">
-<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: abstract methods and instanceof</h2><p class="muted">One loop over an Animal[]: each object runs its own makeSound(), and only Drawable objects are drawn.</p><div data-trace="lab5-iface"></div>
+<p class="kicker">Official lab · step through the code · 1 of 2</p><h2>Trace: abstract methods and instanceof</h2><p class="muted">One loop over an Animal[]: each object runs its own makeSound(), and only Drawable objects are drawn.</p><div data-trace="lab5-iface"></div>
 </div></section>
 <section class="slide " data-title="Trace: an abstract class still has a constructor" aria-label="Trace: an abstract class still has a constructor" tabindex="-1"><div style="zoom:0.94;" class="slide-inner">
-<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: an abstract class still has a constructor</h2><p class="muted">Animal can never be created on its own, yet its constructor runs inside every Dog.</p><div data-trace="lab5-abstract"></div>
+<p class="kicker">Official lab · step through the code · 2 of 2</p><h2>Trace: an abstract class still has a constructor</h2><p class="muted">Animal can never be created on its own, yet its constructor runs inside every Dog.</p><div data-trace="lab5-abstract"></div>
 </div></section>
-<section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
-<p class="kicker">For reference · 7 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Animal.java">public abstract class Animal {
+<section class="slide " data-title="The official program" aria-label="The official program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Official lab · 7 files</p><h2>The official program</h2><div class="codeview"><pre class="code small-code" data-file="Animal.java">public abstract class Animal {
 
     protected String name;
     protected int age;
@@ -436,10 +820,10 @@ if (animalRef instanceof Dog) {
             System.out.println(&quot;Casted Dog breed: &quot; + castedDog.getBreed());
         }
     }
-}</pre></div><p class="muted">Copy or download each file, save it under the same name, then compile and run: <code>javac *.java</code> → <code>java Lab5Demo</code></p>
+}</pre></div><p class="muted">Compile and run: <code>javac *.java</code> → <code>java Lab5Demo</code></p>
 </div></section>
-<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Implementation</p><h2>Expected output</h2><div class="runbox" data-cmd="java Lab5Demo"><pre class="run-src" hidden>=== Object Creation ===
+<section class="slide " data-title="Official program: expected output" aria-label="Official program: expected output" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Official lab</p><h2>Official program: expected output</h2><div class="runbox" data-cmd="java Lab5Demo"><pre class="run-src" hidden>=== Object Creation ===
 Created Dog : Rex
 Created Bird: Tweety
 Created Fish: Nemo
@@ -483,26 +867,20 @@ fish instanceof Eatable  : true
 === Safe Casting ===
 Casted Dog breed: Golden Retriever</pre></div><p class="note-line">The same three method calls produce three different results — that is polymorphism through the abstract class.</p>
 </div></section>
-<section class="slide " data-title="Which types does each object satisfy?" aria-label="Which types does each object satisfy?" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Interactive 1 of 2</p><h2>Which types does each object satisfy?</h2><div data-demo="iface"></div>
-</div></section>
-<section class="slide " data-title="One abstract method, many shapes" aria-label="One abstract method, many shapes" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Interactive 2 of 2</p><h2>One abstract method, many shapes</h2><div data-demo="shapes"></div>
-</div></section>
 <section class="slide " data-title="Task 1: Add a Cat class" aria-label="Task 1: Add a Cat class" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 1 of 3</p><h2>Task 1: Add a Cat class</h2><div class="ex task"><div class="qq">A concrete Animal that is also Drawable.</div>
+<p class="kicker">Official in-lab task 1 of 3</p><h2>Task 1: Add a Cat class</h2><div class="ex task"><div class="qq">A concrete Animal that is also Drawable.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l5t0r0" data-key="l5t0r0"><label for="l5t0r0">Field <code>private String colour</code> with <code>getColour()</code></label></li><li><input type="checkbox" id="l5t0r1" data-key="l5t0r1"><label for="l5t0r1">Implement makeSound(), eat(), draw() and hide()</label></li><li><input type="checkbox" id="l5t0r2" data-key="l5t0r2"><label for="l5t0r2">Create a Cat in Lab5Demo</label></li><li><input type="checkbox" id="l5t0r3" data-key="l5t0r3"><label for="l5t0r3">Pass it to demonstratePolymorphism() and demonstrateDrawable()</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">If you forget one abstract or interface method, the compiler tells you exactly which.</div></details></div>
 </div></section>
 <section class="slide " data-title="Task 2: Create a Trainable interface" aria-label="Task 2: Create a Trainable interface" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 2 of 3</p><h2>Task 2: Create a Trainable interface</h2><div class="ex task"><div class="qq">A capability shared by Dog and Cat.</div>
+<p class="kicker">Official in-lab task 2 of 3</p><h2>Task 2: Create a Trainable interface</h2><div class="ex task"><div class="qq">A capability shared by Dog and Cat.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l5t1r0" data-key="l5t1r0"><label for="l5t1r0"><code>void train(String command)</code> and <code>void obey(String command)</code></label></li><li><input type="checkbox" id="l5t1r1" data-key="l5t1r1"><label for="l5t1r1">Dog and Cat implement Trainable (Dog already implements Drawable: list both)</label></li><li><input type="checkbox" id="l5t1r2" data-key="l5t1r2"><label for="l5t1r2">Create a <code>Trainable[]</code> in main</label></li><li><input type="checkbox" id="l5t1r3" data-key="l5t1r3"><label for="l5t1r3">Call train() and obey() on each</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans"><code>class Dog extends Animal implements Drawable, Trainable</code></div></details></div>
 </div></section>
 <section class="slide " data-title="Task 3: Interface-based parameters" aria-label="Task 3: Interface-based parameters" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 3 of 3</p><h2>Task 3: Interface-based parameters</h2><div class="ex task"><div class="qq">Write <code>feedAnimal(Eatable eatable)</code>.</div>
+<p class="kicker">Official in-lab task 3 of 3</p><h2>Task 3: Interface-based parameters</h2><div class="ex task"><div class="qq">Write <code>feedAnimal(Eatable eatable)</code>.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l5t2r0" data-key="l5t2r0"><label for="l5t2r0">Call it with a Fish</label></li><li><input type="checkbox" id="l5t2r1" data-key="l5t2r1"><label for="l5t2r1">Print whether the object is poisonous</label></li><li><input type="checkbox" id="l5t2r2" data-key="l5t2r2"><label for="l5t2r2">Print its nutrition value</label></li><li><input type="checkbox" id="l5t2r3" data-key="l5t2r3"><label for="l5t2r3">Explain in a comment why <code>feedAnimal(dog)</code> does not compile</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">The parameter type is the contract: only objects whose class implements Eatable can be passed.</div></details></div>
 </div></section>
 <section class="slide " data-title="Show your work" aria-label="Show your work" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
+<p class="kicker">Official in-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
 </div></section>
 <section class="slide " data-title="Report exercise 1" aria-label="Report exercise 1" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Lab report · exercise 1 of 2</p><h2>Shape hierarchy with multiple interfaces</h2><div class="ex task report"><div class="qq">Abstract Shape with Resizable and Colorable interfaces.</div>
@@ -516,25 +894,25 @@ Casted Dog breed: Golden Retriever</pre></div><p class="note-line">The same thre
 <p class="kicker">Lab report</p><h2>Writing the lab report</h2><ul class="big-list"><li>Problem statement and your design (classes, fields, methods)</li><li>Complete source code, formatted and commented</li><li>Sample output or screenshots for normal <b>and</b> edge cases</li><li>A short discussion: what each OOP concept did in your program</li></ul><div class="integrity"><h3>Academic integrity</h3><p>Copying from the internet, classmates, seniors or any other unauthorized source is strictly prohibited. Full marks may be deducted if plagiarism, copied work or academic dishonesty is detected. Complete the tasks, implementation, output analysis and report yourself.</p></div>
 </div></section>
 <section class="slide " data-title="Viva questions (1 of 2)" aria-label="Viva questions (1 of 2)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Discussion and analysis</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">Why is Animal abstract instead of a normal class?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">There is no meaningful generic animal sound or diet; making it abstract forbids plain Animal objects and forces every subclass to provide them.</div></details></div><div class="ex"><div class="qq">Can an abstract class have a constructor?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Yes. It initialises the shared fields and is called from subclass constructors with super(…).</div></details></div>
+<p class="kicker">Discussion</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">Why can’t we write <code>new GameObject("x", 0)</code>?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">GameObject is abstract: it has methods with no body, so a plain GameObject would not know how to update or draw itself.</div></details></div><div class="ex"><div class="qq">Player already extends GameObject. How can it also be a Damageable and a Shooter?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">A class can extend only one class but implement any number of interfaces.</div></details></div>
 </div></section>
 <section class="slide " data-title="Viva questions (2 of 2)" aria-label="Viva questions (2 of 2)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Discussion and analysis</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq">Why are Drawable and Eatable interfaces and not abstract classes?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">They are capabilities that only some animals have, and a class can implement several interfaces but extend only one class.</div></details></div><div class="ex"><div class="qq"><code>fish instanceof Drawable</code> is false. Why does it still compile?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">instanceof is checked at run time against the object; the compiler allows it because some Animal subclass could be Drawable.</div></details></div>
+<p class="kicker">Discussion</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq">What does the <code>default</code> keyword give an interface method?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">A body. Implementing classes get it for free and may override it.</div></details></div><div class="ex"><div class="qq">Why did the Damageable loop need instanceof but the Shooter loop did not?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">The Shooter loop ran over a Shooter[], so every element was a Shooter. The world array holds any GameObject, including the health pack.</div></details></div>
 </div></section>
 <section class="slide " data-title="Quiz" aria-label="Quiz" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="lab5"></div><script type="application/json" class="quiz-json">[{"q": "<code>new Animal(\"x\", 1)<\/code> where Animal is abstract\u2026", "o": ["works", "is a compile error", "throws at run time", "returns null"], "a": 1, "w": "Abstract classes cannot be instantiated."}, {"q": "How many interfaces can a class implement?", "o": ["one", "two", "any number", "none if it extends a class"], "a": 2, "w": "Implement many, extend one."}, {"q": "A Drawable reference can call\u2026", "o": ["draw() and hide()", "makeSound()", "getBreed()", "eat()"], "a": 0, "w": "Only the methods the interface declares."}, {"q": "A class that does not implement an inherited abstract method must be\u2026", "o": ["final", "static", "abstract", "an interface"], "a": 2, "w": "Otherwise it will not compile."}, {"q": "Interfaces mostly describe\u2026", "o": ["is-a relationships", "can-do capabilities", "constructors", "private state"], "a": 1, "w": "Abstract classes model is-a; interfaces model can-do."}]</script></div>
+<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="game5"></div><script type="application/json" class="quiz-json">[{"q": "An abstract class\u2026", "o": ["can be instantiated with new", "cannot be instantiated", "cannot have constructors", "cannot have normal methods"], "a": 1, "w": "You create concrete subclasses instead."}, {"q": "A class can implement\u2026", "o": ["one interface", "any number of interfaces", "only abstract classes", "no interfaces if it extends a class"], "a": 1, "w": "One superclass, many interfaces."}, {"q": "A field declared in an interface is\u2026", "o": ["private", "public static final", "an instance field", "not allowed"], "a": 1, "w": "Interface fields are constants."}, {"q": "A concrete class extends an abstract class but does not override an abstract method. Then\u2026", "o": ["it still compiles", "it must be declared abstract too", "the method returns null", "Java writes the body"], "a": 1, "w": "Every abstract method must be implemented in a concrete class."}, {"q": "Which fits \u201canything that can be picked up\u201d best?", "o": ["an abstract class", "an interface", "a static method", "a final class"], "a": 1, "w": "An ability shared by unrelated classes is an interface."}]</script></div>
 </div></section>
 <section class="slide " data-title="Summary" aria-label="Summary" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Summary</p><h2>Summary</h2><ul class="sumlist"><li>Abstract classes share state and code and force subclasses to implement abstract methods.</li><li>They cannot be instantiated but can have constructors.</li><li>Interfaces are contracts; a class can implement many.</li><li>Use abstract classes for is-a, interfaces for can-do.</li><li>Both work as reference types for polymorphism; instanceof checks interfaces too.</li></ul><div class="nextcard"><a class="btn pri" href="06-exception-handling.html">Next: Lab 6 · Exception handling</a><a class="btn" href="../index.html">All labs</a></div>
+<p class="kicker">Mission debrief</p><h2>Summary</h2><ul class="sumlist"><li>abstract classes give a shared base and force subclasses to fill in the gaps.</li><li>An abstract class cannot be created with new.</li><li>Interfaces describe abilities; a class can implement many.</li><li>Interface fields are constants; default methods have bodies.</li><li>Both abstract classes and interfaces work as reference types for polymorphism.</li><li>Next mission: what happens when things go wrong.</li></ul><div class="nextcard"><a class="btn pri" href="06-exception-handling.html">Next: Mission 6 · When things go wrong</a><a class="btn" href="../index.html">All chapters</a></div>
 </div></section>
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 35</span>
+  <span class="counter" id="counter">1 / 47</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
-<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
-<noscript><p style="padding:20px">This lab needs JavaScript for the slides and the interactive examples.</p></noscript>
+<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this chapter</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
+<noscript><p style="padding:20px">This chapter needs JavaScript for the slides, the game scenes and the interactive examples.</p></noscript>
 <script src="../js/core.js"></script>
 <script src="../js/art.js"></script>
 <script src="../js/java.js"></script>
@@ -546,10 +924,14 @@ Casted Dog breed: Golden Retriever</pre></div><p class="note-line">The same thre
 <script src="../js/demos-basics.js"></script>
 <script src="../js/demos-oop.js"></script>
 <script src="../js/demos-adv.js"></script>
+<script src="../js/game-core.js"></script>
+<script src="../js/game-scenes-a.js"></script>
+<script src="../js/game-scenes-b.js"></script>
+<script src="../js/game-scenes-c.js"></script>
 <script src="../js/quiz.js"></script>
 <script src="../js/page.js"></script>
 <script src="../js/lab.js"></script>
-<script>window.OOP_TOPIC = {"id": 5, "prev": "04-inheritance-polymorphism.html", "next": "06-exception-handling.html", "nextLabel": "Next lab"};</script>
+<script>window.OOP_TOPIC = {"id": 5, "prev": "04-inheritance-polymorphism.html", "next": "06-exception-handling.html", "nextLabel": "Next chapter"};</script>
 <script>mountPage();</script>
 <script src="../js/slides.js"></script>
 <script src="../js/annotate.js"></script>

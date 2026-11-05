@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Give a Rectangle class default, parameterised and copy constructors chained with this(…), overload area() and describe(), and find out exactly what Java passes to a method.">
-<meta name="keywords" content="java constructor, copy constructor, constructor chaining, method overloading, pass by value, object reference, lab, cse 202, object oriented programming lab">
+<meta name="description" content="Build an armory: default, parameterised and copy constructors for Weapon, chaining with this(…), an overloaded shoot(), and what really happens when you pass an int or a Weapon to a method.">
+<meta name="keywords" content="java constructor, copy constructor, constructor chaining, method overloading, pass by value, object reference, lab, java game, game programming, cse 202, object oriented programming lab">
 <meta name="author" content="Object Oriented Programming Lab Notes">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#155E63">
@@ -16,32 +16,33 @@
 <link rel="manifest" href="../site.webmanifest">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
-<meta property="og:title" content="Lab 3: Constructors, Overloading &amp; Reference Passing | OOP Lab (CSE 202)">
-<meta property="og:description" content="Give a Rectangle class default, parameterised and copy constructors chained with this(…), overload area() and describe(), and find out exactly what Java passes to a method.">
+<meta property="og:title" content="Chapter 3: Constructors, Overloading &amp; Reference Passing | OOP Lab (CSE 202)">
+<meta property="og:description" content="Build an armory: default, parameterised and copy constructors for Weapon, chaining with this(…), an overloaded shoot(), and what really happens when you pass an int or a Weapon to a method.">
 <meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/03-constructors-overloading.html">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/03-constructors-overloading.png?v=2">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Lab 3 of 10: Constructors, Overloading &amp; Reference Passing – CSE 202 Object Oriented Programming Lab">
+<meta property="og:image:alt" content="Chapter 3 of 10: Constructors, Overloading &amp; Reference Passing – CSE 202 Object Oriented Programming Lab">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Lab 3: Constructors, Overloading &amp; Reference Passing | OOP Lab (CSE 202)">
-<meta name="twitter:description" content="Give a Rectangle class default, parameterised and copy constructors chained with this(…), overload area() and describe(), and find out exactly what Java passes to a method.">
+<meta name="twitter:title" content="Chapter 3: Constructors, Overloading &amp; Reference Passing | OOP Lab (CSE 202)">
+<meta name="twitter:description" content="Build an armory: default, parameterised and copy constructors for Weapon, chaining with this(…), an overloaded shoot(), and what really happens when you pass an int or a Weapon to a method.">
 <meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/03-constructors-overloading.png?v=2">
-<meta name="twitter:image:alt" content="Lab 3 of 10: Constructors, Overloading &amp; Reference Passing – CSE 202 Object Oriented Programming Lab">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Constructors, Overloading & Reference Passing", "description": "Give a Rectangle class default, parameterised and copy constructors chained with this(…), overload area() and describe(), and find out exactly what Java passes to a method.", "position": 3, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 43, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/03-constructors-overloading.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/03-constructors-overloading.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
-<title>Lab 3: Constructors, Overloading &amp; Reference Passing | OOP Lab (CSE 202)</title>
+<meta name="twitter:image:alt" content="Chapter 3 of 10: Constructors, Overloading &amp; Reference Passing – CSE 202 Object Oriented Programming Lab">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Constructors, Overloading & Reference Passing", "description": "Build an armory: default, parameterised and copy constructors for Weapon, chaining with this(…), an overloaded shoot(), and what really happens when you pass an int or a Weapon to a method.", "position": 3, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 44, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/03-constructors-overloading.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/03-constructors-overloading.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
+<title>Chapter 3: Constructors, Overloading &amp; Reference Passing | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/lab.css">
+<link rel="stylesheet" href="../css/game.css">
 </head>
 <body class="deck-page">
 <div class="sr-only" id="live" aria-live="polite"></div>
 <header class="deck-bar">
-  <a class="home-link" href="../index.html" aria-label="Home: all labs"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
+  <a class="home-link" href="../index.html" aria-label="Home: all chapters"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
   <div class="deck-title"><span class="badge">3</span><span>Constructors, Overloading &amp; Reference Passing</span></div>
   <div class="deck-actions">
     <button type="button" class="btn sm" id="btn-menu" aria-expanded="false" aria-controls="slide-menu" aria-label="Slides"><svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><rect x="3" y="4.5" width="18" height="3" rx="1"></rect><rect x="3" y="10.5" width="18" height="3" rx="1"></rect><rect x="3" y="16.5" width="18" height="3" rx="1"></rect></svg><span>Slides</span></button>
@@ -52,213 +53,488 @@
 <div class="deck-progress"><i id="progress-fill"></i></div>
 <main class="deck" id="deck">
 <section class="slide title-slide" data-title="Constructors, Overloading &amp; Reference Passing" aria-label="Constructors, Overloading &amp; Reference Passing" tabindex="-1"><div class="slide-inner">
-<span class="topic-art" data-art="5" aria-hidden="true"></span>
+<div class="topic-art g-title-art" data-demo="g-title" data-ch="3" aria-hidden="true"></div>
 <span class="badge big">3</span>
-<p class="kicker">Lab III · CSE 202</p>
+<p class="kicker">Chapter 3 · Lab III · CSE 202</p>
 <h1>Constructors, Overloading & Reference Passing</h1>
-<p class="lead">Give a Rectangle class default, parameterised and copy constructors chained with this(…), overload area() and describe(), and find out exactly what Java passes to a method.</p>
-<div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
+<p class="g-mission">Mission 3 · Arm up</p>
+<p class="lead">Build an armory: default, parameterised and copy constructors for Weapon, chaining with this(…), an overloaded shoot(), and what really happens when you pass an int or a Weapon to a method.</p>
+<div class="row"><a class="btn pri" href="#s=2">Start the mission</a><a class="btn" href="../index.html">All chapters</a></div>
 <p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
 </div></section>
-<section class="slide " data-title="Why this lab" aria-label="Why this lab" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Before we start</p><h2>Why this lab</h2><div class="hook"><p class="q">You pass a rectangle to a method and it comes back twice as big. You pass a number and it comes back unchanged. Why the difference?</p><p>Java always passes <b>a copy</b>: a copy of the number, or a copy of the reference to the object. This lab proves it with a <code>Rectangle</code> class.</p></div>
+<section class="slide " data-title="Your mission" aria-label="Your mission" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Mission 3 · Arm up</p><h2>Your mission</h2><div class="hook"><p class="q">A pistol, a rifle and a rocket launcher: the same kind of thing with different settings. How do we build each one easily?</p><p>Give <code>Weapon</code> several <b>constructors</b> that call each other with <code>this(…)</code>. Then give the player several <code>shoot</code> methods with the same name: that is <b>overloading</b>.</p></div>
 </div></section>
-<section class="slide " data-title="Lab at a glance" aria-label="Lab at a glance" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 3 of 10</p><h2>Lab at a glance</h2><div class="cols wl"><div><h3>After this lab you can</h3><ul class=""><li>Define default, parameterised and copy constructors</li><li>Chain constructors with <code>this(…)</code> to avoid repeated code</li><li>Overload methods by changing the parameter list</li><li>Explain how the compiler picks an overload</li><li>Distinguish passing primitives from passing object references</li><li>Explain why reassigning a parameter does not affect the caller</li></ul></div>
-<div><h3>Before you start</h3><ul class=""><li>Lab 2: classes, objects, constructors, encapsulation</li><li>Primitive vs reference types</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
+<section class="slide " data-title="Chapter at a glance" aria-label="Chapter at a glance" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Chapter 3 of 10</p><h2>Chapter at a glance</h2><div class="cols wl"><div><h3>After this chapter you can</h3><ul class=""><li>Write default, parameterised and copy constructors</li><li>Chain constructors with <code>this(…)</code> so the fields are set in one place</li><li>Overload <code>shoot()</code> and predict which version runs</li><li>Explain why changing an int parameter never reaches the caller</li><li>Explain why changing an object through a parameter does</li></ul></div>
+<div><h3>Before you start</h3><ul class=""><li>Chapter 2: classes, fields, constructors and methods</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Topics: the idea, then the game</li><li>Run the game program</li><li>Game practice tasks</li><li>Official lab and graded tasks</li><li>Report exercises at home</li></ol></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 3 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=12">Program design</a></li><li><a href="#s=14">Code walkthrough</a></li><li><a href="#s=27">Step-through traces: stack, heap and output</a></li><li><a href="#s=31">Expected output</a></li><li><a href="#s=32">Interactive demos</a></li><li><a href="#s=33">In-lab tasks</a></li><li><a href="#s=37">Lab report exercises</a></li><li><a href="#s=40">Viva questions and quiz</a></li></ol>
+<p class="kicker">Chapter 3 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=24">Run the game</a></li><li><a href="#s=25">Game practice tasks</a></li><li><a href="#s=28">The official lab program</a></li><li><a href="#s=34">Official in-lab tasks</a></li><li><a href="#s=38">Lab report exercises</a></li><li><a href="#s=41">Viva questions and quiz</a></li></ol>
 </div></section>
-<section class="slide " data-title="Default, parameterised and copy constructors" aria-label="Default, parameterised and copy constructors" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 1 of 5</p><h2>Default, parameterised and copy constructors</h2><pre class="code small-code">public Rectangle()                         // default: 1 x 1, White
-public Rectangle(double side)              // square
-public Rectangle(double w, double h)       // rectangle
-public Rectangle(double w, double h, String colour)
-public Rectangle(Rectangle other)          // copy</pre><ul class=""><li>Java writes a no-argument constructor only if you write none yourself.</li><li>A copy constructor builds a <b>new, independent</b> object with the same field values.</li></ul>
+<section class="slide " data-title="Today’s build" aria-label="Today’s build" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Build the game · Chapter 3</p><h2>Today’s build</h2><ul class="pts"><li>Four files: <code>Weapon</code> (four constructors), <code>Player</code> (three shoot methods), <code>Medic</code> (heals through a reference) and <code>ArmoryDemo</code> (main).</li></ul>
+<div class="cols wl"><div><h3>What the program does</h3><ol class="flow"><li>Craft three weapons with three different constructors</li><li>Copy the rifle and upgrade only the copy</li><li>Equip the rocket and call all three shoot() versions</li><li>Pass an int to refill(): unchanged afterwards</li><li>Pass the pistol to refill(): changed; swap() cannot replace it</li><li>Let the medic heal the player through a reference</li></ol></div><div><h3>Files</h3><ul class="g-files"><li><code>Weapon.java</code> <span class="muted">(53 lines)</span></li><li><code>Player.java</code> <span class="muted">(55 lines)</span></li><li><code>Medic.java</code> <span class="muted">(13 lines)</span></li><li><code>ArmoryDemo.java</code> <span class="muted">(59 lines)</span></li></ul><p class="muted">180 lines in all. Each topic below shows the part of the program that uses it.</p></div></div>
 </div></section>
-<section class="slide " data-title="Constructor chaining with this(…)" aria-label="Constructor chaining with this(…)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 2 of 5</p><h2>Constructor chaining with this(…)</h2><figure class="fig" data-fig="lab3-chain"></figure><ul class=""><li>Simpler constructors delegate to the full one, so validation lives in one place.</li></ul>
-</div></section>
-<section class="slide " data-title="Constructor chaining with this(…) (code)" aria-label="Constructor chaining with this(…) (code)" tabindex="-1"><div class="slide-inner">
-<h2>Constructor chaining with this(…)</h2><pre class="code small-code">public Rectangle(double side) {
-    this(side, side, &quot;White&quot;);   // must be the first statement
-}</pre>
-</div></section>
-<section class="slide " data-title="Method overloading" aria-label="Method overloading" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 3 of 5</p><h2>Method overloading</h2><pre class="code small-code">public double area()                                   // own fields
-public double area(double scaleFactor)                 // scaled
-public static double area(double width, double height) // any size</pre><ul class=""><li>Same name, different parameter lists (number, type or order).</li><li>Resolved by the compiler at <b>compile time</b>.</li><li>A different return type or access modifier alone is <b>not</b> an overload — compile error.</li></ul>
-</div></section>
-<section class="slide " data-title="Passing a primitive" aria-label="Passing a primitive" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 4 of 5</p><h2>Passing a primitive</h2><figure class="fig" data-fig="lab3-prim"></figure><ul class=""><li>The method gets a copy of the value; changing the copy cannot touch the caller’s variable.</li></ul>
-</div></section>
-<section class="slide " data-title="Passing a primitive (code)" aria-label="Passing a primitive (code)" tabindex="-1"><div class="slide-inner">
-<h2>Passing a primitive</h2><pre class="code small-code">static void passPrimitive(double side) { side = side * 2; }
+<section class="slide " data-title="Kinds of constructors" aria-label="Kinds of constructors" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 5</p><h2>Kinds of constructors</h2><div class="g-ingame"><div>In the game:</div><div>Four ways to build a Weapon</div></div><div class="g-codeside g-topic"><div><div class="kicker g-wk"><div class="walk-file">Weapon.java</div><div>·</div><div>Fields and the default constructor</div></div><pre class="code small-code wide">public class Weapon {
+    private String name;
+    private int damage;
+    private int ammo;
 
-double side = 10.0;
-passPrimitive(side);   // side is still 10.0</pre>
+    // 1. Default constructor: no arguments gives a basic pistol
+    public Weapon() {
+        this(&quot;Pistol&quot;, 10);                 // chain to the 2-argument constructor
+    }</pre></div><ul class="pts"><li><b>Default</b>: no parameters, fills in starting values.</li><li><b>Parameterised</b>: the caller passes the values.</li><li><b>Copy</b>: builds a new object from another one of the same class.</li><li>No arguments: a pistol with 10 damage.</li><li>It does not set the fields itself: it hands over with <code>this(…)</code>.</li></ul></div>
 </div></section>
-<section class="slide " data-title="Passing an object reference" aria-label="Passing an object reference" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 5 of 5</p><h2>Passing an object reference</h2><figure class="fig" data-fig="lab3-ref"></figure><ul class=""><li>The method gets a copy of the <b>reference</b>: both point to the same object, so <code>r.scale(2.0)</code> is visible to the caller.</li><li>Reassigning the parameter (<code>r = new Rectangle(…)</code>) only moves the copy; the caller still sees the original.</li><li>So Java is <b>always pass-by-value</b> — for objects the value is a reference.</li></ul>
+<section class="slide " data-title="Four ways to build a Weapon" aria-label="Four ways to build a Weapon" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 5 · in the game</p><h2>Four ways to build a Weapon</h2><div data-demo="g-armory"></div><ul class="pts pts-row"><li><b>Default</b> constructor: no arguments, sensible defaults (a pistol).</li><li><b>Parameterised</b>: you choose the name and the damage.</li><li><b>Copy</b> constructor: a new weapon with another weapon’s settings.</li></ul>
 </div></section>
-<section class="slide " data-title="Program design" aria-label="Program design" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Implementation design</p><h2>Program design</h2><figure class="fig" data-fig="lab3-rect-uml"></figure>
+<section class="slide " data-title="Parameterised and full constructors" aria-label="Parameterised and full constructors" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 5 · our game program · 1 of 4 · <span class="walk-file">Weapon.java</span></p><h2>Parameterised and full constructors</h2><pre class="code walk-code">// 2. Parameterised constructor: a standard clip of 12
+public Weapon(String name, int damage) {
+    this(name, damage, 12);             // chain to the full constructor
+}
+
+// 3. Full constructor: the only one that sets the fields
+public Weapon(String name, int damage, int ammo) {
+    this.name = name;
+    this.damage = damage;
+    this.ammo = ammo;
+    System.out.println(&quot;  crafted &quot; + this);
+}</pre><ul class="walk-notes"><li>The 2-argument version adds a standard clip of 12.</li><li>Only the full constructor writes the fields.</li></ul>
 </div></section>
-<section class="slide " data-title="Execution flow" aria-label="Execution flow" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Implementation design</p><h2>Execution flow</h2><ol class="flow"><li>Build rectangles with each of the five constructors</li><li>Copy r3, change r3’s colour and show the copy is unchanged</li><li>Call the three area() overloads and the two describe() overloads</li><li>Pass a primitive: unchanged after the call</li><li>Pass a reference and scale: the change is visible</li><li>Reassign the parameter: the caller’s object is untouched</li></ol><p class="note-line">All constructors funnel into the full one, which validates width and height.</p>
+<section class="slide " data-title="The copy constructor, getters and fire()" aria-label="The copy constructor, getters and fire()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 5 · our game program · 2 of 4 · <span class="walk-file">Weapon.java</span></p><h2>The copy constructor, getters and fire()</h2><div class="walk-side g-walk"><pre class="code walk-code">// 4. Copy constructor: a new weapon with the same settings
+public Weapon(Weapon other) {
+    this(other.name, other.damage, other.ammo);
+}
+
+public String getName() { return name; }
+public int getDamage()  { return damage; }
+public int getAmmo()    { return ammo; }
+
+public boolean fire() {
+    if (ammo == 0) {
+        return false;
+    }
+    ammo--;
+    return true;
+}</pre><ul class="walk-notes"><li>The copy reads the other weapon’s private fields: allowed, it is the same class.</li><li><code>fire()</code> returns false when the clip is empty.</li></ul></div>
+</div></section>
+<section class="slide " data-title="addAmmo(), upgrade() and toString()" aria-label="addAmmo(), upgrade() and toString()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 5 · our game program · 3 of 4 · <span class="walk-file">Weapon.java</span></p><h2>addAmmo(), upgrade() and toString()</h2><pre class="code walk-code">public void addAmmo(int amount) {
+    ammo += amount;
+}
+
+public void upgrade(int extraDamage) {
+    damage += extraDamage;
+}
+
+@Override
+public String toString() {
+    return name + &quot; [&quot; + damage + &quot; dmg, &quot; + ammo + &quot; ammo]&quot;;
+}</pre><ul class="walk-notes"><li><code>toString()</code> decides how a Weapon prints: <code>"  crafted " + this</code> uses it.</li></ul>
+</div></section>
+<section class="slide " data-title="main: building and copying" aria-label="main: building and copying" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 5 · our game program · 4 of 4 · <span class="walk-file">ArmoryDemo.java</span></p><h2>main: building and copying</h2><pre class="code walk-code">System.out.println(&quot;=== Constructors ===&quot;);
+Weapon pistol = new Weapon();
+Weapon rifle = new Weapon(&quot;Rifle&quot;, 25);
+Weapon rocket = new Weapon(&quot;Rocket&quot;, 80, 3);
+
+System.out.println(&quot;\n=== Copy constructor ===&quot;);
+Weapon spare = new Weapon(rifle);
+spare.upgrade(5);
+System.out.println(&quot;rifle: &quot; + rifle);
+System.out.println(&quot;spare: &quot; + spare + &quot;  (a separate object)&quot;);</pre><ul class="walk-notes"><li>Each line runs a different constructor; each prints “crafted”.</li><li>Upgrading the spare leaves the rifle alone.</li></ul>
 </div></section>
 <section class="slide " data-title="Constructor chaining" aria-label="Constructor chaining" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 1 of 13 · <span class="walk-file">Rectangle.java</span></p><h2>Constructor chaining</h2><pre class="code walk-code">public Rectangle() {
-    this(1.0, 1.0, &quot;White&quot;);
+<p class="kicker">Topic 2 of 5</p><h2>Constructor chaining</h2><div class="g-ingame"><div>In the game:</div><div>Constructor chaining with this(…)</div></div><div class="g-codeside"><pre class="code small-code">public Weapon() {
+    this(&quot;Pistol&quot;, 10);                 // -&gt; the 2-argument constructor
 }
 
-public Rectangle(double side) {
-    this(side, side, &quot;White&quot;);
+public Weapon(String name, int damage) {
+    this(name, damage, 12);             // -&gt; the full constructor
 }
 
-public Rectangle(double width, double height) {
-    this(width, height, &quot;White&quot;);
-}</pre><ul class="walk-notes"><li>Each simple constructor passes defaults to the full one with <code>this(…)</code>.</li></ul>
+public Weapon(String name, int damage, int ammo) {
+    this.name = name;
+    this.damage = damage;
+    this.ammo = ammo;
+}</pre><ul class="pts"><li><code>this(…)</code> calls another constructor of the same class.</li><li>It must be the <b>first</b> line of the constructor.</li><li>The real work is written once, in one constructor.</li><li><code>this(…)</code> calls another constructor of the same class.</li><li>It must be the very first statement.</li><li>Every path ends at the full constructor: the fields are set in exactly one place.</li></ul></div>
 </div></section>
-<section class="slide " data-title="The full constructor validates" aria-label="The full constructor validates" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 2 of 13 · <span class="walk-file">Rectangle.java</span></p><h2>The full constructor validates</h2><pre class="code walk-code">public Rectangle(double width, double height, String colour) {
-    if (width &gt; 0) {
-        this.width = width;
+<section class="slide " data-title="Player: chained constructors and equip()" aria-label="Player: chained constructors and equip()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 2 of 5 · our game program · 1 of 1 · <span class="walk-file">Player.java</span></p><h2>Player: chained constructors and equip()</h2><div class="walk-side g-walk"><pre class="code walk-code">public Player(String name) {
+    this(name, 100);                    // chain: default health is 100
+}
+
+public Player(String name, int health) {
+    this.name = name;
+    this.health = health;
+    this.weapon = new Weapon();         // everyone starts with a pistol
+}
+
+public String getName() { return name; }
+public int getHealth()  { return health; }
+
+public void setHealth(int health) {
+    this.health = Math.max(0, Math.min(100, health));
+}
+
+public void equip(Weapon w) {
+    weapon = w;
+    System.out.println(name + &quot; equips &quot; + w);
+}</pre><ul class="walk-notes"><li><code>new Player("Ranger")</code> chains to health 100.</li><li>Every player starts with <code>new Weapon()</code>: a pistol.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Method overloading" aria-label="Method overloading" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 5</p><h2>Method overloading</h2><div class="g-ingame"><div>In the game:</div><div>Overloading shoot()</div></div><div class="g-codeside g-topic"><div><div class="kicker g-wk"><div class="walk-file">ArmoryDemo.java</div><div>·</div><div>main: overloading</div></div><pre class="code small-code">System.out.println(&quot;\n=== Overloaded shoot() ===&quot;);
+Player ranger = new Player(&quot;Ranger&quot;);
+ranger.equip(rocket);
+ranger.shoot();
+ranger.shoot(&quot;Tank&quot;);
+ranger.shoot(&quot;Drone&quot;, 3);</pre></div><ul class="pts"><li>Several methods share one name but have different <b>parameter lists</b>.</li><li>Java picks the one whose parameters match the call.</li><li>The return type alone is not enough to tell them apart.</li><li>The rocket has 3 ammo: the third call runs dry halfway through the burst.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Overloading shoot()" aria-label="Overloading shoot()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 5 · in the game</p><h2>Overloading shoot()</h2><div data-demo="g-overload"></div><ul class="pts pts-row"><li>Same method name, different parameter lists.</li><li>The compiler picks the version from the arguments: <code>shoot()</code>, <code>shoot("Tank")</code>, <code>shoot("Drone", 3)</code>.</li><li>The burst version simply calls the one-target version in a loop.</li></ul>
+</div></section>
+<section class="slide " data-title="Three shoot() methods" aria-label="Three shoot() methods" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
+<p class="kicker">Topic 3 of 5 · our game program · 1 of 1 · <span class="walk-file">Player.java</span></p><h2>Three shoot() methods</h2><div class="walk-side g-walk"><pre class="code walk-code wide">// Overloaded shoot(): same name, different parameter lists
+public void shoot() {
+    if (weapon.fire()) {
+        System.out.println(name + &quot; fires the &quot; + weapon.getName() + &quot; into the air&quot;);
     } else {
-        this.width = 1.0;
+        System.out.println(name + &quot;: click! The &quot; + weapon.getName() + &quot; is empty&quot;);
     }
-    if (height &gt; 0) {
-        this.height = height;
+}
+
+public void shoot(String target) {
+    if (weapon.fire()) {
+        System.out.println(name + &quot; hits &quot; + target + &quot; for &quot; + weapon.getDamage());
     } else {
-        this.height = 1.0;
+        System.out.println(name + &quot;: click! The &quot; + weapon.getName() + &quot; is empty&quot;);
     }
-    this.colour = colour;
-}</pre><ul class="walk-notes"><li>All checks live in one place, whichever constructor was called.</li></ul>
-</div></section>
-<section class="slide " data-title="The copy constructor" aria-label="The copy constructor" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 3 of 13 · <span class="walk-file">Rectangle.java</span></p><h2>The copy constructor</h2><pre class="code walk-code">// Copy constructor
-public Rectangle(Rectangle other) {
-    this(other.width, other.height, other.colour);
-}</pre><ul class="walk-notes"><li>Builds a new object from another one’s values; it can read <code>other</code>’s private fields because it is the same class.</li></ul>
-</div></section>
-<section class="slide " data-title="Three overloads of area()" aria-label="Three overloads of area()" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 4 of 13 · <span class="walk-file">Rectangle.java</span></p><h2>Three overloads of area()</h2><pre class="code walk-code">public double area() {
-    return width * height;
 }
 
-public double area(double scaleFactor) {
-    return area() * scaleFactor;
-}
-
-public static double area(double width, double height) {
-    return width * height;
-}</pre><ul class="walk-notes"><li>Same name, different parameters.</li><li>The static one needs no object: <code>Rectangle.area(3, 8)</code>.</li></ul>
-</div></section>
-<section class="slide " data-title="describe() overloads and scale()" aria-label="describe() overloads and scale()" tabindex="-1"><div style="zoom:0.95;" class="slide-inner">
-<p class="kicker">Code walkthrough 5 of 13 · <span class="walk-file">Rectangle.java</span></p><h2>describe() overloads and scale()</h2><pre class="code walk-code">public String describe() {
-    return String.format(&quot;Rectangle[%.2f x %.2f, colour=%s, area=%.2f]&quot;,
-            width, height, colour, area());
-}
-
-public String describe(String prefix) {
-    return prefix + &quot;: &quot; + describe();
-}
-
-public void scale(double factor) {
-    if (factor &gt; 0) {
-        width = width * factor;
-        height = height * factor;
+public void shoot(String target, int burst) {
+    System.out.println(name + &quot; fires a burst of &quot; + burst + &quot; at &quot; + target);
+    for (int i = 1; i &lt;= burst; i++) {
+        shoot(target);                  // reuses the one-target version
     }
-}</pre><ul class="walk-notes"><li><code>describe(prefix)</code> reuses <code>describe()</code>.</li><li><code>scale()</code> changes the object itself.</li></ul>
+}</pre><ul class="walk-notes"><li>Same name, three parameter lists.</li><li>The burst version reuses <code>shoot(target)</code>.</li></ul></div>
 </div></section>
-<section class="slide " data-title="Passing a primitive" aria-label="Passing a primitive" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 6 of 13 · <span class="walk-file">Lab3Demo.java</span></p><h2>Passing a primitive</h2><pre class="code walk-code">static void passPrimitive(double side) {
-    System.out.println(&quot;Inside passPrimitive: side before = &quot; + side);
-    side = side * 2;
-    System.out.println(&quot;Inside passPrimitive: side after  = &quot; + side);
-}</pre><ul class="walk-notes"><li><code>side</code> here is a copy; doubling it cannot change the caller’s variable.</li></ul>
+<section class="slide " data-title="Passing arguments" aria-label="Passing arguments" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 4 of 5</p><h2>Passing arguments</h2><div class="g-ingame"><div>In the game:</div><div>Passing a primitive and passing a reference</div></div><ul class="pts big-list"><li>Java always passes a <b>copy</b> of the argument.</li><li>For a primitive, the copy is the value: the caller’s variable cannot change.</li><li>For an object, the copy is the reference: the method reaches the same object.</li></ul>
 </div></section>
-<section class="slide " data-title="Passing a reference" aria-label="Passing a reference" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 7 of 13 · <span class="walk-file">Lab3Demo.java</span></p><h2>Passing a reference</h2><pre class="code walk-code wide">static void passReference(Rectangle rectangle) {
-    System.out.println(&quot;Inside passReference before scaling: &quot; + rectangle.describe());
-    rectangle.scale(2.0);
-    System.out.println(&quot;Inside passReference after scaling : &quot; + rectangle.describe());
-}</pre><ul class="walk-notes"><li>The parameter points to the caller’s object, so scaling is visible after the call.</li></ul>
+<section class="slide " data-title="Passing a primitive and passing a reference" aria-label="Passing a primitive and passing a reference" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 4 of 5 · in the game</p><h2>Passing a primitive and passing a reference</h2><div data-demo="g-pass"></div><ul class="pts pts-row"><li>Java always passes a <b>copy</b>.</li><li>For an int, the copy is the value: the caller’s variable never changes.</li><li>For an object, the copy is the reference: both point at the same object, so changes to the object are seen by the caller.</li></ul>
 </div></section>
-<section class="slide " data-title="Reassigning the parameter" aria-label="Reassigning the parameter" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 8 of 13 · <span class="walk-file">Lab3Demo.java</span></p><h2>Reassigning the parameter</h2><pre class="code walk-code">static void tryReassignReference(Rectangle rectangle) {
-    rectangle = new Rectangle(99.0, 99.0, &quot;Invisible&quot;);
-    System.out.println(&quot;Inside tryReassignReference: &quot; + rectangle.describe());
-}</pre><ul class="walk-notes"><li>Only the local copy of the reference moves to the new object.</li></ul>
-</div></section>
-<section class="slide " data-title="Using every constructor" aria-label="Using every constructor" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 9 of 13 · <span class="walk-file">Lab3Demo.java</span></p><h2>Using every constructor</h2><pre class="code walk-code">// 1. Constructor Variants
-System.out.println(&quot;=== Constructor Variants ===&quot;);
-Rectangle r0 = new Rectangle();
-System.out.println(&quot;Default constructor    : &quot; + r0.describe());
-Rectangle r1 = new Rectangle(5.0);
-System.out.println(&quot;Square constructor     : &quot; + r1.describe());
-Rectangle r2 = new Rectangle(4.0, 7.0);
-System.out.println(&quot;Two-arg constructor    : &quot; + r2.describe());
-Rectangle r3 = new Rectangle(3.0, 6.0, &quot;Blue&quot;);
-System.out.println(&quot;Full constructor       : &quot; + r3.describe());
-Rectangle r4 = new Rectangle(r3);
-System.out.println(&quot;Copy constructor       : &quot; + r4.describe());</pre><ul class="walk-notes"><li>The compiler picks a constructor by the arguments.</li></ul>
-</div></section>
-<section class="slide " data-title="Copies are independent" aria-label="Copies are independent" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 10 of 13 · <span class="walk-file">Lab3Demo.java</span></p><h2>Copies are independent</h2><pre class="code walk-code">// 2. Copy Constructor Independence
-System.out.println(&quot;\n=== Copy Constructor Independence ===&quot;);
-r3.setColour(&quot;Green&quot;);
-System.out.println(&quot;Original after change  : &quot; + r3.describe());
-System.out.println(&quot;Copy remains unchanged : &quot; + r4.describe());</pre><ul class="walk-notes"><li>Changing r3 does not affect r4.</li></ul>
-</div></section>
-<section class="slide " data-title="Calling the overloads" aria-label="Calling the overloads" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 11 of 13 · <span class="walk-file">Lab3Demo.java</span></p><h2>Calling the overloads</h2><pre class="code walk-code">// 3. Method Overloading
-System.out.println(&quot;\n=== Method Overloading: area() ===&quot;);
-Rectangle rect = new Rectangle(6.0, 4.0, &quot;Yellow&quot;);
-System.out.printf(&quot;area()          = %.2f%n&quot;, rect.area());
-System.out.printf(&quot;area(1.5)       = %.2f%n&quot;, rect.area(1.5));
-System.out.printf(&quot;area(3.0, 8.0)  = %.2f%n&quot;, Rectangle.area(3.0, 8.0));
+<section class="slide " data-title="Primitive and reference parameters" aria-label="Primitive and reference parameters" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 4 of 5 · our game program · 1 of 2 · <span class="walk-file">ArmoryDemo.java</span></p><h2>Primitive and reference parameters</h2><div class="walk-side g-walk"><pre class="code walk-code">// Receives a copy of the int: the change stays inside this method
+static void refill(int ammo) {
+    ammo = 99;
+    System.out.println(&quot;  inside refill(int): ammo = &quot; + ammo);
+}
 
-System.out.println(&quot;\n=== Method Overloading: describe() ===&quot;);
-System.out.println(rect.describe());
-System.out.println(rect.describe(&quot;Main rectangle&quot;));</pre><ul class="walk-notes"><li>Arguments decide which area() and describe() run.</li></ul>
-</div></section>
-<section class="slide " data-title="Pass-by-value: a primitive" aria-label="Pass-by-value: a primitive" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 12 of 13 · <span class="walk-file">Lab3Demo.java</span></p><h2>Pass-by-value: a primitive</h2><pre class="code walk-code">// 4. Passing Primitive Value
-System.out.println(&quot;\n=== Passing a Primitive Value ===&quot;);
-double side = 10.0;
-System.out.println(&quot;Before method call: side = &quot; + side);
-passPrimitive(side);
-System.out.println(&quot;After method call : side = &quot; + side);</pre><ul class="walk-notes"><li>side is still 10.0 after the call: the method doubled a copy.</li></ul>
-</div></section>
-<section class="slide " data-title="Pass-by-value: references" aria-label="Pass-by-value: references" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 13 of 13 · <span class="walk-file">Lab3Demo.java</span></p><h2>Pass-by-value: references</h2><pre class="code walk-code">// 5. Passing Object Reference
-System.out.println(&quot;\n=== Passing an Object Reference ===&quot;);
-Rectangle ref = new Rectangle(5.0, 5.0, &quot;Blue&quot;);
-System.out.println(&quot;Before method call: &quot; + ref.describe());
-passReference(ref);
-System.out.println(&quot;After method call : &quot; + ref.describe());
+// Receives a copy of the reference: both point at the same Weapon object
+static void refill(Weapon w) {
+    w.addAmmo(10);
+    System.out.println(&quot;  inside refill(Weapon): &quot; + w);
+}
 
-// 6. Reassigning Reference Parameter
-System.out.println(&quot;\n=== Reassigning Reference Parameter ===&quot;);
-Rectangle original = new Rectangle(2.0, 3.0, &quot;Pink&quot;);
-System.out.println(&quot;Before method call: &quot; + original.describe());
-tryReassignReference(original);
-System.out.println(&quot;After method call : &quot; + original.describe());</pre><ul class="walk-notes"><li>Mutating through the reference: the change is visible.</li><li>Reassigning the reference: the caller still sees the Pink 2 × 3 rectangle.</li></ul>
+// Pointing the parameter at a new object does not change the caller&#x27;s variable
+static void swap(Weapon w) {
+    w = new Weapon(&quot;Water gun&quot;, 1, 1);
+    System.out.println(&quot;  inside swap(): w is now &quot; + w);
+}</pre><ul class="walk-notes"><li><code>refill(int)</code> and <code>refill(Weapon)</code> overload each other too.</li><li><code>swap</code> re-points its own copy only.</li></ul></div>
+</div></section>
+<section class="slide " data-title="main: passing values and references" aria-label="main: passing values and references" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 4 of 5 · our game program · 2 of 2 · <span class="walk-file">ArmoryDemo.java</span></p><h2>main: passing values and references</h2><div class="walk-side g-walk"><pre class="code walk-code">System.out.println(&quot;\n=== Passing a primitive ===&quot;);
+int ammo = 5;
+refill(ammo);
+System.out.println(&quot;  after refill(int): ammo = &quot; + ammo);
+
+System.out.println(&quot;\n=== Passing an object reference ===&quot;);
+refill(pistol);
+System.out.println(&quot;  after refill(Weapon): &quot; + pistol);
+swap(pistol);
+System.out.println(&quot;  after swap(): pistol is still &quot; + pistol);
+
+System.out.println(&quot;\n=== A medic heals through a reference ===&quot;);
+Medic doc = new Medic(&quot;Doc&quot;);
+ranger.takeDamage(40);
+System.out.println(&quot;Ranger takes 40 damage -&gt; health &quot; + ranger.getHealth());
+doc.heal(ranger, 30);
+System.out.println(&quot;Back in main: ranger.getHealth() = &quot; + ranger.getHealth());</pre><ul class="walk-notes"><li>ammo is still 5 after refill(int).</li><li>The pistol gains 10 ammo; swap() changes nothing.</li><li>The medic’s heal shows up in main.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Objects working on other objects" aria-label="Objects working on other objects" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 5</p><h2>Objects working on other objects</h2><div class="g-ingame"><div>In the game:</div><div>A medic heals through a reference</div></div><div class="g-codeside"><pre class="code small-code">public void heal(Player p, int amount) {
+    p.setHealth(p.getHealth() + amount);
+}
+
+// in main
+ranger.takeDamage(40);        // health 60
+doc.heal(ranger, 30);         // p and ranger: the same Player
+ranger.getHealth();           // 90</pre><ul class="pts"><li>A method can take another object as a parameter.</li><li>Through that reference it can call the other object’s methods and change it.</li><li>In the game: a <code>Medic</code> heals a <code>Player</code>.</li><li><code>p</code> is a copy of the reference in <code>ranger</code>.</li><li><code>p.setHealth</code> changes that one Player object.</li><li>Back in main, the new health is there.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Medic" aria-label="Medic" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 5 · our game program · 1 of 1 · <span class="walk-file">Medic.java</span></p><h2>Medic</h2><div class="walk-side g-walk"><pre class="code walk-code wide">public class Medic {
+    private String name;
+
+    public Medic(String name) {
+        this.name = name;
+    }
+
+    // p is a copy of the reference: it points at the caller&#x27;s Player object
+    public void heal(Player p, int amount) {
+        p.setHealth(p.getHealth() + amount);
+        System.out.println(name + &quot; heals &quot; + p.getName() + &quot; -&gt; health &quot; + p.getHealth());
+    }
+}</pre><ul class="walk-notes"><li><code>heal</code> receives a reference and changes the object it points at.</li></ul></div>
+</div></section>
+<section class="slide " data-title="The complete game program" aria-label="The complete game program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Build the game · 4 files</p><h2>The complete game program</h2><div class="codeview"><pre class="code small-code" data-file="Weapon.java">public class Weapon {
+    private String name;
+    private int damage;
+    private int ammo;
+
+    // 1. Default constructor: no arguments gives a basic pistol
+    public Weapon() {
+        this(&quot;Pistol&quot;, 10);                 // chain to the 2-argument constructor
+    }
+
+    // 2. Parameterised constructor: a standard clip of 12
+    public Weapon(String name, int damage) {
+        this(name, damage, 12);             // chain to the full constructor
+    }
+
+    // 3. Full constructor: the only one that sets the fields
+    public Weapon(String name, int damage, int ammo) {
+        this.name = name;
+        this.damage = damage;
+        this.ammo = ammo;
+        System.out.println(&quot;  crafted &quot; + this);
+    }
+
+    // 4. Copy constructor: a new weapon with the same settings
+    public Weapon(Weapon other) {
+        this(other.name, other.damage, other.ammo);
+    }
+
+    public String getName() { return name; }
+    public int getDamage()  { return damage; }
+    public int getAmmo()    { return ammo; }
+
+    public boolean fire() {
+        if (ammo == 0) {
+            return false;
+        }
+        ammo--;
+        return true;
+    }
+
+    public void addAmmo(int amount) {
+        ammo += amount;
+    }
+
+    public void upgrade(int extraDamage) {
+        damage += extraDamage;
+    }
+
+    @Override
+    public String toString() {
+        return name + &quot; [&quot; + damage + &quot; dmg, &quot; + ammo + &quot; ammo]&quot;;
+    }
+}</pre><pre class="code small-code" data-file="Player.java">public class Player {
+    private String name;
+    private int health;
+    private Weapon weapon;
+
+    public Player(String name) {
+        this(name, 100);                    // chain: default health is 100
+    }
+
+    public Player(String name, int health) {
+        this.name = name;
+        this.health = health;
+        this.weapon = new Weapon();         // everyone starts with a pistol
+    }
+
+    public String getName() { return name; }
+    public int getHealth()  { return health; }
+
+    public void setHealth(int health) {
+        this.health = Math.max(0, Math.min(100, health));
+    }
+
+    public void equip(Weapon w) {
+        weapon = w;
+        System.out.println(name + &quot; equips &quot; + w);
+    }
+
+    // Overloaded shoot(): same name, different parameter lists
+    public void shoot() {
+        if (weapon.fire()) {
+            System.out.println(name + &quot; fires the &quot; + weapon.getName() + &quot; into the air&quot;);
+        } else {
+            System.out.println(name + &quot;: click! The &quot; + weapon.getName() + &quot; is empty&quot;);
+        }
+    }
+
+    public void shoot(String target) {
+        if (weapon.fire()) {
+            System.out.println(name + &quot; hits &quot; + target + &quot; for &quot; + weapon.getDamage());
+        } else {
+            System.out.println(name + &quot;: click! The &quot; + weapon.getName() + &quot; is empty&quot;);
+        }
+    }
+
+    public void shoot(String target, int burst) {
+        System.out.println(name + &quot; fires a burst of &quot; + burst + &quot; at &quot; + target);
+        for (int i = 1; i &lt;= burst; i++) {
+            shoot(target);                  // reuses the one-target version
+        }
+    }
+
+    public void takeDamage(int amount) {
+        setHealth(health - amount);
+    }
+}</pre><pre class="code small-code" data-file="Medic.java">public class Medic {
+    private String name;
+
+    public Medic(String name) {
+        this.name = name;
+    }
+
+    // p is a copy of the reference: it points at the caller&#x27;s Player object
+    public void heal(Player p, int amount) {
+        p.setHealth(p.getHealth() + amount);
+        System.out.println(name + &quot; heals &quot; + p.getName() + &quot; -&gt; health &quot; + p.getHealth());
+    }
+}</pre><pre class="code small-code" data-file="ArmoryDemo.java">public class ArmoryDemo {
+
+    // Receives a copy of the int: the change stays inside this method
+    static void refill(int ammo) {
+        ammo = 99;
+        System.out.println(&quot;  inside refill(int): ammo = &quot; + ammo);
+    }
+
+    // Receives a copy of the reference: both point at the same Weapon object
+    static void refill(Weapon w) {
+        w.addAmmo(10);
+        System.out.println(&quot;  inside refill(Weapon): &quot; + w);
+    }
+
+    // Pointing the parameter at a new object does not change the caller&#x27;s variable
+    static void swap(Weapon w) {
+        w = new Weapon(&quot;Water gun&quot;, 1, 1);
+        System.out.println(&quot;  inside swap(): w is now &quot; + w);
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println(&quot;=== Constructors ===&quot;);
+        Weapon pistol = new Weapon();
+        Weapon rifle = new Weapon(&quot;Rifle&quot;, 25);
+        Weapon rocket = new Weapon(&quot;Rocket&quot;, 80, 3);
+
+        System.out.println(&quot;\n=== Copy constructor ===&quot;);
+        Weapon spare = new Weapon(rifle);
+        spare.upgrade(5);
+        System.out.println(&quot;rifle: &quot; + rifle);
+        System.out.println(&quot;spare: &quot; + spare + &quot;  (a separate object)&quot;);
+
+        System.out.println(&quot;\n=== Overloaded shoot() ===&quot;);
+        Player ranger = new Player(&quot;Ranger&quot;);
+        ranger.equip(rocket);
+        ranger.shoot();
+        ranger.shoot(&quot;Tank&quot;);
+        ranger.shoot(&quot;Drone&quot;, 3);
+
+        System.out.println(&quot;\n=== Passing a primitive ===&quot;);
+        int ammo = 5;
+        refill(ammo);
+        System.out.println(&quot;  after refill(int): ammo = &quot; + ammo);
+
+        System.out.println(&quot;\n=== Passing an object reference ===&quot;);
+        refill(pistol);
+        System.out.println(&quot;  after refill(Weapon): &quot; + pistol);
+        swap(pistol);
+        System.out.println(&quot;  after swap(): pistol is still &quot; + pistol);
+
+        System.out.println(&quot;\n=== A medic heals through a reference ===&quot;);
+        Medic doc = new Medic(&quot;Doc&quot;);
+        ranger.takeDamage(40);
+        System.out.println(&quot;Ranger takes 40 damage -&gt; health &quot; + ranger.getHealth());
+        doc.heal(ranger, 30);
+        System.out.println(&quot;Back in main: ranger.getHealth() = &quot; + ranger.getHealth());
+    }
+}</pre></div><p class="muted">Save every file in one folder, then compile and run: <code>javac *.java</code> → <code>java ArmoryDemo</code></p>
+</div></section>
+<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Run the game</p><h2>Expected output</h2><div class="runbox" data-cmd="java ArmoryDemo"><pre class="run-src" hidden>=== Constructors ===
+  crafted Pistol [10 dmg, 12 ammo]
+  crafted Rifle [25 dmg, 12 ammo]
+  crafted Rocket [80 dmg, 3 ammo]
+
+=== Copy constructor ===
+  crafted Rifle [25 dmg, 12 ammo]
+rifle: Rifle [25 dmg, 12 ammo]
+spare: Rifle [30 dmg, 12 ammo]  (a separate object)
+
+=== Overloaded shoot() ===
+  crafted Pistol [10 dmg, 12 ammo]
+Ranger equips Rocket [80 dmg, 3 ammo]
+Ranger fires the Rocket into the air
+Ranger hits Tank for 80
+Ranger fires a burst of 3 at Drone
+Ranger hits Drone for 80
+Ranger: click! The Rocket is empty
+Ranger: click! The Rocket is empty
+
+=== Passing a primitive ===
+  inside refill(int): ammo = 99
+  after refill(int): ammo = 5
+
+=== Passing an object reference ===
+  inside refill(Weapon): Pistol [10 dmg, 22 ammo]
+  after refill(Weapon): Pistol [10 dmg, 22 ammo]
+  crafted Water gun [1 dmg, 1 ammo]
+  inside swap(): w is now Water gun [1 dmg, 1 ammo]
+  after swap(): pistol is still Pistol [10 dmg, 22 ammo]
+
+=== A medic heals through a reference ===
+Ranger takes 40 damage -&gt; health 60
+Doc heals Ranger -&gt; health 90
+Back in main: ranger.getHealth() = 90</pre></div>
+</div></section>
+<section class="slide " data-title="Game task 1: A shotgun constructor" aria-label="Game task 1: A shotgun constructor" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 1 of 3</p><h2>Game task 1: A shotgun constructor</h2><div class="ex task g-task"><div class="qq">A weapon that fires several pellets.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g3t0r0" data-key="g3t0r0"><label for="g3t0r0">Add <code>Weapon(String name, int damage, int ammo, int pellets)</code></label></li><li><input type="checkbox" id="g3t0r1" data-key="g3t0r1"><label for="g3t0r1">Chain the other constructors to it with <code>this(…)</code>, so pellets defaults to 1</label></li><li><input type="checkbox" id="g3t0r2" data-key="g3t0r2"><label for="g3t0r2">Show the pellets in <code>toString()</code></label></li><li><input type="checkbox" id="g3t0r3" data-key="g3t0r3"><label for="g3t0r3">Craft a shotgun with 6 pellets and a pistol with 1</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Make the new 4-argument constructor the only one that sets the fields, and let the 3-argument one call it with pellets = 1.</div></details></div>
+</div></section>
+<section class="slide " data-title="Game task 2: Overload heal()" aria-label="Game task 2: Overload heal()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 2 of 3</p><h2>Game task 2: Overload heal()</h2><div class="ex task g-task"><div class="qq">More ways to heal.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g3t1r0" data-key="g3t1r0"><label for="g3t1r0"><code>heal(Player p)</code> heals 20 by calling the 2-argument version</label></li><li><input type="checkbox" id="g3t1r1" data-key="g3t1r1"><label for="g3t1r1"><code>heal(Player a, Player b, int amount)</code> heals two players at once</label></li><li><input type="checkbox" id="g3t1r2" data-key="g3t1r2"><label for="g3t1r2">Call all three versions from main and print the results</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Let the short versions call the full one, just as <code>shoot(target, burst)</code> calls <code>shoot(target)</code>.</div></details></div>
+</div></section>
+<section class="slide " data-title="Game task 3: Swap weapons" aria-label="Game task 3: Swap weapons" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 3 of 3</p><h2>Game task 3: Swap weapons</h2><div class="ex task g-task"><div class="qq">Two players trade weapons.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g3t2r0" data-key="g3t2r0"><label for="g3t2r0">Write <code>static void swapWeapons(Player a, Player b)</code> that exchanges their weapons</label></li><li><input type="checkbox" id="g3t2r1" data-key="g3t2r1"><label for="g3t2r1">Add a getter <code>getWeapon()</code></label></li><li><input type="checkbox" id="g3t2r2" data-key="g3t2r2"><label for="g3t2r2">Print both players’ weapons before and after</label></li><li><input type="checkbox" id="g3t2r3" data-key="g3t2r3"><label for="g3t2r3">Explain in a comment why this works, while swapping two Weapon parameters does not</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">You cannot change the caller’s variables, but you can call methods on the objects they refer to: <code>a.equip(…)</code> and <code>b.equip(…)</code>.</div></details></div>
+</div></section>
+<section class="slide " data-title="The official lab program" aria-label="The official lab program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Official lab · from the lab manual</p><h2>The official lab program</h2>
+<p class="g-official">The graded in-lab tasks and report exercises build on this program, not on the game. Read it and run it before you start them.</p>
+<ol class="flow"><li>Build rectangles with each of the five constructors</li><li>Copy r3, change r3’s colour and show the copy is unchanged</li><li>Call the three area() overloads and the two describe() overloads</li><li>Pass a primitive: unchanged after the call</li><li>Pass a reference and scale: the change is visible</li><li>Reassign the parameter: the caller’s object is untouched</li></ol><p class="note-line">All constructors funnel into the full one, which validates width and height.</p>
 </div></section>
 <section class="slide " data-title="Trace: constructor chaining with this(…)" aria-label="Trace: constructor chaining with this(…)" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
-<p class="kicker">Step through the code · 1 of 3</p><h2>Trace: constructor chaining with this(…)</h2><p class="muted">The stack grows by one frame when one constructor hands over to another.</p><div data-trace="lab3-chain"></div>
+<p class="kicker">Official lab · step through the code · 1 of 3</p><h2>Trace: constructor chaining with this(…)</h2><p class="muted">The stack grows by one frame when one constructor hands over to another.</p><div data-trace="lab3-chain"></div>
 </div></section>
-<section class="slide " data-title="Trace: pass-by-value, three ways" aria-label="Trace: pass-by-value, three ways" tabindex="-1"><div style="zoom:0.94;" class="slide-inner">
-<p class="kicker">Step through the code · 2 of 3</p><h2>Trace: pass-by-value, three ways</h2><p class="muted">Before stepping, predict which call changes something the caller can see.</p><div data-trace="lab3-pass"></div>
+<section class="slide " data-title="Trace: pass-by-value, three ways" aria-label="Trace: pass-by-value, three ways" tabindex="-1"><div style="zoom:0.95;" class="slide-inner">
+<p class="kicker">Official lab · step through the code · 2 of 3</p><h2>Trace: pass-by-value, three ways</h2><p class="muted">Before stepping, predict which call changes something the caller can see.</p><div data-trace="lab3-pass"></div>
 </div></section>
 <section class="slide " data-title="Trace: copy or alias?" aria-label="Trace: copy or alias?" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
-<p class="kicker">Step through the code · 3 of 3</p><h2>Trace: copy or alias?</h2><p class="muted">r4 is a copy made by the copy constructor; r5 is just another reference. Which one changes when r3 does?</p><div data-trace="lab3-copy"></div>
+<p class="kicker">Official lab · step through the code · 3 of 3</p><h2>Trace: copy or alias?</h2><p class="muted">r4 is a copy made by the copy constructor; r5 is just another reference. Which one changes when r3 does?</p><div data-trace="lab3-copy"></div>
 </div></section>
-<section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
-<p class="kicker">For reference · 2 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Rectangle.java">public class Rectangle {
+<section class="slide " data-title="The official program" aria-label="The official program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Official lab · 2 files</p><h2>The official program</h2><div class="codeview"><pre class="code small-code" data-file="Rectangle.java">public class Rectangle {
 
     private double width;
     private double height;
@@ -404,10 +680,10 @@ System.out.println(&quot;After method call : &quot; + original.describe());</pre
         tryReassignReference(original);
         System.out.println(&quot;After method call : &quot; + original.describe());
     }
-}</pre></div><p class="muted">Copy or download each file, save it under the same name, then compile and run: <code>javac *.java</code> → <code>java Lab3Demo</code></p>
+}</pre></div><p class="muted">Compile and run: <code>javac *.java</code> → <code>java Lab3Demo</code></p>
 </div></section>
-<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Implementation</p><h2>Expected output</h2><div class="runbox" data-cmd="java Lab3Demo"><pre class="run-src" hidden>=== Constructor Variants ===
+<section class="slide " data-title="Official program: expected output" aria-label="Official program: expected output" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Official lab</p><h2>Official program: expected output</h2><div class="runbox" data-cmd="java Lab3Demo"><pre class="run-src" hidden>=== Constructor Variants ===
 Default constructor    : Rectangle[1.00 x 1.00, colour=White, area=1.00]
 Square constructor     : Rectangle[5.00 x 5.00, colour=White, area=25.00]
 Two-arg constructor    : Rectangle[4.00 x 7.00, colour=White, area=28.00]
@@ -444,23 +720,20 @@ Before method call: Rectangle[2.00 x 3.00, colour=Pink, area=6.00]
 Inside tryReassignReference: Rectangle[99.00 x 99.00, colour=Invisible, area=9801.00]
 After method call : Rectangle[2.00 x 3.00, colour=Pink, area=6.00]</pre></div><p class="note-line">Compare the last three sections: the primitive is unchanged, the scaled object changed, the reassigned parameter left the original alone.</p>
 </div></section>
-<section class="slide " data-title="Which overload does the compiler pick?" aria-label="Which overload does the compiler pick?" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Interactive 1 of 1</p><h2>Which overload does the compiler pick?</h2><div data-demo="overload"></div>
-</div></section>
 <section class="slide " data-title="Task 1: Overloaded perimeter() methods" aria-label="Task 1: Overloaded perimeter() methods" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 1 of 3</p><h2>Task 1: Overloaded perimeter() methods</h2><div class="ex task"><div class="qq">Add three overloads to Rectangle and call each from main.</div>
+<p class="kicker">Official in-lab task 1 of 3</p><h2>Task 1: Overloaded perimeter() methods</h2><div class="ex task"><div class="qq">Add three overloads to Rectangle and call each from main.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l3t0r0" data-key="l3t0r0"><label for="l3t0r0"><code>double perimeter()</code> from the object’s fields</label></li><li><input type="checkbox" id="l3t0r1" data-key="l3t0r1"><label for="l3t0r1"><code>double perimeter(double scaleFactor)</code></label></li><li><input type="checkbox" id="l3t0r2" data-key="l3t0r2"><label for="l3t0r2"><code>static double perimeter(double width, double height)</code></label></li><li><input type="checkbox" id="l3t0r3" data-key="l3t0r3"><label for="l3t0r3">Demonstrate all three</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Mirror the three area() overloads; the scaled version can call <code>perimeter()</code>.</div></details></div>
 </div></section>
 <section class="slide " data-title="Task 2: Copy constructor independence test" aria-label="Task 2: Copy constructor independence test" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 2 of 3</p><h2>Task 2: Copy constructor independence test</h2><div class="ex task"><div class="qq">Prove that a copy is a separate object.</div>
+<p class="kicker">Official in-lab task 2 of 3</p><h2>Task 2: Copy constructor independence test</h2><div class="ex task"><div class="qq">Prove that a copy is a separate object.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l3t1r0" data-key="l3t1r0"><label for="l3t1r0"><code>Rectangle a = new Rectangle(4.0, 8.0, "Red");</code></label></li><li><input type="checkbox" id="l3t1r1" data-key="l3t1r1"><label for="l3t1r1"><code>Rectangle b = new Rectangle(a);</code></label></li><li><input type="checkbox" id="l3t1r2" data-key="l3t1r2"><label for="l3t1r2">Call <code>a.scale(3.0)</code></label></li><li><input type="checkbox" id="l3t1r3" data-key="l3t1r3"><label for="l3t1r3">Print a and b and show b is unchanged</label></li><li><input type="checkbox" id="l3t1r4" data-key="l3t1r4"><label for="l3t1r4">Explain in a comment why b is independent</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">The copy constructor copied the <i>values</i> of width and height into a new object.</div></details></div>
 </div></section>
 <section class="slide " data-title="Task 3: Design a Circle class" aria-label="Task 3: Design a Circle class" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 3 of 3</p><h2>Task 3: Design a Circle class</h2><div class="ex task"><div class="qq">Constructors, overloads and reference passing with circles.</div>
+<p class="kicker">Official in-lab task 3 of 3</p><h2>Task 3: Design a Circle class</h2><div class="ex task"><div class="qq">Constructors, overloads and reference passing with circles.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l3t2r0" data-key="l3t2r0"><label for="l3t2r0">Fields <code>radius</code> and <code>colour</code></label></li><li><input type="checkbox" id="l3t2r1" data-key="l3t2r1"><label for="l3t2r1">Default (1.0, White), radius, radius+colour and copy constructors</label></li><li><input type="checkbox" id="l3t2r2" data-key="l3t2r2"><label for="l3t2r2"><code>area()</code>, <code>area(scale)</code>, <code>circumference()</code>, <code>circumference(scale)</code>, <code>scale()</code>, <code>display()</code></label></li><li><input type="checkbox" id="l3t2r3" data-key="l3t2r3"><label for="l3t2r3">Create ≥3 circles and demonstrate every constructor and overload</label></li><li><input type="checkbox" id="l3t2r4" data-key="l3t2r4"><label for="l3t2r4">Pass a circle to a method that doubles its radius; show the change in main</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Chain the constructors to <code>Circle(double radius, String colour)</code> and validate radius there.</div></details></div>
 </div></section>
 <section class="slide " data-title="Show your work" aria-label="Show your work" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
+<p class="kicker">Official in-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
 </div></section>
 <section class="slide " data-title="Report exercise 1" aria-label="Report exercise 1" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Lab report · exercise 1 of 2</p><h2>Geometric shape library</h2><div class="ex task report"><div class="qq">Classes <code>Triangle</code> and <code>Cylinder</code> with a driver class.</div>
@@ -474,25 +747,25 @@ After method call : Rectangle[2.00 x 3.00, colour=Pink, area=6.00]</pre></div><p
 <p class="kicker">Lab report</p><h2>Writing the lab report</h2><ul class="big-list"><li>Problem statement and your design (classes, fields, methods)</li><li>Complete source code, formatted and commented</li><li>Sample output or screenshots for normal <b>and</b> edge cases</li><li>A short discussion: what each OOP concept did in your program</li></ul><div class="integrity"><h3>Academic integrity</h3><p>Copying from the internet, classmates, seniors or any other unauthorized source is strictly prohibited. Full marks may be deducted if plagiarism, copied work or academic dishonesty is detected. Complete the tasks, implementation, output analysis and report yourself.</p></div>
 </div></section>
 <section class="slide " data-title="Viva questions (1 of 2)" aria-label="Viva questions (1 of 2)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Discussion and analysis</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">Why must <code>this(…)</code> be the first statement in a constructor?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">The object must be fully initialised by the delegated constructor before any other code runs; Java enforces it at compile time.</div></details></div><div class="ex"><div class="qq">Can two methods differ only in return type?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">No. The call <code>calculate()</code> would be ambiguous, so it is a compile error.</div></details></div>
+<p class="kicker">Discussion</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">Why does <code>Weapon()</code> call <code>this("Pistol", 10)</code> instead of setting the fields itself?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">So the fields are set in one place only. If the rules change, there is one constructor to edit.</div></details></div><div class="ex"><div class="qq">Can <code>this(…)</code> be the second statement of a constructor?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">No. It must be the first statement; the compiler rejects it anywhere else.</div></details></div>
 </div></section>
 <section class="slide " data-title="Viva questions (2 of 2)" aria-label="Viva questions (2 of 2)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Discussion and analysis</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq">Is Java pass-by-reference for objects?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">No. It passes the reference by value: mutation through the copy is visible, but reassigning the parameter is not.</div></details></div><div class="ex"><div class="qq">When does a copy constructor fail to give independence?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">When a field is itself a reference (such as an array) and only the reference is copied — a shallow copy. Copy the array too for a deep copy.</div></details></div>
+<p class="kicker">Discussion</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq"><code>refill(ammo)</code> set ammo to 99, but main still printed 5. Why?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">The method got a copy of the value. Its ammo is a different variable from main’s.</div></details></div><div class="ex"><div class="qq"><code>swap(pistol)</code> made a water gun, but main’s pistol did not change. Why?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">swap got a copy of the reference and pointed its copy at a new object. main’s variable still refers to the old one.</div></details></div>
 </div></section>
 <section class="slide " data-title="Quiz" aria-label="Quiz" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="lab3"></div><script type="application/json" class="quiz-json">[{"q": "Which call runs <code>Rectangle(double side)<\/code>?", "o": ["new Rectangle()", "new Rectangle(5.0)", "new Rectangle(5, 5)", "new Rectangle(r)"], "a": 1, "w": "One double argument matches the square constructor."}, {"q": "After <code>passPrimitive(side)<\/code> doubles its parameter, the caller\u2019s <code>side<\/code> is\u2026", "o": ["doubled", "unchanged", "0", "undefined"], "a": 1, "w": "The method changed only a copy."}, {"q": "Overloads must differ in\u2026", "o": ["return type", "parameter list", "access modifier", "method body"], "a": 1, "w": "Only the parameter list distinguishes overloads."}, {"q": "<code>tryReassignReference(r)<\/code> sets its parameter to a new object. Afterwards <code>r<\/code> refers to\u2026", "o": ["the new object", "the original object", "null", "a copy"], "a": 1, "w": "Only the parameter\u2019s copy of the reference moved."}, {"q": "Constructor chaining is written as\u2026", "o": ["super(\u2026)", "this(\u2026)", "Rectangle(\u2026)", "new this(\u2026)"], "a": 1, "w": "this(\u2026) calls another constructor of the same class."}]</script></div>
+<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="game3"></div><script type="application/json" class="quiz-json">[{"q": "A constructor with no parameters is called\u2026", "o": ["a copy constructor", "a default (no-argument) constructor", "an overloaded method", "a static constructor"], "a": 1, "w": "It sets sensible defaults."}, {"q": "<code>this(name, damage, 12);<\/code> inside a constructor\u2026", "o": ["creates a second object", "calls another constructor of the same class", "calls the superclass constructor", "is not allowed"], "a": 1, "w": "That is constructor chaining."}, {"q": "<code>shoot()<\/code>, <code>shoot(String)<\/code> and <code>shoot(String, int)<\/code> in one class are an example of\u2026", "o": ["overriding", "overloading", "an error", "inheritance"], "a": 1, "w": "Same name, different parameters."}, {"q": "A method sets its int parameter to 99. In the caller, the variable is\u2026", "o": ["99", "unchanged", "0", "undefined"], "a": 1, "w": "Primitives are copied."}, {"q": "A method calls <code>w.addAmmo(10)<\/code> on its Weapon parameter. The caller\u2019s weapon\u2026", "o": ["is unchanged", "has 10 more ammo", "is replaced", "is copied"], "a": 1, "w": "Both references point at the same object."}]</script></div>
 </div></section>
 <section class="slide " data-title="Summary" aria-label="Summary" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Summary</p><h2>Summary</h2><ul class="sumlist"><li>Default, parameterised and copy constructors give flexible object creation.</li><li>Chain constructors with this(…) so validation lives in one place.</li><li>Overloads share a name but differ in parameters; the compiler chooses.</li><li>Java passes copies: of values for primitives, of references for objects.</li><li>Mutation through a reference is visible; reassigning the parameter is not.</li></ul><div class="nextcard"><a class="btn pri" href="04-inheritance-polymorphism.html">Next: Lab 4 · Inheritance and polymorphism</a><a class="btn" href="../index.html">All labs</a></div>
+<p class="kicker">Mission debrief</p><h2>Summary</h2><ul class="sumlist"><li>Default, parameterised and copy constructors build objects in different ways.</li><li>this(…) chains constructors so the fields are set in one place.</li><li>Overloading: one name, different parameters, picked at compile time.</li><li>Java passes copies: of the value for primitives, of the reference for objects.</li><li>Next mission: many kinds of enemy in one fight.</li></ul><div class="nextcard"><a class="btn pri" href="04-inheritance-polymorphism.html">Next: Mission 4 · Many enemies, one fight</a><a class="btn" href="../index.html">All chapters</a></div>
 </div></section>
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 43</span>
+  <span class="counter" id="counter">1 / 44</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
-<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
-<noscript><p style="padding:20px">This lab needs JavaScript for the slides and the interactive examples.</p></noscript>
+<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this chapter</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
+<noscript><p style="padding:20px">This chapter needs JavaScript for the slides, the game scenes and the interactive examples.</p></noscript>
 <script src="../js/core.js"></script>
 <script src="../js/art.js"></script>
 <script src="../js/java.js"></script>
@@ -504,10 +777,14 @@ After method call : Rectangle[2.00 x 3.00, colour=Pink, area=6.00]</pre></div><p
 <script src="../js/demos-basics.js"></script>
 <script src="../js/demos-oop.js"></script>
 <script src="../js/demos-adv.js"></script>
+<script src="../js/game-core.js"></script>
+<script src="../js/game-scenes-a.js"></script>
+<script src="../js/game-scenes-b.js"></script>
+<script src="../js/game-scenes-c.js"></script>
 <script src="../js/quiz.js"></script>
 <script src="../js/page.js"></script>
 <script src="../js/lab.js"></script>
-<script>window.OOP_TOPIC = {"id": 3, "prev": "02-classes-and-objects.html", "next": "04-inheritance-polymorphism.html", "nextLabel": "Next lab"};</script>
+<script>window.OOP_TOPIC = {"id": 3, "prev": "02-classes-and-objects.html", "next": "04-inheritance-polymorphism.html", "nextLabel": "Next chapter"};</script>
 <script>mountPage();</script>
 <script src="../js/slides.js"></script>
 <script src="../js/annotate.js"></script>

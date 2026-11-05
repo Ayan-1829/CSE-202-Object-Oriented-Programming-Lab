@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Protect bank balances with synchronized methods and blocks, watch two transfers deadlock when they lock accounts in opposite order, and prevent it with lock ordering.">
-<meta name="keywords" content="java synchronization, race condition, critical section, deadlock, lock ordering, resource allocation graph, wait notify, lab, cse 202, object oriented programming lab">
+<meta name="description" content="The squad shares one scoreboard, one ammo crate and one med kit. Without care, points get lost and soldiers freeze. Race conditions, synchronized, deadlock and its fix, and wait/notify for supply drops.">
+<meta name="keywords" content="java synchronization, race condition, critical section, deadlock, lock ordering, resource allocation graph, wait notify, lab, java game, game programming, cse 202, object oriented programming lab">
 <meta name="author" content="Object Oriented Programming Lab Notes">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#155E63">
@@ -16,32 +16,33 @@
 <link rel="manifest" href="../site.webmanifest">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
-<meta property="og:title" content="Lab 8: Synchronization, Deadlock &amp; Resource Allocation | OOP Lab (CSE 202)">
-<meta property="og:description" content="Protect bank balances with synchronized methods and blocks, watch two transfers deadlock when they lock accounts in opposite order, and prevent it with lock ordering.">
+<meta property="og:title" content="Chapter 8: Synchronization, Deadlock &amp; Resource Allocation | OOP Lab (CSE 202)">
+<meta property="og:description" content="The squad shares one scoreboard, one ammo crate and one med kit. Without care, points get lost and soldiers freeze. Race conditions, synchronized, deadlock and its fix, and wait/notify for supply drops.">
 <meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/08-synchronization-deadlock.html">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/08-synchronization-deadlock.png?v=2">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Lab 8 of 10: Synchronization, Deadlock &amp; Resource Allocation – CSE 202 Object Oriented Programming Lab">
+<meta property="og:image:alt" content="Chapter 8 of 10: Synchronization, Deadlock &amp; Resource Allocation – CSE 202 Object Oriented Programming Lab">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Lab 8: Synchronization, Deadlock &amp; Resource Allocation | OOP Lab (CSE 202)">
-<meta name="twitter:description" content="Protect bank balances with synchronized methods and blocks, watch two transfers deadlock when they lock accounts in opposite order, and prevent it with lock ordering.">
+<meta name="twitter:title" content="Chapter 8: Synchronization, Deadlock &amp; Resource Allocation | OOP Lab (CSE 202)">
+<meta name="twitter:description" content="The squad shares one scoreboard, one ammo crate and one med kit. Without care, points get lost and soldiers freeze. Race conditions, synchronized, deadlock and its fix, and wait/notify for supply drops.">
 <meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/08-synchronization-deadlock.png?v=2">
-<meta name="twitter:image:alt" content="Lab 8 of 10: Synchronization, Deadlock &amp; Resource Allocation – CSE 202 Object Oriented Programming Lab">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Synchronization, Deadlock & Resource Allocation", "description": "Protect bank balances with synchronized methods and blocks, watch two transfers deadlock when they lock accounts in opposite order, and prevent it with lock ordering.", "position": 8, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 37, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/08-synchronization-deadlock.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/08-synchronization-deadlock.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
-<title>Lab 8: Synchronization, Deadlock &amp; Resource Allocation | OOP Lab (CSE 202)</title>
+<meta name="twitter:image:alt" content="Chapter 8 of 10: Synchronization, Deadlock &amp; Resource Allocation – CSE 202 Object Oriented Programming Lab">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Synchronization, Deadlock & Resource Allocation", "description": "The squad shares one scoreboard, one ammo crate and one med kit. Without care, points get lost and soldiers freeze. Race conditions, synchronized, deadlock and its fix, and wait/notify for supply drops.", "position": 8, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 42, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/08-synchronization-deadlock.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/08-synchronization-deadlock.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
+<title>Chapter 8: Synchronization, Deadlock &amp; Resource Allocation | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/lab.css">
+<link rel="stylesheet" href="../css/game.css">
 </head>
 <body class="deck-page">
 <div class="sr-only" id="live" aria-live="polite"></div>
 <header class="deck-bar">
-  <a class="home-link" href="../index.html" aria-label="Home: all labs"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
+  <a class="home-link" href="../index.html" aria-label="Home: all chapters"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
   <div class="deck-title"><span class="badge">8</span><span>Synchronization, Deadlock &amp; Resource Allocation</span></div>
   <div class="deck-actions">
     <button type="button" class="btn sm" id="btn-menu" aria-expanded="false" aria-controls="slide-menu" aria-label="Slides"><svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><rect x="3" y="4.5" width="18" height="3" rx="1"></rect><rect x="3" y="10.5" width="18" height="3" rx="1"></rect><rect x="3" y="16.5" width="18" height="3" rx="1"></rect></svg><span>Slides</span></button>
@@ -52,194 +53,417 @@
 <div class="deck-progress"><i id="progress-fill"></i></div>
 <main class="deck" id="deck">
 <section class="slide title-slide" data-title="Synchronization, Deadlock &amp; Resource Allocation" aria-label="Synchronization, Deadlock &amp; Resource Allocation" tabindex="-1"><div class="slide-inner">
-<span class="topic-art" data-art="6" aria-hidden="true"></span>
+<div class="topic-art g-title-art" data-demo="g-title" data-ch="8" aria-hidden="true"></div>
 <span class="badge big">8</span>
-<p class="kicker">Lab VIII · CSE 202</p>
+<p class="kicker">Chapter 8 · Lab VIII · CSE 202</p>
 <h1>Synchronization, Deadlock & Resource Allocation</h1>
-<p class="lead">Protect bank balances with synchronized methods and blocks, watch two transfers deadlock when they lock accounts in opposite order, and prevent it with lock ordering.</p>
-<div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
+<p class="g-mission">Mission 8 · Sharing safely</p>
+<p class="lead">The squad shares one scoreboard, one ammo crate and one med kit. Without care, points get lost and soldiers freeze. Race conditions, synchronized, deadlock and its fix, and wait/notify for supply drops.</p>
+<div class="row"><a class="btn pri" href="#s=2">Start the mission</a><a class="btn" href="../index.html">All chapters</a></div>
 <p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
 </div></section>
-<section class="slide " data-title="Why this lab" aria-label="Why this lab" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Before we start</p><h2>Why this lab</h2><div class="hook"><p class="q">Thread 1 moves money from A to B while thread 2 moves money from B to A. Each grabs one account and waits for the other — forever. How do we stop that?</p><p>That is a <b>deadlock</b>. In this lab you cause one on purpose, then remove it with a simple rule: always lock accounts in the same order.</p></div>
+<section class="slide " data-title="Your mission" aria-label="Your mission" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Mission 8 · Sharing safely</p><h2>Your mission</h2><div class="hook"><p class="q">Alpha and Bravo each score 100 000 points on the same scoreboard. Why does it sometimes show about 145 000?</p><p>Because <code>score = score + 1</code> is three steps, and two threads can mix them up: a <b>race condition</b>. <code>synchronized</code> lets one thread in at a time. Lock carelessly, though, and two soldiers can wait for each other forever: a <b>deadlock</b>.</p></div>
 </div></section>
-<section class="slide " data-title="Lab at a glance" aria-label="Lab at a glance" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 8 of 10</p><h2>Lab at a glance</h2><div class="cols wl"><div><h3>After this lab you can</h3><ul class=""><li>Explain why shared data needs synchronization</li><li>Describe race conditions and critical sections</li><li>Use synchronized methods and synchronized blocks</li><li>Explain monitor (object) locks</li><li>Name the four necessary conditions for deadlock</li><li>Demonstrate and prevent deadlock with lock ordering</li><li>Use <code>wait()</code>, <code>notify()</code> and <code>notifyAll()</code> for coordination</li></ul></div>
-<div><h3>Before you start</h3><ul class=""><li>Lab 7: Thread, Runnable, states, sleep() and join()</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
+<section class="slide " data-title="Chapter at a glance" aria-label="Chapter at a glance" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Chapter 8 of 10</p><h2>Chapter at a glance</h2><div class="cols wl"><div><h3>After this chapter you can</h3><ul class=""><li>Explain a race condition on the shared scoreboard</li><li>Fix it with a synchronized method or block</li><li>Describe a deadlock and its four conditions</li><li>Draw a resource allocation graph for the soldiers and their supplies</li><li>Prevent deadlock with a fixed lock order</li><li>Coordinate threads with wait() and notifyAll()</li></ul></div>
+<div><h3>Before you start</h3><ul class=""><li>Chapter 7: creating, starting and joining threads</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Topics: the idea, then the game</li><li>Run the game program</li><li>Game practice tasks</li><li>Official lab and graded tasks</li><li>Report exercises at home</li></ol></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 8 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=11">Program design</a></li><li><a href="#s=12">Code walkthrough</a></li><li><a href="#s=21">Step-through traces: stack, heap and output</a></li><li><a href="#s=24">Expected output</a></li><li><a href="#s=25">Interactive demos</a></li><li><a href="#s=27">In-lab tasks</a></li><li><a href="#s=31">Lab report exercises</a></li><li><a href="#s=34">Viva questions and quiz</a></li></ol>
+<p class="kicker">Chapter 8 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=23">Run the game</a></li><li><a href="#s=24">Game practice tasks</a></li><li><a href="#s=27">The official lab program</a></li><li><a href="#s=32">Official in-lab tasks</a></li><li><a href="#s=36">Lab report exercises</a></li><li><a href="#s=39">Viva questions and quiz</a></li></ol>
 </div></section>
-<section class="slide " data-title="Race conditions and critical sections" aria-label="Race conditions and critical sections" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 1 of 6</p><h2>Race conditions and critical sections</h2><pre class="code small-code">balance = balance + amount;   // read, add, write: three steps</pre><ul class=""><li>If two threads interleave those steps, one update can overwrite the other — a <b>race condition</b>.</li><li>Code that touches shared data is a <b>critical section</b>; only one thread should run it at a time.</li></ul>
+<section class="slide " data-title="Today’s build" aria-label="Today’s build" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Build the game · Chapter 8</p><h2>Today’s build</h2><ul class="pts"><li>Four files: <code>Scoreboard</code> (unsafe and safe adding), <code>SquadMember</code> (a scoring thread), <code>SupplyDepot</code> (wait and notifyAll) and <code>SyncDemo</code>.</li></ul>
+<div class="cols wl"><div><h3>What the program does</h3><ol class="flow"><li>Two threads add 100 000 points each with no lock: points go missing</li><li>The same with synchronized: exactly 200 000</li><li>Two soldiers lock the items in opposite orders: deadlock</li><li>The same soldiers lock in one order: both finish</li><li>Two soldiers wait for a supply drop; the helicopter notifies them</li></ol></div><div><h3>Files</h3><ul class="g-files"><li><code>Scoreboard.java</code> <span class="muted">(22 lines)</span></li><li><code>SquadMember.java</code> <span class="muted">(22 lines)</span></li><li><code>SupplyDepot.java</code> <span class="muted">(20 lines)</span></li><li><code>SyncDemo.java</code> <span class="muted">(76 lines)</span></li></ul><p class="muted">140 lines in all. Each topic below shows the part of the program that uses it.</p></div></div>
 </div></section>
-<section class="slide " data-title="synchronized methods and blocks" aria-label="synchronized methods and blocks" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 2 of 6</p><h2>synchronized methods and blocks</h2><pre class="code small-code">public synchronized void deposit(double amount) { balance += amount; }
+<section class="slide " data-title="Race condition" aria-label="Race condition" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 6</p><h2>Race condition</h2><div class="g-ingame"><div>In the game:</div><div>Race condition: lost points</div></div><ul class="pts big-list"><li>Two threads change the same variable at the same time.</li><li><code>count++</code> is three steps: read, add, write. Steps from two threads can mix.</li><li>Some updates are lost, and the result changes from run to run.</li></ul>
+</div></section>
+<section class="slide " data-title="Race condition: lost points" aria-label="Race condition: lost points" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 6 · in the game</p><h2>Race condition: lost points</h2><div data-demo="g-race"></div><ul class="pts pts-row"><li><code>score = score + 1</code> is read, add, write.</li><li>If two threads read the same old value, one of the two updates is lost.</li><li>The code between reading and writing shared data is a <b>critical section</b>.</li></ul>
+</div></section>
+<section class="slide " data-title="SquadMember: a scoring thread" aria-label="SquadMember: a scoring thread" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 6 · our game program · 1 of 1 · <span class="walk-file">SquadMember.java</span></p><h2>SquadMember: a scoring thread</h2><div class="walk-side g-walk"><pre class="code walk-code">// Each squad member is a thread that keeps scoring points
+public class SquadMember extends Thread {
+    private final Scoreboard board;
+    private final boolean safe;
 
-synchronized (account) {        // lock a chosen object
-    account.withdraw(amount);
-}</pre><ul class=""><li>Entering either form acquires the object’s <b>monitor lock</b>; other threads wait (BLOCKED) until it is released.</li><li>Methods protect the whole body; blocks protect only what needs it and let you pick the lock — used to lock two accounts in transfer().</li></ul>
+    public SquadMember(String name, Scoreboard board, boolean safe) {
+        super(name);
+        this.board = board;
+        this.safe = safe;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 100000; i++) {
+            if (safe) {
+                board.addSafe(1);
+            } else {
+                board.addUnsafe(1);
+            }
+        }
+    }
+}</pre><ul class="walk-notes"><li>100 000 points per thread, the safe or the unsafe way.</li></ul></div>
+</div></section>
+<section class="slide " data-title="synchronized" aria-label="synchronized" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 2 of 6</p><h2>synchronized</h2><div class="g-ingame"><div>In the game:</div><div>synchronized methods and blocks</div></div><div class="g-codeside"><pre class="code small-code">public synchronized void addSafe(int points) {   // locks this Scoreboard
+    score = score + points;
+}
+
+synchronized (ammoCrate) {                       // locks one chosen object
+    // only one thread at a time in here
+}</pre><ul class="pts"><li>A <code>synchronized</code> method lets one thread in at a time; others wait for the lock.</li><li>A <code>synchronized (obj) { … }</code> block locks only the lines that need it.</li><li>Now no update is lost.</li><li>Every object has a lock (a monitor).</li><li>A synchronized method locks <code>this</code>; a synchronized block locks the object you name.</li><li>A thread that finds the lock taken is BLOCKED until it is released.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Scoreboard: unsafe and safe" aria-label="Scoreboard: unsafe and safe" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 2 of 6 · our game program · 1 of 2 · <span class="walk-file">Scoreboard.java</span></p><h2>Scoreboard: unsafe and safe</h2><div class="walk-side g-walk"><pre class="code walk-code">// One scoreboard shared by the whole squad
+public class Scoreboard {
+    private int score = 0;
+
+    // Not safe: read, add and write can interleave with another thread
+    public void addUnsafe(int points) {
+        score = score + points;
+    }
+
+    // Safe: only one thread at a time may run this method on this object
+    public synchronized void addSafe(int points) {
+        score = score + points;
+    }
+
+    public synchronized int getScore() {
+        return score;
+    }
+
+    public synchronized void reset() {
+        score = 0;
+    }
+}</pre><ul class="walk-notes"><li><code>addUnsafe</code> has no lock: updates can be lost.</li><li><code>addSafe</code> is synchronized on the scoreboard.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Race condition and the fix" aria-label="Race condition and the fix" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 2 of 6 · our game program · 2 of 2 · <span class="walk-file">SyncDemo.java</span></p><h2>Race condition and the fix</h2><div class="walk-side g-walk"><pre class="code walk-code">System.out.println(&quot;=== 1. Race condition: two players, one scoreboard ===&quot;);
+Scoreboard board = new Scoreboard();
+SquadMember a = new SquadMember(&quot;Alpha&quot;, board, false);
+SquadMember b = new SquadMember(&quot;Bravo&quot;, board, false);
+a.start(); b.start();
+a.join(); b.join();
+System.out.println(&quot;Unsafe: expected 200000, got &quot; + board.getScore());
+
+System.out.println(&quot;\n=== 2. synchronized fixes it ===&quot;);
+board.reset();
+a = new SquadMember(&quot;Alpha&quot;, board, true);
+b = new SquadMember(&quot;Bravo&quot;, board, true);
+a.start(); b.start();
+a.join(); b.join();
+System.out.println(&quot;Safe:   expected 200000, got &quot; + board.getScore());</pre><ul class="walk-notes"><li>Unsafe: well under 200 000.</li><li>Safe: exactly 200 000.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Deadlock" aria-label="Deadlock" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 3 of 6</p><h2>Deadlock</h2><figure class="fig" data-fig="deadlock"></figure><ul class=""><li>Four conditions must all hold: <b>mutual exclusion</b>, <b>hold and wait</b>, <b>no preemption</b>, <b>circular wait</b>.</li><li>Break any one of them and deadlock cannot happen.</li></ul>
+<p class="kicker">Topic 3 of 6</p><h2>Deadlock</h2><div class="g-ingame"><div>In the game:</div><div>Deadlock: two soldiers, two items</div></div><ul class="pts big-list"><li>Two threads each hold one lock and wait for the other’s lock.</li><li>Neither can go on, so both wait forever.</li><li>In the game: the Medic holds the med kit and wants the crate; the Gunner holds the crate and wants the kit.</li></ul>
 </div></section>
-<section class="slide " data-title="Resource allocation graph" aria-label="Resource allocation graph" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 4 of 6</p><h2>Resource allocation graph</h2><figure class="fig" data-fig="lab8-rag"></figure><ul class=""><li>Threads are circles, resources are squares. Request edge: thread → resource; assignment edge: resource → thread.</li><li>A cycle in the graph means a possible deadlock.</li></ul>
+<section class="slide " data-title="Deadlock: two soldiers, two items" aria-label="Deadlock: two soldiers, two items" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 6 · in the game</p><h2>Deadlock: two soldiers, two items</h2><div data-demo="g-deadlock"></div><ul class="pts pts-row"><li>The Medic holds the med kit and waits for the ammo crate.</li><li>The Gunner holds the ammo crate and waits for the med kit.</li><li>Neither can continue, ever: a <b>deadlock</b>.</li></ul>
 </div></section>
-<section class="slide " data-title="Prevention: lock ordering" aria-label="Prevention: lock ordering" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 5 of 6</p><h2>Prevention: lock ordering</h2><pre class="code small-code">BankAccount first  = accountId.compareTo(target.accountId) &lt; 0 ? this : target;
-BankAccount second = (first == this) ? target : this;
-
-synchronized (first) {
-    synchronized (second) {
-        this.withdraw(amount);
-        target.deposit(amount);
-    }
-}</pre><ul class=""><li>Every thread locks the account with the smaller ID first, so a circular wait is impossible.</li></ul>
-</div></section>
-<section class="slide " data-title="wait(), notify() and notifyAll()" aria-label="wait(), notify() and notifyAll()" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 6 of 6</p><h2>wait(), notify() and notifyAll()</h2><pre class="code small-code">synchronized (buffer) {
-    while (bufferIsEmpty) {
-        buffer.wait();      // releases the lock while waiting
-    }
-    ...
-    buffer.notifyAll();
-}</pre><ul class=""><li>Call them only while holding the object’s lock.</li><li>Always re-check the condition in a <code>while</code> loop: a woken thread may find the condition false again.</li></ul>
-</div></section>
-<section class="slide " data-title="Execution flow" aria-label="Execution flow" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Implementation design</p><h2>Execution flow</h2><ol class="flow"><li>Create ACC-001 (5000) and ACC-002 (3000)</li><li>Do one safe transfer with lock ordering</li><li>Run two threads transferring 100 back and forth five times each</li><li>join() them and check the total is still 8000</li><li>Start two risky transfers that lock in opposite order</li><li>join(3000): if a thread is still alive, report a possible deadlock</li></ol><p class="note-line">BankAccount has synchronized deposit/withdraw/getBalance and an ordered transfer(); DeadlockProneTransfer shows the unsafe way.</p>
-</div></section>
-<section class="slide " data-title="A synchronized withdrawal" aria-label="A synchronized withdrawal" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 1 of 9 · <span class="walk-file">BankAccount.java</span></p><h2>A synchronized withdrawal</h2><pre class="code walk-code">public synchronized void withdraw(double amount) {
-    if (amount &lt;= 0.0) {
-        throw new IllegalArgumentException(&quot;Amount must be positive.&quot;);
-    }
-    if (amount &gt; balance) {
-        throw new IllegalArgumentException(&quot;Insufficient funds in &quot; + accountId
-                + &quot;. Requested: &quot; + amount + &quot;, Available: &quot; + balance);
-    }
-    balance = balance - amount;
-    System.out.println(Thread.currentThread().getName() + &quot; withdrew &quot; + amount
-            + &quot; from &quot; + accountId + &quot;. New balance: &quot; + balance);
-}</pre><ul class="walk-notes"><li>Check and update happen while holding the account’s lock.</li></ul>
-</div></section>
-<section class="slide " data-title="Choosing the lock order" aria-label="Choosing the lock order" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 2 of 9 · <span class="walk-file">BankAccount.java</span></p><h2>Choosing the lock order</h2><pre class="code walk-code">// Locks are acquired in a fixed order to prevent deadlock.
-public void transfer(BankAccount target, double amount) {
-    if (target == null) {
-        throw new IllegalArgumentException(&quot;Target account cannot be null.&quot;);
-    }
-    BankAccount first;
-    BankAccount second;
-    if (this.accountId.compareTo(target.accountId) &lt; 0) {
-        first = this;
-        second = target;
-    } else {
-        first = target;
-        second = this;
-    }</pre><ul class="walk-notes"><li>The account with the smaller ID always becomes <code>first</code>, whichever direction the money moves.</li></ul>
-</div></section>
-<section class="slide " data-title="Locking both accounts in that order" aria-label="Locking both accounts in that order" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 3 of 9 · <span class="walk-file">BankAccount.java</span></p><h2>Locking both accounts in that order</h2><pre class="code walk-code wide">synchronized (first) {
-    synchronized (second) {
-        System.out.println(Thread.currentThread().getName() + &quot; transferring &quot;
-                + amount + &quot; from &quot; + this.accountId + &quot; to &quot; + target.accountId);
-        this.withdraw(amount);
-        target.deposit(amount);
-        System.out.println(Thread.currentThread().getName() + &quot; completed transfer.&quot;);
-    }
-}</pre><ul class="walk-notes"><li>Both locks are held during the whole transfer.</li><li>Two opposite transfers can never wait for each other in a circle.</li></ul>
-</div></section>
-<section class="slide " data-title="The risky way: lock the source" aria-label="The risky way: lock the source" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 4 of 9 · <span class="walk-file">DeadlockProneTransfer.java</span></p><h2>The risky way: lock the source</h2><pre class="code walk-code wide">// Inconsistent lock ordering: source first, then target.
-@Override
-public void run() {
-    synchronized (from) {
-        System.out.println(Thread.currentThread().getName() + &quot; locked &quot; + from.getAccountId());
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }</pre><ul class="walk-notes"><li>Each thread locks its own source first, then sleeps while holding it.</li></ul>
-</div></section>
-<section class="slide " data-title="…then wait for the target" aria-label="…then wait for the target" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 5 of 9 · <span class="walk-file">DeadlockProneTransfer.java</span></p><h2>…then wait for the target</h2><pre class="code walk-code wide">synchronized (to) {
-    System.out.println(Thread.currentThread().getName() + &quot; locked &quot; + to.getAccountId());
+<section class="slide " data-title="The soldier thread" aria-label="The soldier thread" tabindex="-1"><div style="zoom:0.93;" class="slide-inner">
+<p class="kicker">Topic 3 of 6 · our game program · 1 of 1 · <span class="walk-file">SyncDemo.java</span></p><h2>The soldier thread</h2><div class="walk-side g-walk"><pre class="code walk-code wide">static void pause(int ms) {
     try {
-        from.withdraw(amount);
-        to.deposit(amount);
-        System.out.println(Thread.currentThread().getName() + &quot; completed risky transfer.&quot;);
-    } catch (IllegalArgumentException e) {
-        System.out.println(&quot;Risky transfer failed: &quot; + e.getMessage());
+        Thread.sleep(ms);
+    } catch (InterruptedException e) {
+        Thread.currentThread().interrupt();
     }
-}</pre><ul class="walk-notes"><li>Opposite transfers → each holds the lock the other needs. Neither can continue.</li></ul>
+}
+
+// Each soldier needs both items; first and second say which lock is taken first
+static Thread soldier(String name, Object first, String firstName, Object second, String secondName) {
+    Thread t = new Thread(() -&gt; {
+        synchronized (first) {
+            System.out.println(&quot;[&quot; + name + &quot;] has the &quot; + firstName + &quot;, wants the &quot; + secondName);
+            pause(100);
+            synchronized (second) {
+                System.out.println(&quot;[&quot; + name + &quot;] has both items: patched up and reloaded&quot;);
+            }
+        }
+    }, name);
+    t.setDaemon(true);                  // lets the program exit even if it gets stuck
+    return t;
+}</pre><ul class="walk-notes"><li>Each soldier locks <code>first</code>, then <code>second</code>.</li><li>Daemon threads let the program end even if they stay stuck.</li></ul></div>
 </div></section>
-<section class="slide " data-title="Two threads, opposite transfers, safely" aria-label="Two threads, opposite transfers, safely" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 6 of 9 · <span class="walk-file">Lab8Demo.java</span></p><h2>Two threads, opposite transfers, safely</h2><pre class="code walk-code">Thread safeThread1 = new Thread(() -&gt; {
-    for (int i = 0; i &lt; 5; i++) {
-        safeAccount1.transfer(safeAccount2, 100.0);
+<section class="slide " data-title="The four conditions" aria-label="The four conditions" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 4 of 6</p><h2>The four conditions</h2><div class="g-ingame"><div>In the game:</div><div>The four conditions and the graph</div></div><ul class="pts big-list"><li><b>Mutual exclusion</b>: a resource is held by one thread at a time.</li><li><b>Hold and wait</b>: a thread keeps one resource while waiting for another.</li><li><b>No preemption</b>: nobody can take a resource away. <b>Circular wait</b>: A waits for B, B waits for A.</li><li>All four together cause a deadlock; break any one to prevent it.</li></ul>
+</div></section>
+<section class="slide " data-title="The four conditions and the graph" aria-label="The four conditions and the graph" tabindex="-1"><div style="zoom:0.95;" class="slide-inner">
+<p class="kicker">Topic 4 of 6 · in the game</p><h2>The four conditions and the graph</h2><div data-demo="g-rag"></div><ul class="pts pts-row"><li>Mutual exclusion: an item can be held by one soldier only.</li><li>Hold and wait: each holds one item while waiting for another.</li><li>No preemption: nobody can snatch an item away.</li><li>Circular wait: Medic → crate → Gunner → kit → Medic. Break any one condition and deadlock cannot happen.</li></ul>
+</div></section>
+<section class="slide " data-title="Preventing deadlock: lock order" aria-label="Preventing deadlock: lock order" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 6</p><h2>Preventing deadlock: lock order</h2><div class="g-ingame"><div>In the game:</div><div>The fix: one lock order</div></div><div class="g-codeside"><pre class="code small-code">// everyone locks the ammo crate first, then the med kit
+synchronized (ammoCrate) {
+    synchronized (medKit) {
+        // patched up and reloaded
+    }
+}</pre><ul class="pts"><li>Make every thread take the locks in the <b>same order</b>.</li><li>Then a circle of waiting can never form.</li><li>In the game: both soldiers take the ammo crate first, then the med kit.</li><li>If every thread takes locks in the same order, no cycle can form.</li><li>One soldier may have to wait, but only until the other finishes.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Deadlock and lock ordering" aria-label="Deadlock and lock ordering" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 6 · our game program · 1 of 1 · <span class="walk-file">SyncDemo.java</span></p><h2>Deadlock and lock ordering</h2><div class="walk-side g-walk"><pre class="code walk-code wide">System.out.println(&quot;\n=== 3. Deadlock: opposite lock order ===&quot;);
+Object ammoCrate = new Object();
+Object medKit = new Object();
+Thread medic = soldier(&quot;Medic&quot;, medKit, &quot;med kit&quot;, ammoCrate, &quot;ammo crate&quot;);
+Thread gunner = soldier(&quot;Gunner&quot;, ammoCrate, &quot;ammo crate&quot;, medKit, &quot;med kit&quot;);
+medic.start(); gunner.start();
+medic.join(1000); gunner.join(1000);    // wait at most one second each
+if (medic.isAlive() &amp;&amp; gunner.isAlive()) {
+    System.out.println(&quot;DEADLOCK: each soldier holds one item and waits forever for the other&quot;);
+    System.out.println(&quot;  Medic is &quot; + medic.getState() + &quot;, Gunner is &quot; + gunner.getState());
+}
+
+System.out.println(&quot;\n=== 4. The fix: everyone locks in the same order ===&quot;);
+Object crate2 = new Object();       // the stuck soldiers still hold the first pair
+Object kit2 = new Object();
+Thread medic2 = soldier(&quot;Medic&quot;, crate2, &quot;ammo crate&quot;, kit2, &quot;med kit&quot;);
+Thread gunner2 = soldier(&quot;Gunner&quot;, crate2, &quot;ammo crate&quot;, kit2, &quot;med kit&quot;);
+medic2.start(); gunner2.start();
+medic2.join(); gunner2.join();
+System.out.println(&quot;No deadlock: both soldiers finished&quot;);</pre><ul class="walk-notes"><li>join(1000) waits at most a second: they are still stuck, BLOCKED.</li><li>The fix uses a new crate and kit: the stuck soldiers still hold the old ones.</li></ul></div>
+</div></section>
+<section class="slide " data-title="wait() and notifyAll()" aria-label="wait() and notifyAll()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 6 of 6</p><h2>wait() and notifyAll()</h2><div class="g-ingame"><div>In the game:</div><div>wait() and notifyAll(): supply drops</div></div><div class="g-codeside"><pre class="code small-code">public synchronized void take() throws InterruptedException {
+    while (crates == 0) {
+        wait();               // release the lock and sleep
+    }
+    crates--;
+}
+
+public synchronized void drop(int count) {
+    crates += count;
+    notifyAll();              // wake every waiting soldier
+}</pre><ul class="pts"><li><code>wait()</code> gives up the lock and sleeps until another thread calls <code>notifyAll()</code>.</li><li>Call both inside <code>synchronized</code> code, and check the condition in a <code>while</code> loop.</li><li>Producer and consumer: one puts things in, the other takes them out.</li><li>wait() releases the lock while it waits; sleep() does not.</li><li>Always wait inside a while loop and test the condition again.</li><li>Both must be called while holding the object’s lock.</li></ul></div>
+</div></section>
+<section class="slide " data-title="SupplyDepot: wait and notifyAll" aria-label="SupplyDepot: wait and notifyAll" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 6 of 6 · our game program · 1 of 2 · <span class="walk-file">SupplyDepot.java</span></p><h2>SupplyDepot: wait and notifyAll</h2><div class="walk-side g-walk"><pre class="code walk-code wide">// Producer-consumer: a helicopter drops crates, soldiers take them
+public class SupplyDepot {
+    private int crates = 0;
+
+    public synchronized void drop(int count) {
+        crates += count;
+        System.out.println(&quot;[&quot; + Thread.currentThread().getName() + &quot;] dropped &quot; + count + &quot; -&gt; depot has &quot; + crates);
+        notifyAll();                        // wake everyone waiting for a crate
+    }
+
+    public synchronized void take() throws InterruptedException {
+        String me = Thread.currentThread().getName();
+        while (crates == 0) {
+            System.out.println(&quot;[&quot; + me + &quot;] depot empty, waiting&quot;);
+            wait();                         // releases the lock while waiting
+        }
+        crates--;
+        System.out.println(&quot;[&quot; + me + &quot;] took a crate -&gt; depot has &quot; + crates);
+    }
+}</pre><ul class="walk-notes"><li><code>take()</code> waits in a while loop until a crate exists.</li><li><code>drop()</code> adds crates and wakes everyone.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Supply drops" aria-label="Supply drops" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 6 of 6 · our game program · 2 of 2 · <span class="walk-file">SyncDemo.java</span></p><h2>Supply drops</h2><pre class="code walk-code wide">System.out.println(&quot;\n=== 5. wait() and notifyAll(): supply drops ===&quot;);
+SupplyDepot depot = new SupplyDepot();
+Thread s1 = new Thread(() -&gt; { try { depot.take(); } catch (InterruptedException e) { } }, &quot;Soldier-1&quot;);
+Thread s2 = new Thread(() -&gt; { try { depot.take(); } catch (InterruptedException e) { } }, &quot;Soldier-2&quot;);
+s1.start(); s2.start();
+pause(200);                         // both soldiers arrive before the drop
+Thread heli = new Thread(() -&gt; depot.drop(2), &quot;Helicopter&quot;);
+heli.start();
+s1.join(); s2.join(); heli.join();
+System.out.println(&quot;Supply run finished&quot;);</pre><ul class="walk-notes"><li>Both soldiers wait first; one drop of 2 crates serves them both.</li></ul>
+</div></section>
+<section class="slide " data-title="The complete game program" aria-label="The complete game program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Build the game · 4 files</p><h2>The complete game program</h2><div class="codeview"><pre class="code small-code" data-file="Scoreboard.java">// One scoreboard shared by the whole squad
+public class Scoreboard {
+    private int score = 0;
+
+    // Not safe: read, add and write can interleave with another thread
+    public void addUnsafe(int points) {
+        score = score + points;
+    }
+
+    // Safe: only one thread at a time may run this method on this object
+    public synchronized void addSafe(int points) {
+        score = score + points;
+    }
+
+    public synchronized int getScore() {
+        return score;
+    }
+
+    public synchronized void reset() {
+        score = 0;
+    }
+}</pre><pre class="code small-code" data-file="SquadMember.java">// Each squad member is a thread that keeps scoring points
+public class SquadMember extends Thread {
+    private final Scoreboard board;
+    private final boolean safe;
+
+    public SquadMember(String name, Scoreboard board, boolean safe) {
+        super(name);
+        this.board = board;
+        this.safe = safe;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 100000; i++) {
+            if (safe) {
+                board.addSafe(1);
+            } else {
+                board.addUnsafe(1);
+            }
+        }
+    }
+}</pre><pre class="code small-code" data-file="SupplyDepot.java">// Producer-consumer: a helicopter drops crates, soldiers take them
+public class SupplyDepot {
+    private int crates = 0;
+
+    public synchronized void drop(int count) {
+        crates += count;
+        System.out.println(&quot;[&quot; + Thread.currentThread().getName() + &quot;] dropped &quot; + count + &quot; -&gt; depot has &quot; + crates);
+        notifyAll();                        // wake everyone waiting for a crate
+    }
+
+    public synchronized void take() throws InterruptedException {
+        String me = Thread.currentThread().getName();
+        while (crates == 0) {
+            System.out.println(&quot;[&quot; + me + &quot;] depot empty, waiting&quot;);
+            wait();                         // releases the lock while waiting
+        }
+        crates--;
+        System.out.println(&quot;[&quot; + me + &quot;] took a crate -&gt; depot has &quot; + crates);
+    }
+}</pre><pre class="code small-code" data-file="SyncDemo.java">public class SyncDemo {
+
+    static void pause(int ms) {
         try {
-            Thread.sleep(50);
+            Thread.sleep(ms);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
     }
-}, &quot;SafeThread-1&quot;);</pre><ul class="walk-notes"><li>The lambda is the Runnable.</li><li>safeThread2 is the same with the two accounts swapped.</li><li>transfer() orders the locks, so this cannot deadlock.</li></ul>
+
+    // Each soldier needs both items; first and second say which lock is taken first
+    static Thread soldier(String name, Object first, String firstName, Object second, String secondName) {
+        Thread t = new Thread(() -&gt; {
+            synchronized (first) {
+                System.out.println(&quot;[&quot; + name + &quot;] has the &quot; + firstName + &quot;, wants the &quot; + secondName);
+                pause(100);
+                synchronized (second) {
+                    System.out.println(&quot;[&quot; + name + &quot;] has both items: patched up and reloaded&quot;);
+                }
+            }
+        }, name);
+        t.setDaemon(true);                  // lets the program exit even if it gets stuck
+        return t;
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+
+        System.out.println(&quot;=== 1. Race condition: two players, one scoreboard ===&quot;);
+        Scoreboard board = new Scoreboard();
+        SquadMember a = new SquadMember(&quot;Alpha&quot;, board, false);
+        SquadMember b = new SquadMember(&quot;Bravo&quot;, board, false);
+        a.start(); b.start();
+        a.join(); b.join();
+        System.out.println(&quot;Unsafe: expected 200000, got &quot; + board.getScore());
+
+        System.out.println(&quot;\n=== 2. synchronized fixes it ===&quot;);
+        board.reset();
+        a = new SquadMember(&quot;Alpha&quot;, board, true);
+        b = new SquadMember(&quot;Bravo&quot;, board, true);
+        a.start(); b.start();
+        a.join(); b.join();
+        System.out.println(&quot;Safe:   expected 200000, got &quot; + board.getScore());
+
+        System.out.println(&quot;\n=== 3. Deadlock: opposite lock order ===&quot;);
+        Object ammoCrate = new Object();
+        Object medKit = new Object();
+        Thread medic = soldier(&quot;Medic&quot;, medKit, &quot;med kit&quot;, ammoCrate, &quot;ammo crate&quot;);
+        Thread gunner = soldier(&quot;Gunner&quot;, ammoCrate, &quot;ammo crate&quot;, medKit, &quot;med kit&quot;);
+        medic.start(); gunner.start();
+        medic.join(1000); gunner.join(1000);    // wait at most one second each
+        if (medic.isAlive() &amp;&amp; gunner.isAlive()) {
+            System.out.println(&quot;DEADLOCK: each soldier holds one item and waits forever for the other&quot;);
+            System.out.println(&quot;  Medic is &quot; + medic.getState() + &quot;, Gunner is &quot; + gunner.getState());
+        }
+
+        System.out.println(&quot;\n=== 4. The fix: everyone locks in the same order ===&quot;);
+        Object crate2 = new Object();       // the stuck soldiers still hold the first pair
+        Object kit2 = new Object();
+        Thread medic2 = soldier(&quot;Medic&quot;, crate2, &quot;ammo crate&quot;, kit2, &quot;med kit&quot;);
+        Thread gunner2 = soldier(&quot;Gunner&quot;, crate2, &quot;ammo crate&quot;, kit2, &quot;med kit&quot;);
+        medic2.start(); gunner2.start();
+        medic2.join(); gunner2.join();
+        System.out.println(&quot;No deadlock: both soldiers finished&quot;);
+
+        System.out.println(&quot;\n=== 5. wait() and notifyAll(): supply drops ===&quot;);
+        SupplyDepot depot = new SupplyDepot();
+        Thread s1 = new Thread(() -&gt; { try { depot.take(); } catch (InterruptedException e) { } }, &quot;Soldier-1&quot;);
+        Thread s2 = new Thread(() -&gt; { try { depot.take(); } catch (InterruptedException e) { } }, &quot;Soldier-2&quot;);
+        s1.start(); s2.start();
+        pause(200);                         // both soldiers arrive before the drop
+        Thread heli = new Thread(() -&gt; depot.drop(2), &quot;Helicopter&quot;);
+        heli.start();
+        s1.join(); s2.join(); heli.join();
+        System.out.println(&quot;Supply run finished&quot;);
+    }
+}</pre></div><p class="muted">Save every file in one folder, then compile and run: <code>javac *.java</code> → <code>java SyncDemo</code></p>
 </div></section>
-<section class="slide " data-title="Checking that no money was lost" aria-label="Checking that no money was lost" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 7 of 9 · <span class="walk-file">Lab8Demo.java</span></p><h2>Checking that no money was lost</h2><pre class="code walk-code">safeThread1.start();
-safeThread2.start();
-try {
-    safeThread1.join();
-    safeThread2.join();
-} catch (InterruptedException e) {
-    System.out.println(&quot;Main thread interrupted.&quot;);
-    Thread.currentThread().interrupt();
-}
-System.out.println(&quot;\nAfter concurrent safe transfers:&quot;);
-safeAccount1.display();
-safeAccount2.display();
-double safeTotal = safeAccount1.getBalance() + safeAccount2.getBalance();
-System.out.println(&quot;Total balance: &quot; + safeTotal);</pre><ul class="walk-notes"><li>After join(), the total must still be 8000.</li></ul>
+<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Run the game</p><h2>Expected output</h2><div class="runbox" data-cmd="java SyncDemo"><pre class="run-src" hidden>=== 1. Race condition: two players, one scoreboard ===
+Unsafe: expected 200000, got 145145
+
+=== 2. synchronized fixes it ===
+Safe:   expected 200000, got 200000
+
+=== 3. Deadlock: opposite lock order ===
+[Medic] has the med kit, wants the ammo crate
+[Gunner] has the ammo crate, wants the med kit
+DEADLOCK: each soldier holds one item and waits forever for the other
+  Medic is BLOCKED, Gunner is BLOCKED
+
+=== 4. The fix: everyone locks in the same order ===
+[Medic] has the ammo crate, wants the med kit
+[Medic] has both items: patched up and reloaded
+[Gunner] has the ammo crate, wants the med kit
+[Gunner] has both items: patched up and reloaded
+No deadlock: both soldiers finished
+
+=== 5. wait() and notifyAll(): supply drops ===
+[Soldier-1] depot empty, waiting
+[Soldier-2] depot empty, waiting
+[Helicopter] dropped 2 -&gt; depot has 2
+[Soldier-1] took a crate -&gt; depot has 1
+[Soldier-2] took a crate -&gt; depot has 0
+Supply run finished</pre></div><p class="note-line">The unsafe total is different on every run, and threads that run together may print in another order. The safe total is always 200000.</p>
 </div></section>
-<section class="slide " data-title="Provoking the deadlock" aria-label="Provoking the deadlock" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 8 of 9 · <span class="walk-file">Lab8Demo.java</span></p><h2>Provoking the deadlock</h2><pre class="code walk-code wide">BankAccount riskAccount1 = new BankAccount(&quot;ACC-001&quot;, 5000.0);
-BankAccount riskAccount2 = new BankAccount(&quot;ACC-002&quot;, 3000.0);
-Thread riskyThread1 = new Thread(
-        new DeadlockProneTransfer(riskAccount1, riskAccount2, 500.0), &quot;RiskyThread-1&quot;);
-Thread riskyThread2 = new Thread(
-        new DeadlockProneTransfer(riskAccount2, riskAccount1, 700.0), &quot;RiskyThread-2&quot;);</pre><ul class="walk-notes"><li>Same two accounts, opposite directions, no ordering.</li></ul>
+<section class="slide " data-title="Game task 1: A synchronized block" aria-label="Game task 1: A synchronized block" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 1 of 3</p><h2>Game task 1: A synchronized block</h2><div class="ex task g-task"><div class="qq">Lock less code.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g8t0r0" data-key="g8t0r0"><label for="g8t0r0">Write <code>addBlock(int points)</code> in Scoreboard using <code>synchronized (this) { … }</code></label></li><li><input type="checkbox" id="g8t0r1" data-key="g8t0r1"><label for="g8t0r1">Run the two squad threads with it</label></li><li><input type="checkbox" id="g8t0r2" data-key="g8t0r2"><label for="g8t0r2">Check that the total is 200 000</label></li><li><input type="checkbox" id="g8t0r3" data-key="g8t0r3"><label for="g8t0r3">Explain in a comment the difference from a synchronized method</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">A synchronized method is the same as wrapping its whole body in <code>synchronized (this)</code>; a block can lock just the lines that need it.</div></details></div>
 </div></section>
-<section class="slide " data-title="Detecting it with a timeout" aria-label="Detecting it with a timeout" tabindex="-1"><div style="zoom:0.93;" class="slide-inner">
-<p class="kicker">Code walkthrough 9 of 9 · <span class="walk-file">Lab8Demo.java</span></p><h2>Detecting it with a timeout</h2><pre class="code walk-code wide">riskyThread1.start();
-riskyThread2.start();
-try {
-    riskyThread1.join(3000);
-    riskyThread2.join(3000);
-} catch (InterruptedException e) {
-    System.out.println(&quot;Main thread interrupted during deadlock test.&quot;);
-    Thread.currentThread().interrupt();
-}
-if (riskyThread1.isAlive() || riskyThread2.isAlive()) {
-    System.out.println(&quot;\nPossible deadlock detected.&quot;);
-    System.out.println(&quot;At least one risky thread did not finish within timeout.&quot;);
-    System.out.println(&quot;This happens because locks may be acquired in opposite order.&quot;);
-} else {
-    System.out.println(&quot;\nRisky threads completed in this run.&quot;);
-    System.out.println(&quot;Deadlock did not occur this time, but the design is unsafe.&quot;);
-}</pre><ul class="walk-notes"><li><code>join(3000)</code> waits at most 3 s; a thread still alive means it is stuck.</li></ul>
+<section class="slide " data-title="Game task 2: Three soldiers, three items" aria-label="Game task 2: Three soldiers, three items" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 2 of 3</p><h2>Game task 2: Three soldiers, three items</h2><div class="ex task g-task"><div class="qq">Deadlock with a longer cycle.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g8t1r0" data-key="g8t1r0"><label for="g8t1r0">Add a third soldier and a third item (a radio)</label></li><li><input type="checkbox" id="g8t1r1" data-key="g8t1r1"><label for="g8t1r1">Make each soldier lock "their" item first and the next one second, so the locks form a circle</label></li><li><input type="checkbox" id="g8t1r2" data-key="g8t1r2"><label for="g8t1r2">Show the deadlock</label></li><li><input type="checkbox" id="g8t1r3" data-key="g8t1r3"><label for="g8t1r3">Fix it with one global order</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Number the items 1, 2, 3 and always lock the lower number first.</div></details></div>
+</div></section>
+<section class="slide " data-title="Game task 3: A depot with a limit" aria-label="Game task 3: A depot with a limit" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 3 of 3</p><h2>Game task 3: A depot with a limit</h2><div class="ex task g-task"><div class="qq">Producer and consumer both wait.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g8t2r0" data-key="g8t2r0"><label for="g8t2r0">Give SupplyDepot a capacity of 3 crates</label></li><li><input type="checkbox" id="g8t2r1" data-key="g8t2r1"><label for="g8t2r1">drop() waits while the depot is full</label></li><li><input type="checkbox" id="g8t2r2" data-key="g8t2r2"><label for="g8t2r2">Run two helicopters and three soldiers</label></li><li><input type="checkbox" id="g8t2r3" data-key="g8t2r3"><label for="g8t2r3">Print every drop and take; the depot must never go below 0 or above 3</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">drop() needs its own <code>while (crates + count &gt; CAPACITY) wait();</code> and take() must call notifyAll() too.</div></details></div>
+</div></section>
+<section class="slide " data-title="The official lab program" aria-label="The official lab program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Official lab · from the lab manual</p><h2>The official lab program</h2>
+<p class="g-official">The graded in-lab tasks and report exercises build on this program, not on the game. Read it and run it before you start them.</p>
+<ol class="flow"><li>Create ACC-001 (5000) and ACC-002 (3000)</li><li>Do one safe transfer with lock ordering</li><li>Run two threads transferring 100 back and forth five times each</li><li>join() them and check the total is still 8000</li><li>Start two risky transfers that lock in opposite order</li><li>join(3000): if a thread is still alive, report a possible deadlock</li></ol><p class="note-line">BankAccount has synchronized deposit/withdraw/getBalance and an ordered transfer(); DeadlockProneTransfer shows the unsafe way.</p>
 </div></section>
 <section class="slide " data-title="Trace: lock ordering in transfer()" aria-label="Trace: lock ordering in transfer()" tabindex="-1"><div style="zoom:0.91;" class="slide-inner">
-<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: lock ordering in transfer()</h2><p class="muted">Try both directions: the locks are always taken in the same order, ACC-A first.</p><div data-trace="lab8-lock"></div>
+<p class="kicker">Official lab · step through the code · 1 of 2</p><h2>Trace: lock ordering in transfer()</h2><p class="muted">Try both directions: the locks are always taken in the same order, ACC-A first.</p><div data-trace="lab8-lock"></div>
 </div></section>
 <section class="slide " data-title="Trace: how a deadlock happens" aria-label="Trace: how a deadlock happens" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: how a deadlock happens</h2><p class="muted">Two transfers in opposite directions. Choose the timing and watch both threads end up BLOCKED, each holding the lock the other needs.</p>
+<p class="kicker">Official lab · step through the code · 2 of 2</p><h2>Trace: how a deadlock happens</h2><p class="muted">Two transfers in opposite directions. Choose the timing and watch both threads end up BLOCKED, each holding the lock the other needs.</p>
 </div></section>
 <section class="slide " data-title="Trace: how a deadlock happens (cont.)" aria-label="Trace: how a deadlock happens (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: how a deadlock happens (cont.)</h2><div data-trace="lab8-deadlock"></div>
+<p class="kicker">Official lab · step through the code · 2 of 2</p><h2>Trace: how a deadlock happens (cont.)</h2><div data-trace="lab8-deadlock"></div>
 </div></section>
-<section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
-<p class="kicker">For reference · 3 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="BankAccount.java">public class BankAccount {
+<section class="slide " data-title="The official program" aria-label="The official program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Official lab · 3 files</p><h2>The official program</h2><div class="codeview"><pre class="code small-code" data-file="BankAccount.java">public class BankAccount {
 
     private String accountId;
     private double balance;
@@ -439,10 +663,10 @@ if (riskyThread1.isAlive() || riskyThread2.isAlive()) {
         System.out.println(&quot;Use consistent lock ordering to prevent circular wait.&quot;);
         System.out.println(&quot;Program demonstration completed.&quot;);
     }
-}</pre></div><p class="muted">Copy or download each file, save it under the same name, then compile and run: <code>javac *.java</code> → <code>java Lab8Demo</code></p>
+}</pre></div><p class="muted">Compile and run: <code>javac *.java</code> → <code>java Lab8Demo</code></p>
 </div></section>
-<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Implementation</p><h2>Expected output</h2><div class="runbox" data-cmd="java Lab8Demo"><pre class="run-src" hidden>=== Synchronization and Deadlock Demo ===
+<section class="slide " data-title="Official program: expected output" aria-label="Official program: expected output" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Official lab</p><h2>Official program: expected output</h2><div class="runbox" data-cmd="java Lab8Demo"><pre class="run-src" hidden>=== Synchronization and Deadlock Demo ===
 
 === Initial Account States ===
 Account: ACC-001 | Balance: 5000.0
@@ -487,26 +711,20 @@ This happens because locks may be acquired in opposite order.
 Use consistent lock ordering to prevent circular wait.
 Program demonstration completed.</pre></div><p class="note-line">The risky threads usually deadlock (each holds one lock, then sleeps); on some runs they finish. Note the JVM will not exit while deadlocked threads are alive — stop it from the IDE.</p>
 </div></section>
-<section class="slide " data-title="Race condition lab" aria-label="Race condition lab" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Interactive 1 of 2</p><h2>Race condition lab</h2><div data-demo="race"></div>
-</div></section>
-<section class="slide " data-title="Producer–consumer with wait and notify" aria-label="Producer–consumer with wait and notify" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Interactive 2 of 2</p><h2>Producer–consumer with wait and notify</h2><div data-demo="prodcons"></div>
-</div></section>
 <section class="slide " data-title="Task 1: Synchronized printBalance()" aria-label="Task 1: Synchronized printBalance()" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 1 of 3</p><h2>Task 1: Synchronized printBalance()</h2><div class="ex task"><div class="qq">Show that the balance stays consistent under concurrent deposits and withdrawals.</div>
+<p class="kicker">Official in-lab task 1 of 3</p><h2>Task 1: Synchronized printBalance()</h2><div class="ex task"><div class="qq">Show that the balance stays consistent under concurrent deposits and withdrawals.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l8t0r0" data-key="l8t0r0"><label for="l8t0r0">Add <code>public synchronized void printBalance()</code></label></li><li><input type="checkbox" id="l8t0r1" data-key="l8t0r1"><label for="l8t0r1">One thread repeatedly deposits 100</label></li><li><input type="checkbox" id="l8t0r2" data-key="l8t0r2"><label for="l8t0r2">Another repeatedly withdraws 100 when the balance allows</label></li><li><input type="checkbox" id="l8t0r3" data-key="l8t0r3"><label for="l8t0r3">Call printBalance() after each operation</label></li><li><input type="checkbox" id="l8t0r4" data-key="l8t0r4"><label for="l8t0r4">Verify the balance stays consistent</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Check-then-withdraw must happen inside one synchronized region, otherwise another thread can change the balance in between.</div></details></div>
 </div></section>
 <section class="slide " data-title="Task 2: A simple wait()/notify() buffer" aria-label="Task 2: A simple wait()/notify() buffer" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 2 of 3</p><h2>Task 2: A simple wait()/notify() buffer</h2><div class="ex task"><div class="qq">SharedBuffer holds one integer at a time.</div>
+<p class="kicker">Official in-lab task 2 of 3</p><h2>Task 2: A simple wait()/notify() buffer</h2><div class="ex task"><div class="qq">SharedBuffer holds one integer at a time.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l8t1r0" data-key="l8t1r0"><label for="l8t1r0">Fields: the value and a boolean <code>full</code></label></li><li><input type="checkbox" id="l8t1r1" data-key="l8t1r1"><label for="l8t1r1"><code>synchronized void put(int)</code> and <code>synchronized int take()</code></label></li><li><input type="checkbox" id="l8t1r2" data-key="l8t1r2"><label for="l8t1r2">take() waits while empty; put() waits while full</label></li><li><input type="checkbox" id="l8t1r3" data-key="l8t1r3"><label for="l8t1r3">Call notify() after each change</label></li><li><input type="checkbox" id="l8t1r4" data-key="l8t1r4"><label for="l8t1r4">Producer puts 10 items; consumer takes 10</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Use <code>while (!full) wait();</code> — never <code>if</code>.</div></details></div>
 </div></section>
 <section class="slide " data-title="Task 3: Deadlock detection with timeout" aria-label="Task 3: Deadlock detection with timeout" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 3 of 3</p><h2>Task 3: Deadlock detection with timeout</h2><div class="ex task"><div class="qq">Make the deadlock happen reliably and detect it.</div>
+<p class="kicker">Official in-lab task 3 of 3</p><h2>Task 3: Deadlock detection with timeout</h2><div class="ex task"><div class="qq">Make the deadlock happen reliably and detect it.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l8t2r0" data-key="l8t2r0"><label for="l8t2r0">Explicit synchronized blocks</label></li><li><input type="checkbox" id="l8t2r1" data-key="l8t2r1"><label for="l8t2r1">Two threads lock in opposite order</label></li><li><input type="checkbox" id="l8t2r2" data-key="l8t2r2"><label for="l8t2r2">Thread.sleep() after the first lock</label></li><li><input type="checkbox" id="l8t2r3" data-key="l8t2r3"><label for="l8t2r3">Wait at most 3 s with <code>join(3000)</code></label></li><li><input type="checkbox" id="l8t2r4" data-key="l8t2r4"><label for="l8t2r4">Print a warning if a thread is still alive</label></li><li><input type="checkbox" id="l8t2r5" data-key="l8t2r5"><label for="l8t2r5">Explain which four conditions held</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Mark the threads as daemon (<code>setDaemon(true)</code>) so the program can exit after detecting the deadlock.</div></details></div>
 </div></section>
 <section class="slide " data-title="Show your work" aria-label="Show your work" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
+<p class="kicker">Official in-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
 </div></section>
 <section class="slide " data-title="Report exercise 1" aria-label="Report exercise 1" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Lab report · exercise 1 of 2</p><h2>Thread-safe bounded queue with wait()/notifyAll()</h2><div class="ex task report"><div class="qq">A generic BoundedQueue shared by one producer and two consumers.</div>
@@ -520,25 +738,25 @@ Program demonstration completed.</pre></div><p class="note-line">The risky threa
 <p class="kicker">Lab report</p><h2>Writing the lab report</h2><ul class="big-list"><li>Problem statement and your design (classes, fields, methods)</li><li>Complete source code, formatted and commented</li><li>Sample output or screenshots for normal <b>and</b> edge cases</li><li>A short discussion: what each OOP concept did in your program</li></ul><div class="integrity"><h3>Academic integrity</h3><p>Copying from the internet, classmates, seniors or any other unauthorized source is strictly prohibited. Full marks may be deducted if plagiarism, copied work or academic dishonesty is detected. Complete the tasks, implementation, output analysis and report yourself.</p></div>
 </div></section>
 <section class="slide " data-title="Viva questions (1 of 2)" aria-label="Viva questions (1 of 2)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Discussion and analysis</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">Name the four conditions for deadlock.</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Mutual exclusion, hold and wait, no preemption and circular wait — all four at once.</div></details></div><div class="ex"><div class="qq">Which condition does lock ordering remove?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Circular wait: if every thread takes locks in the same global order, no cycle can form.</div></details></div>
+<p class="kicker">Discussion</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">Two threads each add 100 000 without a lock. Why is the total less than 200 000?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">score = score + 1 is read, add, write. When the threads interleave those steps, both write the same new value and one point is lost.</div></details></div><div class="ex"><div class="qq">What does a synchronized method lock?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">The object it is called on (this). Another thread calling any synchronized method of the same object must wait.</div></details></div>
 </div></section>
 <section class="slide " data-title="Viva questions (2 of 2)" aria-label="Viva questions (2 of 2)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Discussion and analysis</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq">Why does transfer() use synchronized blocks rather than a synchronized method?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">It needs to hold two different objects’ locks, chosen in a specific order; a synchronized method locks only this.</div></details></div><div class="ex"><div class="qq">Why must wait() be inside a while loop?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">A woken thread may find the condition false again (another thread got there first, or a spurious wake-up), so it must re-check.</div></details></div>
+<p class="kicker">Discussion</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq">Name the four conditions for deadlock.</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Mutual exclusion, hold and wait, no preemption, and circular wait.</div></details></div><div class="ex"><div class="qq">Why does take() use <code>while (crates == 0)</code> and not <code>if</code>?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">When the thread wakes up, another soldier may already have taken the crate, so the condition must be checked again.</div></details></div>
 </div></section>
 <section class="slide " data-title="Quiz" aria-label="Quiz" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="lab8"></div><script type="application/json" class="quiz-json">[{"q": "A race condition happens when\u2026", "o": ["a loop never ends", "the result depends on thread timing", "two classes share a name", "a thread sleeps"], "a": 1, "w": "Unsynchronized interleavings give different results."}, {"q": "Which is NOT a deadlock condition?", "o": ["mutual exclusion", "hold and wait", "preemption", "circular wait"], "a": 2, "w": "The condition is NO preemption."}, {"q": "wait() must be called\u2026", "o": ["anywhere", "while holding the object\u2019s lock", "only in main", "after join()"], "a": 1, "w": "Otherwise IllegalMonitorStateException."}, {"q": "Lock ordering prevents deadlock by removing\u2026", "o": ["mutual exclusion", "circular wait", "threads", "locks"], "a": 1, "w": "Same order everywhere means no cycle."}, {"q": "A thread waiting to enter a synchronized block is\u2026", "o": ["NEW", "BLOCKED", "TERMINATED", "RUNNABLE"], "a": 1, "w": "It is blocked on the monitor lock."}]</script></div>
+<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="game8"></div><script type="application/json" class="quiz-json">[{"q": "A race condition happens when\u2026", "o": ["a thread runs too fast", "threads interleave updates to shared data", "a thread is never started", "two threads have the same name"], "a": 1, "w": "Unprotected shared data plus interleaving."}, {"q": "A synchronized method can be run by\u2026", "o": ["any number of threads at once", "one thread at a time per object", "only the main thread", "only daemon threads"], "a": 1, "w": "The object\u2019s lock is held while it runs."}, {"q": "Which removes circular wait?", "o": ["more threads", "locking in one fixed order", "longer sleeps", "calling run() instead of start()"], "a": 1, "w": "No cycle can form."}, {"q": "wait() must be called\u2026", "o": ["anywhere", "while holding the object\u2019s lock", "only in main", "only on Thread objects"], "a": 1, "w": "Otherwise IllegalMonitorStateException."}, {"q": "A thread waiting to enter a synchronized block is\u2026", "o": ["NEW", "BLOCKED", "TERMINATED", "RUNNABLE"], "a": 1, "w": "It is blocked on the lock."}]</script></div>
 </div></section>
 <section class="slide " data-title="Summary" aria-label="Summary" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Summary</p><h2>Summary</h2><ul class="sumlist"><li>Shared data + concurrent writes = race conditions; protect critical sections.</li><li>synchronized methods and blocks take an object’s monitor lock.</li><li>Deadlock needs mutual exclusion, hold and wait, no preemption and circular wait.</li><li>Consistent lock ordering removes circular wait.</li><li>wait/notify/notifyAll coordinate threads; always wait in a while loop.</li></ul><div class="nextcard"><a class="btn pri" href="09-gui-swing.html">Next: Lab 9 · GUI and drawing</a><a class="btn" href="../index.html">All labs</a></div>
+<p class="kicker">Mission debrief</p><h2>Summary</h2><ul class="sumlist"><li>Shared data plus interleaving threads gives race conditions.</li><li>synchronized lets one thread at a time into a critical section.</li><li>Deadlock needs four conditions; circular wait is the easiest to break.</li><li>Lock in one fixed order to prevent it.</li><li>wait() releases the lock and sleeps; notifyAll() wakes the waiters.</li><li>Next mission: put the game on screen.</li></ul><div class="nextcard"><a class="btn pri" href="09-gui-swing.html">Next: Mission 9 · Put the game on screen</a><a class="btn" href="../index.html">All chapters</a></div>
 </div></section>
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 37</span>
+  <span class="counter" id="counter">1 / 42</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
-<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
-<noscript><p style="padding:20px">This lab needs JavaScript for the slides and the interactive examples.</p></noscript>
+<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this chapter</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
+<noscript><p style="padding:20px">This chapter needs JavaScript for the slides, the game scenes and the interactive examples.</p></noscript>
 <script src="../js/core.js"></script>
 <script src="../js/art.js"></script>
 <script src="../js/java.js"></script>
@@ -550,10 +768,14 @@ Program demonstration completed.</pre></div><p class="note-line">The risky threa
 <script src="../js/demos-basics.js"></script>
 <script src="../js/demos-oop.js"></script>
 <script src="../js/demos-adv.js"></script>
+<script src="../js/game-core.js"></script>
+<script src="../js/game-scenes-a.js"></script>
+<script src="../js/game-scenes-b.js"></script>
+<script src="../js/game-scenes-c.js"></script>
 <script src="../js/quiz.js"></script>
 <script src="../js/page.js"></script>
 <script src="../js/lab.js"></script>
-<script>window.OOP_TOPIC = {"id": 8, "prev": "07-threads.html", "next": "09-gui-swing.html", "nextLabel": "Next lab"};</script>
+<script>window.OOP_TOPIC = {"id": 8, "prev": "07-threads.html", "next": "09-gui-swing.html", "nextLabel": "Next chapter"};</script>
 <script>mountPage();</script>
 <script src="../js/slides.js"></script>
 <script src="../js/annotate.js"></script>

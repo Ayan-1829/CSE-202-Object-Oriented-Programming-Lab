@@ -1,0 +1,165 @@
+/* ===================== game.css : Code Commando scenes and the v2 chapter layout ===================== */
+/* game canvases */
+.g-cvs{display:block;width:100%;height:auto;border-radius:10px;background:#0E1A2E;outline:none}
+.g-cvs:focus-visible{box-shadow:0 0 0 3px var(--accent)}
+.g-scene{min-width:0}
+.slide .g-cvs{max-width:min(100%, calc(40vh * var(--ar, 2)));margin-left:auto;margin-right:auto}
+/* a scene is one centred block: canvas, its buttons and its caption share the canvas width */
+.slide .g-scene{max-width:min(100%, calc(40vh * var(--ar, 2)));margin-left:auto;margin-right:auto}
+.slide .g-scene .g-cvs{max-width:100%}
+.slide .g-scene>.g-ctrl,.g-center{justify-content:center}
+.slide .g-scene>.g-cap{text-align:center}
+.slide .g-swingframe .g-cvs{max-width:min(100%, calc(32vh * var(--ar, 2)))}
+.slide .g-swingframe{width:fit-content;max-width:100%;margin:0 auto}
+.g-hero .g-cvs{max-width:min(100%, calc(46vh * var(--ar, 2)))}
+.g-ctrl{margin-top:10px}
+.g-cap{margin:8px 0 0;color:var(--ink-2);font-size:16px;line-height:1.45;text-align:left}
+.g-stepn{font:600 15px var(--f-head,Georgia,serif);color:var(--ink-3);margin-left:4px}
+.g-split{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:980px){.g-split{grid-template-columns:1fr}}
+.g-side{min-width:0;display:flex;flex-direction:column;gap:10px}
+.g-side h4{margin:0}
+.g-side pre.code{margin:0}
+.g-status{margin:0;padding:8px 12px;border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:0 8px 8px 0;text-align:left}
+.g-status:empty{display:none}
+.g-kv{margin:0}
+.g-console .console-body{min-height:3.2em;max-height:16em;overflow:auto;white-space:pre-wrap}
+/* Chapter 1: the variables beside the game */
+.g-vars{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.g-vars li{padding:4px 10px;border-radius:6px;background:var(--sheet-2);text-align:left}
+.g-vars code{background:none;padding:0}
+.g-vars .g-t{color:var(--ac-ink);font-weight:700}
+.g-vars b{font-family:var(--f-mono)}
+.g-vars li.chg{animation:g-chg .9s ease-out}
+@keyframes g-chg{0%{background:var(--accent-soft);box-shadow:inset 4px 0 0 var(--accent)}}
+/* Chapter 2: objects on the heap */
+.g-heap{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.g-obj{display:flex;flex-direction:column;gap:2px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--sheet);text-align:left}
+.g-obj code{background:none;padding:0;font-size:.95em}
+.g-obj.on{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.g-obj.dead{opacity:.55}
+.g-selrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
+/* Chapter 4: the members of the selected class */
+.g-members{margin-top:12px}
+.g-mcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:10px}
+.g-mcol{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--sheet)}
+.g-mcol h5{margin:0 0 6px;font:700 15px var(--f-head,Georgia,serif);color:var(--ink-2)}
+.g-mcol ul{margin:0;padding-left:1.1em}
+.g-mcol li{text-align:left}
+.g-mcol.own{border-top:4px solid var(--ok)}.g-mcol.over{border-top:4px solid var(--accent)}.g-mcol.inh{border-top:4px solid var(--ac)}
+/* Chapter 6: the call stack and the exception chain */
+.g-stack{display:flex;flex-direction:column;gap:6px}
+.g-stack h5{margin:0;font:700 15px var(--f-head,Georgia,serif);color:var(--ink-2)}
+.g-frame{display:flex;flex-direction:column;gap:2px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--sheet);transition:background .2s,border-color .2s;text-align:left}
+.g-frame code{background:none;padding:0;white-space:normal}
+.g-frame.on{border-color:var(--ok);background:var(--ok-soft)}
+.g-frame.ex{border-color:var(--bad);background:var(--bad-soft)}
+.g-chain{display:flex;flex-direction:column;gap:6px}
+.g-link{display:flex;flex-direction:column;padding:8px 12px;border-left:4px solid var(--ac);background:var(--sheet-2);border-radius:0 8px 8px 0;text-align:left}
+.g-link.ex{border-left-color:var(--bad)}.g-link.ok{border-left-color:var(--ok)}
+/* Chapter 7: thread state legend */
+.g-legend{margin-top:8px}
+.g-legend span{display:inline-flex;align-items:center;gap:6px;font:600 14px var(--f-head,Georgia,serif);color:var(--ink-2)}
+.g-legend i{width:14px;height:14px;border-radius:3px;display:inline-block}
+/* Chapter 10: the game loop */
+.g-loopdiag{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.g-ph{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border:2px solid var(--line);border-radius:10px;background:var(--sheet);transition:background .15s,border-color .15s;text-align:left}
+.g-ph b{font-family:var(--f-mono)}
+.g-ph.on{border-color:var(--accent);background:var(--accent-soft)}
+/* Swing frames */
+.g-swingframe{max-width:none}
+.g-swingframe .swing-body{position:relative}
+.g-north{margin:0 0 6px;padding:2px 4px}
+.g-pad{min-width:44px;touch-action:none;user-select:none}
+.g-best{margin-left:auto}
+.g-parts .g-part{position:relative;outline:2px dashed #E07A1F;outline-offset:3px;margin-bottom:12px}
+.g-parts .g-part::before{content:attr(data-part);position:absolute;right:6px;top:-11px;z-index:2;background:#E07A1F;color:#fff;font:700 12px Georgia,serif;padding:2px 8px;border-radius:999px}
+/* title slide art, home page hero */
+.title-slide .g-title-art{grid-column:2;grid-row:1 / span 20;align-self:center;display:block}
+.g-title-art .g-cvs{border-radius:16px;box-shadow:0 10px 30px rgba(10,20,40,.25)}
+.g-hero{margin:18px 0 22px}
+.g-hero .g-cap{font-size:16px}
+.slide .g-mission{font:700 22px var(--f-head,Georgia,serif);color:var(--accent-ink);margin:-2px 0 10px}
+.g-cardmission{display:block;font-weight:700;color:var(--accent-ink);margin:2px 0 4px}
+/* key points instead of paragraphs */
+.slide ul.pts{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px}
+.slide ul.pts li{position:relative;padding-left:26px;text-align:left;hyphens:none}
+.slide ul.pts li::before{content:"";position:absolute;left:4px;top:.55em;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.g-codeside{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px;align-items:start}
+.g-codeside pre.code{margin:0}
+.g-codeside ul.pts{margin-top:0}
+@media (max-width:900px){.g-codeside{grid-template-columns:1fr}}
+.g-files{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}
+.g-files li{padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:var(--sheet)}
+.task.g-task{border-left-color:var(--ok)}
+.slide .g-official{padding:12px 16px;border:1px solid var(--line);border-left:5px solid var(--ac);border-radius:0 10px 10px 0;background:var(--ac-soft);text-align:left}
+.walk-side.g-walk{grid-template-columns:minmax(0,1fr) 300px}
+body.deck-page .slide .g-walk pre.code.walk-code,body.deck-page .slide .g-walk pre.code.walk-code .cl,body.deck-page .slide .g-codeside pre.code,body.deck-page .slide .g-codeside pre.code .cl{font-size:clamp(15px,1vw,19px)!important;line-height:1.36!important}
+/* projector sizes: captions and side panels are small text */
+body.deck-page .slide :where(.g-cap,.g-status,.g-vars li,.g-obj,.g-mcol li,.g-frame,.g-link,.g-ph,.g-files li,.g-legend span,.g-stepn){font-size:var(--pj-sm)!important}
+body.deck-page .slide .g-side pre.code,body.deck-page .slide .g-side pre.code .cl{font-size:clamp(14px,.92vw,18px)!important;line-height:1.36!important}
+.g-heap{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+.g-obj{padding:6px 8px}
+/* home page: the playable opening battle */
+.g-heroscene{max-width:min(100%, calc(56vh * var(--ar, 2)));margin:0 auto}
+.g-heropad{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 18px;margin-top:12px}
+.g-dpad{display:grid;grid-template-columns:repeat(3,48px);grid-template-rows:repeat(2,44px);gap:6px}
+.g-dpad .g-pad{width:48px;height:44px;padding:0;font-size:18px}
+.g-pad.g-fire{min-width:96px;height:56px;font:700 18px Georgia,serif;background:linear-gradient(#FFB070,#E0701F);border-color:#B3541A;color:#fff}
+.g-heroinfo{font:600 15px var(--f-head,Georgia,serif);color:var(--ink-2);flex-basis:100%;text-align:center}
+.g-heroscene .g-cap{text-align:center}
+/* topic slides: the everyday example and its output beside the key points */
+.g-excode{display:flex;flex-direction:column;gap:10px;min-width:0}
+.g-excode pre.code{margin:0}
+.g-exout .console-body{white-space:pre;overflow:auto;max-height:30vh;margin:0}
+.g-topic .note-line{margin-top:12px}
+body.deck-page .slide .g-exout .console-body{font-size:clamp(14px,.92vw,18px)!important;line-height:1.36!important}
+/* Chapter 4 family tree: a shorter canvas and the member lists as chips, so it fits one slide */
+.slide [data-demo="g-family"] .g-scene{max-width:min(100%, calc(36vh * var(--ar, 2)))}
+.g-members .g-mcol ul{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:4px 8px}
+.g-members .g-mcol li::before{content:none}
+.slide [data-demo="g-family"] .g-scene{max-width:min(100%, 1100px)}
+.slide [data-demo="g-family"] .g-scene .g-cvs{max-width:min(100%, calc(28vh * var(--ar, 2)))}
+/* key points under a game scene sit side by side, so the scene keeps its room */
+.slide ul.pts.pts-row{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:8px 28px;margin-top:12px}
+body.deck-page .slide ul.pts.pts-row li{font-size:clamp(19px,1.3vw,25px)!important;line-height:1.4!important}
+.slide [data-demo="g-blueprint"] .g-cvs{max-width:min(100%, calc(34vh * var(--ar, 2)))}
+/* numbered program steps: one per line (the shared .flow rule is a flex row for chips) */
+.slide ol.flow{display:block}
+.g-codeside.g-topic{grid-template-columns:minmax(0,1.75fr) minmax(0,1fr)}
+@media (max-width:900px){.g-codeside.g-topic{grid-template-columns:1fr}}
+.slide .g-ingame{font:700 20px var(--f-head,Georgia,serif);color:var(--accent-ink);margin:-4px 0 12px}
+.g-heap.g-heap2{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.g-heap2 .g-obj{padding:5px 8px}
+/* buttons sit above the scene, so text that grows below never moves them */
+.slide .g-scene>.g-ctrl{margin:0 0 10px}
+.g-side>.g-ctrl:first-child{margin:0}
+.slide .g-ingame,.slide .g-wk{display:flex;flex-wrap:wrap;gap:0 .4em}
+.slide .g-wk{margin:0 0 8px}
+/* home page: the playable game sits in the middle */
+.g-hero .g-cvs{margin-left:auto;margin-right:auto}
+
+/* ===================== a more lifelike finish (v3) =====================
+   Depth instead of flat boxes: soft layered shadows, raised buttons that press down, framed
+   game screens and code that sits on the page like a card. Nothing here changes sizes or layout. */
+:root{--lift-1:0 1px 2px rgba(16,24,40,.06),0 2px 6px rgba(16,24,40,.06);--lift-2:0 2px 4px rgba(16,24,40,.06),0 10px 24px rgba(16,24,40,.10);--press:inset 0 1px 2px rgba(16,24,40,.18)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--lift-1:0 1px 2px rgba(0,0,0,.35),0 2px 6px rgba(0,0,0,.25);--lift-2:0 2px 4px rgba(0,0,0,.35),0 12px 26px rgba(0,0,0,.4)}}
+:root[data-theme="dark"]{--lift-1:0 1px 2px rgba(0,0,0,.35),0 2px 6px rgba(0,0,0,.25);--lift-2:0 2px 4px rgba(0,0,0,.35),0 12px 26px rgba(0,0,0,.4)}
+/* the page: a faint light from the top, like paper under a lamp */
+body.deck-page,body.index-page{background:radial-gradient(120% 80% at 50% -10%,var(--sheet) 0%,var(--paper) 60%) fixed}
+/* buttons: raised, with a highlight on top; they sink when pressed */
+.btn{background:linear-gradient(180deg,var(--sheet) 0%,var(--sheet-2) 100%);box-shadow:var(--lift-1),inset 0 1px 0 rgba(255,255,255,.55);transition:transform .08s,box-shadow .12s,filter .12s}
+.btn:hover{box-shadow:var(--lift-2),inset 0 1px 0 rgba(255,255,255,.55)}
+.btn:active:not(:disabled){transform:translateY(1px);box-shadow:var(--press)}
+.btn.pri{background:linear-gradient(180deg,color-mix(in srgb,var(--ac) 82%,#fff) 0%,var(--ac) 55%,color-mix(in srgb,var(--ac) 85%,#000) 100%);box-shadow:var(--lift-1),inset 0 1px 0 rgba(255,255,255,.3)}
+.btn:disabled{box-shadow:none;filter:saturate(.4)}
+/* game screens: a dark bezel around the canvas, like a monitor */
+.slide .g-cvs,.g-hero .g-cvs{box-shadow:0 0 0 3px #18202C,0 0 0 4px #3A4558,0 14px 30px rgba(8,16,32,.32)}
+/* code, panels and cards lift off the page */
+.slide pre.code,.codeview{box-shadow:var(--lift-1)}
+.slide .g-obj,.slide .g-mcol,.slide .g-frame,.slide .g-ph,.slide .ex,.slide .task,.slide .runbox,.slide .console,.card,.mcard{box-shadow:var(--lift-1)}
+.slide .g-obj.on,.slide .g-frame.on,.slide .g-ph.on{box-shadow:var(--lift-2)}
+.slide .g-status{box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}
+.deck-bar{box-shadow:0 1px 0 var(--line),0 4px 14px rgba(16,24,40,.06)}
+/* a Swing window is drawn flat, as Java draws it: no monitor bezel inside the frame */
+.slide .g-swingframe .g-cvs,.swing-body .g-cvs{box-shadow:none;border-radius:0}

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Build a Vehicle hierarchy with Car, Motorcycle and ElectricCar: reuse code with extends and super, override display(), and let one loop drive every kind of vehicle.">
-<meta name="keywords" content="java inheritance, extends, super, method overriding, polymorphism, dynamic dispatch, instanceof, lab, cse 202, object oriented programming lab">
+<meta name="description" content="Drones, tanks and snipers are all enemies, and enemies and the player are all game characters. Inheritance shares the common code, overriding gives each enemy its own attack, and polymorphism runs a whole wave with one loop.">
+<meta name="keywords" content="java inheritance, extends, super, method overriding, polymorphism, dynamic dispatch, instanceof, lab, java game, game programming, cse 202, object oriented programming lab">
 <meta name="author" content="Object Oriented Programming Lab Notes">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#155E63">
@@ -16,32 +16,33 @@
 <link rel="manifest" href="../site.webmanifest">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
-<meta property="og:title" content="Lab 4: Inheritance, Polymorphism &amp; Overriding | OOP Lab (CSE 202)">
-<meta property="og:description" content="Build a Vehicle hierarchy with Car, Motorcycle and ElectricCar: reuse code with extends and super, override display(), and let one loop drive every kind of vehicle.">
+<meta property="og:title" content="Chapter 4: Inheritance, Polymorphism &amp; Overriding | OOP Lab (CSE 202)">
+<meta property="og:description" content="Drones, tanks and snipers are all enemies, and enemies and the player are all game characters. Inheritance shares the common code, overriding gives each enemy its own attack, and polymorphism runs a whole wave with one loop.">
 <meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/04-inheritance-polymorphism.html">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/04-inheritance-polymorphism.png?v=2">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Lab 4 of 10: Inheritance, Polymorphism &amp; Overriding – CSE 202 Object Oriented Programming Lab">
+<meta property="og:image:alt" content="Chapter 4 of 10: Inheritance, Polymorphism &amp; Overriding – CSE 202 Object Oriented Programming Lab">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Lab 4: Inheritance, Polymorphism &amp; Overriding | OOP Lab (CSE 202)">
-<meta name="twitter:description" content="Build a Vehicle hierarchy with Car, Motorcycle and ElectricCar: reuse code with extends and super, override display(), and let one loop drive every kind of vehicle.">
+<meta name="twitter:title" content="Chapter 4: Inheritance, Polymorphism &amp; Overriding | OOP Lab (CSE 202)">
+<meta name="twitter:description" content="Drones, tanks and snipers are all enemies, and enemies and the player are all game characters. Inheritance shares the common code, overriding gives each enemy its own attack, and polymorphism runs a whole wave with one loop.">
 <meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/04-inheritance-polymorphism.png?v=2">
-<meta name="twitter:image:alt" content="Lab 4 of 10: Inheritance, Polymorphism &amp; Overriding – CSE 202 Object Oriented Programming Lab">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Inheritance, Polymorphism & Overriding", "description": "Build a Vehicle hierarchy with Car, Motorcycle and ElectricCar: reuse code with extends and super, override display(), and let one loop drive every kind of vehicle.", "position": 4, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 37, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/04-inheritance-polymorphism.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/04-inheritance-polymorphism.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
-<title>Lab 4: Inheritance, Polymorphism &amp; Overriding | OOP Lab (CSE 202)</title>
+<meta name="twitter:image:alt" content="Chapter 4 of 10: Inheritance, Polymorphism &amp; Overriding – CSE 202 Object Oriented Programming Lab">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Inheritance, Polymorphism & Overriding", "description": "Drones, tanks and snipers are all enemies, and enemies and the player are all game characters. Inheritance shares the common code, overriding gives each enemy its own attack, and polymorphism runs a whole wave with one loop.", "position": 4, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 45, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/04-inheritance-polymorphism.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/04-inheritance-polymorphism.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
+<title>Chapter 4: Inheritance, Polymorphism &amp; Overriding | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/lab.css">
+<link rel="stylesheet" href="../css/game.css">
 </head>
 <body class="deck-page">
 <div class="sr-only" id="live" aria-live="polite"></div>
 <header class="deck-bar">
-  <a class="home-link" href="../index.html" aria-label="Home: all labs"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
+  <a class="home-link" href="../index.html" aria-label="Home: all chapters"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
   <div class="deck-title"><span class="badge">4</span><span>Inheritance, Polymorphism &amp; Overriding</span></div>
   <div class="deck-actions">
     <button type="button" class="btn sm" id="btn-menu" aria-expanded="false" aria-controls="slide-menu" aria-label="Slides"><svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><rect x="3" y="4.5" width="18" height="3" rx="1"></rect><rect x="3" y="10.5" width="18" height="3" rx="1"></rect><rect x="3" y="16.5" width="18" height="3" rx="1"></rect></svg><span>Slides</span></button>
@@ -52,208 +53,503 @@
 <div class="deck-progress"><i id="progress-fill"></i></div>
 <main class="deck" id="deck">
 <section class="slide title-slide" data-title="Inheritance, Polymorphism &amp; Overriding" aria-label="Inheritance, Polymorphism &amp; Overriding" tabindex="-1"><div class="slide-inner">
-<span class="topic-art" data-art="7" aria-hidden="true"></span>
+<div class="topic-art g-title-art" data-demo="g-title" data-ch="4" aria-hidden="true"></div>
 <span class="badge big">4</span>
-<p class="kicker">Lab IV · CSE 202</p>
+<p class="kicker">Chapter 4 · Lab IV · CSE 202</p>
 <h1>Inheritance, Polymorphism & Overriding</h1>
-<p class="lead">Build a Vehicle hierarchy with Car, Motorcycle and ElectricCar: reuse code with extends and super, override display(), and let one loop drive every kind of vehicle.</p>
-<div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
+<p class="g-mission">Mission 4 · Many enemies, one fight</p>
+<p class="lead">Drones, tanks and snipers are all enemies, and enemies and the player are all game characters. Inheritance shares the common code, overriding gives each enemy its own attack, and polymorphism runs a whole wave with one loop.</p>
+<div class="row"><a class="btn pri" href="#s=2">Start the mission</a><a class="btn" href="../index.html">All chapters</a></div>
 <p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
 </div></section>
-<section class="slide " data-title="Why this lab" aria-label="Why this lab" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Before we start</p><h2>Why this lab</h2><div class="hook"><p class="q">A car, a motorcycle and an electric car all accelerate and brake the same way, but each shows different details. Do we write accelerate() three times?</p><p>No: write it once in <code>Vehicle</code> and <b>inherit</b> it. Each subclass then <b>overrides</b> only what differs, and one <code>Vehicle[]</code> array can hold them all.</p></div>
+<section class="slide " data-title="Your mission" aria-label="Your mission" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Mission 4 · Many enemies, one fight</p><h2>Your mission</h2><div class="hook"><p class="q">A drone dives, a tank fires a shell, a sniper aims and shoots. Do we need a separate loop for each kind of enemy?</p><p>No. They all <b>extend</b> <code>Enemy</code>, so one <code>Enemy[]</code> holds them all, and one call, <code>e.attack(ranger)</code>, makes each one attack <b>in its own way</b>.</p></div>
 </div></section>
-<section class="slide " data-title="Lab at a glance" aria-label="Lab at a glance" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 4 of 10</p><h2>Lab at a glance</h2><div class="cols wl"><div><h3>After this lab you can</h3><ul class=""><li>Explain inheritance as code reuse and an is-a relationship</li><li>Create subclasses with <code>extends</code></li><li>Call superclass constructors with <code>super(…)</code></li><li>Override methods with <code>@Override</code></li><li>Distinguish overriding from overloading</li><li>Use superclass references to subclass objects (polymorphism)</li><li>Cast safely with <code>instanceof</code></li></ul></div>
-<div><h3>Before you start</h3><ul class=""><li>Labs 2–3: classes, constructors, encapsulation, constructor chaining, overloading</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
+<section class="slide " data-title="Chapter at a glance" aria-label="Chapter at a glance" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Chapter 4 of 10</p><h2>Chapter at a glance</h2><div class="cols wl"><div><h3>After this chapter you can</h3><ul class=""><li>Build a class hierarchy with <code>extends</code>: GameCharacter → Enemy → Drone, Tank, Sniper</li><li>Use <code>super(…)</code> for the inherited part and <code>protected</code> to share fields</li><li>Override <code>attack()</code>, <code>takeDamage()</code> and <code>describe()</code>; tell overriding from overloading</li><li>Run a mixed wave through Enemy references (polymorphism)</li><li>Use <code>instanceof</code> before casting to reach Tank- or Sniper-only methods</li></ul></div>
+<div><h3>Before you start</h3><ul class=""><li>Chapters 2–3: classes, constructors and overloading</li><li>Arrays and the for-each loop</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Topics: the idea, then the game</li><li>Run the game program</li><li>Game practice tasks</li><li>Official lab and graded tasks</li><li>Report exercises at home</li></ol></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 4 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=10">Program design</a></li><li><a href="#s=11">Code walkthrough</a></li><li><a href="#s=21">Step-through traces: stack, heap and output</a></li><li><a href="#s=24">Expected output</a></li><li><a href="#s=25">Interactive demos</a></li><li><a href="#s=27">In-lab tasks</a></li><li><a href="#s=31">Lab report exercises</a></li><li><a href="#s=34">Viva questions and quiz</a></li></ol>
+<p class="kicker">Chapter 4 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=26">Run the game</a></li><li><a href="#s=27">Game practice tasks</a></li><li><a href="#s=30">The official lab program</a></li><li><a href="#s=35">Official in-lab tasks</a></li><li><a href="#s=39">Lab report exercises</a></li><li><a href="#s=42">Viva questions and quiz</a></li></ol>
 </div></section>
-<section class="slide " data-title="Inheritance and extends" aria-label="Inheritance and extends" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 1 of 5</p><h2>Inheritance and extends</h2><figure class="fig" data-fig="lab4-vehicle-uml"></figure><ul class=""><li><code>class Car extends Vehicle</code>: a Car <b>is a</b> Vehicle and inherits its accessible fields and methods.</li><li>Java classes have <b>single inheritance</b>, but chains are allowed: ElectricCar → Car → Vehicle.</li></ul>
+<section class="slide " data-title="Today’s build" aria-label="Today’s build" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Build the game · Chapter 4</p><h2>Today’s build</h2><ul class="pts"><li>Seven files: the hierarchy <code>GameCharacter</code> → <code>Player</code>, <code>Enemy</code> → <code>Drone</code>, <code>Tank</code>, <code>Sniper</code>, and <code>WaveDemo</code> to run it.</li></ul>
+<div class="cols wl"><div><h3>What the program does</h3><ol class="flow"><li>Create the player, a drone, a tank and a sniper, and describe each</li><li>Put the enemies in an Enemy[] and let each one attack</li><li>Shoot the drone and the tank: armor blocks part of the hit</li><li>Use the overloaded shoot(target, power)</li><li>Use instanceof and casts to call raiseShield() and aim()</li><li>Call describe() through a GameCharacter reference</li></ol></div><div><h3>Files</h3><ul class="g-files"><li><code>GameCharacter.java</code> <span class="muted">(25 lines)</span></li><li><code>Player.java</code> <span class="muted">(26 lines)</span></li><li><code>Enemy.java</code> <span class="muted">(19 lines)</span></li><li><code>Drone.java</code> <span class="muted">(12 lines)</span></li><li><code>Tank.java</code> <span class="muted">(34 lines)</span></li><li><code>Sniper.java</code> <span class="muted">(17 lines)</span></li><li><code>WaveDemo.java</code> <span class="muted">(47 lines)</span></li></ul><p class="muted">180 lines in all. Each topic below shows the part of the program that uses it.</p></div></div>
+</div></section>
+<section class="slide " data-title="Inheritance" aria-label="Inheritance" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 6</p><h2>Inheritance</h2><div class="g-ingame"><div>In the game:</div><div>The family tree of the game</div></div><div class="g-codeside g-topic"><div><div class="kicker g-wk"><div class="walk-file">Player.java</div><div>·</div><div>Player extends GameCharacter</div></div><pre class="code small-code wide">public class Player extends GameCharacter {
+    private int score;
+
+    public Player(String name) {
+        super(name, 100);                   // build the GameCharacter part first
+    }</pre></div><ul class="pts"><li><code>class Enemy extends GameCharacter</code>: Enemy gets every field and method of GameCharacter.</li><li>The parent is the <b>superclass</b>, the child the <b>subclass</b>.</li><li>A subclass <b>is a</b> kind of its superclass, and can add its own members.</li><li><code>super(name, 100)</code> builds the inherited part.</li><li>Player adds only a score field.</li></ul></div>
+</div></section>
+<section class="slide " data-title="The family tree of the game" aria-label="The family tree of the game" tabindex="-1"><div style="zoom:0.92;" class="slide-inner">
+<p class="kicker">Topic 1 of 6 · in the game</p><h2>The family tree of the game</h2><div data-demo="g-family"></div><ul class="pts pts-row"><li><code>class Tank extends Enemy</code>: a Tank <b>is an</b> Enemy, and every Enemy is a GameCharacter.</li><li>A subclass gets every field and method of its superclass.</li><li>It only adds what is new and overrides what works differently.</li></ul>
+</div></section>
+<section class="slide " data-title="GameCharacter: the root of the tree" aria-label="GameCharacter: the root of the tree" tabindex="-1"><div style="zoom:0.91;" class="slide-inner">
+<p class="kicker">Topic 1 of 6 · our game program · 1 of 1 · <span class="walk-file">GameCharacter.java</span></p><h2>GameCharacter: the root of the tree</h2><div class="walk-side g-walk"><pre class="code walk-code">public class GameCharacter {
+    // protected: visible to subclasses such as Player and Enemy
+    protected String name;
+    protected int health;
+
+    public GameCharacter(String name, int health) {
+        this.name = name;
+        this.health = health;
+    }
+
+    public String getName() { return name; }
+    public int getHealth()  { return health; }
+
+    public boolean isAlive() {
+        return health &gt; 0;
+    }
+
+    public void takeDamage(int amount) {
+        health = Math.max(0, health - amount);
+    }
+
+    public void describe() {
+        System.out.println(name + &quot; (&quot; + health + &quot; HP)&quot;);
+    }
+}</pre><ul class="walk-notes"><li>What every character has: a name and health.</li><li>protected fields are visible to subclasses.</li></ul></div>
 </div></section>
 <section class="slide " data-title="super and protected" aria-label="super and protected" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 2 of 5</p><h2>super and protected</h2><pre class="code small-code">public Car(String make, int year, int numDoors, double fuelLevel) {
-    super(make, year);          // Vehicle part first
-    this.numDoors = numDoors;
-    ...
-}</pre><ul class=""><li><code>super(…)</code> runs the superclass constructor and must be the first statement.</li><li><code>protected</code> fields (make, year, speed) are visible to subclasses; subclass-only fields stay <code>private</code>.</li></ul>
-</div></section>
-<section class="slide " data-title="Overriding vs overloading" aria-label="Overriding vs overloading" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 3 of 5</p><h2>Overriding vs overloading</h2><div class="scrollx"><table class="doc"><thead><tr><th></th><th>Overloading</th><th>Overriding</th></tr></thead><tbody><tr><td>Where</td><td>same class</td><td>subclass</td></tr><tr><td>Signature</td><td>different parameters</td><td>same name, parameters, return type</td></tr><tr><td>Chosen</td><td>at compile time</td><td>at run time (object type)</td></tr><tr><td>Example</td><td>display() / display(String)</td><td>Car.display() replaces Vehicle.display()</td></tr></tbody></table></div><ul class=""><li><code>@Override</code> makes the compiler check that you really override something.</li></ul>
-</div></section>
-<section class="slide " data-title="Polymorphism: one call, many behaviours" aria-label="Polymorphism: one call, many behaviours" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 4 of 5</p><h2>Polymorphism: one call, many behaviours</h2><pre class="code small-code">Vehicle[] vehicles = {vehicle, car, motorcycle, electricCar};
-for (Vehicle v : vehicles) {
-    v.display();   // Car, Motorcycle or ElectricCar version
-}</pre><ul class=""><li>The reference type (Vehicle) decides what you may call; the object type decides <b>which version</b> runs.</li><li>This is <b>dynamic method dispatch</b>.</li></ul>
-</div></section>
-<section class="slide " data-title="instanceof and safe casting" aria-label="instanceof and safe casting" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 5 of 5</p><h2>instanceof and safe casting</h2><pre class="code small-code">Vehicle v = new Car(&quot;Honda Civic&quot;, 2021, 2, 60.0);
-if (v instanceof Car) {
-    Car c = (Car) v;
-    System.out.println(c.getNumDoors());
-}</pre><ul class=""><li>A Vehicle reference cannot call <code>getNumDoors()</code>; cast it first.</li><li>Check with <code>instanceof</code> before casting to avoid a <code>ClassCastException</code>.</li></ul>
-</div></section>
-<section class="slide " data-title="Execution flow" aria-label="Execution flow" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Implementation design</p><h2>Execution flow</h2><ol class="flow"><li>Create a Vehicle, a Car, a Motorcycle and an ElectricCar</li><li>Call display() on each directly</li><li>Store them in a Vehicle[] and display them polymorphically</li><li>Call inherited accelerate() and brake()</li><li>Call subclass-only refuel(), wheelie() and charge()</li><li>Test instanceof and cast a Vehicle reference to Car</li><li>Verify overriding through Vehicle references</li><li>Show brake() never makes speed negative</li></ol><p class="note-line">Common state in Vehicle; each subclass adds fields and overrides display().</p>
-</div></section>
-<section class="slide " data-title="The superclass" aria-label="The superclass" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 1 of 10 · <span class="walk-file">Vehicle.java</span></p><h2>The superclass</h2><pre class="code walk-code">// Protected fields are accessible in subclasses
-protected String make;
-protected int year;
-protected int speed;
+<p class="kicker">Topic 2 of 6</p><h2>super and protected</h2><div class="g-ingame"><div>In the game:</div><div>super(…) and protected</div></div><div class="g-codeside"><pre class="code small-code">public class Enemy extends GameCharacter {
+    protected int damage;
 
-public Vehicle(String make, int year) {
-    this.make = make;
-    this.year = year;
-    this.speed = 0;
-}</pre><ul class="walk-notes"><li><code>protected</code> fields are visible to subclasses.</li></ul>
-</div></section>
-<section class="slide " data-title="Methods every vehicle inherits" aria-label="Methods every vehicle inherits" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 2 of 10 · <span class="walk-file">Vehicle.java</span></p><h2>Methods every vehicle inherits</h2><pre class="code walk-code">public void accelerate(int delta) {
-    if (delta &gt; 0) {
-        this.speed = this.speed + delta;
+    public Enemy(String name, int health, int damage) {
+        super(name, health);            // build the GameCharacter part first
+        this.damage = damage;
     }
 }
 
-public void brake(int delta) {
-    if (delta &gt; 0) {
-        this.speed = Math.max(0, this.speed - delta);
+public class Drone extends Enemy {
+    public Drone(String name) {
+        super(name, 30, 5);             // light and weak
     }
-}</pre>
+}</pre><ul class="pts"><li><code>super(…)</code> calls the parent’s constructor; it must be the first line.</li><li><code>protected</code> members are visible in subclasses (and the package).</li><li><code>super.method()</code> calls the parent’s version of a method.</li><li>A subclass constructor starts with <code>super(…)</code>.</li><li><code>protected</code> fields (name, health, damage) are visible in subclasses.</li><li><code>super.describe()</code> runs the parent’s version inside an override.</li></ul></div>
 </div></section>
-<section class="slide " data-title="Methods every vehicle inherits (cont.)" aria-label="Methods every vehicle inherits (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 2 of 10 · <span class="walk-file">Vehicle.java</span></p><h2>Methods every vehicle inherits (cont.)</h2><pre data-start="13" class="code walk-code">public void display() {
-    System.out.println(&quot;------- Vehicle -------&quot;);
-    System.out.println(&quot;Make  : &quot; + make);
-    System.out.println(&quot;Year  : &quot; + year);
-    System.out.println(&quot;Speed : &quot; + speed + &quot; km/h&quot;);
-    System.out.println(&quot;-----------------------&quot;);
-}</pre><ul class="walk-notes"><li>Car, Motorcycle and ElectricCar get these without writing them again.</li></ul>
-</div></section>
-<section class="slide " data-title="Car extends Vehicle" aria-label="Car extends Vehicle" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 3 of 10 · <span class="walk-file">Car.java</span></p><h2>Car extends Vehicle</h2><pre class="code walk-code">public class Car extends Vehicle {
+<section class="slide " data-title="Enemy: what all enemies share" aria-label="Enemy: what all enemies share" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 2 of 6 · our game program · 1 of 1 · <span class="walk-file">Enemy.java</span></p><h2>Enemy: what all enemies share</h2><div class="walk-side g-walk"><pre class="code walk-code wide">public class Enemy extends GameCharacter {
+    protected int damage;
 
-    private int numDoors;
-    private double fuelLevel;
-
-    public Car(String make, int year, int numDoors, double fuelLevel) {
-        super(make, year);
-        if (numDoors &gt; 0) {
-            this.numDoors = numDoors;
-        } else {
-            this.numDoors = 4;</pre>
-</div></section>
-<section class="slide " data-title="Car extends Vehicle (cont.)" aria-label="Car extends Vehicle (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 3 of 10 · <span class="walk-file">Car.java</span></p><h2>Car extends Vehicle (cont.)</h2><pre data-start="12" class="code walk-code">        }
-        if (fuelLevel &gt;= 0.0 &amp;&amp; fuelLevel &lt;= 100.0) {
-            this.fuelLevel = fuelLevel;
-        } else {
-            this.fuelLevel = 0.0;
-        }
-    }</pre><ul class="walk-notes"><li><code>super(make, year)</code> builds the Vehicle part first.</li><li>Then Car validates its own fields.</li></ul>
-</div></section>
-<section class="slide " data-title="Overriding display()" aria-label="Overriding display()" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 4 of 10 · <span class="walk-file">Car.java</span></p><h2>Overriding display()</h2><pre class="code walk-code">@Override
-public void display() {
-    System.out.println(&quot;------- Car -------&quot;);
-    System.out.println(&quot;Make      : &quot; + make);
-    System.out.println(&quot;Year      : &quot; + year);
-    System.out.println(&quot;Speed     : &quot; + speed + &quot; km/h&quot;);
-    System.out.println(&quot;Doors     : &quot; + numDoors);
-    System.out.printf(&quot;Fuel Level: %.1f%%%n&quot;, fuelLevel);
-    System.out.println(&quot;-------------------&quot;);
-}</pre><ul class="walk-notes"><li>Same signature as Vehicle.display(); <code>@Override</code> lets the compiler check it.</li><li>make, year and speed are inherited protected fields.</li></ul>
-</div></section>
-<section class="slide " data-title="Motorcycle: another subclass" aria-label="Motorcycle: another subclass" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 5 of 10 · <span class="walk-file">Motorcycle.java</span></p><h2>Motorcycle: another subclass</h2><pre class="code walk-code">public class Motorcycle extends Vehicle {
-
-    private boolean hasStorage;
-
-    public Motorcycle(String make, int year, boolean hasStorage) {
-        super(make, year);
-        this.hasStorage = hasStorage;
+    public Enemy(String name, int health, int damage) {
+        super(name, health);
+        this.damage = damage;
     }
 
-    public void wheelie() {
-        System.out.println(make + &quot; is performing a wheelie!&quot;);
-    }</pre><ul class="walk-notes"><li>Adds its own field and a method only motorcycles have.</li><li>Its display() override follows the same pattern as Car’s.</li></ul>
-</div></section>
-<section class="slide " data-title="ElectricCar: a chain of inheritance" aria-label="ElectricCar: a chain of inheritance" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 6 of 10 · <span class="walk-file">ElectricCar.java</span></p><h2>ElectricCar: a chain of inheritance</h2><pre class="code walk-code">public class ElectricCar extends Car {
+    // Every enemy can attack; subclasses override how
+    public void attack(GameCharacter target) {
+        target.takeDamage(damage);
+        System.out.println(name + &quot; attacks &quot; + target.getName() + &quot; for &quot; + damage);
+    }
 
-    private double batteryCapacity;
-    private double chargeLevel;
+    @Override
+    public void describe() {
+        System.out.println(&quot;Enemy &quot; + name + &quot; (&quot; + health + &quot; HP, &quot; + damage + &quot; damage)&quot;);
+    }
+}</pre><ul class="walk-notes"><li>Adds damage and a default attack().</li><li>Overrides describe() to show the damage.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Method overriding" aria-label="Method overriding" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 6</p><h2>Method overriding</h2><div class="g-ingame"><div>In the game:</div><div>Overriding: each enemy attacks its own way</div></div><div class="g-codeside"><pre class="code small-code">// Drone
+@Override
+public void attack(GameCharacter target) {
+    target.takeDamage(damage);
+    System.out.println(name + &quot; dives at &quot; + target.getName() + &quot;! -&quot; + damage);
+}
 
-    public ElectricCar(String make, int year, int numDoors,
-                       double batteryCapacity, double chargeLevel) {
-        super(make, year, numDoors, 100.0);
-        if (batteryCapacity &gt; 0.0) {
-            this.batteryCapacity = batteryCapacity;
-        } else {</pre>
+// Tank
+@Override
+public void takeDamage(int amount) {
+    int blocked = Math.min(armor, amount);
+    super.takeDamage(amount - blocked);   // the inherited version does the rest
+}</pre><ul class="pts"><li>A subclass writes its own version of a parent method: same name, same parameters.</li><li>Mark it with <code>@Override</code> so the compiler checks it.</li><li>The object’s real class decides which version runs.</li><li>Same signature as the parent’s method, a new body.</li><li><code>@Override</code> makes the compiler check that you really override something.</li><li>Tank even overrides takeDamage(): armor blocks part of every hit.</li></ul></div>
 </div></section>
-<section class="slide " data-title="ElectricCar: a chain of inheritance (cont.)" aria-label="ElectricCar: a chain of inheritance (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 6 of 10 · <span class="walk-file">ElectricCar.java</span></p><h2>ElectricCar: a chain of inheritance (cont.)</h2><pre data-start="12" class="code walk-code">            this.batteryCapacity = 50.0;
+<section class="slide " data-title="Drone: overriding attack()" aria-label="Drone: overriding attack()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 6 · our game program · 1 of 4 · <span class="walk-file">Drone.java</span></p><h2>Drone: overriding attack()</h2><pre class="code walk-code wide">public class Drone extends Enemy {
+
+    public Drone(String name) {
+        super(name, 30, 5);                 // light and weak
+    }
+
+    @Override
+    public void attack(GameCharacter target) {
+        target.takeDamage(damage);
+        System.out.println(name + &quot; dives at &quot; + target.getName() + &quot;! -&quot; + damage);
+    }
+}</pre><ul class="walk-notes"><li>No new fields at all: only a different attack.</li><li>Drone inherits Enemy’s describe().</li></ul>
+</div></section>
+<section class="slide " data-title="Tank: armor and its own takeDamage()" aria-label="Tank: armor and its own takeDamage()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 6 · our game program · 2 of 4 · <span class="walk-file">Tank.java</span></p><h2>Tank: armor and its own takeDamage()</h2><div class="walk-side g-walk"><pre class="code walk-code wide">public class Tank extends Enemy {
+    private int armor;
+
+    public Tank(String name, int armor) {
+        super(name, 120, 20);               // slow, tough and hits hard
+        this.armor = armor;
+    }
+
+    @Override
+    public void attack(GameCharacter target) {
+        target.takeDamage(damage);
+        System.out.println(name + &quot; fires a shell at &quot; + target.getName() + &quot;! -&quot; + damage);
+    }
+
+    // Armor blocks part of every hit, then the inherited version does the rest
+    @Override
+    public void takeDamage(int amount) {
+        int blocked = Math.min(armor, amount);
+        System.out.println(&quot;  &quot; + name + &quot;&#x27;s armor blocks &quot; + blocked);
+        super.takeDamage(amount - blocked);
+    }</pre><ul class="walk-notes"><li>A field only tanks have: armor.</li><li><code>super.takeDamage(…)</code> reuses the inherited logic.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Tank: raiseShield() and describe()" aria-label="Tank: raiseShield() and describe()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 6 · our game program · 3 of 4 · <span class="walk-file">Tank.java</span></p><h2>Tank: raiseShield() and describe()</h2><pre class="code walk-code">// Only tanks have this method
+public void raiseShield() {
+    armor += 10;
+    System.out.println(name + &quot; raises its shield: armor &quot; + armor);
+}
+
+@Override
+public void describe() {
+    super.describe();                   // reuse Enemy&#x27;s version, then add more
+    System.out.println(&quot;  armor &quot; + armor);
+}</pre><ul class="walk-notes"><li>raiseShield() exists only in Tank.</li><li>describe() extends the parent’s output instead of replacing it.</li></ul>
+</div></section>
+<section class="slide " data-title="Sniper" aria-label="Sniper" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 6 · our game program · 4 of 4 · <span class="walk-file">Sniper.java</span></p><h2>Sniper</h2><div class="walk-side g-walk"><pre class="code walk-code wide">public class Sniper extends Enemy {
+
+    public Sniper(String name) {
+        super(name, 50, 35);                // fragile, but every shot hurts
+    }
+
+    @Override
+    public void attack(GameCharacter target) {
+        target.takeDamage(damage);
+        System.out.println(name + &quot; takes aim... headshot on &quot; + target.getName() + &quot;! -&quot; + damage);
+    }
+
+    // Only snipers have this method
+    public void aim() {
+        System.out.println(name + &quot; steadies the rifle (red laser on)&quot;);
+    }
+}</pre><ul class="walk-notes"><li>Its own attack() and an extra aim() method.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Overloading vs overriding" aria-label="Overloading vs overriding" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 4 of 6</p><h2>Overloading vs overriding</h2><div class="g-ingame"><div>In the game:</div><div>Overloading or overriding?</div></div><div class="scrollx"><table class="doc"><thead><tr><th></th><th>Overloading</th><th>Overriding</th></tr></thead><tbody><tr><td>Where</td><td>in one class</td><td>in a subclass</td></tr><tr><td>Parameters</td><td>different</td><td>exactly the same</td></tr><tr><td>Chosen</td><td>at compile time, from the arguments</td><td>at run time, from the object</td></tr><tr><td>In the game</td><td><code>shoot(target)</code> / <code>shoot(target, power)</code></td><td><code>Drone.attack()</code> / <code>Tank.attack()</code></td></tr></tbody></table></div><ul class="pts"><li><b>Overloading</b>: same name, different parameters, usually in one class. Chosen at compile time.</li><li><b>Overriding</b>: same name and parameters, in a subclass. Chosen at run time.</li><li>A class can do both.</li><li>Overloading gives one class several versions of a method.</li><li>Overriding lets a subclass replace an inherited version.</li></ul>
+</div></section>
+<section class="slide " data-title="Player: overloaded shoot() and describe()" aria-label="Player: overloaded shoot() and describe()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 4 of 6 · our game program · 1 of 2 · <span class="walk-file">Player.java</span></p><h2>Player: overloaded shoot() and describe()</h2><div class="walk-side g-walk"><pre class="code walk-code wide">// Overloaded: same name, different parameters (chosen at compile time)
+public void shoot(Enemy target) {
+    shoot(target, 25);
+}
+
+public void shoot(Enemy target, int power) {
+    System.out.println(name + &quot; shoots &quot; + target.getName() + &quot; with power &quot; + power);
+    target.takeDamage(power);           // which takeDamage runs depends on the object
+    if (!target.isAlive()) {
+        score += 100;
+        System.out.println(target.getName() + &quot; destroyed! Score &quot; + score);
+    }
+}
+
+@Override
+public void describe() {
+    System.out.println(&quot;Player &quot; + name + &quot; (&quot; + health + &quot; HP, score &quot; + score + &quot;)&quot;);
+}</pre><ul class="walk-notes"><li>Two overloaded shoot() methods.</li><li><code>target.takeDamage(power)</code> runs the target’s own version.</li><li>describe() is overridden.</li></ul></div>
+</div></section>
+<section class="slide " data-title="WaveDemo: overriding and overloading" aria-label="WaveDemo: overriding and overloading" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 4 of 6 · our game program · 2 of 2 · <span class="walk-file">WaveDemo.java</span></p><h2>WaveDemo: overriding and overloading</h2><pre class="code walk-code">System.out.println(&quot;\n=== Overriding takeDamage() ===&quot;);
+ranger.shoot(drone);
+ranger.shoot(tank);
+System.out.println(&quot;Tank health: &quot; + tank.getHealth());
+
+System.out.println(&quot;\n=== Overloading shoot() ===&quot;);
+ranger.shoot(sniper, 60);</pre><ul class="walk-notes"><li>The tank’s armor kicks in automatically: its own takeDamage() runs.</li><li>shoot(sniper, 60) picks the 2-argument overload.</li></ul>
+</div></section>
+<section class="slide " data-title="Polymorphism" aria-label="Polymorphism" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 6</p><h2>Polymorphism</h2><div class="g-ingame"><div>In the game:</div><div>Polymorphism: one loop, three attacks</div></div><div class="g-codeside g-topic"><div><div class="kicker g-wk"><div class="walk-file">WaveDemo.java</div><div>·</div><div>WaveDemo: polymorphism</div></div><pre class="code small-code">System.out.println(&quot;\n=== Polymorphism: one loop, three attacks ===&quot;);
+Enemy[] wave = { drone, tank, sniper };
+for (Enemy e : wave) {
+    e.attack(ranger);               // the object&#x27;s own attack() runs
+}
+System.out.println(&quot;Ranger&#x27;s health after the wave: &quot; + ranger.getHealth());</pre></div><ul class="pts"><li>A parent-type variable can refer to any subclass object.</li><li>One call, <code>e.attack(ranger)</code>, runs a different method for each real object.</li><li>New subclasses work without changing the loop.</li><li>One loop, three different attacks.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Polymorphism: one loop, three attacks" aria-label="Polymorphism: one loop, three attacks" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 6 · in the game</p><h2>Polymorphism: one loop, three attacks</h2><div data-demo="g-wave"></div><ul class="pts pts-row"><li>The array’s type is Enemy, but each element is a real Drone, Tank or Sniper object.</li><li><code>e.attack(ranger)</code> runs the attack() of the actual object: <b>dynamic dispatch</b>.</li><li>Add a new enemy type later and this loop needs no change at all.</li></ul>
+</div></section>
+<section class="slide " data-title="WaveDemo: the characters" aria-label="WaveDemo: the characters" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 6 · our game program · 1 of 1 · <span class="walk-file">WaveDemo.java</span></p><h2>WaveDemo: the characters</h2><pre class="code walk-code">System.out.println(&quot;=== The characters ===&quot;);
+Player ranger = new Player(&quot;Ranger&quot;);
+Drone drone = new Drone(&quot;Drone-1&quot;);
+Tank tank = new Tank(&quot;Tank-1&quot;, 8);
+Sniper sniper = new Sniper(&quot;Sniper-1&quot;);
+ranger.describe();
+drone.describe();                   // Drone has no describe(): Enemy&#x27;s runs
+tank.describe();
+sniper.describe();</pre><ul class="walk-notes"><li>Each describe() call runs the version of that object’s class.</li></ul>
+</div></section>
+<section class="slide " data-title="instanceof and casting" aria-label="instanceof and casting" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 6 of 6</p><h2>instanceof and casting</h2><div class="g-ingame"><div>In the game:</div><div>instanceof and safe casting</div></div><ul class="pts big-list"><li>Through a parent reference you can only call the parent’s methods.</li><li><code>e instanceof Tank</code> checks the real class first.</li><li>Then cast down, <code>(Tank) e</code>, to reach the subclass’s own method.</li></ul>
+</div></section>
+<section class="slide " data-title="instanceof and safe casting" aria-label="instanceof and safe casting" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 6 of 6 · in the game</p><h2>instanceof and safe casting</h2><div data-demo="g-cast4"></div><ul class="pts pts-row"><li>Through an Enemy reference you can only call Enemy methods.</li><li>To call <code>raiseShield()</code>, check <code>e instanceof Tank</code>, then cast: <code>(Tank) e</code>.</li><li>A wrong cast throws <code>ClassCastException</code> at run time.</li></ul>
+</div></section>
+<section class="slide " data-title="WaveDemo: instanceof and casting" aria-label="WaveDemo: instanceof and casting" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 6 of 6 · our game program · 1 of 1 · <span class="walk-file">WaveDemo.java</span></p><h2>WaveDemo: instanceof and casting</h2><div class="walk-side g-walk"><pre class="code walk-code wide">System.out.println(&quot;\n=== instanceof and casting ===&quot;);
+for (Enemy e : wave) {
+    if (e instanceof Tank) {
+        Tank t = (Tank) e;          // safe: we just checked
+        t.raiseShield();
+    } else if (e instanceof Sniper) {
+        ((Sniper) e).aim();
+    } else {
+        System.out.println(e.getName() + &quot; is a &quot; + e.getClass().getSimpleName() + &quot;: no special move&quot;);
+    }
+}
+
+System.out.println(&quot;\n=== A GameCharacter reference ===&quot;);
+GameCharacter c = tank;             // upcast: always allowed
+c.describe();                       // still runs Tank&#x27;s describe()
+System.out.println(&quot;c instanceof Enemy : &quot; + (c instanceof Enemy));
+System.out.println(&quot;c instanceof Drone : &quot; + (c instanceof Drone));</pre><ul class="walk-notes"><li>Check first, then cast, then call the special method.</li><li>An upcast to GameCharacter still runs Tank’s describe().</li></ul></div>
+</div></section>
+<section class="slide " data-title="The complete game program" aria-label="The complete game program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Build the game · 7 files</p><h2>The complete game program</h2><div class="codeview"><pre class="code small-code" data-file="GameCharacter.java">public class GameCharacter {
+    // protected: visible to subclasses such as Player and Enemy
+    protected String name;
+    protected int health;
+
+    public GameCharacter(String name, int health) {
+        this.name = name;
+        this.health = health;
+    }
+
+    public String getName() { return name; }
+    public int getHealth()  { return health; }
+
+    public boolean isAlive() {
+        return health &gt; 0;
+    }
+
+    public void takeDamage(int amount) {
+        health = Math.max(0, health - amount);
+    }
+
+    public void describe() {
+        System.out.println(name + &quot; (&quot; + health + &quot; HP)&quot;);
+    }
+}</pre><pre class="code small-code" data-file="Player.java">public class Player extends GameCharacter {
+    private int score;
+
+    public Player(String name) {
+        super(name, 100);                   // build the GameCharacter part first
+    }
+
+    // Overloaded: same name, different parameters (chosen at compile time)
+    public void shoot(Enemy target) {
+        shoot(target, 25);
+    }
+
+    public void shoot(Enemy target, int power) {
+        System.out.println(name + &quot; shoots &quot; + target.getName() + &quot; with power &quot; + power);
+        target.takeDamage(power);           // which takeDamage runs depends on the object
+        if (!target.isAlive()) {
+            score += 100;
+            System.out.println(target.getName() + &quot; destroyed! Score &quot; + score);
         }
-        if (chargeLevel &gt;= 0.0 &amp;&amp; chargeLevel &lt;= 100.0) {
-            this.chargeLevel = chargeLevel;
-        } else {
-            this.chargeLevel = 0.0;
+    }
+
+    @Override
+    public void describe() {
+        System.out.println(&quot;Player &quot; + name + &quot; (&quot; + health + &quot; HP, score &quot; + score + &quot;)&quot;);
+    }
+}</pre><pre class="code small-code" data-file="Enemy.java">public class Enemy extends GameCharacter {
+    protected int damage;
+
+    public Enemy(String name, int health, int damage) {
+        super(name, health);
+        this.damage = damage;
+    }
+
+    // Every enemy can attack; subclasses override how
+    public void attack(GameCharacter target) {
+        target.takeDamage(damage);
+        System.out.println(name + &quot; attacks &quot; + target.getName() + &quot; for &quot; + damage);
+    }
+
+    @Override
+    public void describe() {
+        System.out.println(&quot;Enemy &quot; + name + &quot; (&quot; + health + &quot; HP, &quot; + damage + &quot; damage)&quot;);
+    }
+}</pre><pre class="code small-code" data-file="Drone.java">public class Drone extends Enemy {
+
+    public Drone(String name) {
+        super(name, 30, 5);                 // light and weak
+    }
+
+    @Override
+    public void attack(GameCharacter target) {
+        target.takeDamage(damage);
+        System.out.println(name + &quot; dives at &quot; + target.getName() + &quot;! -&quot; + damage);
+    }
+}</pre><pre class="code small-code" data-file="Tank.java">public class Tank extends Enemy {
+    private int armor;
+
+    public Tank(String name, int armor) {
+        super(name, 120, 20);               // slow, tough and hits hard
+        this.armor = armor;
+    }
+
+    @Override
+    public void attack(GameCharacter target) {
+        target.takeDamage(damage);
+        System.out.println(name + &quot; fires a shell at &quot; + target.getName() + &quot;! -&quot; + damage);
+    }
+
+    // Armor blocks part of every hit, then the inherited version does the rest
+    @Override
+    public void takeDamage(int amount) {
+        int blocked = Math.min(armor, amount);
+        System.out.println(&quot;  &quot; + name + &quot;&#x27;s armor blocks &quot; + blocked);
+        super.takeDamage(amount - blocked);
+    }
+
+    // Only tanks have this method
+    public void raiseShield() {
+        armor += 10;
+        System.out.println(name + &quot; raises its shield: armor &quot; + armor);
+    }
+
+    @Override
+    public void describe() {
+        super.describe();                   // reuse Enemy&#x27;s version, then add more
+        System.out.println(&quot;  armor &quot; + armor);
+    }
+}</pre><pre class="code small-code" data-file="Sniper.java">public class Sniper extends Enemy {
+
+    public Sniper(String name) {
+        super(name, 50, 35);                // fragile, but every shot hurts
+    }
+
+    @Override
+    public void attack(GameCharacter target) {
+        target.takeDamage(damage);
+        System.out.println(name + &quot; takes aim... headshot on &quot; + target.getName() + &quot;! -&quot; + damage);
+    }
+
+    // Only snipers have this method
+    public void aim() {
+        System.out.println(name + &quot; steadies the rifle (red laser on)&quot;);
+    }
+}</pre><pre class="code small-code" data-file="WaveDemo.java">public class WaveDemo {
+    public static void main(String[] args) {
+
+        System.out.println(&quot;=== The characters ===&quot;);
+        Player ranger = new Player(&quot;Ranger&quot;);
+        Drone drone = new Drone(&quot;Drone-1&quot;);
+        Tank tank = new Tank(&quot;Tank-1&quot;, 8);
+        Sniper sniper = new Sniper(&quot;Sniper-1&quot;);
+        ranger.describe();
+        drone.describe();                   // Drone has no describe(): Enemy&#x27;s runs
+        tank.describe();
+        sniper.describe();
+
+        System.out.println(&quot;\n=== Polymorphism: one loop, three attacks ===&quot;);
+        Enemy[] wave = { drone, tank, sniper };
+        for (Enemy e : wave) {
+            e.attack(ranger);               // the object&#x27;s own attack() runs
         }
-    }</pre><ul class="walk-notes"><li>ElectricCar → Car → Vehicle. <code>super(…)</code> calls Car’s constructor.</li></ul>
+        System.out.println(&quot;Ranger&#x27;s health after the wave: &quot; + ranger.getHealth());
+
+        System.out.println(&quot;\n=== Overriding takeDamage() ===&quot;);
+        ranger.shoot(drone);
+        ranger.shoot(tank);
+        System.out.println(&quot;Tank health: &quot; + tank.getHealth());
+
+        System.out.println(&quot;\n=== Overloading shoot() ===&quot;);
+        ranger.shoot(sniper, 60);
+
+        System.out.println(&quot;\n=== instanceof and casting ===&quot;);
+        for (Enemy e : wave) {
+            if (e instanceof Tank) {
+                Tank t = (Tank) e;          // safe: we just checked
+                t.raiseShield();
+            } else if (e instanceof Sniper) {
+                ((Sniper) e).aim();
+            } else {
+                System.out.println(e.getName() + &quot; is a &quot; + e.getClass().getSimpleName() + &quot;: no special move&quot;);
+            }
+        }
+
+        System.out.println(&quot;\n=== A GameCharacter reference ===&quot;);
+        GameCharacter c = tank;             // upcast: always allowed
+        c.describe();                       // still runs Tank&#x27;s describe()
+        System.out.println(&quot;c instanceof Enemy : &quot; + (c instanceof Enemy));
+        System.out.println(&quot;c instanceof Drone : &quot; + (c instanceof Drone));
+    }
+}</pre></div><p class="muted">Save every file in one folder, then compile and run: <code>javac *.java</code> → <code>java WaveDemo</code></p>
 </div></section>
-<section class="slide " data-title="Polymorphic dispatch" aria-label="Polymorphic dispatch" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 7 of 10 · <span class="walk-file">Lab4Demo.java</span></p><h2>Polymorphic dispatch</h2><pre class="code walk-code">// 3. Polymorphism with Superclass References
-System.out.println(&quot;\n=== Polymorphic Dispatch ===&quot;);
-Vehicle[] vehicles = {vehicle, car, motorcycle, electricCar};
-for (int i = 0; i &lt; vehicles.length; i++) {
-    System.out.println(&quot;vehicles[&quot; + i + &quot;]:&quot;);
-    displayVehicle(vehicles[i]);
-}</pre><ul class="walk-notes"><li>One Vehicle[] holds every kind of vehicle.</li><li>Each element runs its own display().</li></ul>
+<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Run the game</p><h2>Expected output</h2><div class="runbox" data-cmd="java WaveDemo"><pre class="run-src" hidden>=== The characters ===
+Player Ranger (100 HP, score 0)
+Enemy Drone-1 (30 HP, 5 damage)
+Enemy Tank-1 (120 HP, 20 damage)
+  armor 8
+Enemy Sniper-1 (50 HP, 35 damage)
+
+=== Polymorphism: one loop, three attacks ===
+Drone-1 dives at Ranger! -5
+Tank-1 fires a shell at Ranger! -20
+Sniper-1 takes aim... headshot on Ranger! -35
+Ranger&#x27;s health after the wave: 40
+
+=== Overriding takeDamage() ===
+Ranger shoots Drone-1 with power 25
+Ranger shoots Tank-1 with power 25
+  Tank-1&#x27;s armor blocks 8
+Tank health: 103
+
+=== Overloading shoot() ===
+Ranger shoots Sniper-1 with power 60
+Sniper-1 destroyed! Score 100
+
+=== instanceof and casting ===
+Drone-1 is a Drone: no special move
+Tank-1 raises its shield: armor 18
+Sniper-1 steadies the rifle (red laser on)
+
+=== A GameCharacter reference ===
+Enemy Tank-1 (103 HP, 20 damage)
+  armor 18
+c instanceof Enemy : true
+c instanceof Drone : false</pre></div>
 </div></section>
-<section class="slide " data-title="Inherited and subclass-only methods" aria-label="Inherited and subclass-only methods" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 8 of 10 · <span class="walk-file">Lab4Demo.java</span></p><h2>Inherited and subclass-only methods</h2><pre class="code walk-code">// 5. Subclass-Specific Methods
-System.out.println(&quot;\n=== Subclass-Specific Methods ===&quot;);
-car.refuel(20.0);
-System.out.println(&quot;After car.refuel(20.0):&quot;);
-car.display();
-motorcycle.wheelie();
-electricCar.charge(15.0);
-System.out.println(&quot;After electricCar.charge(15.0):&quot;);
-electricCar.display();</pre><ul class="walk-notes"><li>refuel, wheelie and charge exist only in their subclasses.</li></ul>
+<section class="slide " data-title="Game task 1: A Boss enemy" aria-label="Game task 1: A Boss enemy" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 1 of 3</p><h2>Game task 1: A Boss enemy</h2><div class="ex task g-task"><div class="qq">An enemy with two phases.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g4t0r0" data-key="g4t0r0"><label for="g4t0r0"><code>Boss extends Enemy</code> with 300 HP and 40 damage</label></li><li><input type="checkbox" id="g4t0r1" data-key="g4t0r1"><label for="g4t0r1">A field <code>phase</code> (1 or 2)</label></li><li><input type="checkbox" id="g4t0r2" data-key="g4t0r2"><label for="g4t0r2">Override takeDamage(): below 150 HP it switches to phase 2 and prints a warning</label></li><li><input type="checkbox" id="g4t0r3" data-key="g4t0r3"><label for="g4t0r3">Override attack(): in phase 2 it hits twice as hard</label></li><li><input type="checkbox" id="g4t0r4" data-key="g4t0r4"><label for="g4t0r4">Add the boss to the wave array and run the same loop</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Call <code>super.takeDamage(amount)</code> first, then check <code>health &lt; 150</code>.</div></details></div>
 </div></section>
-<section class="slide " data-title="instanceof and a safe cast" aria-label="instanceof and a safe cast" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 9 of 10 · <span class="walk-file">Lab4Demo.java</span></p><h2>instanceof and a safe cast</h2><pre class="code walk-code wide">// 6. instanceof and Safe Casting
-System.out.println(&quot;\n=== instanceof and Safe Casting ===&quot;);
-Vehicle v = new Car(&quot;Honda Civic&quot;, 2021, 2, 60.0);
-System.out.println(&quot;v instanceof Vehicle    : &quot; + (v instanceof Vehicle));
-System.out.println(&quot;v instanceof Car        : &quot; + (v instanceof Car));
-System.out.println(&quot;v instanceof Motorcycle : &quot; + (v instanceof Motorcycle));
-if (v instanceof Car) {
-    Car castedCar = (Car) v;
-    System.out.println(&quot;Number of doors after casting: &quot; + castedCar.getNumDoors());
-}</pre><ul class="walk-notes"><li>Check the real type, then cast to reach Car-only methods.</li></ul>
+<section class="slide " data-title="Game task 2: A Medic player class" aria-label="Game task 2: A Medic player class" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 2 of 3</p><h2>Game task 2: A Medic player class</h2><div class="ex task g-task"><div class="qq">A player who can heal.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g4t1r0" data-key="g4t1r0"><label for="g4t1r0"><code>Medic extends Player</code> with a constructor that uses <code>super(name)</code></label></li><li><input type="checkbox" id="g4t1r1" data-key="g4t1r1"><label for="g4t1r1">A new method <code>heal(GameCharacter c, int amount)</code></label></li><li><input type="checkbox" id="g4t1r2" data-key="g4t1r2"><label for="g4t1r2">Override describe()</label></li><li><input type="checkbox" id="g4t1r3" data-key="g4t1r3"><label for="g4t1r3">Store a Medic in a Player variable and call describe()</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">The field health is protected, and all the game classes are in one package, so the Medic can write <code>c.health</code>.</div></details></div>
 </div></section>
-<section class="slide " data-title="Overriding through Vehicle references" aria-label="Overriding through Vehicle references" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 10 of 10 · <span class="walk-file">Lab4Demo.java</span></p><h2>Overriding through Vehicle references</h2><pre class="code walk-code">// 7. Method Overriding Verification
-System.out.println(&quot;\n=== Method Overriding Verification ===&quot;);
-Vehicle ref1 = new Car(&quot;Ford Mustang&quot;, 2020, 2, 50.0);
-Vehicle ref2 = new Motorcycle(&quot;Harley-Davidson&quot;, 2022, false);
-Vehicle ref3 = new ElectricCar(&quot;Nissan Leaf&quot;, 2023, 4, 62.0, 70.0);
-ref1.display();
-ref2.display();
-ref3.display();</pre><ul class="walk-notes"><li>The reference type is Vehicle, but each object’s own display() runs.</li></ul>
+<section class="slide " data-title="Game task 3: Count by type" aria-label="Game task 3: Count by type" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 3 of 3</p><h2>Game task 3: Count by type</h2><div class="ex task g-task"><div class="qq">Report on a mixed wave.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g4t2r0" data-key="g4t2r0"><label for="g4t2r0">Build an Enemy[] with 2 drones, 2 tanks and 1 sniper</label></li><li><input type="checkbox" id="g4t2r1" data-key="g4t2r1"><label for="g4t2r1">Loop once and count each type with instanceof</label></li><li><input type="checkbox" id="g4t2r2" data-key="g4t2r2"><label for="g4t2r2">Raise every tank’s shield through a safe cast</label></li><li><input type="checkbox" id="g4t2r3" data-key="g4t2r3"><label for="g4t2r3">Print the counts and the total health of the wave</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">If you ever add a subclass of Tank, test the most specific class first.</div></details></div>
+</div></section>
+<section class="slide " data-title="The official lab program" aria-label="The official lab program" tabindex="-1"><div style="zoom:0.99;" class="slide-inner">
+<p class="kicker">Official lab · from the lab manual</p><h2>The official lab program</h2>
+<p class="g-official">The graded in-lab tasks and report exercises build on this program, not on the game. Read it and run it before you start them.</p>
+<ol class="flow"><li>Create a Vehicle, a Car, a Motorcycle and an ElectricCar</li><li>Call display() on each directly</li><li>Store them in a Vehicle[] and display them polymorphically</li><li>Call inherited accelerate() and brake()</li><li>Call subclass-only refuel(), wheelie() and charge()</li><li>Test instanceof and cast a Vehicle reference to Car</li><li>Verify overriding through Vehicle references</li><li>Show brake() never makes speed negative</li></ol><p class="note-line">Common state in Vehicle; each subclass adds fields and overrides display().</p>
 </div></section>
 <section class="slide " data-title="Trace: super(…) and dynamic dispatch" aria-label="Trace: super(…) and dynamic dispatch" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
-<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: super(…) and dynamic dispatch</h2><p class="muted">Watch super(…) build the inherited part, then one call site run two different display() methods.</p><div data-trace="lab4-dispatch"></div>
+<p class="kicker">Official lab · step through the code · 1 of 2</p><h2>Trace: super(…) and dynamic dispatch</h2><p class="muted">Watch super(…) build the inherited part, then one call site run two different display() methods.</p><div data-trace="lab4-dispatch"></div>
 </div></section>
 <section class="slide " data-title="Trace: instanceof before every cast" aria-label="Trace: instanceof before every cast" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
-<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: instanceof before every cast</h2><p class="muted">One loop over a Vehicle[]: the check decides whether the cast is safe. The last line shows what happens without it.</p><div data-trace="lab4-cast"></div>
+<p class="kicker">Official lab · step through the code · 2 of 2</p><h2>Trace: instanceof before every cast</h2><p class="muted">One loop over a Vehicle[]: the check decides whether the cast is safe. The last line shows what happens without it.</p><div data-trace="lab4-cast"></div>
 </div></section>
-<section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
-<p class="kicker">For reference · 5 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Vehicle.java">public class Vehicle {
+<section class="slide " data-title="The official program" aria-label="The official program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Official lab · 5 files</p><h2>The official program</h2><div class="codeview"><pre class="code small-code" data-file="Vehicle.java">public class Vehicle {
 
     // Protected fields are accessible in subclasses
     protected String make;
@@ -476,10 +772,10 @@ ref3.display();</pre><ul class="walk-notes"><li>The reference type is Vehicle, b
         System.out.println(&quot;After testCar.brake(200):&quot;);
         testCar.display();
     }
-}</pre></div><p class="muted">Copy or download each file, save it under the same name, then compile and run: <code>javac *.java</code> → <code>java Lab4Demo</code></p>
+}</pre></div><p class="muted">Compile and run: <code>javac *.java</code> → <code>java Lab4Demo</code></p>
 </div></section>
-<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Implementation</p><h2>Expected output</h2><div class="runbox" data-cmd="java Lab4Demo"><pre class="run-src" hidden>=== Object Creation ===
+<section class="slide " data-title="Official program: expected output" aria-label="Official program: expected output" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Official lab</p><h2>Official program: expected output</h2><div class="runbox" data-cmd="java Lab4Demo"><pre class="run-src" hidden>=== Object Creation ===
 
 === Direct Method Calls ===
 ------- Vehicle -------
@@ -540,26 +836,20 @@ After testCar.accelerate(100):  Speed : 100 km/h
 After testCar.brake(30):        Speed : 70 km/h
 After testCar.brake(200):       Speed : 0 km/h</pre></div><p class="note-line">Shortened: repeated display blocks are summarised. Run the program to see every block in full.</p>
 </div></section>
-<section class="slide " data-title="Reference type vs object type" aria-label="Reference type vs object type" tabindex="-1"><div style="zoom:0.90;" class="slide-inner">
-<p class="kicker">Interactive 1 of 2</p><h2>Reference type vs object type</h2><div data-demo="dispatch"></div>
-</div></section>
-<section class="slide " data-title="When is a cast safe?" aria-label="When is a cast safe?" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Interactive 2 of 2</p><h2>When is a cast safe?</h2><div data-demo="downcast"></div>
-</div></section>
 <section class="slide " data-title="Task 1: Add a Bus class" aria-label="Task 1: Add a Bus class" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 1 of 3</p><h2>Task 1: Add a Bus class</h2><div class="ex task"><div class="qq">A new Vehicle subclass that sells tickets.</div>
+<p class="kicker">Official in-lab task 1 of 3</p><h2>Task 1: Add a Bus class</h2><div class="ex task"><div class="qq">A new Vehicle subclass that sells tickets.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l4t0r0" data-key="l4t0r0"><label for="l4t0r0">Private fields <code>numSeats</code> and <code>ticketPrice</code> with getters</label></li><li><input type="checkbox" id="l4t0r1" data-key="l4t0r1"><label for="l4t0r1">Constructor that calls <code>super(make, year)</code></label></li><li><input type="checkbox" id="l4t0r2" data-key="l4t0r2"><label for="l4t0r2">Override <code>display()</code></label></li><li><input type="checkbox" id="l4t0r3" data-key="l4t0r3"><label for="l4t0r3"><code>calculateRevenue(int passengersBoarded)</code></label></li><li><input type="checkbox" id="l4t0r4" data-key="l4t0r4"><label for="l4t0r4">Demonstrate accelerate/brake, display and revenue in Lab4Demo</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Cap revenue at the number of seats: <code>Math.min(passengersBoarded, numSeats) * ticketPrice</code>.</div></details></div>
 </div></section>
 <section class="slide " data-title="Task 2: Create a HybridCar class" aria-label="Task 2: Create a HybridCar class" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 2 of 3</p><h2>Task 2: Create a HybridCar class</h2><div class="ex task"><div class="qq">A Car subclass that can run on fuel or battery.</div>
+<p class="kicker">Official in-lab task 2 of 3</p><h2>Task 2: Create a HybridCar class</h2><div class="ex task"><div class="qq">A Car subclass that can run on fuel or battery.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l4t1r0" data-key="l4t1r0"><label for="l4t1r0">Fields <code>batteryLevel</code> and <code>currentMode</code></label></li><li><input type="checkbox" id="l4t1r1" data-key="l4t1r1"><label for="l4t1r1"><code>useBattery(double)</code> and <code>switchMode(String)</code> ("Fuel" / "Battery")</label></li><li><input type="checkbox" id="l4t1r2" data-key="l4t1r2"><label for="l4t1r2">Override <code>display()</code></label></li><li><input type="checkbox" id="l4t1r3" data-key="l4t1r3"><label for="l4t1r3">Store it in a Vehicle reference and call display()</label></li><li><input type="checkbox" id="l4t1r4" data-key="l4t1r4"><label for="l4t1r4">Cast to HybridCar to call its own methods</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Calling <code>v.switchMode("Battery")</code> on a Vehicle reference will not compile — that is the point of the cast.</div></details></div>
 </div></section>
 <section class="slide " data-title="Task 3: Test instanceof and casting" aria-label="Task 3: Test instanceof and casting" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 3 of 3</p><h2>Task 3: Test instanceof and casting</h2><div class="ex task"><div class="qq">Process a mixed array safely.</div>
+<p class="kicker">Official in-lab task 3 of 3</p><h2>Task 3: Test instanceof and casting</h2><div class="ex task"><div class="qq">Process a mixed array safely.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l4t2r0" data-key="l4t2r0"><label for="l4t2r0">Array with Car, Motorcycle, ElectricCar and Bus objects</label></li><li><input type="checkbox" id="l4t2r1" data-key="l4t2r1"><label for="l4t2r1">Loop over it</label></li><li><input type="checkbox" id="l4t2r2" data-key="l4t2r2"><label for="l4t2r2">Identify each actual type with <code>instanceof</code></label></li><li><input type="checkbox" id="l4t2r3" data-key="l4t2r3"><label for="l4t2r3">Call type-specific methods after a safe cast</label></li><li><input type="checkbox" id="l4t2r4" data-key="l4t2r4"><label for="l4t2r4">Print clear output</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Test the most specific type first: an ElectricCar is also a Car.</div></details></div>
 </div></section>
 <section class="slide " data-title="Show your work" aria-label="Show your work" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
+<p class="kicker">Official in-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
 </div></section>
 <section class="slide " data-title="Report exercise 1" aria-label="Report exercise 1" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Lab report · exercise 1 of 2</p><h2>Employee hierarchy and payroll</h2><div class="ex task report"><div class="qq">Employee with Manager, Developer and Intern subclasses.</div>
@@ -573,25 +863,25 @@ After testCar.brake(200):       Speed : 0 km/h</pre></div><p class="note-line">S
 <p class="kicker">Lab report</p><h2>Writing the lab report</h2><ul class="big-list"><li>Problem statement and your design (classes, fields, methods)</li><li>Complete source code, formatted and commented</li><li>Sample output or screenshots for normal <b>and</b> edge cases</li><li>A short discussion: what each OOP concept did in your program</li></ul><div class="integrity"><h3>Academic integrity</h3><p>Copying from the internet, classmates, seniors or any other unauthorized source is strictly prohibited. Full marks may be deducted if plagiarism, copied work or academic dishonesty is detected. Complete the tasks, implementation, output analysis and report yourself.</p></div>
 </div></section>
 <section class="slide " data-title="Viva questions (1 of 2)" aria-label="Viva questions (1 of 2)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Discussion and analysis</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">Why does Car’s constructor start with <code>super(make, year)</code>?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">The Vehicle part of the object (make, year, speed) must be initialised first, and only Vehicle’s constructor knows how.</div></details></div><div class="ex"><div class="qq">Why are Vehicle’s fields protected instead of private?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">So subclasses such as Car can use make, year and speed directly in their display() methods.</div></details></div>
+<p class="kicker">Discussion</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">Why does Tank’s constructor call <code>super(name, 120, 20)</code>?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">The Enemy part (name, health, damage) must be built first, and only Enemy’s constructor knows how.</div></details></div><div class="ex"><div class="qq"><code>wave[1]</code> is a Tank in an Enemy[]. Which attack() runs for <code>wave[1].attack(ranger)</code>?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Tank’s. The actual object decides at run time.</div></details></div>
 </div></section>
 <section class="slide " data-title="Viva questions (2 of 2)" aria-label="Viva questions (2 of 2)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Discussion and analysis</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq"><code>Vehicle v = new Motorcycle(…); v.display();</code> — which display runs?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Motorcycle’s. The object type decides at run time (dynamic dispatch).</div></details></div><div class="ex"><div class="qq">Why can’t <code>v.wheelie()</code> compile?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">The compiler only knows v is a Vehicle, and Vehicle has no wheelie(). Check instanceof and cast to Motorcycle first.</div></details></div>
+<p class="kicker">Discussion</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq">Why does <code>wave[1].raiseShield()</code> not compile?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">The compiler only knows wave[1] is an Enemy, and Enemy has no raiseShield(). Check instanceof and cast to Tank first.</div></details></div><div class="ex"><div class="qq">Drone has no describe() method. What does <code>drone.describe()</code> print?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Enemy’s version: Drone inherits it from Enemy, which overrides GameCharacter’s.</div></details></div>
 </div></section>
 <section class="slide " data-title="Quiz" aria-label="Quiz" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="lab4"></div><script type="application/json" class="quiz-json">[{"q": "Which keyword calls the superclass constructor?", "o": ["this", "super", "extends", "base"], "a": 1, "w": "super(\u2026) must be the first statement."}, {"q": "An ElectricCar is also a\u2026", "o": ["Motorcycle", "Car and Vehicle", "Vehicle only", "nothing else"], "a": 1, "w": "ElectricCar \u2192 Car \u2192 Vehicle."}, {"q": "Overriding is resolved\u2026", "o": ["at compile time", "at run time", "by the programmer", "never"], "a": 1, "w": "The JVM picks the version from the actual object."}, {"q": "<code>(Car) v<\/code> where v refers to a Motorcycle throws\u2026", "o": ["NullPointerException", "ClassCastException", "nothing", "compile error only"], "a": 1, "w": "Check with instanceof first."}, {"q": "Which access modifier lets subclasses see a field?", "o": ["private", "protected", "none of these", "static"], "a": 1, "w": "protected: same package and subclasses."}]</script></div>
+<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="game4"></div><script type="application/json" class="quiz-json">[{"q": "Which keyword calls the superclass constructor?", "o": ["this", "super", "extends", "base"], "a": 1, "w": "super(\u2026) must be the first statement."}, {"q": "A Tank is also a\u2026", "o": ["Drone", "Enemy and GameCharacter", "Player", "nothing else"], "a": 1, "w": "Tank \u2192 Enemy \u2192 GameCharacter."}, {"q": "Which attack() runs for <code>Enemy e = new Sniper(\"S\"); e.attack(p);<\/code>?", "o": ["Enemy\u2019s", "Sniper\u2019s", "GameCharacter\u2019s", "none: compile error"], "a": 1, "w": "Overriding is resolved from the object at run time."}, {"q": "<code>(Tank) e<\/code> where e refers to a Drone throws\u2026", "o": ["NullPointerException", "ClassCastException", "nothing", "only a compile error"], "a": 1, "w": "Check with instanceof first."}, {"q": "<code>shoot(target)<\/code> and <code>shoot(target, power)<\/code> in Player are\u2026", "o": ["overriding", "overloading", "polymorphism at run time", "inheritance"], "a": 1, "w": "Same name, different parameters, same class."}]</script></div>
 </div></section>
 <section class="slide " data-title="Summary" aria-label="Summary" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Summary</p><h2>Summary</h2><ul class="sumlist"><li>extends creates an is-a relationship and reuses superclass code.</li><li>super(…) initialises the inherited part first.</li><li>Overriding replaces an inherited method; @Override lets the compiler check it.</li><li>Superclass references + overriding = polymorphism (dynamic dispatch).</li><li>Use instanceof before downcasting.</li></ul><div class="nextcard"><a class="btn pri" href="05-abstract-classes-interfaces.html">Next: Lab 5 · Abstract classes and interfaces</a><a class="btn" href="../index.html">All labs</a></div>
+<p class="kicker">Mission debrief</p><h2>Summary</h2><ul class="sumlist"><li>extends builds an is-a tree; subclasses reuse everything above them.</li><li>super(…) builds the inherited part first; protected shares fields with subclasses.</li><li>Overriding replaces an inherited method; @Override lets the compiler check it.</li><li>Superclass references + overriding = polymorphism: one loop, many behaviours.</li><li>Check instanceof before you cast.</li><li>Next mission: rules that every game object must follow.</li></ul><div class="nextcard"><a class="btn pri" href="05-abstract-classes-interfaces.html">Next: Mission 5 · Rules every object follows</a><a class="btn" href="../index.html">All chapters</a></div>
 </div></section>
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 37</span>
+  <span class="counter" id="counter">1 / 45</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
-<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
-<noscript><p style="padding:20px">This lab needs JavaScript for the slides and the interactive examples.</p></noscript>
+<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this chapter</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
+<noscript><p style="padding:20px">This chapter needs JavaScript for the slides, the game scenes and the interactive examples.</p></noscript>
 <script src="../js/core.js"></script>
 <script src="../js/art.js"></script>
 <script src="../js/java.js"></script>
@@ -603,10 +893,14 @@ After testCar.brake(200):       Speed : 0 km/h</pre></div><p class="note-line">S
 <script src="../js/demos-basics.js"></script>
 <script src="../js/demos-oop.js"></script>
 <script src="../js/demos-adv.js"></script>
+<script src="../js/game-core.js"></script>
+<script src="../js/game-scenes-a.js"></script>
+<script src="../js/game-scenes-b.js"></script>
+<script src="../js/game-scenes-c.js"></script>
 <script src="../js/quiz.js"></script>
 <script src="../js/page.js"></script>
 <script src="../js/lab.js"></script>
-<script>window.OOP_TOPIC = {"id": 4, "prev": "03-constructors-overloading.html", "next": "05-abstract-classes-interfaces.html", "nextLabel": "Next lab"};</script>
+<script>window.OOP_TOPIC = {"id": 4, "prev": "03-constructors-overloading.html", "next": "05-abstract-classes-interfaces.html", "nextLabel": "Next chapter"};</script>
 <script>mountPage();</script>
 <script src="../js/slides.js"></script>
 <script src="../js/annotate.js"></script>

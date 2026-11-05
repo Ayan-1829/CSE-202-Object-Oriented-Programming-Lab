@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Model a real thing as a class with private fields, a constructor and methods; create objects, use getters and setters, a static counter, and see two variables share one object.">
-<meta name="keywords" content="java class, object, constructor, this keyword, encapsulation, static, reference semantics, lab, cse 202, object oriented programming lab">
+<meta name="description" content="Turn the commando and the drones into objects. One class is the blueprint, every object keeps its own health. Fields, constructors, methods, encapsulation, static members and references.">
+<meta name="keywords" content="java class, object, constructor, this keyword, encapsulation, static, reference semantics, lab, java game, game programming, cse 202, object oriented programming lab">
 <meta name="author" content="Object Oriented Programming Lab Notes">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#155E63">
@@ -16,32 +16,33 @@
 <link rel="manifest" href="../site.webmanifest">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
-<meta property="og:title" content="Lab 2: Classes, Objects, Instances &amp; Methods | OOP Lab (CSE 202)">
-<meta property="og:description" content="Model a real thing as a class with private fields, a constructor and methods; create objects, use getters and setters, a static counter, and see two variables share one object.">
+<meta property="og:title" content="Chapter 2: Classes, Objects, Instances &amp; Methods | OOP Lab (CSE 202)">
+<meta property="og:description" content="Turn the commando and the drones into objects. One class is the blueprint, every object keeps its own health. Fields, constructors, methods, encapsulation, static members and references.">
 <meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/02-classes-and-objects.html">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/02-classes-and-objects.png?v=2">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Lab 2 of 10: Classes, Objects, Instances &amp; Methods – CSE 202 Object Oriented Programming Lab">
+<meta property="og:image:alt" content="Chapter 2 of 10: Classes, Objects, Instances &amp; Methods – CSE 202 Object Oriented Programming Lab">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Lab 2: Classes, Objects, Instances &amp; Methods | OOP Lab (CSE 202)">
-<meta name="twitter:description" content="Model a real thing as a class with private fields, a constructor and methods; create objects, use getters and setters, a static counter, and see two variables share one object.">
+<meta name="twitter:title" content="Chapter 2: Classes, Objects, Instances &amp; Methods | OOP Lab (CSE 202)">
+<meta name="twitter:description" content="Turn the commando and the drones into objects. One class is the blueprint, every object keeps its own health. Fields, constructors, methods, encapsulation, static members and references.">
 <meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/02-classes-and-objects.png?v=2">
-<meta name="twitter:image:alt" content="Lab 2 of 10: Classes, Objects, Instances &amp; Methods – CSE 202 Object Oriented Programming Lab">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Classes, Objects, Instances & Methods", "description": "Model a real thing as a class with private fields, a constructor and methods; create objects, use getters and setters, a static counter, and see two variables share one object.", "position": 2, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 40, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/02-classes-and-objects.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/02-classes-and-objects.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
-<title>Lab 2: Classes, Objects, Instances &amp; Methods | OOP Lab (CSE 202)</title>
+<meta name="twitter:image:alt" content="Chapter 2 of 10: Classes, Objects, Instances &amp; Methods – CSE 202 Object Oriented Programming Lab">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Classes, Objects, Instances & Methods", "description": "Turn the commando and the drones into objects. One class is the blueprint, every object keeps its own health. Fields, constructors, methods, encapsulation, static members and references.", "position": 2, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 42, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/02-classes-and-objects.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/02-classes-and-objects.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
+<title>Chapter 2: Classes, Objects, Instances &amp; Methods | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/lab.css">
+<link rel="stylesheet" href="../css/game.css">
 </head>
 <body class="deck-page">
 <div class="sr-only" id="live" aria-live="polite"></div>
 <header class="deck-bar">
-  <a class="home-link" href="../index.html" aria-label="Home: all labs"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
+  <a class="home-link" href="../index.html" aria-label="Home: all chapters"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
   <div class="deck-title"><span class="badge">2</span><span>Classes, Objects, Instances &amp; Methods</span></div>
   <div class="deck-actions">
     <button type="button" class="btn sm" id="btn-menu" aria-expanded="false" aria-controls="slide-menu" aria-label="Slides"><svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><rect x="3" y="4.5" width="18" height="3" rx="1"></rect><rect x="3" y="10.5" width="18" height="3" rx="1"></rect><rect x="3" y="16.5" width="18" height="3" rx="1"></rect></svg><span>Slides</span></button>
@@ -52,192 +53,436 @@
 <div class="deck-progress"><i id="progress-fill"></i></div>
 <main class="deck" id="deck">
 <section class="slide title-slide" data-title="Classes, Objects, Instances &amp; Methods" aria-label="Classes, Objects, Instances &amp; Methods" tabindex="-1"><div class="slide-inner">
-<span class="topic-art" data-art="4" aria-hidden="true"></span>
+<div class="topic-art g-title-art" data-demo="g-title" data-ch="2" aria-hidden="true"></div>
 <span class="badge big">2</span>
-<p class="kicker">Lab II · CSE 202</p>
+<p class="kicker">Chapter 2 · Lab II · CSE 202</p>
 <h1>Classes, Objects, Instances & Methods</h1>
-<p class="lead">Model a real thing as a class with private fields, a constructor and methods; create objects, use getters and setters, a static counter, and see two variables share one object.</p>
-<div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
+<p class="g-mission">Mission 2 · Build the characters</p>
+<p class="lead">Turn the commando and the drones into objects. One class is the blueprint, every object keeps its own health. Fields, constructors, methods, encapsulation, static members and references.</p>
+<div class="row"><a class="btn pri" href="#s=2">Start the mission</a><a class="btn" href="../index.html">All chapters</a></div>
 <p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
 </div></section>
-<section class="slide " data-title="Why this lab" aria-label="Why this lab" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Before we start</p><h2>Why this lab</h2><div class="hook"><p class="q">A car park holds hundreds of cars, all different, all built to one design. How does a program describe the design once and make many cars?</p><p>The design is a <b>class</b>; each car is an <b>object</b> with its own make, speed and fuel. In this lab you build a <code>Car</code> class and drive two of them.</p></div>
+<section class="slide " data-title="Your mission" aria-label="Your mission" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Mission 2 · Build the characters</p><h2>Your mission</h2><div class="hook"><p class="q">Three drones attack at once. Do we write the drone code three times?</p><p>No. Write one <b>class</b>, <code>Enemy</code>, as a blueprint, then build as many <b>objects</b> as you like with <code>new</code>. Each object keeps its own health.</p></div>
 </div></section>
-<section class="slide " data-title="Lab at a glance" aria-label="Lab at a glance" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 2 of 10</p><h2>Lab at a glance</h2><div class="cols wl"><div><h3>After this lab you can</h3><ul class=""><li>Explain the difference between a class and an object</li><li>Define a class with fields, a constructor and methods</li><li>Create objects with <code>new</code> and call their methods</li><li>Apply encapsulation with private fields, getters and setters</li><li>Use <code>this</code> to refer to the current object</li><li>Use a <code>static</code> field and method for class-level data</li><li>Show that two reference variables can point to the same object</li></ul></div>
-<div><h3>Before you start</h3><ul class=""><li>Lab 1: program structure, types, decisions and loops</li><li>Compiling and running Java files from an IDE</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
+<section class="slide " data-title="Chapter at a glance" aria-label="Chapter at a glance" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Chapter 2 of 10</p><h2>Chapter at a glance</h2><div class="cols wl"><div><h3>After this chapter you can</h3><ul class=""><li>Explain class and object with the Enemy blueprint and its drones</li><li>Write fields, a constructor and methods for <code>Player</code> and <code>Enemy</code></li><li>Protect fields with <code>private</code> and a validating setter</li><li>Tell instance members from static members (<code>enemiesSpawned</code>)</li><li>Follow references from stack variables to heap objects</li></ul></div>
+<div><h3>Before you start</h3><ul class=""><li>Chapter 1: variables, if and loops</li><li>Compile and run a program with several files: <code>javac *.java</code></li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Topics: the idea, then the game</li><li>Run the game program</li><li>Game practice tasks</li><li>Official lab and graded tasks</li><li>Report exercises at home</li></ol></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 2 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=11">Program design</a></li><li><a href="#s=13">Code walkthrough</a></li><li><a href="#s=23">Step-through traces: stack, heap and output</a></li><li><a href="#s=26">Expected output</a></li><li><a href="#s=27">Interactive demos</a></li><li><a href="#s=30">In-lab tasks</a></li><li><a href="#s=34">Lab report exercises</a></li><li><a href="#s=37">Viva questions and quiz</a></li></ol>
+<p class="kicker">Chapter 2 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=23">Run the game</a></li><li><a href="#s=24">Game practice tasks</a></li><li><a href="#s=27">The official lab program</a></li><li><a href="#s=32">Official in-lab tasks</a></li><li><a href="#s=36">Lab report exercises</a></li><li><a href="#s=39">Viva questions and quiz</a></li></ol>
+</div></section>
+<section class="slide " data-title="Today’s build" aria-label="Today’s build" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Build the game · Chapter 2</p><h2>Today’s build</h2><ul class="pts"><li>Three files: <code>Player</code> and <code>Enemy</code> are the blueprints; <code>BattleDemo</code> builds the objects and runs a small fight.</li><li>Compile all three together: <code>javac *.java</code>, then <code>java BattleDemo</code>.</li></ul>
+<div class="cols wl"><div><h3>What the program does</h3><ol class="flow"><li>Create one Player and two Enemy objects</li><li>Show that each object keeps its own health</li><li>Let the objects fight by calling each other’s methods</li><li>Test the validating setter with 250 and -30</li><li>Make a second reference to the same drone</li></ol></div><div><h3>Files</h3><ul class="g-files"><li><code>Player.java</code> <span class="muted">(68 lines)</span></li><li><code>Enemy.java</code> <span class="muted">(38 lines)</span></li><li><code>BattleDemo.java</code> <span class="muted">(39 lines)</span></li></ul><p class="muted">145 lines in all. Each topic below shows the part of the program that uses it.</p></div></div>
 </div></section>
 <section class="slide " data-title="Class and object" aria-label="Class and object" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 1 of 5</p><h2>Class and object</h2><figure class="fig" data-fig="lab2-car-objects"></figure><ul class=""><li>A <b>class</b> is a blueprint: it lists the data (fields) and actions (methods) every object will have.</li><li>An <b>object</b> is a runtime instance made with <code>new</code>; each one has its own copy of the fields.</li></ul>
+<p class="kicker">Topic 1 of 6</p><h2>Class and object</h2><div class="g-ingame"><div>In the game:</div><div>Class = blueprint, object = the real thing</div></div><div class="g-codeside g-topic"><div><div class="kicker g-wk"><div class="walk-file">BattleDemo.java</div><div>·</div><div>BattleDemo: creating objects</div></div><pre class="code small-code">System.out.println(&quot;=== Creating objects with new ===&quot;);
+Player ranger = new Player(&quot;Ranger&quot;, 100, 5);
+Enemy drone1 = new Enemy(&quot;Drone-1&quot;, 40, 50);
+Enemy drone2 = new Enemy(&quot;Drone-2&quot;, 40, 50);
+ranger.showStatus();
+System.out.println(&quot;Players created: &quot; + Player.getPlayersCreated());
+System.out.println(&quot;Enemies spawned: &quot; + Enemy.getEnemiesSpawned());
+
+System.out.println(&quot;\n=== Each object keeps its own state ===&quot;);
+ranger.shoot(drone1);
+System.out.println(&quot;drone1 health: &quot; + drone1.getHealth());
+System.out.println(&quot;drone2 health: &quot; + drone2.getHealth());</pre></div><ul class="pts"><li>A <b>class</b> is a blueprint: it lists what every object has and does.</li><li>An <b>object</b> is one real thing built from the class with <code>new</code>.</li><li>Each object keeps its own values.</li><li>Three <code>new</code>s: three objects.</li><li>Shooting drone1 leaves drone2 at 40.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Class = blueprint, object = the real thing" aria-label="Class = blueprint, object = the real thing" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 6 · in the game</p><h2>Class = blueprint, object = the real thing</h2><div data-demo="g-blueprint"></div><ul class="pts pts-row"><li>A <b>class</b> says what every enemy has (fields) and can do (methods).</li><li><code>new Enemy("Drone-1", 40, 50)</code> builds one <b>object</b>, also called an instance.</li><li>Each object has its own fields: shooting one drone leaves the others untouched.</li></ul>
 </div></section>
 <section class="slide " data-title="Fields, constructor and this" aria-label="Fields, constructor and this" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 2 of 5</p><h2>Fields, constructor and this</h2><pre class="code small-code">public class Car {
-    private String make;
-    private int speed;
-    private double fuelLevel;
+<p class="kicker">Topic 2 of 6</p><h2>Fields, constructor and this</h2><div class="g-codeside"><pre class="code small-code">public class Enemy {
+    private String type;
+    private int health;
+    private int points;
 
-    public Car(String make, double fuelLevel) {
-        this.make = make;          // field = parameter
-        this.speed = 0;
-        this.fuelLevel = fuelLevel;
+    public Enemy(String type, int health, int points) {
+        this.type = type;
+        this.health = health;
+        this.points = points;
     }
-}</pre><ul class=""><li>A constructor has the class name and no return type; it runs once, when the object is created.</li><li><code>this.make</code> is the field of the current object; <code>make</code> alone is the parameter.</li></ul>
+}</pre><ul class="pts"><li><b>Fields</b> are the variables inside an object.</li><li>A <b>constructor</b> has the class name and no return type; it fills the fields when <code>new</code> runs.</li><li><code>this.health</code> means “this object’s field” when a parameter has the same name.</li><li><b>Fields</b> hold each object’s state.</li><li>The <b>constructor</b> runs once for each new object and fills the fields.</li><li><code>this.health</code> is the field; plain <code>health</code> is the parameter.</li></ul></div>
 </div></section>
-<section class="slide " data-title="Encapsulation: getters and validating setters" aria-label="Encapsulation: getters and validating setters" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 3 of 5</p><h2>Encapsulation: getters and validating setters</h2><pre class="code small-code">public void setFuelLevel(double fuelLevel) {
-    if (fuelLevel &gt;= 0.0 &amp;&amp; fuelLevel &lt;= 100.0) {
-        this.fuelLevel = fuelLevel;   // invalid values are rejected
-    }
-}</pre><ul class=""><li>Fields are <code>private</code>: outside code cannot change them directly.</li><li>Public methods give controlled access, so an object can never hold an invalid fuel level.</li></ul>
-</div></section>
-<section class="slide " data-title="Instance members vs static members" aria-label="Instance members vs static members" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 4 of 5</p><h2>Instance members vs static members</h2><figure class="fig" data-fig="lab2-static"></figure><ul class=""><li>Each object has its own <code>make</code>, <code>speed</code> and <code>fuelLevel</code>.</li><li><code>private static int count</code> belongs to the class: one copy shared by all cars.</li><li>Call a static method on the class: <code>Car.getCount()</code>.</li></ul>
-</div></section>
-<section class="slide " data-title="References, stack and heap" aria-label="References, stack and heap" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 5 of 5</p><h2>References, stack and heap</h2><figure class="fig" data-fig="lab2-refs"></figure><ul class=""><li>Objects live on the <b>heap</b>; variables on the <b>stack</b> hold references to them.</li><li>Assigning a reference copies the arrow, not the object: <code>car1</code> and <code>car3</code> are aliases.</li></ul>
+<section class="slide " data-title="Player: fields and a static counter" aria-label="Player: fields and a static counter" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 2 of 6 · our game program · 1 of 2 · <span class="walk-file">Player.java</span></p><h2>Player: fields and a static counter</h2><div class="walk-side g-walk"><pre class="code walk-code">public class Player {
+    // Fields: every Player object gets its own copy
+    private String name;
+    private int health;
+    private int ammo;
+    private int score;
 
-<div class="applinks" role="group" aria-label="Explore further"><span class="al-h">Explore further</span><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/ram.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">RAM</span></a></div>
+    // Static field: one copy shared by the whole class
+    private static int playersCreated = 0;</pre><ul class="walk-notes"><li>Four private fields: every Player object gets its own.</li><li><code>playersCreated</code> is static: shared by all players.</li></ul></div>
 </div></section>
-<section class="slide " data-title="References, stack and heap (code)" aria-label="References, stack and heap (code)" tabindex="-1"><div class="slide-inner">
-<h2>References, stack and heap</h2><pre class="code small-code">Car car3 = car1;      // no new object!
-car3.accelerate(20);
-System.out.println(car1.getSpeed());  // changed too</pre>
+<section class="slide " data-title="The Player constructor" aria-label="The Player constructor" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 2 of 6 · our game program · 2 of 2 · <span class="walk-file">Player.java</span></p><h2>The Player constructor</h2><div class="walk-side g-walk"><pre class="code walk-code">// Constructor: runs once for each new Player
+public Player(String name, int health, int ammo) {
+    this.name = name;
+    setHealth(health);
+    this.ammo = ammo;
+    this.score = 0;
+    playersCreated++;
+}</pre><ul class="walk-notes"><li><code>this.name</code> is the field, <code>name</code> the parameter.</li><li>Health goes through <code>setHealth</code>, so even the constructor is checked.</li></ul></div>
 </div></section>
-<section class="slide " data-title="Program design" aria-label="Program design" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Implementation design</p><h2>Program design</h2><figure class="fig" data-fig="lab2-car-uml"></figure>
-</div></section>
-<section class="slide " data-title="Execution flow" aria-label="Execution flow" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Implementation design</p><h2>Execution flow</h2><ol class="flow"><li>Create two Car objects; the constructor increments the static count</li><li>Print the count with <code>Car.getCount()</code></li><li>Accelerate and brake car1, showing state after each call (speed never goes below 0)</li><li>Accelerate and refuel car2 (fuel never exceeds 100)</li><li>Read with getters, change make with a setter</li><li>Alias car3 = car1 and show the shared speed</li><li>Print the final count</li></ol><p class="note-line"><code>Car</code> defines state and behaviour; <code>Lab2Demo</code> only tests it.</p>
-</div></section>
-<section class="slide " data-title="Fields: instance and static" aria-label="Fields: instance and static" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 1 of 10 · <span class="walk-file">Car.java</span></p><h2>Fields: instance and static</h2><pre class="code walk-code">// Private instance fields
-private String make;
-private int speed;
-private double fuelLevel;
+<section class="slide " data-title="Methods" aria-label="Methods" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 6</p><h2>Methods</h2><div class="g-ingame"><div>In the game:</div><div>Methods: what objects can do</div></div><div class="g-codeside"><pre class="code small-code">ranger.shoot(drone1);          // the player acts on a drone
 
-// Static field shared by all Car objects
-private static int count = 0;</pre><ul class="walk-notes"><li>Each Car object gets its own make, speed and fuelLevel.</li><li><code>count</code> is static: one copy for the whole class.</li></ul>
+// inside Player.shoot(Enemy target):
+ammo--;
+target.takeDamage(25);         // the drone changes its own health
+if (!target.isAlive()) {
+    score += target.getPoints();
+}</pre><ul class="pts"><li>A <b>method</b> is something an object can do.</li><li>It may take parameters and may <code>return</code> a value (<code>void</code> returns nothing).</li><li>Call it on an object: <code>c.increment()</code>.</li><li>A method is called on an object: <code>ranger.shoot(…)</code>.</li><li>Inside, it works on that object’s own fields.</li><li>Objects cooperate by calling each other’s methods.</li></ul></div>
 </div></section>
-<section class="slide " data-title="The constructor" aria-label="The constructor" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 2 of 10 · <span class="walk-file">Car.java</span></p><h2>The constructor</h2><pre class="code walk-code">public Car(String make, double fuelLevel) {
-    this.make = make;
-    this.speed = 0;
-    if (fuelLevel &gt;= 0.0 &amp;&amp; fuelLevel &lt;= 100.0) {
-        this.fuelLevel = fuelLevel;
-    } else {
-        this.fuelLevel = 0.0;
+<section class="slide " data-title="shoot(): one object acts on another" aria-label="shoot(): one object acts on another" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 6 · our game program · 1 of 4 · <span class="walk-file">Player.java</span></p><h2>shoot(): one object acts on another</h2><div class="walk-side g-walk"><pre class="code walk-code wide">public void shoot(Enemy target) {
+    if (!target.isAlive()) {
+        System.out.println(name + &quot; holds fire: &quot; + target.getType() + &quot; is already destroyed&quot;);
+        return;
     }
-    count++;
-}</pre><ul class="walk-notes"><li><code>this.make</code> is the field, <code>make</code> the parameter.</li><li>Invalid fuel is replaced by 0.0.</li><li><code>count++</code> counts every car created.</li></ul>
+    if (ammo == 0) {
+        System.out.println(name + &quot; pulls the trigger: click! Out of ammo&quot;);
+        return;
+    }
+    ammo--;
+    target.takeDamage(25);
+    System.out.println(name + &quot; shoots &quot; + target.getType() + &quot; -&gt; its health &quot; + target.getHealth());
+    if (!target.isAlive()) {
+        score += target.getPoints();
+        System.out.println(target.getType() + &quot; destroyed! +&quot; + target.getPoints() + &quot; points&quot;);
+    }
+}</pre><ul class="walk-notes"><li>Two early <code>return</code>s: a destroyed target, an empty clip.</li><li><code>target.takeDamage(25)</code> changes the drone, not the player.</li><li>Points are added only when the shot destroys it.</li></ul></div>
 </div></section>
-<section class="slide " data-title="Behaviour: accelerate and brake" aria-label="Behaviour: accelerate and brake" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 3 of 10 · <span class="walk-file">Car.java</span></p><h2>Behaviour: accelerate and brake</h2><pre class="code walk-code">public void accelerate(int delta) {
-    if (delta &gt; 0) {
-        this.speed = this.speed + delta;
+<section class="slide " data-title="takeDamage(), isAlive() and showStatus()" aria-label="takeDamage(), isAlive() and showStatus()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 6 · our game program · 2 of 4 · <span class="walk-file">Player.java</span></p><h2>takeDamage(), isAlive() and showStatus()</h2><pre class="code walk-code wide">public void takeDamage(int amount) {
+    setHealth(health - amount);
+}
+
+public boolean isAlive() {
+    return health &gt; 0;
+}
+
+public void showStatus() {
+    System.out.println(&quot;[&quot; + name + &quot;] health &quot; + health + &quot; | ammo &quot; + ammo + &quot; | score &quot; + score);
+}</pre><ul class="walk-notes"><li>takeDamage reuses the setter, so health never goes below 0.</li></ul>
+</div></section>
+<section class="slide " data-title="Enemy: its methods" aria-label="Enemy: its methods" tabindex="-1"><div style="zoom:0.98;" class="slide-inner">
+<p class="kicker">Topic 3 of 6 · our game program · 3 of 4 · <span class="walk-file">Enemy.java</span></p><h2>Enemy: its methods</h2><div class="walk-side g-walk"><pre class="code walk-code wide">public String getType() { return type; }
+public int getHealth()  { return health; }
+public int getPoints()  { return points; }
+public static int getEnemiesSpawned() { return enemiesSpawned; }
+
+public boolean isAlive() {
+    return health &gt; 0;
+}
+
+public void takeDamage(int amount) {
+    health -= amount;
+    if (health &lt; 0) {
+        health = 0;
     }
 }
 
-public void brake(int delta) {
-    if (delta &gt; 0) {
-        this.speed = Math.max(0, this.speed - delta);
+public void attack(Player target) {
+    if (isAlive()) {
+        target.takeDamage(10);
+        System.out.println(type + &quot; zaps &quot; + target.getName() + &quot; -&gt; health &quot; + target.getHealth());
     }
-}</pre><ul class="walk-notes"><li>Methods change the object’s own state.</li><li><code>Math.max(0, …)</code> keeps the speed from going negative.</li></ul>
+}</pre><ul class="walk-notes"><li><code>attack</code> calls a method on the Player it is given.</li></ul></div>
 </div></section>
-<section class="slide " data-title="refuel() and display()" aria-label="refuel() and display()" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 4 of 10 · <span class="walk-file">Car.java</span></p><h2>refuel() and display()</h2><pre class="code walk-code">public void refuel(double amount) {
-    if (amount &gt; 0.0) {
-        this.fuelLevel = Math.min(100.0, this.fuelLevel + amount);
+<section class="slide " data-title="BattleDemo: the fight" aria-label="BattleDemo: the fight" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 6 · our game program · 4 of 4 · <span class="walk-file">BattleDemo.java</span></p><h2>BattleDemo: the fight</h2><pre class="code walk-code">System.out.println(&quot;\n=== The fight: objects calling each other&#x27;s methods ===&quot;);
+drone2.attack(ranger);
+ranger.shoot(drone1);
+drone2.attack(ranger);
+ranger.shoot(drone2);
+ranger.shoot(drone1);
+ranger.shoot(drone2);
+ranger.shoot(drone2);
+ranger.showStatus();</pre><ul class="walk-notes"><li>Objects take turns calling each other’s methods.</li><li>Shooting a destroyed drone is refused, so no ammo is wasted.</li></ul>
+</div></section>
+<section class="slide " data-title="Encapsulation" aria-label="Encapsulation" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 4 of 6</p><h2>Encapsulation</h2><div class="g-ingame"><div>In the game:</div><div>Encapsulation: private fields and a validating setter</div></div><div class="g-codeside"><pre class="code small-code">private int health;
+
+public int getHealth() { return health; }
+
+public void setHealth(int health) {
+    if (health &lt; 0) {
+        health = 0;
     }
+    if (health &gt; 100) {
+        health = 100;
+    }
+    this.health = health;
+}</pre><ul class="pts"><li>Make fields <code>private</code>: only the class itself can touch them.</li><li>Give controlled access with public <b>getters</b> and <b>setters</b>.</li><li>A setter can refuse bad values.</li><li><code>private</code>: only code inside the class can touch the field.</li><li>Others read through a getter and write through a setter.</li><li>The setter refuses bad values: health always stays between 0 and 100.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Getters and the validating setter" aria-label="Getters and the validating setter" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 4 of 6 · our game program · 1 of 1 · <span class="walk-file">Player.java</span></p><h2>Getters and the validating setter</h2><div class="walk-side g-walk"><pre class="code walk-code">// Getters: read-only access to private fields
+public String getName() { return name; }
+public int getHealth()  { return health; }
+public int getAmmo()    { return ammo; }
+public int getScore()   { return score; }
+public static int getPlayersCreated() { return playersCreated; }
+
+// Validating setter: health always stays between 0 and 100
+public void setHealth(int health) {
+    if (health &lt; 0) {
+        health = 0;
+    }
+    if (health &gt; 100) {
+        health = 100;
+    }
+    this.health = health;
+}</pre><ul class="walk-notes"><li>Getters give read-only access.</li><li>The setter clamps health to 0..100.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Instance and static members" aria-label="Instance and static members" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 6</p><h2>Instance and static members</h2><div class="g-ingame"><div>In the game:</div><div>Instance members and static members</div></div><div class="g-codeside"><pre class="code small-code">private int health;                      // one per object
+private static int enemiesSpawned = 0;   // one for the whole class
+
+public Enemy(String type, int health, int points) {
+    …
+    enemiesSpawned++;                    // counts every new Enemy
 }
 
-public void display() {
-    System.out.println(&quot;-------------------------------&quot;);
-    System.out.println(&quot;Make      : &quot; + make);
-    System.out.println(&quot;Speed     : &quot; + speed + &quot; km/h&quot;);
-    System.out.printf(&quot;Fuel Level: %.1f%%%n&quot;, fuelLevel);
-    System.out.println(&quot;-------------------------------&quot;);
-}</pre><ul class="walk-notes"><li><code>Math.min(100.0, …)</code> caps the fuel at 100%.</li><li><code>%%</code> prints a percent sign in printf.</li></ul>
+int n = Enemy.getEnemiesSpawned();       // called on the class</pre><ul class="pts"><li>An <b>instance</b> field: every object has its own copy (each drone’s health).</li><li>A <code>static</code> field: one copy shared by the whole class (how many enemies were spawned).</li><li>Use a static member through the class name: <code>Enemy.enemiesSpawned</code>.</li><li>An <b>instance</b> field belongs to each object.</li><li>A <b>static</b> field belongs to the class: one shared copy.</li><li>Call static methods on the class name: <code>Enemy.getEnemiesSpawned()</code>.</li></ul></div>
 </div></section>
-<section class="slide " data-title="Getters, setters and a static method" aria-label="Getters, setters and a static method" tabindex="-1"><div style="zoom:0.92;" class="slide-inner">
-<p class="kicker">Code walkthrough 5 of 10 · <span class="walk-file">Car.java</span></p><h2>Getters, setters and a static method</h2><pre class="code walk-code">// Getter methods
-public String getMake() { return make; }
-public int getSpeed() { return speed; }
-public double getFuelLevel() { return fuelLevel; }
+<section class="slide " data-title="Enemy: fields, counter and constructor" aria-label="Enemy: fields, counter and constructor" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 6 · our game program · 1 of 1 · <span class="walk-file">Enemy.java</span></p><h2>Enemy: fields, counter and constructor</h2><div class="walk-side g-walk"><pre class="code walk-code">public class Enemy {
+    private String type;
+    private int health;
+    private int points;
 
-// Setter methods
-public void setMake(String make) { this.make = make; }
+    // Counts every Enemy ever created
+    private static int enemiesSpawned = 0;
 
-public void setFuelLevel(double fuelLevel) {
-    if (fuelLevel &gt;= 0.0 &amp;&amp; fuelLevel &lt;= 100.0) {
-        this.fuelLevel = fuelLevel;
+    public Enemy(String type, int health, int points) {
+        this.type = type;
+        this.health = health;
+        this.points = points;
+        enemiesSpawned++;
+    }</pre><ul class="walk-notes"><li>The same pattern as Player.</li><li><code>enemiesSpawned++</code> runs once per new Enemy.</li></ul></div>
+</div></section>
+<section class="slide " data-title="References" aria-label="References" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 6 of 6</p><h2>References</h2><div class="g-ingame"><div>In the game:</div><div>References: stack and heap</div></div><div class="g-codeside g-topic"><div><div class="kicker g-wk"><div class="walk-file">BattleDemo.java</div><div>·</div><div>BattleDemo: the setter and references</div></div><pre class="code small-code wide">System.out.println(&quot;\n=== Encapsulation: the setter validates ===&quot;);
+ranger.setHealth(250);
+System.out.println(&quot;setHealth(250) -&gt; health &quot; + ranger.getHealth());
+ranger.setHealth(-30);
+System.out.println(&quot;setHealth(-30) -&gt; health &quot; + ranger.getHealth() + &quot;, alive? &quot; + ranger.isAlive());
+
+System.out.println(&quot;\n=== References: two names, one object ===&quot;);
+Enemy target = drone1;
+System.out.println(&quot;target == drone1 ? &quot; + (target == drone1));
+System.out.println(&quot;target.getType(): &quot; + target.getType());
+System.out.println(&quot;Enemies spawned is still &quot; + Enemy.getEnemiesSpawned() + &quot; (no new object was made)&quot;);</pre></div><ul class="pts"><li>A class-type variable holds a <b>reference</b> (an arrow) to an object on the heap.</li><li><code>b2 = b1</code> copies the arrow, not the object: both point to the same box.</li><li><code>null</code> means the variable points to nothing.</li><li>250 is clamped to 100; -30 to 0.</li><li><code>target = drone1</code> makes no new object: the counter stays 2.</li></ul></div>
+</div></section>
+<section class="slide " data-title="References: stack and heap" aria-label="References: stack and heap" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 6 of 6 · in the game</p><h2>References: stack and heap</h2><div data-demo="g-refs"></div><ul class="pts pts-row"><li>A variable of a class type holds a <b>reference</b> to an object, not the object itself.</li><li><code>Enemy target = drone1;</code> copies the reference: two names, one object.</li><li><code>==</code> on references asks: is it the same object?</li></ul>
+</div></section>
+<section class="slide " data-title="The complete game program" aria-label="The complete game program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Build the game · 3 files</p><h2>The complete game program</h2><div class="codeview"><pre class="code small-code" data-file="Player.java">public class Player {
+    // Fields: every Player object gets its own copy
+    private String name;
+    private int health;
+    private int ammo;
+    private int score;
+
+    // Static field: one copy shared by the whole class
+    private static int playersCreated = 0;
+
+    // Constructor: runs once for each new Player
+    public Player(String name, int health, int ammo) {
+        this.name = name;
+        setHealth(health);
+        this.ammo = ammo;
+        this.score = 0;
+        playersCreated++;
     }
-}
 
-// Static method
-public static int getCount() { return count; }</pre><ul class="walk-notes"><li>Getters read private fields; the setter validates before changing.</li><li><code>getCount()</code> is static: call it as <code>Car.getCount()</code>.</li></ul>
-</div></section>
-<section class="slide " data-title="Creating objects" aria-label="Creating objects" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 6 of 10 · <span class="walk-file">Lab2Demo.java</span></p><h2>Creating objects</h2><pre class="code walk-code">// 1. Object Creation
-System.out.println(&quot;=== Object Creation ===&quot;);
-Car car1 = new Car(&quot;Sedan&quot;, 80.5);
-Car car2 = new Car(&quot;SUV&quot;, 100.0);
-System.out.println(&quot;Total Car objects created: &quot; + Car.getCount());</pre><ul class="walk-notes"><li><code>new</code> runs the constructor twice, so count becomes 2.</li></ul>
-</div></section>
-<section class="slide " data-title="Calling methods on car1" aria-label="Calling methods on car1" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 7 of 10 · <span class="walk-file">Lab2Demo.java</span></p><h2>Calling methods on car1</h2><pre class="code walk-code">// 2. Method Invocation on car1
-System.out.println(&quot;\n=== car1 initial state ===&quot;);
-car1.display();
-car1.accelerate(30);
-System.out.println(&quot;After accelerate(30):&quot;);
-car1.display();
-car1.brake(10);
-System.out.println(&quot;After brake(10):&quot;);
-car1.display();
-car1.brake(100);
-System.out.println(&quot;After brake(100):&quot;);
-car1.display();</pre><ul class="walk-notes"><li>Every call changes only car1.</li><li><code>brake(100)</code> stops at 0, not −80.</li></ul>
-</div></section>
-<section class="slide " data-title="car2 has its own state" aria-label="car2 has its own state" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 8 of 10 · <span class="walk-file">Lab2Demo.java</span></p><h2>car2 has its own state</h2><pre class="code walk-code">// 3. Method Invocation on car2
-System.out.println(&quot;\n=== car2 initial state ===&quot;);
-car2.display();
-car2.accelerate(60);
-car2.refuel(5.0);
-System.out.println(&quot;After accelerate(60) and refuel(5.0):&quot;);
-car2.display();</pre><ul class="walk-notes"><li>car2 is already at 100%, so refuel(5.0) changes nothing.</li></ul>
-</div></section>
-<section class="slide " data-title="Getters and setters in use" aria-label="Getters and setters in use" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 9 of 10 · <span class="walk-file">Lab2Demo.java</span></p><h2>Getters and setters in use</h2><pre class="code walk-code">// 4. Getters and Setters
-System.out.println(&quot;\n=== Getters and Setters ===&quot;);
-System.out.println(&quot;car1 make via getter : &quot; + car1.getMake());
-System.out.println(&quot;car2 speed via getter: &quot; + car2.getSpeed());
-car1.setMake(&quot;Hatchback&quot;);
-System.out.println(&quot;car1 make after setter: &quot; + car1.getMake());</pre><ul class="walk-notes"><li>Read through getters, change through the setter.</li></ul>
-</div></section>
-<section class="slide " data-title="Two references, one object" aria-label="Two references, one object" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 10 of 10 · <span class="walk-file">Lab2Demo.java</span></p><h2>Two references, one object</h2><pre class="code walk-code">// 5. Reference Semantics
-System.out.println(&quot;\n=== Reference Semantics ===&quot;);
-Car car3 = car1;
-car3.accelerate(20);
-System.out.println(&quot;car1.getSpeed() = &quot; + car1.getSpeed());
-System.out.println(&quot;car3.getSpeed() = &quot; + car3.getSpeed());
-System.out.println(&quot;car1 and car3 refer to the same object.&quot;);
+    // Getters: read-only access to private fields
+    public String getName() { return name; }
+    public int getHealth()  { return health; }
+    public int getAmmo()    { return ammo; }
+    public int getScore()   { return score; }
+    public static int getPlayersCreated() { return playersCreated; }
 
-// 6. Static Member
-System.out.println(&quot;\n=== Static Member ===&quot;);
-System.out.println(&quot;Total Car objects ever created: &quot; + Car.getCount());</pre><ul class="walk-notes"><li><code>car3 = car1</code> copies the reference, not the car.</li><li>The count is still 2: no object was created.</li></ul>
+    // Validating setter: health always stays between 0 and 100
+    public void setHealth(int health) {
+        if (health &lt; 0) {
+            health = 0;
+        }
+        if (health &gt; 100) {
+            health = 100;
+        }
+        this.health = health;
+    }
+
+    // Methods: what a player can do
+    public void shoot(Enemy target) {
+        if (!target.isAlive()) {
+            System.out.println(name + &quot; holds fire: &quot; + target.getType() + &quot; is already destroyed&quot;);
+            return;
+        }
+        if (ammo == 0) {
+            System.out.println(name + &quot; pulls the trigger: click! Out of ammo&quot;);
+            return;
+        }
+        ammo--;
+        target.takeDamage(25);
+        System.out.println(name + &quot; shoots &quot; + target.getType() + &quot; -&gt; its health &quot; + target.getHealth());
+        if (!target.isAlive()) {
+            score += target.getPoints();
+            System.out.println(target.getType() + &quot; destroyed! +&quot; + target.getPoints() + &quot; points&quot;);
+        }
+    }
+
+    public void takeDamage(int amount) {
+        setHealth(health - amount);
+    }
+
+    public boolean isAlive() {
+        return health &gt; 0;
+    }
+
+    public void showStatus() {
+        System.out.println(&quot;[&quot; + name + &quot;] health &quot; + health + &quot; | ammo &quot; + ammo + &quot; | score &quot; + score);
+    }
+}</pre><pre class="code small-code" data-file="Enemy.java">public class Enemy {
+    private String type;
+    private int health;
+    private int points;
+
+    // Counts every Enemy ever created
+    private static int enemiesSpawned = 0;
+
+    public Enemy(String type, int health, int points) {
+        this.type = type;
+        this.health = health;
+        this.points = points;
+        enemiesSpawned++;
+    }
+
+    public String getType() { return type; }
+    public int getHealth()  { return health; }
+    public int getPoints()  { return points; }
+    public static int getEnemiesSpawned() { return enemiesSpawned; }
+
+    public boolean isAlive() {
+        return health &gt; 0;
+    }
+
+    public void takeDamage(int amount) {
+        health -= amount;
+        if (health &lt; 0) {
+            health = 0;
+        }
+    }
+
+    public void attack(Player target) {
+        if (isAlive()) {
+            target.takeDamage(10);
+            System.out.println(type + &quot; zaps &quot; + target.getName() + &quot; -&gt; health &quot; + target.getHealth());
+        }
+    }
+}</pre><pre class="code small-code" data-file="BattleDemo.java">public class BattleDemo {
+    public static void main(String[] args) {
+
+        System.out.println(&quot;=== Creating objects with new ===&quot;);
+        Player ranger = new Player(&quot;Ranger&quot;, 100, 5);
+        Enemy drone1 = new Enemy(&quot;Drone-1&quot;, 40, 50);
+        Enemy drone2 = new Enemy(&quot;Drone-2&quot;, 40, 50);
+        ranger.showStatus();
+        System.out.println(&quot;Players created: &quot; + Player.getPlayersCreated());
+        System.out.println(&quot;Enemies spawned: &quot; + Enemy.getEnemiesSpawned());
+
+        System.out.println(&quot;\n=== Each object keeps its own state ===&quot;);
+        ranger.shoot(drone1);
+        System.out.println(&quot;drone1 health: &quot; + drone1.getHealth());
+        System.out.println(&quot;drone2 health: &quot; + drone2.getHealth());
+
+        System.out.println(&quot;\n=== The fight: objects calling each other&#x27;s methods ===&quot;);
+        drone2.attack(ranger);
+        ranger.shoot(drone1);
+        drone2.attack(ranger);
+        ranger.shoot(drone2);
+        ranger.shoot(drone1);
+        ranger.shoot(drone2);
+        ranger.shoot(drone2);
+        ranger.showStatus();
+
+        System.out.println(&quot;\n=== Encapsulation: the setter validates ===&quot;);
+        ranger.setHealth(250);
+        System.out.println(&quot;setHealth(250) -&gt; health &quot; + ranger.getHealth());
+        ranger.setHealth(-30);
+        System.out.println(&quot;setHealth(-30) -&gt; health &quot; + ranger.getHealth() + &quot;, alive? &quot; + ranger.isAlive());
+
+        System.out.println(&quot;\n=== References: two names, one object ===&quot;);
+        Enemy target = drone1;
+        System.out.println(&quot;target == drone1 ? &quot; + (target == drone1));
+        System.out.println(&quot;target.getType(): &quot; + target.getType());
+        System.out.println(&quot;Enemies spawned is still &quot; + Enemy.getEnemiesSpawned() + &quot; (no new object was made)&quot;);
+    }
+}</pre></div><p class="muted">Save every file in one folder, then compile and run: <code>javac *.java</code> → <code>java BattleDemo</code></p>
+</div></section>
+<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Run the game</p><h2>Expected output</h2><div class="runbox" data-cmd="java BattleDemo"><pre class="run-src" hidden>=== Creating objects with new ===
+[Ranger] health 100 | ammo 5 | score 0
+Players created: 1
+Enemies spawned: 2
+
+=== Each object keeps its own state ===
+Ranger shoots Drone-1 -&gt; its health 15
+drone1 health: 15
+drone2 health: 40
+
+=== The fight: objects calling each other&#x27;s methods ===
+Drone-2 zaps Ranger -&gt; health 90
+Ranger shoots Drone-1 -&gt; its health 0
+Drone-1 destroyed! +50 points
+Drone-2 zaps Ranger -&gt; health 80
+Ranger shoots Drone-2 -&gt; its health 15
+Ranger holds fire: Drone-1 is already destroyed
+Ranger shoots Drone-2 -&gt; its health 0
+Drone-2 destroyed! +50 points
+Ranger holds fire: Drone-2 is already destroyed
+[Ranger] health 80 | ammo 1 | score 100
+
+=== Encapsulation: the setter validates ===
+setHealth(250) -&gt; health 100
+setHealth(-30) -&gt; health 0, alive? false
+
+=== References: two names, one object ===
+target == drone1 ? true
+target.getType(): Drone-1
+Enemies spawned is still 2 (no new object was made)</pre></div>
+</div></section>
+<section class="slide " data-title="Game task 1: A Medkit class" aria-label="Game task 1: A Medkit class" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 1 of 3</p><h2>Game task 1: A Medkit class</h2><div class="ex task g-task"><div class="qq">Pick-ups become objects too.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g2t0r0" data-key="g2t0r0"><label for="g2t0r0">Class <code>Medkit</code> with a private <code>int amount</code> and a constructor</label></li><li><input type="checkbox" id="g2t0r1" data-key="g2t0r1"><label for="g2t0r1">Method <code>use(Player p)</code> that heals the player through <code>setHealth</code></label></li><li><input type="checkbox" id="g2t0r2" data-key="g2t0r2"><label for="g2t0r2">A static counter of medkits used</label></li><li><input type="checkbox" id="g2t0r3" data-key="g2t0r3"><label for="g2t0r3">In main: hurt the player, use two medkits, print the status and the counter</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">use() gets the Player as a parameter: <code>p.setHealth(p.getHealth() + amount);</code> The setter already caps health at 100.</div></details></div>
+</div></section>
+<section class="slide " data-title="Game task 2: Reload" aria-label="Game task 2: Reload" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 2 of 3</p><h2>Game task 2: Reload</h2><div class="ex task g-task"><div class="qq">Let players reload.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g2t1r0" data-key="g2t1r0"><label for="g2t1r0">A private field <code>maxAmmo</code>, set in the constructor</label></li><li><input type="checkbox" id="g2t1r1" data-key="g2t1r1"><label for="g2t1r1">Method <code>reload()</code> that fills ammo back up to maxAmmo</label></li><li><input type="checkbox" id="g2t1r2" data-key="g2t1r2"><label for="g2t1r2">It returns how many bullets were added</label></li><li><input type="checkbox" id="g2t1r3" data-key="g2t1r3"><label for="g2t1r3">Show shoot → reload → shoot in main</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Work out <code>int added = maxAmmo - ammo;</code> before you overwrite ammo.</div></details></div>
+</div></section>
+<section class="slide " data-title="Game task 3: A second player" aria-label="Game task 3: A second player" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 3 of 3</p><h2>Game task 3: A second player</h2><div class="ex task g-task"><div class="qq">Two players, one game.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g2t2r0" data-key="g2t2r0"><label for="g2t2r0">Create two Player objects with different names</label></li><li><input type="checkbox" id="g2t2r1" data-key="g2t2r1"><label for="g2t2r1">Let the same drone attack both</label></li><li><input type="checkbox" id="g2t2r2" data-key="g2t2r2"><label for="g2t2r2">Print both statuses: each keeps its own health</label></li><li><input type="checkbox" id="g2t2r3" data-key="g2t2r3"><label for="g2t2r3">Print <code>Player.getPlayersCreated()</code></label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans"><code>playersCreated</code> is static, so it counts both players; health is not static.</div></details></div>
+</div></section>
+<section class="slide " data-title="The official lab program" aria-label="The official lab program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Official lab · from the lab manual</p><h2>The official lab program</h2>
+<p class="g-official">The graded in-lab tasks and report exercises build on this program, not on the game. Read it and run it before you start them.</p>
+<ol class="flow"><li>Create two Car objects; the constructor increments the static count</li><li>Print the count with <code>Car.getCount()</code></li><li>Accelerate and brake car1, showing state after each call (speed never goes below 0)</li><li>Accelerate and refuel car2 (fuel never exceeds 100)</li><li>Read with getters, change make with a setter</li><li>Alias car3 = car1 and show the shared speed</li><li>Print the final count</li></ol><p class="note-line"><code>Car</code> defines state and behaviour; <code>Lab2Demo</code> only tests it.</p>
 </div></section>
 <section class="slide " data-title="Trace: objects, references and a static counter" aria-label="Trace: objects, references and a static counter" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
-<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: objects, references and a static counter</h2><p class="muted">See the objects on the heap, the references on the stack, and the one shared <code>count</code>.</p><div data-trace="lab2-car"></div>
+<p class="kicker">Official lab · step through the code · 1 of 2</p><h2>Trace: objects, references and a static counter</h2><p class="muted">See the objects on the heap, the references on the stack, and the one shared <code>count</code>.</p><div data-trace="lab2-car"></div>
 </div></section>
 <section class="slide " data-title="Trace: methods that guard the object" aria-label="Trace: methods that guard the object" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
-<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: methods that guard the object</h2><p class="muted">Each call works on the object <code>this</code> points to. Watch brake(100) and refuel(5.0) refuse to break the rules.</p><div data-trace="lab2-methods"></div>
+<p class="kicker">Official lab · step through the code · 2 of 2</p><h2>Trace: methods that guard the object</h2><p class="muted">Each call works on the object <code>this</code> points to. Watch brake(100) and refuel(5.0) refuse to break the rules.</p><div data-trace="lab2-methods"></div>
 </div></section>
-<section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
-<p class="kicker">For reference · 2 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Car.java">public class Car {
+<section class="slide " data-title="The official program" aria-label="The official program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Official lab · 2 files</p><h2>The official program</h2><div class="codeview"><pre class="code small-code" data-file="Car.java">public class Car {
 
     // Private instance fields
     private String make;
@@ -350,10 +595,10 @@ System.out.println(&quot;Total Car objects ever created: &quot; + Car.getCount()
         System.out.println(&quot;\n=== Static Member ===&quot;);
         System.out.println(&quot;Total Car objects ever created: &quot; + Car.getCount());
     }
-}</pre></div><p class="muted">Copy or download each file, save it under the same name, then compile and run: <code>javac *.java</code> → <code>java Lab2Demo</code></p>
+}</pre></div><p class="muted">Compile and run: <code>javac *.java</code> → <code>java Lab2Demo</code></p>
 </div></section>
-<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Implementation</p><h2>Expected output</h2><div class="runbox" data-cmd="java Lab2Demo"><pre class="run-src" hidden>=== Object Creation ===
+<section class="slide " data-title="Official program: expected output" aria-label="Official program: expected output" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Official lab</p><h2>Official program: expected output</h2><div class="runbox" data-cmd="java Lab2Demo"><pre class="run-src" hidden>=== Object Creation ===
 Total Car objects created: 2
 
 === car1 initial state ===
@@ -407,29 +652,20 @@ car1 and car3 refer to the same object.
 === Static Member ===
 Total Car objects ever created: 2</pre></div><p class="note-line">car3 = car1 creates no object, so the count stays 2 and both variables report speed 20.</p>
 </div></section>
-<section class="slide " data-title="Create objects and follow the references" aria-label="Create objects and follow the references" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Interactive 1 of 3</p><h2>Create objects and follow the references</h2><div data-demo="objects"></div>
-</div></section>
-<section class="slide " data-title="Who can see a private field?" aria-label="Who can see a private field?" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Interactive 2 of 3</p><h2>Who can see a private field?</h2><div data-demo="access"></div>
-</div></section>
-<section class="slide " data-title="What can static code use?" aria-label="What can static code use?" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Interactive 3 of 3</p><h2>What can static code use?</h2><div data-demo="static-rules"></div>
-</div></section>
 <section class="slide " data-title="Task 1: Extend the Car class" aria-label="Task 1: Extend the Car class" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 1 of 3</p><h2>Task 1: Extend the Car class</h2><div class="ex task"><div class="qq">Add an engine to the car: it may only accelerate while the engine is on.</div>
+<p class="kicker">Official in-lab task 1 of 3</p><h2>Task 1: Extend the Car class</h2><div class="ex task"><div class="qq">Add an engine to the car: it may only accelerate while the engine is on.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l2t0r0" data-key="l2t0r0"><label for="l2t0r0">Add a private boolean field <code>engineOn</code>, false in the constructor</label></li><li><input type="checkbox" id="l2t0r1" data-key="l2t0r1"><label for="l2t0r1">Add <code>startEngine()</code> and <code>stopEngine()</code></label></li><li><input type="checkbox" id="l2t0r2" data-key="l2t0r2"><label for="l2t0r2">Make <code>accelerate()</code> work only when the engine is on</label></li><li><input type="checkbox" id="l2t0r3" data-key="l2t0r3"><label for="l2t0r3">Print a message when accelerating with the engine off</label></li><li><input type="checkbox" id="l2t0r4" data-key="l2t0r4"><label for="l2t0r4">Demonstrate it from <code>main</code></label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Wrap the existing body of <code>accelerate</code> in <code>if (engineOn) { … } else { System.out.println(…); }</code>.</div></details></div>
 </div></section>
 <section class="slide " data-title="Task 2: Design a BankAccount class" aria-label="Task 2: Design a BankAccount class" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 2 of 3</p><h2>Task 2: Design a BankAccount class</h2><div class="ex task"><div class="qq">A simple account with an owner, a balance and a count of all accounts.</div>
+<p class="kicker">Official in-lab task 2 of 3</p><h2>Task 2: Design a BankAccount class</h2><div class="ex task"><div class="qq">A simple account with an owner, a balance and a count of all accounts.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l2t1r0" data-key="l2t1r0"><label for="l2t1r0">Fields: <code>private String owner</code>, <code>private double balance</code>, <code>private static int totalAccounts</code></label></li><li><input type="checkbox" id="l2t1r1" data-key="l2t1r1"><label for="l2t1r1">Constructor, <code>deposit</code>, <code>withdraw</code>, <code>getBalance</code>, <code>display</code>, <code>static getTotalAccounts</code></label></li><li><input type="checkbox" id="l2t1r2" data-key="l2t1r2"><label for="l2t1r2">Reject negative deposits and withdrawals larger than the balance</label></li><li><input type="checkbox" id="l2t1r3" data-key="l2t1r3"><label for="l2t1r3">Create at least three accounts and print the total</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Increment <code>totalAccounts</code> in the constructor, exactly like <code>count</code> in Car.</div></details></div>
 </div></section>
 <section class="slide " data-title="Task 3: Demonstrate reference sharing" aria-label="Task 3: Demonstrate reference sharing" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 3 of 3</p><h2>Task 3: Demonstrate reference sharing</h2><div class="ex task"><div class="qq">Show that two variables can refer to one BankAccount.</div>
+<p class="kicker">Official in-lab task 3 of 3</p><h2>Task 3: Demonstrate reference sharing</h2><div class="ex task"><div class="qq">Show that two variables can refer to one BankAccount.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l2t2r0" data-key="l2t2r0"><label for="l2t2r0">Create <code>account1</code></label></li><li><input type="checkbox" id="l2t2r1" data-key="l2t2r1"><label for="l2t2r1">Assign it to <code>account2</code></label></li><li><input type="checkbox" id="l2t2r2" data-key="l2t2r2"><label for="l2t2r2">Deposit through <code>account2</code></label></li><li><input type="checkbox" id="l2t2r3" data-key="l2t2r3"><label for="l2t2r3">Print the balance through both</label></li><li><input type="checkbox" id="l2t2r4" data-key="l2t2r4"><label for="l2t2r4">Add a comment explaining why both balances are the same</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Draw the stack and heap first: two arrows, one object.</div></details></div>
 </div></section>
 <section class="slide " data-title="Show your work" aria-label="Show your work" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
+<p class="kicker">Official in-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
 </div></section>
 <section class="slide " data-title="Report exercise 1" aria-label="Report exercise 1" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Lab report · exercise 1 of 2</p><h2>University student registration</h2><div class="ex task report"><div class="qq">Classes <code>Student</code>, <code>Course</code> and <code>Enrollment</code> (a student enrolled in a course for a semester, with a grade).</div>
@@ -443,25 +679,25 @@ Total Car objects ever created: 2</pre></div><p class="note-line">car3 = car1 cr
 <p class="kicker">Lab report</p><h2>Writing the lab report</h2><ul class="big-list"><li>Problem statement and your design (classes, fields, methods)</li><li>Complete source code, formatted and commented</li><li>Sample output or screenshots for normal <b>and</b> edge cases</li><li>A short discussion: what each OOP concept did in your program</li></ul><div class="integrity"><h3>Academic integrity</h3><p>Copying from the internet, classmates, seniors or any other unauthorized source is strictly prohibited. Full marks may be deducted if plagiarism, copied work or academic dishonesty is detected. Complete the tasks, implementation, output analysis and report yourself.</p></div>
 </div></section>
 <section class="slide " data-title="Viva questions (1 of 2)" aria-label="Viva questions (1 of 2)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Discussion and analysis</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">Why are the fields of Car private?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Encapsulation: only Car’s own methods can change them, so rules such as “speed never below 0” and “fuel 0–100” are always enforced.</div></details></div><div class="ex"><div class="qq">Why is <code>count</code> static but <code>speed</code> is not?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">count describes the class (how many cars exist) and must be shared; speed describes one particular car.</div></details></div>
+<p class="kicker">Discussion</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">What is the difference between the class <code>Enemy</code> and the object <code>drone1</code>?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Enemy is the blueprint (code). drone1 refers to one object built from it, with its own health.</div></details></div><div class="ex"><div class="qq">Why are the fields private?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">So no other class can set health to 250 directly; it must use setHealth, which checks the value.</div></details></div>
 </div></section>
 <section class="slide " data-title="Viva questions (2 of 2)" aria-label="Viva questions (2 of 2)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Discussion and analysis</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq">After <code>Car car3 = car1;</code>, how many Car objects exist?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Still two. Only the reference was copied; car1 and car3 point to the same object.</div></details></div><div class="ex"><div class="qq">What would happen without <code>this</code> in <code>this.make = make;</code>?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">make = make assigns the parameter to itself; the field stays null.</div></details></div>
+<p class="kicker">Discussion</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq">Why is <code>enemiesSpawned</code> static but <code>health</code> is not?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">There is one spawn count for the whole game, but every enemy has its own health.</div></details></div><div class="ex"><div class="qq">After <code>Enemy target = drone1;</code> how many Enemy objects exist?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Still two. target is a second reference to the object drone1 already refers to.</div></details></div>
 </div></section>
 <section class="slide " data-title="Quiz" aria-label="Quiz" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="lab2"></div><script type="application/json" class="quiz-json">[{"q": "What does <code>new Car(\"SUV\", 100.0)<\/code> do?", "o": ["declares a class", "creates an object and runs the constructor", "copies car1", "calls a static method"], "a": 1, "w": "new allocates the object on the heap and runs the constructor."}, {"q": "Which call is correct for a static method?", "o": ["car1.Car.getCount()", "Car.getCount()", "new getCount()", "this.getCount(Car)"], "a": 1, "w": "Static members are accessed through the class name."}, {"q": "<code>car1.brake(100)<\/code> when speed is 20 leaves speed at\u2026", "o": ["-80", "0", "20", "100"], "a": 1, "w": "Math.max(0, \u2026) stops speed going negative."}, {"q": "A constructor\u2026", "o": ["has a return type void", "has the class name and no return type", "must be static", "is called with car.Car()"], "a": 1, "w": "Constructors have no return type."}, {"q": "<code>Car c3 = c1; c3.accelerate(20);<\/code> \u2014 what happens to <code>c1.getSpeed()<\/code>?", "o": ["unchanged", "increases by 20", "becomes 0", "compile error"], "a": 1, "w": "c1 and c3 refer to the same object."}]</script></div>
+<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="game2"></div><script type="application/json" class="quiz-json">[{"q": "Which keyword creates an object?", "o": ["class", "new", "this", "static"], "a": 1, "w": "new builds an object and runs its constructor."}, {"q": "Three Enemy objects exist. How many copies of the static field <code>enemiesSpawned<\/code> are there?", "o": ["three", "one", "none", "one per method"], "a": 1, "w": "static: one copy for the class."}, {"q": "In the constructor, <code>this.health = health;<\/code> means\u2026", "o": ["the parameter gets the field\u2019s value", "the field gets the parameter\u2019s value", "nothing at all", "a compile error"], "a": 1, "w": "this.health is the field."}, {"q": "<code>target == drone1<\/code> is true when\u2026", "o": ["both have the same health", "both refer to the same object", "both are Enemy objects", "always"], "a": 1, "w": "== compares references."}, {"q": "Why use a setter instead of a public field?", "o": ["it runs faster", "it can check the value first", "Java requires it", "it saves memory"], "a": 1, "w": "The setter keeps health in 0..100."}]</script></div>
 </div></section>
 <section class="slide " data-title="Summary" aria-label="Summary" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Summary</p><h2>Summary</h2><ul class="sumlist"><li>A class is a blueprint; objects are instances created with new.</li><li>Constructors initialise objects; this names the current object.</li><li>Private fields + public methods = encapsulation and validation.</li><li>Static fields and methods belong to the class and are shared.</li><li>Variables hold references: assignment creates aliases, not copies.</li></ul><div class="nextcard"><a class="btn pri" href="03-constructors-overloading.html">Next: Lab 3 · Constructors and overloading</a><a class="btn" href="../index.html">All labs</a></div>
+<p class="kicker">Mission debrief</p><h2>Summary</h2><ul class="sumlist"><li>A class is the blueprint; new builds objects (instances) from it.</li><li>Each object has its own fields; a static field is shared by the class.</li><li>Constructors fill the fields; this.x means the field.</li><li>private fields plus getters and checking setters protect the object’s state.</li><li>Variables hold references: = copies the arrow, never the object.</li><li>Next mission: give the commando an armory.</li></ul><div class="nextcard"><a class="btn pri" href="03-constructors-overloading.html">Next: Mission 3 · Arm up</a><a class="btn" href="../index.html">All chapters</a></div>
 </div></section>
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 40</span>
+  <span class="counter" id="counter">1 / 42</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
-<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
-<noscript><p style="padding:20px">This lab needs JavaScript for the slides and the interactive examples.</p></noscript>
+<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this chapter</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
+<noscript><p style="padding:20px">This chapter needs JavaScript for the slides, the game scenes and the interactive examples.</p></noscript>
 <script src="../js/core.js"></script>
 <script src="../js/art.js"></script>
 <script src="../js/java.js"></script>
@@ -473,10 +709,14 @@ Total Car objects ever created: 2</pre></div><p class="note-line">car3 = car1 cr
 <script src="../js/demos-basics.js"></script>
 <script src="../js/demos-oop.js"></script>
 <script src="../js/demos-adv.js"></script>
+<script src="../js/game-core.js"></script>
+<script src="../js/game-scenes-a.js"></script>
+<script src="../js/game-scenes-b.js"></script>
+<script src="../js/game-scenes-c.js"></script>
 <script src="../js/quiz.js"></script>
 <script src="../js/page.js"></script>
 <script src="../js/lab.js"></script>
-<script>window.OOP_TOPIC = {"id": 2, "prev": "01-java-basics.html", "next": "03-constructors-overloading.html", "nextLabel": "Next lab"};</script>
+<script>window.OOP_TOPIC = {"id": 2, "prev": "01-java-basics.html", "next": "03-constructors-overloading.html", "nextLabel": "Next chapter"};</script>
 <script>mountPage();</script>
 <script src="../js/slides.js"></script>
 <script src="../js/annotate.js"></script>

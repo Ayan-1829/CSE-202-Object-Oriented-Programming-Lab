@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Build a Swing drawing application: a JFrame with layout managers, buttons and a colour box, event listeners, and a custom JPanel that draws rectangles and circles with Graphics.">
-<meta name="keywords" content="java swing, awt, jframe, jpanel, layout manager, actionlistener, paintComponent, graphics, event dispatch thread, lab, cse 202, object oriented programming lab">
+<meta name="description" content="Leave the console behind. A JFrame window, a score label, Fire and Reset buttons, and a JPanel that draws the commando and the drones from rectangles and ovals, then reacts to the keyboard.">
+<meta name="keywords" content="java swing, awt, jframe, jpanel, layout manager, actionlistener, paintComponent, graphics, event dispatch thread, lab, java game, game programming, cse 202, object oriented programming lab">
 <meta name="author" content="Object Oriented Programming Lab Notes">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#155E63">
@@ -16,32 +16,33 @@
 <link rel="manifest" href="../site.webmanifest">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
-<meta property="og:title" content="Lab 9: GUI Components, Drawing, AWT &amp; Swing | OOP Lab (CSE 202)">
-<meta property="og:description" content="Build a Swing drawing application: a JFrame with layout managers, buttons and a colour box, event listeners, and a custom JPanel that draws rectangles and circles with Graphics.">
+<meta property="og:title" content="Chapter 9: GUI Components, Drawing, AWT &amp; Swing | OOP Lab (CSE 202)">
+<meta property="og:description" content="Leave the console behind. A JFrame window, a score label, Fire and Reset buttons, and a JPanel that draws the commando and the drones from rectangles and ovals, then reacts to the keyboard.">
 <meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/09-gui-swing.html">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/09-gui-swing.png?v=2">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Lab 9 of 10: GUI Components, Drawing, AWT &amp; Swing – CSE 202 Object Oriented Programming Lab">
+<meta property="og:image:alt" content="Chapter 9 of 10: GUI Components, Drawing, AWT &amp; Swing – CSE 202 Object Oriented Programming Lab">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Lab 9: GUI Components, Drawing, AWT &amp; Swing | OOP Lab (CSE 202)">
-<meta name="twitter:description" content="Build a Swing drawing application: a JFrame with layout managers, buttons and a colour box, event listeners, and a custom JPanel that draws rectangles and circles with Graphics.">
+<meta name="twitter:title" content="Chapter 9: GUI Components, Drawing, AWT &amp; Swing | OOP Lab (CSE 202)">
+<meta name="twitter:description" content="Leave the console behind. A JFrame window, a score label, Fire and Reset buttons, and a JPanel that draws the commando and the drones from rectangles and ovals, then reacts to the keyboard.">
 <meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/09-gui-swing.png?v=2">
-<meta name="twitter:image:alt" content="Lab 9 of 10: GUI Components, Drawing, AWT &amp; Swing – CSE 202 Object Oriented Programming Lab">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "GUI Components, Drawing, AWT & Swing", "description": "Build a Swing drawing application: a JFrame with layout managers, buttons and a colour box, event listeners, and a custom JPanel that draws rectangles and circles with Graphics.", "position": 9, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 41, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/09-gui-swing.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/09-gui-swing.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
-<title>Lab 9: GUI Components, Drawing, AWT &amp; Swing | OOP Lab (CSE 202)</title>
+<meta name="twitter:image:alt" content="Chapter 9 of 10: GUI Components, Drawing, AWT &amp; Swing – CSE 202 Object Oriented Programming Lab">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "GUI Components, Drawing, AWT & Swing", "description": "Leave the console behind. A JFrame window, a score label, Fire and Reset buttons, and a JPanel that draws the commando and the drones from rectangles and ovals, then reacts to the keyboard.", "position": 9, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 47, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/09-gui-swing.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/09-gui-swing.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
+<title>Chapter 9: GUI Components, Drawing, AWT &amp; Swing | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/lab.css">
+<link rel="stylesheet" href="../css/game.css">
 </head>
 <body class="deck-page">
 <div class="sr-only" id="live" aria-live="polite"></div>
 <header class="deck-bar">
-  <a class="home-link" href="../index.html" aria-label="Home: all labs"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
+  <a class="home-link" href="../index.html" aria-label="Home: all chapters"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
   <div class="deck-title"><span class="badge">9</span><span>GUI Components, Drawing, AWT &amp; Swing</span></div>
   <div class="deck-actions">
     <button type="button" class="btn sm" id="btn-menu" aria-expanded="false" aria-controls="slide-menu" aria-label="Slides"><svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><rect x="3" y="4.5" width="18" height="3" rx="1"></rect><rect x="3" y="10.5" width="18" height="3" rx="1"></rect><rect x="3" y="16.5" width="18" height="3" rx="1"></rect></svg><span>Slides</span></button>
@@ -52,213 +53,614 @@
 <div class="deck-progress"><i id="progress-fill"></i></div>
 <main class="deck" id="deck">
 <section class="slide title-slide" data-title="GUI Components, Drawing, AWT &amp; Swing" aria-label="GUI Components, Drawing, AWT &amp; Swing" tabindex="-1"><div class="slide-inner">
-<span class="topic-art" data-art="13" aria-hidden="true"></span>
+<div class="topic-art g-title-art" data-demo="g-title" data-ch="9" aria-hidden="true"></div>
 <span class="badge big">9</span>
-<p class="kicker">Lab IX · CSE 202</p>
+<p class="kicker">Chapter 9 · Lab IX · CSE 202</p>
 <h1>GUI Components, Drawing, AWT & Swing</h1>
-<p class="lead">Build a Swing drawing application: a JFrame with layout managers, buttons and a colour box, event listeners, and a custom JPanel that draws rectangles and circles with Graphics.</p>
-<div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
+<p class="g-mission">Mission 9 · Put the game on screen</p>
+<p class="lead">Leave the console behind. A JFrame window, a score label, Fire and Reset buttons, and a JPanel that draws the commando and the drones from rectangles and ovals, then reacts to the keyboard.</p>
+<div class="row"><a class="btn pri" href="#s=2">Start the mission</a><a class="btn" href="../index.html">All chapters</a></div>
 <p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
 </div></section>
-<section class="slide " data-title="Why this lab" aria-label="Why this lab" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Before we start</p><h2>Why this lab</h2><div class="hook"><p class="q">Every desktop app is a window full of boxes that react to clicks. How does Java put a button on screen and know when it is pressed?</p><p>Swing gives you components (<code>JFrame</code>, <code>JButton</code>…), layout managers to arrange them and listeners that run your code on each click. You will build a small paint program.</p></div>
+<section class="slide " data-title="Your mission" aria-label="Your mission" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Mission 9 · Put the game on screen</p><h2>Your mission</h2><div class="hook"><p class="q">Eight chapters of text output. How do we finally draw the commando?</p><p>With <b>Swing</b>: a <code>JFrame</code> is the window, a <code>JPanel</code> is the drawing area, and <code>paintComponent(Graphics g)</code> draws everything from simple shapes. Buttons and keys send <b>events</b>.</p></div>
 </div></section>
-<section class="slide " data-title="Lab at a glance" aria-label="Lab at a glance" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 9 of 10</p><h2>Lab at a glance</h2><div class="cols wl"><div><h3>After this lab you can</h3><ul class=""><li>Explain the purpose of GUIs and distinguish AWT from Swing</li><li>Use JFrame, JPanel, JButton, JLabel, JTextField and JComboBox</li><li>Arrange components with BorderLayout, FlowLayout and GridLayout</li><li>Handle events with ActionListener</li><li>Draw shapes by overriding <code>paintComponent()</code> and using Graphics</li><li>Start Swing safely on the Event Dispatch Thread</li></ul></div>
-<div><h3>Before you start</h3><ul class=""><li>Labs 4–5: inheritance, abstract classes, overriding</li><li>Lab 7: threads (for the EDT idea)</li><li>ArrayList basics</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
+<section class="slide " data-title="Chapter at a glance" aria-label="Chapter at a glance" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Chapter 9 of 10</p><h2>Chapter at a glance</h2><div class="cols wl"><div><h3>After this chapter you can</h3><ul class=""><li>Tell AWT from Swing</li><li>Build a window from components and containers</li><li>Arrange them with BorderLayout and FlowLayout</li><li>Handle button clicks and key presses with listeners</li><li>Draw the game with Graphics in paintComponent and refresh it with repaint()</li><li>Explain why Swing work belongs on the Event Dispatch Thread</li></ul></div>
+<div><h3>Before you start</h3><ul class=""><li>Chapters 2–5: classes, inheritance and interfaces (listeners are interfaces)</li><li>Chapter 7: what a thread is</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Topics: the idea, then the game</li><li>Run the game program</li><li>Game practice tasks</li><li>Official lab and graded tasks</li><li>Report exercises at home</li></ol></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 9 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=12">Program design</a></li><li><a href="#s=14">Code walkthrough</a></li><li><a href="#s=24">Step-through traces: stack, heap and output</a></li><li><a href="#s=27">Expected output</a></li><li><a href="#s=28">Interactive demos</a></li><li><a href="#s=31">In-lab tasks</a></li><li><a href="#s=35">Lab report exercises</a></li><li><a href="#s=38">Viva questions and quiz</a></li></ol>
+<p class="kicker">Chapter 9 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=27">Run the game</a></li><li><a href="#s=28">Game practice tasks</a></li><li><a href="#s=31">The official lab program</a></li><li><a href="#s=37">Official in-lab tasks</a></li><li><a href="#s=41">Lab report exercises</a></li><li><a href="#s=44">Viva questions and quiz</a></li></ol>
 </div></section>
-<section class="slide " data-title="AWT, Swing and applets" aria-label="AWT, Swing and applets" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 1 of 6</p><h2>AWT, Swing and applets</h2><ul class=""><li><b>AWT</b> is the original toolkit using native OS components; <b>Swing</b> is built on it with lightweight, platform-independent components whose names start with J.</li><li><b>Applets</b> ran inside browsers; browsers no longer support them, so this lab uses a <code>JFrame</code> desktop app — the drawing and event ideas are the same.</li></ul>
+<section class="slide " data-title="Today’s build" aria-label="Today’s build" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Build the game · Chapter 9</p><h2>Today’s build</h2><ul class="pts"><li>Three files: <code>Sprites</code> draws every character from shapes, <code>GamePanel</code> is the drawing area and key listener, <code>GameFrame</code> is the window with its label and buttons.</li><li>Nothing moves on its own yet: the panel repaints only after a key or a click.</li></ul>
+<div class="cols wl"><div><h3>What the program does</h3><ol class="flow"><li>Build the window on the Event Dispatch Thread</li><li>Lay out the score label, the game panel and the buttons</li><li>Draw the sky, the city, the ground, three drones and the commando</li><li>Move with the arrow keys; Space or the Fire button shoots a laser</li><li>The laser stops at the first drone in line and destroys it</li><li>Reset puts everything back</li></ol></div><div><h3>Files</h3><ul class="g-files"><li><code>Sprites.java</code> <span class="muted">(112 lines)</span></li><li><code>GamePanel.java</code> <span class="muted">(107 lines)</span></li><li><code>GameFrame.java</code> <span class="muted">(52 lines)</span></li></ul><p class="muted">271 lines in all. Each topic below shows the part of the program that uses it.</p></div></div>
 </div></section>
-<section class="slide " data-title="Components and containers" aria-label="Components and containers" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 2 of 6</p><h2>Components and containers</h2><figure class="fig" data-fig="lab9-tree"></figure><ul class=""><li>A container holds components: the JFrame holds panels, panels hold buttons, labels and the drawing canvas.</li></ul>
+<section class="slide " data-title="AWT and Swing" aria-label="AWT and Swing" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 6</p><h2>AWT and Swing</h2><div class="scrollx"><table class="doc"><thead><tr><th></th><th>AWT (java.awt)</th><th>Swing (javax.swing)</th></tr></thead><tbody><tr><td>Components</td><td>Frame, Button, Label</td><td>JFrame, JButton, JLabel, JPanel</td></tr><tr><td>Drawn by</td><td>the operating system</td><td>Java itself</td></tr><tr><td>Look</td><td>changes per system</td><td>the same everywhere</td></tr><tr><td>Still used for</td><td>Graphics, Color, Font, events</td><td>every component in this game</td></tr></tbody></table></div><ul class="pts"><li><b>AWT</b> (<code>java.awt</code>): Java’s first GUI toolkit, drawn by the operating system.</li><li><b>Swing</b> (<code>javax.swing</code>): built on AWT, classes start with J: <code>JFrame</code>, <code>JButton</code>.</li><li>This course uses Swing, plus AWT’s <code>Graphics</code>, <code>Color</code> and layouts.</li><li>Swing is built on top of AWT: we use both.</li><li>Applets, the old way to run Java in a browser, no longer work in any browser.</li></ul>
 </div></section>
-<section class="slide " data-title="Layout managers" aria-label="Layout managers" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 3 of 6</p><h2>Layout managers</h2><figure class="fig" data-fig="lab9-border"></figure><ul class=""><li><b>BorderLayout</b>: NORTH, SOUTH, EAST, WEST, CENTER. <b>FlowLayout</b>: left to right. <b>GridLayout</b>: equal cells in rows and columns.</li></ul>
+<section class="slide " data-title="A window: JFrame" aria-label="A window: JFrame" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 2 of 6</p><h2>A window: JFrame</h2><div class="g-ingame"><div>In the game:</div><div>The game window</div></div><div class="g-codeside g-topic"><div><div class="kicker g-wk"><div class="walk-file">GameFrame.java</div><div>·</div><div>GameFrame: label and panel</div></div><pre class="code small-code">public GameFrame() {
+    super(&quot;Code Commando - Chapter 9&quot;);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setLayout(new BorderLayout());
+
+    scoreLabel.setFont(new Font(&quot;SansSerif&quot;, Font.BOLD, 18));
+    scoreLabel.setBorder(BorderFactory.createEmptyBorder(6, 10, 6, 10));
+    add(scoreLabel, BorderLayout.NORTH);
+
+    panel = new GamePanel(this);
+    add(panel, BorderLayout.CENTER);</pre></div><ul class="pts"><li><code>JFrame</code> is a top-level window with a title bar.</li><li>Set its size, what closing does, and then make it visible.</li><li><code>setLocationRelativeTo(null)</code> centres it on the screen.</li><li>BorderLayout: the label goes NORTH, the panel CENTER.</li></ul></div>
 </div></section>
-<section class="slide " data-title="Layout managers (code)" aria-label="Layout managers (code)" tabindex="-1"><div class="slide-inner">
-<h2>Layout managers</h2><pre class="code small-code">JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEFT));
-buttons.add(new JButton(&quot;Add Rectangle&quot;));
-mainPanel.add(drawingPanel, BorderLayout.CENTER);</pre>
+<section class="slide " data-title="The game window" aria-label="The game window" tabindex="-1"><div style="zoom:0.93;" class="slide-inner">
+<p class="kicker">Topic 2 of 6 · in the game</p><h2>The game window</h2><div data-demo="g-swing"></div><ul class="pts pts-row"><li>The window is a <code>JFrame</code> with a <code>BorderLayout</code>.</li><li>NORTH: a <code>JLabel</code> for the score. CENTER: our <code>GamePanel</code>. SOUTH: a <code>JPanel</code> with two <code>JButton</code>s.</li><li>Turn on “show the Swing parts” to see each component.</li></ul>
 </div></section>
-<section class="slide " data-title="Event handling" aria-label="Event handling" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 4 of 6</p><h2>Event handling</h2><pre class="code small-code">rectangleButton.addActionListener(new ActionListener() {
+<section class="slide " data-title="Components, containers and layouts" aria-label="Components, containers and layouts" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 6</p><h2>Components, containers and layouts</h2><div class="g-codeside g-topic"><pre class="code small-code">setLayout(new BorderLayout());
+add(scoreLabel, BorderLayout.NORTH);
+add(panel, BorderLayout.CENTER);
+
+JPanel buttons = new JPanel(new FlowLayout());
+buttons.add(fire);
+buttons.add(reset);
+add(buttons, BorderLayout.SOUTH);
+pack();                       // size the window to fit</pre><ul class="pts"><li><b>Components</b>: buttons, labels, text fields.</li><li><b>Containers</b> (<code>JFrame</code>, <code>JPanel</code>) hold components.</li><li>A <b>layout manager</b> places them: <code>BorderLayout</code>, <code>FlowLayout</code>, <code>GridLayout</code>.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Components, containers and layouts" aria-label="Components, containers and layouts" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 6 · in the game</p><h2>Components, containers and layouts</h2><div data-demo="g-border"></div><ul class="pts pts-row"><li>A <b>container</b> (JFrame, JPanel) holds components.</li><li>A <b>layout manager</b> decides where they go.</li><li>BorderLayout has five areas; FlowLayout puts things in a row.</li></ul>
+</div></section>
+<section class="slide " data-title="GamePanel: fields and the constructor" aria-label="GamePanel: fields and the constructor" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 6 · our game program · 1 of 1 · <span class="walk-file">GamePanel.java</span></p><h2>GamePanel: fields and the constructor</h2><div class="walk-side g-walk"><pre class="code walk-code wide">public class GamePanel extends JPanel implements KeyListener {
+    public static final int W = 760, H = 380, GROUND = 330;
+
+    private final GameFrame frame;
+    private int playerX, playerY;
+    private final ArrayList&lt;Point&gt; drones = new ArrayList&lt;&gt;();
+    private int score;
+    private int laserY = -1;                // -1 means &quot;no shot on screen&quot;
+    private int laserEndX;
+
+    public GamePanel(GameFrame frame) {
+        this.frame = frame;
+        setPreferredSize(new Dimension(W, H));
+        setFocusable(true);                 // so the panel can receive key presses
+        addKeyListener(this);
+        reset();
+    }</pre><ul class="walk-notes"><li>setFocusable(true) lets the panel receive key presses.</li><li>The panel is its own KeyListener.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Events and listeners" aria-label="Events and listeners" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 4 of 6</p><h2>Events and listeners</h2><div class="g-ingame"><div>In the game:</div><div>Events: buttons and keys</div></div><div class="g-codeside"><pre class="code small-code">fire.addActionListener(e -&gt; panel.fire());       // a click
+
+public class GamePanel extends JPanel implements KeyListener {
     @Override
-    public void actionPerformed(ActionEvent e) {
-        drawingPanel.addRectangle(x, y, 100, 80);
-        updateStatus();
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            fire();
+        }
     }
-});</pre><ul class=""><li>GUI programs are event-driven: Swing calls <code>actionPerformed</code> when the button is clicked.</li></ul>
-
-<div class="applinks" role="group" aria-label="Explore further"><span class="al-h">Explore further</span><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/mouse.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">Mouse</span></a><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/keyboard.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">Keyboard</span></a></div>
+}</pre><ul class="pts"><li>Clicking or typing creates an <b>event</b>.</li><li>A <b>listener</b> is the code that reacts: <code>addActionListener</code> for buttons, <code>KeyListener</code> for keys.</li><li>A lambda is the shortest way to write a listener.</li><li>A <b>listener</b> is an object that Swing calls when something happens.</li><li>ActionListener for clicks; KeyListener for keys.</li><li>The panel needs <code>setFocusable(true)</code> to receive keys.</li></ul></div>
 </div></section>
-<section class="slide " data-title="Custom drawing and repaint()" aria-label="Custom drawing and repaint()" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 5 of 6</p><h2>Custom drawing and repaint()</h2><pre class="code small-code">@Override
-protected void paintComponent(Graphics g) {
-    super.paintComponent(g);     // clear the background first
-    for (Shape shape : shapes) {
-        shape.draw(g);           // polymorphic draw
+<section class="slide " data-title="Key events" aria-label="Key events" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 4 of 6 · our game program · 1 of 2 · <span class="walk-file">GamePanel.java</span></p><h2>Key events</h2><div class="walk-side g-walk"><pre class="code walk-code wide">@Override
+public void keyPressed(KeyEvent e) {
+    switch (e.getKeyCode()) {
+        case KeyEvent.VK_LEFT:  playerX = Math.max(30, playerX - 10); break;
+        case KeyEvent.VK_RIGHT: playerX = Math.min(W - 60, playerX + 10); break;
+        case KeyEvent.VK_UP:    playerY = Math.max(120, playerY - 10); break;   // jump jets
+        case KeyEvent.VK_DOWN:  playerY = Math.min(GROUND, playerY + 10); break;
+        case KeyEvent.VK_SPACE: fire(); return;
+        default: return;
     }
-}</pre><ul class=""><li>Graphics offers drawLine, drawRect, fillRect, drawOval, fillOval, drawString.</li><li>Change the data, then call <code>repaint()</code>; Swing calls paintComponent for you. Never call it yourself.</li></ul>
+    laserY = -1;                        // moving clears the last shot
+    repaint();
+}
 
-<div class="applinks" role="group" aria-label="Explore further"><span class="al-h">Explore further</span><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/gpu.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">GPU</span></a><a class="al al-itc" href="https://ayan-1829.github.io/inside-the-computer/parts/monitor.html" target="_blank" rel="noopener"><span class="al-app">Inside the Computer</span><span class="al-t">Monitor</span></a></div>
+@Override
+public void keyReleased(KeyEvent e) { }
+
+@Override
+public void keyTyped(KeyEvent e) { }</pre><ul class="walk-notes"><li>The arrow keys move the player; Space fires.</li><li>keyReleased and keyTyped must exist, even if empty.</li></ul></div>
 </div></section>
-<section class="slide " data-title="The Event Dispatch Thread" aria-label="The Event Dispatch Thread" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 6 of 6</p><h2>The Event Dispatch Thread</h2><pre class="code small-code">SwingUtilities.invokeLater(new Runnable() {
+<section class="slide " data-title="GameFrame: the buttons" aria-label="GameFrame: the buttons" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 4 of 6 · our game program · 2 of 2 · <span class="walk-file">GameFrame.java</span></p><h2>GameFrame: the buttons</h2><div class="walk-side g-walk"><pre class="code walk-code">    JButton fire = new JButton(&quot;Fire&quot;);
+    JButton reset = new JButton(&quot;Reset&quot;);
+    fire.setFocusable(false);           // keep the keyboard focus on the panel
+    reset.setFocusable(false);
+    fire.addActionListener(e -&gt; panel.fire());
+    reset.addActionListener(e -&gt; panel.reset());
+    JPanel buttons = new JPanel(new FlowLayout());
+    buttons.add(fire);
+    buttons.add(reset);
+    buttons.add(new JLabel(&quot;Arrow keys move, Space fires&quot;));
+    add(buttons, BorderLayout.SOUTH);
+
+    pack();                             // size the window to fit its parts
+    setLocationRelativeTo(null);        // centre it on the screen
+}</pre><ul class="walk-notes"><li>Buttons are not focusable, so the keys keep going to the panel.</li><li>pack() sizes the window around its parts.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Drawing with Graphics" aria-label="Drawing with Graphics" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 6</p><h2>Drawing with Graphics</h2><div class="g-codeside g-topic"><div><div class="kicker g-wk"><div class="walk-file">Sprites.java</div><div>·</div><div>Sprites: the background</div></div><pre class="code small-code">public static void drawBackground(Graphics2D g, int w, int h, int ground) {
+    g.setPaint(new GradientPaint(0, 0, SKY_TOP, 0, ground, SKY_BOTTOM));
+    g.fillRect(0, 0, w, ground);
+    g.setColor(CITY);
+    int[] tops = { 60, 90, 40, 110, 70, 50, 95, 65 };
+    int bw = w / tops.length;
+    for (int i = 0; i &lt; tops.length; i++) {
+        g.fillRect(i * bw + 6, ground - tops[i], bw - 12, tops[i]);
+    }
+    g.setColor(DIRT);
+    g.fillRect(0, ground, w, h - ground);
+    g.setColor(GRASS);
+    g.fillRect(0, ground, w, 4);
+}</pre></div><ul class="pts"><li>Extend <code>JPanel</code> and override <code>paintComponent(Graphics g)</code>.</li><li>Draw with <code>setColor</code>, <code>fillRect</code>, <code>fillOval</code>, <code>drawLine</code>, <code>drawString</code>.</li><li>(0, 0) is the top-left corner; y grows downward.</li><li>A GradientPaint fills the sky.</li><li>Eight rectangles make the city skyline.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Drawing with Graphics" aria-label="Drawing with Graphics" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 6 · in the game</p><h2>Drawing with Graphics</h2><div data-demo="g-paint"></div><ul class="pts pts-row"><li>Override <code>paintComponent(Graphics g)</code> and draw with <code>fillRect</code>, <code>fillOval</code>, <code>fillArc</code>.</li><li>(0, 0) is the top-left corner; y grows downwards.</li><li>Later shapes are drawn on top of earlier ones.</li></ul>
+</div></section>
+<section class="slide " data-title="Sprites: the commando’s body" aria-label="Sprites: the commando’s body" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 6 · our game program · 1 of 5 · <span class="walk-file">Sprites.java</span></p><h2>Sprites: the commando’s body</h2><div class="walk-side g-walk"><pre class="code walk-code">// (x, y) = the point between the boots, on the ground
+public static void drawCommando(Graphics2D g, int x, int y, boolean firing) {
+    Color dark = new Color(47, 93, 44), green = new Color(62, 123, 58);
+    Color skin = new Color(224, 180, 138), metal = new Color(34, 34, 34);
+    g.setColor(dark);
+    g.fillRect(x - 18, y - 44, 7, 18);                  // backpack
+    g.fillRect(x - 10, y - 22, 8, 22);                  // back leg
+    g.fillRect(x + 2, y - 22, 8, 22);                   // front leg
+    g.setColor(Color.BLACK);
+    g.fillRect(x - 12, y - 4, 12, 4);                   // boots
+    g.fillRect(x + 1, y - 4, 12, 4);
+    g.setColor(green);
+    g.fillRect(x - 12, y - 46, 24, 26);                 // body
+    g.setColor(new Color(110, 80, 40));
+    g.fillRect(x - 12, y - 24, 24, 3);                  // belt
+    g.setColor(skin);</pre><ul class="walk-notes"><li>Every part is placed relative to one point (x, y), between the boots.</li><li>Up means y minus something.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Sprites: head, helmet and rifle" aria-label="Sprites: head, helmet and rifle" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 6 · our game program · 2 of 5 · <span class="walk-file">Sprites.java</span></p><h2>Sprites: head, helmet and rifle</h2><div class="walk-side g-walk"><pre class="code walk-code">    g.fillOval(x - 8, y - 60, 16, 16);                  // head
+    g.setColor(dark);
+    g.fillArc(x - 10, y - 66, 20, 16, 0, 180);          // helmet
+    g.fillRect(x - 10, y - 59, 22, 3);                  // helmet brim
+    g.setColor(Color.BLACK);
+    g.fillRect(x + 3, y - 55, 4, 3);                    // eye
+    g.setColor(metal);
+    g.fillRect(x + 2, y - 38, 26, 6);                   // rifle
+    g.fillRect(x + 28, y - 37, 8, 3);                   // barrel
+    g.setColor(green);
+    g.fillRect(x - 2, y - 40, 14, 6);                   // arm
+    g.setColor(skin);
+    g.fillOval(x + 9, y - 41, 7, 7);                    // hand
+    if (firing) {
+        g.setColor(new Color(255, 210, 60));
+        g.fillOval(x + 36, y - 41, 12, 10);             // muzzle flash
+    }
+}</pre><ul class="walk-notes"><li>fillArc draws the top half of an oval: the helmet.</li><li>The muzzle flash is drawn only while firing.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Sprites: drone and tank" aria-label="Sprites: drone and tank" tabindex="-1"><div style="zoom:0.94;" class="slide-inner">
+<p class="kicker">Topic 5 of 6 · our game program · 3 of 5 · <span class="walk-file">Sprites.java</span></p><h2>Sprites: drone and tank</h2><div class="walk-side g-walk"><pre class="code walk-code">// (cx, cy) = the centre of the drone
+public static void drawDrone(Graphics2D g, int cx, int cy) {
+    g.setColor(new Color(58, 63, 71));
+    g.fillRect(cx - 24, cy - 10, 48, 3);                // arms
+    g.setColor(new Color(170, 178, 189));
+    g.fillOval(cx - 30, cy - 14, 16, 4);                // rotors
+    g.fillOval(cx + 14, cy - 14, 16, 4);
+    g.setColor(new Color(90, 98, 112));
+    g.fillOval(cx - 16, cy - 8, 32, 16);                // body
+    g.setColor(new Color(255, 77, 77));
+    g.fillOval(cx - 5, cy - 4, 10, 8);                  // red eye
+}
+
+// (x, y) = the left end of the tracks, on the ground
+public static void drawTank(Graphics2D g, int x, int y) {
+    g.setColor(new Color(51, 51, 51));
+    g.fillRoundRect(x, y - 14, 70, 14, 12, 12);         // tracks
+    g.setColor(new Color(122, 106, 58));
+    g.fillRect(x + 6, y - 28, 58, 14);                  // hull
+    g.setColor(new Color(106, 90, 48));
+    g.fillRoundRect(x + 20, y - 40, 28, 14, 8, 8);      // turret
+    g.setColor(new Color(68, 68, 68));
+    g.fillRect(x - 10, y - 36, 32, 5);                  // cannon, pointing left
+}</pre><ul class="walk-notes"><li>The same idea for every character.</li><li>The tank’s cannon points left, at the player.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Sprites: bullets, explosions and the laser" aria-label="Sprites: bullets, explosions and the laser" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 6 · our game program · 4 of 5 · <span class="walk-file">Sprites.java</span></p><h2>Sprites: bullets, explosions and the laser</h2><div class="walk-side g-walk"><pre class="code walk-code">public static void drawBullet(Graphics2D g, int x, int y, boolean enemy) {
+    g.setColor(enemy ? new Color(255, 120, 60) : new Color(255, 214, 90));
+    g.fillRoundRect(x - 5, y - 2, 10, 4, 4, 4);
+}
+
+// age runs from 0 (bang) to 20 (gone)
+public static void drawExplosion(Graphics2D g, int cx, int cy, int age) {
+    int r = 6 + age * 2;
+    int alpha = Math.max(0, 220 - age * 11);
+    g.setColor(new Color(255, 140, 40, alpha));
+    g.fillOval(cx - r, cy - r, 2 * r, 2 * r);
+    g.setColor(new Color(255, 230, 120, alpha));
+    g.fillOval(cx - r / 2, cy - r / 2, r, r);
+}
+
+public static void drawLaser(Graphics2D g, int x1, int y, int x2) {
+    g.setColor(new Color(255, 220, 80));
+    g.setStroke(new BasicStroke(3));
+    g.drawLine(x1, y, x2, y);
+    g.setStroke(new BasicStroke(1));
+}</pre><ul class="walk-notes"><li>The explosion fades by lowering its alpha (transparency).</li><li>Chapter 10 reuses this class unchanged.</li></ul></div>
+</div></section>
+<section class="slide " data-title="paintComponent(): drawing the scene" aria-label="paintComponent(): drawing the scene" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 6 · our game program · 5 of 5 · <span class="walk-file">GamePanel.java</span></p><h2>paintComponent(): drawing the scene</h2><div class="walk-side g-walk"><pre class="code walk-code wide">@Override
+protected void paintComponent(Graphics g0) {
+    super.paintComponent(g0);           // clear the old picture first
+    Graphics2D g = (Graphics2D) g0;
+    g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    Sprites.drawBackground(g, W, H, GROUND);
+    for (Point d : drones) {
+        Sprites.drawDrone(g, d.x, d.y);
+    }
+    Sprites.drawCommando(g, playerX, playerY, laserY &gt;= 0);
+    if (laserY &gt;= 0) {
+        Sprites.drawLaser(g, playerX + 36, laserY, laserEndX);
+    }
+    if (drones.isEmpty()) {
+        g.setColor(Color.WHITE);
+        g.setFont(new Font(&quot;SansSerif&quot;, Font.BOLD, 32));
+        g.drawString(&quot;All drones down!&quot;, W / 2 - 130, H / 2);
+    }
+}</pre><ul class="walk-notes"><li><code>super.paintComponent</code> clears the old picture.</li><li>Draw order: background, drones, player, laser.</li></ul></div>
+</div></section>
+<section class="slide " data-title="repaint() and the Event Dispatch Thread" aria-label="repaint() and the Event Dispatch Thread" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 6 of 6</p><h2>repaint() and the Event Dispatch Thread</h2><div class="g-codeside"><pre class="code small-code">// never call paintComponent yourself
+playerX += 10;
+repaint();               // &quot;please redraw soon&quot;
+
+public static void main(String[] args) {
+    SwingUtilities.invokeLater(() -&gt; new GameFrame().setVisible(true));
+}</pre><ul class="pts"><li>Never call <code>paintComponent</code> yourself: call <code>repaint()</code> and Swing draws soon.</li><li>Swing work happens on one thread, the <b>Event Dispatch Thread</b> (EDT).</li><li>Start the GUI with <code>SwingUtilities.invokeLater(…)</code>.</li><li><code>repaint()</code> asks Swing to call paintComponent on its own thread.</li><li>All Swing work runs on the <b>Event Dispatch Thread</b> (EDT).</li><li><code>invokeLater</code> builds the window on the EDT.</li></ul></div>
+</div></section>
+<section class="slide " data-title="reset()" aria-label="reset()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 6 of 6 · our game program · 1 of 3 · <span class="walk-file">GamePanel.java</span></p><h2>reset()</h2><div class="walk-side g-walk"><pre class="code walk-code">public void reset() {
+    drones.clear();
+    drones.add(new Point(560, 120));
+    drones.add(new Point(640, 200));
+    drones.add(new Point(480, 270));
+    playerX = 80;
+    playerY = GROUND;
+    score = 0;
+    laserY = -1;
+    frame.updateScore(score, drones.size());
+    repaint();                          // ask Swing to call paintComponent soon
+    requestFocusInWindow();
+}</pre><ul class="walk-notes"><li>Three drones at fixed places, the player back at the start.</li><li>It ends with <code>repaint()</code>.</li></ul></div>
+</div></section>
+<section class="slide " data-title="fire(): the laser" aria-label="fire(): the laser" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 6 of 6 · our game program · 2 of 3 · <span class="walk-file">GamePanel.java</span></p><h2>fire(): the laser</h2><div class="walk-side g-walk"><pre class="code walk-code">// One shot: a laser along the rifle&#x27;s height that stops at the first drone
+public void fire() {
+    laserY = playerY - 36;
+    laserEndX = W;
+    Point hit = null;
+    for (Point d : drones) {
+        boolean ahead = d.x &gt; playerX;
+        boolean inLine = Math.abs(d.y - laserY) &lt; 16;
+        if (ahead &amp;&amp; inLine &amp;&amp; (hit == null || d.x &lt; hit.x)) {
+            hit = d;
+        }
+    }
+    if (hit != null) {
+        drones.remove(hit);
+        laserEndX = hit.x;
+        score += 100;
+    }
+    frame.updateScore(score, drones.size());
+    repaint();
+    requestFocusInWindow();
+}</pre><ul class="walk-notes"><li>fire() finds the nearest drone ahead, at rifle height.</li><li>A hit removes it from the list and adds 100 points.</li></ul></div>
+</div></section>
+<section class="slide " data-title="updateScore() and main()" aria-label="updateScore() and main()" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 6 of 6 · our game program · 3 of 3 · <span class="walk-file">GameFrame.java</span></p><h2>updateScore() and main()</h2><pre class="code walk-code">public void updateScore(int score, int dronesLeft) {
+    scoreLabel.setText(&quot;Score: &quot; + score + &quot;    Drones left: &quot; + dronesLeft);
+}
+
+public static void main(String[] args) {
+    // Swing must be built and changed on the Event Dispatch Thread
+    SwingUtilities.invokeLater(() -&gt; new GameFrame().setVisible(true));
+}</pre><ul class="walk-notes"><li>main builds the window with invokeLater, on the EDT.</li></ul>
+</div></section>
+<section class="slide " data-title="The complete game program" aria-label="The complete game program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Build the game · 3 files</p><h2>The complete game program</h2><div class="codeview"><pre class="code small-code" data-file="Sprites.java">import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Graphics2D;
+
+// Draws every character from simple shapes: rectangles, ovals and arcs
+public final class Sprites {
+    private Sprites() { }
+
+    static final Color SKY_TOP    = new Color(14, 26, 46);
+    static final Color SKY_BOTTOM = new Color(34, 56, 90);
+    static final Color CITY       = new Color(26, 42, 64);
+    static final Color DIRT       = new Color(59, 47, 37);
+    static final Color GRASS      = new Color(76, 122, 58);
+
+    public static void drawBackground(Graphics2D g, int w, int h, int ground) {
+        g.setPaint(new GradientPaint(0, 0, SKY_TOP, 0, ground, SKY_BOTTOM));
+        g.fillRect(0, 0, w, ground);
+        g.setColor(CITY);
+        int[] tops = { 60, 90, 40, 110, 70, 50, 95, 65 };
+        int bw = w / tops.length;
+        for (int i = 0; i &lt; tops.length; i++) {
+            g.fillRect(i * bw + 6, ground - tops[i], bw - 12, tops[i]);
+        }
+        g.setColor(DIRT);
+        g.fillRect(0, ground, w, h - ground);
+        g.setColor(GRASS);
+        g.fillRect(0, ground, w, 4);
+    }
+
+    // (x, y) = the point between the boots, on the ground
+    public static void drawCommando(Graphics2D g, int x, int y, boolean firing) {
+        Color dark = new Color(47, 93, 44), green = new Color(62, 123, 58);
+        Color skin = new Color(224, 180, 138), metal = new Color(34, 34, 34);
+        g.setColor(dark);
+        g.fillRect(x - 18, y - 44, 7, 18);                  // backpack
+        g.fillRect(x - 10, y - 22, 8, 22);                  // back leg
+        g.fillRect(x + 2, y - 22, 8, 22);                   // front leg
+        g.setColor(Color.BLACK);
+        g.fillRect(x - 12, y - 4, 12, 4);                   // boots
+        g.fillRect(x + 1, y - 4, 12, 4);
+        g.setColor(green);
+        g.fillRect(x - 12, y - 46, 24, 26);                 // body
+        g.setColor(new Color(110, 80, 40));
+        g.fillRect(x - 12, y - 24, 24, 3);                  // belt
+        g.setColor(skin);
+        g.fillOval(x - 8, y - 60, 16, 16);                  // head
+        g.setColor(dark);
+        g.fillArc(x - 10, y - 66, 20, 16, 0, 180);          // helmet
+        g.fillRect(x - 10, y - 59, 22, 3);                  // helmet brim
+        g.setColor(Color.BLACK);
+        g.fillRect(x + 3, y - 55, 4, 3);                    // eye
+        g.setColor(metal);
+        g.fillRect(x + 2, y - 38, 26, 6);                   // rifle
+        g.fillRect(x + 28, y - 37, 8, 3);                   // barrel
+        g.setColor(green);
+        g.fillRect(x - 2, y - 40, 14, 6);                   // arm
+        g.setColor(skin);
+        g.fillOval(x + 9, y - 41, 7, 7);                    // hand
+        if (firing) {
+            g.setColor(new Color(255, 210, 60));
+            g.fillOval(x + 36, y - 41, 12, 10);             // muzzle flash
+        }
+    }
+
+    // (cx, cy) = the centre of the drone
+    public static void drawDrone(Graphics2D g, int cx, int cy) {
+        g.setColor(new Color(58, 63, 71));
+        g.fillRect(cx - 24, cy - 10, 48, 3);                // arms
+        g.setColor(new Color(170, 178, 189));
+        g.fillOval(cx - 30, cy - 14, 16, 4);                // rotors
+        g.fillOval(cx + 14, cy - 14, 16, 4);
+        g.setColor(new Color(90, 98, 112));
+        g.fillOval(cx - 16, cy - 8, 32, 16);                // body
+        g.setColor(new Color(255, 77, 77));
+        g.fillOval(cx - 5, cy - 4, 10, 8);                  // red eye
+    }
+
+    // (x, y) = the left end of the tracks, on the ground
+    public static void drawTank(Graphics2D g, int x, int y) {
+        g.setColor(new Color(51, 51, 51));
+        g.fillRoundRect(x, y - 14, 70, 14, 12, 12);         // tracks
+        g.setColor(new Color(122, 106, 58));
+        g.fillRect(x + 6, y - 28, 58, 14);                  // hull
+        g.setColor(new Color(106, 90, 48));
+        g.fillRoundRect(x + 20, y - 40, 28, 14, 8, 8);      // turret
+        g.setColor(new Color(68, 68, 68));
+        g.fillRect(x - 10, y - 36, 32, 5);                  // cannon, pointing left
+    }
+
+    public static void drawBullet(Graphics2D g, int x, int y, boolean enemy) {
+        g.setColor(enemy ? new Color(255, 120, 60) : new Color(255, 214, 90));
+        g.fillRoundRect(x - 5, y - 2, 10, 4, 4, 4);
+    }
+
+    // age runs from 0 (bang) to 20 (gone)
+    public static void drawExplosion(Graphics2D g, int cx, int cy, int age) {
+        int r = 6 + age * 2;
+        int alpha = Math.max(0, 220 - age * 11);
+        g.setColor(new Color(255, 140, 40, alpha));
+        g.fillOval(cx - r, cy - r, 2 * r, 2 * r);
+        g.setColor(new Color(255, 230, 120, alpha));
+        g.fillOval(cx - r / 2, cy - r / 2, r, r);
+    }
+
+    public static void drawLaser(Graphics2D g, int x1, int y, int x2) {
+        g.setColor(new Color(255, 220, 80));
+        g.setStroke(new BasicStroke(3));
+        g.drawLine(x1, y, x2, y);
+        g.setStroke(new BasicStroke(1));
+    }
+}</pre><pre class="code small-code" data-file="GamePanel.java">import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.RenderingHints;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import javax.swing.JPanel;
+
+// The drawing area: a JPanel that paints the arena and listens to the keyboard
+public class GamePanel extends JPanel implements KeyListener {
+    public static final int W = 760, H = 380, GROUND = 330;
+
+    private final GameFrame frame;
+    private int playerX, playerY;
+    private final ArrayList&lt;Point&gt; drones = new ArrayList&lt;&gt;();
+    private int score;
+    private int laserY = -1;                // -1 means &quot;no shot on screen&quot;
+    private int laserEndX;
+
+    public GamePanel(GameFrame frame) {
+        this.frame = frame;
+        setPreferredSize(new Dimension(W, H));
+        setFocusable(true);                 // so the panel can receive key presses
+        addKeyListener(this);
+        reset();
+    }
+
+    public void reset() {
+        drones.clear();
+        drones.add(new Point(560, 120));
+        drones.add(new Point(640, 200));
+        drones.add(new Point(480, 270));
+        playerX = 80;
+        playerY = GROUND;
+        score = 0;
+        laserY = -1;
+        frame.updateScore(score, drones.size());
+        repaint();                          // ask Swing to call paintComponent soon
+        requestFocusInWindow();
+    }
+
+    // One shot: a laser along the rifle&#x27;s height that stops at the first drone
+    public void fire() {
+        laserY = playerY - 36;
+        laserEndX = W;
+        Point hit = null;
+        for (Point d : drones) {
+            boolean ahead = d.x &gt; playerX;
+            boolean inLine = Math.abs(d.y - laserY) &lt; 16;
+            if (ahead &amp;&amp; inLine &amp;&amp; (hit == null || d.x &lt; hit.x)) {
+                hit = d;
+            }
+        }
+        if (hit != null) {
+            drones.remove(hit);
+            laserEndX = hit.x;
+            score += 100;
+        }
+        frame.updateScore(score, drones.size());
+        repaint();
+        requestFocusInWindow();
+    }
+
     @Override
-    public void run() { new DrawingApp(); }
-});</pre><ul class=""><li>Swing is not thread-safe: create and update components only on the EDT.</li></ul>
-</div></section>
-<section class="slide " data-title="Program design" aria-label="Program design" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Implementation design</p><h2>Program design</h2><figure class="fig" data-fig="lab9-uml"></figure>
-</div></section>
-<section class="slide " data-title="Execution flow" aria-label="Execution flow" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Implementation design</p><h2>Execution flow</h2><ol class="flow"><li>main schedules GUI creation on the EDT</li><li>DrawingApp builds the window: title (NORTH), canvas (CENTER), controls and status (SOUTH)</li><li>Listeners are registered on the three buttons</li><li>Add Rectangle / Add Circle: set colour, add a shape, repaint, update status</li><li>Clear All: empty the list and repaint</li><li>Closing the window ends the program</li></ol><p class="note-line">Layout (DrawingApp), drawing (DrawingPanel) and shape behaviour (Shape subclasses) are separate, so adding a TriangleShape is easy.</p>
-</div></section>
-<section class="slide " data-title="An abstract drawable shape" aria-label="An abstract drawable shape" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 1 of 10 · <span class="walk-file">Shape.java</span></p><h2>An abstract drawable shape</h2><div class="walk-side"><pre class="code walk-code">public abstract class Shape {
-
-    protected int x;
-    protected int y;
-    protected Color colour;
-
-    public Shape(int x, int y, Color colour) {
-        this.x = x;
-        this.y = y;
-        this.colour = colour;
-    }
-
-    public abstract void draw(Graphics g);
-}</pre><ul class="walk-notes"><li>Position and colour for every shape; each subclass decides how to draw.</li></ul></div>
-</div></section>
-<section class="slide " data-title="RectangleShape.draw()" aria-label="RectangleShape.draw()" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 2 of 10 · <span class="walk-file">RectangleShape.java</span></p><h2>RectangleShape.draw()</h2><pre class="code walk-code">@Override
-public void draw(Graphics g) {
-    g.setColor(colour);
-    g.fillRect(x, y, width, height);
-    g.setColor(Color.BLACK);
-    g.drawRect(x, y, width, height);
-}</pre><ul class="walk-notes"><li>Fill in the shape’s colour, then outline in black.</li></ul>
-</div></section>
-<section class="slide " data-title="CircleShape.draw()" aria-label="CircleShape.draw()" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 3 of 10 · <span class="walk-file">CircleShape.java</span></p><h2>CircleShape.draw()</h2><pre class="code walk-code">@Override
-public void draw(Graphics g) {
-    int diameter = 2 * radius;
-    g.setColor(colour);
-    g.fillOval(x - radius, y - radius, diameter, diameter);
-    g.setColor(Color.BLACK);
-    g.drawOval(x - radius, y - radius, diameter, diameter);
-}</pre><ul class="walk-notes"><li>fillOval takes the top-left corner, so subtract the radius from the centre.</li></ul>
-</div></section>
-<section class="slide " data-title="paintComponent draws the frame" aria-label="paintComponent draws the frame" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 4 of 10 · <span class="walk-file">DrawingPanel.java</span></p><h2>paintComponent draws the frame</h2><div class="walk-side"><pre class="code walk-code">@Override
-protected void paintComponent(Graphics g) {
-    super.paintComponent(g);
-    drawGrid(g);
-    for (Shape shape : shapes) {
-        shape.draw(g);
-    }
-}
-
-private void drawGrid(Graphics g) {
-    g.setColor(new Color(220, 220, 220));
-    for (int x = 0; x &lt; getWidth(); x += 50) {
-        g.drawLine(x, 0, x, getHeight());
-    }
-    for (int y = 0; y &lt; getHeight(); y += 50) {
-        g.drawLine(0, y, getWidth(), y);
-    }
-}</pre><ul class="walk-notes"><li>Clear, draw the grid, then call draw(g) on every shape (polymorphism).</li></ul></div>
-</div></section>
-<section class="slide " data-title="Changing the picture" aria-label="Changing the picture" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 5 of 10 · <span class="walk-file">DrawingPanel.java</span></p><h2>Changing the picture</h2><pre class="code walk-code">public void addRectangle(int x, int y, int width, int height) {
-    shapes.add(new RectangleShape(x, y, width, height, currentColor));
-    repaint();
-}
-
-public void addCircle(int x, int y, int radius) {
-    shapes.add(new CircleShape(x, y, radius, currentColor));
-    repaint();
-}
-
-public void clear() {
-    shapes.clear();
-    repaint();
-}</pre><ul class="walk-notes"><li>Change the list, then <code>repaint()</code>; never call paintComponent yourself.</li></ul>
-</div></section>
-<section class="slide " data-title="Building the window: north and centre" aria-label="Building the window: north and centre" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 6 of 10 · <span class="walk-file">DrawingApp.java</span></p><h2>Building the window: north and centre</h2><pre class="code walk-code">private void setupUI() {
-    JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
-    mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-    JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    JLabel titleLabel = new JLabel(&quot;Drawing Application&quot;);
-    titleLabel.setFont(new Font(&quot;Arial&quot;, Font.BOLD, 16));
-    topPanel.add(titleLabel);
-
-    drawingPanel = new DrawingPanel();
-    drawingPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));</pre><ul class="walk-notes"><li>BorderLayout for the frame, FlowLayout for the title row.</li></ul>
-</div></section>
-<section class="slide " data-title="Building the window: the controls" aria-label="Building the window: the controls" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 7 of 10 · <span class="walk-file">DrawingApp.java</span></p><h2>Building the window: the controls</h2><pre class="code walk-code">JPanel controlPanel = new JPanel(new BorderLayout());
-JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-JLabel colorLabel = new JLabel(&quot;Colour:&quot;);
-colorComboBox = new JComboBox&lt;String&gt;(
-        new String[] {&quot;Blue&quot;, &quot;Red&quot;, &quot;Green&quot;, &quot;Yellow&quot;, &quot;Orange&quot;, &quot;Purple&quot;});
-rectangleButton = new JButton(&quot;Add Rectangle&quot;);
-circleButton = new JButton(&quot;Add Circle&quot;);
-clearButton = new JButton(&quot;Clear All&quot;);
-
-buttonPanel.add(colorLabel);
-buttonPanel.add(colorComboBox);
-buttonPanel.add(rectangleButton);
-buttonPanel.add(circleButton);
-buttonPanel.add(clearButton);</pre><ul class="walk-notes"><li>Create each component, then add it to a FlowLayout row.</li></ul>
-</div></section>
-<section class="slide " data-title="Placing the panels" aria-label="Placing the panels" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 8 of 10 · <span class="walk-file">DrawingApp.java</span></p><h2>Placing the panels</h2><pre class="code walk-code">statusLabel = new JLabel(&quot;Ready. Shapes: 0&quot;);
-controlPanel.add(buttonPanel, BorderLayout.CENTER);
-controlPanel.add(statusLabel, BorderLayout.SOUTH);
-
-mainPanel.add(topPanel, BorderLayout.NORTH);
-mainPanel.add(drawingPanel, BorderLayout.CENTER);
-mainPanel.add(controlPanel, BorderLayout.SOUTH);
-setContentPane(mainPanel);</pre><ul class="walk-notes"><li>Panels nest: the button row and status go in controlPanel, which goes in SOUTH.</li></ul>
-</div></section>
-<section class="slide " data-title="Responding to clicks" aria-label="Responding to clicks" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 9 of 10 · <span class="walk-file">DrawingApp.java</span></p><h2>Responding to clicks</h2><pre class="code walk-code">private void addActionListeners() {
-    rectangleButton.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            drawingPanel.setCurrentColor(getSelectedColor());
-            int x = (int) (Math.random() * 600);
-            int y = (int) (Math.random() * 350);
-            drawingPanel.addRectangle(x, y, 100, 80);
-            updateStatus();
+    protected void paintComponent(Graphics g0) {
+        super.paintComponent(g0);           // clear the old picture first
+        Graphics2D g = (Graphics2D) g0;
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        Sprites.drawBackground(g, W, H, GROUND);
+        for (Point d : drones) {
+            Sprites.drawDrone(g, d.x, d.y);
         }
-    });</pre><ul class="walk-notes"><li>actionPerformed runs on each click: pick the colour, add a shape, update the label.</li></ul>
-</div></section>
-<section class="slide " data-title="Starting on the Event Dispatch Thread" aria-label="Starting on the Event Dispatch Thread" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 10 of 10 · <span class="walk-file">Lab9Demo.java</span></p><h2>Starting on the Event Dispatch Thread</h2><pre class="code walk-code">public static void main(String[] args) {
-    SwingUtilities.invokeLater(new Runnable() {
-        @Override
-        public void run() {
-            new DrawingApp();
+        Sprites.drawCommando(g, playerX, playerY, laserY &gt;= 0);
+        if (laserY &gt;= 0) {
+            Sprites.drawLaser(g, playerX + 36, laserY, laserEndX);
         }
-    });
-}</pre><ul class="walk-notes"><li>invokeLater runs the GUI code on Swing’s own thread.</li></ul>
+        if (drones.isEmpty()) {
+            g.setColor(Color.WHITE);
+            g.setFont(new Font(&quot;SansSerif&quot;, Font.BOLD, 32));
+            g.drawString(&quot;All drones down!&quot;, W / 2 - 130, H / 2);
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_LEFT:  playerX = Math.max(30, playerX - 10); break;
+            case KeyEvent.VK_RIGHT: playerX = Math.min(W - 60, playerX + 10); break;
+            case KeyEvent.VK_UP:    playerY = Math.max(120, playerY - 10); break;   // jump jets
+            case KeyEvent.VK_DOWN:  playerY = Math.min(GROUND, playerY + 10); break;
+            case KeyEvent.VK_SPACE: fire(); return;
+            default: return;
+        }
+        laserY = -1;                        // moving clears the last shot
+        repaint();
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) { }
+
+    @Override
+    public void keyTyped(KeyEvent e) { }
+}</pre><pre class="code small-code" data-file="GameFrame.java">import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+// The window: a score label on top, the arena in the middle, buttons below
+public class GameFrame extends JFrame {
+    private final JLabel scoreLabel = new JLabel();
+    private final GamePanel panel;
+
+    public GameFrame() {
+        super(&quot;Code Commando - Chapter 9&quot;);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+
+        scoreLabel.setFont(new Font(&quot;SansSerif&quot;, Font.BOLD, 18));
+        scoreLabel.setBorder(BorderFactory.createEmptyBorder(6, 10, 6, 10));
+        add(scoreLabel, BorderLayout.NORTH);
+
+        panel = new GamePanel(this);
+        add(panel, BorderLayout.CENTER);
+
+        JButton fire = new JButton(&quot;Fire&quot;);
+        JButton reset = new JButton(&quot;Reset&quot;);
+        fire.setFocusable(false);           // keep the keyboard focus on the panel
+        reset.setFocusable(false);
+        fire.addActionListener(e -&gt; panel.fire());
+        reset.addActionListener(e -&gt; panel.reset());
+        JPanel buttons = new JPanel(new FlowLayout());
+        buttons.add(fire);
+        buttons.add(reset);
+        buttons.add(new JLabel(&quot;Arrow keys move, Space fires&quot;));
+        add(buttons, BorderLayout.SOUTH);
+
+        pack();                             // size the window to fit its parts
+        setLocationRelativeTo(null);        // centre it on the screen
+    }
+
+    public void updateScore(int score, int dronesLeft) {
+        scoreLabel.setText(&quot;Score: &quot; + score + &quot;    Drones left: &quot; + dronesLeft);
+    }
+
+    public static void main(String[] args) {
+        // Swing must be built and changed on the Event Dispatch Thread
+        SwingUtilities.invokeLater(() -&gt; new GameFrame().setVisible(true));
+    }
+}</pre></div><p class="muted">Save every file in one folder, then compile and run: <code>javac *.java</code> → <code>java GameFrame</code></p>
 </div></section>
-<section class="slide " data-title="Trace: change the model, then repaint()" aria-label="Trace: change the model, then repaint()" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
-<p class="kicker">Step through the code · 1 of 2</p><h2>Trace: change the model, then repaint()</h2><p class="muted">Each click adds a shape to the list; paintComponent draws whatever is in the list.</p><div data-trace="lab9-repaint"></div>
+<section class="slide " data-title="What you should see" aria-label="What you should see" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Run the game</p><h2>What you should see</h2><p>The program opens a window instead of printing. When it works:</p><ul class="pts"><li>A window titled “Code Commando - Chapter 9”</li><li>The score and drones left in a label at the top</li><li>The night city, three drones and the commando in the middle</li><li>Fire and Reset buttons at the bottom</li><li>Arrow keys move the commando (up and down use the jump jets); Space fires</li><li>A yellow laser destroys the first drone in its line</li></ul>
+</div></section>
+<section class="slide " data-title="Game task 1: A pause button" aria-label="Game task 1: A pause button" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 1 of 3</p><h2>Game task 1: A pause button</h2><div class="ex task g-task"><div class="qq">More components.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g9t0r0" data-key="g9t0r0"><label for="g9t0r0">Add a JToggleButton “Pause” to the SOUTH panel</label></li><li><input type="checkbox" id="g9t0r1" data-key="g9t0r1"><label for="g9t0r1">While paused, key presses do nothing</label></li><li><input type="checkbox" id="g9t0r2" data-key="g9t0r2"><label for="g9t0r2">Show “PAUSED” in large letters on the panel</label></li><li><input type="checkbox" id="g9t0r3" data-key="g9t0r3"><label for="g9t0r3">Keep the keyboard focus on the panel after clicking it</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Store a <code>boolean paused</code> in GamePanel, check it at the top of keyPressed, and draw the text in paintComponent when it is true.</div></details></div>
+</div></section>
+<section class="slide " data-title="Game task 2: Draw a health pack" aria-label="Game task 2: Draw a health pack" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 2 of 3</p><h2>Game task 2: Draw a health pack</h2><div class="ex task g-task"><div class="qq">Practise Graphics.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g9t1r0" data-key="g9t1r0"><label for="g9t1r0">Add <code>drawHealthPack(Graphics2D g, int x, int y)</code> to Sprites: a white box with a red cross</label></li><li><input type="checkbox" id="g9t1r1" data-key="g9t1r1"><label for="g9t1r1">Draw one on the ground in paintComponent</label></li><li><input type="checkbox" id="g9t1r2" data-key="g9t1r2"><label for="g9t1r2">When the player walks onto it, show “+25 HP” in the label</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Two red fillRect calls make the cross: one tall and thin, one short and wide.</div></details></div>
+</div></section>
+<section class="slide " data-title="Game task 3: A menu bar" aria-label="Game task 3: A menu bar" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 3 of 3</p><h2>Game task 3: A menu bar</h2><div class="ex task g-task"><div class="qq">Menus are components too.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g9t2r0" data-key="g9t2r0"><label for="g9t2r0">A JMenuBar with a “Game” menu</label></li><li><input type="checkbox" id="g9t2r1" data-key="g9t2r1"><label for="g9t2r1">Items “New game” (calls reset) and “Quit” (closes the window)</label></li><li><input type="checkbox" id="g9t2r2" data-key="g9t2r2"><label for="g9t2r2">Keyboard shortcuts with setAccelerator</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Quit can call <code>dispose()</code> on the frame, or <code>System.exit(0)</code>.</div></details></div>
+</div></section>
+<section class="slide " data-title="The official lab program" aria-label="The official lab program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Official lab · from the lab manual</p><h2>The official lab program</h2>
+<p class="g-official">The graded in-lab tasks and report exercises build on this program, not on the game. Read it and run it before you start them.</p>
+<ol class="flow"><li>main schedules GUI creation on the EDT</li><li>DrawingApp builds the window: title (NORTH), canvas (CENTER), controls and status (SOUTH)</li><li>Listeners are registered on the three buttons</li><li>Add Rectangle / Add Circle: set colour, add a shape, repaint, update status</li><li>Clear All: empty the list and repaint</li><li>Closing the window ends the program</li></ol><p class="note-line">Layout (DrawingApp), drawing (DrawingPanel) and shape behaviour (Shape subclasses) are separate, so adding a TriangleShape is easy.</p>
+</div></section>
+<section class="slide " data-title="Trace: change the model, then repaint()" aria-label="Trace: change the model, then repaint()" tabindex="-1"><div style="zoom:0.95;" class="slide-inner">
+<p class="kicker">Official lab · step through the code · 1 of 2</p><h2>Trace: change the model, then repaint()</h2><p class="muted">Each click adds a shape to the list; paintComponent draws whatever is in the list.</p><div data-trace="lab9-repaint"></div>
 </div></section>
 <section class="slide " data-title="Trace: main, the EDT and a click" aria-label="Trace: main, the EDT and a click" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
-<p class="kicker">Step through the code · 2 of 2</p><h2>Trace: main, the EDT and a click</h2><p class="muted">invokeLater hands the work to the Event Dispatch Thread. Every listener and every paint then runs on that one thread.</p><div data-trace="lab9-edt"></div>
+<p class="kicker">Official lab · step through the code · 2 of 2</p><h2>Trace: main, the EDT and a click</h2><p class="muted">invokeLater hands the work to the Event Dispatch Thread. Every listener and every paint then runs on that one thread.</p><div data-trace="lab9-edt"></div>
 </div></section>
-<section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
-<p class="kicker">For reference · 6 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="Shape.java">import java.awt.Color;
+<section class="slide " data-title="The official program" aria-label="The official program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Official lab · 6 files</p><h2>The official program</h2><div class="codeview"><pre class="code small-code" data-file="Shape.java">import java.awt.Color;
 import java.awt.Graphics;
 
 public abstract class Shape {
@@ -495,34 +897,28 @@ public class Lab9Demo {
             }
         });
     }
-}</pre></div><p class="muted">Copy or download each file, save it under the same name, then compile and run: <code>javac *.java</code> → <code>java Lab9Demo</code></p>
+}</pre></div><p class="muted">Compile and run: <code>javac *.java</code> → <code>java Lab9Demo</code></p>
 </div></section>
-<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Implementation</p><h2>Expected output</h2><p>The program opens a window instead of printing to the console. When it works you should see:</p><ul class=""><li>A window titled “Drawing Application” with a white canvas and a light grey grid</li><li>A colour box and Add Rectangle, Add Circle and Clear All buttons</li><li>Each Add button draws a filled shape in the selected colour at a random position</li><li>Clear All empties the canvas</li><li>The status label shows the current number of shapes</li></ul>
+<section class="slide " data-title="Official program: expected output" aria-label="Official program: expected output" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Official lab</p><h2>Official program: expected output</h2><p>The program opens a window. When it works you should see:</p><ul class=""><li>A window titled “Drawing Application” with a white canvas and a light grey grid</li><li>A colour box and Add Rectangle, Add Circle and Clear All buttons</li><li>Each Add button draws a filled shape in the selected colour at a random position</li><li>Clear All empties the canvas</li><li>The status label shows the current number of shapes</li></ul>
 </div></section>
 <section class="slide " data-title="Try the drawing application" aria-label="Try the drawing application" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Interactive</p><h2>Try the drawing application</h2><div data-demo="lab9-paint"></div>
-</div></section>
-<section class="slide " data-title="Explore layout managers" aria-label="Explore layout managers" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Interactive 1 of 2</p><h2>Explore layout managers</h2><div data-demo="layouts"></div>
-</div></section>
-<section class="slide " data-title="Drawing with Graphics calls" aria-label="Drawing with Graphics calls" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Interactive 2 of 2</p><h2>Drawing with Graphics calls</h2><div data-demo="canvasdraw"></div>
+<p class="kicker">Official lab · in the browser</p><h2>Try the drawing application</h2><div data-demo="lab9-paint"></div>
 </div></section>
 <section class="slide " data-title="Task 1: Add a TriangleShape" aria-label="Task 1: Add a TriangleShape" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 1 of 3</p><h2>Task 1: Add a TriangleShape</h2><div class="ex task"><div class="qq">Support triangles in the drawing app.</div>
+<p class="kicker">Official in-lab task 1 of 3</p><h2>Task 1: Add a TriangleShape</h2><div class="ex task"><div class="qq">Support triangles in the drawing app.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l9t0r0" data-key="l9t0r0"><label for="l9t0r0"><code>TriangleShape extends Shape</code></label></li><li><input type="checkbox" id="l9t0r1" data-key="l9t0r1"><label for="l9t0r1">Store three points or compute them from a starting point</label></li><li><input type="checkbox" id="l9t0r2" data-key="l9t0r2"><label for="l9t0r2">Override <code>draw(Graphics g)</code>: filled triangle + black outline</label></li><li><input type="checkbox" id="l9t0r3" data-key="l9t0r3"><label for="l9t0r3">Add an “Add Triangle” button</label></li><li><input type="checkbox" id="l9t0r4" data-key="l9t0r4"><label for="l9t0r4">Update the status label</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Use <code>g.fillPolygon(xs, ys, 3)</code> and <code>g.drawPolygon(xs, ys, 3)</code> with two int arrays.</div></details></div>
 </div></section>
 <section class="slide " data-title="Task 2: Mouse-click drawing" aria-label="Task 2: Mouse-click drawing" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 2 of 3</p><h2>Task 2: Mouse-click drawing</h2><div class="ex task"><div class="qq">Draw where the user clicks.</div>
+<p class="kicker">Official in-lab task 2 of 3</p><h2>Task 2: Mouse-click drawing</h2><div class="ex task"><div class="qq">Draw where the user clicks.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l9t1r0" data-key="l9t1r0"><label for="l9t1r0">Add a mouse listener to DrawingPanel</label></li><li><input type="checkbox" id="l9t1r1" data-key="l9t1r1"><label for="l9t1r1">Draw a small circle at the clicked point</label></li><li><input type="checkbox" id="l9t1r2" data-key="l9t1r2"><label for="l9t1r2">Use the current colour</label></li><li><input type="checkbox" id="l9t1r3" data-key="l9t1r3"><label for="l9t1r3">Update the shape count</label></li><li><input type="checkbox" id="l9t1r4" data-key="l9t1r4"><label for="l9t1r4">Show the clicked coordinates in the status label</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Extend <code>MouseAdapter</code> and override only <code>mouseClicked(MouseEvent e)</code>; read <code>e.getX()</code>, <code>e.getY()</code>.</div></details></div>
 </div></section>
 <section class="slide " data-title="Task 3: Colour picker" aria-label="Task 3: Colour picker" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 3 of 3</p><h2>Task 3: Colour picker</h2><div class="ex task"><div class="qq">Choose any colour with JColorChooser.</div>
+<p class="kicker">Official in-lab task 3 of 3</p><h2>Task 3: Colour picker</h2><div class="ex task"><div class="qq">Choose any colour with JColorChooser.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l9t2r0" data-key="l9t2r0"><label for="l9t2r0">Add a “Choose Colour” button</label></li><li><input type="checkbox" id="l9t2r1" data-key="l9t2r1"><label for="l9t2r1">Open <code>JColorChooser</code> on click</label></li><li><input type="checkbox" id="l9t2r2" data-key="l9t2r2"><label for="l9t2r2">Store the result as the current colour</label></li><li><input type="checkbox" id="l9t2r3" data-key="l9t2r3"><label for="l9t2r3">Use it for new shapes</label></li><li><input type="checkbox" id="l9t2r4" data-key="l9t2r4"><label for="l9t2r4">Show its name or RGB value in the status label</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans"><code>JColorChooser.showDialog(this, "Pick a colour", current)</code> returns null if the user cancels.</div></details></div>
 </div></section>
 <section class="slide " data-title="Show your work" aria-label="Show your work" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
+<p class="kicker">Official in-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
 </div></section>
 <section class="slide " data-title="Report exercise 1" aria-label="Report exercise 1" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Lab report · exercise 1 of 2</p><h2>Undo and redo</h2><div class="ex task report"><div class="qq">Extend the drawing app with history.</div>
@@ -536,25 +932,25 @@ public class Lab9Demo {
 <p class="kicker">Lab report</p><h2>Writing the lab report</h2><ul class="big-list"><li>Problem statement and your design (classes, fields, methods)</li><li>Complete source code, formatted and commented</li><li>Sample output or screenshots for normal <b>and</b> edge cases</li><li>A short discussion: what each OOP concept did in your program</li></ul><div class="integrity"><h3>Academic integrity</h3><p>Copying from the internet, classmates, seniors or any other unauthorized source is strictly prohibited. Full marks may be deducted if plagiarism, copied work or academic dishonesty is detected. Complete the tasks, implementation, output analysis and report yourself.</p></div>
 </div></section>
 <section class="slide " data-title="Viva questions (1 of 2)" aria-label="Viva questions (1 of 2)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Discussion and analysis</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">Why call <code>super.paintComponent(g)</code> first?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">It paints the background and clears the previous frame; without it old drawings remain as trails.</div></details></div><div class="ex"><div class="qq">Why should you call repaint() instead of paintComponent() directly?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">repaint() asks Swing to redraw at the right time on the EDT with a proper Graphics object.</div></details></div>
+<p class="kicker">Discussion</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">Why does GamePanel override paintComponent instead of drawing in fire()?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Swing decides when to paint (after resizing, covering, repaint()). Everything drawn must come from paintComponent, or it disappears at the next repaint.</div></details></div><div class="ex"><div class="qq">Why is <code>super.paintComponent(g0)</code> the first line?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">It clears the panel. Without it, the old picture stays and moving objects leave trails.</div></details></div>
 </div></section>
 <section class="slide " data-title="Viva questions (2 of 2)" aria-label="Viva questions (2 of 2)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Discussion and analysis</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq">How does the program show polymorphism?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">DrawingPanel keeps an ArrayList&lt;Shape&gt; and calls draw(g) on each; Java runs the RectangleShape or CircleShape version.</div></details></div><div class="ex"><div class="qq">Why start the GUI with SwingUtilities.invokeLater?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Swing is not thread-safe; invokeLater runs the creation code on the Event Dispatch Thread.</div></details></div>
+<p class="kicker">Discussion</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq">Why are the buttons set to <code>setFocusable(false)</code>?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">A clicked button takes the keyboard focus, so the arrow keys would stop reaching the panel.</div></details></div><div class="ex"><div class="qq">Why is the window built inside <code>SwingUtilities.invokeLater</code>?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Swing is not thread-safe: all Swing work must happen on the Event Dispatch Thread.</div></details></div>
 </div></section>
 <section class="slide " data-title="Quiz" aria-label="Quiz" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="lab9"></div><script type="application/json" class="quiz-json">[{"q": "Which layout divides a container into NORTH, SOUTH, EAST, WEST and CENTER?", "o": ["FlowLayout", "GridLayout", "BorderLayout", "BoxLayout"], "a": 2, "w": "BorderLayout has five regions."}, {"q": "A button click is handled by\u2026", "o": ["ActionListener.actionPerformed", "paintComponent", "main", "repaint"], "a": 0, "w": "Register an ActionListener on the button."}, {"q": "Custom drawing in Swing goes in\u2026", "o": ["paint() of JFrame", "paintComponent() of a JPanel", "the constructor", "main"], "a": 1, "w": "Override paintComponent on a JPanel."}, {"q": "To redraw after changing the shape list, call\u2026", "o": ["paintComponent(g)", "repaint()", "update()", "draw()"], "a": 1, "w": "Swing then calls paintComponent."}, {"q": "Swing components should be created on\u2026", "o": ["any thread", "the main thread", "the Event Dispatch Thread", "a worker thread"], "a": 2, "w": "Use SwingUtilities.invokeLater."}]</script></div>
+<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="game9"></div><script type="application/json" class="quiz-json">[{"q": "Which class is the window?", "o": ["JPanel", "JFrame", "JButton", "Graphics"], "a": 1, "w": "JFrame is the top-level window."}, {"q": "In BorderLayout, the game panel goes in\u2026", "o": ["NORTH", "CENTER", "SOUTH", "EAST"], "a": 1, "w": "CENTER takes all the space that is left."}, {"q": "On screen, increasing y moves a shape\u2026", "o": ["up", "down", "left", "right"], "a": 1, "w": "(0, 0) is the top-left corner."}, {"q": "To redraw after a change you call\u2026", "o": ["paintComponent(g)", "repaint()", "draw()", "update()"], "a": 1, "w": "repaint() asks Swing to paint soon."}, {"q": "A button click is delivered to\u2026", "o": ["a KeyListener", "an ActionListener", "paintComponent", "main"], "a": 1, "w": "addActionListener registers it."}]</script></div>
 </div></section>
 <section class="slide " data-title="Summary" aria-label="Summary" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Summary</p><h2>Summary</h2><ul class="sumlist"><li>Swing builds on AWT with lightweight J-components; applets are obsolete.</li><li>Containers hold components; layout managers position them.</li><li>Listeners make the GUI event-driven.</li><li>Draw in paintComponent and trigger it with repaint().</li><li>Create and update Swing on the Event Dispatch Thread.</li></ul><div class="nextcard"><a class="btn pri" href="10-animation.html">Next: Lab 10 · Animation</a><a class="btn" href="../index.html">All labs</a></div>
+<p class="kicker">Mission debrief</p><h2>Summary</h2><ul class="sumlist"><li>Swing components (JFrame, JPanel, JButton, JLabel) are placed by layout managers.</li><li>Listeners turn clicks and key presses into method calls.</li><li>paintComponent draws everything; (0, 0) is top-left and y grows down.</li><li>repaint() asks for a redraw; Swing work belongs on the Event Dispatch Thread.</li><li>Next mission: make it move on its own.</li></ul><div class="nextcard"><a class="btn pri" href="10-animation.html">Next: Mission 10 · Bring it to life</a><a class="btn" href="../index.html">All chapters</a></div>
 </div></section>
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 41</span>
+  <span class="counter" id="counter">1 / 47</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
-<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
-<noscript><p style="padding:20px">This lab needs JavaScript for the slides and the interactive examples.</p></noscript>
+<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this chapter</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
+<noscript><p style="padding:20px">This chapter needs JavaScript for the slides, the game scenes and the interactive examples.</p></noscript>
 <script src="../js/core.js"></script>
 <script src="../js/art.js"></script>
 <script src="../js/java.js"></script>
@@ -566,10 +962,14 @@ public class Lab9Demo {
 <script src="../js/demos-basics.js"></script>
 <script src="../js/demos-oop.js"></script>
 <script src="../js/demos-adv.js"></script>
+<script src="../js/game-core.js"></script>
+<script src="../js/game-scenes-a.js"></script>
+<script src="../js/game-scenes-b.js"></script>
+<script src="../js/game-scenes-c.js"></script>
 <script src="../js/quiz.js"></script>
 <script src="../js/page.js"></script>
 <script src="../js/lab.js"></script>
-<script>window.OOP_TOPIC = {"id": 9, "prev": "08-synchronization-deadlock.html", "next": "10-animation.html", "nextLabel": "Next lab"};</script>
+<script>window.OOP_TOPIC = {"id": 9, "prev": "08-synchronization-deadlock.html", "next": "10-animation.html", "nextLabel": "Next chapter"};</script>
 <script>mountPage();</script>
 <script src="../js/slides.js"></script>
 <script src="../js/annotate.js"></script>

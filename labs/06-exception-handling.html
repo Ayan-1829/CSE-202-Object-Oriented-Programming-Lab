@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Make a bank account that refuses bad input: throw and declare exceptions, catch them with try-catch-finally, write checked and unchecked custom exceptions and wrap low-level failures in a meaningful one.">
-<meta name="keywords" content="java exception handling, try catch finally, throw, throws, checked exception, custom exception, exception chaining, lab, cse 202, object oriented programming lab">
+<meta name="description" content="A gun runs out of ammo, a player types a level that does not exist, a lane number is out of range. Exceptions let the game notice the problem, deal with it and keep running.">
+<meta name="keywords" content="java exception handling, try catch finally, throw, throws, checked exception, custom exception, exception chaining, lab, java game, game programming, cse 202, object oriented programming lab">
 <meta name="author" content="Object Oriented Programming Lab Notes">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#155E63">
@@ -16,32 +16,33 @@
 <link rel="manifest" href="../site.webmanifest">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
-<meta property="og:title" content="Lab 6: Exception Handling &amp; Custom Exceptions | OOP Lab (CSE 202)">
-<meta property="og:description" content="Make a bank account that refuses bad input: throw and declare exceptions, catch them with try-catch-finally, write checked and unchecked custom exceptions and wrap low-level failures in a meaningful one.">
+<meta property="og:title" content="Chapter 6: Exception Handling &amp; Custom Exceptions | OOP Lab (CSE 202)">
+<meta property="og:description" content="A gun runs out of ammo, a player types a level that does not exist, a lane number is out of range. Exceptions let the game notice the problem, deal with it and keep running.">
 <meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/06-exception-handling.html">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/06-exception-handling.png?v=2">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Lab 6 of 10: Exception Handling &amp; Custom Exceptions – CSE 202 Object Oriented Programming Lab">
+<meta property="og:image:alt" content="Chapter 6 of 10: Exception Handling &amp; Custom Exceptions – CSE 202 Object Oriented Programming Lab">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Lab 6: Exception Handling &amp; Custom Exceptions | OOP Lab (CSE 202)">
-<meta name="twitter:description" content="Make a bank account that refuses bad input: throw and declare exceptions, catch them with try-catch-finally, write checked and unchecked custom exceptions and wrap low-level failures in a meaningful one.">
+<meta name="twitter:title" content="Chapter 6: Exception Handling &amp; Custom Exceptions | OOP Lab (CSE 202)">
+<meta name="twitter:description" content="A gun runs out of ammo, a player types a level that does not exist, a lane number is out of range. Exceptions let the game notice the problem, deal with it and keep running.">
 <meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/06-exception-handling.png?v=2">
-<meta name="twitter:image:alt" content="Lab 6 of 10: Exception Handling &amp; Custom Exceptions – CSE 202 Object Oriented Programming Lab">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Exception Handling & Custom Exceptions", "description": "Make a bank account that refuses bad input: throw and declare exceptions, catch them with try-catch-finally, write checked and unchecked custom exceptions and wrap low-level failures in a meaningful one.", "position": 6, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 39, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/06-exception-handling.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/06-exception-handling.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
-<title>Lab 6: Exception Handling &amp; Custom Exceptions | OOP Lab (CSE 202)</title>
+<meta name="twitter:image:alt" content="Chapter 6 of 10: Exception Handling &amp; Custom Exceptions – CSE 202 Object Oriented Programming Lab">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Exception Handling & Custom Exceptions", "description": "A gun runs out of ammo, a player types a level that does not exist, a lane number is out of range. Exceptions let the game notice the problem, deal with it and keep running.", "position": 6, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 43, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/06-exception-handling.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/06-exception-handling.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
+<title>Chapter 6: Exception Handling &amp; Custom Exceptions | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/lab.css">
+<link rel="stylesheet" href="../css/game.css">
 </head>
 <body class="deck-page">
 <div class="sr-only" id="live" aria-live="polite"></div>
 <header class="deck-bar">
-  <a class="home-link" href="../index.html" aria-label="Home: all labs"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
+  <a class="home-link" href="../index.html" aria-label="Home: all chapters"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Home</span></a>
   <div class="deck-title"><span class="badge">6</span><span>Exception Handling &amp; Custom Exceptions</span></div>
   <div class="deck-actions">
     <button type="button" class="btn sm" id="btn-menu" aria-expanded="false" aria-controls="slide-menu" aria-label="Slides"><svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><rect x="3" y="4.5" width="18" height="3" rx="1"></rect><rect x="3" y="10.5" width="18" height="3" rx="1"></rect><rect x="3" y="16.5" width="18" height="3" rx="1"></rect></svg><span>Slides</span></button>
@@ -52,218 +53,411 @@
 <div class="deck-progress"><i id="progress-fill"></i></div>
 <main class="deck" id="deck">
 <section class="slide title-slide" data-title="Exception Handling &amp; Custom Exceptions" aria-label="Exception Handling &amp; Custom Exceptions" tabindex="-1"><div class="slide-inner">
-<span class="topic-art" data-art="10" aria-hidden="true"></span>
+<div class="topic-art g-title-art" data-demo="g-title" data-ch="6" aria-hidden="true"></div>
 <span class="badge big">6</span>
-<p class="kicker">Lab VI · CSE 202</p>
+<p class="kicker">Chapter 6 · Lab VI · CSE 202</p>
 <h1>Exception Handling & Custom Exceptions</h1>
-<p class="lead">Make a bank account that refuses bad input: throw and declare exceptions, catch them with try-catch-finally, write checked and unchecked custom exceptions and wrap low-level failures in a meaningful one.</p>
-<div class="row"><a class="btn pri" href="#s=2">Start</a><a class="btn" href="../index.html">All labs</a></div>
+<p class="g-mission">Mission 6 · When things go wrong</p>
+<p class="lead">A gun runs out of ammo, a player types a level that does not exist, a lane number is out of range. Exceptions let the game notice the problem, deal with it and keep running.</p>
+<div class="row"><a class="btn pri" href="#s=2">Start the mission</a><a class="btn" href="../index.html">All chapters</a></div>
 <p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
 </div></section>
-<section class="slide " data-title="Why this lab" aria-label="Why this lab" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Before we start</p><h2>Why this lab</h2><div class="hook"><p class="q">A customer tries to withdraw 10,000 from an account that holds 5,000. Should the program crash, quietly do nothing, or explain what went wrong?</p><p>It should <b>throw an exception</b> that the caller can catch and report. In this lab the bank speaks in exceptions: <code>InvalidAccountException</code>, <code>InsufficientFundsException</code> and <code>TransactionException</code>.</p></div>
+<section class="slide " data-title="Your mission" aria-label="Your mission" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Mission 6 · When things go wrong</p><h2>Your mission</h2><div class="hook"><p class="q">The player presses Fire with an empty clip. Should the whole game crash?</p><p>No. <code>fire()</code> <b>throws</b> an <code>OutOfAmmoException</code>, and the game <b>catches</b> it, reloads and carries on. A <code>finally</code> block makes sure the score is always saved.</p></div>
 </div></section>
-<section class="slide " data-title="Lab at a glance" aria-label="Lab at a glance" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 6 of 10</p><h2>Lab at a glance</h2><div class="cols wl"><div><h3>After this lab you can</h3><ul class=""><li>Explain why programs handle exceptions</li><li>Describe the Throwable hierarchy and checked vs unchecked exceptions</li><li>Handle errors with try, catch and finally</li><li>Throw exceptions with <code>throw</code> and declare them with <code>throws</code></li><li>Write custom checked and unchecked exceptions</li><li>Wrap a low-level exception in a higher-level one, keeping the cause</li></ul></div>
-<div><h3>Before you start</h3><ul class=""><li>Labs 2–4: classes, constructors, inheritance</li><li>Conditionals and validation logic</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Theory recap</li><li>Walk through the program, section by section, and run it</li><li>In-lab tasks, shown to the instructor</li><li>Report exercises at home</li></ol></div></div>
+<section class="slide " data-title="Chapter at a glance" aria-label="Chapter at a glance" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Chapter 6 of 10</p><h2>Chapter at a glance</h2><div class="cols wl"><div><h3>After this chapter you can</h3><ul class=""><li>Explain what an exception is and how it travels up the call stack</li><li>Read the exception hierarchy: Throwable, Exception, RuntimeException</li><li>Tell checked from unchecked exceptions</li><li>Use try, catch, finally, throw and throws</li><li>Write custom exceptions for the game, and wrap a lower-level cause</li></ul></div>
+<div><h3>Before you start</h3><ul class=""><li>Chapters 2–5: classes and inheritance (custom exceptions are classes)</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Topics: the idea, then the game</li><li>Run the game program</li><li>Game practice tasks</li><li>Official lab and graded tasks</li><li>Report exercises at home</li></ol></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Lab 6 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Theory recap</a></li><li><a href="#s=12">Program design</a></li><li><a href="#s=13">Code walkthrough</a></li><li><a href="#s=23">Step-through traces: stack, heap and output</a></li><li><a href="#s=27">Expected output</a></li><li><a href="#s=28">Interactive demos</a></li><li><a href="#s=29">In-lab tasks</a></li><li><a href="#s=33">Lab report exercises</a></li><li><a href="#s=36">Viva questions and quiz</a></li></ol>
+<p class="kicker">Chapter 6 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=23">Run the game</a></li><li><a href="#s=24">Game practice tasks</a></li><li><a href="#s=27">The official lab program</a></li><li><a href="#s=33">Official in-lab tasks</a></li><li><a href="#s=37">Lab report exercises</a></li><li><a href="#s=40">Viva questions and quiz</a></li></ol>
+</div></section>
+<section class="slide " data-title="Today’s build" aria-label="Today’s build" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Build the game · Chapter 6</p><h2>Today’s build</h2><ul class="pts"><li>Six files: three exception classes (<code>GameException</code> and two subclasses), <code>Gun</code>, <code>LevelLoader</code> and <code>ExceptionDemo</code>.</li></ul>
+<div class="cols wl"><div><h3>What the program does</h3><ol class="flow"><li>Catch an unchecked exception: lane 5 of 3</li><li>Fire until the clip is empty: catch, reload, and finally on every shot</li><li>throw an IllegalArgumentException for a bad reload</li><li>Load "3", "abc" and "42": a custom exception that wraps NumberFormatException</li><li>Catch an OutOfAmmoException through its parent GameException</li><li>Show that finally runs even after return</li></ol></div><div><h3>Files</h3><ul class="g-files"><li><code>GameException.java</code> <span class="muted">(10 lines)</span></li><li><code>OutOfAmmoException.java</code> <span class="muted">(12 lines)</span></li><li><code>InvalidLevelException.java</code> <span class="muted">(10 lines)</span></li><li><code>Gun.java</code> <span class="muted">(27 lines)</span></li><li><code>LevelLoader.java</code> <span class="muted">(17 lines)</span></li><li><code>ExceptionDemo.java</code> <span class="muted">(70 lines)</span></li></ul><p class="muted">146 lines in all. Each topic below shows the part of the program that uses it.</p></div></div>
 </div></section>
 <section class="slide " data-title="What is an exception?" aria-label="What is an exception?" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 1 of 5</p><h2>What is an exception?</h2><figure class="fig" data-fig="ex-flow"></figure><ul class=""><li>An exception is an object thrown when something abnormal happens; it interrupts the normal flow.</li><li>A matching <code>catch</code> handles it; if nobody catches it, the program stops with a stack trace.</li></ul>
+<p class="kicker">Topic 1 of 5</p><h2>What is an exception?</h2><div class="g-codeside g-topic"><div><div class="kicker g-wk"><div class="walk-file">ExceptionDemo.java</div><div>·</div><div>An unchecked exception</div></div><pre class="code small-code wide">System.out.println(&quot;=== An unchecked exception: a lane that does not exist ===&quot;);
+int[] laneY = { 100, 200, 300 };
+try {
+    System.out.println(&quot;Lane 5 is at y=&quot; + laneY[5]);
+} catch (ArrayIndexOutOfBoundsException e) {
+    System.out.println(&quot;Caught &quot; + e.getClass().getSimpleName() + &quot;: &quot; + e.getMessage());
+}</pre></div><ul class="pts"><li>An <b>exception</b> is a problem that happens while the program runs.</li><li>Java creates an exception object and stops the normal flow.</li><li>If nobody catches it, the program crashes with a message.</li><li>There is no lane 5, so Java throws.</li><li>The catch prints the class name and message.</li></ul></div>
 </div></section>
-<section class="slide " data-title="What is an exception? (code)" aria-label="What is an exception? (code)" tabindex="-1"><div class="slide-inner">
-<h2>What is an exception?</h2><pre class="code small-code">try {
-    int result = 10 / 0;
-} catch (ArithmeticException e) {
-    System.out.println(&quot;Error: &quot; + e.getMessage());
-}</pre>
+<section class="slide " data-title="What is an exception?" aria-label="What is an exception?" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 5 · in the game</p><h2>What is an exception?</h2><div data-demo="g-exception"></div><ul class="pts pts-row"><li>An <b>exception</b> is an object that reports a problem while the program runs.</li><li><code>throw</code> starts it; it leaves each method until a matching <code>catch</code> handles it.</li><li>If nobody catches it, the program stops with a stack trace.</li></ul>
 </div></section>
 <section class="slide " data-title="The exception hierarchy" aria-label="The exception hierarchy" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 2 of 5</p><h2>The exception hierarchy</h2><figure class="fig" data-fig="ex-tree"></figure>
-</div></section>
-<section class="slide " data-title="The exception hierarchy (cont.)" aria-label="The exception hierarchy (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 2 of 5</p><h2>The exception hierarchy (cont.)</h2><ul class=""><li><code>Error</code>: serious JVM problems — do not catch.</li><li><code>Exception</code>: conditions a program can handle.</li><li><code>RuntimeException</code> and its subclasses are <b>unchecked</b>.</li></ul>
-</div></section>
-<section class="slide " data-title="Checked vs unchecked" aria-label="Checked vs unchecked" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 3 of 5</p><h2>Checked vs unchecked</h2><div class="scrollx"><table class="doc"><thead><tr><th></th><th>Checked</th><th>Unchecked</th></tr></thead><tbody><tr><td>Extends</td><td>Exception</td><td>RuntimeException</td></tr><tr><td>Compiler</td><td>must catch or declare</td><td>not enforced</td></tr><tr><td>Typical cause</td><td>outside problem (file, bad account data)</td><td>programming error / business rule</td></tr><tr><td>In this lab</td><td>InvalidAccountException, TransactionException</td><td>InsufficientFundsException</td></tr></tbody></table></div>
-</div></section>
-<section class="slide " data-title="throw, throws and finally" aria-label="throw, throws and finally" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 4 of 5</p><h2>throw, throws and finally</h2><pre class="code small-code wide">public void deposit(double amount) throws InvalidAccountException {
-    if (amount &lt;= 0) {
-        throw new InvalidAccountException(&quot;Deposit amount must be positive.&quot;);
-    }
-    balance += amount;
-}
-
-try { account.deposit(500.0); }
-catch (InvalidAccountException e) { System.out.println(&quot;Error: &quot; + e.getMessage()); }
-finally { System.out.println(&quot;Transaction attempt completed.&quot;); }</pre><ul class=""><li><code>throw</code> raises an exception object; <code>throws</code> in the header warns callers.</li><li><code>finally</code> runs whether or not an exception happened — use it for cleanup and logging.</li></ul>
-</div></section>
-<section class="slide " data-title="Custom exceptions and wrapping" aria-label="Custom exceptions and wrapping" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Theory 5 of 5</p><h2>Custom exceptions and wrapping</h2><figure class="fig" data-fig="lab6-ex-uml"></figure><ul class=""><li>Extend <code>Exception</code> (checked) or <code>RuntimeException</code> (unchecked) and pass the message to super.</li><li>Wrapping turns a low-level error into one meaningful type; <code>getCause()</code> still returns the original.</li></ul>
-</div></section>
-<section class="slide " data-title="Custom exceptions and wrapping (code)" aria-label="Custom exceptions and wrapping (code)" tabindex="-1"><div class="slide-inner">
-<h2>Custom exceptions and wrapping</h2><pre class="code small-code">} catch (InsufficientFundsException e) {
-    throw new TransactionException(&quot;Transfer failed.&quot;, e);   // keep the cause
-}</pre>
-</div></section>
-<section class="slide " data-title="Execution flow" aria-label="Execution flow" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Implementation design</p><h2>Execution flow</h2><ol class="flow"><li>Create two valid accounts inside try-catch</li><li>Try invalid accounts (empty number, negative balance) and catch the checked exception</li><li>Withdraw too much and catch the unchecked exception</li><li>Do valid deposits and withdrawals</li><li>Show that finally always runs</li><li>Transfer successfully, then fail a transfer and read the wrapped cause</li><li>Reject negative amounts and print the final balances</li></ol><p class="note-line">Three custom exceptions make each failure self-explaining; transfer() wraps lower-level failures.</p>
-</div></section>
-<section class="slide " data-title="A custom checked exception" aria-label="A custom checked exception" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 1 of 10 · <span class="walk-file">InvalidAccountException.java</span></p><h2>A custom checked exception</h2><pre class="code walk-code">public class InvalidAccountException extends Exception {
-
-    public InvalidAccountException(String message) {
+<p class="kicker">Topic 2 of 5</p><h2>The exception hierarchy</h2><div class="g-codeside g-topic"><div><div class="kicker g-wk"><div class="walk-file">GameException.java</div><div>·</div><div>GameException: the parent</div></div><pre class="code small-code">// The parent of every game problem: checked, so callers must handle it
+public class GameException extends Exception {
+    public GameException(String message) {
         super(message);
     }
 
-    public InvalidAccountException(String message, Throwable cause) {
+    public GameException(String message, Throwable cause) {
         super(message, cause);
     }
-}</pre><ul class="walk-notes"><li>Extends Exception, so callers must catch or declare it.</li><li>The second constructor keeps a cause.</li></ul>
+}</pre></div><ul class="pts"><li>Everything that can be thrown extends <code>Throwable</code>.</li><li><code>Error</code>: serious JVM problems. <code>Exception</code>: problems a program can handle.</li><li>A <code>catch</code> for a parent type also catches all its children.</li><li>Extends Exception, so it is checked.</li><li>The second constructor keeps a cause.</li></ul></div>
 </div></section>
-<section class="slide " data-title="An unchecked one" aria-label="An unchecked one" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 2 of 10 · <span class="walk-file">InsufficientFundsException.java</span></p><h2>An unchecked one</h2><pre class="code walk-code">public class InsufficientFundsException extends RuntimeException {
-
-    public InsufficientFundsException(String message) {
-        super(message);
-    }</pre><ul class="walk-notes"><li>Extends RuntimeException: the compiler does not force handling.</li></ul>
+<section class="slide " data-title="The exception hierarchy" aria-label="The exception hierarchy" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 2 of 5 · in the game</p><h2>The exception hierarchy</h2><div data-demo="g-extree"></div><ul class="pts pts-row"><li>Everything that can be thrown extends <code>Throwable</code>.</li><li><code>Exception</code>: problems a program can handle. <code>Error</code>: serious JVM problems.</li><li>Our <code>GameException</code> extends Exception, so all game problems share one parent.</li></ul>
 </div></section>
-<section class="slide " data-title="Validate in the constructor" aria-label="Validate in the constructor" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 3 of 10 · <span class="walk-file">BankAccount.java</span></p><h2>Validate in the constructor</h2><pre class="code walk-code wide">public BankAccount(String accountNumber, String owner, double initialBalance)
-        throws InvalidAccountException {
-
-    if (accountNumber == null || accountNumber.trim().isEmpty()) {
-        throw new InvalidAccountException(&quot;Account number cannot be null or empty.&quot;);
-    }
-    if (owner == null || owner.trim().isEmpty()) {
-        throw new InvalidAccountException(&quot;Owner name cannot be null or empty.&quot;);
-    }
-    if (initialBalance &lt; 0.0) {
-        throw new InvalidAccountException(</pre>
-</div></section>
-<section class="slide " data-title="Validate in the constructor (cont.)" aria-label="Validate in the constructor (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 3 of 10 · <span class="walk-file">BankAccount.java</span></p><h2>Validate in the constructor (cont.)</h2><pre data-start="12" class="code walk-code wide">                &quot;Initial balance cannot be negative. Provided: &quot; + initialBalance);
-    }
-    this.accountNumber = accountNumber;
-    this.owner = owner;
-    this.balance = initialBalance;
-    totalAccounts++;
-}</pre><ul class="walk-notes"><li><code>throw</code> stops construction, so invalid accounts are never counted.</li><li><code>throws</code> in the header warns callers.</li></ul>
-</div></section>
-<section class="slide " data-title="deposit() rejects bad amounts" aria-label="deposit() rejects bad amounts" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 4 of 10 · <span class="walk-file">BankAccount.java</span></p><h2>deposit() rejects bad amounts</h2><pre class="code walk-code">public void deposit(double amount) throws InvalidAccountException {
-    if (amount &lt;= 0.0) {
-        throw new InvalidAccountException(
-                &quot;Deposit amount must be positive. Provided: &quot; + amount);
-    }
-    balance = balance + amount;
-    System.out.println(&quot;[&quot; + accountNumber + &quot;] Deposit: &quot; + amount
-            + &quot; | New balance: &quot; + balance);
-}</pre><ul class="walk-notes"><li>A non-positive amount → the checked InvalidAccountException.</li></ul>
-</div></section>
-<section class="slide " data-title="withdraw() can fail in two ways" aria-label="withdraw() can fail in two ways" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 5 of 10 · <span class="walk-file">BankAccount.java</span></p><h2>withdraw() can fail in two ways</h2><pre class="code walk-code wide">public void withdraw(double amount) throws InvalidAccountException {
-    if (amount &lt;= 0.0) {
-        throw new InvalidAccountException(
-                &quot;Withdrawal amount must be positive. Provided: &quot; + amount);
-    }
-    if (amount &gt; balance) {
-        throw new InsufficientFundsException(
-                &quot;Insufficient funds. Requested: &quot; + amount + &quot;, Available: &quot; + balance);
-    }
-    balance = balance - amount;
-    System.out.println(&quot;[&quot; + accountNumber + &quot;] Withdrawal: &quot; + amount
-            + &quot; | New balance: &quot; + balance);
-}</pre><ul class="walk-notes"><li>Bad amount → checked exception (declared in <code>throws</code>).</li><li>Too little money → unchecked exception (no declaration needed).</li></ul>
-</div></section>
-<section class="slide " data-title="transfer() wraps low-level failures" aria-label="transfer() wraps low-level failures" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 6 of 10 · <span class="walk-file">BankAccount.java</span></p><h2>transfer() wraps low-level failures</h2><pre class="code walk-code wide">public void transfer(BankAccount target, double amount) throws TransactionException {
-    if (target == null) {
-        throw new TransactionException(&quot;Transfer failed: target account is null.&quot;);
-    }
-    try {
-        System.out.println(&quot;--- Starting transfer ---&quot;);
-        System.out.println(&quot;From: &quot; + this.accountNumber + &quot; | To: &quot;
-                + target.accountNumber + &quot; | Amount: &quot; + amount);
-        this.withdraw(amount);
-        target.deposit(amount);
-        System.out.println(&quot;Transfer completed successfully.&quot;);</pre>
-</div></section>
-<section class="slide " data-title="transfer() wraps low-level failures (cont.)" aria-label="transfer() wraps low-level failures (cont.)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 6 of 10 · <span class="walk-file">BankAccount.java</span></p><h2>transfer() wraps low-level failures (cont.)</h2><pre data-start="12" class="code walk-code wide">    } catch (InsufficientFundsException e) {
-        throw new TransactionException(
-                &quot;Transfer failed: insufficient funds in source account.&quot;, e);
-    } catch (InvalidAccountException e) {
-        throw new TransactionException(
-                &quot;Transfer failed: invalid transaction amount.&quot;, e);
-    }
-}</pre><ul class="walk-notes"><li>Both failures become one TransactionException; <code>e</code> is kept as the cause.</li></ul>
-</div></section>
-<section class="slide " data-title="Catching a checked exception" aria-label="Catching a checked exception" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 7 of 10 · <span class="walk-file">Lab6Demo.java</span></p><h2>Catching a checked exception</h2><pre class="code walk-code">// 2. Invalid Account Creation
-System.out.println(&quot;\n=== Invalid Account Creation ===&quot;);
+<section class="slide " data-title="Catching the parent type and finally" aria-label="Catching the parent type and finally" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 2 of 5 · our game program · 1 of 1 · <span class="walk-file">ExceptionDemo.java</span></p><h2>Catching the parent type and finally</h2><pre class="code walk-code wide">System.out.println(&quot;\n=== Catching by the parent type ===&quot;);
+Gun rocket = new Gun(&quot;Rocket&quot;, 0);
 try {
-    BankAccount invalidAccount = new BankAccount(&quot;&quot;, &quot;Charlie&quot;, 1000.0);
-} catch (InvalidAccountException e) {
-    System.out.println(&quot;Caught checked exception: &quot; + e.getMessage());
+    rocket.fire();
+} catch (GameException e) {
+    System.out.println(&quot;GameException handler caught &quot; + e.getClass().getSimpleName() + &quot;: &quot; + e.getMessage());
 }
-try {
-    BankAccount invalidAccount = new BankAccount(&quot;ACC003&quot;, &quot;Diana&quot;, -500.0);
-} catch (InvalidAccountException e) {
-    System.out.println(&quot;Caught checked exception: &quot; + e.getMessage());
-}</pre><ul class="walk-notes"><li>The constructor throws, the catch block reports it, the program continues.</li></ul>
+
+System.out.println(&quot;\n=== finally always runs ===&quot;);
+System.out.println(saveScore());</pre><ul class="walk-notes"><li>A GameException handler also catches every subclass.</li></ul>
 </div></section>
-<section class="slide " data-title="Two catch blocks for one call" aria-label="Two catch blocks for one call" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 8 of 10 · <span class="walk-file">Lab6Demo.java</span></p><h2>Two catch blocks for one call</h2><pre class="code walk-code">// 3. Insufficient Funds
-System.out.println(&quot;\n=== Insufficient Funds Example ===&quot;);
-try {
-    account1.withdraw(10000.0);
-} catch (InsufficientFundsException e) {
-    System.out.println(&quot;Caught unchecked exception: &quot; + e.getMessage());
-} catch (InvalidAccountException e) {
-    System.out.println(&quot;Caught checked exception: &quot; + e.getMessage());
-}</pre><ul class="walk-notes"><li>withdraw() can throw either exception; Java runs the first matching catch.</li></ul>
+<section class="slide " data-title="Checked and unchecked exceptions" aria-label="Checked and unchecked exceptions" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 5</p><h2>Checked and unchecked exceptions</h2><div class="g-ingame"><div>In the game:</div><div>Checked and unchecked</div></div><div class="scrollx"><table class="doc"><thead><tr><th></th><th>Checked</th><th>Unchecked</th></tr></thead><tbody><tr><td>Extends</td><td>Exception (not RuntimeException)</td><td>RuntimeException</td></tr><tr><td>The compiler</td><td>forces you to catch or declare it</td><td>does not check</td></tr><tr><td>Usually means</td><td>something outside your control</td><td>a bug in the code</td></tr><tr><td>In the game</td><td><code>OutOfAmmoException</code>, <code>InvalidLevelException</code></td><td><code>ArrayIndexOutOfBoundsException</code>, <code>IllegalArgumentException</code></td></tr></tbody></table></div><ul class="pts"><li><b>Checked</b> (e.g. <code>IOException</code>, <code>InterruptedException</code>): the compiler forces you to catch or declare them.</li><li><b>Unchecked</b> (<code>RuntimeException</code> and its children): usually bugs; catching is optional.</li><li>In the game: <code>OutOfAmmoException</code> is checked; a bad reload amount is unchecked.</li><li>Running out of ammo is a normal game situation: make it checked.</li><li>Reloading with -5 bullets is a programming mistake: unchecked is fine.</li></ul>
 </div></section>
-<section class="slide " data-title="finally always runs" aria-label="finally always runs" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 9 of 10 · <span class="walk-file">Lab6Demo.java</span></p><h2>finally always runs</h2><pre class="code walk-code">// 5. try-catch-finally
-System.out.println(&quot;\n=== try-catch-finally Example ===&quot;);
+<section class="slide " data-title="Gun: an unchecked exception" aria-label="Gun: an unchecked exception" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 5 · our game program · 1 of 2 · <span class="walk-file">Gun.java</span></p><h2>Gun: an unchecked exception</h2><pre class="code walk-code wide">// An unchecked exception for a programming mistake
+public void reload(int amount) {
+    if (amount &lt;= 0) {
+        throw new IllegalArgumentException(&quot;reload amount must be positive, got &quot; + amount);
+    }
+    ammo += amount;
+    System.out.println(&quot;  reloaded &quot; + amount + &quot; -&gt; &quot; + name + &quot; has &quot; + ammo);
+}</pre><ul class="walk-notes"><li><code>reload()</code> throws an unchecked one and needs no throws clause.</li></ul>
+</div></section>
+<section class="slide " data-title="throw and custom exceptions" aria-label="throw and custom exceptions" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 5 · our game program · 2 of 2 · <span class="walk-file">ExceptionDemo.java</span></p><h2>throw and custom exceptions</h2><div class="walk-side g-walk"><pre class="code walk-code wide">System.out.println(&quot;\n=== throw for a bad argument ===&quot;);
 try {
-    System.out.println(&quot;Attempting to withdraw 500 from account1...&quot;);
-    account1.withdraw(500.0);
-    System.out.println(&quot;Withdrawal successful.&quot;);
-} catch (InsufficientFundsException e) {
-    System.out.println(&quot;Caught InsufficientFundsException: &quot; + e.getMessage());
-} catch (InvalidAccountException e) {
-    System.out.println(&quot;Caught InvalidAccountException: &quot; + e.getMessage());
+    pistol.reload(-5);
+} catch (IllegalArgumentException e) {
+    System.out.println(&quot;Caught: &quot; + e.getMessage());
+}
+
+System.out.println(&quot;\n=== A custom exception that wraps another ===&quot;);
+String[] typed = { &quot;3&quot;, &quot;abc&quot;, &quot;42&quot; };
+for (String t : typed) {
+    try {
+        int level = LevelLoader.load(t);
+        System.out.println(&quot;Loaded level &quot; + level);
+    } catch (InvalidLevelException e) {
+        System.out.println(&quot;Cannot load: &quot; + e.getMessage());
+        if (e.getCause() != null) {
+            System.out.println(&quot;  cause: &quot; + e.getCause().getClass().getSimpleName());
+        }
+    }
+}</pre><ul class="walk-notes"><li><code>getCause()</code> reaches the wrapped NumberFormatException.</li></ul></div>
+</div></section>
+<section class="slide " data-title="try, catch, finally, throw and throws" aria-label="try, catch, finally, throw and throws" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 4 of 5</p><h2>try, catch, finally, throw and throws</h2><div class="g-codeside"><pre class="code small-code">public void fire() throws OutOfAmmoException {   // throws: warns every caller
+    if (ammo == 0) {
+        throw new OutOfAmmoException(name);        // throw: report the problem
+    }
+    ammo--;
+}
+
+try {
+    pistol.fire();
+} catch (OutOfAmmoException e) {
+    pistol.reload(6);                             // handle it
 } finally {
-    System.out.println(&quot;Finally block: cleanup or logging code runs.&quot;);
-    account1.display();
-}</pre><ul class="walk-notes"><li>Success or failure, the finally block prints and shows the account.</li></ul>
+    System.out.println(&quot;(shot logged)&quot;);          // runs every time
+}</pre><ul class="pts"><li><code>try</code> holds risky code; <code>catch</code> handles one kind of exception.</li><li><code>finally</code> always runs, error or not.</li><li><code>throw</code> raises an exception; <code>throws</code> in a method heading warns callers.</li><li><code>throws</code> in the header, <code>throw</code> in the body.</li><li>catch runs only when that type (or a subtype) was thrown.</li><li>finally runs whether or not something was thrown, even after return.</li></ul></div>
 </div></section>
-<section class="slide " data-title="Reading the wrapped cause" aria-label="Reading the wrapped cause" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Code walkthrough 10 of 10 · <span class="walk-file">Lab6Demo.java</span></p><h2>Reading the wrapped cause</h2><pre class="code walk-code">// 7. Failed Transfer
-System.out.println(&quot;\n=== Failed Transfer ===&quot;);
-try {
-    account2.transfer(account1, 5000.0);
-} catch (TransactionException e) {
-    System.out.println(&quot;Caught TransactionException: &quot; + e.getMessage());
-    System.out.println(&quot;Root cause: &quot; + e.getCause().getMessage());
-}</pre><ul class="walk-notes"><li><code>getCause()</code> returns the original InsufficientFundsException.</li></ul>
+<section class="slide " data-title="Gun: throw and throws" aria-label="Gun: throw and throws" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 4 of 5 · our game program · 1 of 3 · <span class="walk-file">Gun.java</span></p><h2>Gun: throw and throws</h2><div class="walk-side g-walk"><pre class="code walk-code">public class Gun {
+    private String name;
+    private int ammo;
+
+    public Gun(String name, int ammo) {
+        this.name = name;
+        this.ammo = ammo;
+    }
+
+    // throws: tells every caller that this method can fail this way
+    public void fire() throws OutOfAmmoException {
+        if (ammo == 0) {
+            throw new OutOfAmmoException(name);
+        }
+        ammo--;
+        System.out.println(&quot;  BANG! &quot; + name + &quot; has &quot; + ammo + &quot; left&quot;);
+    }</pre><ul class="walk-notes"><li><code>fire()</code> declares the checked exception it can throw.</li><li>It throws before touching the ammo, so nothing is half done.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Firing until empty" aria-label="Firing until empty" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 4 of 5 · our game program · 2 of 3 · <span class="walk-file">ExceptionDemo.java</span></p><h2>Firing until empty</h2><div class="walk-side g-walk"><pre class="code walk-code wide">System.out.println(&quot;\n=== try / catch / finally: firing until the clip is empty ===&quot;);
+Gun pistol = new Gun(&quot;Pistol&quot;, 2);
+for (int shot = 1; shot &lt;= 3; shot++) {
+    try {
+        pistol.fire();
+        score += 10;
+    } catch (OutOfAmmoException e) {
+        System.out.println(&quot;  Caught: &quot; + e.getMessage() + &quot; -&gt; reloading&quot;);
+        pistol.reload(6);
+    } finally {
+        System.out.println(&quot;  (shot &quot; + shot + &quot; logged, score &quot; + score + &quot;)&quot;);
+    }
+}</pre><ul class="walk-notes"><li>Shots 1 and 2 work; shot 3 throws.</li><li><code>score += 10</code> is skipped when fire() throws.</li><li>finally runs after every shot.</li></ul></div>
+</div></section>
+<section class="slide " data-title="saveScore(): finally after return" aria-label="saveScore(): finally after return" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 4 of 5 · our game program · 3 of 3 · <span class="walk-file">ExceptionDemo.java</span></p><h2>saveScore(): finally after return</h2><pre class="code walk-code wide">// finally runs even when the try block returns early
+static String saveScore() {
+    try {
+        return &quot;score &quot; + score + &quot; sent to the server&quot;;
+    } finally {
+        System.out.println(&quot;  finally: score &quot; + score + &quot; written to save.dat&quot;);
+    }
+}</pre><ul class="walk-notes"><li>finally runs before the method really returns.</li></ul>
+</div></section>
+<section class="slide " data-title="Custom exceptions" aria-label="Custom exceptions" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 5</p><h2>Custom exceptions</h2><div class="g-ingame"><div>In the game:</div><div>Custom exceptions and wrapping</div></div><div class="g-codeside g-topic"><div><div class="kicker g-wk"><div class="walk-file">InvalidLevelException.java</div><div>·</div><div>InvalidLevelException</div></div><pre class="code small-code">public class InvalidLevelException extends GameException {
+    public InvalidLevelException(String message) {
+        super(message);
+    }
+
+    // Wraps the low-level exception that caused the problem
+    public InvalidLevelException(String message, Throwable cause) {
+        super(message, cause);
+    }
+}</pre></div><ul class="pts"><li>Make your own exception by extending <code>Exception</code> (checked) or <code>RuntimeException</code>.</li><li>Pass the message to <code>super(message)</code>.</li><li>A cause can be wrapped: <code>super(message, cause)</code>.</li><li>Two constructors: with and without a cause.</li></ul></div>
+</div></section>
+<section class="slide " data-title="Custom exceptions and wrapping" aria-label="Custom exceptions and wrapping" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
+<p class="kicker">Topic 5 of 5 · in the game</p><h2>Custom exceptions and wrapping</h2><div data-demo="g-level"></div><ul class="pts pts-row"><li>A custom exception is a class: <code>class OutOfAmmoException extends GameException</code>.</li><li>Its message speaks the game’s language: “Pistol is out of ammo”.</li><li>Wrapping keeps the original problem as the <b>cause</b>: <code>new InvalidLevelException(msg, e)</code>.</li></ul>
+</div></section>
+<section class="slide " data-title="OutOfAmmoException" aria-label="OutOfAmmoException" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 5 · our game program · 1 of 2 · <span class="walk-file">OutOfAmmoException.java</span></p><h2>OutOfAmmoException</h2><div class="walk-side g-walk"><pre class="code walk-code">public class OutOfAmmoException extends GameException {
+    private final String weapon;
+
+    public OutOfAmmoException(String weapon) {
+        super(weapon + &quot; is out of ammo&quot;);
+        this.weapon = weapon;
+    }
+
+    public String getWeapon() {
+        return weapon;
+    }
+}</pre><ul class="walk-notes"><li>An exception can carry data: which weapon ran dry.</li></ul></div>
+</div></section>
+<section class="slide " data-title="LevelLoader: wrapping a cause" aria-label="LevelLoader: wrapping a cause" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 5 · our game program · 2 of 2 · <span class="walk-file">LevelLoader.java</span></p><h2>LevelLoader: wrapping a cause</h2><div class="walk-side g-walk"><pre class="code walk-code wide">public class LevelLoader {
+    public static final int MAX_LEVEL = 10;
+
+    // Turns text such as &quot;3&quot; into a level number, or explains why it cannot
+    public static int load(String text) throws InvalidLevelException {
+        int level;
+        try {
+            level = Integer.parseInt(text.trim());
+        } catch (NumberFormatException e) {
+            throw new InvalidLevelException(&quot;\&quot;&quot; + text + &quot;\&quot; is not a level number&quot;, e);
+        }
+        if (level &lt; 1 || level &gt; MAX_LEVEL) {
+            throw new InvalidLevelException(&quot;level &quot; + level + &quot; does not exist (1-&quot; + MAX_LEVEL + &quot;)&quot;);
+        }
+        return level;
+    }
+}</pre><ul class="walk-notes"><li>NumberFormatException is caught and replaced by a game exception.</li><li>Out-of-range numbers get their own message.</li></ul></div>
+</div></section>
+<section class="slide " data-title="The complete game program" aria-label="The complete game program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Build the game · 6 files</p><h2>The complete game program</h2><div class="codeview"><pre class="code small-code" data-file="GameException.java">// The parent of every game problem: checked, so callers must handle it
+public class GameException extends Exception {
+    public GameException(String message) {
+        super(message);
+    }
+
+    public GameException(String message, Throwable cause) {
+        super(message, cause);
+    }
+}</pre><pre class="code small-code" data-file="OutOfAmmoException.java">public class OutOfAmmoException extends GameException {
+    private final String weapon;
+
+    public OutOfAmmoException(String weapon) {
+        super(weapon + &quot; is out of ammo&quot;);
+        this.weapon = weapon;
+    }
+
+    public String getWeapon() {
+        return weapon;
+    }
+}</pre><pre class="code small-code" data-file="InvalidLevelException.java">public class InvalidLevelException extends GameException {
+    public InvalidLevelException(String message) {
+        super(message);
+    }
+
+    // Wraps the low-level exception that caused the problem
+    public InvalidLevelException(String message, Throwable cause) {
+        super(message, cause);
+    }
+}</pre><pre class="code small-code" data-file="Gun.java">public class Gun {
+    private String name;
+    private int ammo;
+
+    public Gun(String name, int ammo) {
+        this.name = name;
+        this.ammo = ammo;
+    }
+
+    // throws: tells every caller that this method can fail this way
+    public void fire() throws OutOfAmmoException {
+        if (ammo == 0) {
+            throw new OutOfAmmoException(name);
+        }
+        ammo--;
+        System.out.println(&quot;  BANG! &quot; + name + &quot; has &quot; + ammo + &quot; left&quot;);
+    }
+
+    // An unchecked exception for a programming mistake
+    public void reload(int amount) {
+        if (amount &lt;= 0) {
+            throw new IllegalArgumentException(&quot;reload amount must be positive, got &quot; + amount);
+        }
+        ammo += amount;
+        System.out.println(&quot;  reloaded &quot; + amount + &quot; -&gt; &quot; + name + &quot; has &quot; + ammo);
+    }
+}</pre><pre class="code small-code" data-file="LevelLoader.java">public class LevelLoader {
+    public static final int MAX_LEVEL = 10;
+
+    // Turns text such as &quot;3&quot; into a level number, or explains why it cannot
+    public static int load(String text) throws InvalidLevelException {
+        int level;
+        try {
+            level = Integer.parseInt(text.trim());
+        } catch (NumberFormatException e) {
+            throw new InvalidLevelException(&quot;\&quot;&quot; + text + &quot;\&quot; is not a level number&quot;, e);
+        }
+        if (level &lt; 1 || level &gt; MAX_LEVEL) {
+            throw new InvalidLevelException(&quot;level &quot; + level + &quot; does not exist (1-&quot; + MAX_LEVEL + &quot;)&quot;);
+        }
+        return level;
+    }
+}</pre><pre class="code small-code" data-file="ExceptionDemo.java">public class ExceptionDemo {
+
+    static int score = 0;
+
+    // finally runs even when the try block returns early
+    static String saveScore() {
+        try {
+            return &quot;score &quot; + score + &quot; sent to the server&quot;;
+        } finally {
+            System.out.println(&quot;  finally: score &quot; + score + &quot; written to save.dat&quot;);
+        }
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println(&quot;=== An unchecked exception: a lane that does not exist ===&quot;);
+        int[] laneY = { 100, 200, 300 };
+        try {
+            System.out.println(&quot;Lane 5 is at y=&quot; + laneY[5]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(&quot;Caught &quot; + e.getClass().getSimpleName() + &quot;: &quot; + e.getMessage());
+        }
+
+        System.out.println(&quot;\n=== try / catch / finally: firing until the clip is empty ===&quot;);
+        Gun pistol = new Gun(&quot;Pistol&quot;, 2);
+        for (int shot = 1; shot &lt;= 3; shot++) {
+            try {
+                pistol.fire();
+                score += 10;
+            } catch (OutOfAmmoException e) {
+                System.out.println(&quot;  Caught: &quot; + e.getMessage() + &quot; -&gt; reloading&quot;);
+                pistol.reload(6);
+            } finally {
+                System.out.println(&quot;  (shot &quot; + shot + &quot; logged, score &quot; + score + &quot;)&quot;);
+            }
+        }
+
+        System.out.println(&quot;\n=== throw for a bad argument ===&quot;);
+        try {
+            pistol.reload(-5);
+        } catch (IllegalArgumentException e) {
+            System.out.println(&quot;Caught: &quot; + e.getMessage());
+        }
+
+        System.out.println(&quot;\n=== A custom exception that wraps another ===&quot;);
+        String[] typed = { &quot;3&quot;, &quot;abc&quot;, &quot;42&quot; };
+        for (String t : typed) {
+            try {
+                int level = LevelLoader.load(t);
+                System.out.println(&quot;Loaded level &quot; + level);
+            } catch (InvalidLevelException e) {
+                System.out.println(&quot;Cannot load: &quot; + e.getMessage());
+                if (e.getCause() != null) {
+                    System.out.println(&quot;  cause: &quot; + e.getCause().getClass().getSimpleName());
+                }
+            }
+        }
+
+        System.out.println(&quot;\n=== Catching by the parent type ===&quot;);
+        Gun rocket = new Gun(&quot;Rocket&quot;, 0);
+        try {
+            rocket.fire();
+        } catch (GameException e) {
+            System.out.println(&quot;GameException handler caught &quot; + e.getClass().getSimpleName() + &quot;: &quot; + e.getMessage());
+        }
+
+        System.out.println(&quot;\n=== finally always runs ===&quot;);
+        System.out.println(saveScore());
+    }
+}</pre></div><p class="muted">Save every file in one folder, then compile and run: <code>javac *.java</code> → <code>java ExceptionDemo</code></p>
+</div></section>
+<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Run the game</p><h2>Expected output</h2><div class="runbox" data-cmd="java ExceptionDemo"><pre class="run-src" hidden>=== An unchecked exception: a lane that does not exist ===
+Caught ArrayIndexOutOfBoundsException: Index 5 out of bounds for length 3
+
+=== try / catch / finally: firing until the clip is empty ===
+  BANG! Pistol has 1 left
+  (shot 1 logged, score 10)
+  BANG! Pistol has 0 left
+  (shot 2 logged, score 20)
+  Caught: Pistol is out of ammo -&gt; reloading
+  reloaded 6 -&gt; Pistol has 6
+  (shot 3 logged, score 20)
+
+=== throw for a bad argument ===
+Caught: reload amount must be positive, got -5
+
+=== A custom exception that wraps another ===
+Loaded level 3
+Cannot load: &quot;abc&quot; is not a level number
+  cause: NumberFormatException
+Cannot load: level 42 does not exist (1-10)
+
+=== Catching by the parent type ===
+GameException handler caught OutOfAmmoException: Rocket is out of ammo
+
+=== finally always runs ===
+  finally: score 20 written to save.dat
+score 20 sent to the server</pre></div>
+</div></section>
+<section class="slide " data-title="Game task 1: A WeaponJammedException" aria-label="Game task 1: A WeaponJammedException" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 1 of 3</p><h2>Game task 1: A WeaponJammedException</h2><div class="ex task g-task"><div class="qq">Sometimes the gun jams.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g6t0r0" data-key="g6t0r0"><label for="g6t0r0"><code>WeaponJammedException extends GameException</code></label></li><li><input type="checkbox" id="g6t0r1" data-key="g6t0r1"><label for="g6t0r1">fire() throws it on every 5th shot</label></li><li><input type="checkbox" id="g6t0r2" data-key="g6t0r2"><label for="g6t0r2">Catch the two exceptions in separate catch blocks with different messages</label></li><li><input type="checkbox" id="g6t0r3" data-key="g6t0r3"><label for="g6t0r3">Try catching GameException first: what does the compiler say?</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">A catch for the parent placed before a catch for the child makes the child’s block unreachable, which is a compile error.</div></details></div>
+</div></section>
+<section class="slide " data-title="Game task 2: A safe main menu" aria-label="Game task 2: A safe main menu" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 2 of 3</p><h2>Game task 2: A safe main menu</h2><div class="ex task g-task"><div class="qq">Typed input never crashes the game.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g6t1r0" data-key="g6t1r0"><label for="g6t1r0">Read a menu choice with <code>Scanner</code></label></li><li><input type="checkbox" id="g6t1r1" data-key="g6t1r1"><label for="g6t1r1">Catch <code>InputMismatchException</code> when the player types letters</label></li><li><input type="checkbox" id="g6t1r2" data-key="g6t1r2"><label for="g6t1r2">Ask again until the input is a number from 1 to 3</label></li><li><input type="checkbox" id="g6t1r3" data-key="g6t1r3"><label for="g6t1r3">Use finally to print "menu closed" once</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">After an InputMismatchException call <code>sc.next()</code> to throw away the bad token, or the loop never ends.</div></details></div>
+</div></section>
+<section class="slide " data-title="Game task 3: Save the high score" aria-label="Game task 3: Save the high score" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Game practice · 3 of 3</p><h2>Game task 3: Save the high score</h2><div class="ex task g-task"><div class="qq">finally in action.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g6t2r0" data-key="g6t2r0"><label for="g6t2r0">A method <code>saveHighScore(int score)</code> that throws <code>GameException</code> for negative scores</label></li><li><input type="checkbox" id="g6t2r1" data-key="g6t2r1"><label for="g6t2r1">Call it with 1200 and with -5</label></li><li><input type="checkbox" id="g6t2r2" data-key="g6t2r2"><label for="g6t2r2">A finally block that always prints "save attempt finished"</label></li><li><input type="checkbox" id="g6t2r3" data-key="g6t2r3"><label for="g6t2r3">Print the exception message in the catch</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">throw new GameException("score cannot be negative: " + score);</div></details></div>
+</div></section>
+<section class="slide " data-title="The official lab program" aria-label="The official lab program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Official lab · from the lab manual</p><h2>The official lab program</h2>
+<p class="g-official">The graded in-lab tasks and report exercises build on this program, not on the game. Read it and run it before you start them.</p>
+<ol class="flow"><li>Create two valid accounts inside try-catch</li><li>Try invalid accounts (empty number, negative balance) and catch the checked exception</li><li>Withdraw too much and catch the unchecked exception</li><li>Do valid deposits and withdrawals</li><li>Show that finally always runs</li><li>Transfer successfully, then fail a transfer and read the wrapped cause</li><li>Reject negative amounts and print the final balances</li></ol><p class="note-line">Three custom exceptions make each failure self-explaining; transfer() wraps lower-level failures.</p>
 </div></section>
 <section class="slide " data-title="Trace: a constructor that throws" aria-label="Trace: a constructor that throws" tabindex="-1"><div style="zoom:0.91;" class="slide-inner">
-<p class="kicker">Step through the code · 1 of 3</p><h2>Trace: a constructor that throws</h2><p class="muted">Pick an input. An invalid account is never created and never counted.</p><div data-trace="lab6-create"></div>
+<p class="kicker">Official lab · step through the code · 1 of 3</p><h2>Trace: a constructor that throws</h2><p class="muted">Pick an input. An invalid account is never created and never counted.</p><div data-trace="lab6-create"></div>
 </div></section>
 <section class="slide " data-title="Trace: withdraw, catch and finally" aria-label="Trace: withdraw, catch and finally" tabindex="-1"><div style="zoom:0.91;" class="slide-inner">
-<p class="kicker">Step through the code · 2 of 3</p><h2>Trace: withdraw, catch and finally</h2><p class="muted">Pick an amount and follow the exception (if any) to its catch block.</p><div data-trace="lab6-withdraw"></div>
+<p class="kicker">Official lab · step through the code · 2 of 3</p><h2>Trace: withdraw, catch and finally</h2><p class="muted">Pick an amount and follow the exception (if any) to its catch block.</p><div data-trace="lab6-withdraw"></div>
 </div></section>
-<section class="slide " data-title="Trace: wrapping an exception with its cause" aria-label="Trace: wrapping an exception with its cause" tabindex="-1"><div style="zoom:0.90;" class="slide-inner">
-<p class="kicker">Step through the code · 3 of 3</p><h2>Trace: wrapping an exception with its cause</h2><p class="muted">A low-level InsufficientFundsException becomes a TransactionException. Follow the cause arrow back to the original.</p><div data-trace="lab6-wrap"></div>
+<section class="slide " data-title="Trace: wrapping an exception with its cause" aria-label="Trace: wrapping an exception with its cause" tabindex="-1"><div style="zoom:0.94;" class="slide-inner">
+<p class="kicker">Official lab · step through the code · 3 of 3</p><h2>Trace: wrapping an exception with its cause</h2><p class="muted">A low-level InsufficientFundsException becomes a TransactionException. Follow the cause arrow back to the original.</p><div data-trace="lab6-wrap"></div>
 </div></section>
-<section class="slide " data-title="The complete program" aria-label="The complete program" tabindex="-1"><div class="slide-inner">
-<p class="kicker">For reference · 5 files</p><h2>The complete program</h2><div class="codeview"><pre class="code small-code" data-file="InvalidAccountException.java">public class InvalidAccountException extends Exception {
+<section class="slide " data-title="The official program" aria-label="The official program" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Official lab · 5 files</p><h2>The official program</h2><div class="codeview"><pre class="code small-code" data-file="InvalidAccountException.java">public class InvalidAccountException extends Exception {
 
     public InvalidAccountException(String message) {
         super(message);
@@ -479,10 +673,10 @@ try {
         account2.display();
         System.out.println(&quot;Total accounts created: &quot; + BankAccount.getTotalAccounts());
     }
-}</pre></div><p class="muted">Copy or download each file, save it under the same name, then compile and run: <code>javac *.java</code> → <code>java Lab6Demo</code></p>
+}</pre></div><p class="muted">Compile and run: <code>javac *.java</code> → <code>java Lab6Demo</code></p>
 </div></section>
-<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Implementation</p><h2>Expected output</h2><div class="runbox" data-cmd="java Lab6Demo"><pre class="run-src" hidden>=== Creating Bank Accounts ===
+<section class="slide " data-title="Official program: expected output" aria-label="Official program: expected output" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Official lab</p><h2>Official program: expected output</h2><div class="runbox" data-cmd="java Lab6Demo"><pre class="run-src" hidden>=== Creating Bank Accounts ===
 Account 1 created successfully.
 Account 2 created successfully.
 
@@ -528,23 +722,20 @@ Account: ACC001 | Owner: Alice | Balance: 4000.0
 Account: ACC002 | Owner: Bob | Balance: 4000.0
 Total accounts created: 2</pre></div><p class="note-line">Only 2 accounts are counted: the constructor throws before <code>totalAccounts++</code> for the invalid ones.</p>
 </div></section>
-<section class="slide " data-title="Which catch block handles it?" aria-label="Which catch block handles it?" tabindex="-1"><div style="zoom:0.93;" class="slide-inner">
-<p class="kicker">Interactive 1 of 1</p><h2>Which catch block handles it?</h2><div data-demo="exmatch"></div>
-</div></section>
 <section class="slide " data-title="Task 1: Add a FrozenAccountException" aria-label="Task 1: Add a FrozenAccountException" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 1 of 3</p><h2>Task 1: Add a FrozenAccountException</h2><div class="ex task"><div class="qq">Accounts can be frozen; a frozen account rejects all money movement.</div>
+<p class="kicker">Official in-lab task 1 of 3</p><h2>Task 1: Add a FrozenAccountException</h2><div class="ex task"><div class="qq">Accounts can be frozen; a frozen account rejects all money movement.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l6t0r0" data-key="l6t0r0"><label for="l6t0r0">Create the unchecked <code>FrozenAccountException</code></label></li><li><input type="checkbox" id="l6t0r1" data-key="l6t0r1"><label for="l6t0r1">Add <code>private boolean isFrozen</code> with <code>freeze()</code> and <code>unfreeze()</code></label></li><li><input type="checkbox" id="l6t0r2" data-key="l6t0r2"><label for="l6t0r2">deposit() and withdraw() throw it when the account is frozen</label></li><li><input type="checkbox" id="l6t0r3" data-key="l6t0r3"><label for="l6t0r3">Demonstrate that a frozen account rejects both operations</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Check the frozen flag first in each method, before validating the amount.</div></details></div>
 </div></section>
 <section class="slide " data-title="Task 2: Amount validation utility" aria-label="Task 2: Amount validation utility" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 2 of 3</p><h2>Task 2: Amount validation utility</h2><div class="ex task"><div class="qq">One static method validates every amount.</div>
+<p class="kicker">Official in-lab task 2 of 3</p><h2>Task 2: Amount validation utility</h2><div class="ex task"><div class="qq">One static method validates every amount.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l6t1r0" data-key="l6t1r0"><label for="l6t1r0"><code>static void validateAmount(double amount)</code> throws InvalidAccountException</label></li><li><input type="checkbox" id="l6t1r1" data-key="l6t1r1"><label for="l6t1r1">Reject amounts ≤ 0 and amounts > 100000</label></li><li><input type="checkbox" id="l6t1r2" data-key="l6t1r2"><label for="l6t1r2">Use it in deposit() and withdraw()</label></li><li><input type="checkbox" id="l6t1r3" data-key="l6t1r3"><label for="l6t1r3">Test valid, zero, negative and too-large amounts</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Because it throws a checked exception, its header needs <code>throws InvalidAccountException</code>.</div></details></div>
 </div></section>
 <section class="slide " data-title="Task 3: Transaction history" aria-label="Task 3: Transaction history" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab task 3 of 3</p><h2>Task 3: Transaction history</h2><div class="ex task"><div class="qq">Record what actually happened to an account.</div>
+<p class="kicker">Official in-lab task 3 of 3</p><h2>Task 3: Transaction history</h2><div class="ex task"><div class="qq">Record what actually happened to an account.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l6t2r0" data-key="l6t2r0"><label for="l6t2r0">Add a history array or list</label></li><li><input type="checkbox" id="l6t2r1" data-key="l6t2r1"><label for="l6t2r1">Record successful deposits, withdrawals and transfers</label></li><li><input type="checkbox" id="l6t2r2" data-key="l6t2r2"><label for="l6t2r2">Do <b>not</b> record failed ones</label></li><li><input type="checkbox" id="l6t2r3" data-key="l6t2r3"><label for="l6t2r3">Implement <code>printTransactionHistory()</code></label></li><li><input type="checkbox" id="l6t2r4" data-key="l6t2r4"><label for="l6t2r4">Demonstrate after a mix of successful and failed operations</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Add the record as the last line of each method: if an exception is thrown earlier, that line never runs.</div></details></div>
 </div></section>
 <section class="slide " data-title="Show your work" aria-label="Show your work" tabindex="-1"><div class="slide-inner">
-<p class="kicker">In-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
+<p class="kicker">Official in-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
 </div></section>
 <section class="slide " data-title="Report exercise 1" aria-label="Report exercise 1" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Lab report · exercise 1 of 2</p><h2>Robust CSV file processing</h2><div class="ex task report"><div class="qq">Read student records (ID,Name,GPA) from a CSV file with custom exceptions.</div>
@@ -558,25 +749,25 @@ Total accounts created: 2</pre></div><p class="note-line">Only 2 accounts are co
 <p class="kicker">Lab report</p><h2>Writing the lab report</h2><ul class="big-list"><li>Problem statement and your design (classes, fields, methods)</li><li>Complete source code, formatted and commented</li><li>Sample output or screenshots for normal <b>and</b> edge cases</li><li>A short discussion: what each OOP concept did in your program</li></ul><div class="integrity"><h3>Academic integrity</h3><p>Copying from the internet, classmates, seniors or any other unauthorized source is strictly prohibited. Full marks may be deducted if plagiarism, copied work or academic dishonesty is detected. Complete the tasks, implementation, output analysis and report yourself.</p></div>
 </div></section>
 <section class="slide " data-title="Viva questions (1 of 2)" aria-label="Viva questions (1 of 2)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Discussion and analysis</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">Why must <code>new BankAccount(…)</code> be inside try-catch here?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Its constructor declares the checked InvalidAccountException, so the compiler requires the caller to catch or declare it.</div></details></div><div class="ex"><div class="qq">Why is InsufficientFundsException unchecked?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">It is a runtime business-rule violation; making it unchecked keeps callers free to handle it where it makes sense.</div></details></div>
+<p class="kicker">Discussion</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">Why must <code>fire()</code> say <code>throws OutOfAmmoException</code> but <code>reload()</code> not mention IllegalArgumentException?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">OutOfAmmoException is checked, so the compiler insists. IllegalArgumentException is a RuntimeException: unchecked.</div></details></div><div class="ex"><div class="qq">On shot 3, the line <code>score += 10;</code> did not run. Why?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">fire() threw, so control jumped straight to the catch block, skipping the rest of the try.</div></details></div>
 </div></section>
 <section class="slide " data-title="Viva questions (2 of 2)" aria-label="Viva questions (2 of 2)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Discussion and analysis</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq">When does finally <b>not</b> matter?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">It always runs after try/catch (even after a return), except when the JVM exits — so it is the right place for cleanup.</div></details></div><div class="ex"><div class="qq">What does exception wrapping give the caller?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">One meaningful exception type to catch (TransactionException) while getCause() still reveals the original problem.</div></details></div>
+<p class="kicker">Discussion</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq">What does <code>e.getCause()</code> give for the input "abc"?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">The original NumberFormatException that LevelLoader wrapped inside the InvalidLevelException.</div></details></div><div class="ex"><div class="qq">Does finally run when the try block contains <code>return</code>?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Yes. saveScore() shows it: finally prints before the returned value is used.</div></details></div>
 </div></section>
 <section class="slide " data-title="Quiz" aria-label="Quiz" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="lab6"></div><script type="application/json" class="quiz-json">[{"q": "Which is a checked exception?", "o": ["ArithmeticException", "NullPointerException", "IOException", "ArrayIndexOutOfBoundsException"], "a": 2, "w": "IOException extends Exception, not RuntimeException."}, {"q": "<code>throws<\/code> appears\u2026", "o": ["in the method header", "inside catch", "before new", "in finally"], "a": 0, "w": "throws declares; throw raises."}, {"q": "A custom unchecked exception extends\u2026", "o": ["Error", "Exception", "RuntimeException", "Throwable directly"], "a": 2, "w": "RuntimeException subclasses are unchecked."}, {"q": "The finally block runs\u2026", "o": ["only on success", "only on exceptions", "always after try/catch", "never with return"], "a": 2, "w": "That makes it ideal for cleanup."}, {"q": "<code>e.getCause()<\/code> on a wrapped exception returns\u2026", "o": ["null always", "the original exception", "the message", "the stack trace"], "a": 1, "w": "Wrapping keeps the cause."}]</script></div>
+<p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="game6"></div><script type="application/json" class="quiz-json">[{"q": "Which keyword starts an exception?", "o": ["throws", "throw", "catch", "try"], "a": 1, "w": "throw creates the report; throws only declares it."}, {"q": "OutOfAmmoException extends GameException, which extends Exception. It is\u2026", "o": ["unchecked", "checked", "an Error", "not an exception"], "a": 1, "w": "Not a RuntimeException, so checked."}, {"q": "When does finally run?", "o": ["only when an exception was thrown", "only when none was thrown", "always", "never after return"], "a": 2, "w": "finally always runs."}, {"q": "A <code>catch (GameException e)<\/code> block can catch\u2026", "o": ["only GameException itself", "GameException and its subclasses", "any Error", "only unchecked exceptions"], "a": 1, "w": "A catch matches the type and its subtypes."}, {"q": "Integer.parseInt(\"abc\") throws\u2026", "o": ["NullPointerException", "NumberFormatException", "ArithmeticException", "nothing"], "a": 1, "w": "The text is not a number."}]</script></div>
 </div></section>
 <section class="slide " data-title="Summary" aria-label="Summary" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Summary</p><h2>Summary</h2><ul class="sumlist"><li>Exceptions interrupt normal flow; catch them to recover with a clear message.</li><li>Checked exceptions must be caught or declared; unchecked ones need not be.</li><li>throw raises, throws declares, finally always runs.</li><li>Custom exceptions name domain errors.</li><li>Wrap low-level exceptions to give callers one meaningful type, keeping the cause.</li></ul><div class="nextcard"><a class="btn pri" href="07-threads.html">Next: Lab 7 · Threads</a><a class="btn" href="../index.html">All labs</a></div>
+<p class="kicker">Mission debrief</p><h2>Summary</h2><ul class="sumlist"><li>An exception is an object that reports a problem and travels up the call stack.</li><li>Checked exceptions must be caught or declared; unchecked ones signal bugs.</li><li>try / catch handles a problem; finally always runs.</li><li>throw starts an exception; throws declares that a method may throw one.</li><li>Custom exceptions speak the game’s language and can wrap a cause.</li><li>Next mission: make several things happen at once.</li></ul><div class="nextcard"><a class="btn pri" href="07-threads.html">Next: Mission 7 · Everything at once</a><a class="btn" href="../index.html">All chapters</a></div>
 </div></section>
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 39</span>
+  <span class="counter" id="counter">1 / 43</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
-<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this lab</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
-<noscript><p style="padding:20px">This lab needs JavaScript for the slides and the interactive examples.</p></noscript>
+<aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this chapter</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
+<noscript><p style="padding:20px">This chapter needs JavaScript for the slides, the game scenes and the interactive examples.</p></noscript>
 <script src="../js/core.js"></script>
 <script src="../js/art.js"></script>
 <script src="../js/java.js"></script>
@@ -588,10 +779,14 @@ Total accounts created: 2</pre></div><p class="note-line">Only 2 accounts are co
 <script src="../js/demos-basics.js"></script>
 <script src="../js/demos-oop.js"></script>
 <script src="../js/demos-adv.js"></script>
+<script src="../js/game-core.js"></script>
+<script src="../js/game-scenes-a.js"></script>
+<script src="../js/game-scenes-b.js"></script>
+<script src="../js/game-scenes-c.js"></script>
 <script src="../js/quiz.js"></script>
 <script src="../js/page.js"></script>
 <script src="../js/lab.js"></script>
-<script>window.OOP_TOPIC = {"id": 6, "prev": "05-abstract-classes-interfaces.html", "next": "07-threads.html", "nextLabel": "Next lab"};</script>
+<script>window.OOP_TOPIC = {"id": 6, "prev": "05-abstract-classes-interfaces.html", "next": "07-threads.html", "nextLabel": "Next chapter"};</script>
 <script>mountPage();</script>
 <script src="../js/slides.js"></script>
 <script src="../js/annotate.js"></script>

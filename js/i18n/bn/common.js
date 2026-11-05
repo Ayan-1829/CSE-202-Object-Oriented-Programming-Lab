@@ -91,5 +91,9 @@ I18N_BN_PATTERNS([
   [/^Chapter (\d+) · (Midterm|Final) syllabus · Lectures? ([\d–]+)$/, (m, c, p, l) => `অধ্যায় ${c} · ${p === 'Midterm' ? 'মিডটার্ম' : 'ফাইনাল'} সিলেবাস · লেকচার ${l}`],
   [/^Summary · End of Chapter (\d+)$/, 'সারসংক্ষেপ · অধ্যায় $1 শেষ'],
   [/^Next: Chapter (\d+) · (.+)$/, 'পরবর্তী: অধ্যায় $1 · $2'],
-  [/^Chapter (\d+) · Lectures? ([\d–]+)$/, 'অধ্যায় $1 · লেকচার $2']
+  [/^Chapter (\d+) · Lectures? ([\d–]+)$/, 'অধ্যায় $1 · লেকচার $2'],
+  [/^Part (\d+) of (\d+)$/, 'অংশ $1 / $2'],
+  [/^Outline · chapter (\d+)$/, 'রূপরেখা · অধ্যায় $1'],
+  [/^Chapter (\d+) of (\d+) · Part A · The research process$/, 'অধ্যায় $1 / $2 · পর্ব A · গবেষণা প্রক্রিয়া'],
+  [/^Chapter (\d+) of (\d+) · Part B · Research fields$/, 'অধ্যায় $1 / $2 · পর্ব B · গবেষণা ক্ষেত্র']
 ]);
