@@ -497,7 +497,8 @@ function gKeys(target, keys) {
   const base = codeView;
   function keepInView(pre, line) {
     if (!line || pre.scrollHeight <= pre.clientHeight + 2) return;
-    const top = line.getBoundingClientRect().top - pre.getBoundingClientRect().top + pre.scrollTop, bottom = top + line.offsetHeight, pad = 24;
+    const pr = pre.getBoundingClientRect(), z = pr.height / pre.offsetHeight || 1;
+    const top = (line.getBoundingClientRect().top - pr.top) / z + pre.scrollTop, bottom = top + line.offsetHeight, pad = 24;
     if (top - pad < pre.scrollTop) pre.scrollTop = Math.max(0, top - pad);
     else if (bottom + pad > pre.scrollTop + pre.clientHeight) pre.scrollTop = bottom + pad - pre.clientHeight;
   }

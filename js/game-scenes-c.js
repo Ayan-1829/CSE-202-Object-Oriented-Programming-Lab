@@ -346,11 +346,15 @@ DEMOS['g-hero'] = (root) => {
   const stage = h('div', { class: 'g-herostage' }, c.cvs, fsBtn, chaptersOk() ? chapterBox : null);
   function chaptersOk() { return chapters.length > 0; }
   /* shown only in full screen: a keyboard-style keypad that also lights up with the real keys */
+  /* the game keys sit on the left; on the right, Enter course opens Chapter 1 */
+  const firstChapter = (chapters[0] && chapters[0].url) || 'labs/01-java-basics.html';
   const keypad = h('div', { class: 'g-keypad' },
-    h('div', { class: 'g-arrows' }, h('span'), cap('↑', '', 'up'), h('span'), cap('←', '', 'left'), cap('↓', '', 'down'), cap('→', '', 'right')),
-    cap('Space', gT('Fire'), 'fire', 'g-space'),
-    h('div', { class: 'g-keyside' }, cap('R', gT('Restart'), 'restart', 'g-small'),
-      h('button', { type: 'button', class: 'g-key g-small', onclick: exitFs }, h('b', null, 'Esc'), h('small', null, gT('Exit')))));
+    h('div', { class: 'g-keyleft' },
+      h('div', { class: 'g-arrows' }, h('span'), cap('↑', '', 'up'), h('span'), cap('←', '', 'left'), cap('↓', '', 'down'), cap('→', '', 'right')),
+      cap('Space', gT('Fire'), 'fire', 'g-space'),
+      h('div', { class: 'g-keyside' }, cap('R', gT('Restart'), 'restart', 'g-small'),
+        h('button', { type: 'button', class: 'g-key g-small', onclick: exitFs }, h('b', null, 'Esc'), h('small', null, gT('Exit'))))),
+    h('a', { class: 'btn pri g-entercourse', href: firstChapter }, gT('Enter course') + ' ▶'));
   ['fullscreenchange', 'webkitfullscreenchange'].forEach((ev) => document.addEventListener(ev, () => toggleMenu(false)));
   wrap.append(stage, keypad,
     h('p', { class: 'g-cap' }, gT('Code Commando: the game you build in this course.')));

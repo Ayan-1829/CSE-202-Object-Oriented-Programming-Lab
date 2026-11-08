@@ -212,3 +212,9 @@ html.g-noscroll,html.g-noscroll body{overflow:hidden}
 .g-chn{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#FFC27A;color:#1B2330;font:700 13px Georgia,serif}
 /* home page: room between the two buttons and the chapter list */
 .index-page .toolbar-links{margin-bottom:28px}
+/* full-screen game: keys on the left, Enter course on the right, both lined up under the game */
+.g-heroscene:fullscreen>.g-keypad,.g-heroscene.g-fake-fs>.g-keypad{width:min(calc(100vw - 32px),calc((100vh - 190px) * var(--ar)),calc((100dvh - 190px) * var(--ar)));justify-content:space-between;align-items:flex-end;flex-wrap:nowrap}
+.g-keyleft{display:flex;align-items:flex-end;gap:18px;flex-wrap:wrap}
+.g-keypad .g-key.g-space{width:min(30vw,300px)}
+.g-entercourse{flex:none;font:700 20px Georgia,serif;padding:16px 26px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.45)}
+@media (max-width:760px){.g-heroscene:fullscreen>.g-keypad,.g-heroscene.g-fake-fs>.g-keypad{flex-wrap:wrap;justify-content:center;gap:12px}}
