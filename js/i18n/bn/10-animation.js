@@ -29,7 +29,6 @@ I18N_BN_ADD({
 "A health bar and the score at the top": "ওপরে একটি health bar আর স্কোর",
 "A hit of 12.75 damage is a double": "12.75 damage-এর একটি আঘাত হলো double",
 "A loop with sleep() on the EDT would freeze the window: it could not handle keys or paint while it sleeps.": "EDT-তে sleep() সহ একটি loop window আটকে দিত: ঘুমানোর সময় এটি কী সামলাতে বা আঁকতে পারত না।",
-"A separate <b>thread</b> runs the <b>game loop</b>: update everything, check collisions, <code>repaint()</code>, sleep 16 ms, and again, about 60 times a second. Each frame is a slightly different picture: that is <b>animation</b>.": "একটি আলাদা <b>thread</b> <b>game loop</b> চালায়: সবকিছু update করা, collision পরীক্ষা, <code>repaint()</code>, 16 ms sleep, তারপর আবার, সেকেন্ডে প্রায় 60 বার। প্রতিটি ফ্রেম একটু আলাদা ছবি: এটাই <b>animation</b>।",
 "A short discussion: what each OOP concept did in your program": "একটি সংক্ষিপ্ত আলোচনা: আপনার প্রোগ্রামে প্রতিটি OOP ধারণা কী করেছে",
 "A tank fires...": "একটি ট্যাংক গুলি ছোড়ে...",
 "A window titled “Bouncing Balls Animation” with a gridded white panel and three coloured balls": "“Bouncing Balls Animation” শিরোনামের একটি উইন্ডো, grid-সহ সাদা panel ও তিনটি রঙিন বল",
@@ -250,7 +249,6 @@ I18N_BN_ADD({
 "Test different gravity and bounce values": "ভিন্ন মাধ্যাকর্ষণ ও bounce মান পরীক্ষা করুন",
 "The Animator moves the balls, the EDT draws them. The panel’s lock makes sure the EDT never paints a half-moved frame.": "Animator বল সরায়, EDT সেগুলো আঁকে। Panel-এর lock নিশ্চিত করে EDT কখনো অর্ধেক-সরানো frame আঁকে না।",
 "The Animator sleeps ≈16 ms, so the loop runs about 60 times a second. It is TIMED_WAITING.": "Animator প্রায় 16 ms ঘুমায়, তাই loop সেকেন্ডে প্রায় 60 বার চলে। এটি TIMED_WAITING।",
-"The Chapter 9 game only changes when you press a key. How do the drones fly on their own?": "অধ্যায় 9-এর গেম শুধু কী চাপলেই বদলায়। drone-গুলো নিজে থেকে ওড়ে কীভাবে?",
 "The EDT could draw while the game thread is removing objects from a list, giving a ConcurrentModificationException or a half-updated frame.": "game thread যখন তালিকা থেকে object সরাচ্ছে, EDT তখন আঁকতে পারত, ফলে ConcurrentModificationException বা আধা-update হওয়া ফ্রেম হতো।",
 "The EDT gets the lock now.": "EDT এখন lock পায়।",
 "The EDT only sets flags; the game thread reads them every frame.": "EDT শুধু flag বসায়; game thread প্রতি ফ্রেমে সেগুলো পড়ে।",
@@ -391,7 +389,9 @@ I18N_BN_ADD({
 "x grows →": "x বাড়ে →",
 "y grows ↓": "y বাড়ে ↓",
 "yes": "হ্যাঁ",
-"…but the Animator holds the lock, so the EDT is <b>BLOCKED</b>. It can never draw a half-moved frame.": "…কিন্তু lock Animator-এর হাতে, তাই EDT <b>BLOCKED</b>। এটি কখনো আধা-সরানো ফ্রেম আঁকতে পারে না।"
+"…but the Animator holds the lock, so the EDT is <b>BLOCKED</b>. It can never draw a half-moved frame.": "…কিন্তু lock Animator-এর হাতে, তাই EDT <b>BLOCKED</b>। এটি কখনো আধা-সরানো ফ্রেম আঁকতে পারে না।",
+"In Chapter 9 the drones only move when you press a key, like statues that shuffle when you blink. Today they fly on their own.": "অধ্যায় 9-এ drone-গুলো নড়ে শুধু কী চাপলে, যেন চোখের পলক ফেললেই একটু সরে যাওয়া মূর্তি। আজ তারা নিজে থেকে ওড়ে।",
+"A separate <b>thread</b> runs the <b>game loop</b>: update everything, check collisions, <code>repaint()</code>, sleep 16 ms — sixty times a second. Each frame is a slightly different picture, and that is <b>animation</b>.": "একটি আলাদা <b>thread</b> চালায় <b>game loop</b>: সবকিছু update, collision পরীক্ষা, <code>repaint()</code>, 16 ms sleep — সেকেন্ডে ষাটবার। প্রতিটি ফ্রেম একটু আলাদা ছবি, আর এটাই <b>animation</b>।"
 });
 /* Bengali patterns for text with changing numbers or file names on the v2 decks (appended to each deck's file) */
 I18N_BN_PATTERNS([

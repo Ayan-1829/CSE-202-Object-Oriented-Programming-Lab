@@ -36,7 +36,6 @@ I18N_BN_ADD({
 "A cast to int cuts off the fraction.": "int-এ cast করলে ভগ্নাংশ কেটে যায়।",
 "A cast to int truncates: it drops the fraction. Use <code>Math.round</code> to round.": "int-এ cast truncate করে: ভগ্নাংশ বাদ দেয়। রাউন্ড করতে <code>Math.round</code> ব্যবহার করুন।",
 "A game is numbers and words in variables; the type decides what fits.": "গেম মানে variable-এ রাখা সংখ্যা ও শব্দ; type ঠিক করে কী ধরবে।",
-"A game looks like moving pictures. What does the computer actually keep track of?": "গেম দেখতে চলমান ছবির মতো। কম্পিউটার আসলে কী কী মনে রাখে?",
 "A hit of 12.75 damage is a double": "12.75 damage-এর একটি আঘাত হলো double",
 "A jam and an empty clip": "একটি জ্যাম আর একটি খালি ক্লিপ",
 "A loop repeats a block of code. <code>for (start; test; update)</code>: you know how many times.": "Loop একটি কোড block বারবার চালায়। <code>for (start; test; update)</code>: কতবার, তা জানা থাকে।",
@@ -155,7 +154,6 @@ I18N_BN_ADD({
 "No objects yet: press Next to run main()": "এখনো কোনো object নেই: main() চালাতে Next চাপুন",
 "Nobody caught the exception, so the program stopped. Press Reset.": "কেউ exception ধরেনি, তাই প্রোগ্রাম থেমে গেছে। Reset চাপুন।",
 "Not sure which Mac? Apple menu → <b>About This Mac</b>: “Apple M…” = M-series (ARM64), “Intel” = Intel (x64).": "কোন Mac নিশ্চিত নন? Apple মেনু → <b>About This Mac</b>: “Apple M…” = M-series (ARM64), “Intel” = Intel (x64)।",
-"Numbers and words: health, ammo, score, the player’s name. In Java each one lives in a <b>variable</b> with a <b>type</b>. Decisions (<code>if</code>, <code>switch</code>) and loops (<code>for</code>, <code>while</code>) make the game react.": "সংখ্যা ও শব্দ: health, ammo, score, খেলোয়াড়ের নাম। Java-তে প্রতিটি একটি <b>type</b>-সহ <b>variable</b>-এ থাকে। সিদ্ধান্ত (<code>if</code>, <code>switch</code>) আর loop (<code>for</code>, <code>while</code>) গেমকে সাড়া দিতে শেখায়।",
 "Official in-lab tasks": "অফিশিয়াল ইন-ল্যাব টাস্ক",
 "Official installers page (netbeans.apache.org → Download → Installers): the marked button for your Mac · <i>click to enlarge</i>": "অফিসিয়াল installer পেজ (netbeans.apache.org → Download → Installers): আপনার Mac-এর জন্য চিহ্নিত বাটন · <i>বড় করে দেখতে ক্লিক করুন</i>",
 "Official lab": "অফিশিয়াল ল্যাব",
@@ -390,7 +388,9 @@ I18N_BN_ADD({
 "▶ Run program": "▶ প্রোগ্রাম চালান",
 "▶ Watch on YouTube": "▶ YouTube-এ দেখুন",
 "⬇ NetBeans Java Quick Start (official tutorial)": "⬇ NetBeans Java Quick Start (অফিসিয়াল টিউটোরিয়াল)",
-"⬇ Open oracle.com/java": "⬇ oracle.com/java খুলুন"
+"⬇ Open oracle.com/java": "⬇ oracle.com/java খুলুন",
+"Every game you have played is secretly a spreadsheet in a hurry. Behind the explosions, the computer is just updating a few numbers, sixty times a second.": "আপনি যত গেম খেলেছেন, সবই আসলে তাড়াহুড়োয় থাকা একটি spreadsheet। বিস্ফোরণের পেছনে computer শুধু কয়েকটি সংখ্যা update করছে, সেকেন্ডে ষাটবার।",
+"Health 100, ammo 5, score 0, name “Ranger”: in Java each one lives in a <b>variable</b> with a <b>type</b>. Add <code>if</code> and <code>switch</code> to make decisions and loops to repeat them, and the numbers start to fight back.": "Health 100, ammo 5, score 0, নাম “Ranger”: Java-তে প্রতিটি থাকে একটি <b>type</b> সহ <b>variable</b>-এ। সিদ্ধান্তের জন্য <code>if</code> আর <code>switch</code>, পুনরাবৃত্তির জন্য loop যোগ করুন, আর সংখ্যাগুলো পাল্টা লড়াই শুরু করে।"
 });
 /* Bengali patterns for text with changing numbers or file names on the v2 decks (appended to each deck's file) */
 I18N_BN_PATTERNS([

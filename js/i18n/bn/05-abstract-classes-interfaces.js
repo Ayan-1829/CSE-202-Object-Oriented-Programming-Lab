@@ -58,7 +58,6 @@ I18N_BN_ADD({
 "Both abstract classes and interfaces work as reference types for polymorphism.": "abstract class ও interface দুটিই polymorphism-এর জন্য reference type হিসেবে কাজ করে।",
 "Both lock the ammo crate first. Gunner holds both items, Medic only waits for the crate. There is no circle, so Gunner finishes and then Medic can go.": "দুজনেই আগে ammo crate লক করে। Gunner দুটো জিনিসই ধরে রাখে, Medic শুধু crate-এর জন্য অপেক্ষা করে। কোনো বৃত্ত নেই, তাই Gunner শেষ করে, তারপর Medic এগোতে পারে।",
 "Bravo (thread)": "Bravo (থ্রেড)",
-"Bullets, drones, health packs and the player all move and get drawn. But what would a plain “game object” look like?": "গুলি, ড্রোন, health pack আর খেলোয়াড় সবাই নড়ে এবং আঁকা হয়। কিন্তু একটি সাধারণ “game object” দেখতে কেমন হতো?",
 "Call it with a Fish": "একটি Fish দিয়ে এটি call করুন",
 "Call stack<small>local variables, newest frame on top</small>": "Call stack<small>local variable, নতুনতম frame সবার ওপরে</small>",
 "Call train() and obey() on each": "প্রতিটিতে train() ও obey() call করুন",
@@ -174,7 +173,6 @@ I18N_BN_ADD({
 "No deadlock: both finished": "Deadlock নেই: দুজনেই শেষ করেছে",
 "No objects yet: press Next to run main()": "এখনো কোনো object নেই: main() চালাতে Next চাপুন",
 "Nobody caught the exception, so the program stopped. Press Reset.": "কেউ exception ধরেনি, তাই প্রোগ্রাম থেমে গেছে। Reset চাপুন।",
-"Nothing: it is only an idea. Make <code>GameObject</code> <b>abstract</b> so every real object must fill in <code>update()</code> and <code>symbol()</code>. Use <b>interfaces</b> for abilities that cut across the tree, such as being Damageable.": "কিছুই না: এটি শুধু একটি ধারণা। <code>GameObject</code>-কে <b>abstract</b> করুন, যাতে প্রতিটি আসল object-কে <code>update()</code> ও <code>symbol()</code> পূরণ করতে হয়। গাছজুড়ে ছড়ানো ক্ষমতার জন্য <b>interface</b> ব্যবহার করুন, যেমন Damageable হওয়া।",
 "Official in-lab tasks": "অফিশিয়াল ইন-ল্যাব টাস্ক",
 "Official lab": "অফিশিয়াল ল্যাব",
 "Official lab · from the lab manual": "অফিশিয়াল ল্যাব · ল্যাব ম্যানুয়াল থেকে",
@@ -346,7 +344,9 @@ I18N_BN_ADD({
 "yes": "হ্যাঁ",
 "…so the abstract class’s constructor <b>does</b> run, just never on its own.": "…তাই abstract class-এর constructor <b>চলে</b>, শুধু কখনো একা নয়।",
 "≥2 of each; Shape[], Resizable[] and Colorable[] arrays": "প্রতিটির ≥2টি; Shape[], Resizable[] ও Colorable[] array",
-"▶ Run program": "▶ প্রোগ্রাম চালান"
+"▶ Run program": "▶ প্রোগ্রাম চালান",
+"Someone asks: “Can I see a game object?” You point at a drone. “No, a plain game object.” There isn’t one — and that is the point.": "কেউ জিজ্ঞেস করে: “একটা game object দেখাতে পারো?” আপনি একটি drone দেখান। “না, সাধারণ একটা game object।” এমন কিছু নেই — আর সেটাই মূল কথা।",
+"“Game object” is only an idea, so make <code>GameObject</code> <b>abstract</b>: nobody can create one, and every real object must fill in <code>update()</code> and <code>symbol()</code>. <b>Interfaces</b> add abilities across the family tree, such as being Damageable.": "“Game object” শুধু একটি ধারণা, তাই <code>GameObject</code>-কে <b>abstract</b> করুন: কেউ এটি তৈরি করতে পারে না, আর প্রতিটি আসল object-কে <code>update()</code> আর <code>symbol()</code> পূরণ করতে হয়। <b>Interface</b> পুরো বংশতালিকা জুড়ে ক্ষমতা যোগ করে, যেমন Damageable হওয়া।"
 });
 /* Bengali patterns for text with changing numbers or file names on the v2 decks (appended to each deck's file) */
 I18N_BN_PATTERNS([

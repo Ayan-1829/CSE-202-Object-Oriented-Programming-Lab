@@ -28,7 +28,6 @@ I18N_BN_ADD({
 "After this chapter you can": "এই অধ্যায়ের পরে আপনি পারবেন",
 "All four together cause a deadlock; break any one to prevent it.": "চারটি একসঙ্গে থাকলে deadlock হয়; যেকোনো একটি ভাঙলেই তা আটকানো যায়।",
 "Alpha (thread)": "Alpha (থ্রেড)",
-"Alpha and Bravo each score 100 000 points on the same scoreboard. Why does it sometimes show about 145 000?": "Alpha আর Bravo একই scoreboard-এ প্রত্যেকে 100 000 পয়েন্ট পায়। কেন মাঝে মাঝে প্রায় 145 000 দেখায়?",
 "Alpha reads score: 10": "Alpha score পড়ে: 10",
 "Alpha takes the scoreboard’s lock": "Alpha scoreboard-এর lock নেয়",
 "Alpha writes 10 + 1 = 11": "Alpha লেখে 10 + 1 = 11",
@@ -38,7 +37,6 @@ I18N_BN_ADD({
 "Arrow keys or WASD move · Space fires · R restarts": "Arrow কী বা WASD দিয়ে চলুন · Space দিয়ে গুলি · R দিয়ে নতুন করে শুরু",
 "BLOCKED: waiting for the lock": "BLOCKED: lock-এর জন্য অপেক্ষা",
 "BankAccount has synchronized deposit/withdraw/getBalance and an ordered transfer(); DeadlockProneTransfer shows the unsafe way.": "BankAccount-এ synchronized deposit/withdraw/getBalance ও একটি ক্রমযুক্ত transfer() আছে; DeadlockProneTransfer অনিরাপদ উপায়টি দেখায়।",
-"Because <code>score = score + 1</code> is three steps, and two threads can mix them up: a <b>race condition</b>. <code>synchronized</code> lets one thread in at a time. Lock carelessly, though, and two soldiers can wait for each other forever: a <b>deadlock</b>.": "কারণ <code>score = score + 1</code> তিন ধাপের, আর দুটি thread ধাপগুলো মিশিয়ে ফেলতে পারে: একটি <b>race condition</b>। <code>synchronized</code> একসময়ে একটি thread-কে ঢুকতে দেয়। তবে অসাবধানে lock করলে দুজন সৈনিক চিরকাল একে অপরের জন্য অপেক্ষা করতে পারে: একটি <b>deadlock</b>।",
 "Before you start": "শুরুর আগে",
 "Both go for the ammo crate first: the same order.": "দুজনেই আগে ammo crate নিতে যায়: একই ক্রম।",
 "Both lock the ammo crate first. Gunner holds both items, Medic only waits for the crate. There is no circle, so Gunner finishes and then Medic can go.": "দুজনেই আগে ammo crate লক করে। Gunner দুটো জিনিসই ধরে রাখে, Medic শুধু crate-এর জন্য অপেক্ষা করে। কোনো বৃত্ত নেই, তাই Gunner শেষ করে, তারপর Medic এগোতে পারে।",
@@ -343,7 +341,9 @@ I18N_BN_ADD({
 "yes": "হ্যাঁ",
 "…but T2 holds it. T1 is <b>BLOCKED</b>, still holding ACC-001.": "…কিন্তু সেটি T2 ধরে আছে। T1 <b>BLOCKED</b>, তখনও ACC-001 ধরে রেখে।",
 "…which T1 holds. Each thread holds one lock and waits for the other: a <b>circular wait</b>. Neither can ever continue: <b>deadlock</b>. The program hangs with no error.": "…যা T1 ধরে আছে। প্রতিটি thread একটি lock ধরে অন্যটির জন্য অপেক্ষা করে: একটি <b>circular wait</b>। কেউই আর কখনো এগোতে পারে না: <b>deadlock</b>। প্রোগ্রামটি কোনো error ছাড়াই ঝুলে থাকে।",
-"▶ Run program": "▶ প্রোগ্রাম চালান"
+"▶ Run program": "▶ প্রোগ্রাম চালান",
+"Alpha and Bravo each score 100 000 points. The scoreboard says 145 000. Fifty-five thousand points vanished, and nobody cheated.": "Alpha আর Bravo প্রত্যেকে 100 000 পয়েন্ট পায়। scoreboard দেখায় 145 000। পঞ্চান্ন হাজার পয়েন্ট উধাও, অথচ কেউ চুরি করেনি।",
+"<code>score = score + 1</code> is three steps, and two threads mixed them up: a <b>race condition</b>. <code>synchronized</code> lets one thread in at a time — but lock carelessly and two soldiers wait for each other forever: a <b>deadlock</b>.": "<code>score = score + 1</code> তিন ধাপের, আর দুটি thread ধাপগুলো গুলিয়ে ফেলেছে: একটি <b>race condition</b>। <code>synchronized</code> একসময়ে একটি thread-কে ঢুকতে দেয় — কিন্তু অসাবধানে lock করলে দুই সৈনিক চিরকাল একে অপরের অপেক্ষায় থাকে: একটি <b>deadlock</b>।"
 });
 /* Bengali patterns for text with changing numbers or file names on the v2 decks (appended to each deck's file) */
 I18N_BN_PATTERNS([

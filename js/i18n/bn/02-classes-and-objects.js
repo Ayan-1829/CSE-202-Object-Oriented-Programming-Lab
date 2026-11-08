@@ -170,7 +170,6 @@ I18N_BN_ADD({
 "No deadlock: both finished": "Deadlock নেই: দুজনেই শেষ করেছে",
 "No new: target gets a copy of the arrow. Both names point at the same Drone-1.": "new নেই: target তীরের একটি কপি পায়। দুটি নামই একই Drone-1-কে দেখায়।",
 "No objects yet: press Next to run main()": "এখনো কোনো object নেই: main() চালাতে Next চাপুন",
-"No. Write one <b>class</b>, <code>Enemy</code>, as a blueprint, then build as many <b>objects</b> as you like with <code>new</code>. Each object keeps its own health.": "না। একটি <b>class</b>, <code>Enemy</code>, blueprint হিসেবে লিখুন, তারপর <code>new</code> দিয়ে যত খুশি <b>object</b> তৈরি করুন। প্রতিটি object নিজের health রাখে।",
 "Nobody caught the exception, so the program stopped. Press Reset.": "কেউ exception ধরেনি, তাই প্রোগ্রাম থেমে গেছে। Reset চাপুন।",
 "Objects take turns calling each other’s methods.": "object-গুলো পালা করে একে অপরের method call করে।",
 "Official in-lab tasks": "অফিশিয়াল ইন-ল্যাব টাস্ক",
@@ -240,7 +239,6 @@ I18N_BN_ADD({
 "There is one spawn count for the whole game, but every enemy has its own health.": "পুরো গেমের জন্য একটি spawn count, কিন্তু প্রতিটি শত্রুর নিজস্ব health।",
 "Three <code>new</code>s: three objects.": "তিনটি <code>new</code>: তিনটি object।",
 "Three Enemy objects exist. How many copies of the static field &lt;code&gt;enemiesSpawned&lt;/code&gt; are there?": "তিনটি Enemy object আছে। static field &lt;code&gt;enemiesSpawned&lt;/code&gt;-এর কয়টি কপি আছে?",
-"Three drones attack at once. Do we write the drone code three times?": "তিনটি ড্রোন একসাথে আক্রমণ করছে। ড্রোনের কোড কি তিনবার লিখব?",
 "Three files: <code>Player</code> and <code>Enemy</code> are the blueprints; <code>BattleDemo</code> builds the objects and runs a small fight.": "তিনটি ফাইল: <code>Player</code> ও <code>Enemy</code> হলো blueprint; <code>BattleDemo</code> object তৈরি করে একটি ছোট লড়াই চালায়।",
 "Three objects from one class. They share the code, but each keeps its own fields.": "একটি class থেকে তিনটি object। কোড এক, কিন্তু প্রত্যেকে নিজের field রাখে।",
 "Through car3 we change the <b>same</b> object car1 points to.": "car3 দিয়ে আমরা car1 যে object-কে দেখায়, <b>সেটিকেই</b> বদলাই।",
@@ -344,7 +342,9 @@ I18N_BN_ADD({
 "y grows ↓": "y বাড়ে ↓",
 "yes": "হ্যাঁ",
 "…so drone1 sees it too: it prints 15. Still only two Enemy objects.": "…তাই drone1-ও তা দেখে: এটি 15 ছাপে। এখনো মাত্র দুটি Enemy object।",
-"▶ Run program": "▶ প্রোগ্রাম চালান"
+"▶ Run program": "▶ প্রোগ্রাম চালান",
+"Three drones attack at once. A beginner copies the drone code three times. Then the boss says: “Make it fifty.”": "একসঙ্গে তিনটি drone আক্রমণ করে। একজন নতুন programmer drone-এর কোড তিনবার কপি করে। তারপর বস বলেন: “পঞ্চাশটা করো।”",
+"Write one <b>class</b>, <code>Enemy</code>, as a blueprint, and build as many <b>objects</b> as you like with <code>new</code>. Fifty drones, one class — and each object keeps its own health.": "নকশা হিসেবে একটি <b>class</b> লিখুন, <code>Enemy</code>, আর <code>new</code> দিয়ে যত খুশি <b>object</b> বানান। পঞ্চাশটি drone, একটি class — আর প্রতিটি object নিজের health রাখে।"
 });
 /* Bengali patterns for text with changing numbers or file names on the v2 decks (appended to each deck's file) */
 I18N_BN_PATTERNS([

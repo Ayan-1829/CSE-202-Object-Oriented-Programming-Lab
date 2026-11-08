@@ -33,7 +33,6 @@ I18N_BN_ADD({
 "A method calls &lt;code&gt;w.addAmmo(10)&lt;/code&gt; on its Weapon parameter. The caller’s weapon…": "একটি method তার Weapon parameter-এ &lt;code&gt;w.addAmmo(10)&lt;/code&gt; call করে। caller-এর অস্ত্র…",
 "A method can take another object as a parameter.": "একটি method আরেকটি object-কে parameter হিসেবে নিতে পারে।",
 "A method sets its int parameter to 99. In the caller, the variable is…": "একটি method তার int parameter 99 করে। caller-এ variable-টি…",
-"A pistol, a rifle and a rocket launcher: the same kind of thing with different settings. How do we build each one easily?": "একটি পিস্তল, একটি রাইফেল আর একটি রকেট লঞ্চার: একই ধরনের জিনিস, ভিন্ন সেটিং। প্রতিটি সহজে কীভাবে বানাব?",
 "A second frame on the stack, for the <b>same</b> object. All validation lives here, in one place.": "stack-এ দ্বিতীয় একটি frame, <b>একই</b> object-এর জন্য। সব যাচাই এখানে, এক জায়গায়।",
 "A short discussion: what each OOP concept did in your program": "একটি সংক্ষিপ্ত আলোচনা: আপনার প্রোগ্রামে প্রতিটি OOP ধারণা কী করেছে",
 "A tank fires...": "একটি ট্যাংক গুলি ছোড়ে...",
@@ -126,7 +125,6 @@ I18N_BN_ADD({
 "Game task 3: Swap weapons": "গেম টাস্ক 3: অস্ত্র বদলাবদলি",
 "GamePanel: gets all the space that is left": "GamePanel: বাকি সব জায়গা এটি পায়",
 "Geometric shape library": "জ্যামিতিক shape library",
-"Give <code>Weapon</code> several <b>constructors</b> that call each other with <code>this(…)</code>. Then give the player several <code>shoot</code> methods with the same name: that is <b>overloading</b>.": "<code>Weapon</code>-কে কয়েকটি <b>constructor</b> দিন, যারা <code>this(…)</code> দিয়ে একে অপরকে call করে। তারপর খেলোয়াড়কে একই নামের কয়েকটি <code>shoot</code> method দিন: এটাই <b>overloading</b>।",
 "HEAP: objects": "HEAP: object-গুলো",
 "Healthy: green bar": "সুস্থ: সবুজ বার",
 "Heap<small>objects and arrays</small>": "Heap<small>object ও array</small>",
@@ -338,7 +336,9 @@ I18N_BN_ADD({
 "yes": "হ্যাঁ",
 "…and points its copy at a brand-new object. main’s pistol does not move.": "…এবং নিজের কপিকে একেবারে নতুন object-এ ঘোরায়। main-এর pistol নড়ে না।",
 "…changes what r3 <b>and</b> r5 see, but not the copy.": "…r3 <b>ও</b> r5 যা দেখে তা বদলায়, কিন্তু কপিটি নয়।",
-"▶ Run program": "▶ প্রোগ্রাম চালান"
+"▶ Run program": "▶ প্রোগ্রাম চালান",
+"The armoury sergeant hates paperwork. “A pistol is just a weapon with the usual settings,” he grumbles. “Don’t make me fill in every box.”": "অস্ত্রাগারের সার্জেন্ট কাগজপত্র ঘৃণা করেন। “পিস্তল তো সাধারণ সেটিংসের একটি অস্ত্র,” তিনি গজগজ করেন। “আমাকে প্রতিটি ঘর পূরণ করিও না।”",
+"Give <code>Weapon</code> several <b>constructors</b> that call each other with <code>this(…)</code>, so a pistol needs one line and a rocket launcher a few more. Then give the player several <code>shoot</code> methods with the same name: that is <b>overloading</b>.": "<code>Weapon</code>-কে কয়েকটি <b>constructor</b> দিন, যারা <code>this(…)</code> দিয়ে একে অপরকে call করে, তাহলে পিস্তলের জন্য লাগে এক লাইন, রকেট লঞ্চারের জন্য আরও কয়েকটি। তারপর প্লেয়ারকে একই নামের কয়েকটি <code>shoot</code> method দিন: এটাই <b>overloading</b>।"
 });
 /* Bengali patterns for text with changing numbers or file names on the v2 decks (appended to each deck's file) */
 I18N_BN_PATTERNS([

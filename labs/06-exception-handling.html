@@ -62,7 +62,7 @@
 <div class="row"><a class="btn pri" href="#s=2">Start the mission</a><a class="btn" href="../index.html">All chapters</a></div>
 </div></section>
 <section class="slide " data-title="Your mission" aria-label="Your mission" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Mission 6 · When things go wrong</p><h2>Your mission</h2><div class="hook"><p class="q">The player presses Fire with an empty clip. Should the whole game crash?</p><p>No. <code>fire()</code> <b>throws</b> an <code>OutOfAmmoException</code>, and the game <b>catches</b> it, reloads and carries on. A <code>finally</code> block makes sure the score is always saved.</p></div>
+<p class="kicker">Mission 6 · When things go wrong</p><h2>Your mission</h2><div class="hook"><p class="q">The player pulls the trigger on an empty gun. In a bad game, the whole screen freezes. In a good one, you hear “click” and the commando reloads.</p><p><code>fire()</code> <b>throws</b> an <code>OutOfAmmoException</code>, the game <b>catches</b> it, reloads and carries on, and a <code>finally</code> block makes sure the score is saved no matter what.</p></div>
 </div></section>
 <section class="slide " data-title="Chapter at a glance" aria-label="Chapter at a glance" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Chapter 6 of 10</p><h2>Chapter at a glance</h2><div class="cols wl"><div><h3>After this chapter you can</h3><ul class=""><li>Explain what an exception is and how it travels up the call stack</li><li>Read the exception hierarchy: Throwable, Exception, RuntimeException</li><li>Tell checked from unchecked exceptions</li><li>Use try, catch, finally, throw and throws</li><li>Write custom exceptions for the game, and wrap a lower-level cause</li></ul></div>

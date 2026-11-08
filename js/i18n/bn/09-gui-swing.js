@@ -100,7 +100,6 @@ I18N_BN_ADD({
 "Drawn by": "যে আঁকে",
 "Each Add button draws a filled shape in the selected colour at a random position": "প্রতিটি Add বাটন বাছাই করা রঙে একটি random অবস্থানে ভরাট shape আঁকে",
 "Each click adds a shape to the list; paintComponent draws whatever is in the list.": "প্রতিটি ক্লিক তালিকায় একটি shape যোগ করে; paintComponent তালিকায় যা আছে তা আঁকে।",
-"Eight chapters of text output. How do we finally draw the commando?": "আট অধ্যায় ধরে শুধু লেখা output। অবশেষে কমান্ডোকে কীভাবে আঁকব?",
 "Events and listeners": "Event ও listener",
 "Events: buttons and keys": "Event: button ও কী",
 "Every part is placed relative to one point (x, y), between the boots.": "প্রতিটি অংশ একটি বিন্দু (x, y) থেকে বসানো, বুট দুটোর মাঝখানে।",
@@ -290,7 +289,6 @@ I18N_BN_ADD({
 "Why does GamePanel override paintComponent instead of drawing in fire()?": "GamePanel কেন fire()-এ না এঁকে paintComponent override করে?",
 "Why is <code>super.paintComponent(g0)</code> the first line?": "<code>super.paintComponent(g0)</code> কেন প্রথম লাইন?",
 "Why is the window built inside <code>SwingUtilities.invokeLater</code>?": "window কেন <code>SwingUtilities.invokeLater</code>-এর ভেতরে তৈরি হয়?",
-"With <b>Swing</b>: a <code>JFrame</code> is the window, a <code>JPanel</code> is the drawing area, and <code>paintComponent(Graphics g)</code> draws everything from simple shapes. Buttons and keys send <b>events</b>.": "<b>Swing</b> দিয়ে: <code>JFrame</code> হলো window, <code>JPanel</code> হলো আঁকার এলাকা, আর <code>paintComponent(Graphics g)</code> সাধারণ shape দিয়ে সবকিছু আঁকে। button আর কী <b>event</b> পাঠায়।",
 "Writing the lab report": "ল্যাব রিপোর্ট লেখা",
 "Your mission": "আপনার মিশন",
 "a JPanel with FlowLayout: one row": "FlowLayout-সহ একটি JPanel: এক সারি",
@@ -366,7 +364,9 @@ I18N_BN_ADD({
 "width": "প্রস্থ",
 "x grows →": "x বাড়ে →",
 "y grows ↓": "y বাড়ে ↓",
-"yes": "হ্যাঁ"
+"yes": "হ্যাঁ",
+"For eight chapters the commando has been a line of text: “Ranger | health 100”. Today he finally gets a body, a helmet and a rifle.": "আট অধ্যায় ধরে কমান্ডো ছিল শুধু এক লাইন লেখা: “Ranger | health 100”। আজ অবশেষে সে পায় একটি শরীর, একটি হেলমেট আর একটি রাইফেল।",
+"With <b>Swing</b>, a <code>JFrame</code> is the window, a <code>JPanel</code> is the canvas and <code>paintComponent(Graphics g)</code> draws everything from rectangles and ovals. Buttons and keys send <b>events</b>.": "<b>Swing</b>-এ একটি <code>JFrame</code> হলো window, একটি <code>JPanel</code> হলো ক্যানভাস, আর <code>paintComponent(Graphics g)</code> আয়তক্ষেত্র আর ডিম্বাকৃতি দিয়ে সবকিছু আঁকে। button আর কী <b>event</b> পাঠায়।"
 });
 /* Bengali patterns for text with changing numbers or file names on the v2 decks (appended to each deck's file) */
 I18N_BN_PATTERNS([

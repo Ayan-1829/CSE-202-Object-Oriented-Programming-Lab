@@ -28,7 +28,6 @@ I18N_BN_ADD({
 "A Vehicle[] can hold any kind of Vehicle. Look at the <b>real</b> class written on each object.": "একটি Vehicle[] যেকোনো ধরনের Vehicle রাখতে পারে। প্রতিটি object-এ লেখা <b>আসল</b> class দেখুন।",
 "A Vehicle[] may hold a Car: a Car <b>is a</b> Vehicle (upcasting).": "একটি Vehicle[] একটি Car রাখতে পারে: Car একটি Vehicle <b>(is a)</b> (upcasting)।",
 "A class can do both.": "একটি class দুটোই করতে পারে।",
-"A drone dives, a tank fires a shell, a sniper aims and shoots. Do we need a separate loop for each kind of enemy?": "ড্রোন ঝাঁপ দেয়, ট্যাংক গোলা ছোড়ে, স্নাইপার নিশানা করে গুলি করে। প্রতিটি ধরনের শত্রুর জন্য কি আলাদা loop লাগবে?",
 "A field <code>phase</code> (1 or 2)": "একটি field <code>phase</code> (1 বা 2)",
 "A field only tanks have: armor.": "শুধু ট্যাংকের একটি field: armor।",
 "A hit of 12.75 damage is a double": "12.75 damage-এর একটি আঘাত হলো double",
@@ -160,7 +159,6 @@ I18N_BN_ADD({
 "No deadlock: both finished": "Deadlock নেই: দুজনেই শেষ করেছে",
 "No new fields at all: only a different attack.": "কোনো নতুন field নেই: শুধু আলাদা একটি আক্রমণ।",
 "No objects yet: press Next to run main()": "এখনো কোনো object নেই: main() চালাতে Next চাপুন",
-"No. They all <b>extend</b> <code>Enemy</code>, so one <code>Enemy[]</code> holds them all, and one call, <code>e.attack(ranger)</code>, makes each one attack <b>in its own way</b>.": "না। তারা সবাই <code>Enemy</code>-কে <b>extend</b> করে, তাই একটি <code>Enemy[]</code> সবাইকে রাখে, আর একটি call, <code>e.attack(ranger)</code>, প্রত্যেককে <b>নিজের মতো করে</b> আক্রমণ করায়।",
 "Nobody caught the exception, so the program stopped. Press Reset.": "কেউ exception ধরেনি, তাই প্রোগ্রাম থেমে গেছে। Reset চাপুন।",
 "Now a cast <b>without</b> a check…": "এবার check <b>ছাড়া</b> একটি cast…",
 "Official in-lab tasks": "অফিশিয়াল ইন-ল্যাব টাস্ক",
@@ -350,7 +348,9 @@ I18N_BN_ADD({
 "yes": "হ্যাঁ",
 "≥2 objects of each concrete class in an <code>Animal[]</code>": "একটি <code>Animal[]</code>-এ প্রতিটি concrete class-এর ≥2টি object",
 "≥2 objects of each subclass in an <code>Employee[]</code>": "একটি <code>Employee[]</code>-এ প্রতিটি subclass-এর ≥2টি object",
-"▶ Run program": "▶ প্রোগ্রাম চালান"
+"▶ Run program": "▶ প্রোগ্রাম চালান",
+"The commander shouts one order: “Attack!” The drone dives, the tank fires a shell, the sniper takes aim. Nobody asked which kind of enemy they were.": "কমান্ডার একটি আদেশ দেন: “আক্রমণ!” drone ঝাঁপ দেয়, tank shell ছোড়ে, sniper নিশানা করে। কেউ জিজ্ঞেস করেনি তারা কোন ধরনের শত্রু।",
+"They all <b>extend</b> <code>Enemy</code>, so one <code>Enemy[]</code> holds them all, and one call, <code>e.attack(ranger)</code>, makes each one attack <b>in its own way</b>. That is polymorphism.": "তারা সবাই <code>Enemy</code>-কে <b>extend</b> করে, তাই একটি <code>Enemy[]</code> সবাইকে ধরে, আর একটি call, <code>e.attack(ranger)</code>, প্রত্যেককে <b>নিজের মতো করে</b> আক্রমণ করায়। এটাই polymorphism।"
 });
 /* Bengali patterns for text with changing numbers or file names on the v2 decks (appended to each deck's file) */
 I18N_BN_PATTERNS([

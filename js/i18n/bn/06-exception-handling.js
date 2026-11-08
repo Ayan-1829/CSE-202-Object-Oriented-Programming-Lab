@@ -145,7 +145,6 @@ I18N_BN_ADD({
 "No deadlock: both finished": "Deadlock নেই: দুজনেই শেষ করেছে",
 "No exception, so the catch block is skipped.": "কোনো exception নেই, তাই catch block বাদ পড়ে।",
 "No objects yet: press Next to run main()": "এখনো কোনো object নেই: main() চালাতে Next চাপুন",
-"No. <code>fire()</code> <b>throws</b> an <code>OutOfAmmoException</code>, and the game <b>catches</b> it, reloads and carries on. A <code>finally</code> block makes sure the score is always saved.": "না। <code>fire()</code> একটি <code>OutOfAmmoException</code> <b>throw</b> করে, আর গেম সেটি <b>catch</b> করে, reload করে এবং চালিয়ে যায়। একটি <code>finally</code> block নিশ্চিত করে যে স্কোর সবসময় সেভ হয়।",
 "Nobody caught the exception, so the program stopped. Press Reset.": "কেউ exception ধরেনি, তাই প্রোগ্রাম থেমে গেছে। Reset চাপুন।",
 "Not a RuntimeException, so checked.": "RuntimeException নয়, তাই checked।",
 "NumberFormatException is caught and replaced by a game exception.": "NumberFormatException catch হয়ে একটি গেম exception দিয়ে বদলে যায়।",
@@ -211,7 +210,6 @@ I18N_BN_ADD({
 "The official lab program": "অফিশিয়াল ল্যাব প্রোগ্রাম",
 "The official program": "অফিশিয়াল প্রোগ্রাম",
 "The original NumberFormatException that LevelLoader wrapped inside the InvalidLevelException.": "মূল NumberFormatException, যা LevelLoader InvalidLevelException-এর ভেতরে মুড়ে রেখেছিল।",
-"The player presses Fire with an empty clip. Should the whole game crash?": "খালি ক্লিপ নিয়ে প্লেয়ার Fire চাপে। পুরো গেম কি crash করা উচিত?",
 "The text is not a number.": "লেখাটি সংখ্যা নয়।",
 "The topics: the idea, then the game": "বিষয়গুলো: আগে ধারণা, তারপর গেম",
 "There is no lane 5, so Java throws.": "lane 5 নেই, তাই Java throw করে।",
@@ -334,7 +332,9 @@ I18N_BN_ADD({
 "y grows ↓": "y বাড়ে ↓",
 "yes": "হ্যাঁ",
 "≥3 products with different stock; one successful and one failing order": "ভিন্ন stock-সহ ≥3টি product; একটি সফল ও একটি ব্যর্থ অর্ডার",
-"▶ Run program": "▶ প্রোগ্রাম চালান"
+"▶ Run program": "▶ প্রোগ্রাম চালান",
+"The player pulls the trigger on an empty gun. In a bad game, the whole screen freezes. In a good one, you hear “click” and the commando reloads.": "প্লেয়ার খালি বন্দুকের ট্রিগার টানে। খারাপ গেমে পুরো স্ক্রিন জমে যায়। ভালো গেমে শোনা যায় “ক্লিক”, আর কমান্ডো reload করে।",
+"<code>fire()</code> <b>throws</b> an <code>OutOfAmmoException</code>, the game <b>catches</b> it, reloads and carries on, and a <code>finally</code> block makes sure the score is saved no matter what.": "<code>fire()</code> একটি <code>OutOfAmmoException</code> <b>throw</b> করে, গেম সেটি <b>catch</b> করে, reload করে আর চালিয়ে যায়, আর একটি <code>finally</code> block যা-ই ঘটুক স্কোর সেভ নিশ্চিত করে।"
 });
 /* Bengali patterns for text with changing numbers or file names on the v2 decks (appended to each deck's file) */
 I18N_BN_PATTERNS([
