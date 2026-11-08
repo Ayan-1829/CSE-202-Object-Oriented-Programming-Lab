@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="A gun runs out of ammo, a player types a level that does not exist, a lane number is out of range. Exceptions let the game notice the problem, deal with it and keep running.">
+<meta name="description" content="When the gun runs dry or a level is missing, exceptions let the game recover and keep running.">
 <meta name="keywords" content="java exception handling, try catch finally, throw, throws, checked exception, custom exception, exception chaining, lab, java game, game programming, cse 202, object oriented programming lab">
 <meta name="author" content="Object Oriented Programming Lab Notes">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -17,7 +17,7 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
 <meta property="og:title" content="Chapter 6: Exception Handling &amp; Custom Exceptions | OOP Lab (CSE 202)">
-<meta property="og:description" content="A gun runs out of ammo, a player types a level that does not exist, a lane number is out of range. Exceptions let the game notice the problem, deal with it and keep running.">
+<meta property="og:description" content="When the gun runs dry or a level is missing, exceptions let the game recover and keep running.">
 <meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/06-exception-handling.html">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/06-exception-handling.png?v=2">
@@ -27,10 +27,10 @@
 <meta property="og:image:alt" content="Chapter 6 of 10: Exception Handling &amp; Custom Exceptions – CSE 202 Object Oriented Programming Lab">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Chapter 6: Exception Handling &amp; Custom Exceptions | OOP Lab (CSE 202)">
-<meta name="twitter:description" content="A gun runs out of ammo, a player types a level that does not exist, a lane number is out of range. Exceptions let the game notice the problem, deal with it and keep running.">
+<meta name="twitter:description" content="When the gun runs dry or a level is missing, exceptions let the game recover and keep running.">
 <meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/06-exception-handling.png?v=2">
 <meta name="twitter:image:alt" content="Chapter 6 of 10: Exception Handling &amp; Custom Exceptions – CSE 202 Object Oriented Programming Lab">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Exception Handling & Custom Exceptions", "description": "A gun runs out of ammo, a player types a level that does not exist, a lane number is out of range. Exceptions let the game notice the problem, deal with it and keep running.", "position": 6, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 43, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/06-exception-handling.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/06-exception-handling.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Exception Handling & Custom Exceptions", "description": "When the gun runs dry or a level is missing, exceptions let the game recover and keep running.", "position": 6, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 43, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/06-exception-handling.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/06-exception-handling.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
 <title>Chapter 6: Exception Handling &amp; Custom Exceptions | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,16 +58,15 @@
 <p class="kicker">Chapter 6 · Lab VI · CSE 202</p>
 <h1>Exception Handling & Custom Exceptions</h1>
 <p class="g-mission">Mission 6 · When things go wrong</p>
-<p class="lead">A gun runs out of ammo, a player types a level that does not exist, a lane number is out of range. Exceptions let the game notice the problem, deal with it and keep running.</p>
+<p class="lead">When the gun runs dry or a level is missing, exceptions let the game recover and keep running.</p>
 <div class="row"><a class="btn pri" href="#s=2">Start the mission</a><a class="btn" href="../index.html">All chapters</a></div>
-<p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
 </div></section>
 <section class="slide " data-title="Your mission" aria-label="Your mission" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Mission 6 · When things go wrong</p><h2>Your mission</h2><div class="hook"><p class="q">The player presses Fire with an empty clip. Should the whole game crash?</p><p>No. <code>fire()</code> <b>throws</b> an <code>OutOfAmmoException</code>, and the game <b>catches</b> it, reloads and carries on. A <code>finally</code> block makes sure the score is always saved.</p></div>
 </div></section>
 <section class="slide " data-title="Chapter at a glance" aria-label="Chapter at a glance" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Chapter 6 of 10</p><h2>Chapter at a glance</h2><div class="cols wl"><div><h3>After this chapter you can</h3><ul class=""><li>Explain what an exception is and how it travels up the call stack</li><li>Read the exception hierarchy: Throwable, Exception, RuntimeException</li><li>Tell checked from unchecked exceptions</li><li>Use try, catch, finally, throw and throws</li><li>Write custom exceptions for the game, and wrap a lower-level cause</li></ul></div>
-<div><h3>Before you start</h3><ul class=""><li>Chapters 2–5: classes and inheritance (custom exceptions are classes)</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Topics: the idea, then the game</li><li>Run the game program</li><li>Game practice tasks</li><li>Official lab and graded tasks</li><li>Report exercises at home</li></ol></div></div>
+<div><h3>Before you start</h3><ul class=""><li>Chapters 2–5: classes and inheritance (custom exceptions are classes)</li></ul></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Chapter 6 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=23">Run the game</a></li><li><a href="#s=24">Game practice tasks</a></li><li><a href="#s=27">The official lab program</a></li><li><a href="#s=33">Official in-lab tasks</a></li><li><a href="#s=37">Lab report exercises</a></li><li><a href="#s=40">Viva questions and quiz</a></li></ol>
@@ -83,10 +82,10 @@ try {
     System.out.println(&quot;Lane 5 is at y=&quot; + laneY[5]);
 } catch (ArrayIndexOutOfBoundsException e) {
     System.out.println(&quot;Caught &quot; + e.getClass().getSimpleName() + &quot;: &quot; + e.getMessage());
-}</pre></div><ul class="pts"><li>An <b>exception</b> is a problem that happens while the program runs.</li><li>Java creates an exception object and stops the normal flow.</li><li>If nobody catches it, the program crashes with a message.</li><li>There is no lane 5, so Java throws.</li><li>The catch prints the class name and message.</li></ul></div>
+}</pre></div><ul class="pts"><li>An <b>exception</b> is a problem that happens while the program runs.</li><li>Java creates an exception object and stops the normal flow.</li><li>If nobody catches it, the program crashes with a message.</li><li>There is no lane 5, so Java throws.</li></ul></div>
 </div></section>
 <section class="slide " data-title="What is an exception?" aria-label="What is an exception?" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 1 of 5 · in the game</p><h2>What is an exception?</h2><div data-demo="g-exception"></div><ul class="pts pts-row"><li>An <b>exception</b> is an object that reports a problem while the program runs.</li><li><code>throw</code> starts it; it leaves each method until a matching <code>catch</code> handles it.</li><li>If nobody catches it, the program stops with a stack trace.</li></ul>
+<p class="kicker">Topic 1 of 5 · in the game</p><h2>What is an exception?</h2><div data-demo="g-exception"></div>
 </div></section>
 <section class="slide " data-title="The exception hierarchy" aria-label="The exception hierarchy" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 2 of 5</p><h2>The exception hierarchy</h2><div class="g-codeside g-topic"><div><div class="kicker g-wk"><div class="walk-file">GameException.java</div><div>·</div><div>GameException: the parent</div></div><pre class="code small-code">// The parent of every game problem: checked, so callers must handle it
@@ -98,10 +97,10 @@ public class GameException extends Exception {
     public GameException(String message, Throwable cause) {
         super(message, cause);
     }
-}</pre></div><ul class="pts"><li>Everything that can be thrown extends <code>Throwable</code>.</li><li><code>Error</code>: serious JVM problems. <code>Exception</code>: problems a program can handle.</li><li>A <code>catch</code> for a parent type also catches all its children.</li><li>Extends Exception, so it is checked.</li><li>The second constructor keeps a cause.</li></ul></div>
+}</pre></div><ul class="pts"><li>Everything that can be thrown extends <code>Throwable</code>.</li><li><code>Error</code>: serious JVM problems. <code>Exception</code>: problems a program can handle.</li><li>A <code>catch</code> for a parent type also catches all its children.</li><li>Extends Exception, so it is checked.</li></ul></div>
 </div></section>
 <section class="slide " data-title="The exception hierarchy" aria-label="The exception hierarchy" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 2 of 5 · in the game</p><h2>The exception hierarchy</h2><div data-demo="g-extree"></div><ul class="pts pts-row"><li>Everything that can be thrown extends <code>Throwable</code>.</li><li><code>Exception</code>: problems a program can handle. <code>Error</code>: serious JVM problems.</li><li>Our <code>GameException</code> extends Exception, so all game problems share one parent.</li></ul>
+<p class="kicker">Topic 2 of 5 · in the game</p><h2>The exception hierarchy</h2><div data-demo="g-extree"></div>
 </div></section>
 <section class="slide " data-title="Catching the parent type and finally" aria-label="Catching the parent type and finally" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 2 of 5 · our game program · 1 of 1 · <span class="walk-file">ExceptionDemo.java</span></p><h2>Catching the parent type and finally</h2><pre class="code walk-code wide">System.out.println(&quot;\n=== Catching by the parent type ===&quot;);
@@ -116,7 +115,7 @@ System.out.println(&quot;\n=== finally always runs ===&quot;);
 System.out.println(saveScore());</pre><ul class="walk-notes"><li>A GameException handler also catches every subclass.</li></ul>
 </div></section>
 <section class="slide " data-title="Checked and unchecked exceptions" aria-label="Checked and unchecked exceptions" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 3 of 5</p><h2>Checked and unchecked exceptions</h2><div class="g-ingame"><div>In the game:</div><div>Checked and unchecked</div></div><div class="scrollx"><table class="doc"><thead><tr><th></th><th>Checked</th><th>Unchecked</th></tr></thead><tbody><tr><td>Extends</td><td>Exception (not RuntimeException)</td><td>RuntimeException</td></tr><tr><td>The compiler</td><td>forces you to catch or declare it</td><td>does not check</td></tr><tr><td>Usually means</td><td>something outside your control</td><td>a bug in the code</td></tr><tr><td>In the game</td><td><code>OutOfAmmoException</code>, <code>InvalidLevelException</code></td><td><code>ArrayIndexOutOfBoundsException</code>, <code>IllegalArgumentException</code></td></tr></tbody></table></div><ul class="pts"><li><b>Checked</b> (e.g. <code>IOException</code>, <code>InterruptedException</code>): the compiler forces you to catch or declare them.</li><li><b>Unchecked</b> (<code>RuntimeException</code> and its children): usually bugs; catching is optional.</li><li>In the game: <code>OutOfAmmoException</code> is checked; a bad reload amount is unchecked.</li><li>Running out of ammo is a normal game situation: make it checked.</li><li>Reloading with -5 bullets is a programming mistake: unchecked is fine.</li></ul>
+<p class="kicker">Topic 3 of 5</p><h2>Checked and unchecked exceptions</h2><div class="g-ingame"><div>In the game:</div><div>Checked and unchecked</div></div><div class="scrollx"><table class="doc"><thead><tr><th></th><th>Checked</th><th>Unchecked</th></tr></thead><tbody><tr><td>Extends</td><td>Exception (not RuntimeException)</td><td>RuntimeException</td></tr><tr><td>The compiler</td><td>forces you to catch or declare it</td><td>does not check</td></tr><tr><td>Usually means</td><td>something outside your control</td><td>a bug in the code</td></tr><tr><td>In the game</td><td><code>OutOfAmmoException</code>, <code>InvalidLevelException</code></td><td><code>ArrayIndexOutOfBoundsException</code>, <code>IllegalArgumentException</code></td></tr></tbody></table></div><ul class="pts"><li><b>Checked</b> (e.g. <code>IOException</code>, <code>InterruptedException</code>): the compiler forces you to catch or declare them.</li><li><b>Unchecked</b> (<code>RuntimeException</code> and its children): usually bugs; catching is optional.</li><li>In the game: <code>OutOfAmmoException</code> is checked; a bad reload amount is unchecked.</li><li>Running out of ammo is a normal game situation: make it checked.</li></ul>
 </div></section>
 <section class="slide " data-title="Gun: an unchecked exception" aria-label="Gun: an unchecked exception" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 3 of 5 · our game program · 1 of 2 · <span class="walk-file">Gun.java</span></p><h2>Gun: an unchecked exception</h2><pre class="code walk-code wide">// An unchecked exception for a programming mistake
@@ -164,7 +163,7 @@ try {
     pistol.reload(6);                             // handle it
 } finally {
     System.out.println(&quot;(shot logged)&quot;);          // runs every time
-}</pre><ul class="pts"><li><code>try</code> holds risky code; <code>catch</code> handles one kind of exception.</li><li><code>finally</code> always runs, error or not.</li><li><code>throw</code> raises an exception; <code>throws</code> in a method heading warns callers.</li><li><code>throws</code> in the header, <code>throw</code> in the body.</li><li>catch runs only when that type (or a subtype) was thrown.</li><li>finally runs whether or not something was thrown, even after return.</li></ul></div>
+}</pre><ul class="pts"><li><code>try</code> holds risky code; <code>catch</code> handles one kind of exception.</li><li><code>finally</code> always runs, error or not.</li><li><code>throw</code> raises an exception; <code>throws</code> in a method heading warns callers.</li><li><code>throws</code> in the header, <code>throw</code> in the body.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Gun: throw and throws" aria-label="Gun: throw and throws" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 4 of 5 · our game program · 1 of 3 · <span class="walk-file">Gun.java</span></p><h2>Gun: throw and throws</h2><div class="walk-side g-walk"><pre class="code walk-code">public class Gun {
@@ -222,8 +221,8 @@ static String saveScore() {
     }
 }</pre></div><ul class="pts"><li>Make your own exception by extending <code>Exception</code> (checked) or <code>RuntimeException</code>.</li><li>Pass the message to <code>super(message)</code>.</li><li>A cause can be wrapped: <code>super(message, cause)</code>.</li><li>Two constructors: with and without a cause.</li></ul></div>
 </div></section>
-<section class="slide " data-title="Custom exceptions and wrapping" aria-label="Custom exceptions and wrapping" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
-<p class="kicker">Topic 5 of 5 · in the game</p><h2>Custom exceptions and wrapping</h2><div data-demo="g-level"></div><ul class="pts pts-row"><li>A custom exception is a class: <code>class OutOfAmmoException extends GameException</code>.</li><li>Its message speaks the game’s language: “Pistol is out of ammo”.</li><li>Wrapping keeps the original problem as the <b>cause</b>: <code>new InvalidLevelException(msg, e)</code>.</li></ul>
+<section class="slide " data-title="Custom exceptions and wrapping" aria-label="Custom exceptions and wrapping" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 5 of 5 · in the game</p><h2>Custom exceptions and wrapping</h2><div data-demo="g-level"></div>
 </div></section>
 <section class="slide " data-title="OutOfAmmoException" aria-label="OutOfAmmoException" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 5 of 5 · our game program · 1 of 2 · <span class="walk-file">OutOfAmmoException.java</span></p><h2>OutOfAmmoException</h2><div class="walk-side g-walk"><pre class="code walk-code">public class OutOfAmmoException extends GameException {

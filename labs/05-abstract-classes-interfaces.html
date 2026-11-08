@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Everything on screen is a GameObject that must update() itself and say how it looks, yet nobody can create a plain GameObject. Interfaces add abilities across the tree: Damageable, Shooter and Collectible.">
+<meta name="description" content="An abstract GameObject for everything on screen, and interfaces for abilities like Damageable.">
 <meta name="keywords" content="java abstract class, abstract method, interface, implements, multiple interfaces, polymorphism, instanceof, lab, java game, game programming, cse 202, object oriented programming lab">
 <meta name="author" content="Object Oriented Programming Lab Notes">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -17,7 +17,7 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
 <meta property="og:title" content="Chapter 5: Abstract Classes &amp; Interfaces | OOP Lab (CSE 202)">
-<meta property="og:description" content="Everything on screen is a GameObject that must update() itself and say how it looks, yet nobody can create a plain GameObject. Interfaces add abilities across the tree: Damageable, Shooter and Collectible.">
+<meta property="og:description" content="An abstract GameObject for everything on screen, and interfaces for abilities like Damageable.">
 <meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/05-abstract-classes-interfaces.html">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/05-abstract-classes-interfaces.png?v=2">
@@ -27,10 +27,10 @@
 <meta property="og:image:alt" content="Chapter 5 of 10: Abstract Classes &amp; Interfaces – CSE 202 Object Oriented Programming Lab">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Chapter 5: Abstract Classes &amp; Interfaces | OOP Lab (CSE 202)">
-<meta name="twitter:description" content="Everything on screen is a GameObject that must update() itself and say how it looks, yet nobody can create a plain GameObject. Interfaces add abilities across the tree: Damageable, Shooter and Collectible.">
+<meta name="twitter:description" content="An abstract GameObject for everything on screen, and interfaces for abilities like Damageable.">
 <meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/05-abstract-classes-interfaces.png?v=2">
 <meta name="twitter:image:alt" content="Chapter 5 of 10: Abstract Classes &amp; Interfaces – CSE 202 Object Oriented Programming Lab">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Abstract Classes & Interfaces", "description": "Everything on screen is a GameObject that must update() itself and say how it looks, yet nobody can create a plain GameObject. Interfaces add abilities across the tree: Damageable, Shooter and Collectible.", "position": 5, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 47, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/05-abstract-classes-interfaces.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/05-abstract-classes-interfaces.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Abstract Classes & Interfaces", "description": "An abstract GameObject for everything on screen, and interfaces for abilities like Damageable.", "position": 5, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 47, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/05-abstract-classes-interfaces.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/05-abstract-classes-interfaces.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
 <title>Chapter 5: Abstract Classes &amp; Interfaces | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,16 +58,15 @@
 <p class="kicker">Chapter 5 · Lab V · CSE 202</p>
 <h1>Abstract Classes & Interfaces</h1>
 <p class="g-mission">Mission 5 · Rules every object follows</p>
-<p class="lead">Everything on screen is a GameObject that must update() itself and say how it looks, yet nobody can create a plain GameObject. Interfaces add abilities across the tree: Damageable, Shooter and Collectible.</p>
+<p class="lead">An abstract GameObject for everything on screen, and interfaces for abilities like Damageable.</p>
 <div class="row"><a class="btn pri" href="#s=2">Start the mission</a><a class="btn" href="../index.html">All chapters</a></div>
-<p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
 </div></section>
 <section class="slide " data-title="Your mission" aria-label="Your mission" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Mission 5 · Rules every object follows</p><h2>Your mission</h2><div class="hook"><p class="q">Bullets, drones, health packs and the player all move and get drawn. But what would a plain “game object” look like?</p><p>Nothing: it is only an idea. Make <code>GameObject</code> <b>abstract</b> so every real object must fill in <code>update()</code> and <code>symbol()</code>. Use <b>interfaces</b> for abilities that cut across the tree, such as being Damageable.</p></div>
 </div></section>
 <section class="slide " data-title="Chapter at a glance" aria-label="Chapter at a glance" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Chapter 5 of 10</p><h2>Chapter at a glance</h2><div class="cols wl"><div><h3>After this chapter you can</h3><ul class=""><li>Declare an abstract class with abstract and concrete methods</li><li>Explain why an abstract class cannot be instantiated</li><li>Define interfaces with constants and default methods</li><li>Implement several interfaces in one class</li><li>Choose between an abstract class and an interface</li><li>Use both as reference types for polymorphism</li></ul></div>
-<div><h3>Before you start</h3><ul class=""><li>Chapter 4: inheritance and overriding</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Topics: the idea, then the game</li><li>Run the game program</li><li>Game practice tasks</li><li>Official lab and graded tasks</li><li>Report exercises at home</li></ol></div></div>
+<div><h3>Before you start</h3><ul class=""><li>Chapter 4: inheritance and overriding</li></ul></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Chapter 5 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=28">Run the game</a></li><li><a href="#s=29">Game practice tasks</a></li><li><a href="#s=32">The official lab program</a></li><li><a href="#s=37">Official in-lab tasks</a></li><li><a href="#s=41">Lab report exercises</a></li><li><a href="#s=44">Viva questions and quiz</a></li></ol>
@@ -80,7 +79,7 @@
 <p class="kicker">Topic 1 of 5</p><h2>Abstract classes</h2><div class="g-ingame"><div>In the game:</div><div>An abstract GameObject</div></div><ul class="pts big-list"><li>An <code>abstract</code> class is an idea, not a finished thing: you cannot <code>new</code> it.</li><li>It can hold fields, constructors and normal methods for its subclasses.</li><li>In the game there is no plain “GameObject”, only players, drones, bullets, …</li></ul>
 </div></section>
 <section class="slide " data-title="An abstract GameObject" aria-label="An abstract GameObject" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 1 of 5 · in the game</p><h2>An abstract GameObject</h2><div data-demo="g-abstract"></div><ul class="pts pts-row"><li>An <b>abstract class</b> is a base that is never created on its own.</li><li>An <b>abstract method</b> has no body: every concrete subclass must write one.</li><li>It can still have fields and normal methods, such as <code>position()</code>.</li></ul>
+<p class="kicker">Topic 1 of 5 · in the game</p><h2>An abstract GameObject</h2><div data-demo="g-abstract"></div>
 </div></section>
 <section class="slide " data-title="GameObject: abstract and concrete methods" aria-label="GameObject: abstract and concrete methods" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 1 of 5 · our game program · 1 of 1 · <span class="walk-file">GameObject.java</span></p><h2>GameObject: abstract and concrete methods</h2><div class="walk-side g-walk"><pre class="code walk-code">public abstract class GameObject {
@@ -121,7 +120,7 @@
 public class Bullet extends GameObject {
     @Override public void update() { x += 3 * direction; }
     @Override public char symbol() { return direction &gt; 0 ? &#x27;&gt;&#x27; : &#x27;&lt;&#x27;; }
-}</pre><ul class="pts"><li>An <b>abstract method</b> has no body, only a heading ending in <code>;</code>.</li><li>Every concrete subclass <b>must</b> override it, or be abstract itself.</li><li>The parent can still call it: each subclass fills it in its own way.</li><li>An abstract method ends with <code>;</code> instead of a body.</li><li>Bullet must override both, or be abstract itself.</li><li><code>new GameObject(…)</code> does not compile.</li></ul></div>
+}</pre><ul class="pts"><li>An <b>abstract method</b> has no body, only a heading ending in <code>;</code>.</li><li>Every concrete subclass <b>must</b> override it, or be abstract itself.</li><li>The parent can still call it: each subclass fills it in its own way.</li><li>An abstract method ends with <code>;</code> instead of a body.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Bullet" aria-label="Bullet" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 2 of 5 · our game program · 1 of 5 · <span class="walk-file">Bullet.java</span></p><h2>Bullet</h2><div class="walk-side g-walk"><pre class="code walk-code">public class Bullet extends GameObject {
@@ -216,7 +215,7 @@ for (int tick = 1; tick &lt;= 3; tick++) {
 }</pre></div><ul class="pts"><li>An <code>interface</code> is a list of abilities: methods a class promises to have.</li><li>A class <code>implements</code> it and must write those methods.</li><li>One class can implement many interfaces.</li><li>Two promises: take damage, say whether it is destroyed.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Interfaces: abilities" aria-label="Interfaces: abilities" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 3 of 5 · in the game</p><h2>Interfaces: abilities</h2><div data-demo="g-badges"></div><ul class="pts pts-row"><li>An <b>interface</b> lists methods a class promises to provide.</li><li>A class can implement many: <code>Player extends GameObject implements Damageable, Shooter</code>.</li><li>Interfaces cut across the tree: the player and the drone are both Damageable.</li></ul>
+<p class="kicker">Topic 3 of 5 · in the game</p><h2>Interfaces: abilities</h2><div data-demo="g-badges"></div>
 </div></section>
 <section class="slide " data-title="Shooter" aria-label="Shooter" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 3 of 5 · our game program · 1 of 5 · <span class="walk-file">Shooter.java</span></p><h2>Shooter</h2><pre class="code walk-code wide">public interface Shooter {
@@ -311,7 +310,7 @@ public interface Collectible {
     default String pickupMessage() {   // has a body
         return &quot;picked up&quot;;
     }
-}</pre><ul class="pts"><li>Methods are <code>public abstract</code> unless marked otherwise.</li><li>Fields are <code>public static final</code>: constants.</li><li>A <code>default</code> method has a body that implementing classes get for free.</li><li>Interface fields are constants: <code>Shooter.RANGE</code>.</li><li>A <code>default</code> method has a body; implementers may keep it or override it.</li><li>Interfaces have no constructors and no instance fields.</li></ul></div>
+}</pre><ul class="pts"><li>Methods are <code>public abstract</code> unless marked otherwise.</li><li>Fields are <code>public static final</code>: constants.</li><li>A <code>default</code> method has a body that implementing classes get for free.</li><li>Interface fields are constants: <code>Shooter.RANGE</code>.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Collectible and a default method" aria-label="Collectible and a default method" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 4 of 5 · our game program · 1 of 1 · <span class="walk-file">Collectible.java</span></p><h2>Collectible and a default method</h2><pre class="code walk-code">public interface Collectible {
@@ -324,7 +323,7 @@ public interface Collectible {
 }</pre><ul class="walk-notes"><li>HealthPack keeps collectBy() abstract but overrides the default message.</li></ul>
 </div></section>
 <section class="slide " data-title="Abstract class or interface?" aria-label="Abstract class or interface?" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 5 of 5</p><h2>Abstract class or interface?</h2><div class="scrollx"><table class="doc"><thead><tr><th></th><th>Abstract class</th><th>Interface</th></tr></thead><tbody><tr><td>A class can…</td><td>extend one</td><td>implement many</td></tr><tr><td>Fields</td><td>any fields</td><td>constants only</td></tr><tr><td>Constructors</td><td>yes</td><td>no</td></tr><tr><td>Methods</td><td>abstract and normal</td><td>abstract, default and static</td></tr><tr><td>In the game</td><td>GameObject: what every object is</td><td>Damageable, Shooter, Collectible: what it can do</td></tr></tbody></table></div><ul class="pts"><li><b>Abstract class</b>: shared code and state for close relatives (“is a”). A class extends only one.</li><li><b>Interface</b>: an ability unrelated classes can share (“can do”). A class implements many.</li><li>Often both: <code>class Drone extends GameObject implements Damageable, Shooter</code>.</li><li>Use an abstract class for a shared base with shared code.</li><li>Use an interface for an ability that unrelated classes can share.</li></ul>
+<p class="kicker">Topic 5 of 5</p><h2>Abstract class or interface?</h2><div class="scrollx"><table class="doc"><thead><tr><th></th><th>Abstract class</th><th>Interface</th></tr></thead><tbody><tr><td>A class can…</td><td>extend one</td><td>implement many</td></tr><tr><td>Fields</td><td>any fields</td><td>constants only</td></tr><tr><td>Constructors</td><td>yes</td><td>no</td></tr><tr><td>Methods</td><td>abstract and normal</td><td>abstract, default and static</td></tr><tr><td>In the game</td><td>GameObject: what every object is</td><td>Damageable, Shooter, Collectible: what it can do</td></tr></tbody></table></div><ul class="pts"><li><b>Abstract class</b>: shared code and state for close relatives (“is a”). A class extends only one.</li><li><b>Interface</b>: an ability unrelated classes can share (“can do”). A class implements many.</li><li>Often both: <code>class Drone extends GameObject implements Damageable, Shooter</code>.</li><li>Use an abstract class for a shared base with shared code.</li></ul>
 </div></section>
 <section class="slide " data-title="World: interfaces as types" aria-label="World: interfaces as types" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 5 of 5 · our game program · 1 of 2 · <span class="walk-file">World.java</span></p><h2>World: interfaces as types</h2><pre class="code walk-code wide">System.out.println(&quot;\n=== Interfaces as types ===&quot;);

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="The finished game. A game-loop thread updates every object about 60 times a second, Rectangle collisions decide what is hit, drones bob, tanks fire shells, and Swing paints each frame. Every chapter so far comes together here.">
+<meta name="description" content="The finished game: a game loop, collisions and smooth animation, built from every chapter.">
 <meta name="keywords" content="java animation, game loop, frame rate, worker thread, double buffering, collision detection, swing, lab, java game, game programming, cse 202, object oriented programming lab">
 <meta name="author" content="Object Oriented Programming Lab Notes">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -17,7 +17,7 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
 <meta property="og:title" content="Chapter 10: Animation with Threads | OOP Lab (CSE 202)">
-<meta property="og:description" content="The finished game. A game-loop thread updates every object about 60 times a second, Rectangle collisions decide what is hit, drones bob, tanks fire shells, and Swing paints each frame. Every chapter so far comes together here.">
+<meta property="og:description" content="The finished game: a game loop, collisions and smooth animation, built from every chapter.">
 <meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/10-animation.html">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/10-animation.png?v=2">
@@ -27,10 +27,10 @@
 <meta property="og:image:alt" content="Chapter 10 of 10: Animation with Threads – CSE 202 Object Oriented Programming Lab">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Chapter 10: Animation with Threads | OOP Lab (CSE 202)">
-<meta name="twitter:description" content="The finished game. A game-loop thread updates every object about 60 times a second, Rectangle collisions decide what is hit, drones bob, tanks fire shells, and Swing paints each frame. Every chapter so far comes together here.">
+<meta name="twitter:description" content="The finished game: a game loop, collisions and smooth animation, built from every chapter.">
 <meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/10-animation.png?v=2">
 <meta name="twitter:image:alt" content="Chapter 10 of 10: Animation with Threads – CSE 202 Object Oriented Programming Lab">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Animation with Threads", "description": "The finished game. A game-loop thread updates every object about 60 times a second, Rectangle collisions decide what is hit, drones bob, tanks fire shells, and Swing paints each frame. Every chapter so far comes together here.", "position": 10, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 55, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/10-animation.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/10-animation.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Animation with Threads", "description": "The finished game: a game loop, collisions and smooth animation, built from every chapter.", "position": 10, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 55, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/10-animation.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/10-animation.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
 <title>Chapter 10: Animation with Threads | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,16 +58,15 @@
 <p class="kicker">Chapter 10 · Lab X · CSE 202</p>
 <h1>Animation with Threads</h1>
 <p class="g-mission">Mission 10 · Bring it to life</p>
-<p class="lead">The finished game. A game-loop thread updates every object about 60 times a second, Rectangle collisions decide what is hit, drones bob, tanks fire shells, and Swing paints each frame. Every chapter so far comes together here.</p>
+<p class="lead">The finished game: a game loop, collisions and smooth animation, built from every chapter.</p>
 <div class="row"><a class="btn pri" href="#s=2">Start the mission</a><a class="btn" href="../index.html">All chapters</a></div>
-<p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
 </div></section>
 <section class="slide " data-title="Your mission" aria-label="Your mission" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Mission 10 · Bring it to life</p><h2>Your mission</h2><div class="hook"><p class="q">The Chapter 9 game only changes when you press a key. How do the drones fly on their own?</p><p>A separate <b>thread</b> runs the <b>game loop</b>: update everything, check collisions, <code>repaint()</code>, sleep 16 ms, and again, about 60 times a second. Each frame is a slightly different picture: that is <b>animation</b>.</p></div>
 </div></section>
 <section class="slide " data-title="Chapter at a glance" aria-label="Chapter at a glance" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Chapter 10 of 10</p><h2>Chapter at a glance</h2><div class="cols wl"><div><h3>After this chapter you can</h3><ul class=""><li>Explain frame-based animation and the game loop</li><li>Run the loop on a worker thread and paint on the Event Dispatch Thread</li><li>Share the game objects safely between the two threads</li><li>Detect collisions with Rectangle.intersects</li><li>Explain double buffering</li><li>Read and extend the complete Code Commando program</li></ul></div>
-<div><h3>Before you start</h3><ul class=""><li>Every earlier chapter: this one uses classes, inheritance, abstract classes, threads, synchronization and Swing</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Topics: the idea, then the game</li><li>Run the game program</li><li>Game practice tasks</li><li>Official lab and graded tasks</li><li>Report exercises at home</li></ol></div></div>
+<div><h3>Before you start</h3><ul class=""><li>Every earlier chapter: this one uses classes, inheritance, abstract classes, threads, synchronization and Swing</li></ul></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Chapter 10 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=35">Run the game</a></li><li><a href="#s=36">Game practice tasks</a></li><li><a href="#s=39">The official lab program</a></li><li><a href="#s=45">Official in-lab tasks</a></li><li><a href="#s=49">Lab report exercises</a></li><li><a href="#s=52">Viva questions and quiz</a></li></ol>
@@ -271,10 +270,10 @@ public void draw(Graphics2D g) {
 
 public void stop() {
     running = false;
-}</pre></div><ul class="pts"><li>A game repeats one cycle many times a second: <b>update</b>, <b>draw</b>, <b>wait</b>.</li><li>Update moves things; draw shows them; the wait (about 16 ms) gives 60 frames per second.</li><li>In the game it runs on its own thread, about 60 times a second.</li><li>start() creates the GameLoop thread.</li><li>stop() just clears a volatile flag; the loop ends by itself.</li></ul></div>
+}</pre></div><ul class="pts"><li>A game repeats one cycle many times a second: <b>update</b>, <b>draw</b>, <b>wait</b>.</li><li>Update moves things; draw shows them; the wait (about 16 ms) gives 60 frames per second.</li><li>In the game it runs on its own thread, about 60 times a second.</li><li>start() creates the GameLoop thread.</li></ul></div>
 </div></section>
 <section class="slide " data-title="The game loop" aria-label="The game loop" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 2 of 6 · in the game</p><h2>The game loop</h2><div data-demo="g-loop"></div><ul class="pts pts-row"><li>One frame: <code>update()</code>, then collisions, then <code>repaint()</code>, then <code>sleep</code> about 16 ms.</li><li>About 60 frames a second looks like smooth motion.</li><li>Each object moves a few pixels per frame: speed is pixels per frame.</li></ul>
+<p class="kicker">Topic 2 of 6 · in the game</p><h2>The game loop</h2><div data-demo="g-loop"></div>
 </div></section>
 <section class="slide " data-title="The game loop" aria-label="The game loop" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 2 of 6 · our game program · 1 of 3 · <span class="walk-file">GamePanel.java</span></p><h2>The game loop</h2><div class="walk-side g-walk"><pre class="code walk-code">// The game loop: update, then repaint, then sleep until the next frame
@@ -350,7 +349,7 @@ protected void paintComponent(Graphics g0) {   // the EDT
     synchronized (lock) {
         // draw every object
     }
-}</pre><ul class="pts"><li>One thread runs the loop; the Swing thread handles keys and painting.</li><li>A flag one thread writes and another reads should be <code>volatile</code>, so the change is seen at once.</li><li>In the game: the key flags and the running flag are volatile.</li><li>The game thread changes the objects; the EDT draws them.</li><li>Both lock the same object, so painting never sees a half-updated list (Chapter 8).</li><li>Key flags are <code>volatile</code>: written by the EDT, read by the game thread.</li></ul></div>
+}</pre><ul class="pts"><li>One thread runs the loop; the Swing thread handles keys and painting.</li><li>A flag one thread writes and another reads should be <code>volatile</code>, so the change is seen at once.</li><li>In the game: the key flags and the running flag are volatile.</li><li>The game thread changes the objects; the EDT draws them.</li></ul></div>
 </div></section>
 <section class="slide " data-title="GamePanel: state shared by two threads" aria-label="GamePanel: state shared by two threads" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
 <p class="kicker">Topic 3 of 6 · our game program · 1 of 3 · <span class="walk-file">GamePanel.java</span></p><h2>GamePanel: state shared by two threads</h2><div class="walk-side g-walk"><pre class="code walk-code wide">public class GamePanel extends JPanel implements Runnable, KeyListener {
@@ -434,7 +433,7 @@ public boolean isActive() { return active; }
 public void destroy()     { active = false; }</pre></div><ul class="pts"><li>Give every object a <b>bounding box</b>: a rectangle around it.</li><li>Two objects touch when their boxes overlap: <code>a.intersects(b)</code>.</li><li><code>java.awt.Rectangle</code> takes x, y, width, height.</li><li><code>collidesWith</code> is the whole collision test.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Collisions" aria-label="Collisions" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 4 of 6 · in the game</p><h2>Collisions</h2><div data-demo="g-collide"></div><ul class="pts pts-row"><li>Every GameObject has a bounding box: <code>getBounds()</code> returns a <code>Rectangle</code>.</li><li>Two objects collide when their boxes overlap: <code>a.getBounds().intersects(b.getBounds())</code>.</li><li>Boxes are a little bigger than the drawing, which keeps the game fair and simple.</li></ul>
+<p class="kicker">Topic 4 of 6 · in the game</p><h2>Collisions</h2><div data-demo="g-collide"></div>
 </div></section>
 <section class="slide " data-title="update(): bullets hit things" aria-label="update(): bullets hit things" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 4 of 6 · our game program · 1 of 2 · <span class="walk-file">GamePanel.java</span></p><h2>update(): bullets hit things</h2><div class="walk-side g-walk"><pre class="code walk-code">// 4. collisions
@@ -480,7 +479,7 @@ for (Bullet b : bullets) {
 }</pre><ul class="walk-notes"><li><code>removeIf</code> drops everything that is no longer active.</li><li>At 0 HP the game is over.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Double buffering" aria-label="Double buffering" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 5 of 6</p><h2>Double buffering</h2><div class="g-ingame"><div>In the game:</div><div>Double buffering and smooth animation</div></div><ul class="pts"><li>Draw the whole frame on a hidden image first, then copy it to the screen in one go.</li><li>The viewer never sees a half-drawn frame, so nothing flickers.</li><li>Swing’s <code>JPanel</code> does this for you, so the game does not flicker.</li><li>Drawing straight onto the screen can flicker: you see half-finished frames.</li><li><b>Double buffering</b> draws the whole frame off-screen first, then shows it in one go.</li><li>Swing’s JPanel is double-buffered by default, so the game does not flicker.</li><li>javax.swing.Timer is another way to run a loop: it calls your code on the EDT itself.</li></ul>
+<p class="kicker">Topic 5 of 6</p><h2>Double buffering</h2><div class="g-ingame"><div>In the game:</div><div>Double buffering and smooth animation</div></div><ul class="pts"><li>Draw the whole frame on a hidden image first, then copy it to the screen in one go.</li><li>The viewer never sees a half-drawn frame, so nothing flickers.</li><li>Swing’s <code>JPanel</code> does this for you, so the game does not flicker.</li><li>Drawing straight onto the screen can flicker: you see half-finished frames.</li></ul>
 </div></section>
 <section class="slide " data-title="Painting" aria-label="Painting" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 5 of 6 · our game program · 1 of 2 · <span class="walk-file">GamePanel.java</span></p><h2>Painting</h2><div class="walk-side g-walk"><pre class="code walk-code wide">@Override
@@ -1100,7 +1099,7 @@ public class CodeCommando {
 <section class="slide " data-title="Trace: the animation thread and the EDT" aria-label="Trace: the animation thread and the EDT" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Official lab · step through the code · 2 of 2</p><h2>Trace: the animation thread and the EDT</h2><p class="muted">The Animator moves the balls, the EDT draws them. The panel’s lock makes sure the EDT never paints a half-moved frame.</p>
 </div></section>
-<section class="slide " data-title="Trace: the animation thread and the EDT (cont.)" aria-label="Trace: the animation thread and the EDT (cont.)" tabindex="-1"><div class="slide-inner">
+<section class="slide " data-title="Trace: the animation thread and the EDT (cont.)" aria-label="Trace: the animation thread and the EDT (cont.)" tabindex="-1"><div style="zoom:0.90;" class="slide-inner">
 <p class="kicker">Official lab · step through the code · 2 of 2</p><h2>Trace: the animation thread and the EDT (cont.)</h2><div data-trace="lab10-worker"></div>
 </div></section>
 <section class="slide " data-title="The official program" aria-label="The official program" tabindex="-1"><div class="slide-inner">

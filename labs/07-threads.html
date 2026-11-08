@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="In a real game the enemy spawner, the ammo regeneration and the countdown timer all run at the same time. Each one is a thread. Create threads two ways, start them, watch their states and wait for them with join().">
+<meta name="description" content="The spawner, ammo refill and timer run at the same time: one thread each.">
 <meta name="keywords" content="java thread, runnable, start vs run, thread states, sleep, join, synchronized, lab, java game, game programming, cse 202, object oriented programming lab">
 <meta name="author" content="Object Oriented Programming Lab Notes">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -17,7 +17,7 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
 <meta property="og:title" content="Chapter 7: Thread Creation &amp; Thread States | OOP Lab (CSE 202)">
-<meta property="og:description" content="In a real game the enemy spawner, the ammo regeneration and the countdown timer all run at the same time. Each one is a thread. Create threads two ways, start them, watch their states and wait for them with join().">
+<meta property="og:description" content="The spawner, ammo refill and timer run at the same time: one thread each.">
 <meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/07-threads.html">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/07-threads.png?v=2">
@@ -27,10 +27,10 @@
 <meta property="og:image:alt" content="Chapter 7 of 10: Thread Creation &amp; Thread States – CSE 202 Object Oriented Programming Lab">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Chapter 7: Thread Creation &amp; Thread States | OOP Lab (CSE 202)">
-<meta name="twitter:description" content="In a real game the enemy spawner, the ammo regeneration and the countdown timer all run at the same time. Each one is a thread. Create threads two ways, start them, watch their states and wait for them with join().">
+<meta name="twitter:description" content="The spawner, ammo refill and timer run at the same time: one thread each.">
 <meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/07-threads.png?v=2">
 <meta name="twitter:image:alt" content="Chapter 7 of 10: Thread Creation &amp; Thread States – CSE 202 Object Oriented Programming Lab">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Thread Creation & Thread States", "description": "In a real game the enemy spawner, the ammo regeneration and the countdown timer all run at the same time. Each one is a thread. Create threads two ways, start them, watch their states and wait for them with join().", "position": 7, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 41, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/07-threads.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/07-threads.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Thread Creation & Thread States", "description": "The spawner, ammo refill and timer run at the same time: one thread each.", "position": 7, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 41, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/07-threads.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/07-threads.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
 <title>Chapter 7: Thread Creation &amp; Thread States | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,16 +58,15 @@
 <p class="kicker">Chapter 7 · Lab VII · CSE 202</p>
 <h1>Thread Creation & Thread States</h1>
 <p class="g-mission">Mission 7 · Everything at once</p>
-<p class="lead">In a real game the enemy spawner, the ammo regeneration and the countdown timer all run at the same time. Each one is a thread. Create threads two ways, start them, watch their states and wait for them with join().</p>
+<p class="lead">The spawner, ammo refill and timer run at the same time: one thread each.</p>
 <div class="row"><a class="btn pri" href="#s=2">Start the mission</a><a class="btn" href="../index.html">All chapters</a></div>
-<p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
 </div></section>
 <section class="slide " data-title="Your mission" aria-label="Your mission" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Mission 7 · Everything at once</p><h2>Your mission</h2><div class="hook"><p class="q">Drones must keep appearing while the timer counts down and the ammo slowly refills. How can one program do three things at once?</p><p>Give each job its own <b>thread</b>. The <code>EnemySpawner</code>, <code>AmmoRegen</code> and <code>Timer</code> threads run side by side, and <code>main</code> waits for them with <code>join()</code>.</p></div>
 </div></section>
 <section class="slide " data-title="Chapter at a glance" aria-label="Chapter at a glance" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Chapter 7 of 10</p><h2>Chapter at a glance</h2><div class="cols wl"><div><h3>After this chapter you can</h3><ul class=""><li>Explain process and thread with the game’s three background jobs</li><li>Create threads by extending Thread, by implementing Runnable and with a lambda</li><li>Explain why start() is needed and run() alone is just a method call</li><li>Name the thread states and see them with getState()</li><li>Use sleep() and join()</li></ul></div>
-<div><h3>Before you start</h3><ul class=""><li>Chapters 2–6: classes, interfaces and exceptions (InterruptedException is checked)</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Topics: the idea, then the game</li><li>Run the game program</li><li>Game practice tasks</li><li>Official lab and graded tasks</li><li>Report exercises at home</li></ol></div></div>
+<div><h3>Before you start</h3><ul class=""><li>Chapters 2–6: classes, interfaces and exceptions (InterruptedException is checked)</li></ul></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Chapter 7 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=22">Run the game</a></li><li><a href="#s=23">Game practice tasks</a></li><li><a href="#s=26">The official lab program</a></li><li><a href="#s=31">Official in-lab tasks</a></li><li><a href="#s=35">Lab report exercises</a></li><li><a href="#s=38">Viva questions and quiz</a></li></ol>
@@ -80,13 +79,13 @@
 <p class="kicker">Topic 1 of 6</p><h2>What is a thread?</h2><div class="g-ingame"><div>In the game:</div><div>Three jobs, three threads</div></div><ul class="pts big-list"><li>A <b>thread</b> is one path of execution: one list of steps being run.</li><li>A program starts with one thread, <code>main</code>.</li><li>More threads let several jobs run at the same time.</li></ul>
 </div></section>
 <section class="slide " data-title="Three jobs, three threads" aria-label="Three jobs, three threads" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 1 of 6 · in the game</p><h2>Three jobs, three threads</h2><div data-demo="g-threads"></div><ul class="pts pts-row"><li>A <b>thread</b> is one path of execution inside the program.</li><li>All threads share the program’s objects, but each has its own call stack.</li><li>The timeline shows when each thread runs and when it sleeps.</li></ul>
+<p class="kicker">Topic 1 of 6 · in the game</p><h2>Three jobs, three threads</h2><div data-demo="g-threads"></div>
 </div></section>
 <section class="slide " data-title="Process and thread" aria-label="Process and thread" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 2 of 6</p><h2>Process and thread</h2><ul class="pts big-list"><li>A <b>process</b> is a running program with its own memory (a browser, a music player).</li><li>A process holds one or more <b>threads</b> that share its memory.</li><li>Threads are cheaper to make than processes, but must share carefully.</li></ul>
 </div></section>
 <section class="slide " data-title="Process and thread" aria-label="Process and thread" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 2 of 6 · in the game</p><h2>Process and thread</h2><div data-demo="g-threadmem"></div><ul class="pts pts-row"><li>A process is the running program; threads are workers inside it.</li><li>Threads share the heap (the game objects) but not their stacks.</li><li>Sharing is fast, and also risky: see Chapter 8.</li></ul>
+<p class="kicker">Topic 2 of 6 · in the game</p><h2>Process and thread</h2><div data-demo="g-threadmem"></div>
 </div></section>
 <section class="slide " data-title="Creating a thread" aria-label="Creating a thread" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 3 of 6</p><h2>Creating a thread</h2><div class="g-ingame"><div>In the game:</div><div>Two ways to create a thread</div></div><div class="g-codeside"><pre class="code small-code">// 1. extend Thread
@@ -102,7 +101,7 @@ public class AmmoRegen implements Runnable {
 new Thread(new AmmoRegen(10), &quot;AmmoRegen&quot;).start();
 
 // 3. a lambda is a short Runnable
-new Thread(() -&gt; System.out.println(&quot;[Timer] GO!&quot;), &quot;Timer&quot;).start();</pre><ul class="pts"><li><b>Way 1</b>: extend <code>Thread</code> and override <code>run()</code>.</li><li><b>Way 2</b>: implement <code>Runnable</code> and pass it to <code>new Thread(…)</code>.</li><li>Way 2 leaves your class free to extend something else.</li><li>Extending Thread uses up the one superclass a class can have.</li><li>Implementing Runnable keeps that freedom, so it is usually preferred.</li><li>A lambda suits a small job.</li></ul></div>
+new Thread(() -&gt; System.out.println(&quot;[Timer] GO!&quot;), &quot;Timer&quot;).start();</pre><ul class="pts"><li><b>Way 1</b>: extend <code>Thread</code> and override <code>run()</code>.</li><li><b>Way 2</b>: implement <code>Runnable</code> and pass it to <code>new Thread(…)</code>.</li><li>Way 2 leaves your class free to extend something else.</li><li>Extending Thread uses up the one superclass a class can have.</li></ul></div>
 </div></section>
 <section class="slide " data-title="EnemySpawner: extending Thread" aria-label="EnemySpawner: extending Thread" tabindex="-1"><div style="zoom:0.94;" class="slide-inner">
 <p class="kicker">Topic 3 of 6 · our game program · 1 of 4 · <span class="walk-file">EnemySpawner.java</span></p><h2>EnemySpawner: extending Thread</h2><div class="walk-side g-walk"><pre class="code walk-code">// Way 1: extend Thread and override run()
@@ -184,7 +183,7 @@ System.out.println(&quot;spawner state before start(): &quot; + spawner.getState
 <p class="kicker">Topic 4 of 6</p><h2>start() or run()?</h2><div class="g-codeside"><pre class="code small-code">spawner.start();   // a NEW thread runs run()
 
 direct.run();      // no new thread: main runs it like any method
-                   // prints [main] spawned Drone-1</pre><ul class="pts"><li><code>start()</code> creates a new thread, which then calls <code>run()</code>.</li><li>Calling <code>run()</code> yourself is a normal method call on the same thread.</li><li>A thread can be started only once.</li><li><code>start()</code> asks the JVM for a new thread, which then calls <code>run()</code>.</li><li>Calling <code>run()</code> yourself runs it on the current thread.</li><li>A thread can be started only once.</li></ul></div>
+                   // prints [main] spawned Drone-1</pre><ul class="pts"><li><code>start()</code> creates a new thread, which then calls <code>run()</code>.</li><li>Calling <code>run()</code> yourself is a normal method call on the same thread.</li><li>A thread can be started only once.</li><li><code>start()</code> asks the JVM for a new thread, which then calls <code>run()</code>.</li></ul></div>
 </div></section>
 <section class="slide " data-title="run() is just a method call" aria-label="run() is just a method call" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 4 of 6 · our game program · 1 of 1 · <span class="walk-file">ThreadDemo.java</span></p><h2>run() is just a method call</h2><pre class="code walk-code wide">System.out.println(&quot;\n=== run() is just a method call ===&quot;);
@@ -196,7 +195,7 @@ System.out.println(&quot;direct state: &quot; + direct.getState() + &quot; (it n
 <p class="kicker">Topic 5 of 6</p><h2>Thread states</h2><ul class="pts big-list"><li><code>NEW</code>: created, not started. <code>RUNNABLE</code>: running or ready to run.</li><li><code>TIMED_WAITING</code> / <code>WAITING</code> / <code>BLOCKED</code>: paused for a reason.</li><li><code>TERMINATED</code>: <code>run()</code> has finished.</li></ul>
 </div></section>
 <section class="slide " data-title="Thread states" aria-label="Thread states" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 5 of 6 · in the game</p><h2>Thread states</h2><div data-demo="g-states"></div><ul class="pts pts-row"><li>NEW → RUNNABLE after start().</li><li>TIMED_WAITING during sleep(ms); WAITING during join() with no time limit.</li><li>BLOCKED while waiting for a lock (Chapter 8); TERMINATED when run() ends.</li></ul>
+<p class="kicker">Topic 5 of 6 · in the game</p><h2>Thread states</h2><div data-demo="g-states"></div>
 </div></section>
 <section class="slide " data-title="sleep() and join()" aria-label="sleep() and join()" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 6 of 6</p><h2>sleep() and join()</h2><div class="g-codeside"><pre class="code small-code">Thread.sleep(300);        // pause this thread for 300 ms
@@ -205,7 +204,7 @@ System.out.println(&quot;direct state: &quot; + direct.getState() + &quot; (it n
 spawner.join();           // main waits here until the spawner ends
 regenThread.join();
 timer.join();
-System.out.println(spawner.getState());   // TERMINATED</pre><ul class="pts"><li><code>Thread.sleep(ms)</code> pauses the current thread.</li><li><code>t.join()</code> makes the current thread wait until <code>t</code> finishes.</li><li>Both can throw the checked <code>InterruptedException</code>.</li><li>sleep() gives other threads a turn and slows a job down.</li><li>join() makes one thread wait for another to finish.</li><li>Both can be interrupted, so both throw InterruptedException.</li></ul></div>
+System.out.println(spawner.getState());   // TERMINATED</pre><ul class="pts"><li><code>Thread.sleep(ms)</code> pauses the current thread.</li><li><code>t.join()</code> makes the current thread wait until <code>t</code> finishes.</li><li>Both can throw the checked <code>InterruptedException</code>.</li><li>sleep() gives other threads a turn and slows a job down.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Starting and joining" aria-label="Starting and joining" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 6 of 6 · our game program · 1 of 1 · <span class="walk-file">ThreadDemo.java</span></p><h2>Starting and joining</h2><div class="walk-side g-walk"><pre class="code walk-code wide">System.out.println(&quot;\n=== start(): all three run at the same time ===&quot;);

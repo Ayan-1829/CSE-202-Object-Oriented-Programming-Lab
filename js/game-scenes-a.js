@@ -64,7 +64,7 @@ DEMOS['g-hud'] = (root) => {
     if (s.over || s.t > 3000) { s = newBattle({ seed: s.t, ammo: 15 }); }
   }, () => { battleDraw(c.g, s); if (++tick % 4 === 0) paintVars(); }, { warm: 120 });
   paintVars();
-  root.append(h('div', { class: 'g-split' }, gFrame('Each number on the screen is a variable. Watch health, ammo and score change while the others stay fixed.', c, [run.btn]), gSide(h('h4', null, 'The game’s variables'), list)));
+  root.append(h('div', { class: 'g-split' }, gFrame('Each number on the screen is a variable.', c, [run.btn]), gSide(h('h4', null, 'The game’s variables'), list)));
 };
 
 DEMOS['g-cast'] = (root) => {
@@ -101,7 +101,7 @@ DEMOS['g-cast'] = (root) => {
     else say(gT('A tank fires...'));
   }
   const run = gRun(c.cvs, () => { t++; }, draw, { warm: 180 });
-  root.append(gFrame('Narrowing (double → int) needs a cast and drops the fraction. Widening (int → double) happens by itself.', c, [run.btn, gBtn('Replay', () => { t = 0; draw(); })]));
+  root.append(gFrame('double → int needs a cast and drops the fraction.', c, [run.btn, gBtn('Replay', () => { t = 0; draw(); })]));
 };
 
 DEMOS['g-switch'] = (root) => {
@@ -145,7 +145,7 @@ DEMOS['g-switch'] = (root) => {
   }
   pick(2);
   const run = gRun(c.cvs, step, draw, { warm: 30 });
-  root.append(h('div', { class: 'g-split' }, gFrame('Press a key. switch compares key with each case; break stops it falling into the next case. Any other key goes to default.', c, [run.btn, ks.el]), gSide(cv.el, out)));
+  root.append(h('div', { class: 'g-split' }, gFrame('Press a key to pick a weapon.', c, [run.btn, ks.el]), gSide(cv.el, out)));
 };
 
 DEMOS['g-loops'] = (root) => {
@@ -313,7 +313,7 @@ DEMOS['g-blueprint'] = (root) => {
   }
   const run = gRun(c.cvs, step, draw);
   root.append(h('div', { class: 'g-split' },
-    h('div', null, gFrame('Each new runs a constructor and adds one object to the game. Shooting changes only the object it is called on.', c, [run.btn])),
+    h('div', null, gFrame('Each new adds one object to the game.', c, [run.btn])),
     gSide(h('div', { class: 'row tight g-ctrl' }, S.el), cv.el, note, h('h4', null, 'The objects (on the heap)'), heap)));
   S.go(0);
 };
@@ -353,7 +353,7 @@ DEMOS['g-refs'] = (root) => {
   const S = gSteps(lines.length, (i) => { k = i; cv.mark([i + 1]); note.textContent = notes[i]; out.set(i >= 5 ? '15' : ' '); draw(); }, { ms: 1800 });
   const run = gRun(c.cvs, () => { t++; }, draw);
   S.go(0);
-  root.append(h('div', { class: 'g-split' }, h('div', null, gFrame('A variable of a class type holds a reference, not the object itself. = copies the arrow, never the object.', c, [run.btn])), gSide(h('div', { class: 'row tight g-ctrl' }, S.el), cv.el, note, out.el)));
+  root.append(h('div', { class: 'g-split' }, h('div', null, gFrame('A variable holds an arrow to the object; = copies the arrow.', c, [run.btn])), gSide(h('div', { class: 'row tight g-ctrl' }, S.el), cv.el, note, out.el)));
 };
 
 /* ---------------- Chapter 3 ---------------- */
@@ -440,7 +440,7 @@ DEMOS['g-overload'] = (root) => {
     fl.draw(g);
   }
   const run = gRun(c.cvs, step, draw);
-  root.append(h('div', { class: 'g-split' }, gFrame('Same name, different parameters. The compiler picks the version from the arguments you pass. The rocket has 3 ammo, so the burst runs dry.', c,
+  root.append(h('div', { class: 'g-split' }, gFrame('Same name, different parameters: the arguments pick the method.', c,
     [run.btn, gBtn('shoot()', () => call(0)), gBtn('shoot("Tank")', () => call(1)), gBtn('shoot("Drone", 3)', () => call(2)), gBtn('Reset', () => { ammo = 3; hp = { Tank: 120, Drone: 30 }; log = []; shots = []; queue = []; fl.clear(); out.set(' '); cv.clearAll(); })]), gSide(cv.el, out.el)));
 };
 
@@ -535,7 +535,7 @@ DEMOS['g-family'] = (root) => {
   const pick = seg(Object.keys(FAMILY), sel, (v) => { sel = v; members(); draw(); });
   const run = gRun(c.cvs, () => { t++; }, draw);
   members();
-  root.append(gFrame('Click a class. Everything a superclass has, the subclass has too: it only adds what is new and overrides what works differently.', c, [run.btn, pick.el], panel));
+  root.append(gFrame('Click a class to see what it inherits, adds and overrides.', c, [run.btn, pick.el], panel));
 };
 
 DEMOS['g-wave'] = (root) => {
@@ -569,7 +569,7 @@ DEMOS['g-wave'] = (root) => {
     fl.draw(g);
   }
   const run = gRun(c.cvs, step, draw);
-  root.append(h('div', { class: 'g-split' }, gFrame('The array is of type Enemy, but each element is a Drone, Tank or Sniper object. Java runs the attack() of the actual object (dynamic dispatch).', c, [run.btn]), gSide(cv.el, status, out.el)));
+  root.append(h('div', { class: 'g-split' }, gFrame('One Enemy[] loop; each object runs its own attack().', c, [run.btn]), gSide(cv.el, status, out.el)));
 };
 
 DEMOS['g-cast4'] = (root) => {
@@ -580,14 +580,16 @@ DEMOS['g-cast4'] = (root) => {
   const code = codeView('', { small: true, nums: false });
   function src() {
     const call = target === 'Tank' ? 'raiseShield()' : 'aim()';
-    return check ? 'Enemy e = wave[' + ref + '];\nif (e instanceof ' + target + ') {\n    ((' + target + ') e).' + call + ';\n}' : 'Enemy e = wave[' + ref + '];\n((' + target + ') e).' + call + ';   // no check!';
+    // always the same four lines: without the check, lines 2 and 4 are switched off instead of removed
+    return 'Enemy e = wave[' + ref + '];\nif (e instanceof ' + target + ') {\n    ((' + target + ') e).' + call + ';' + (check ? '' : '   // no check!') + '\n}';
   }
   function tryIt() {
     code.set(src());
+    code.clearAll(); if (!check) code.mark([2, 4], 'off');
     const actual = kinds[ref], ok = actual === target;
     if (check && !ok) { msg = 'e instanceof ' + target + ' is false (it is a ' + actual + '), so the cast is skipped safely.'; effect = null; code.mark([2]); }
-    else if (!ok) { msg = 'ClassCastException: class ' + actual + ' cannot be cast to class ' + target; effect = 'crash'; code.mark([2], 'cur'); }
-    else { msg = 'It really is a ' + target + ', so the cast works and ' + (target === 'Tank' ? 'raiseShield()' : 'aim()') + ' runs.'; effect = target; code.mark([check ? 3 : 2], 'ok'); }
+    else if (!ok) { msg = 'ClassCastException: class ' + actual + ' cannot be cast to class ' + target; effect = 'crash'; code.mark([3], 'cur'); }
+    else { msg = 'It really is a ' + target + ', so the cast works and ' + (target === 'Tank' ? 'raiseShield()' : 'aim()') + ' runs.'; effect = target; code.mark([3], 'ok'); }
     status.textContent = msg; t = 0;
   }
   const r = seg(kinds.map((k, i) => ({ v: i, l: 'wave[' + i + ']' })), ref, (v) => { ref = v; tryIt(); });
@@ -602,7 +604,7 @@ DEMOS['g-cast4'] = (root) => {
   }
   const run = gRun(c.cvs, () => { t++; }, draw);
   tryIt();
-  root.append(h('div', { class: 'g-split' }, gFrame('A cast does not change the object; it only lets you call methods of the real type. Turn the check off and cast the wrong enemy to see what goes wrong.', c, [run.btn, r.el, tg.el, ck.el]), gSide(code.el, status)));
+  root.append(h('div', { class: 'g-split' }, gFrame('Turn the check off and cast the wrong enemy to see the crash.', c, [run.btn, r.el, tg.el, ck.el]), gSide(code.el, status)));
 };
 
 /* ---------------- Chapter 5 ---------------- */
@@ -632,7 +634,7 @@ DEMOS['g-abstract'] = (root) => {
     if (t % 6 === 0) out.set(lines.join('\n'));
   }
   const run = gRun(c.cvs, () => { t++; }, draw);
-  root.append(h('div', { class: 'g-split' }, gFrame('The world is a GameObject[]. Every element has update() and symbol() because the abstract class demands them, yet each class fills them in differently. The console shows the same map World.java prints.', c, [run.btn]), gSide(h('h4', null, 'World.java prints'), out.el)));
+  root.append(h('div', { class: 'g-split' }, gFrame('One GameObject[]; each class fills in update() and symbol() its own way.', c, [run.btn]), gSide(h('h4', null, 'World.java prints'), out.el)));
 };
 
 DEMOS['g-badges'] = (root) => {
@@ -682,5 +684,5 @@ DEMOS['g-badges'] = (root) => {
   }
   const run = gRun(c.cvs, () => { t++; fl.step(); }, draw);
   go(type);
-  root.append(h('div', { class: 'g-split' }, gFrame('A class extends one superclass but can implement many interfaces. An interface type collects every object that can do something, whatever its class.', c, [run.btn, pick.el]), gSide(cv.el, status)));
+  root.append(h('div', { class: 'g-split' }, gFrame('Pick an interface to see every object that has that ability.', c, [run.btn, pick.el]), gSide(cv.el, status)));
 };

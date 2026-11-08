@@ -163,3 +163,50 @@ body.deck-page,body.index-page{background:radial-gradient(120% 80% at 50% -10%,v
 .deck-bar{box-shadow:0 1px 0 var(--line),0 4px 14px rgba(16,24,40,.06)}
 /* a Swing window is drawn flat, as Java draws it: no monitor bezel inside the frame */
 .slide .g-swingframe .g-cvs,.swing-body .g-cvs{box-shadow:none;border-radius:0}
+/* stepping through code: the highlight only changes the background, never the letters' width,
+   so wrapped lines do not reflow; side-panel code scrolls inside its own box */
+.slide .cl.cur,.slide .cl.prev,.slide .cl.ok,.slide .cl.off{font-weight:inherit}
+.slide .g-side pre.code{max-height:min(46vh,520px);overflow:auto;scroll-behavior:smooth}
+.slide .g-side pre.code .cl{transition:background-color .15s}
+/* ===== home page game: full screen with a keyboard-style keypad ===== */
+.g-fsbtn{font:700 15px Georgia,serif}
+.g-keypad{display:none}
+.g-heroscene:fullscreen,.g-heroscene.g-fake-fs{position:fixed;inset:0;z-index:9999;max-width:none;width:100vw;height:100vh;height:100dvh;margin:0;padding:16px 16px 18px;box-sizing:border-box;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:radial-gradient(120% 90% at 50% 0%,#1B2A44 0%,#0A111D 70%)}
+.g-heroscene:-webkit-full-screen{width:100vw;height:100vh;max-width:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:#0A111D}
+.g-heroscene:fullscreen .g-cvs,.g-heroscene.g-fake-fs .g-cvs{width:min(calc(100vw - 32px),calc((100vh - 190px) * var(--ar)),calc((100dvh - 190px) * var(--ar)));max-width:none;flex:none}
+.g-heroscene:fullscreen>.g-heropad,.g-heroscene.g-fake-fs>.g-heropad,.g-heroscene:fullscreen>.g-cap,.g-heroscene.g-fake-fs>.g-cap{display:none}
+.g-heroscene:fullscreen>.g-keypad,.g-heroscene.g-fake-fs>.g-keypad{display:flex}
+html.g-noscroll,html.g-noscroll body{overflow:hidden}
+.g-keypad{align-items:flex-end;justify-content:center;gap:22px;flex-wrap:wrap}
+.g-arrows{display:grid;grid-template-columns:repeat(3,64px);grid-template-rows:repeat(2,60px);gap:6px}
+.g-keyside{display:flex;flex-direction:column;gap:6px}
+/* keycaps: light plastic with a darker base, pressed = pushed down and lit */
+.g-key{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:64px;height:60px;padding:0 10px;border:1px solid #9AA3AF;border-radius:9px;
+  background:linear-gradient(180deg,#FFFFFF 0%,#E6E9EE 70%,#D3D8DF 100%);color:#1B2330;box-shadow:0 5px 0 #8C95A3,0 7px 12px rgba(0,0,0,.45);
+  cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none;transition:transform .05s,box-shadow .05s,background .05s;font-family:Georgia,serif}
+.g-key b{font:700 24px Georgia,serif;line-height:1}
+.g-key small{font:600 12px Georgia,serif;color:#4A5566}
+.g-key.down,.g-key:active{transform:translateY(4px);box-shadow:0 1px 0 #8C95A3,0 2px 4px rgba(0,0,0,.4);background:linear-gradient(180deg,#FFE2B8 0%,#FFC27A 100%)}
+.g-key.g-space{width:min(42vw,340px);height:60px}
+.g-key.g-space b{font-size:18px;letter-spacing:.08em}
+.g-key.g-small{min-width:72px;height:44px}
+.g-key.g-small b{font-size:16px}
+@media (max-width:640px){.g-arrows{grid-template-columns:repeat(3,54px);grid-template-rows:repeat(2,50px)}.g-key{min-width:54px;height:50px}.g-key.g-space{width:60vw}}
+.g-enter{font:700 20px Georgia,serif;padding:12px 30px;border-radius:12px}
+/* home game: Enter sits on the picture; the Chapters menu appears in full screen */
+.g-herostage{position:relative}
+.g-herostage>.g-enter{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:24px;padding:14px 36px;box-shadow:0 8px 24px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.3)}
+.g-herostage>.g-enter:active:not(:disabled){transform:translate(-50%,calc(-50% + 1px))}
+.g-heroscene:fullscreen .g-enter,.g-heroscene.g-fake-fs .g-enter{display:none}
+.g-heroscene>.g-heropad{display:none}
+.g-chapters{display:none}
+.g-heroscene:fullscreen .g-chapters,.g-heroscene.g-fake-fs .g-chapters{display:block;position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:3}
+.g-chbtn{font:700 16px Georgia,serif;color:#F4F7FB;background:rgba(10,18,32,.78);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:8px 18px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+.g-chbtn:hover,.g-chbtn[aria-expanded="true"]{background:rgba(20,34,58,.92);border-color:#FFC27A}
+.g-chmenu{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);width:min(420px,86vw);max-height:min(60vh,520px);overflow:auto;
+  background:rgba(12,20,36,.96);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:6px;box-shadow:0 14px 34px rgba(0,0,0,.55)}
+.g-chmenu[hidden]{display:none}
+.g-chitem{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;color:#E7EEF8;text-decoration:none;font:600 15px/1.3 Georgia,serif}
+.g-chitem:hover,.g-chitem:focus-visible{background:rgba(255,194,122,.16);color:#fff}
+.g-chn{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#FFC27A;color:#1B2330;font:700 13px Georgia,serif}

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Meet Code Commando, the game we build this semester. Start with its numbers: variables and types for health, ammo and score, a cast for damage, if and switch for decisions, and loops for firing.">
+<meta name="description" content="Meet Code Commando. Its health, ammo and score are variables; decisions and loops make it react.">
 <meta name="keywords" content="java lab, data types, type casting, switch, for loop, while loop, do-while, java game, game programming, cse 202, object oriented programming lab">
 <meta name="author" content="Object Oriented Programming Lab Notes">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -17,7 +17,7 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
 <meta property="og:title" content="Chapter 1: Java Syntax, Data Types &amp; Control Flow | OOP Lab (CSE 202)">
-<meta property="og:description" content="Meet Code Commando, the game we build this semester. Start with its numbers: variables and types for health, ammo and score, a cast for damage, if and switch for decisions, and loops for firing.">
+<meta property="og:description" content="Meet Code Commando. Its health, ammo and score are variables; decisions and loops make it react.">
 <meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/01-java-basics.html">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/01-java-basics.png?v=2">
@@ -27,10 +27,10 @@
 <meta property="og:image:alt" content="Chapter 1 of 10: Java Syntax, Data Types &amp; Control Flow – CSE 202 Object Oriented Programming Lab">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Chapter 1: Java Syntax, Data Types &amp; Control Flow | OOP Lab (CSE 202)">
-<meta name="twitter:description" content="Meet Code Commando, the game we build this semester. Start with its numbers: variables and types for health, ammo and score, a cast for damage, if and switch for decisions, and loops for firing.">
+<meta name="twitter:description" content="Meet Code Commando. Its health, ammo and score are variables; decisions and loops make it react.">
 <meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/01-java-basics.png?v=2">
 <meta name="twitter:image:alt" content="Chapter 1 of 10: Java Syntax, Data Types &amp; Control Flow – CSE 202 Object Oriented Programming Lab">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Java Syntax, Data Types & Control Flow", "description": "Meet Code Commando, the game we build this semester. Start with its numbers: variables and types for health, ammo and score, a cast for damage, if and switch for decisions, and loops for firing.", "position": 1, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 50, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/01-java-basics.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/01-java-basics.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Java Syntax, Data Types & Control Flow", "description": "Meet Code Commando. Its health, ammo and score are variables; decisions and loops make it react.", "position": 1, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 50, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/01-java-basics.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/01-java-basics.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
 <title>Chapter 1: Java Syntax, Data Types &amp; Control Flow | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,9 +58,8 @@
 <p class="kicker">Chapter 1 · Lab I · CSE 202</p>
 <h1>Java Syntax, Data Types & Control Flow</h1>
 <p class="g-mission">Mission 1 · The numbers behind the game</p>
-<p class="lead">Meet Code Commando, the game we build this semester. Start with its numbers: variables and types for health, ammo and score, a cast for damage, if and switch for decisions, and loops for firing.</p>
+<p class="lead">Meet Code Commando. Its health, ammo and score are variables; decisions and loops make it react.</p>
 <div class="row"><a class="btn pri" href="#s=2">Start the mission</a><a class="btn" href="../index.html">All chapters</a></div>
-<p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
 </div></section>
 <section class="slide " data-title="Your mission" aria-label="Your mission" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Mission 1 · The numbers behind the game</p><h2>Your mission</h2><div class="hook"><p class="q">A game looks like moving pictures. What does the computer actually keep track of?</p><p>Numbers and words: health, ammo, score, the player’s name. In Java each one lives in a <b>variable</b> with a <b>type</b>. Decisions (<code>if</code>, <code>switch</code>) and loops (<code>for</code>, <code>while</code>) make the game react.</p></div>
@@ -70,7 +69,7 @@
 </div></section>
 <section class="slide " data-title="Chapter at a glance" aria-label="Chapter at a glance" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Chapter 1 of 10</p><h2>Chapter at a glance</h2><div class="cols wl"><div><h3>After this chapter you can</h3><ul class=""><li>Set up and check a JDK with an IDE (NetBeans, Eclipse or IntelliJ IDEA)</li><li>Explain how <code>GameBasics.java</code> becomes bytecode that the JVM runs</li><li>Store game data in the eight primitive types and <code>String</code></li><li>Turn a <code>double</code> hit into <code>int</code> health with a cast</li><li>Make game decisions with <code>if / else if / else</code> and <code>switch</code></li><li>Repeat actions with <code>for</code>, <code>while</code> and <code>do-while</code>, steered by <code>break</code> and <code>continue</code></li></ul></div>
-<div><h3>Before you start</h3><ul class=""><li>Create folders and save files</li><li>A basic idea of variables, input and output</li><li>JDK 11 or later and an IDE installed (the setup slides help)</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Topics: the idea, then the game</li><li>Run the game program</li><li>Game practice tasks</li><li>Official lab and graded tasks</li><li>Report exercises at home</li></ol></div></div>
+<div><h3>Before you start</h3><ul class=""><li>Create folders and save files</li><li>A basic idea of variables, input and output</li><li>JDK 11 or later and an IDE installed (the setup slides help)</li></ul></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Chapter 1 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Install Java and NetBeans</a></li><li><a href="#s=9">Today’s build: the game program</a></li><li><a href="#s=10">The topics: the idea, then the game</a></li><li><a href="#s=29">Run the game</a></li><li><a href="#s=30">Game practice tasks</a></li><li><a href="#s=33">The official lab program</a></li><li><a href="#s=39">Official in-lab tasks</a></li><li><a href="#s=44">Lab report exercises</a></li><li><a href="#s=47">Viva questions and quiz</a></li></ol>
@@ -96,10 +95,10 @@
     public static void main(String[] args) {
         System.out.println(&quot;Mission start!&quot;);
     }
-}</pre><ul class="pts"><li>Java code lives inside a <b>class</b>; the file is named after the class.</li><li><code>javac Hello.java</code> compiles it to bytecode, <code>Hello.class</code>.</li><li><code>java Hello</code> starts the JVM, which runs <code>main</code>.</li><li>Every statement lives inside a class.</li><li><code>System.out.println</code> prints one line.</li><li>Run this first: if it prints, your setup works.</li></ul></div>
+}</pre><ul class="pts"><li>Java code lives inside a <b>class</b>; the file is named after the class.</li><li><code>javac Hello.java</code> compiles it to bytecode, <code>Hello.class</code>.</li><li><code>java Hello</code> starts the JVM, which runs <code>main</code>.</li><li>Every statement lives inside a class.</li></ul></div>
 </div></section>
 <section class="slide " data-title="From GameBasics.java to a running program" aria-label="From GameBasics.java to a running program" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 1 of 6 · in the game</p><h2>From GameBasics.java to a running program</h2><div data-demo="g-jvm"></div><ul class="pts pts-row"><li>You write <code>GameBasics.java</code>. <code>javac</code> compiles it to bytecode: <code>GameBasics.class</code>.</li><li>The JVM runs the bytecode, starting at <code>main</code>.</li><li>A <code>public</code> class lives in a file with exactly the same name.</li></ul>
+<p class="kicker">Topic 1 of 6 · in the game</p><h2>From GameBasics.java to a running program</h2><div data-demo="g-jvm"></div>
 </div></section>
 <section class="slide " data-title="Variables and data types" aria-label="Variables and data types" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 2 of 6</p><h2>Variables and data types</h2><div class="g-ingame"><div>In the game:</div><div>Variables: the numbers on the screen</div></div><div class="g-codeside g-topic"><div><div class="kicker g-wk"><div class="walk-file">GameBasics.java</div><div>·</div><div>The player’s stats</div></div><pre class="code small-code wide">// 1. Variables: the player&#x27;s stats
@@ -108,10 +107,10 @@ int health = 100;
 int ammo = 5;
 double damage = 12.75;
 boolean alive = true;
-System.out.println(name + &quot; | health &quot; + health + &quot; | ammo &quot; + ammo + &quot; | alive &quot; + alive);</pre></div><ul class="pts"><li>A <b>variable</b> is a named box that holds one value.</li><li>Its <b>type</b> decides what may go in: whole numbers, decimals, one character, true/false or text.</li><li>Declare it once with its type, then use it by name.</li><li>Five variables, five types: String, int, int, double, boolean.</li><li><code>+</code> joins text and values into one line.</li></ul></div>
+System.out.println(name + &quot; | health &quot; + health + &quot; | ammo &quot; + ammo + &quot; | alive &quot; + alive);</pre></div><ul class="pts"><li>A <b>variable</b> is a named box that holds one value.</li><li>Its <b>type</b> decides what may go in: whole numbers, decimals, one character, true/false or text.</li><li>Declare it once with its type, then use it by name.</li><li>Five variables, five types: String, int, int, double, boolean.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Variables: the numbers on the screen" aria-label="Variables: the numbers on the screen" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 2 of 6 · in the game</p><h2>Variables: the numbers on the screen</h2><div data-demo="g-hud"></div><ul class="pts pts-row"><li>A <b>variable</b> is a named box for one value: <code>int health = 100;</code></li><li>The <b>type</b> says what kind of value fits in the box.</li><li>Java checks every type before the program runs.</li></ul>
+<p class="kicker">Topic 2 of 6 · in the game</p><h2>Variables: the numbers on the screen</h2><div data-demo="g-hud"></div>
 </div></section>
 <section class="slide " data-title="Variables: the numbers on the screen (in code)" aria-label="Variables: the numbers on the screen (in code)" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 2 of 6 · in the game, in code</p><h2>Variables: the numbers on the screen</h2><div class="scrollx"><table class="doc"><thead><tr><th>Type</th><th>In the game</th><th>Example</th></tr></thead><tbody><tr><td>byte / short</td><td>small whole numbers</td><td><code>byte lives = 3;</code> · <code>short level = 1;</code></td></tr><tr><td>int</td><td>most whole numbers</td><td><code>int health = 100;</code></td></tr><tr><td>long</td><td>huge whole numbers (suffix L)</td><td><code>long highScore = 2500000000L;</code></td></tr><tr><td>float</td><td>decimals, less precise (suffix f)</td><td><code>float speed = 2.5f;</code></td></tr><tr><td>double</td><td>decimals, the usual choice</td><td><code>double damage = 12.75;</code></td></tr><tr><td>char</td><td>one character</td><td><code>char rank = 'B';</code></td></tr><tr><td>boolean</td><td>true or false</td><td><code>boolean alive = true;</code></td></tr><tr><td>String</td><td>text (a class, not a primitive)</td><td><code>String name = "Ranger";</code></td></tr></tbody></table></div><ul class="pts"><li>Pick the smallest type that is safe; <code>int</code> and <code>double</code> are the everyday choices.</li></ul>
@@ -120,10 +119,10 @@ System.out.println(name + &quot; | health &quot; + health + &quot; | ammo &quot;
 <p class="kicker">Topic 3 of 6</p><h2>Type casting</h2><div class="g-ingame"><div>In the game:</div><div>Type casting: damage into health</div></div><div class="g-codeside g-topic"><pre class="code small-code">int hit = (int) damage;                 // narrowing: 12.75 -&gt; 12
 health = health - hit;                  // 100 - 12 = 88
 double healthAsDouble = health;         // widening: 88 -&gt; 88.0
-char nextRank = (char) (rank - 1);      // &#x27;B&#x27; - 1 = &#x27;A&#x27;</pre><ul class="pts"><li><b>Widening</b>: a small type goes into a bigger one by itself (int → double).</li><li><b>Narrowing</b>: a bigger type into a smaller one needs a cast, <code>(int)</code>, and drops the fraction.</li><li>Watch int ÷ int: 7 / 2 is 3. Cast one side to get 3.5.</li><li>The cast truncates: 12.75 becomes 12, not 13.</li><li>Use <code>Math.round</code> when you want rounding.</li></ul></div>
+char nextRank = (char) (rank - 1);      // &#x27;B&#x27; - 1 = &#x27;A&#x27;</pre><ul class="pts"><li><b>Widening</b>: a small type goes into a bigger one by itself (int → double).</li><li><b>Narrowing</b>: a bigger type into a smaller one needs a cast, <code>(int)</code>, and drops the fraction.</li><li>Watch int ÷ int: 7 / 2 is 3. Cast one side to get 3.5.</li><li>The cast truncates: 12.75 becomes 12, not 13.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Type casting: damage into health" aria-label="Type casting: damage into health" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 3 of 6 · in the game</p><h2>Type casting: damage into health</h2><div data-demo="g-cast"></div><ul class="pts pts-row"><li><b>Narrowing</b> (double → int) needs a cast and cuts off the fraction.</li><li><b>Widening</b> (int → double) happens by itself and loses nothing.</li><li>A <code>char</code> is a number too: <code>(char) (rank - 1)</code> turns B into A.</li></ul>
+<p class="kicker">Topic 3 of 6 · in the game</p><h2>Type casting: damage into health</h2><div data-demo="g-cast"></div>
 </div></section>
 <section class="slide " data-title="Casting the damage" aria-label="Casting the damage" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 3 of 6 · our game program · 1 of 1 · <span class="walk-file">GameBasics.java</span></p><h2>Casting the damage</h2><pre class="code walk-code wide">// 2. Casting: a 12.75 hit becomes a whole number
@@ -143,7 +142,7 @@ System.out.println(&quot;Hit for &quot; + damage + &quot; -&gt; loses &quot; + h
 }</pre><ul class="pts"><li><code>if</code> runs a block only when its condition is <code>true</code>.</li><li><code>else if</code> tests the next condition; <code>else</code> catches the rest.</li><li>Only the <b>first</b> true branch runs.</li><li>88 HP: the first test is true, so the other branches are skipped.</li></ul></div>
 </div></section>
 <section class="slide " data-title="if / else: the health bar colour" aria-label="if / else: the health bar colour" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 4 of 6 · in the game</p><h2>if / else: the health bar colour</h2><div data-demo="g-ifflow"></div><ul class="pts pts-row"><li>Java tests each condition from the top and runs the first branch that is true.</li><li>Test from high to low, as here, so each range is checked once.</li><li><code>else</code> catches everything left over.</li></ul>
+<p class="kicker">Topic 4 of 6 · in the game</p><h2>if / else: the health bar colour</h2><div data-demo="g-ifflow"></div>
 </div></section>
 <section class="slide " data-title="The health bar colour" aria-label="The health bar colour" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 4 of 6 · our game program · 1 of 1 · <span class="walk-file">GameBasics.java</span></p><h2>The health bar colour</h2><div class="walk-side g-walk"><pre class="code walk-code">// 3. if-else: the colour of the health bar
@@ -165,7 +164,7 @@ switch (key) {
 }</pre></div><ul class="pts"><li><code>switch</code> picks one <code>case</code> by the value of a variable.</li><li><code>break</code> ends the case; without it the next case runs too (fall-through).</li><li><code>default</code> runs when no case matches.</li><li>key 2 jumps straight to <code>case 2</code>; <code>break</code> stops it there.</li></ul></div>
 </div></section>
 <section class="slide " data-title="switch: pick a weapon" aria-label="switch: pick a weapon" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 5 of 6 · in the game</p><h2>switch: pick a weapon</h2><div data-demo="g-switch"></div><ul class="pts pts-row"><li><code>switch</code> compares one value with fixed <code>case</code> labels.</li><li><code>break</code> ends a case. Without it, execution falls through into the next case.</li><li><code>default</code> handles every other value.</li></ul>
+<p class="kicker">Topic 5 of 6 · in the game</p><h2>switch: pick a weapon</h2><div data-demo="g-switch"></div>
 </div></section>
 <section class="slide " data-title="Loops" aria-label="Loops" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 6 of 6</p><h2>Loops</h2><div class="g-ingame"><div>In the game:</div><div>Loops: fire, fire, fire</div></div><div class="g-codeside g-topic"><div><div class="kicker g-wk"><div class="walk-file">GameBasics.java</div><div>·</div><div>Burst fire</div></div><pre class="code small-code">// 5. for: a burst of exactly 3 shots
@@ -175,7 +174,7 @@ for (int shot = 1; shot &lt;= 3; shot++) {
 }</pre></div><ul class="pts"><li>A loop repeats a block of code. <code>for (start; test; update)</code>: you know how many times.</li><li><code>while</code> tests first (may run zero times); <code>do-while</code> tests after (runs at least once).</li><li><code>break</code> leaves the loop at once; <code>continue</code> skips to the next round.</li><li>Exactly three shots: start, test and update all sit in the header.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Loops: fire, fire, fire" aria-label="Loops: fire, fire, fire" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 6 of 6 · in the game</p><h2>Loops: fire, fire, fire</h2><div data-demo="g-loops"></div><ul class="pts pts-row"><li><code>for</code>: you know how many times (a burst of 3).</li><li><code>while</code>: repeat while a condition holds (until the drone is down).</li><li><code>do-while</code>: the body runs at least once (the first wave).</li><li><code>break</code> leaves a loop; <code>continue</code> skips to the next round.</li></ul>
+<p class="kicker">Topic 6 of 6 · in the game</p><h2>Loops: fire, fire, fire</h2><div data-demo="g-loops"></div>
 </div></section>
 <section class="slide " data-title="Destroy the drone" aria-label="Destroy the drone" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 6 of 6 · our game program · 1 of 3 · <span class="walk-file">GameBasics.java</span></p><h2>Destroy the drone</h2><pre class="code walk-code">// 6. while: shoot the drone until it falls

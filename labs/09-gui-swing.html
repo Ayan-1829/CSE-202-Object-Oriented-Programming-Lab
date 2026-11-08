@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Leave the console behind. A JFrame window, a score label, Fire and Reset buttons, and a JPanel that draws the commando and the drones from rectangles and ovals, then reacts to the keyboard.">
+<meta name="description" content="Put the game in a window: draw it with shapes and react to keys and buttons.">
 <meta name="keywords" content="java swing, awt, jframe, jpanel, layout manager, actionlistener, paintComponent, graphics, event dispatch thread, lab, java game, game programming, cse 202, object oriented programming lab">
 <meta name="author" content="Object Oriented Programming Lab Notes">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -17,7 +17,7 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
 <meta property="og:title" content="Chapter 9: GUI Components, Drawing, AWT &amp; Swing | OOP Lab (CSE 202)">
-<meta property="og:description" content="Leave the console behind. A JFrame window, a score label, Fire and Reset buttons, and a JPanel that draws the commando and the drones from rectangles and ovals, then reacts to the keyboard.">
+<meta property="og:description" content="Put the game in a window: draw it with shapes and react to keys and buttons.">
 <meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/09-gui-swing.html">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/09-gui-swing.png?v=2">
@@ -27,10 +27,10 @@
 <meta property="og:image:alt" content="Chapter 9 of 10: GUI Components, Drawing, AWT &amp; Swing – CSE 202 Object Oriented Programming Lab">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Chapter 9: GUI Components, Drawing, AWT &amp; Swing | OOP Lab (CSE 202)">
-<meta name="twitter:description" content="Leave the console behind. A JFrame window, a score label, Fire and Reset buttons, and a JPanel that draws the commando and the drones from rectangles and ovals, then reacts to the keyboard.">
+<meta name="twitter:description" content="Put the game in a window: draw it with shapes and react to keys and buttons.">
 <meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/09-gui-swing.png?v=2">
 <meta name="twitter:image:alt" content="Chapter 9 of 10: GUI Components, Drawing, AWT &amp; Swing – CSE 202 Object Oriented Programming Lab">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "GUI Components, Drawing, AWT & Swing", "description": "Leave the console behind. A JFrame window, a score label, Fire and Reset buttons, and a JPanel that draws the commando and the drones from rectangles and ovals, then reacts to the keyboard.", "position": 9, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 47, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/09-gui-swing.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/09-gui-swing.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "GUI Components, Drawing, AWT & Swing", "description": "Put the game in a window: draw it with shapes and react to keys and buttons.", "position": 9, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 47, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/09-gui-swing.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/09-gui-swing.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
 <title>Chapter 9: GUI Components, Drawing, AWT &amp; Swing | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,16 +58,15 @@
 <p class="kicker">Chapter 9 · Lab IX · CSE 202</p>
 <h1>GUI Components, Drawing, AWT & Swing</h1>
 <p class="g-mission">Mission 9 · Put the game on screen</p>
-<p class="lead">Leave the console behind. A JFrame window, a score label, Fire and Reset buttons, and a JPanel that draws the commando and the drones from rectangles and ovals, then reacts to the keyboard.</p>
+<p class="lead">Put the game in a window: draw it with shapes and react to keys and buttons.</p>
 <div class="row"><a class="btn pri" href="#s=2">Start the mission</a><a class="btn" href="../index.html">All chapters</a></div>
-<p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
 </div></section>
 <section class="slide " data-title="Your mission" aria-label="Your mission" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Mission 9 · Put the game on screen</p><h2>Your mission</h2><div class="hook"><p class="q">Eight chapters of text output. How do we finally draw the commando?</p><p>With <b>Swing</b>: a <code>JFrame</code> is the window, a <code>JPanel</code> is the drawing area, and <code>paintComponent(Graphics g)</code> draws everything from simple shapes. Buttons and keys send <b>events</b>.</p></div>
 </div></section>
 <section class="slide " data-title="Chapter at a glance" aria-label="Chapter at a glance" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Chapter 9 of 10</p><h2>Chapter at a glance</h2><div class="cols wl"><div><h3>After this chapter you can</h3><ul class=""><li>Tell AWT from Swing</li><li>Build a window from components and containers</li><li>Arrange them with BorderLayout and FlowLayout</li><li>Handle button clicks and key presses with listeners</li><li>Draw the game with Graphics in paintComponent and refresh it with repaint()</li><li>Explain why Swing work belongs on the Event Dispatch Thread</li></ul></div>
-<div><h3>Before you start</h3><ul class=""><li>Chapters 2–5: classes, inheritance and interfaces (listeners are interfaces)</li><li>Chapter 7: what a thread is</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Topics: the idea, then the game</li><li>Run the game program</li><li>Game practice tasks</li><li>Official lab and graded tasks</li><li>Report exercises at home</li></ol></div></div>
+<div><h3>Before you start</h3><ul class=""><li>Chapters 2–5: classes, inheritance and interfaces (listeners are interfaces)</li><li>Chapter 7: what a thread is</li></ul></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Chapter 9 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=27">Run the game</a></li><li><a href="#s=28">Game practice tasks</a></li><li><a href="#s=31">The official lab program</a></li><li><a href="#s=37">Official in-lab tasks</a></li><li><a href="#s=41">Lab report exercises</a></li><li><a href="#s=44">Viva questions and quiz</a></li></ol>
@@ -77,7 +76,7 @@
 <div class="cols wl"><div><h3>What the program does</h3><ol class="flow"><li>Build the window on the Event Dispatch Thread</li><li>Lay out the score label, the game panel and the buttons</li><li>Draw the sky, the city, the ground, three drones and the commando</li><li>Move with the arrow keys; Space or the Fire button shoots a laser</li><li>The laser stops at the first drone in line and destroys it</li><li>Reset puts everything back</li></ol></div><div><h3>Files</h3><ul class="g-files"><li><code>Sprites.java</code> <span class="muted">(112 lines)</span></li><li><code>GamePanel.java</code> <span class="muted">(107 lines)</span></li><li><code>GameFrame.java</code> <span class="muted">(52 lines)</span></li></ul><p class="muted">271 lines in all. Each topic below shows the part of the program that uses it.</p></div></div>
 </div></section>
 <section class="slide " data-title="AWT and Swing" aria-label="AWT and Swing" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 1 of 6</p><h2>AWT and Swing</h2><div class="scrollx"><table class="doc"><thead><tr><th></th><th>AWT (java.awt)</th><th>Swing (javax.swing)</th></tr></thead><tbody><tr><td>Components</td><td>Frame, Button, Label</td><td>JFrame, JButton, JLabel, JPanel</td></tr><tr><td>Drawn by</td><td>the operating system</td><td>Java itself</td></tr><tr><td>Look</td><td>changes per system</td><td>the same everywhere</td></tr><tr><td>Still used for</td><td>Graphics, Color, Font, events</td><td>every component in this game</td></tr></tbody></table></div><ul class="pts"><li><b>AWT</b> (<code>java.awt</code>): Java’s first GUI toolkit, drawn by the operating system.</li><li><b>Swing</b> (<code>javax.swing</code>): built on AWT, classes start with J: <code>JFrame</code>, <code>JButton</code>.</li><li>This course uses Swing, plus AWT’s <code>Graphics</code>, <code>Color</code> and layouts.</li><li>Swing is built on top of AWT: we use both.</li><li>Applets, the old way to run Java in a browser, no longer work in any browser.</li></ul>
+<p class="kicker">Topic 1 of 6</p><h2>AWT and Swing</h2><div class="scrollx"><table class="doc"><thead><tr><th></th><th>AWT (java.awt)</th><th>Swing (javax.swing)</th></tr></thead><tbody><tr><td>Components</td><td>Frame, Button, Label</td><td>JFrame, JButton, JLabel, JPanel</td></tr><tr><td>Drawn by</td><td>the operating system</td><td>Java itself</td></tr><tr><td>Look</td><td>changes per system</td><td>the same everywhere</td></tr><tr><td>Still used for</td><td>Graphics, Color, Font, events</td><td>every component in this game</td></tr></tbody></table></div><ul class="pts"><li><b>AWT</b> (<code>java.awt</code>): Java’s first GUI toolkit, drawn by the operating system.</li><li><b>Swing</b> (<code>javax.swing</code>): built on AWT, classes start with J: <code>JFrame</code>, <code>JButton</code>.</li><li>This course uses Swing, plus AWT’s <code>Graphics</code>, <code>Color</code> and layouts.</li><li>Swing is built on top of AWT: we use both.</li></ul>
 </div></section>
 <section class="slide " data-title="A window: JFrame" aria-label="A window: JFrame" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 2 of 6</p><h2>A window: JFrame</h2><div class="g-ingame"><div>In the game:</div><div>The game window</div></div><div class="g-codeside g-topic"><div><div class="kicker g-wk"><div class="walk-file">GameFrame.java</div><div>·</div><div>GameFrame: label and panel</div></div><pre class="code small-code">public GameFrame() {
@@ -92,8 +91,8 @@
     panel = new GamePanel(this);
     add(panel, BorderLayout.CENTER);</pre></div><ul class="pts"><li><code>JFrame</code> is a top-level window with a title bar.</li><li>Set its size, what closing does, and then make it visible.</li><li><code>setLocationRelativeTo(null)</code> centres it on the screen.</li><li>BorderLayout: the label goes NORTH, the panel CENTER.</li></ul></div>
 </div></section>
-<section class="slide " data-title="The game window" aria-label="The game window" tabindex="-1"><div style="zoom:0.93;" class="slide-inner">
-<p class="kicker">Topic 2 of 6 · in the game</p><h2>The game window</h2><div data-demo="g-swing"></div><ul class="pts pts-row"><li>The window is a <code>JFrame</code> with a <code>BorderLayout</code>.</li><li>NORTH: a <code>JLabel</code> for the score. CENTER: our <code>GamePanel</code>. SOUTH: a <code>JPanel</code> with two <code>JButton</code>s.</li><li>Turn on “show the Swing parts” to see each component.</li></ul>
+<section class="slide " data-title="The game window" aria-label="The game window" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 2 of 6 · in the game</p><h2>The game window</h2><div data-demo="g-swing"></div>
 </div></section>
 <section class="slide " data-title="Components, containers and layouts" aria-label="Components, containers and layouts" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 3 of 6</p><h2>Components, containers and layouts</h2><div class="g-codeside g-topic"><pre class="code small-code">setLayout(new BorderLayout());
@@ -107,7 +106,7 @@ add(buttons, BorderLayout.SOUTH);
 pack();                       // size the window to fit</pre><ul class="pts"><li><b>Components</b>: buttons, labels, text fields.</li><li><b>Containers</b> (<code>JFrame</code>, <code>JPanel</code>) hold components.</li><li>A <b>layout manager</b> places them: <code>BorderLayout</code>, <code>FlowLayout</code>, <code>GridLayout</code>.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Components, containers and layouts" aria-label="Components, containers and layouts" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 3 of 6 · in the game</p><h2>Components, containers and layouts</h2><div data-demo="g-border"></div><ul class="pts pts-row"><li>A <b>container</b> (JFrame, JPanel) holds components.</li><li>A <b>layout manager</b> decides where they go.</li><li>BorderLayout has five areas; FlowLayout puts things in a row.</li></ul>
+<p class="kicker">Topic 3 of 6 · in the game</p><h2>Components, containers and layouts</h2><div data-demo="g-border"></div>
 </div></section>
 <section class="slide " data-title="GamePanel: fields and the constructor" aria-label="GamePanel: fields and the constructor" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 3 of 6 · our game program · 1 of 1 · <span class="walk-file">GamePanel.java</span></p><h2>GamePanel: fields and the constructor</h2><div class="walk-side g-walk"><pre class="code walk-code wide">public class GamePanel extends JPanel implements KeyListener {
@@ -138,7 +137,7 @@ public class GamePanel extends JPanel implements KeyListener {
             fire();
         }
     }
-}</pre><ul class="pts"><li>Clicking or typing creates an <b>event</b>.</li><li>A <b>listener</b> is the code that reacts: <code>addActionListener</code> for buttons, <code>KeyListener</code> for keys.</li><li>A lambda is the shortest way to write a listener.</li><li>A <b>listener</b> is an object that Swing calls when something happens.</li><li>ActionListener for clicks; KeyListener for keys.</li><li>The panel needs <code>setFocusable(true)</code> to receive keys.</li></ul></div>
+}</pre><ul class="pts"><li>Clicking or typing creates an <b>event</b>.</li><li>A <b>listener</b> is the code that reacts: <code>addActionListener</code> for buttons, <code>KeyListener</code> for keys.</li><li>A lambda is the shortest way to write a listener.</li><li>A <b>listener</b> is an object that Swing calls when something happens.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Key events" aria-label="Key events" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 4 of 6 · our game program · 1 of 2 · <span class="walk-file">GamePanel.java</span></p><h2>Key events</h2><div class="walk-side g-walk"><pre class="code walk-code wide">@Override
@@ -192,10 +191,10 @@ public void keyTyped(KeyEvent e) { }</pre><ul class="walk-notes"><li>The arrow k
     g.fillRect(0, ground, w, h - ground);
     g.setColor(GRASS);
     g.fillRect(0, ground, w, 4);
-}</pre></div><ul class="pts"><li>Extend <code>JPanel</code> and override <code>paintComponent(Graphics g)</code>.</li><li>Draw with <code>setColor</code>, <code>fillRect</code>, <code>fillOval</code>, <code>drawLine</code>, <code>drawString</code>.</li><li>(0, 0) is the top-left corner; y grows downward.</li><li>A GradientPaint fills the sky.</li><li>Eight rectangles make the city skyline.</li></ul></div>
+}</pre></div><ul class="pts"><li>Extend <code>JPanel</code> and override <code>paintComponent(Graphics g)</code>.</li><li>Draw with <code>setColor</code>, <code>fillRect</code>, <code>fillOval</code>, <code>drawLine</code>, <code>drawString</code>.</li><li>(0, 0) is the top-left corner; y grows downward.</li><li>A GradientPaint fills the sky.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Drawing with Graphics" aria-label="Drawing with Graphics" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 5 of 6 · in the game</p><h2>Drawing with Graphics</h2><div data-demo="g-paint"></div><ul class="pts pts-row"><li>Override <code>paintComponent(Graphics g)</code> and draw with <code>fillRect</code>, <code>fillOval</code>, <code>fillArc</code>.</li><li>(0, 0) is the top-left corner; y grows downwards.</li><li>Later shapes are drawn on top of earlier ones.</li></ul>
+<p class="kicker">Topic 5 of 6 · in the game</p><h2>Drawing with Graphics</h2><div data-demo="g-paint"></div>
 </div></section>
 <section class="slide " data-title="Sprites: the commando’s body" aria-label="Sprites: the commando’s body" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 5 of 6 · our game program · 1 of 5 · <span class="walk-file">Sprites.java</span></p><h2>Sprites: the commando’s body</h2><div class="walk-side g-walk"><pre class="code walk-code">// (x, y) = the point between the boots, on the ground
@@ -312,7 +311,7 @@ repaint();               // &quot;please redraw soon&quot;
 
 public static void main(String[] args) {
     SwingUtilities.invokeLater(() -&gt; new GameFrame().setVisible(true));
-}</pre><ul class="pts"><li>Never call <code>paintComponent</code> yourself: call <code>repaint()</code> and Swing draws soon.</li><li>Swing work happens on one thread, the <b>Event Dispatch Thread</b> (EDT).</li><li>Start the GUI with <code>SwingUtilities.invokeLater(…)</code>.</li><li><code>repaint()</code> asks Swing to call paintComponent on its own thread.</li><li>All Swing work runs on the <b>Event Dispatch Thread</b> (EDT).</li><li><code>invokeLater</code> builds the window on the EDT.</li></ul></div>
+}</pre><ul class="pts"><li>Never call <code>paintComponent</code> yourself: call <code>repaint()</code> and Swing draws soon.</li><li>Swing work happens on one thread, the <b>Event Dispatch Thread</b> (EDT).</li><li>Start the GUI with <code>SwingUtilities.invokeLater(…)</code>.</li><li><code>repaint()</code> asks Swing to call paintComponent on its own thread.</li></ul></div>
 </div></section>
 <section class="slide " data-title="reset()" aria-label="reset()" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 6 of 6 · our game program · 1 of 3 · <span class="walk-file">GamePanel.java</span></p><h2>reset()</h2><div class="walk-side g-walk"><pre class="code walk-code">public void reset() {

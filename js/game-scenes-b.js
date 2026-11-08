@@ -44,7 +44,7 @@ DEMOS['g-exception'] = (root) => {
   }
   const m = seg([{ v: 1, l: 'with try / catch' }, { v: 0, l: 'without try / catch' }], 1, (v) => { mode = v; });
   const run = gRun(c.cvs, step, draw);
-  root.append(h('div', { class: 'g-split' }, h('div', null, gFrame('Keep pressing Fire. At 0 ammo, fire() throws; the exception leaves fire() and shoot() until a catch handles it. With no catch anywhere, the game crashes.', c,
+  root.append(h('div', { class: 'g-split' }, h('div', null, gFrame('Keep pressing Fire until the ammo runs out.', c,
     [run.btn, gBtn('Fire', fire, 'pri'), m.el, gBtn('Reset', () => { ammo = 2; crashed = false; anim = null; log = []; out.set(' '); lit(-1); fl.clear(); })])), gSide(stack, out.el)));
 };
 
@@ -79,7 +79,7 @@ DEMOS['g-level'] = (root) => {
   }
   const run = gRun(c.cvs, () => { t++; }, draw);
   load();
-  root.append(gFrame('Type a level and load it. A custom exception explains the problem in game terms, and keeps the original exception as its cause.', c,
+  root.append(gFrame('Load a level; a bad one throws a custom exception with its cause.', c,
     [run.btn, inp, gBtn('Load', () => load(), 'pri'), ...['3', 'abc', '42', ' 7 '].map((v) => gBtn('"' + v + '"', () => load(v)))], h('div', { class: 'g-split' }, chain, out.el)));
 };
 
@@ -141,7 +141,7 @@ DEMOS['g-threads'] = (root) => {
   const sp = seg([{ v: 1, l: 'normal' }, { v: 0.3, l: 'slow' }], 1, (v) => { speed = v; });
   const run = gRun(c.cvs, step, draw);
   const legend = h('div', { class: 'row tight g-legend' }, ...Object.keys(STC).map((k) => h('span', null, h('i', { style: { background: STC[k] } }), k)));
-  root.append(h('div', { class: 'g-split' }, gFrame('Spawner, AmmoRegen and Timer each run their own loop. Most of the time they sleep (TIMED_WAITING). main waits for all three with join().', c, [run.btn, sp.el, gBtn('Restart', () => { ms = -START; done = 0; })], legend), gSide(out.el)));
+  root.append(h('div', { class: 'g-split' }, gFrame('Three threads, each with its own loop; main waits with join().', c, [run.btn, sp.el, gBtn('Restart', () => { ms = -START; done = 0; })], legend), gSide(out.el)));
 };
 
 /* ---------------- Chapter 8 ---------------- */
@@ -188,7 +188,7 @@ DEMOS['g-race'] = (root) => {
   const m = seg([{ v: 'unsafe', l: 'no lock' }, { v: 'safe', l: 'synchronized' }], 'unsafe', setMode);
   const run = gRun(c.cvs, () => { t++; }, draw);
   setMode('unsafe');
-  root.append(h('div', { class: 'g-split' }, gFrame('score = score + 1 is three steps: read, add, write. If two threads interleave those steps, one point disappears. synchronized lets only one thread in at a time.', c, [run.btn, m.el]), gSide(ctl, cv.el, note)));
+  root.append(h('div', { class: 'g-split' }, gFrame('Step through two threads adding to one score.', c, [run.btn, m.el]), gSide(ctl, cv.el, note)));
 };
 
 DEMOS['g-deadlock'] = (root) => {
@@ -228,7 +228,7 @@ DEMOS['g-deadlock'] = (root) => {
   }
   const m = seg([{ v: 'opposite', l: 'opposite lock order' }, { v: 'same', l: 'same lock order' }], 'opposite', (v) => { mode = v; t = 0; });
   const run = gRun(c.cvs, () => { t++; }, draw);
-  root.append(gFrame('Each soldier needs both items: synchronized (first) { synchronized (second) { … } }. Locking in opposite orders can freeze both threads forever.', c, [run.btn, m.el], note));
+  root.append(gFrame('Each soldier needs both items; opposite lock orders freeze them.', c, [run.btn, m.el], note));
 };
 
 /* ---------------- Chapter 9 ---------------- */
@@ -345,7 +345,7 @@ DEMOS['g-loop'] = (root) => {
   }
   const sp = seg([{ v: 1, l: 'full speed' }, { v: 0, l: 'slow motion' }], 1, (v) => { speed = v; });
   const run = gRun(c.cvs, step, () => battleDraw(c.g, s), { warm: 200 });
-  root.append(h('div', { class: 'g-split' }, gFrame('The game thread repeats four steps forever. At full speed you see smooth motion; in slow motion you can watch each step.', c, [run.btn, sp.el]), gSide(diag, fc)));
+  root.append(h('div', { class: 'g-split' }, gFrame('One frame: four steps, about 60 times a second.', c, [run.btn, sp.el]), gSide(diag, fc)));
 };
 
 DEMOS['g-collide'] = (root) => {
@@ -360,7 +360,7 @@ DEMOS['g-collide'] = (root) => {
   }, () => battleDraw(c.g, s, { boxes: true }), { warm: 150 });
   const sl = tsw('slow motion', 0, (v) => { slow = !!v; });
   st.textContent = 'Each object is a rectangle. Two objects collide when their rectangles overlap.';
-  root.append(gFrame('Green: the player. Blue: enemies. Yellow: bullets. A box turns red while it overlaps another one, which is exactly what Rectangle.intersects() tests.', c, [run.btn, sl.el], st));
+  root.append(gFrame('A box turns red while it overlaps another one.', c, [run.btn, sl.el], st));
 };
 
 /* the finished game, playable in the browser */

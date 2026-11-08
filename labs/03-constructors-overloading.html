@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Build an armory: default, parameterised and copy constructors for Weapon, chaining with this(…), an overloaded shoot(), and what really happens when you pass an int or a Weapon to a method.">
+<meta name="description" content="Build weapons with different constructors, overload shoot(), and pass objects to methods.">
 <meta name="keywords" content="java constructor, copy constructor, constructor chaining, method overloading, pass by value, object reference, lab, java game, game programming, cse 202, object oriented programming lab">
 <meta name="author" content="Object Oriented Programming Lab Notes">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -17,7 +17,7 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
 <meta property="og:title" content="Chapter 3: Constructors, Overloading &amp; Reference Passing | OOP Lab (CSE 202)">
-<meta property="og:description" content="Build an armory: default, parameterised and copy constructors for Weapon, chaining with this(…), an overloaded shoot(), and what really happens when you pass an int or a Weapon to a method.">
+<meta property="og:description" content="Build weapons with different constructors, overload shoot(), and pass objects to methods.">
 <meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/03-constructors-overloading.html">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/03-constructors-overloading.png?v=2">
@@ -27,10 +27,10 @@
 <meta property="og:image:alt" content="Chapter 3 of 10: Constructors, Overloading &amp; Reference Passing – CSE 202 Object Oriented Programming Lab">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Chapter 3: Constructors, Overloading &amp; Reference Passing | OOP Lab (CSE 202)">
-<meta name="twitter:description" content="Build an armory: default, parameterised and copy constructors for Weapon, chaining with this(…), an overloaded shoot(), and what really happens when you pass an int or a Weapon to a method.">
+<meta name="twitter:description" content="Build weapons with different constructors, overload shoot(), and pass objects to methods.">
 <meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/03-constructors-overloading.png?v=2">
 <meta name="twitter:image:alt" content="Chapter 3 of 10: Constructors, Overloading &amp; Reference Passing – CSE 202 Object Oriented Programming Lab">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Constructors, Overloading & Reference Passing", "description": "Build an armory: default, parameterised and copy constructors for Weapon, chaining with this(…), an overloaded shoot(), and what really happens when you pass an int or a Weapon to a method.", "position": 3, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 44, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/03-constructors-overloading.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/03-constructors-overloading.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Constructors, Overloading & Reference Passing", "description": "Build weapons with different constructors, overload shoot(), and pass objects to methods.", "position": 3, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 44, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/03-constructors-overloading.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/03-constructors-overloading.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
 <title>Chapter 3: Constructors, Overloading &amp; Reference Passing | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,16 +58,15 @@
 <p class="kicker">Chapter 3 · Lab III · CSE 202</p>
 <h1>Constructors, Overloading & Reference Passing</h1>
 <p class="g-mission">Mission 3 · Arm up</p>
-<p class="lead">Build an armory: default, parameterised and copy constructors for Weapon, chaining with this(…), an overloaded shoot(), and what really happens when you pass an int or a Weapon to a method.</p>
+<p class="lead">Build weapons with different constructors, overload shoot(), and pass objects to methods.</p>
 <div class="row"><a class="btn pri" href="#s=2">Start the mission</a><a class="btn" href="../index.html">All chapters</a></div>
-<p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
 </div></section>
 <section class="slide " data-title="Your mission" aria-label="Your mission" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Mission 3 · Arm up</p><h2>Your mission</h2><div class="hook"><p class="q">A pistol, a rifle and a rocket launcher: the same kind of thing with different settings. How do we build each one easily?</p><p>Give <code>Weapon</code> several <b>constructors</b> that call each other with <code>this(…)</code>. Then give the player several <code>shoot</code> methods with the same name: that is <b>overloading</b>.</p></div>
 </div></section>
 <section class="slide " data-title="Chapter at a glance" aria-label="Chapter at a glance" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Chapter 3 of 10</p><h2>Chapter at a glance</h2><div class="cols wl"><div><h3>After this chapter you can</h3><ul class=""><li>Write default, parameterised and copy constructors</li><li>Chain constructors with <code>this(…)</code> so the fields are set in one place</li><li>Overload <code>shoot()</code> and predict which version runs</li><li>Explain why changing an int parameter never reaches the caller</li><li>Explain why changing an object through a parameter does</li></ul></div>
-<div><h3>Before you start</h3><ul class=""><li>Chapter 2: classes, fields, constructors and methods</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Topics: the idea, then the game</li><li>Run the game program</li><li>Game practice tasks</li><li>Official lab and graded tasks</li><li>Report exercises at home</li></ol></div></div>
+<div><h3>Before you start</h3><ul class=""><li>Chapter 2: classes, fields, constructors and methods</li></ul></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Chapter 3 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=24">Run the game</a></li><li><a href="#s=25">Game practice tasks</a></li><li><a href="#s=28">The official lab program</a></li><li><a href="#s=34">Official in-lab tasks</a></li><li><a href="#s=38">Lab report exercises</a></li><li><a href="#s=41">Viva questions and quiz</a></li></ol>
@@ -85,10 +84,10 @@
     // 1. Default constructor: no arguments gives a basic pistol
     public Weapon() {
         this(&quot;Pistol&quot;, 10);                 // chain to the 2-argument constructor
-    }</pre></div><ul class="pts"><li><b>Default</b>: no parameters, fills in starting values.</li><li><b>Parameterised</b>: the caller passes the values.</li><li><b>Copy</b>: builds a new object from another one of the same class.</li><li>No arguments: a pistol with 10 damage.</li><li>It does not set the fields itself: it hands over with <code>this(…)</code>.</li></ul></div>
+    }</pre></div><ul class="pts"><li><b>Default</b>: no parameters, fills in starting values.</li><li><b>Parameterised</b>: the caller passes the values.</li><li><b>Copy</b>: builds a new object from another one of the same class.</li><li>No arguments: a pistol with 10 damage.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Four ways to build a Weapon" aria-label="Four ways to build a Weapon" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 1 of 5 · in the game</p><h2>Four ways to build a Weapon</h2><div data-demo="g-armory"></div><ul class="pts pts-row"><li><b>Default</b> constructor: no arguments, sensible defaults (a pistol).</li><li><b>Parameterised</b>: you choose the name and the damage.</li><li><b>Copy</b> constructor: a new weapon with another weapon’s settings.</li></ul>
+<p class="kicker">Topic 1 of 5 · in the game</p><h2>Four ways to build a Weapon</h2><div data-demo="g-armory"></div>
 </div></section>
 <section class="slide " data-title="Parameterised and full constructors" aria-label="Parameterised and full constructors" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 1 of 5 · our game program · 1 of 4 · <span class="walk-file">Weapon.java</span></p><h2>Parameterised and full constructors</h2><pre class="code walk-code">// 2. Parameterised constructor: a standard clip of 12
@@ -161,7 +160,7 @@ public Weapon(String name, int damage, int ammo) {
     this.name = name;
     this.damage = damage;
     this.ammo = ammo;
-}</pre><ul class="pts"><li><code>this(…)</code> calls another constructor of the same class.</li><li>It must be the <b>first</b> line of the constructor.</li><li>The real work is written once, in one constructor.</li><li><code>this(…)</code> calls another constructor of the same class.</li><li>It must be the very first statement.</li><li>Every path ends at the full constructor: the fields are set in exactly one place.</li></ul></div>
+}</pre><ul class="pts"><li><code>this(…)</code> calls another constructor of the same class.</li><li>It must be the <b>first</b> line of the constructor.</li><li>The real work is written once, in one constructor.</li><li><code>this(…)</code> calls another constructor of the same class.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Player: chained constructors and equip()" aria-label="Player: chained constructors and equip()" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 2 of 5 · our game program · 1 of 1 · <span class="walk-file">Player.java</span></p><h2>Player: chained constructors and equip()</h2><div class="walk-side g-walk"><pre class="code walk-code">public Player(String name) {
@@ -195,7 +194,7 @@ ranger.shoot(&quot;Tank&quot;);
 ranger.shoot(&quot;Drone&quot;, 3);</pre></div><ul class="pts"><li>Several methods share one name but have different <b>parameter lists</b>.</li><li>Java picks the one whose parameters match the call.</li><li>The return type alone is not enough to tell them apart.</li><li>The rocket has 3 ammo: the third call runs dry halfway through the burst.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Overloading shoot()" aria-label="Overloading shoot()" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 3 of 5 · in the game</p><h2>Overloading shoot()</h2><div data-demo="g-overload"></div><ul class="pts pts-row"><li>Same method name, different parameter lists.</li><li>The compiler picks the version from the arguments: <code>shoot()</code>, <code>shoot("Tank")</code>, <code>shoot("Drone", 3)</code>.</li><li>The burst version simply calls the one-target version in a loop.</li></ul>
+<p class="kicker">Topic 3 of 5 · in the game</p><h2>Overloading shoot()</h2><div data-demo="g-overload"></div>
 </div></section>
 <section class="slide " data-title="Three shoot() methods" aria-label="Three shoot() methods" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
 <p class="kicker">Topic 3 of 5 · our game program · 1 of 1 · <span class="walk-file">Player.java</span></p><h2>Three shoot() methods</h2><div class="walk-side g-walk"><pre class="code walk-code wide">// Overloaded shoot(): same name, different parameter lists
@@ -226,7 +225,7 @@ public void shoot(String target, int burst) {
 <p class="kicker">Topic 4 of 5</p><h2>Passing arguments</h2><div class="g-ingame"><div>In the game:</div><div>Passing a primitive and passing a reference</div></div><ul class="pts big-list"><li>Java always passes a <b>copy</b> of the argument.</li><li>For a primitive, the copy is the value: the caller’s variable cannot change.</li><li>For an object, the copy is the reference: the method reaches the same object.</li></ul>
 </div></section>
 <section class="slide " data-title="Passing a primitive and passing a reference" aria-label="Passing a primitive and passing a reference" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 4 of 5 · in the game</p><h2>Passing a primitive and passing a reference</h2><div data-demo="g-pass"></div><ul class="pts pts-row"><li>Java always passes a <b>copy</b>.</li><li>For an int, the copy is the value: the caller’s variable never changes.</li><li>For an object, the copy is the reference: both point at the same object, so changes to the object are seen by the caller.</li></ul>
+<p class="kicker">Topic 4 of 5 · in the game</p><h2>Passing a primitive and passing a reference</h2><div data-demo="g-pass"></div>
 </div></section>
 <section class="slide " data-title="Primitive and reference parameters" aria-label="Primitive and reference parameters" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 4 of 5 · our game program · 1 of 2 · <span class="walk-file">ArmoryDemo.java</span></p><h2>Primitive and reference parameters</h2><div class="walk-side g-walk"><pre class="code walk-code">// Receives a copy of the int: the change stays inside this method
@@ -274,7 +273,7 @@ System.out.println(&quot;Back in main: ranger.getHealth() = &quot; + ranger.getH
 // in main
 ranger.takeDamage(40);        // health 60
 doc.heal(ranger, 30);         // p and ranger: the same Player
-ranger.getHealth();           // 90</pre><ul class="pts"><li>A method can take another object as a parameter.</li><li>Through that reference it can call the other object’s methods and change it.</li><li>In the game: a <code>Medic</code> heals a <code>Player</code>.</li><li><code>p</code> is a copy of the reference in <code>ranger</code>.</li><li><code>p.setHealth</code> changes that one Player object.</li><li>Back in main, the new health is there.</li></ul></div>
+ranger.getHealth();           // 90</pre><ul class="pts"><li>A method can take another object as a parameter.</li><li>Through that reference it can call the other object’s methods and change it.</li><li>In the game: a <code>Medic</code> heals a <code>Player</code>.</li><li><code>p</code> is a copy of the reference in <code>ranger</code>.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Medic" aria-label="Medic" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 5 of 5 · our game program · 1 of 1 · <span class="walk-file">Medic.java</span></p><h2>Medic</h2><div class="walk-side g-walk"><pre class="code walk-code wide">public class Medic {

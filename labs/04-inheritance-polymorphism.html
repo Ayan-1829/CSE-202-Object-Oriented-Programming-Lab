@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Drones, tanks and snipers are all enemies, and enemies and the player are all game characters. Inheritance shares the common code, overriding gives each enemy its own attack, and polymorphism runs a whole wave with one loop.">
+<meta name="description" content="Drones, tanks and snipers are all enemies: shared code, their own attacks, one loop for the wave.">
 <meta name="keywords" content="java inheritance, extends, super, method overriding, polymorphism, dynamic dispatch, instanceof, lab, java game, game programming, cse 202, object oriented programming lab">
 <meta name="author" content="Object Oriented Programming Lab Notes">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -17,7 +17,7 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Object Oriented Programming Lab (CSE 202)">
 <meta property="og:title" content="Chapter 4: Inheritance, Polymorphism &amp; Overriding | OOP Lab (CSE 202)">
-<meta property="og:description" content="Drones, tanks and snipers are all enemies, and enemies and the player are all game characters. Inheritance shares the common code, overriding gives each enemy its own attack, and polymorphism runs a whole wave with one loop.">
+<meta property="og:description" content="Drones, tanks and snipers are all enemies: shared code, their own attacks, one loop for the wave.">
 <meta property="og:url" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/04-inheritance-polymorphism.html">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/04-inheritance-polymorphism.png?v=2">
@@ -27,10 +27,10 @@
 <meta property="og:image:alt" content="Chapter 4 of 10: Inheritance, Polymorphism &amp; Overriding – CSE 202 Object Oriented Programming Lab">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Chapter 4: Inheritance, Polymorphism &amp; Overriding | OOP Lab (CSE 202)">
-<meta name="twitter:description" content="Drones, tanks and snipers are all enemies, and enemies and the player are all game characters. Inheritance shares the common code, overriding gives each enemy its own attack, and polymorphism runs a whole wave with one loop.">
+<meta name="twitter:description" content="Drones, tanks and snipers are all enemies: shared code, their own attacks, one loop for the wave.">
 <meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/04-inheritance-polymorphism.png?v=2">
 <meta name="twitter:image:alt" content="Chapter 4 of 10: Inheritance, Polymorphism &amp; Overriding – CSE 202 Object Oriented Programming Lab">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Inheritance, Polymorphism & Overriding", "description": "Drones, tanks and snipers are all enemies, and enemies and the player are all game characters. Inheritance shares the common code, overriding gives each enemy its own attack, and polymorphism runs a whole wave with one loop.", "position": 4, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 45, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/04-inheritance-polymorphism.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/04-inheritance-polymorphism.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Inheritance, Polymorphism & Overriding", "description": "Drones, tanks and snipers are all enemies: shared code, their own attacks, one loop for the wave.", "position": 4, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 45, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/04-inheritance-polymorphism.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/04-inheritance-polymorphism.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
 <title>Chapter 4: Inheritance, Polymorphism &amp; Overriding | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,16 +58,15 @@
 <p class="kicker">Chapter 4 · Lab IV · CSE 202</p>
 <h1>Inheritance, Polymorphism & Overriding</h1>
 <p class="g-mission">Mission 4 · Many enemies, one fight</p>
-<p class="lead">Drones, tanks and snipers are all enemies, and enemies and the player are all game characters. Inheritance shares the common code, overriding gives each enemy its own attack, and polymorphism runs a whole wave with one loop.</p>
+<p class="lead">Drones, tanks and snipers are all enemies: shared code, their own attacks, one loop for the wave.</p>
 <div class="row"><a class="btn pri" href="#s=2">Start the mission</a><a class="btn" href="../index.html">All chapters</a></div>
-<p class="hint"><kbd>←</kbd> <kbd>→</kbd> move between slides · <kbd>F</kbd> full screen · <kbd>M</kbd> slide list</p>
 </div></section>
 <section class="slide " data-title="Your mission" aria-label="Your mission" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Mission 4 · Many enemies, one fight</p><h2>Your mission</h2><div class="hook"><p class="q">A drone dives, a tank fires a shell, a sniper aims and shoots. Do we need a separate loop for each kind of enemy?</p><p>No. They all <b>extend</b> <code>Enemy</code>, so one <code>Enemy[]</code> holds them all, and one call, <code>e.attack(ranger)</code>, makes each one attack <b>in its own way</b>.</p></div>
 </div></section>
 <section class="slide " data-title="Chapter at a glance" aria-label="Chapter at a glance" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Chapter 4 of 10</p><h2>Chapter at a glance</h2><div class="cols wl"><div><h3>After this chapter you can</h3><ul class=""><li>Build a class hierarchy with <code>extends</code>: GameCharacter → Enemy → Drone, Tank, Sniper</li><li>Use <code>super(…)</code> for the inherited part and <code>protected</code> to share fields</li><li>Override <code>attack()</code>, <code>takeDamage()</code> and <code>describe()</code>; tell overriding from overloading</li><li>Run a mixed wave through Enemy references (polymorphism)</li><li>Use <code>instanceof</code> before casting to reach Tank- or Sniper-only methods</li></ul></div>
-<div><h3>Before you start</h3><ul class=""><li>Chapters 2–3: classes, constructors and overloading</li><li>Arrays and the for-each loop</li></ul><h3 style="margin-top:18px">Plan for the session</h3><ol class="plan"><li>Topics: the idea, then the game</li><li>Run the game program</li><li>Game practice tasks</li><li>Official lab and graded tasks</li><li>Report exercises at home</li></ol></div></div>
+<div><h3>Before you start</h3><ul class=""><li>Chapters 2–3: classes, constructors and overloading</li><li>Arrays and the for-each loop</li></ul></div></div>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Chapter 4 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=26">Run the game</a></li><li><a href="#s=27">Game practice tasks</a></li><li><a href="#s=30">The official lab program</a></li><li><a href="#s=35">Official in-lab tasks</a></li><li><a href="#s=39">Lab report exercises</a></li><li><a href="#s=42">Viva questions and quiz</a></li></ol>
@@ -82,10 +81,10 @@
 
     public Player(String name) {
         super(name, 100);                   // build the GameCharacter part first
-    }</pre></div><ul class="pts"><li><code>class Enemy extends GameCharacter</code>: Enemy gets every field and method of GameCharacter.</li><li>The parent is the <b>superclass</b>, the child the <b>subclass</b>.</li><li>A subclass <b>is a</b> kind of its superclass, and can add its own members.</li><li><code>super(name, 100)</code> builds the inherited part.</li><li>Player adds only a score field.</li></ul></div>
+    }</pre></div><ul class="pts"><li><code>class Enemy extends GameCharacter</code>: Enemy gets every field and method of GameCharacter.</li><li>The parent is the <b>superclass</b>, the child the <b>subclass</b>.</li><li>A subclass <b>is a</b> kind of its superclass, and can add its own members.</li><li><code>super(name, 100)</code> builds the inherited part.</li></ul></div>
 </div></section>
-<section class="slide " data-title="The family tree of the game" aria-label="The family tree of the game" tabindex="-1"><div style="zoom:0.92;" class="slide-inner">
-<p class="kicker">Topic 1 of 6 · in the game</p><h2>The family tree of the game</h2><div data-demo="g-family"></div><ul class="pts pts-row"><li><code>class Tank extends Enemy</code>: a Tank <b>is an</b> Enemy, and every Enemy is a GameCharacter.</li><li>A subclass gets every field and method of its superclass.</li><li>It only adds what is new and overrides what works differently.</li></ul>
+<section class="slide " data-title="The family tree of the game" aria-label="The family tree of the game" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 1 of 6 · in the game</p><h2>The family tree of the game</h2><div data-demo="g-family"></div>
 </div></section>
 <section class="slide " data-title="GameCharacter: the root of the tree" aria-label="GameCharacter: the root of the tree" tabindex="-1"><div style="zoom:0.91;" class="slide-inner">
 <p class="kicker">Topic 1 of 6 · our game program · 1 of 1 · <span class="walk-file">GameCharacter.java</span></p><h2>GameCharacter: the root of the tree</h2><div class="walk-side g-walk"><pre class="code walk-code">public class GameCharacter {
@@ -128,7 +127,7 @@ public class Drone extends Enemy {
     public Drone(String name) {
         super(name, 30, 5);             // light and weak
     }
-}</pre><ul class="pts"><li><code>super(…)</code> calls the parent’s constructor; it must be the first line.</li><li><code>protected</code> members are visible in subclasses (and the package).</li><li><code>super.method()</code> calls the parent’s version of a method.</li><li>A subclass constructor starts with <code>super(…)</code>.</li><li><code>protected</code> fields (name, health, damage) are visible in subclasses.</li><li><code>super.describe()</code> runs the parent’s version inside an override.</li></ul></div>
+}</pre><ul class="pts"><li><code>super(…)</code> calls the parent’s constructor; it must be the first line.</li><li><code>protected</code> members are visible in subclasses (and the package).</li><li><code>super.method()</code> calls the parent’s version of a method.</li><li>A subclass constructor starts with <code>super(…)</code>.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Enemy: what all enemies share" aria-label="Enemy: what all enemies share" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 2 of 6 · our game program · 1 of 1 · <span class="walk-file">Enemy.java</span></p><h2>Enemy: what all enemies share</h2><div class="walk-side g-walk"><pre class="code walk-code wide">public class Enemy extends GameCharacter {
@@ -164,7 +163,7 @@ public void attack(GameCharacter target) {
 public void takeDamage(int amount) {
     int blocked = Math.min(armor, amount);
     super.takeDamage(amount - blocked);   // the inherited version does the rest
-}</pre><ul class="pts"><li>A subclass writes its own version of a parent method: same name, same parameters.</li><li>Mark it with <code>@Override</code> so the compiler checks it.</li><li>The object’s real class decides which version runs.</li><li>Same signature as the parent’s method, a new body.</li><li><code>@Override</code> makes the compiler check that you really override something.</li><li>Tank even overrides takeDamage(): armor blocks part of every hit.</li></ul></div>
+}</pre><ul class="pts"><li>A subclass writes its own version of a parent method: same name, same parameters.</li><li>Mark it with <code>@Override</code> so the compiler checks it.</li><li>The object’s real class decides which version runs.</li><li>Same signature as the parent’s method, a new body.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Drone: overriding attack()" aria-label="Drone: overriding attack()" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 3 of 6 · our game program · 1 of 4 · <span class="walk-file">Drone.java</span></p><h2>Drone: overriding attack()</h2><pre class="code walk-code wide">public class Drone extends Enemy {
@@ -236,7 +235,7 @@ public void describe() {
 }</pre><ul class="walk-notes"><li>Its own attack() and an extra aim() method.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Overloading vs overriding" aria-label="Overloading vs overriding" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 4 of 6</p><h2>Overloading vs overriding</h2><div class="g-ingame"><div>In the game:</div><div>Overloading or overriding?</div></div><div class="scrollx"><table class="doc"><thead><tr><th></th><th>Overloading</th><th>Overriding</th></tr></thead><tbody><tr><td>Where</td><td>in one class</td><td>in a subclass</td></tr><tr><td>Parameters</td><td>different</td><td>exactly the same</td></tr><tr><td>Chosen</td><td>at compile time, from the arguments</td><td>at run time, from the object</td></tr><tr><td>In the game</td><td><code>shoot(target)</code> / <code>shoot(target, power)</code></td><td><code>Drone.attack()</code> / <code>Tank.attack()</code></td></tr></tbody></table></div><ul class="pts"><li><b>Overloading</b>: same name, different parameters, usually in one class. Chosen at compile time.</li><li><b>Overriding</b>: same name and parameters, in a subclass. Chosen at run time.</li><li>A class can do both.</li><li>Overloading gives one class several versions of a method.</li><li>Overriding lets a subclass replace an inherited version.</li></ul>
+<p class="kicker">Topic 4 of 6</p><h2>Overloading vs overriding</h2><div class="g-ingame"><div>In the game:</div><div>Overloading or overriding?</div></div><div class="scrollx"><table class="doc"><thead><tr><th></th><th>Overloading</th><th>Overriding</th></tr></thead><tbody><tr><td>Where</td><td>in one class</td><td>in a subclass</td></tr><tr><td>Parameters</td><td>different</td><td>exactly the same</td></tr><tr><td>Chosen</td><td>at compile time, from the arguments</td><td>at run time, from the object</td></tr><tr><td>In the game</td><td><code>shoot(target)</code> / <code>shoot(target, power)</code></td><td><code>Drone.attack()</code> / <code>Tank.attack()</code></td></tr></tbody></table></div><ul class="pts"><li><b>Overloading</b>: same name, different parameters, usually in one class. Chosen at compile time.</li><li><b>Overriding</b>: same name and parameters, in a subclass. Chosen at run time.</li><li>A class can do both.</li><li>Overloading gives one class several versions of a method.</li></ul>
 </div></section>
 <section class="slide " data-title="Player: overloaded shoot() and describe()" aria-label="Player: overloaded shoot() and describe()" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 4 of 6 · our game program · 1 of 2 · <span class="walk-file">Player.java</span></p><h2>Player: overloaded shoot() and describe()</h2><div class="walk-side g-walk"><pre class="code walk-code wide">// Overloaded: same name, different parameters (chosen at compile time)
@@ -276,7 +275,7 @@ for (Enemy e : wave) {
 System.out.println(&quot;Ranger&#x27;s health after the wave: &quot; + ranger.getHealth());</pre></div><ul class="pts"><li>A parent-type variable can refer to any subclass object.</li><li>One call, <code>e.attack(ranger)</code>, runs a different method for each real object.</li><li>New subclasses work without changing the loop.</li><li>One loop, three different attacks.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Polymorphism: one loop, three attacks" aria-label="Polymorphism: one loop, three attacks" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 5 of 6 · in the game</p><h2>Polymorphism: one loop, three attacks</h2><div data-demo="g-wave"></div><ul class="pts pts-row"><li>The array’s type is Enemy, but each element is a real Drone, Tank or Sniper object.</li><li><code>e.attack(ranger)</code> runs the attack() of the actual object: <b>dynamic dispatch</b>.</li><li>Add a new enemy type later and this loop needs no change at all.</li></ul>
+<p class="kicker">Topic 5 of 6 · in the game</p><h2>Polymorphism: one loop, three attacks</h2><div data-demo="g-wave"></div>
 </div></section>
 <section class="slide " data-title="WaveDemo: the characters" aria-label="WaveDemo: the characters" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 5 of 6 · our game program · 1 of 1 · <span class="walk-file">WaveDemo.java</span></p><h2>WaveDemo: the characters</h2><pre class="code walk-code">System.out.println(&quot;=== The characters ===&quot;);
@@ -293,7 +292,7 @@ sniper.describe();</pre><ul class="walk-notes"><li>Each describe() call runs the
 <p class="kicker">Topic 6 of 6</p><h2>instanceof and casting</h2><div class="g-ingame"><div>In the game:</div><div>instanceof and safe casting</div></div><ul class="pts big-list"><li>Through a parent reference you can only call the parent’s methods.</li><li><code>e instanceof Tank</code> checks the real class first.</li><li>Then cast down, <code>(Tank) e</code>, to reach the subclass’s own method.</li></ul>
 </div></section>
 <section class="slide " data-title="instanceof and safe casting" aria-label="instanceof and safe casting" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 6 of 6 · in the game</p><h2>instanceof and safe casting</h2><div data-demo="g-cast4"></div><ul class="pts pts-row"><li>Through an Enemy reference you can only call Enemy methods.</li><li>To call <code>raiseShield()</code>, check <code>e instanceof Tank</code>, then cast: <code>(Tank) e</code>.</li><li>A wrong cast throws <code>ClassCastException</code> at run time.</li></ul>
+<p class="kicker">Topic 6 of 6 · in the game</p><h2>instanceof and safe casting</h2><div data-demo="g-cast4"></div>
 </div></section>
 <section class="slide " data-title="WaveDemo: instanceof and casting" aria-label="WaveDemo: instanceof and casting" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 6 of 6 · our game program · 1 of 1 · <span class="walk-file">WaveDemo.java</span></p><h2>WaveDemo: instanceof and casting</h2><div class="walk-side g-walk"><pre class="code walk-code wide">System.out.println(&quot;\n=== instanceof and casting ===&quot;);

@@ -487,3 +487,38 @@ function gKeys(target, keys) {
   target.addEventListener('keyup', (e) => on(e, false));
   target.addEventListener('blur', () => Object.keys(keys).forEach((k) => { keys[k] = false; }));
 }
+
+/* ---------- code views that stay put ----------
+   Wraps codeView (demos-basics.js): set() updates only the lines whose text changed, so the block never
+   flashes or loses its scroll position, and mark() scrolls the code box (never the page) to keep the
+   highlighted line in view. */
+(function () {
+  if (typeof codeView !== 'function') return;
+  const base = codeView;
+  function keepInView(pre, line) {
+    if (!line || pre.scrollHeight <= pre.clientHeight + 2) return;
+    const top = line.getBoundingClientRect().top - pre.getBoundingClientRect().top + pre.scrollTop, bottom = top + line.offsetHeight, pad = 24;
+    if (top - pad < pre.scrollTop) pre.scrollTop = Math.max(0, top - pad);
+    else if (bottom + pad > pre.scrollTop + pre.clientHeight) pre.scrollTop = bottom + pad - pre.clientHeight;
+  }
+  window.codeView = codeView = function (src, opts = {}) {
+    const v = base(src, opts), pre = v.el, lines = () => Array.from(pre.querySelectorAll('.cl'));
+    const mark0 = v.mark;
+    v.mark = (nums, cls = 'cur') => {
+      mark0(nums, cls);
+      const first = [].concat(nums || []).filter((n) => n > 0).sort((a, b) => a - b)[0];
+      if (first) requestAnimationFrame(() => keepInView(pre, lines()[first - 1]));
+    };
+    v.set = (src2) => {
+      const fresh = Java.render(src2, null, opts), now = lines(), next = Array.from(fresh.querySelectorAll('.cl'));
+      if (now.length === next.length) {
+        next.forEach((nl, i) => { if (now[i].innerHTML !== nl.innerHTML) now[i].innerHTML = nl.innerHTML; });
+      } else {
+        const st = pre.scrollTop;
+        pre.replaceChildren(...Array.from(fresh.childNodes));
+        pre.scrollTop = st;
+      }
+    };
+    return v;
+  };
+})();

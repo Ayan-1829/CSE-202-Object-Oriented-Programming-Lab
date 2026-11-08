@@ -258,32 +258,101 @@ DEMOS['g-border'] = (root) => {
 DEMOS['g-hero'] = (root) => {
   const c = gCanvas(GW, GH, 'Code Commando: the commando plays by himself until you take over with the arrow keys or the buttons');
   const keys = { left: false, right: false, up: false, down: false, fire: false, restart: false };
-  let s = newBattle({ seed: 11 }), lastInput = -1e9, overT = 0;
-  gKeys(c.cvs, keys);
-  ['keydown'].forEach((ev) => c.cvs.addEventListener(ev, () => { lastInput = performance.now(); }));
+  let s = newBattle({ seed: 11 }), lastInput = -1e9, overT = 0, armed = false;
+  const wrap = h('div', { class: 'g-scene g-heroscene', style: { '--ar': String(GW / GH) } });
+  const fsEl = () => document.fullscreenElement || document.webkitFullscreenElement;
+  const isFs = () => fsEl() === wrap || wrap.classList.contains('g-fake-fs');
   const manual = () => performance.now() - lastInput < 8000;
-  const info = h('span', { class: 'g-heroinfo' });
   const run = gRun(c.cvs, () => {
     if (s.over) { if (++overT > 150 || keys.restart) { s = newBattle({ seed: s.t + 7 }); overT = 0; keys.restart = false; } return; }
     battleStep(s, manual() ? { dx: (keys.right ? 1 : 0) - (keys.left ? 1 : 0), dy: (keys.down ? 1 : 0) - (keys.up ? 1 : 0), fire: keys.fire } : null);
     if (s.t > 5400 && !manual()) s = newBattle({ seed: s.t });
   }, () => {
     battleDraw(c.g, s);
-    const txt = manual() ? gT('You are in control') : gT('Demo: press a button or click and use the arrow keys to take over');
-    if (info.textContent !== txt) info.textContent = txt;
   }, { warm: 160 });
-  const pad = (label, k, cls) => {
-    const b = h('button', { type: 'button', class: 'swing-btn g-pad' + (cls ? ' ' + cls : ''), 'aria-label': k }, label);
-    const on = (v) => (e) => { e.preventDefault(); keys[k] = v; lastInput = performance.now(); };
-    b.addEventListener('pointerdown', on(true)); b.addEventListener('pointerup', on(false)); b.addEventListener('pointerleave', (e) => { if (keys[k]) on(false)(e); });
-    b.addEventListener('keydown', (e) => { if (e.key === ' ' || e.key === 'Enter') on(true)(e); });
-    b.addEventListener('keyup', (e) => { if (e.key === ' ' || e.key === 'Enter') on(false)(e); });
-    return b;
+
+  /* every control (button, keycap, keyboard key) goes through press(): the keycap lights up while held */
+  const caps = {};
+  function press(k, v) {
+    if (keys[k] === v) return;
+    keys[k] = v; lastInput = performance.now();
+    (caps[k] || []).forEach((el) => el.classList.toggle('down', v));
+  }
+  const hold = (el, k) => {
+    const on = (v) => (e) => { e.preventDefault(); press(k, v); };
+    el.addEventListener('pointerdown', on(true)); el.addEventListener('pointerup', on(false)); el.addEventListener('pointercancel', on(false));
+    el.addEventListener('pointerleave', (e) => { if (keys[k]) on(false)(e); });
+    el.addEventListener('keydown', (e) => { if (e.key === 'Enter') on(true)(e); });
+    el.addEventListener('keyup', (e) => { if (e.key === 'Enter') on(false)(e); });
+    (caps[k] = caps[k] || []).push(el);
+    return el;
   };
-  c.cvs.addEventListener('click', () => { c.cvs.focus(); lastInput = performance.now(); });
-  const ctrl = h('div', { class: 'g-heropad' },
-    h('div', { class: 'g-dpad' }, h('span'), pad('▲', 'up'), h('span'), pad('◀', 'left'), pad('▼', 'down'), pad('▶', 'right')),
-    pad('Fire', 'fire', 'g-fire'), run.btn, info);
-  root.append(h('div', { class: 'g-scene g-heroscene', style: { '--ar': String(GW / GH) } }, c.cvs, ctrl,
-    h('p', { class: 'g-cap' }, gT('Code Commando, the game we build in this course. Arrow keys or WASD move the commando up, down, left and right, Space fires. Every part of it is a Java idea you will learn.'))));
+  const cap = (label, sub, k, cls) => hold(h('button', { type: 'button', class: 'g-key' + (cls ? ' ' + cls : ''), 'aria-label': k }, h('b', null, label), sub ? h('small', null, sub) : null), k);
+
+  /* full screen: the real Fullscreen API, or a fixed overlay where it is missing (iPhone Safari) */
+  function enterFs() {
+    const req = wrap.requestFullscreen || wrap.webkitRequestFullscreen;
+    const fake = () => { wrap.classList.add('g-fake-fs'); document.documentElement.classList.add('g-noscroll'); fit(); };
+    if (req) { try { const p = req.call(wrap); if (p && p.catch) p.catch(fake); } catch (e) { fake(); } } else fake();
+    armed = true;
+  }
+  function exitFs() {
+    if (typeof toggleMenu === 'function') toggleMenu(false);
+    if (wrap.classList.contains('g-fake-fs')) { wrap.classList.remove('g-fake-fs'); document.documentElement.classList.remove('g-noscroll'); fit(); return; }
+    const ex = document.exitFullscreen || document.webkitExitFullscreen;
+    if (fsEl() && ex) ex.call(document);
+  }
+  /* keep the canvas sharp at any size: match its pixels to the space it fills */
+  function fit() {
+    const dpr = Math.min(2, window.devicePixelRatio || 1), w = Math.round(c.cvs.getBoundingClientRect().width || GW);
+    const pw = Math.round(Math.max(GW, w) * dpr), ph = Math.round(pw * GH / GW);
+    if (c.cvs.width !== pw) { c.cvs.width = pw; c.cvs.height = ph; c.g.setTransform(pw / GW, 0, 0, ph / GH, 0, 0); battleDraw(c.g, s); }
+  }
+  const fsBtn = h('button', { type: 'button', class: 'btn pri g-enter', onclick: () => (isFs() ? exitFs() : enterFs()) }, '▶ ' + gT('Enter'));
+  ['fullscreenchange', 'webkitfullscreenchange'].forEach((ev) => document.addEventListener(ev, () => { requestAnimationFrame(fit); if (!fsEl()) Object.keys(keys).forEach((k) => press(k, false)); }));
+  window.addEventListener('resize', () => { if (isFs()) requestAnimationFrame(fit); });
+
+  /* the keyboard: arrows / WASD move, Space fires, R restarts, Esc leaves full screen.
+     It works in full screen, and on the page once you have clicked or tapped anywhere in the game. */
+  const MAP = { ArrowLeft: 'left', ArrowRight: 'right', ArrowUp: 'up', ArrowDown: 'down', ' ': 'fire', Spacebar: 'fire', a: 'left', d: 'right', w: 'up', s: 'down', A: 'left', D: 'right', W: 'up', S: 'down', r: 'restart', R: 'restart' };
+  const inView = () => { const r = wrap.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; };
+  const active = () => isFs() || (armed && inView());
+  document.addEventListener('pointerdown', (e) => { armed = wrap.contains(e.target); }, true);
+  const onKey = (v) => (e) => {
+    if (e.key === 'Escape' && v && wrap.classList.contains('g-fake-fs')) { exitFs(); return; }
+    const k = MAP[e.key];
+    if (!k || !active() || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.target.closest && e.target.closest('input,textarea,select,[contenteditable]')) return;
+    e.preventDefault(); e.stopPropagation();
+    press(k, v);
+  };
+  document.addEventListener('keydown', onKey(true), true);
+  document.addEventListener('keyup', onKey(false), true);
+  window.addEventListener('blur', () => Object.keys(keys).forEach((k) => press(k, false)));
+  c.cvs.setAttribute('tabindex', '0');
+  c.cvs.addEventListener('pointerdown', () => { armed = true; c.cvs.focus({ preventScroll: true }); });
+
+  /* full screen only: a Chapters menu (top right of the game) that opens any chapter's slides */
+  let chapters = [];
+  try { chapters = JSON.parse(root.getAttribute('data-chapters') || '[]'); } catch (e) { /* no menu */ }
+  const menu = h('div', { class: 'g-chmenu', hidden: true }, ...chapters.map((ch) =>
+    h('a', { href: ch.url, class: 'g-chitem', onclick: () => exitFs() }, h('span', { class: 'g-chn' }, String(ch.n)), h('span', null, ch.title))));
+  const chBtn = h('button', { type: 'button', class: 'g-chbtn', 'aria-haspopup': 'true', 'aria-expanded': 'false' }, gT('Chapters') + ' ▾');
+  const toggleMenu = (open) => { menu.hidden = !open; chBtn.setAttribute('aria-expanded', String(open)); };
+  chBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleMenu(menu.hidden); });
+  document.addEventListener('pointerdown', (e) => { if (!menu.hidden && !menu.contains(e.target) && e.target !== chBtn) toggleMenu(false); });
+  const chapterBox = h('div', { class: 'g-chapters' }, chBtn, menu);
+  /* the game picture with Enter on top of it; Enter hides once the game is full screen */
+  const stage = h('div', { class: 'g-herostage' }, c.cvs, fsBtn, chaptersOk() ? chapterBox : null);
+  function chaptersOk() { return chapters.length > 0; }
+  /* shown only in full screen: a keyboard-style keypad that also lights up with the real keys */
+  const keypad = h('div', { class: 'g-keypad' },
+    h('div', { class: 'g-arrows' }, h('span'), cap('↑', '', 'up'), h('span'), cap('←', '', 'left'), cap('↓', '', 'down'), cap('→', '', 'right')),
+    cap('Space', gT('Fire'), 'fire', 'g-space'),
+    h('div', { class: 'g-keyside' }, cap('R', gT('Restart'), 'restart', 'g-small'),
+      h('button', { type: 'button', class: 'g-key g-small', onclick: exitFs }, h('b', null, 'Esc'), h('small', null, gT('Exit')))));
+  ['fullscreenchange', 'webkitfullscreenchange'].forEach((ev) => document.addEventListener(ev, () => toggleMenu(false)));
+  wrap.append(stage, keypad,
+    h('p', { class: 'g-cap' }, gT('Code Commando: the game you build in this course.')));
+  root.append(wrap);
 };
