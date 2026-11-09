@@ -218,3 +218,23 @@ html.g-noscroll,html.g-noscroll body{overflow:hidden}
 .g-keypad .g-key.g-space{width:min(30vw,300px)}
 .g-entercourse{flex:none;font:700 20px Georgia,serif;padding:16px 26px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.45)}
 @media (max-width:760px){.g-heroscene:fullscreen>.g-keypad,.g-heroscene.g-fake-fs>.g-keypad{flex-wrap:wrap;justify-content:center;gap:12px}}
+
+/* ---- "Run the game" (data-demo="g-run"): the code on the left, the console on the right ---- */
+.g-run .trace-ctl{justify-content:center;margin-bottom:12px}
+.g-run .g-run-body{align-items:stretch}
+.g-run-left{display:flex;flex-direction:column;min-width:0}
+.g-run-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px;min-height:32px}
+.g-run-bar .cv-tabs{margin:0;flex-wrap:wrap}
+.g-run-file{font:600 14px var(--f-mono);color:var(--ink-2)}
+.g-run-where{font:600 13px var(--f-head);color:var(--ac-ink);white-space:nowrap}
+.slide .g-run .g-run-code,.slide .g-run .g-run-out{height:min(40vh,400px);max-height:none}
+.g-run .g-run-code,.g-run .g-run-out{height:400px;max-height:none;overflow:auto}
+.g-run-console{margin-top:0;display:flex;flex-direction:column}
+.g-run-out{flex:none}
+.g-run-prompt,.g-run-line{display:block}
+.g-run-prompt{color:#8FB3AE}
+.g-run-line{padding:0 6px;margin:0 -6px;border-radius:4px;transition:background .25s}
+.g-run-line.new{background:rgba(255,214,102,.16);box-shadow:inset 3px 0 0 #FFD666}
+@media (max-width:900px){.g-run .g-run-body{grid-template-columns:1fr}.slide .g-run .g-run-code,.slide .g-run .g-run-out,.g-run .g-run-code,.g-run .g-run-out{height:min(34vh,300px)}}
+.g-run-tabs button{font-size:14px;padding:4px 9px}
+body.deck-page .slide .g-run :where(.g-run-code,.g-run-code .cl,.g-run-out){font-size:calc(var(--pj-code) * .84)!important}

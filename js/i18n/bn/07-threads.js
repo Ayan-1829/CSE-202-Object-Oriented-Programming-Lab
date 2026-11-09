@@ -82,6 +82,7 @@ I18N_BN_ADD({
 "Destroyed! New target": "ধ্বংস! নতুন লক্ষ্য",
 "Discussion": "আলোচনা",
 "Download": "ডাউনলোড",
+"Drones keep spawning, the timer keeps ticking, ammo keeps refilling — and the player is still shooting. One program, four jobs, all at the same time.": "drone আসতেই থাকে, timer চলতেই থাকে, ammo ভরতেই থাকে — আর প্লেয়ার গুলি করেই যাচ্ছে। একটি program, চারটি কাজ, সব একসঙ্গে।",
 "Each thread updates the counter and sleeps 100 ms": "প্রতিটি thread counter হালনাগাদ করে 100 ms ঘুমায়",
 "EnemySpawner: extending Thread": "EnemySpawner: Thread extend করা",
 "Expected 12, got 11: a lost update": "প্রত্যাশিত 12, পাওয়া গেল 11: একটি আপডেট হারিয়ে গেছে",
@@ -104,6 +105,7 @@ I18N_BN_ADD({
 "Game task 2: Stop the spawner early": "গেম টাস্ক 2: spawner আগেভাগে থামানো",
 "Game task 3: Priorities and names": "গেম টাস্ক 3: priority ও নাম",
 "GamePanel: gets all the space that is left": "GamePanel: বাকি সব জায়গা এটি পায়",
+"Give each job its own <b>thread</b>. <code>EnemySpawner</code>, <code>AmmoRegen</code> and <code>Timer</code> run side by side, and <code>main</code> waits for them with <code>join()</code>.": "প্রতিটি কাজকে নিজের <b>thread</b> দিন। <code>EnemySpawner</code>, <code>AmmoRegen</code> আর <code>Timer</code> পাশাপাশি চলে, আর <code>main</code> <code>join()</code> দিয়ে তাদের জন্য অপেক্ষা করে।",
 "Give each thread a clear name": "প্রতিটি thread-কে একটি স্পষ্ট নাম দিন",
 "Give each thread a name with <code>super(name)</code> so the interleaved output is readable.": "মিশ্রিত output পড়া সহজ করতে <code>super(name)</code> দিয়ে প্রতিটি thread-কে একটি নাম দিন।",
 "Give the spawner 10 drones instead of 3": "spawner-কে 3টির বদলে 10টি drone দিন",
@@ -316,9 +318,7 @@ I18N_BN_ADD({
 "yes": "হ্যাঁ",
 "yield() is only a hint to the scheduler; the result can differ between machines and runs.": "yield() scheduler-কে কেবল একটি ইঙ্গিত; ফল মেশিন ও run অনুযায়ী আলাদা হতে পারে।",
 "…so its frame goes on <b>main’s</b> stack. Thread-0 is still NEW.": "…তাই এর frame <b>main-এর</b> stack-এ যায়। Thread-0 তখনও NEW।",
-"▶ Run program": "▶ প্রোগ্রাম চালান",
-"Drones keep spawning, the timer keeps ticking, ammo keeps refilling — and the player is still shooting. One program, four jobs, all at the same time.": "drone আসতেই থাকে, timer চলতেই থাকে, ammo ভরতেই থাকে — আর প্লেয়ার গুলি করেই যাচ্ছে। একটি program, চারটি কাজ, সব একসঙ্গে।",
-"Give each job its own <b>thread</b>. <code>EnemySpawner</code>, <code>AmmoRegen</code> and <code>Timer</code> run side by side, and <code>main</code> waits for them with <code>join()</code>.": "প্রতিটি কাজকে নিজের <b>thread</b> দিন। <code>EnemySpawner</code>, <code>AmmoRegen</code> আর <code>Timer</code> পাশাপাশি চলে, আর <code>main</code> <code>join()</code> দিয়ে তাদের জন্য অপেক্ষা করে।"
+"▶ Run program": "▶ প্রোগ্রাম চালান"
 });
 /* Bengali patterns for text with changing numbers or file names on the v2 decks (appended to each deck's file) */
 I18N_BN_PATTERNS([
@@ -378,5 +378,14 @@ I18N_BN_PATTERNS([
   [/^health = (\d+) → Hurt: yellow bar$/, 'health = $1 → আহত: হলুদ বার'],
   [/^health = (\d+) → Critical: red bar$/, 'health = $1 → সংকটাপন্ন: লাল বার'],
   [/^health = (\d+) → Game over$/, 'health = $1 → গেম শেষ'],
-  [/^referenced by (s\d)$/, '$1 দ্বারা নির্দেশিত']
+  [/^referenced by (s\d)$/, '$1 দ্বারা নির্দেশিত'],
+  [/^Next line ▶$/, 'পরের লাইন ▶'],
+  [/^▶ Run$/, '▶ চালান'],
+  [/^Output line (\d+) of (\d+)$/, 'Output লাইন $1 / $2'],
+  [/^line (\d+)$/, 'লাইন $1'],
+  [/^The program starts in <code>main<\/code>\. Press <b>Next line ▶<\/b> to run it until it prints a line\.$/, 'প্রোগ্রাম <code>main</code> থেকে শুরু হয়। পরের output লাইন পর্যন্ত চালাতে <b>পরের লাইন ▶</b> চাপুন।'],
+  [/^Output line (\d+) comes from line (\d+) of <code>([^<]+)<\/code>\.$/, 'Output লাইন $1 আসে <code>$3</code>-এর লাইন $2 থেকে।'],
+  [/^The empty output line (\d+) comes from line (\d+) of <code>([^<]+)<\/code>\.$/, 'ফাঁকা output লাইন $1 আসে <code>$3</code>-এর লাইন $2 থেকে।'],
+  [/^That line is inside a method, called from line (\d+) of <code>([^<]+)<\/code>\.$/, 'লাইনটি একটি method-এর ভিতরে; method-টি call করা হয়েছে <code>$2</code>-এর লাইন $1 থেকে।'],
+  [/^That was the last line: <code>main<\/code> ends and the program exits\.$/, 'এটিই শেষ লাইন: <code>main</code> শেষ হয়, প্রোগ্রামও বন্ধ হয়।']
 ]);

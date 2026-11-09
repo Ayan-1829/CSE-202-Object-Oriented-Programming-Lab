@@ -115,6 +115,7 @@ I18N_BN_ADD({
 "Fire": "গুলি",
 "Fire and Reset buttons at the bottom": "নিচে Fire আর Reset button",
 "For each task, show the instructor:": "প্রতিটি কাজের জন্য শিক্ষককে দেখান:",
+"For eight chapters the commando has been a line of text: “Ranger | health 100”. Today he finally gets a body, a helmet and a rifle.": "আট অধ্যায় ধরে কমান্ডো ছিল শুধু এক লাইন লেখা: “Ranger | health 100”। আজ অবশেষে সে পায় একটি শরীর, একটি হেলমেট আর একটি রাইফেল।",
 "Freehand Mode toggle and a brush size selector (Small, Medium, Large)": "Freehand Mode টগল এবং একটি brush আকার বাছাইকারী (Small, Medium, Large)",
 "Freehand drawing with mouse drag": "Mouse টেনে মুক্তহস্তে আঁকা",
 "GAME CRASHED": "গেম ক্র্যাশ করেছে",
@@ -289,6 +290,7 @@ I18N_BN_ADD({
 "Why does GamePanel override paintComponent instead of drawing in fire()?": "GamePanel কেন fire()-এ না এঁকে paintComponent override করে?",
 "Why is <code>super.paintComponent(g0)</code> the first line?": "<code>super.paintComponent(g0)</code> কেন প্রথম লাইন?",
 "Why is the window built inside <code>SwingUtilities.invokeLater</code>?": "window কেন <code>SwingUtilities.invokeLater</code>-এর ভেতরে তৈরি হয়?",
+"With <b>Swing</b>, a <code>JFrame</code> is the window, a <code>JPanel</code> is the canvas and <code>paintComponent(Graphics g)</code> draws everything from rectangles and ovals. Buttons and keys send <b>events</b>.": "<b>Swing</b>-এ একটি <code>JFrame</code> হলো window, একটি <code>JPanel</code> হলো ক্যানভাস, আর <code>paintComponent(Graphics g)</code> আয়তক্ষেত্র আর ডিম্বাকৃতি দিয়ে সবকিছু আঁকে। button আর কী <b>event</b> পাঠায়।",
 "Writing the lab report": "ল্যাব রিপোর্ট লেখা",
 "Your mission": "আপনার মিশন",
 "a JPanel with FlowLayout: one row": "FlowLayout-সহ একটি JPanel: এক সারি",
@@ -364,9 +366,7 @@ I18N_BN_ADD({
 "width": "প্রস্থ",
 "x grows →": "x বাড়ে →",
 "y grows ↓": "y বাড়ে ↓",
-"yes": "হ্যাঁ",
-"For eight chapters the commando has been a line of text: “Ranger | health 100”. Today he finally gets a body, a helmet and a rifle.": "আট অধ্যায় ধরে কমান্ডো ছিল শুধু এক লাইন লেখা: “Ranger | health 100”। আজ অবশেষে সে পায় একটি শরীর, একটি হেলমেট আর একটি রাইফেল।",
-"With <b>Swing</b>, a <code>JFrame</code> is the window, a <code>JPanel</code> is the canvas and <code>paintComponent(Graphics g)</code> draws everything from rectangles and ovals. Buttons and keys send <b>events</b>.": "<b>Swing</b>-এ একটি <code>JFrame</code> হলো window, একটি <code>JPanel</code> হলো ক্যানভাস, আর <code>paintComponent(Graphics g)</code> আয়তক্ষেত্র আর ডিম্বাকৃতি দিয়ে সবকিছু আঁকে। button আর কী <b>event</b> পাঠায়।"
+"yes": "হ্যাঁ"
 });
 /* Bengali patterns for text with changing numbers or file names on the v2 decks (appended to each deck's file) */
 I18N_BN_PATTERNS([
@@ -426,5 +426,14 @@ I18N_BN_PATTERNS([
   [/^health = (\d+) → Hurt: yellow bar$/, 'health = $1 → আহত: হলুদ বার'],
   [/^health = (\d+) → Critical: red bar$/, 'health = $1 → সংকটাপন্ন: লাল বার'],
   [/^health = (\d+) → Game over$/, 'health = $1 → গেম শেষ'],
-  [/^referenced by (s\d)$/, '$1 দ্বারা নির্দেশিত']
+  [/^referenced by (s\d)$/, '$1 দ্বারা নির্দেশিত'],
+  [/^Next line ▶$/, 'পরের লাইন ▶'],
+  [/^▶ Run$/, '▶ চালান'],
+  [/^Output line (\d+) of (\d+)$/, 'Output লাইন $1 / $2'],
+  [/^line (\d+)$/, 'লাইন $1'],
+  [/^The program starts in <code>main<\/code>\. Press <b>Next line ▶<\/b> to run it until it prints a line\.$/, 'প্রোগ্রাম <code>main</code> থেকে শুরু হয়। পরের output লাইন পর্যন্ত চালাতে <b>পরের লাইন ▶</b> চাপুন।'],
+  [/^Output line (\d+) comes from line (\d+) of <code>([^<]+)<\/code>\.$/, 'Output লাইন $1 আসে <code>$3</code>-এর লাইন $2 থেকে।'],
+  [/^The empty output line (\d+) comes from line (\d+) of <code>([^<]+)<\/code>\.$/, 'ফাঁকা output লাইন $1 আসে <code>$3</code>-এর লাইন $2 থেকে।'],
+  [/^That line is inside a method, called from line (\d+) of <code>([^<]+)<\/code>\.$/, 'লাইনটি একটি method-এর ভিতরে; method-টি call করা হয়েছে <code>$2</code>-এর লাইন $1 থেকে।'],
+  [/^That was the last line: <code>main<\/code> ends and the program exits\.$/, 'এটিই শেষ লাইন: <code>main</code> শেষ হয়, প্রোগ্রামও বন্ধ হয়।']
 ]);

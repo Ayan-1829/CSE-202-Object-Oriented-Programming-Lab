@@ -470,41 +470,183 @@ ranger.getHealth();           // 90</pre><ul class="pts"><li>A method can take a
 }</pre></div><p class="muted">Save every file in one folder, then compile and run: <code>javac *.java</code> → <code>java ArmoryDemo</code></p>
 </div></section>
 <section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Run the game</p><h2>Expected output</h2><div class="runbox" data-cmd="java ArmoryDemo"><pre class="run-src" hidden>=== Constructors ===
-  crafted Pistol [10 dmg, 12 ammo]
-  crafted Rifle [25 dmg, 12 ammo]
-  crafted Rocket [80 dmg, 3 ammo]
+<p class="kicker">Run the game</p><h2>Expected output</h2><div data-demo="g-run" data-cmd="java ArmoryDemo" data-steps="[{&quot;o&quot;:&quot;=== Constructors ===&quot;,&quot;f&quot;:[[0,23]]},{&quot;o&quot;:&quot;  crafted Pistol [10 dmg, 12 ammo]&quot;,&quot;f&quot;:[[1,21],[1,13],[1,8],[0,24]]},{&quot;o&quot;:&quot;  crafted Rifle [25 dmg, 12 ammo]&quot;,&quot;f&quot;:[[1,21],[1,13],[0,25]]},{&quot;o&quot;:&quot;  crafted Rocket [80 dmg, 3 ammo]&quot;,&quot;f&quot;:[[1,21],[0,26]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,28]]},{&quot;o&quot;:&quot;=== Copy constructor ===&quot;,&quot;f&quot;:[[0,28]]},{&quot;o&quot;:&quot;  crafted Rifle [25 dmg, 12 ammo]&quot;,&quot;f&quot;:[[1,21],[1,26],[0,29]]},{&quot;o&quot;:&quot;rifle: Rifle [25 dmg, 12 ammo]&quot;,&quot;f&quot;:[[0,31]]},{&quot;o&quot;:&quot;spare: Rifle [30 dmg, 12 ammo]  (a separate object)&quot;,&quot;f&quot;:[[0,32]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,34]]},{&quot;o&quot;:&quot;=== Overloaded shoot() ===&quot;,&quot;f&quot;:[[0,34]]},{&quot;o&quot;:&quot;  crafted Pistol [10 dmg, 12 ammo]&quot;,&quot;f&quot;:[[1,21],[1,13],[1,8],[2,13],[2,7],[0,35]]},{&quot;o&quot;:&quot;Ranger equips Rocket [80 dmg, 3 ammo]&quot;,&quot;f&quot;:[[2,25],[0,36]]},{&quot;o&quot;:&quot;Ranger fires the Rocket into the air&quot;,&quot;f&quot;:[[2,31],[0,37]]},{&quot;o&quot;:&quot;Ranger hits Tank for 80&quot;,&quot;f&quot;:[[2,39],[0,38]]},{&quot;o&quot;:&quot;Ranger fires a burst of 3 at Drone&quot;,&quot;f&quot;:[[2,46],[0,39]]},{&quot;o&quot;:&quot;Ranger hits Drone for 80&quot;,&quot;f&quot;:[[2,39],[2,48],[0,39]]},{&quot;o&quot;:&quot;Ranger: click! The Rocket is empty&quot;,&quot;f&quot;:[[2,41],[2,48],[0,39]]},{&quot;o&quot;:&quot;Ranger: click! The Rocket is empty&quot;,&quot;f&quot;:[[2,41],[2,48],[0,39]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,41]]},{&quot;o&quot;:&quot;=== Passing a primitive ===&quot;,&quot;f&quot;:[[0,41]]},{&quot;o&quot;:&quot;  inside refill(int): ammo = 99&quot;,&quot;f&quot;:[[0,6],[0,43]]},{&quot;o&quot;:&quot;  after refill(int): ammo = 5&quot;,&quot;f&quot;:[[0,44]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,46]]},{&quot;o&quot;:&quot;=== Passing an object reference ===&quot;,&quot;f&quot;:[[0,46]]},{&quot;o&quot;:&quot;  inside refill(Weapon): Pistol [10 dmg, 22 ammo]&quot;,&quot;f&quot;:[[0,12],[0,47]]},{&quot;o&quot;:&quot;  after refill(Weapon): Pistol [10 dmg, 22 ammo]&quot;,&quot;f&quot;:[[0,48]]},{&quot;o&quot;:&quot;  crafted Water gun [1 dmg, 1 ammo]&quot;,&quot;f&quot;:[[1,21],[0,17],[0,49]]},{&quot;o&quot;:&quot;  inside swap(): w is now Water gun [1 dmg, 1 ammo]&quot;,&quot;f&quot;:[[0,18],[0,49]]},{&quot;o&quot;:&quot;  after swap(): pistol is still Pistol [10 dmg, 22 ammo]&quot;,&quot;f&quot;:[[0,50]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,52]]},{&quot;o&quot;:&quot;=== A medic heals through a reference ===&quot;,&quot;f&quot;:[[0,52]]},{&quot;o&quot;:&quot;Ranger takes 40 damage -&gt; health 60&quot;,&quot;f&quot;:[[0,55]]},{&quot;o&quot;:&quot;Doc heals Ranger -&gt; health 90&quot;,&quot;f&quot;:[[3,11],[0,56]]},{&quot;o&quot;:&quot;Back in main: ranger.getHealth() = 90&quot;,&quot;f&quot;:[[0,57]]}]"><pre class="run-file" data-file="ArmoryDemo.java" hidden>public class ArmoryDemo {
 
-=== Copy constructor ===
-  crafted Rifle [25 dmg, 12 ammo]
-rifle: Rifle [25 dmg, 12 ammo]
-spare: Rifle [30 dmg, 12 ammo]  (a separate object)
+    // Receives a copy of the int: the change stays inside this method
+    static void refill(int ammo) {
+        ammo = 99;
+        System.out.println(&quot;  inside refill(int): ammo = &quot; + ammo);
+    }
 
-=== Overloaded shoot() ===
-  crafted Pistol [10 dmg, 12 ammo]
-Ranger equips Rocket [80 dmg, 3 ammo]
-Ranger fires the Rocket into the air
-Ranger hits Tank for 80
-Ranger fires a burst of 3 at Drone
-Ranger hits Drone for 80
-Ranger: click! The Rocket is empty
-Ranger: click! The Rocket is empty
+    // Receives a copy of the reference: both point at the same Weapon object
+    static void refill(Weapon w) {
+        w.addAmmo(10);
+        System.out.println(&quot;  inside refill(Weapon): &quot; + w);
+    }
 
-=== Passing a primitive ===
-  inside refill(int): ammo = 99
-  after refill(int): ammo = 5
+    // Pointing the parameter at a new object does not change the caller&#x27;s variable
+    static void swap(Weapon w) {
+        w = new Weapon(&quot;Water gun&quot;, 1, 1);
+        System.out.println(&quot;  inside swap(): w is now &quot; + w);
+    }
 
-=== Passing an object reference ===
-  inside refill(Weapon): Pistol [10 dmg, 22 ammo]
-  after refill(Weapon): Pistol [10 dmg, 22 ammo]
-  crafted Water gun [1 dmg, 1 ammo]
-  inside swap(): w is now Water gun [1 dmg, 1 ammo]
-  after swap(): pistol is still Pistol [10 dmg, 22 ammo]
+    public static void main(String[] args) {
 
-=== A medic heals through a reference ===
-Ranger takes 40 damage -&gt; health 60
-Doc heals Ranger -&gt; health 90
-Back in main: ranger.getHealth() = 90</pre></div>
+        System.out.println(&quot;=== Constructors ===&quot;);
+        Weapon pistol = new Weapon();
+        Weapon rifle = new Weapon(&quot;Rifle&quot;, 25);
+        Weapon rocket = new Weapon(&quot;Rocket&quot;, 80, 3);
+
+        System.out.println(&quot;\n=== Copy constructor ===&quot;);
+        Weapon spare = new Weapon(rifle);
+        spare.upgrade(5);
+        System.out.println(&quot;rifle: &quot; + rifle);
+        System.out.println(&quot;spare: &quot; + spare + &quot;  (a separate object)&quot;);
+
+        System.out.println(&quot;\n=== Overloaded shoot() ===&quot;);
+        Player ranger = new Player(&quot;Ranger&quot;);
+        ranger.equip(rocket);
+        ranger.shoot();
+        ranger.shoot(&quot;Tank&quot;);
+        ranger.shoot(&quot;Drone&quot;, 3);
+
+        System.out.println(&quot;\n=== Passing a primitive ===&quot;);
+        int ammo = 5;
+        refill(ammo);
+        System.out.println(&quot;  after refill(int): ammo = &quot; + ammo);
+
+        System.out.println(&quot;\n=== Passing an object reference ===&quot;);
+        refill(pistol);
+        System.out.println(&quot;  after refill(Weapon): &quot; + pistol);
+        swap(pistol);
+        System.out.println(&quot;  after swap(): pistol is still &quot; + pistol);
+
+        System.out.println(&quot;\n=== A medic heals through a reference ===&quot;);
+        Medic doc = new Medic(&quot;Doc&quot;);
+        ranger.takeDamage(40);
+        System.out.println(&quot;Ranger takes 40 damage -&gt; health &quot; + ranger.getHealth());
+        doc.heal(ranger, 30);
+        System.out.println(&quot;Back in main: ranger.getHealth() = &quot; + ranger.getHealth());
+    }
+}</pre><pre class="run-file" data-file="Weapon.java" hidden>public class Weapon {
+    private String name;
+    private int damage;
+    private int ammo;
+
+    // 1. Default constructor: no arguments gives a basic pistol
+    public Weapon() {
+        this(&quot;Pistol&quot;, 10);                 // chain to the 2-argument constructor
+    }
+
+    // 2. Parameterised constructor: a standard clip of 12
+    public Weapon(String name, int damage) {
+        this(name, damage, 12);             // chain to the full constructor
+    }
+
+    // 3. Full constructor: the only one that sets the fields
+    public Weapon(String name, int damage, int ammo) {
+        this.name = name;
+        this.damage = damage;
+        this.ammo = ammo;
+        System.out.println(&quot;  crafted &quot; + this);
+    }
+
+    // 4. Copy constructor: a new weapon with the same settings
+    public Weapon(Weapon other) {
+        this(other.name, other.damage, other.ammo);
+    }
+
+    public String getName() { return name; }
+    public int getDamage()  { return damage; }
+    public int getAmmo()    { return ammo; }
+
+    public boolean fire() {
+        if (ammo == 0) {
+            return false;
+        }
+        ammo--;
+        return true;
+    }
+
+    public void addAmmo(int amount) {
+        ammo += amount;
+    }
+
+    public void upgrade(int extraDamage) {
+        damage += extraDamage;
+    }
+
+    @Override
+    public String toString() {
+        return name + &quot; [&quot; + damage + &quot; dmg, &quot; + ammo + &quot; ammo]&quot;;
+    }
+}</pre><pre class="run-file" data-file="Player.java" hidden>public class Player {
+    private String name;
+    private int health;
+    private Weapon weapon;
+
+    public Player(String name) {
+        this(name, 100);                    // chain: default health is 100
+    }
+
+    public Player(String name, int health) {
+        this.name = name;
+        this.health = health;
+        this.weapon = new Weapon();         // everyone starts with a pistol
+    }
+
+    public String getName() { return name; }
+    public int getHealth()  { return health; }
+
+    public void setHealth(int health) {
+        this.health = Math.max(0, Math.min(100, health));
+    }
+
+    public void equip(Weapon w) {
+        weapon = w;
+        System.out.println(name + &quot; equips &quot; + w);
+    }
+
+    // Overloaded shoot(): same name, different parameter lists
+    public void shoot() {
+        if (weapon.fire()) {
+            System.out.println(name + &quot; fires the &quot; + weapon.getName() + &quot; into the air&quot;);
+        } else {
+            System.out.println(name + &quot;: click! The &quot; + weapon.getName() + &quot; is empty&quot;);
+        }
+    }
+
+    public void shoot(String target) {
+        if (weapon.fire()) {
+            System.out.println(name + &quot; hits &quot; + target + &quot; for &quot; + weapon.getDamage());
+        } else {
+            System.out.println(name + &quot;: click! The &quot; + weapon.getName() + &quot; is empty&quot;);
+        }
+    }
+
+    public void shoot(String target, int burst) {
+        System.out.println(name + &quot; fires a burst of &quot; + burst + &quot; at &quot; + target);
+        for (int i = 1; i &lt;= burst; i++) {
+            shoot(target);                  // reuses the one-target version
+        }
+    }
+
+    public void takeDamage(int amount) {
+        setHealth(health - amount);
+    }
+}</pre><pre class="run-file" data-file="Medic.java" hidden>public class Medic {
+    private String name;
+
+    public Medic(String name) {
+        this.name = name;
+    }
+
+    // p is a copy of the reference: it points at the caller&#x27;s Player object
+    public void heal(Player p, int amount) {
+        p.setHealth(p.getHealth() + amount);
+        System.out.println(name + &quot; heals &quot; + p.getName() + &quot; -&gt; health &quot; + p.getHealth());
+    }
+}</pre></div>
 </div></section>
 <section class="slide " data-title="Game task 1: A shotgun constructor" aria-label="Game task 1: A shotgun constructor" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Game practice · 1 of 3</p><h2>Game task 1: A shotgun constructor</h2><div class="ex task g-task"><div class="qq">A weapon that fires several pellets.</div>

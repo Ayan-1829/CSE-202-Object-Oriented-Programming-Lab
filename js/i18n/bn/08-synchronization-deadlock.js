@@ -11,6 +11,7 @@ I18N_BN_ADD({
 "<code>addUnsafe</code> has no lock: updates can be lost.": "<code>addUnsafe</code>-এ কোনো lock নেই: update হারাতে পারে।",
 "<code>count++</code> is three steps: read, add, write. Steps from two threads can mix.": "<code>count++</code> তিন ধাপ: পড়া, যোগ করা, লেখা। দুই thread-এর ধাপ মিশে যেতে পারে।",
 "<code>drop()</code> adds crates and wakes everyone.": "<code>drop()</code> crate যোগ করে সবাইকে জাগায়।",
+"<code>score = score + 1</code> is three steps, and two threads mixed them up: a <b>race condition</b>. <code>synchronized</code> lets one thread in at a time — but lock carelessly and two soldiers wait for each other forever: a <b>deadlock</b>.": "<code>score = score + 1</code> তিন ধাপের, আর দুটি thread ধাপগুলো গুলিয়ে ফেলেছে: একটি <b>race condition</b>। <code>synchronized</code> একসময়ে একটি thread-কে ঢুকতে দেয় — কিন্তু অসাবধানে lock করলে দুই সৈনিক চিরকাল একে অপরের অপেক্ষায় থাকে: একটি <b>deadlock</b>।",
 "<code>take()</code> waits in a while loop until a crate exists.": "crate না থাকা পর্যন্ত <code>take()</code> একটি while loop-এ অপেক্ষা করে।",
 "<code>wait()</code> gives up the lock and sleeps until another thread calls <code>notifyAll()</code>.": "<code>wait()</code> lock ছেড়ে দিয়ে ঘুমায়, যতক্ষণ না অন্য একটি thread <code>notifyAll()</code> call করে।",
 "A <code>synchronized (obj) { … }</code> block locks only the lines that need it.": "<code>synchronized (obj) { … }</code> block শুধু দরকারি লাইনগুলো lock করে।",
@@ -28,6 +29,7 @@ I18N_BN_ADD({
 "After this chapter you can": "এই অধ্যায়ের পরে আপনি পারবেন",
 "All four together cause a deadlock; break any one to prevent it.": "চারটি একসঙ্গে থাকলে deadlock হয়; যেকোনো একটি ভাঙলেই তা আটকানো যায়।",
 "Alpha (thread)": "Alpha (থ্রেড)",
+"Alpha and Bravo each score 100 000 points. The scoreboard says 145 000. Fifty-five thousand points vanished, and nobody cheated.": "Alpha আর Bravo প্রত্যেকে 100 000 পয়েন্ট পায়। scoreboard দেখায় 145 000। পঞ্চান্ন হাজার পয়েন্ট উধাও, অথচ কেউ চুরি করেনি।",
 "Alpha reads score: 10": "Alpha score পড়ে: 10",
 "Alpha takes the scoreboard’s lock": "Alpha scoreboard-এর lock নেয়",
 "Alpha writes 10 + 1 = 11": "Alpha লেখে 10 + 1 = 11",
@@ -341,9 +343,7 @@ I18N_BN_ADD({
 "yes": "হ্যাঁ",
 "…but T2 holds it. T1 is <b>BLOCKED</b>, still holding ACC-001.": "…কিন্তু সেটি T2 ধরে আছে। T1 <b>BLOCKED</b>, তখনও ACC-001 ধরে রেখে।",
 "…which T1 holds. Each thread holds one lock and waits for the other: a <b>circular wait</b>. Neither can ever continue: <b>deadlock</b>. The program hangs with no error.": "…যা T1 ধরে আছে। প্রতিটি thread একটি lock ধরে অন্যটির জন্য অপেক্ষা করে: একটি <b>circular wait</b>। কেউই আর কখনো এগোতে পারে না: <b>deadlock</b>। প্রোগ্রামটি কোনো error ছাড়াই ঝুলে থাকে।",
-"▶ Run program": "▶ প্রোগ্রাম চালান",
-"Alpha and Bravo each score 100 000 points. The scoreboard says 145 000. Fifty-five thousand points vanished, and nobody cheated.": "Alpha আর Bravo প্রত্যেকে 100 000 পয়েন্ট পায়। scoreboard দেখায় 145 000। পঞ্চান্ন হাজার পয়েন্ট উধাও, অথচ কেউ চুরি করেনি।",
-"<code>score = score + 1</code> is three steps, and two threads mixed them up: a <b>race condition</b>. <code>synchronized</code> lets one thread in at a time — but lock carelessly and two soldiers wait for each other forever: a <b>deadlock</b>.": "<code>score = score + 1</code> তিন ধাপের, আর দুটি thread ধাপগুলো গুলিয়ে ফেলেছে: একটি <b>race condition</b>। <code>synchronized</code> একসময়ে একটি thread-কে ঢুকতে দেয় — কিন্তু অসাবধানে lock করলে দুই সৈনিক চিরকাল একে অপরের অপেক্ষায় থাকে: একটি <b>deadlock</b>।"
+"▶ Run program": "▶ প্রোগ্রাম চালান"
 });
 /* Bengali patterns for text with changing numbers or file names on the v2 decks (appended to each deck's file) */
 I18N_BN_PATTERNS([
@@ -403,5 +403,14 @@ I18N_BN_PATTERNS([
   [/^health = (\d+) → Hurt: yellow bar$/, 'health = $1 → আহত: হলুদ বার'],
   [/^health = (\d+) → Critical: red bar$/, 'health = $1 → সংকটাপন্ন: লাল বার'],
   [/^health = (\d+) → Game over$/, 'health = $1 → গেম শেষ'],
-  [/^referenced by (s\d)$/, '$1 দ্বারা নির্দেশিত']
+  [/^referenced by (s\d)$/, '$1 দ্বারা নির্দেশিত'],
+  [/^Next line ▶$/, 'পরের লাইন ▶'],
+  [/^▶ Run$/, '▶ চালান'],
+  [/^Output line (\d+) of (\d+)$/, 'Output লাইন $1 / $2'],
+  [/^line (\d+)$/, 'লাইন $1'],
+  [/^The program starts in <code>main<\/code>\. Press <b>Next line ▶<\/b> to run it until it prints a line\.$/, 'প্রোগ্রাম <code>main</code> থেকে শুরু হয়। পরের output লাইন পর্যন্ত চালাতে <b>পরের লাইন ▶</b> চাপুন।'],
+  [/^Output line (\d+) comes from line (\d+) of <code>([^<]+)<\/code>\.$/, 'Output লাইন $1 আসে <code>$3</code>-এর লাইন $2 থেকে।'],
+  [/^The empty output line (\d+) comes from line (\d+) of <code>([^<]+)<\/code>\.$/, 'ফাঁকা output লাইন $1 আসে <code>$3</code>-এর লাইন $2 থেকে।'],
+  [/^That line is inside a method, called from line (\d+) of <code>([^<]+)<\/code>\.$/, 'লাইনটি একটি method-এর ভিতরে; method-টি call করা হয়েছে <code>$2</code>-এর লাইন $1 থেকে।'],
+  [/^That was the last line: <code>main<\/code> ends and the program exits\.$/, 'এটিই শেষ লাইন: <code>main</code> শেষ হয়, প্রোগ্রামও বন্ধ হয়।']
 ]);

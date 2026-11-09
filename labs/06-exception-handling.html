@@ -401,33 +401,102 @@ public class GameException extends Exception {
 }</pre></div><p class="muted">Save every file in one folder, then compile and run: <code>javac *.java</code> → <code>java ExceptionDemo</code></p>
 </div></section>
 <section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Run the game</p><h2>Expected output</h2><div class="runbox" data-cmd="java ExceptionDemo"><pre class="run-src" hidden>=== An unchecked exception: a lane that does not exist ===
-Caught ArrayIndexOutOfBoundsException: Index 5 out of bounds for length 3
+<p class="kicker">Run the game</p><h2>Expected output</h2><div data-demo="g-run" data-cmd="java ExceptionDemo" data-steps="[{&quot;o&quot;:&quot;=== An unchecked exception: a lane that does not exist ===&quot;,&quot;f&quot;:[[0,16]]},{&quot;o&quot;:&quot;Caught ArrayIndexOutOfBoundsException: Index 5 out of bounds for length 3&quot;,&quot;f&quot;:[[0,21]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,24]]},{&quot;o&quot;:&quot;=== try / catch / finally: firing until the clip is empty ===&quot;,&quot;f&quot;:[[0,24]]},{&quot;o&quot;:&quot;  BANG! Pistol has 1 left&quot;,&quot;f&quot;:[[1,16],[0,28]]},{&quot;o&quot;:&quot;  (shot 1 logged, score 10)&quot;,&quot;f&quot;:[[0,34]]},{&quot;o&quot;:&quot;  BANG! Pistol has 0 left&quot;,&quot;f&quot;:[[1,16],[0,28]]},{&quot;o&quot;:&quot;  (shot 2 logged, score 20)&quot;,&quot;f&quot;:[[0,34]]},{&quot;o&quot;:&quot;  Caught: Pistol is out of ammo -&gt; reloading&quot;,&quot;f&quot;:[[0,31]]},{&quot;o&quot;:&quot;  reloaded 6 -&gt; Pistol has 6&quot;,&quot;f&quot;:[[1,25],[0,32]]},{&quot;o&quot;:&quot;  (shot 3 logged, score 20)&quot;,&quot;f&quot;:[[0,34]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,38]]},{&quot;o&quot;:&quot;=== throw for a bad argument ===&quot;,&quot;f&quot;:[[0,38]]},{&quot;o&quot;:&quot;Caught: reload amount must be positive, got -5&quot;,&quot;f&quot;:[[0,42]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,45]]},{&quot;o&quot;:&quot;=== A custom exception that wraps another ===&quot;,&quot;f&quot;:[[0,45]]},{&quot;o&quot;:&quot;Loaded level 3&quot;,&quot;f&quot;:[[0,50]]},{&quot;o&quot;:&quot;Cannot load: \&quot;abc\&quot; is not a level number&quot;,&quot;f&quot;:[[0,52]]},{&quot;o&quot;:&quot;  cause: NumberFormatException&quot;,&quot;f&quot;:[[0,54]]},{&quot;o&quot;:&quot;Cannot load: level 42 does not exist (1-10)&quot;,&quot;f&quot;:[[0,52]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,59]]},{&quot;o&quot;:&quot;=== Catching by the parent type ===&quot;,&quot;f&quot;:[[0,59]]},{&quot;o&quot;:&quot;GameException handler caught OutOfAmmoException: Rocket is out of ammo&quot;,&quot;f&quot;:[[0,64]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,67]]},{&quot;o&quot;:&quot;=== finally always runs ===&quot;,&quot;f&quot;:[[0,67]]},{&quot;o&quot;:&quot;  finally: score 20 written to save.dat&quot;,&quot;f&quot;:[[0,10],[0,68]]},{&quot;o&quot;:&quot;score 20 sent to the server&quot;,&quot;f&quot;:[[0,68]]}]"><pre class="run-file" data-file="ExceptionDemo.java" hidden>public class ExceptionDemo {
 
-=== try / catch / finally: firing until the clip is empty ===
-  BANG! Pistol has 1 left
-  (shot 1 logged, score 10)
-  BANG! Pistol has 0 left
-  (shot 2 logged, score 20)
-  Caught: Pistol is out of ammo -&gt; reloading
-  reloaded 6 -&gt; Pistol has 6
-  (shot 3 logged, score 20)
+    static int score = 0;
 
-=== throw for a bad argument ===
-Caught: reload amount must be positive, got -5
+    // finally runs even when the try block returns early
+    static String saveScore() {
+        try {
+            return &quot;score &quot; + score + &quot; sent to the server&quot;;
+        } finally {
+            System.out.println(&quot;  finally: score &quot; + score + &quot; written to save.dat&quot;);
+        }
+    }
 
-=== A custom exception that wraps another ===
-Loaded level 3
-Cannot load: &quot;abc&quot; is not a level number
-  cause: NumberFormatException
-Cannot load: level 42 does not exist (1-10)
+    public static void main(String[] args) {
 
-=== Catching by the parent type ===
-GameException handler caught OutOfAmmoException: Rocket is out of ammo
+        System.out.println(&quot;=== An unchecked exception: a lane that does not exist ===&quot;);
+        int[] laneY = { 100, 200, 300 };
+        try {
+            System.out.println(&quot;Lane 5 is at y=&quot; + laneY[5]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(&quot;Caught &quot; + e.getClass().getSimpleName() + &quot;: &quot; + e.getMessage());
+        }
 
-=== finally always runs ===
-  finally: score 20 written to save.dat
-score 20 sent to the server</pre></div>
+        System.out.println(&quot;\n=== try / catch / finally: firing until the clip is empty ===&quot;);
+        Gun pistol = new Gun(&quot;Pistol&quot;, 2);
+        for (int shot = 1; shot &lt;= 3; shot++) {
+            try {
+                pistol.fire();
+                score += 10;
+            } catch (OutOfAmmoException e) {
+                System.out.println(&quot;  Caught: &quot; + e.getMessage() + &quot; -&gt; reloading&quot;);
+                pistol.reload(6);
+            } finally {
+                System.out.println(&quot;  (shot &quot; + shot + &quot; logged, score &quot; + score + &quot;)&quot;);
+            }
+        }
+
+        System.out.println(&quot;\n=== throw for a bad argument ===&quot;);
+        try {
+            pistol.reload(-5);
+        } catch (IllegalArgumentException e) {
+            System.out.println(&quot;Caught: &quot; + e.getMessage());
+        }
+
+        System.out.println(&quot;\n=== A custom exception that wraps another ===&quot;);
+        String[] typed = { &quot;3&quot;, &quot;abc&quot;, &quot;42&quot; };
+        for (String t : typed) {
+            try {
+                int level = LevelLoader.load(t);
+                System.out.println(&quot;Loaded level &quot; + level);
+            } catch (InvalidLevelException e) {
+                System.out.println(&quot;Cannot load: &quot; + e.getMessage());
+                if (e.getCause() != null) {
+                    System.out.println(&quot;  cause: &quot; + e.getCause().getClass().getSimpleName());
+                }
+            }
+        }
+
+        System.out.println(&quot;\n=== Catching by the parent type ===&quot;);
+        Gun rocket = new Gun(&quot;Rocket&quot;, 0);
+        try {
+            rocket.fire();
+        } catch (GameException e) {
+            System.out.println(&quot;GameException handler caught &quot; + e.getClass().getSimpleName() + &quot;: &quot; + e.getMessage());
+        }
+
+        System.out.println(&quot;\n=== finally always runs ===&quot;);
+        System.out.println(saveScore());
+    }
+}</pre><pre class="run-file" data-file="Gun.java" hidden>public class Gun {
+    private String name;
+    private int ammo;
+
+    public Gun(String name, int ammo) {
+        this.name = name;
+        this.ammo = ammo;
+    }
+
+    // throws: tells every caller that this method can fail this way
+    public void fire() throws OutOfAmmoException {
+        if (ammo == 0) {
+            throw new OutOfAmmoException(name);
+        }
+        ammo--;
+        System.out.println(&quot;  BANG! &quot; + name + &quot; has &quot; + ammo + &quot; left&quot;);
+    }
+
+    // An unchecked exception for a programming mistake
+    public void reload(int amount) {
+        if (amount &lt;= 0) {
+            throw new IllegalArgumentException(&quot;reload amount must be positive, got &quot; + amount);
+        }
+        ammo += amount;
+        System.out.println(&quot;  reloaded &quot; + amount + &quot; -&gt; &quot; + name + &quot; has &quot; + ammo);
+    }
+}</pre></div>
 </div></section>
 <section class="slide " data-title="Game task 1: A WeaponJammedException" aria-label="Game task 1: A WeaponJammedException" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Game practice · 1 of 3</p><h2>Game task 1: A WeaponJammedException</h2><div class="ex task g-task"><div class="qq">Sometimes the gun jams.</div>

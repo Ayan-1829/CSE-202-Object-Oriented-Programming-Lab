@@ -573,30 +573,167 @@ public interface Collectible {
 }</pre></div><p class="muted">Save every file in one folder, then compile and run: <code>javac *.java</code> → <code>java World</code></p>
 </div></section>
 <section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Run the game</p><h2>Expected output</h2><div class="runbox" data-cmd="java World"><pre class="run-src" hidden>=== One abstract type, many objects ===
-start   |.P..+..........D....|
-tick 1  |..P.+.........D.....|
-tick 2  |...P+........D......|
-tick 3  |....P.......D.......|
+<p class="kicker">Run the game</p><h2>Expected output</h2><div data-demo="g-run" data-cmd="java World" data-steps="[{&quot;o&quot;:&quot;=== One abstract type, many objects ===&quot;,&quot;f&quot;:[[0,21]]},{&quot;o&quot;:&quot;start   |.P..+..........D....|&quot;,&quot;f&quot;:[[0,11],[0,23]]},{&quot;o&quot;:&quot;tick 1  |..P.+.........D.....|&quot;,&quot;f&quot;:[[0,11],[0,28]]},{&quot;o&quot;:&quot;tick 2  |...P+........D......|&quot;,&quot;f&quot;:[[0,11],[0,28]]},{&quot;o&quot;:&quot;tick 3  |....P.......D.......|&quot;,&quot;f&quot;:[[0,11],[0,28]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,31]]},{&quot;o&quot;:&quot;=== Interfaces as types ===&quot;,&quot;f&quot;:[[0,31]]},{&quot;o&quot;:&quot;Ranger-bullet1 fired, flying &#x27;&gt;&#x27; from x=5&quot;,&quot;f&quot;:[[0,35]]},{&quot;o&quot;:&quot;Drone-1-laser fired, flying &#x27;&lt;&#x27; from x=11&quot;,&quot;f&quot;:[[0,35]]},{&quot;o&quot;:&quot;Shooter.RANGE = 8&quot;,&quot;f&quot;:[[0,37]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,39]]},{&quot;o&quot;:&quot;=== Damage only what is Damageable ===&quot;,&quot;f&quot;:[[0,39]]},{&quot;o&quot;:&quot;  Drone-1 is hit: health 20&quot;,&quot;f&quot;:[[2,21],[0,40]]},{&quot;o&quot;:&quot;  Ranger is hit: health 70&quot;,&quot;f&quot;:[[1,22],[0,41]]},{&quot;o&quot;:&quot;  HealthPack is not Damageable: skipped&quot;,&quot;f&quot;:[[0,47]]},{&quot;o&quot;:&quot;  Drone-1 is hit: health 0&quot;,&quot;f&quot;:[[2,21],[0,45]]},{&quot;o&quot;:&quot;  Ranger is hit: health 50&quot;,&quot;f&quot;:[[1,22],[0,45]]},{&quot;o&quot;:&quot;Drone destroyed? true&quot;,&quot;f&quot;:[[0,50]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,52]]},{&quot;o&quot;:&quot;=== Picking up a Collectible ===&quot;,&quot;f&quot;:[[0,52]]},{&quot;o&quot;:&quot;  Ranger grabs a health pack (+25) -&gt; health 75&quot;,&quot;f&quot;:[[3,22],[0,54]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,56]]},{&quot;o&quot;:&quot;=== Final map ===&quot;,&quot;f&quot;:[[0,56]]},{&quot;o&quot;:&quot;end     |....P.......*.......|&quot;,&quot;f&quot;:[[0,11],[0,57]]}]"><pre class="run-file" data-file="World.java" hidden>public class World {
 
-=== Interfaces as types ===
-Ranger-bullet1 fired, flying &#x27;&gt;&#x27; from x=5
-Drone-1-laser fired, flying &#x27;&lt;&#x27; from x=11
-Shooter.RANGE = 8
+    // Draws a one-line map, 20 cells wide, from any GameObjects
+    static void drawMap(String label, GameObject[] objects) {
+        char[] row = &quot;....................&quot;.toCharArray();
+        for (GameObject o : objects) {
+            if (o.getX() &gt;= 0 &amp;&amp; o.getX() &lt; row.length) {
+                row[o.getX()] = o.symbol();
+            }
+        }
+        System.out.println(label + &quot;  |&quot; + new String(row) + &quot;|&quot;);
+    }
 
-=== Damage only what is Damageable ===
-  Drone-1 is hit: health 20
-  Ranger is hit: health 70
-  HealthPack is not Damageable: skipped
-  Drone-1 is hit: health 0
-  Ranger is hit: health 50
-Drone destroyed? true
+    public static void main(String[] args) {
+        Player ranger = new Player(&quot;Ranger&quot;, 1);
+        Drone drone = new Drone(&quot;Drone-1&quot;, 15);
+        HealthPack pack = new HealthPack(4, 25);
 
-=== Picking up a Collectible ===
-  Ranger grabs a health pack (+25) -&gt; health 75
+        // GameObject g = new GameObject(&quot;ghost&quot;, 0);   // compile error: GameObject is abstract
 
-=== Final map ===
-end     |....P.......*.......|</pre></div>
+        System.out.println(&quot;=== One abstract type, many objects ===&quot;);
+        GameObject[] world = { pack, drone, ranger };     // drawn in this order: the player on top
+        drawMap(&quot;start &quot;, world);
+        for (int tick = 1; tick &lt;= 3; tick++) {
+            for (GameObject o : world) {
+                o.update();                 // each class moves in its own way
+            }
+            drawMap(&quot;tick &quot; + tick, world);
+        }
+
+        System.out.println(&quot;\n=== Interfaces as types ===&quot;);
+        Shooter[] shooters = { ranger, drone };
+        for (Shooter s : shooters) {
+            Bullet b = s.shoot();
+            System.out.println(b.getName() + &quot; fired, flying &#x27;&quot; + b.symbol() + &quot;&#x27; from x=&quot; + b.getX());
+        }
+        System.out.println(&quot;Shooter.RANGE = &quot; + Shooter.RANGE);
+
+        System.out.println(&quot;\n=== Damage only what is Damageable ===&quot;);
+        drone.takeDamage(10);
+        ranger.takeDamage(30);
+        for (GameObject o : world) {
+            if (o instanceof Damageable) {
+                Damageable d = (Damageable) o;
+                d.takeDamage(20);
+            } else {
+                System.out.println(&quot;  &quot; + o.getName() + &quot; is not Damageable: skipped&quot;);
+            }
+        }
+        System.out.println(&quot;Drone destroyed? &quot; + drone.isDestroyed());
+
+        System.out.println(&quot;\n=== Picking up a Collectible ===&quot;);
+        Collectible c = pack;
+        c.collectBy(ranger);
+
+        System.out.println(&quot;\n=== Final map ===&quot;);
+        drawMap(&quot;end   &quot;, world);
+    }
+}</pre><pre class="run-file" data-file="Player.java" hidden>public class Player extends GameObject implements Damageable, Shooter {
+    private int health = 100;
+    private int shots = 0;
+
+    public Player(String name, int x) {
+        super(name, x);
+    }
+
+    @Override
+    public void update() {
+        x += 1;                             // walks right one step
+    }
+
+    @Override
+    public char symbol() {
+        return &#x27;P&#x27;;
+    }
+
+    @Override
+    public void takeDamage(int amount) {
+        health = Math.max(0, health - amount);
+        System.out.println(&quot;  &quot; + name + &quot; is hit: health &quot; + health);
+    }
+
+    @Override
+    public boolean isDestroyed() {
+        return health == 0;
+    }
+
+    @Override
+    public Bullet shoot() {
+        shots++;
+        return new Bullet(name + &quot;-bullet&quot; + shots, x + 1, +1);
+    }
+
+    public void heal(int amount) {
+        health = Math.min(100, health + amount);
+    }
+
+    public int getHealth() {
+        return health;
+    }
+}</pre><pre class="run-file" data-file="Drone.java" hidden>public class Drone extends GameObject implements Damageable, Shooter {
+    private int health = 30;
+
+    public Drone(String name, int x) {
+        super(name, x);
+    }
+
+    @Override
+    public void update() {
+        x -= 1;                             // flies left, towards the player
+    }
+
+    @Override
+    public char symbol() {
+        return isDestroyed() ? &#x27;*&#x27; : &#x27;D&#x27;;
+    }
+
+    @Override
+    public void takeDamage(int amount) {
+        health = Math.max(0, health - amount);
+        System.out.println(&quot;  &quot; + name + &quot; is hit: health &quot; + health);
+    }
+
+    @Override
+    public boolean isDestroyed() {
+        return health == 0;
+    }
+
+    @Override
+    public Bullet shoot() {
+        return new Bullet(name + &quot;-laser&quot;, x - 1, -1);
+    }
+}</pre><pre class="run-file" data-file="HealthPack.java" hidden>public class HealthPack extends GameObject implements Collectible {
+    private int amount;
+
+    public HealthPack(int x, int amount) {
+        super(&quot;HealthPack&quot;, x);
+        this.amount = amount;
+    }
+
+    @Override
+    public void update() {
+        // a health pack lies still: an empty body is still an implementation
+    }
+
+    @Override
+    public char symbol() {
+        return &#x27;+&#x27;;
+    }
+
+    @Override
+    public void collectBy(Player p) {
+        p.heal(amount);
+        System.out.println(&quot;  &quot; + p.getName() + &quot; &quot; + pickupMessage() + &quot; -&gt; health &quot; + p.getHealth());
+    }
+
+    @Override
+    public String pickupMessage() {
+        return &quot;grabs a health pack (+&quot; + amount + &quot;)&quot;;
+    }
+}</pre></div>
 </div></section>
 <section class="slide " data-title="Game task 1: A Mine" aria-label="Game task 1: A Mine" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Game practice · 1 of 3</p><h2>Game task 1: A Mine</h2><div class="ex task g-task"><div class="qq">A new object with one ability.</div>

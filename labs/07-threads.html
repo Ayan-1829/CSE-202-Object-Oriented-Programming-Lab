@@ -317,32 +317,100 @@ public class AmmoRegen implements Runnable {
     }
 }</pre></div><p class="muted">Save every file in one folder, then compile and run: <code>javac *.java</code> → <code>java ThreadDemo</code></p>
 </div></section>
-<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Run the game</p><h2>Expected output</h2><div class="runbox" data-cmd="java ThreadDemo"><pre class="run-src" hidden>=== Creating three game threads ===
-spawner state before start(): NEW
+<section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div style="zoom:0.92;" class="slide-inner">
+<p class="kicker">Run the game</p><h2>Expected output</h2><div data-demo="g-run" data-cmd="java ThreadDemo" data-steps="[{&quot;o&quot;:&quot;=== Creating three game threads ===&quot;,&quot;f&quot;:[[0,4]]},{&quot;o&quot;:&quot;spawner state before start(): NEW&quot;,&quot;f&quot;:[[0,22]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,24]]},{&quot;o&quot;:&quot;=== start(): all three run at the same time ===&quot;,&quot;f&quot;:[[0,24]]},{&quot;o&quot;:&quot;[Spawner] spawned Drone-1&quot;,&quot;f&quot;:[[1,14]]},{&quot;o&quot;:&quot;[AmmoRegen] +5 ammo -&gt; 15&quot;,&quot;f&quot;:[[2,14]]},{&quot;o&quot;:&quot;[Timer] 3...&quot;,&quot;f&quot;:[[0,12]]},{&quot;o&quot;:&quot;[main] spawner state while sleeping: TIMED_WAITING&quot;,&quot;f&quot;:[[0,29]]},{&quot;o&quot;:&quot;[Spawner] spawned Drone-2&quot;,&quot;f&quot;:[[1,14]]},{&quot;o&quot;:&quot;[Timer] 2...&quot;,&quot;f&quot;:[[0,12]]},{&quot;o&quot;:&quot;[AmmoRegen] +5 ammo -&gt; 20&quot;,&quot;f&quot;:[[2,14]]},{&quot;o&quot;:&quot;[Spawner] spawned Drone-3&quot;,&quot;f&quot;:[[1,14]]},{&quot;o&quot;:&quot;[Timer] 1...&quot;,&quot;f&quot;:[[0,12]]},{&quot;o&quot;:&quot;[AmmoRegen] +5 ammo -&gt; 25&quot;,&quot;f&quot;:[[2,14]]},{&quot;o&quot;:&quot;[Spawner] wave complete&quot;,&quot;f&quot;:[[1,22]]},{&quot;o&quot;:&quot;[Timer] GO!&quot;,&quot;f&quot;:[[0,19]]},{&quot;o&quot;:&quot;[AmmoRegen] clip full&quot;,&quot;f&quot;:[[2,21]]},{&quot;o&quot;:&quot;[main] all threads finished&quot;,&quot;f&quot;:[[0,35]]},{&quot;o&quot;:&quot;spawner state after join(): TERMINATED&quot;,&quot;f&quot;:[[0,36]]},{&quot;o&quot;:&quot;ammo after regen: 25&quot;,&quot;f&quot;:[[0,37]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,39]]},{&quot;o&quot;:&quot;=== run() is just a method call ===&quot;,&quot;f&quot;:[[0,39]]},{&quot;o&quot;:&quot;[main] spawned Drone-1&quot;,&quot;f&quot;:[[1,14],[0,41]]},{&quot;o&quot;:&quot;[main] wave complete&quot;,&quot;f&quot;:[[1,22],[0,41]]},{&quot;o&quot;:&quot;direct state: NEW (it never started)&quot;,&quot;f&quot;:[[0,42]]}]"><pre class="run-file" data-file="ThreadDemo.java" hidden>public class ThreadDemo {
+    public static void main(String[] args) throws InterruptedException {
 
-=== start(): all three run at the same time ===
-[Spawner] spawned Drone-1
-[AmmoRegen] +5 ammo -&gt; 15
-[Timer] 3...
-[main] spawner state while sleeping: TIMED_WAITING
-[Spawner] spawned Drone-2
-[Timer] 2...
-[AmmoRegen] +5 ammo -&gt; 20
-[Spawner] spawned Drone-3
-[Timer] 1...
-[AmmoRegen] +5 ammo -&gt; 25
-[Spawner] wave complete
-[Timer] GO!
-[AmmoRegen] clip full
-[main] all threads finished
-spawner state after join(): TERMINATED
-ammo after regen: 25
+        System.out.println(&quot;=== Creating three game threads ===&quot;);
+        EnemySpawner spawner = new EnemySpawner(3);
+        AmmoRegen regen = new AmmoRegen(10);
+        Thread regenThread = new Thread(regen, &quot;AmmoRegen&quot;);
 
-=== run() is just a method call ===
-[main] spawned Drone-1
-[main] wave complete
-direct state: NEW (it never started)</pre></div><p class="note-line">The threads run at the same time, so lines that happen together (the first three after start(), for example) can come out in a different order on your machine.</p>
+        // Way 3: a lambda is a short Runnable
+        Thread timer = new Thread(() -&gt; {
+            for (int s = 3; s &gt;= 1; s--) {
+                System.out.println(&quot;[Timer] &quot; + s + &quot;...&quot;);
+                try {
+                    Thread.sleep(400);
+                } catch (InterruptedException e) {
+                    return;
+                }
+            }
+            System.out.println(&quot;[Timer] GO!&quot;);
+        }, &quot;Timer&quot;);
+
+        System.out.println(&quot;spawner state before start(): &quot; + spawner.getState());
+
+        System.out.println(&quot;\n=== start(): all three run at the same time ===&quot;);
+        spawner.start();
+        regenThread.start();
+        timer.start();
+        Thread.sleep(100);
+        System.out.println(&quot;[main] spawner state while sleeping: &quot; + spawner.getState());
+
+        // join(): main waits here until each thread has finished
+        spawner.join();
+        regenThread.join();
+        timer.join();
+        System.out.println(&quot;[main] all threads finished&quot;);
+        System.out.println(&quot;spawner state after join(): &quot; + spawner.getState());
+        System.out.println(&quot;ammo after regen: &quot; + regen.getAmmo());
+
+        System.out.println(&quot;\n=== run() is just a method call ===&quot;);
+        EnemySpawner direct = new EnemySpawner(1);
+        direct.run();                       // no new thread: runs inside main
+        System.out.println(&quot;direct state: &quot; + direct.getState() + &quot; (it never started)&quot;);
+    }
+}</pre><pre class="run-file" data-file="EnemySpawner.java" hidden>// Way 1: extend Thread and override run()
+public class EnemySpawner extends Thread {
+    private final int count;
+
+    public EnemySpawner(int count) {
+        super(&quot;Spawner&quot;);                   // the thread&#x27;s name
+        this.count = count;
+    }
+
+    @Override
+    public void run() {
+        String me = Thread.currentThread().getName();
+        for (int i = 1; i &lt;= count; i++) {
+            System.out.println(&quot;[&quot; + me + &quot;] spawned Drone-&quot; + i);
+            try {
+                Thread.sleep(300);          // TIMED_WAITING while asleep
+            } catch (InterruptedException e) {
+                System.out.println(&quot;[&quot; + me + &quot;] interrupted, stopping&quot;);
+                return;
+            }
+        }
+        System.out.println(&quot;[&quot; + me + &quot;] wave complete&quot;);
+    }
+}</pre><pre class="run-file" data-file="AmmoRegen.java" hidden>// Way 2: implement Runnable and hand the task to a Thread
+public class AmmoRegen implements Runnable {
+    private int ammo;
+
+    public AmmoRegen(int ammo) {
+        this.ammo = ammo;
+    }
+
+    @Override
+    public void run() {
+        String me = Thread.currentThread().getName();
+        for (int i = 1; i &lt;= 3; i++) {
+            ammo += 5;
+            System.out.println(&quot;[&quot; + me + &quot;] +5 ammo -&gt; &quot; + ammo);
+            try {
+                Thread.sleep(450);
+            } catch (InterruptedException e) {
+                return;
+            }
+        }
+        System.out.println(&quot;[&quot; + me + &quot;] clip full&quot;);
+    }
+
+    public int getAmmo() {
+        return ammo;
+    }
+}</pre></div><p class="note-line">The threads run at the same time, so lines that happen together (the first three after start(), for example) can come out in a different order on your machine.</p>
 </div></section>
 <section class="slide " data-title="Game task 1: A music thread" aria-label="Game task 1: A music thread" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Game practice · 1 of 3</p><h2>Game task 1: A music thread</h2><div class="ex task g-task"><div class="qq">Background music while the game runs.</div>

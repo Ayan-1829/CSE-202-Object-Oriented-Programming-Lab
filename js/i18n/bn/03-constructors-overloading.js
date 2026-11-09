@@ -125,6 +125,7 @@ I18N_BN_ADD({
 "Game task 3: Swap weapons": "গেম টাস্ক 3: অস্ত্র বদলাবদলি",
 "GamePanel: gets all the space that is left": "GamePanel: বাকি সব জায়গা এটি পায়",
 "Geometric shape library": "জ্যামিতিক shape library",
+"Give <code>Weapon</code> several <b>constructors</b> that call each other with <code>this(…)</code>, so a pistol needs one line and a rocket launcher a few more. Then give the player several <code>shoot</code> methods with the same name: that is <b>overloading</b>.": "<code>Weapon</code>-কে কয়েকটি <b>constructor</b> দিন, যারা <code>this(…)</code> দিয়ে একে অপরকে call করে, তাহলে পিস্তলের জন্য লাগে এক লাইন, রকেট লঞ্চারের জন্য আরও কয়েকটি। তারপর প্লেয়ারকে একই নামের কয়েকটি <code>shoot</code> method দিন: এটাই <b>overloading</b>।",
 "HEAP: objects": "HEAP: object-গুলো",
 "Healthy: green bar": "সুস্থ: সবুজ বার",
 "Heap<small>objects and arrays</small>": "Heap<small>object ও array</small>",
@@ -218,6 +219,7 @@ I18N_BN_ADD({
 "That is constructor chaining.": "এটাই constructor chaining।",
 "The 2-argument version adds a standard clip of 12.": "2-argument version 12-এর একটি স্ট্যান্ডার্ড ম্যাগাজিন যোগ করে।",
 "The 99 × 99 rectangle is now unreachable (garbage). <code>orig</code> is still Pink 2 × 3. Java is always <b>pass-by-value</b>.": "99 × 99 rectangle-টি এখন অপ্রাপ্য (garbage)। <code>orig</code> এখনো Pink 2 × 3। Java সবসময় <b>pass-by-value</b>।",
+"The armoury sergeant hates paperwork. “A pistol is just a weapon with the usual settings,” he grumbles. “Don’t make me fill in every box.”": "অস্ত্রাগারের সার্জেন্ট কাগজপত্র ঘৃণা করেন। “পিস্তল তো সাধারণ সেটিংসের একটি অস্ত্র,” তিনি গজগজ করেন। “আমাকে প্রতিটি ঘর পূরণ করিও না।”",
 "The burst version reuses <code>shoot(target)</code>.": "burst version <code>shoot(target)</code> আবার ব্যবহার করে।",
 "The caller sees the change, because it is the same object.": "caller পরিবর্তনটি দেখে, কারণ এটি একই object।",
 "The complete game program": "সম্পূর্ণ গেম প্রোগ্রাম",
@@ -336,9 +338,7 @@ I18N_BN_ADD({
 "yes": "হ্যাঁ",
 "…and points its copy at a brand-new object. main’s pistol does not move.": "…এবং নিজের কপিকে একেবারে নতুন object-এ ঘোরায়। main-এর pistol নড়ে না।",
 "…changes what r3 <b>and</b> r5 see, but not the copy.": "…r3 <b>ও</b> r5 যা দেখে তা বদলায়, কিন্তু কপিটি নয়।",
-"▶ Run program": "▶ প্রোগ্রাম চালান",
-"The armoury sergeant hates paperwork. “A pistol is just a weapon with the usual settings,” he grumbles. “Don’t make me fill in every box.”": "অস্ত্রাগারের সার্জেন্ট কাগজপত্র ঘৃণা করেন। “পিস্তল তো সাধারণ সেটিংসের একটি অস্ত্র,” তিনি গজগজ করেন। “আমাকে প্রতিটি ঘর পূরণ করিও না।”",
-"Give <code>Weapon</code> several <b>constructors</b> that call each other with <code>this(…)</code>, so a pistol needs one line and a rocket launcher a few more. Then give the player several <code>shoot</code> methods with the same name: that is <b>overloading</b>.": "<code>Weapon</code>-কে কয়েকটি <b>constructor</b> দিন, যারা <code>this(…)</code> দিয়ে একে অপরকে call করে, তাহলে পিস্তলের জন্য লাগে এক লাইন, রকেট লঞ্চারের জন্য আরও কয়েকটি। তারপর প্লেয়ারকে একই নামের কয়েকটি <code>shoot</code> method দিন: এটাই <b>overloading</b>।"
+"▶ Run program": "▶ প্রোগ্রাম চালান"
 });
 /* Bengali patterns for text with changing numbers or file names on the v2 decks (appended to each deck's file) */
 I18N_BN_PATTERNS([
@@ -398,5 +398,14 @@ I18N_BN_PATTERNS([
   [/^health = (\d+) → Hurt: yellow bar$/, 'health = $1 → আহত: হলুদ বার'],
   [/^health = (\d+) → Critical: red bar$/, 'health = $1 → সংকটাপন্ন: লাল বার'],
   [/^health = (\d+) → Game over$/, 'health = $1 → গেম শেষ'],
-  [/^referenced by (s\d)$/, '$1 দ্বারা নির্দেশিত']
+  [/^referenced by (s\d)$/, '$1 দ্বারা নির্দেশিত'],
+  [/^Next line ▶$/, 'পরের লাইন ▶'],
+  [/^▶ Run$/, '▶ চালান'],
+  [/^Output line (\d+) of (\d+)$/, 'Output লাইন $1 / $2'],
+  [/^line (\d+)$/, 'লাইন $1'],
+  [/^The program starts in <code>main<\/code>\. Press <b>Next line ▶<\/b> to run it until it prints a line\.$/, 'প্রোগ্রাম <code>main</code> থেকে শুরু হয়। পরের output লাইন পর্যন্ত চালাতে <b>পরের লাইন ▶</b> চাপুন।'],
+  [/^Output line (\d+) comes from line (\d+) of <code>([^<]+)<\/code>\.$/, 'Output লাইন $1 আসে <code>$3</code>-এর লাইন $2 থেকে।'],
+  [/^The empty output line (\d+) comes from line (\d+) of <code>([^<]+)<\/code>\.$/, 'ফাঁকা output লাইন $1 আসে <code>$3</code>-এর লাইন $2 থেকে।'],
+  [/^That line is inside a method, called from line (\d+) of <code>([^<]+)<\/code>\.$/, 'লাইনটি একটি method-এর ভিতরে; method-টি call করা হয়েছে <code>$2</code>-এর লাইন $1 থেকে।'],
+  [/^That was the last line: <code>main<\/code> ends and the program exits\.$/, 'এটিই শেষ লাইন: <code>main</code> শেষ হয়, প্রোগ্রামও বন্ধ হয়।']
 ]);

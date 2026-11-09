@@ -523,3 +523,83 @@ function gKeys(target, keys) {
     return v;
   };
 })();
+
+/* ---------- "Run the game": the code on the left, the console on the right ----------
+   <div data-demo="g-run" data-cmd="java Main" data-steps='[{"o": "text", "f": [[file, line], ...]}, ...]'>
+   holds one <pre class="run-file" data-file="X.java" hidden> per source file (the main class first).
+   Each step prints one output line and highlights the line that printed it; when that line is in a
+   method of another class, the call in the caller's file is marked too. build_v3.py records the
+   lines by running the real program (tools/v3/runmap/TraceRun__.java). */
+DEMOS['g-run'] = (root) => {
+  const pres = Array.from(root.querySelectorAll('pre.run-file'));
+  const files = pres.map((p) => ({ name: p.getAttribute('data-file'), src: p.textContent.replace(/^\n/, '') }));
+  const steps = JSON.parse(root.getAttribute('data-steps') || '[]');
+  const cmd = root.getAttribute('data-cmd') || 'java Main';
+  pres.forEach((p) => p.remove());
+  if (!files.length) return;
+  const views = files.map((f) => { const v = codeView(f.src); v.el.classList.add('trace-code', 'g-run-code'); return v; });
+  const mainAt = Math.max(1, files[0].src.split('\n').findIndex((l) => /static\s+void\s+main\s*\(/.test(l)) + 1);
+  let shown = 0, cur = 0, timer = null;
+
+  const tabs = files.length > 1 ? h('div', { class: 'cv-tabs g-run-tabs', role: 'tablist' },
+    files.map((f, i) => h('button', { type: 'button', role: 'tab', onclick: () => showFile(i) }, f.name))) : null;
+  const where = h('span', { class: 'g-run-where' });
+  const codeBox = h('div', { class: 'g-run-left' }, h('div', { class: 'g-run-bar' }, tabs || h('span', { class: 'g-run-file' }, files[0].name), where), views.map((v) => v.el));
+  const out = h('pre', { class: 'console-body g-run-out' });
+  const prompt = h('span', { class: 'g-run-prompt' }, '$ ' + cmd);
+  out.append(prompt);
+  const cons = h('div', { class: 'console g-run-console' }, h('div', { class: 'console-h' }, 'Console · ' + cmd), out);
+  const note = h('div', { class: 'trace-note g-run-note', role: 'status', 'aria-live': 'polite' });
+  const counter = h('span', { class: 'trace-count' });
+  const backBtn = h('button', { type: 'button', class: 'btn sm', onclick: () => { stop(); show(cur - 1); } }, '◀ Back');
+  const nextBtn = h('button', { type: 'button', class: 'btn sm pri', onclick: () => { stop(); show(cur + 1); } }, 'Next line ▶');
+  const playBtn = h('button', { type: 'button', class: 'btn sm', onclick: () => (timer ? stop() : play()) }, '▶ Run');
+  const ctl = h('div', { class: 'trace-ctl g-run-ctl' },
+    h('button', { type: 'button', class: 'btn sm', title: 'Start again', 'aria-label': 'Start again', onclick: () => { stop(); show(0); } }, '⏮'),
+    backBtn, nextBtn, playBtn,
+    h('button', { type: 'button', class: 'btn sm', onclick: () => { stop(); show(steps.length); } }, 'Show all'), counter);
+  root.append(h('div', { class: 'trace g-run no-heap' }, ctl, h('div', { class: 'trace-body g-run-body' }, codeBox, cons), note));
+
+  function showFile(i) {
+    shown = i;
+    views.forEach((v, k) => { v.el.hidden = k !== i; });
+    if (tabs) Array.from(tabs.children).forEach((b, k) => { b.classList.toggle('on', k === i); b.setAttribute('aria-selected', String(k === i)); });
+  }
+  function play() {
+    if (cur >= steps.length) show(0);
+    playBtn.textContent = '❚❚ Pause';
+    timer = setInterval(() => { show(cur + 1); if (cur >= steps.length) stop(); }, 1100);
+  }
+  function stop() { if (timer) clearInterval(timer); timer = null; playBtn.textContent = '▶ Run'; }
+  function show(i) {
+    cur = Math.max(0, Math.min(steps.length, i));
+    /* console: the prompt, then output lines 1..cur; the newest one is highlighted */
+    const lines = out.querySelectorAll('.g-run-line');
+    for (let k = lines.length; k > cur; k--) lines[k - 1].remove();
+    for (let k = lines.length; k < cur; k++) out.append(h('span', { class: 'g-run-line' }, steps[k].o || '\u00a0'));
+    out.querySelectorAll('.g-run-line').forEach((l, k) => l.classList.toggle('new', k === cur - 1));
+    out.scrollTop = out.scrollHeight;
+    /* code: the printing line (cur), the call that led to it in other files (prev) */
+    const st = cur ? steps[cur - 1] : null, fr = st ? st.f || [] : [[0, mainAt]];
+    views.forEach((v, k) => {
+      v.mark(fr.slice(0, 1).filter((x) => x[0] === k).map((x) => x[1]), 'cur');
+      const calls = new Set(fr.slice(1).filter((x) => x[0] === k && !(x[0] === fr[0][0] && x[1] === fr[0][1])).map((x) => x[1]));
+      v.el.querySelectorAll('.cl').forEach((l, n) => l.classList.toggle('prev', calls.has(n + 1)));   /* no scrolling for these */
+    });
+    if (fr.length) showFile(fr[0][0]);
+    where.textContent = fr.length ? 'line ' + fr[0][1] : '';
+    counter.textContent = 'Output line ' + cur + ' of ' + steps.length;
+    backBtn.disabled = cur === 0;
+    nextBtn.disabled = cur >= steps.length;
+    note.replaceChildren();
+    const say = (html) => { const d = h('div'); d.innerHTML = html; note.append(d); };
+    if (!st) say('The program starts in <code>main</code>. Press <b>Next line ▶</b> to run it until it prints a line.');
+    else {
+      const [fi, ln] = fr[0], call = fr[1];
+      say((st.o.trim() ? 'Output line ' + cur : 'The empty output line ' + cur) + ' comes from line ' + ln + ' of <code>' + files[fi].name + '</code>.');
+      if (call) say('That line is inside a method, called from line ' + call[1] + ' of <code>' + files[call[0]].name + '</code>.');
+      if (cur === steps.length) say('That was the last line: <code>main</code> ends and the program exits.');
+    }
+  }
+  show(0);
+};

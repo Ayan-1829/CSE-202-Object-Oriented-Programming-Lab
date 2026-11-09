@@ -212,6 +212,7 @@ I18N_BN_ADD({
 "Show that Animal cannot be instantiated": "দেখান Animal-এর instance তৈরি করা যায় না",
 "Show your work": "আপনার কাজ দেখান",
 "Show your work during the lab": "ল্যাবের সময় আপনার কাজ দেখান",
+"Someone asks: “Can I see a game object?” You point at a drone. “No, a plain game object.” There isn’t one — and that is the point.": "কেউ জিজ্ঞেস করে: “একটা game object দেখাতে পারো?” আপনি একটি drone দেখান। “না, সাধারণ একটা game object।” এমন কিছু নেই — আর সেটাই মূল কথা।",
 "Start the mission": "মিশন শুরু করুন",
 "Store them in one GameObject[] and update them for three ticks, printing the map": "এগুলোকে একটি GameObject[]-এ রেখে তিন tick ধরে update করুন, ম্যাপ ছেপে",
 "Task 1: Add a Cat class": "কাজ 1: একটি Cat class যোগ করুন",
@@ -342,11 +343,10 @@ I18N_BN_ADD({
 "x grows →": "x বাড়ে →",
 "y grows ↓": "y বাড়ে ↓",
 "yes": "হ্যাঁ",
+"“Game object” is only an idea, so make <code>GameObject</code> <b>abstract</b>: nobody can create one, and every real object must fill in <code>update()</code> and <code>symbol()</code>. <b>Interfaces</b> add abilities across the family tree, such as being Damageable.": "“Game object” শুধু একটি ধারণা, তাই <code>GameObject</code>-কে <b>abstract</b> করুন: কেউ এটি তৈরি করতে পারে না, আর প্রতিটি আসল object-কে <code>update()</code> আর <code>symbol()</code> পূরণ করতে হয়। <b>Interface</b> পুরো বংশতালিকা জুড়ে ক্ষমতা যোগ করে, যেমন Damageable হওয়া।",
 "…so the abstract class’s constructor <b>does</b> run, just never on its own.": "…তাই abstract class-এর constructor <b>চলে</b>, শুধু কখনো একা নয়।",
 "≥2 of each; Shape[], Resizable[] and Colorable[] arrays": "প্রতিটির ≥2টি; Shape[], Resizable[] ও Colorable[] array",
-"▶ Run program": "▶ প্রোগ্রাম চালান",
-"Someone asks: “Can I see a game object?” You point at a drone. “No, a plain game object.” There isn’t one — and that is the point.": "কেউ জিজ্ঞেস করে: “একটা game object দেখাতে পারো?” আপনি একটি drone দেখান। “না, সাধারণ একটা game object।” এমন কিছু নেই — আর সেটাই মূল কথা।",
-"“Game object” is only an idea, so make <code>GameObject</code> <b>abstract</b>: nobody can create one, and every real object must fill in <code>update()</code> and <code>symbol()</code>. <b>Interfaces</b> add abilities across the family tree, such as being Damageable.": "“Game object” শুধু একটি ধারণা, তাই <code>GameObject</code>-কে <b>abstract</b> করুন: কেউ এটি তৈরি করতে পারে না, আর প্রতিটি আসল object-কে <code>update()</code> আর <code>symbol()</code> পূরণ করতে হয়। <b>Interface</b> পুরো বংশতালিকা জুড়ে ক্ষমতা যোগ করে, যেমন Damageable হওয়া।"
+"▶ Run program": "▶ প্রোগ্রাম চালান"
 });
 /* Bengali patterns for text with changing numbers or file names on the v2 decks (appended to each deck's file) */
 I18N_BN_PATTERNS([
@@ -406,5 +406,14 @@ I18N_BN_PATTERNS([
   [/^health = (\d+) → Hurt: yellow bar$/, 'health = $1 → আহত: হলুদ বার'],
   [/^health = (\d+) → Critical: red bar$/, 'health = $1 → সংকটাপন্ন: লাল বার'],
   [/^health = (\d+) → Game over$/, 'health = $1 → গেম শেষ'],
-  [/^referenced by (s\d)$/, '$1 দ্বারা নির্দেশিত']
+  [/^referenced by (s\d)$/, '$1 দ্বারা নির্দেশিত'],
+  [/^Next line ▶$/, 'পরের লাইন ▶'],
+  [/^▶ Run$/, '▶ চালান'],
+  [/^Output line (\d+) of (\d+)$/, 'Output লাইন $1 / $2'],
+  [/^line (\d+)$/, 'লাইন $1'],
+  [/^The program starts in <code>main<\/code>\. Press <b>Next line ▶<\/b> to run it until it prints a line\.$/, 'প্রোগ্রাম <code>main</code> থেকে শুরু হয়। পরের output লাইন পর্যন্ত চালাতে <b>পরের লাইন ▶</b> চাপুন।'],
+  [/^Output line (\d+) comes from line (\d+) of <code>([^<]+)<\/code>\.$/, 'Output লাইন $1 আসে <code>$3</code>-এর লাইন $2 থেকে।'],
+  [/^The empty output line (\d+) comes from line (\d+) of <code>([^<]+)<\/code>\.$/, 'ফাঁকা output লাইন $1 আসে <code>$3</code>-এর লাইন $2 থেকে।'],
+  [/^That line is inside a method, called from line (\d+) of <code>([^<]+)<\/code>\.$/, 'লাইনটি একটি method-এর ভিতরে; method-টি call করা হয়েছে <code>$2</code>-এর লাইন $1 থেকে।'],
+  [/^That was the last line: <code>main<\/code> ends and the program exits\.$/, 'এটিই শেষ লাইন: <code>main</code> শেষ হয়, প্রোগ্রামও বন্ধ হয়।']
 ]);

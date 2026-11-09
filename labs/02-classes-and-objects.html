@@ -426,36 +426,149 @@ System.out.println(&quot;Enemies spawned is still &quot; + Enemy.getEnemiesSpawn
 }</pre></div><p class="muted">Save every file in one folder, then compile and run: <code>javac *.java</code> → <code>java BattleDemo</code></p>
 </div></section>
 <section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Run the game</p><h2>Expected output</h2><div class="runbox" data-cmd="java BattleDemo"><pre class="run-src" hidden>=== Creating objects with new ===
-[Ranger] health 100 | ammo 5 | score 0
-Players created: 1
-Enemies spawned: 2
+<p class="kicker">Run the game</p><h2>Expected output</h2><div data-demo="g-run" data-cmd="java BattleDemo" data-steps="[{&quot;o&quot;:&quot;=== Creating objects with new ===&quot;,&quot;f&quot;:[[0,4]]},{&quot;o&quot;:&quot;[Ranger] health 100 | ammo 5 | score 0&quot;,&quot;f&quot;:[[1,66],[0,8]]},{&quot;o&quot;:&quot;Players created: 1&quot;,&quot;f&quot;:[[0,9]]},{&quot;o&quot;:&quot;Enemies spawned: 2&quot;,&quot;f&quot;:[[0,10]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,12]]},{&quot;o&quot;:&quot;=== Each object keeps its own state ===&quot;,&quot;f&quot;:[[0,12]]},{&quot;o&quot;:&quot;Ranger shoots Drone-1 -&gt; its health 15&quot;,&quot;f&quot;:[[1,50],[0,13]]},{&quot;o&quot;:&quot;drone1 health: 15&quot;,&quot;f&quot;:[[0,14]]},{&quot;o&quot;:&quot;drone2 health: 40&quot;,&quot;f&quot;:[[0,15]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,17]]},{&quot;o&quot;:&quot;=== The fight: objects calling each other&#x27;s methods ===&quot;,&quot;f&quot;:[[0,17]]},{&quot;o&quot;:&quot;Drone-2 zaps Ranger -&gt; health 90&quot;,&quot;f&quot;:[[2,35],[0,18]]},{&quot;o&quot;:&quot;Ranger shoots Drone-1 -&gt; its health 0&quot;,&quot;f&quot;:[[1,50],[0,19]]},{&quot;o&quot;:&quot;Drone-1 destroyed! +50 points&quot;,&quot;f&quot;:[[1,53],[0,19]]},{&quot;o&quot;:&quot;Drone-2 zaps Ranger -&gt; health 80&quot;,&quot;f&quot;:[[2,35],[0,20]]},{&quot;o&quot;:&quot;Ranger shoots Drone-2 -&gt; its health 15&quot;,&quot;f&quot;:[[1,50],[0,21]]},{&quot;o&quot;:&quot;Ranger holds fire: Drone-1 is already destroyed&quot;,&quot;f&quot;:[[1,41],[0,22]]},{&quot;o&quot;:&quot;Ranger shoots Drone-2 -&gt; its health 0&quot;,&quot;f&quot;:[[1,50],[0,23]]},{&quot;o&quot;:&quot;Drone-2 destroyed! +50 points&quot;,&quot;f&quot;:[[1,53],[0,23]]},{&quot;o&quot;:&quot;Ranger holds fire: Drone-2 is already destroyed&quot;,&quot;f&quot;:[[1,41],[0,24]]},{&quot;o&quot;:&quot;[Ranger] health 80 | ammo 1 | score 100&quot;,&quot;f&quot;:[[1,66],[0,25]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,27]]},{&quot;o&quot;:&quot;=== Encapsulation: the setter validates ===&quot;,&quot;f&quot;:[[0,27]]},{&quot;o&quot;:&quot;setHealth(250) -&gt; health 100&quot;,&quot;f&quot;:[[0,29]]},{&quot;o&quot;:&quot;setHealth(-30) -&gt; health 0, alive? false&quot;,&quot;f&quot;:[[0,31]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,33]]},{&quot;o&quot;:&quot;=== References: two names, one object ===&quot;,&quot;f&quot;:[[0,33]]},{&quot;o&quot;:&quot;target == drone1 ? true&quot;,&quot;f&quot;:[[0,35]]},{&quot;o&quot;:&quot;target.getType(): Drone-1&quot;,&quot;f&quot;:[[0,36]]},{&quot;o&quot;:&quot;Enemies spawned is still 2 (no new object was made)&quot;,&quot;f&quot;:[[0,37]]}]"><pre class="run-file" data-file="BattleDemo.java" hidden>public class BattleDemo {
+    public static void main(String[] args) {
 
-=== Each object keeps its own state ===
-Ranger shoots Drone-1 -&gt; its health 15
-drone1 health: 15
-drone2 health: 40
+        System.out.println(&quot;=== Creating objects with new ===&quot;);
+        Player ranger = new Player(&quot;Ranger&quot;, 100, 5);
+        Enemy drone1 = new Enemy(&quot;Drone-1&quot;, 40, 50);
+        Enemy drone2 = new Enemy(&quot;Drone-2&quot;, 40, 50);
+        ranger.showStatus();
+        System.out.println(&quot;Players created: &quot; + Player.getPlayersCreated());
+        System.out.println(&quot;Enemies spawned: &quot; + Enemy.getEnemiesSpawned());
 
-=== The fight: objects calling each other&#x27;s methods ===
-Drone-2 zaps Ranger -&gt; health 90
-Ranger shoots Drone-1 -&gt; its health 0
-Drone-1 destroyed! +50 points
-Drone-2 zaps Ranger -&gt; health 80
-Ranger shoots Drone-2 -&gt; its health 15
-Ranger holds fire: Drone-1 is already destroyed
-Ranger shoots Drone-2 -&gt; its health 0
-Drone-2 destroyed! +50 points
-Ranger holds fire: Drone-2 is already destroyed
-[Ranger] health 80 | ammo 1 | score 100
+        System.out.println(&quot;\n=== Each object keeps its own state ===&quot;);
+        ranger.shoot(drone1);
+        System.out.println(&quot;drone1 health: &quot; + drone1.getHealth());
+        System.out.println(&quot;drone2 health: &quot; + drone2.getHealth());
 
-=== Encapsulation: the setter validates ===
-setHealth(250) -&gt; health 100
-setHealth(-30) -&gt; health 0, alive? false
+        System.out.println(&quot;\n=== The fight: objects calling each other&#x27;s methods ===&quot;);
+        drone2.attack(ranger);
+        ranger.shoot(drone1);
+        drone2.attack(ranger);
+        ranger.shoot(drone2);
+        ranger.shoot(drone1);
+        ranger.shoot(drone2);
+        ranger.shoot(drone2);
+        ranger.showStatus();
 
-=== References: two names, one object ===
-target == drone1 ? true
-target.getType(): Drone-1
-Enemies spawned is still 2 (no new object was made)</pre></div>
+        System.out.println(&quot;\n=== Encapsulation: the setter validates ===&quot;);
+        ranger.setHealth(250);
+        System.out.println(&quot;setHealth(250) -&gt; health &quot; + ranger.getHealth());
+        ranger.setHealth(-30);
+        System.out.println(&quot;setHealth(-30) -&gt; health &quot; + ranger.getHealth() + &quot;, alive? &quot; + ranger.isAlive());
+
+        System.out.println(&quot;\n=== References: two names, one object ===&quot;);
+        Enemy target = drone1;
+        System.out.println(&quot;target == drone1 ? &quot; + (target == drone1));
+        System.out.println(&quot;target.getType(): &quot; + target.getType());
+        System.out.println(&quot;Enemies spawned is still &quot; + Enemy.getEnemiesSpawned() + &quot; (no new object was made)&quot;);
+    }
+}</pre><pre class="run-file" data-file="Player.java" hidden>public class Player {
+    // Fields: every Player object gets its own copy
+    private String name;
+    private int health;
+    private int ammo;
+    private int score;
+
+    // Static field: one copy shared by the whole class
+    private static int playersCreated = 0;
+
+    // Constructor: runs once for each new Player
+    public Player(String name, int health, int ammo) {
+        this.name = name;
+        setHealth(health);
+        this.ammo = ammo;
+        this.score = 0;
+        playersCreated++;
+    }
+
+    // Getters: read-only access to private fields
+    public String getName() { return name; }
+    public int getHealth()  { return health; }
+    public int getAmmo()    { return ammo; }
+    public int getScore()   { return score; }
+    public static int getPlayersCreated() { return playersCreated; }
+
+    // Validating setter: health always stays between 0 and 100
+    public void setHealth(int health) {
+        if (health &lt; 0) {
+            health = 0;
+        }
+        if (health &gt; 100) {
+            health = 100;
+        }
+        this.health = health;
+    }
+
+    // Methods: what a player can do
+    public void shoot(Enemy target) {
+        if (!target.isAlive()) {
+            System.out.println(name + &quot; holds fire: &quot; + target.getType() + &quot; is already destroyed&quot;);
+            return;
+        }
+        if (ammo == 0) {
+            System.out.println(name + &quot; pulls the trigger: click! Out of ammo&quot;);
+            return;
+        }
+        ammo--;
+        target.takeDamage(25);
+        System.out.println(name + &quot; shoots &quot; + target.getType() + &quot; -&gt; its health &quot; + target.getHealth());
+        if (!target.isAlive()) {
+            score += target.getPoints();
+            System.out.println(target.getType() + &quot; destroyed! +&quot; + target.getPoints() + &quot; points&quot;);
+        }
+    }
+
+    public void takeDamage(int amount) {
+        setHealth(health - amount);
+    }
+
+    public boolean isAlive() {
+        return health &gt; 0;
+    }
+
+    public void showStatus() {
+        System.out.println(&quot;[&quot; + name + &quot;] health &quot; + health + &quot; | ammo &quot; + ammo + &quot; | score &quot; + score);
+    }
+}</pre><pre class="run-file" data-file="Enemy.java" hidden>public class Enemy {
+    private String type;
+    private int health;
+    private int points;
+
+    // Counts every Enemy ever created
+    private static int enemiesSpawned = 0;
+
+    public Enemy(String type, int health, int points) {
+        this.type = type;
+        this.health = health;
+        this.points = points;
+        enemiesSpawned++;
+    }
+
+    public String getType() { return type; }
+    public int getHealth()  { return health; }
+    public int getPoints()  { return points; }
+    public static int getEnemiesSpawned() { return enemiesSpawned; }
+
+    public boolean isAlive() {
+        return health &gt; 0;
+    }
+
+    public void takeDamage(int amount) {
+        health -= amount;
+        if (health &lt; 0) {
+            health = 0;
+        }
+    }
+
+    public void attack(Player target) {
+        if (isAlive()) {
+            target.takeDamage(10);
+            System.out.println(type + &quot; zaps &quot; + target.getName() + &quot; -&gt; health &quot; + target.getHealth());
+        }
+    }
+}</pre></div>
 </div></section>
 <section class="slide " data-title="Game task 1: A Medkit class" aria-label="Game task 1: A Medkit class" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Game practice · 1 of 3</p><h2>Game task 1: A Medkit class</h2><div class="ex task g-task"><div class="qq">Pick-ups become objects too.</div>

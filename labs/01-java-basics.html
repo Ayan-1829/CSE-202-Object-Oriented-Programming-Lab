@@ -270,20 +270,70 @@ do {
 }</pre></div><p class="muted">Save every file in one folder, then compile and run: <code>javac *.java</code> → <code>java GameBasics</code></p>
 </div></section>
 <section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Run the game</p><h2>Expected output</h2><div class="runbox" data-cmd="java GameBasics"><pre class="run-src" hidden>Ranger | health 100 | ammo 5 | alive true
-Hit for 12.75 -&gt; loses 12 -&gt; health 88
-Health bar: green
-Weapon: Rifle
-Shot 1, ammo left 4
-Shot 2, ammo left 3
-Shot 3, ammo left 2
-Drone health 35
-Drone health 10
-Drone health 0
-Bang! ammo left 1
-Bang! ammo left 0
-Wave 1 cleared
-Wave 2 cleared</pre></div>
+<p class="kicker">Run the game</p><h2>Expected output</h2><div data-demo="g-run" data-cmd="java GameBasics" data-steps="[{&quot;o&quot;:&quot;Ranger | health 100 | ammo 5 | alive true&quot;,&quot;f&quot;:[[0,10]]},{&quot;o&quot;:&quot;Hit for 12.75 -&gt; loses 12 -&gt; health 88&quot;,&quot;f&quot;:[[0,15]]},{&quot;o&quot;:&quot;Health bar: green&quot;,&quot;f&quot;:[[0,19]]},{&quot;o&quot;:&quot;Weapon: Rifle&quot;,&quot;f&quot;:[[0,30]]},{&quot;o&quot;:&quot;Shot 1, ammo left 4&quot;,&quot;f&quot;:[[0,37]]},{&quot;o&quot;:&quot;Shot 2, ammo left 3&quot;,&quot;f&quot;:[[0,37]]},{&quot;o&quot;:&quot;Shot 3, ammo left 2&quot;,&quot;f&quot;:[[0,37]]},{&quot;o&quot;:&quot;Drone health 35&quot;,&quot;f&quot;:[[0,44]]},{&quot;o&quot;:&quot;Drone health 10&quot;,&quot;f&quot;:[[0,44]]},{&quot;o&quot;:&quot;Drone health 0&quot;,&quot;f&quot;:[[0,44]]},{&quot;o&quot;:&quot;Bang! ammo left 1&quot;,&quot;f&quot;:[[0,52]]},{&quot;o&quot;:&quot;Bang! ammo left 0&quot;,&quot;f&quot;:[[0,52]]},{&quot;o&quot;:&quot;Wave 1 cleared&quot;,&quot;f&quot;:[[0,61]]},{&quot;o&quot;:&quot;Wave 2 cleared&quot;,&quot;f&quot;:[[0,61]]}]"><pre class="run-file" data-file="GameBasics.java" hidden>public class GameBasics {
+    public static void main(String[] args) {
+
+        // 1. Variables: the player&#x27;s stats
+        String name = &quot;Ranger&quot;;
+        int health = 100;
+        int ammo = 5;
+        double damage = 12.75;
+        boolean alive = true;
+        System.out.println(name + &quot; | health &quot; + health + &quot; | ammo &quot; + ammo + &quot; | alive &quot; + alive);
+
+        // 2. Casting: a 12.75 hit becomes a whole number
+        int hit = (int) damage;
+        health = health - hit;
+        System.out.println(&quot;Hit for &quot; + damage + &quot; -&gt; loses &quot; + hit + &quot; -&gt; health &quot; + health);
+
+        // 3. if-else: the colour of the health bar
+        if (health &gt;= 70) {
+            System.out.println(&quot;Health bar: green&quot;);
+        } else if (health &gt;= 30) {
+            System.out.println(&quot;Health bar: yellow&quot;);
+        } else {
+            System.out.println(&quot;Health bar: red&quot;);
+        }
+
+        // 4. switch: key 2 picks the rifle
+        int key = 2;
+        switch (key) {
+            case 1:  System.out.println(&quot;Weapon: Pistol&quot;); break;
+            case 2:  System.out.println(&quot;Weapon: Rifle&quot;);  break;
+            default: System.out.println(&quot;Weapon: Fists&quot;);
+        }
+
+        // 5. for: a burst of exactly 3 shots
+        for (int shot = 1; shot &lt;= 3; shot++) {
+            ammo--;
+            System.out.println(&quot;Shot &quot; + shot + &quot;, ammo left &quot; + ammo);
+        }
+
+        // 6. while: shoot the drone until it falls
+        int droneHealth = 60;
+        while (droneHealth &gt; 0) {
+            droneHealth -= 25;
+            System.out.println(&quot;Drone health &quot; + Math.max(droneHealth, 0));
+        }
+
+        // 7. break and continue: a jammed shot, then an empty clip
+        for (int shot = 1; shot &lt;= 5; shot++) {
+            if (shot == 2) continue;            // jammed: skip this shot
+            if (ammo == 0) break;               // empty: stop firing
+            ammo--;
+            System.out.println(&quot;Bang! ammo left &quot; + ammo);
+        }
+
+        // 8. do-while: fight waves until no enemies are left
+        int enemies = 5;
+        int wave = 0;
+        do {
+            wave++;
+            enemies -= 3;
+            System.out.println(&quot;Wave &quot; + wave + &quot; cleared&quot;);
+        } while (enemies &gt; 0);
+    }
+}</pre></div>
 </div></section>
 <section class="slide " data-title="Game task 1: Add a shield" aria-label="Game task 1: Add a shield" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Game practice · 1 of 3</p><h2>Game task 1: Add a shield</h2><div class="ex task g-task"><div class="qq">Give the commando a shield that soaks up damage first.</div>

@@ -29,6 +29,7 @@ I18N_BN_ADD({
 "A health bar and the score at the top": "ওপরে একটি health bar আর স্কোর",
 "A hit of 12.75 damage is a double": "12.75 damage-এর একটি আঘাত হলো double",
 "A loop with sleep() on the EDT would freeze the window: it could not handle keys or paint while it sleeps.": "EDT-তে sleep() সহ একটি loop window আটকে দিত: ঘুমানোর সময় এটি কী সামলাতে বা আঁকতে পারত না।",
+"A separate <b>thread</b> runs the <b>game loop</b>: update everything, check collisions, <code>repaint()</code>, sleep 16 ms — sixty times a second. Each frame is a slightly different picture, and that is <b>animation</b>.": "একটি আলাদা <b>thread</b> চালায় <b>game loop</b>: সবকিছু update, collision পরীক্ষা, <code>repaint()</code>, 16 ms sleep — সেকেন্ডে ষাটবার। প্রতিটি ফ্রেম একটু আলাদা ছবি, আর এটাই <b>animation</b>।",
 "A short discussion: what each OOP concept did in your program": "একটি সংক্ষিপ্ত আলোচনা: আপনার প্রোগ্রামে প্রতিটি OOP ধারণা কী করেছে",
 "A tank fires...": "একটি ট্যাংক গুলি ছোড়ে...",
 "A window titled “Bouncing Balls Animation” with a gridded white panel and three coloured balls": "“Bouncing Balls Animation” শিরোনামের একটি উইন্ডো, grid-সহ সাদা panel ও তিনটি রঙিন বল",
@@ -135,6 +136,7 @@ I18N_BN_ADD({
 "How the whole course fits together": "পুরো কোর্স কীভাবে একসঙ্গে মেলে",
 "How the whole course fits together (in code)": "পুরো কোর্স কীভাবে একসঙ্গে মেলে (কোডে)",
 "Hurt: yellow bar": "আহত: হলুদ বার",
+"In Chapter 9 the drones only move when you press a key, like statues that shuffle when you blink. Today they fly on their own.": "অধ্যায় 9-এ drone-গুলো নড়ে শুধু কী চাপলে, যেন চোখের পলক ফেললেই একটু সরে যাওয়া মূর্তি। আজ তারা নিজে থেকে ওড়ে।",
 "In the game it runs on its own thread, about 60 times a second.": "গেমে এটি নিজস্ব thread-এ চলে, সেকেন্ডে প্রায় 60 বার।",
 "In the game:": "গেমে:",
 "In the game: the key flags and the running flag are volatile.": "গেমে: কী flag আর running flag volatile।",
@@ -389,9 +391,7 @@ I18N_BN_ADD({
 "x grows →": "x বাড়ে →",
 "y grows ↓": "y বাড়ে ↓",
 "yes": "হ্যাঁ",
-"…but the Animator holds the lock, so the EDT is <b>BLOCKED</b>. It can never draw a half-moved frame.": "…কিন্তু lock Animator-এর হাতে, তাই EDT <b>BLOCKED</b>। এটি কখনো আধা-সরানো ফ্রেম আঁকতে পারে না।",
-"In Chapter 9 the drones only move when you press a key, like statues that shuffle when you blink. Today they fly on their own.": "অধ্যায় 9-এ drone-গুলো নড়ে শুধু কী চাপলে, যেন চোখের পলক ফেললেই একটু সরে যাওয়া মূর্তি। আজ তারা নিজে থেকে ওড়ে।",
-"A separate <b>thread</b> runs the <b>game loop</b>: update everything, check collisions, <code>repaint()</code>, sleep 16 ms — sixty times a second. Each frame is a slightly different picture, and that is <b>animation</b>.": "একটি আলাদা <b>thread</b> চালায় <b>game loop</b>: সবকিছু update, collision পরীক্ষা, <code>repaint()</code>, 16 ms sleep — সেকেন্ডে ষাটবার। প্রতিটি ফ্রেম একটু আলাদা ছবি, আর এটাই <b>animation</b>।"
+"…but the Animator holds the lock, so the EDT is <b>BLOCKED</b>. It can never draw a half-moved frame.": "…কিন্তু lock Animator-এর হাতে, তাই EDT <b>BLOCKED</b>। এটি কখনো আধা-সরানো ফ্রেম আঁকতে পারে না।"
 });
 /* Bengali patterns for text with changing numbers or file names on the v2 decks (appended to each deck's file) */
 I18N_BN_PATTERNS([
@@ -451,5 +451,14 @@ I18N_BN_PATTERNS([
   [/^health = (\d+) → Hurt: yellow bar$/, 'health = $1 → আহত: হলুদ বার'],
   [/^health = (\d+) → Critical: red bar$/, 'health = $1 → সংকটাপন্ন: লাল বার'],
   [/^health = (\d+) → Game over$/, 'health = $1 → গেম শেষ'],
-  [/^referenced by (s\d)$/, '$1 দ্বারা নির্দেশিত']
+  [/^referenced by (s\d)$/, '$1 দ্বারা নির্দেশিত'],
+  [/^Next line ▶$/, 'পরের লাইন ▶'],
+  [/^▶ Run$/, '▶ চালান'],
+  [/^Output line (\d+) of (\d+)$/, 'Output লাইন $1 / $2'],
+  [/^line (\d+)$/, 'লাইন $1'],
+  [/^The program starts in <code>main<\/code>\. Press <b>Next line ▶<\/b> to run it until it prints a line\.$/, 'প্রোগ্রাম <code>main</code> থেকে শুরু হয়। পরের output লাইন পর্যন্ত চালাতে <b>পরের লাইন ▶</b> চাপুন।'],
+  [/^Output line (\d+) comes from line (\d+) of <code>([^<]+)<\/code>\.$/, 'Output লাইন $1 আসে <code>$3</code>-এর লাইন $2 থেকে।'],
+  [/^The empty output line (\d+) comes from line (\d+) of <code>([^<]+)<\/code>\.$/, 'ফাঁকা output লাইন $1 আসে <code>$3</code>-এর লাইন $2 থেকে।'],
+  [/^That line is inside a method, called from line (\d+) of <code>([^<]+)<\/code>\.$/, 'লাইনটি একটি method-এর ভিতরে; method-টি call করা হয়েছে <code>$2</code>-এর লাইন $1 থেকে।'],
+  [/^That was the last line: <code>main<\/code> ends and the program exits\.$/, 'এটিই শেষ লাইন: <code>main</code> শেষ হয়, প্রোগ্রামও বন্ধ হয়।']
 ]);

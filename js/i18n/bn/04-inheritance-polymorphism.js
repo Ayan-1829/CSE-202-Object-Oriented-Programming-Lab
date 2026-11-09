@@ -233,6 +233,7 @@ I18N_BN_ADD({
 "The Car object has <b>all</b> the fields: the inherited make, year, speed and its own numDoors.": "Car object-এ <b>সব</b> field আছে: inherited make, year, speed আর এর নিজস্ব numDoors।",
 "The Enemy part (name, health, damage) must be built first, and only Enemy’s constructor knows how.": "Enemy অংশটি (name, health, damage) আগে তৈরি করতে হয়, আর শুধু Enemy-র constructor জানে কীভাবে।",
 "The cast creates no new object. It is the <b>same</b> reference, now with type Car, so Car methods are allowed.": "cast নতুন কোনো object তৈরি করে না। এটি <b>একই</b> reference, এখন Car type-সহ, তাই Car-এর method চলবে।",
+"The commander shouts one order: “Attack!” The drone dives, the tank fires a shell, the sniper takes aim. Nobody asked which kind of enemy they were.": "কমান্ডার একটি আদেশ দেন: “আক্রমণ!” drone ঝাঁপ দেয়, tank shell ছোড়ে, sniper নিশানা করে। কেউ জিজ্ঞেস করেনি তারা কোন ধরনের শত্রু।",
 "The compiler only knows wave[1] is an Enemy, and Enemy has no raiseShield(). Check instanceof and cast to Tank first.": "compiler শুধু জানে wave[1] একটি Enemy, আর Enemy-তে raiseShield() নেই। আগে instanceof check করে Tank-এ cast করুন।",
 "The complete game program": "সম্পূর্ণ গেম প্রোগ্রাম",
 "The family tree of the game": "গেমের বংশতালিকা",
@@ -246,6 +247,7 @@ I18N_BN_ADD({
 "The topics: the idea, then the game": "বিষয়গুলো: আগে ধারণা, তারপর গেম",
 "Then Car sets its own field.": "তারপর Car নিজের field সেট করে।",
 "Then cast down, <code>(Tank) e</code>, to reach the subclass’s own method.": "তারপর নিচে cast করুন, <code>(Tank) e</code>, subclass-এর নিজের method-এ পৌঁছাতে।",
+"They all <b>extend</b> <code>Enemy</code>, so one <code>Enemy[]</code> holds them all, and one call, <code>e.attack(ranger)</code>, makes each one attack <b>in its own way</b>. That is polymorphism.": "তারা সবাই <code>Enemy</code>-কে <b>extend</b> করে, তাই একটি <code>Enemy[]</code> সবাইকে ধরে, আর একটি call, <code>e.attack(ranger)</code>, প্রত্যেককে <b>নিজের মতো করে</b> আক্রমণ করায়। এটাই polymorphism।",
 "Through a parent reference you can only call the parent’s methods.": "parent reference দিয়ে শুধু parent-এর method call করা যায়।",
 "Today’s build": "আজকের বিল্ড",
 "Today’s build: the game program": "আজকের বিল্ড: গেম প্রোগ্রাম",
@@ -348,9 +350,7 @@ I18N_BN_ADD({
 "yes": "হ্যাঁ",
 "≥2 objects of each concrete class in an <code>Animal[]</code>": "একটি <code>Animal[]</code>-এ প্রতিটি concrete class-এর ≥2টি object",
 "≥2 objects of each subclass in an <code>Employee[]</code>": "একটি <code>Employee[]</code>-এ প্রতিটি subclass-এর ≥2টি object",
-"▶ Run program": "▶ প্রোগ্রাম চালান",
-"The commander shouts one order: “Attack!” The drone dives, the tank fires a shell, the sniper takes aim. Nobody asked which kind of enemy they were.": "কমান্ডার একটি আদেশ দেন: “আক্রমণ!” drone ঝাঁপ দেয়, tank shell ছোড়ে, sniper নিশানা করে। কেউ জিজ্ঞেস করেনি তারা কোন ধরনের শত্রু।",
-"They all <b>extend</b> <code>Enemy</code>, so one <code>Enemy[]</code> holds them all, and one call, <code>e.attack(ranger)</code>, makes each one attack <b>in its own way</b>. That is polymorphism.": "তারা সবাই <code>Enemy</code>-কে <b>extend</b> করে, তাই একটি <code>Enemy[]</code> সবাইকে ধরে, আর একটি call, <code>e.attack(ranger)</code>, প্রত্যেককে <b>নিজের মতো করে</b> আক্রমণ করায়। এটাই polymorphism।"
+"▶ Run program": "▶ প্রোগ্রাম চালান"
 });
 /* Bengali patterns for text with changing numbers or file names on the v2 decks (appended to each deck's file) */
 I18N_BN_PATTERNS([
@@ -410,5 +410,14 @@ I18N_BN_PATTERNS([
   [/^health = (\d+) → Hurt: yellow bar$/, 'health = $1 → আহত: হলুদ বার'],
   [/^health = (\d+) → Critical: red bar$/, 'health = $1 → সংকটাপন্ন: লাল বার'],
   [/^health = (\d+) → Game over$/, 'health = $1 → গেম শেষ'],
-  [/^referenced by (s\d)$/, '$1 দ্বারা নির্দেশিত']
+  [/^referenced by (s\d)$/, '$1 দ্বারা নির্দেশিত'],
+  [/^Next line ▶$/, 'পরের লাইন ▶'],
+  [/^▶ Run$/, '▶ চালান'],
+  [/^Output line (\d+) of (\d+)$/, 'Output লাইন $1 / $2'],
+  [/^line (\d+)$/, 'লাইন $1'],
+  [/^The program starts in <code>main<\/code>\. Press <b>Next line ▶<\/b> to run it until it prints a line\.$/, 'প্রোগ্রাম <code>main</code> থেকে শুরু হয়। পরের output লাইন পর্যন্ত চালাতে <b>পরের লাইন ▶</b> চাপুন।'],
+  [/^Output line (\d+) comes from line (\d+) of <code>([^<]+)<\/code>\.$/, 'Output লাইন $1 আসে <code>$3</code>-এর লাইন $2 থেকে।'],
+  [/^The empty output line (\d+) comes from line (\d+) of <code>([^<]+)<\/code>\.$/, 'ফাঁকা output লাইন $1 আসে <code>$3</code>-এর লাইন $2 থেকে।'],
+  [/^That line is inside a method, called from line (\d+) of <code>([^<]+)<\/code>\.$/, 'লাইনটি একটি method-এর ভিতরে; method-টি call করা হয়েছে <code>$2</code>-এর লাইন $1 থেকে।'],
+  [/^That was the last line: <code>main<\/code> ends and the program exits\.$/, 'এটিই শেষ লাইন: <code>main</code> শেষ হয়, প্রোগ্রামও বন্ধ হয়।']
 ]);

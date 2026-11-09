@@ -8,6 +8,7 @@ I18N_BN_ADD({
 "<b>finally</b> runs in every case: success, either exception.": "<b>finally</b> সব ক্ষেত্রেই চলে: সফল হলে, যেকোনো exception হলেও।",
 "<code>Error</code>: serious JVM problems. <code>Exception</code>: problems a program can handle.": "<code>Error</code>: JVM-এর গুরুতর সমস্যা। <code>Exception</code>: যে সমস্যা প্রোগ্রাম সামলাতে পারে।",
 "<code>finally</code> always runs, error or not.": "<code>finally</code> সবসময় চলে, error হোক বা না হোক।",
+"<code>fire()</code> <b>throws</b> an <code>OutOfAmmoException</code>, the game <b>catches</b> it, reloads and carries on, and a <code>finally</code> block makes sure the score is saved no matter what.": "<code>fire()</code> একটি <code>OutOfAmmoException</code> <b>throw</b> করে, গেম সেটি <b>catch</b> করে, reload করে আর চালিয়ে যায়, আর একটি <code>finally</code> block যা-ই ঘটুক স্কোর সেভ নিশ্চিত করে।",
 "<code>fire()</code> declares the checked exception it can throw.": "<code>fire()</code> যে checked exception throw করতে পারে, তা declare করে।",
 "<code>getCause()</code> follows the arrow back to the original exception for the details.": "বিস্তারিত জানতে <code>getCause()</code> তীর ধরে মূল exception-এ ফিরে যায়।",
 "<code>getCause()</code> reaches the wrapped NumberFormatException.": "<code>getCause()</code> মোড়ানো NumberFormatException-এ পৌঁছায়।",
@@ -210,6 +211,7 @@ I18N_BN_ADD({
 "The official lab program": "অফিশিয়াল ল্যাব প্রোগ্রাম",
 "The official program": "অফিশিয়াল প্রোগ্রাম",
 "The original NumberFormatException that LevelLoader wrapped inside the InvalidLevelException.": "মূল NumberFormatException, যা LevelLoader InvalidLevelException-এর ভেতরে মুড়ে রেখেছিল।",
+"The player pulls the trigger on an empty gun. In a bad game, the whole screen freezes. In a good one, you hear “click” and the commando reloads.": "প্লেয়ার খালি বন্দুকের ট্রিগার টানে। খারাপ গেমে পুরো স্ক্রিন জমে যায়। ভালো গেমে শোনা যায় “ক্লিক”, আর কমান্ডো reload করে।",
 "The text is not a number.": "লেখাটি সংখ্যা নয়।",
 "The topics: the idea, then the game": "বিষয়গুলো: আগে ধারণা, তারপর গেম",
 "There is no lane 5, so Java throws.": "lane 5 নেই, তাই Java throw করে।",
@@ -332,9 +334,7 @@ I18N_BN_ADD({
 "y grows ↓": "y বাড়ে ↓",
 "yes": "হ্যাঁ",
 "≥3 products with different stock; one successful and one failing order": "ভিন্ন stock-সহ ≥3টি product; একটি সফল ও একটি ব্যর্থ অর্ডার",
-"▶ Run program": "▶ প্রোগ্রাম চালান",
-"The player pulls the trigger on an empty gun. In a bad game, the whole screen freezes. In a good one, you hear “click” and the commando reloads.": "প্লেয়ার খালি বন্দুকের ট্রিগার টানে। খারাপ গেমে পুরো স্ক্রিন জমে যায়। ভালো গেমে শোনা যায় “ক্লিক”, আর কমান্ডো reload করে।",
-"<code>fire()</code> <b>throws</b> an <code>OutOfAmmoException</code>, the game <b>catches</b> it, reloads and carries on, and a <code>finally</code> block makes sure the score is saved no matter what.": "<code>fire()</code> একটি <code>OutOfAmmoException</code> <b>throw</b> করে, গেম সেটি <b>catch</b> করে, reload করে আর চালিয়ে যায়, আর একটি <code>finally</code> block যা-ই ঘটুক স্কোর সেভ নিশ্চিত করে।"
+"▶ Run program": "▶ প্রোগ্রাম চালান"
 });
 /* Bengali patterns for text with changing numbers or file names on the v2 decks (appended to each deck's file) */
 I18N_BN_PATTERNS([
@@ -394,5 +394,14 @@ I18N_BN_PATTERNS([
   [/^health = (\d+) → Hurt: yellow bar$/, 'health = $1 → আহত: হলুদ বার'],
   [/^health = (\d+) → Critical: red bar$/, 'health = $1 → সংকটাপন্ন: লাল বার'],
   [/^health = (\d+) → Game over$/, 'health = $1 → গেম শেষ'],
-  [/^referenced by (s\d)$/, '$1 দ্বারা নির্দেশিত']
+  [/^referenced by (s\d)$/, '$1 দ্বারা নির্দেশিত'],
+  [/^Next line ▶$/, 'পরের লাইন ▶'],
+  [/^▶ Run$/, '▶ চালান'],
+  [/^Output line (\d+) of (\d+)$/, 'Output লাইন $1 / $2'],
+  [/^line (\d+)$/, 'লাইন $1'],
+  [/^The program starts in <code>main<\/code>\. Press <b>Next line ▶<\/b> to run it until it prints a line\.$/, 'প্রোগ্রাম <code>main</code> থেকে শুরু হয়। পরের output লাইন পর্যন্ত চালাতে <b>পরের লাইন ▶</b> চাপুন।'],
+  [/^Output line (\d+) comes from line (\d+) of <code>([^<]+)<\/code>\.$/, 'Output লাইন $1 আসে <code>$3</code>-এর লাইন $2 থেকে।'],
+  [/^The empty output line (\d+) comes from line (\d+) of <code>([^<]+)<\/code>\.$/, 'ফাঁকা output লাইন $1 আসে <code>$3</code>-এর লাইন $2 থেকে।'],
+  [/^That line is inside a method, called from line (\d+) of <code>([^<]+)<\/code>\.$/, 'লাইনটি একটি method-এর ভিতরে; method-টি call করা হয়েছে <code>$2</code>-এর লাইন $1 থেকে।'],
+  [/^That was the last line: <code>main<\/code> ends and the program exits\.$/, 'এটিই শেষ লাইন: <code>main</code> শেষ হয়, প্রোগ্রামও বন্ধ হয়।']
 ]);

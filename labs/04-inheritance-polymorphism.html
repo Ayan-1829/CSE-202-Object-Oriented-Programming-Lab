@@ -490,39 +490,156 @@ System.out.println(&quot;c instanceof Drone : &quot; + (c instanceof Drone));</p
 }</pre></div><p class="muted">Save every file in one folder, then compile and run: <code>javac *.java</code> → <code>java WaveDemo</code></p>
 </div></section>
 <section class="slide " data-title="Expected output" aria-label="Expected output" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Run the game</p><h2>Expected output</h2><div class="runbox" data-cmd="java WaveDemo"><pre class="run-src" hidden>=== The characters ===
-Player Ranger (100 HP, score 0)
-Enemy Drone-1 (30 HP, 5 damage)
-Enemy Tank-1 (120 HP, 20 damage)
-  armor 8
-Enemy Sniper-1 (50 HP, 35 damage)
+<p class="kicker">Run the game</p><h2>Expected output</h2><div data-demo="g-run" data-cmd="java WaveDemo" data-steps="[{&quot;o&quot;:&quot;=== The characters ===&quot;,&quot;f&quot;:[[0,4]]},{&quot;o&quot;:&quot;Player Ranger (100 HP, score 0)&quot;,&quot;f&quot;:[[1,24],[0,9]]},{&quot;o&quot;:&quot;Enemy Drone-1 (30 HP, 5 damage)&quot;,&quot;f&quot;:[[2,17],[0,10]]},{&quot;o&quot;:&quot;Enemy Tank-1 (120 HP, 20 damage)&quot;,&quot;f&quot;:[[2,17],[4,31],[0,11]]},{&quot;o&quot;:&quot;  armor 8&quot;,&quot;f&quot;:[[4,32],[0,11]]},{&quot;o&quot;:&quot;Enemy Sniper-1 (50 HP, 35 damage)&quot;,&quot;f&quot;:[[2,17],[0,12]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,14]]},{&quot;o&quot;:&quot;=== Polymorphism: one loop, three attacks ===&quot;,&quot;f&quot;:[[0,14]]},{&quot;o&quot;:&quot;Drone-1 dives at Ranger! -5&quot;,&quot;f&quot;:[[3,10],[0,17]]},{&quot;o&quot;:&quot;Tank-1 fires a shell at Ranger! -20&quot;,&quot;f&quot;:[[4,12],[0,17]]},{&quot;o&quot;:&quot;Sniper-1 takes aim... headshot on Ranger! -35&quot;,&quot;f&quot;:[[5,10],[0,17]]},{&quot;o&quot;:&quot;Ranger&#x27;s health after the wave: 40&quot;,&quot;f&quot;:[[0,19]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,21]]},{&quot;o&quot;:&quot;=== Overriding takeDamage() ===&quot;,&quot;f&quot;:[[0,21]]},{&quot;o&quot;:&quot;Ranger shoots Drone-1 with power 25&quot;,&quot;f&quot;:[[1,14],[1,10],[0,22]]},{&quot;o&quot;:&quot;Ranger shoots Tank-1 with power 25&quot;,&quot;f&quot;:[[1,14],[1,10],[0,23]]},{&quot;o&quot;:&quot;  Tank-1&#x27;s armor blocks 8&quot;,&quot;f&quot;:[[4,19],[1,15],[1,10],[0,23]]},{&quot;o&quot;:&quot;Tank health: 103&quot;,&quot;f&quot;:[[0,24]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,26]]},{&quot;o&quot;:&quot;=== Overloading shoot() ===&quot;,&quot;f&quot;:[[0,26]]},{&quot;o&quot;:&quot;Ranger shoots Sniper-1 with power 60&quot;,&quot;f&quot;:[[1,14],[0,27]]},{&quot;o&quot;:&quot;Sniper-1 destroyed! Score 100&quot;,&quot;f&quot;:[[1,18],[0,27]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,29]]},{&quot;o&quot;:&quot;=== instanceof and casting ===&quot;,&quot;f&quot;:[[0,29]]},{&quot;o&quot;:&quot;Drone-1 is a Drone: no special move&quot;,&quot;f&quot;:[[0,37]]},{&quot;o&quot;:&quot;Tank-1 raises its shield: armor 18&quot;,&quot;f&quot;:[[4,26],[0,33]]},{&quot;o&quot;:&quot;Sniper-1 steadies the rifle (red laser on)&quot;,&quot;f&quot;:[[5,15],[0,35]]},{&quot;o&quot;:&quot;&quot;,&quot;f&quot;:[[0,41]]},{&quot;o&quot;:&quot;=== A GameCharacter reference ===&quot;,&quot;f&quot;:[[0,41]]},{&quot;o&quot;:&quot;Enemy Tank-1 (103 HP, 20 damage)&quot;,&quot;f&quot;:[[2,17],[4,31],[0,43]]},{&quot;o&quot;:&quot;  armor 18&quot;,&quot;f&quot;:[[4,32],[0,43]]},{&quot;o&quot;:&quot;c instanceof Enemy : true&quot;,&quot;f&quot;:[[0,44]]},{&quot;o&quot;:&quot;c instanceof Drone : false&quot;,&quot;f&quot;:[[0,45]]}]"><pre class="run-file" data-file="WaveDemo.java" hidden>public class WaveDemo {
+    public static void main(String[] args) {
 
-=== Polymorphism: one loop, three attacks ===
-Drone-1 dives at Ranger! -5
-Tank-1 fires a shell at Ranger! -20
-Sniper-1 takes aim... headshot on Ranger! -35
-Ranger&#x27;s health after the wave: 40
+        System.out.println(&quot;=== The characters ===&quot;);
+        Player ranger = new Player(&quot;Ranger&quot;);
+        Drone drone = new Drone(&quot;Drone-1&quot;);
+        Tank tank = new Tank(&quot;Tank-1&quot;, 8);
+        Sniper sniper = new Sniper(&quot;Sniper-1&quot;);
+        ranger.describe();
+        drone.describe();                   // Drone has no describe(): Enemy&#x27;s runs
+        tank.describe();
+        sniper.describe();
 
-=== Overriding takeDamage() ===
-Ranger shoots Drone-1 with power 25
-Ranger shoots Tank-1 with power 25
-  Tank-1&#x27;s armor blocks 8
-Tank health: 103
+        System.out.println(&quot;\n=== Polymorphism: one loop, three attacks ===&quot;);
+        Enemy[] wave = { drone, tank, sniper };
+        for (Enemy e : wave) {
+            e.attack(ranger);               // the object&#x27;s own attack() runs
+        }
+        System.out.println(&quot;Ranger&#x27;s health after the wave: &quot; + ranger.getHealth());
 
-=== Overloading shoot() ===
-Ranger shoots Sniper-1 with power 60
-Sniper-1 destroyed! Score 100
+        System.out.println(&quot;\n=== Overriding takeDamage() ===&quot;);
+        ranger.shoot(drone);
+        ranger.shoot(tank);
+        System.out.println(&quot;Tank health: &quot; + tank.getHealth());
 
-=== instanceof and casting ===
-Drone-1 is a Drone: no special move
-Tank-1 raises its shield: armor 18
-Sniper-1 steadies the rifle (red laser on)
+        System.out.println(&quot;\n=== Overloading shoot() ===&quot;);
+        ranger.shoot(sniper, 60);
 
-=== A GameCharacter reference ===
-Enemy Tank-1 (103 HP, 20 damage)
-  armor 18
-c instanceof Enemy : true
-c instanceof Drone : false</pre></div>
+        System.out.println(&quot;\n=== instanceof and casting ===&quot;);
+        for (Enemy e : wave) {
+            if (e instanceof Tank) {
+                Tank t = (Tank) e;          // safe: we just checked
+                t.raiseShield();
+            } else if (e instanceof Sniper) {
+                ((Sniper) e).aim();
+            } else {
+                System.out.println(e.getName() + &quot; is a &quot; + e.getClass().getSimpleName() + &quot;: no special move&quot;);
+            }
+        }
+
+        System.out.println(&quot;\n=== A GameCharacter reference ===&quot;);
+        GameCharacter c = tank;             // upcast: always allowed
+        c.describe();                       // still runs Tank&#x27;s describe()
+        System.out.println(&quot;c instanceof Enemy : &quot; + (c instanceof Enemy));
+        System.out.println(&quot;c instanceof Drone : &quot; + (c instanceof Drone));
+    }
+}</pre><pre class="run-file" data-file="Player.java" hidden>public class Player extends GameCharacter {
+    private int score;
+
+    public Player(String name) {
+        super(name, 100);                   // build the GameCharacter part first
+    }
+
+    // Overloaded: same name, different parameters (chosen at compile time)
+    public void shoot(Enemy target) {
+        shoot(target, 25);
+    }
+
+    public void shoot(Enemy target, int power) {
+        System.out.println(name + &quot; shoots &quot; + target.getName() + &quot; with power &quot; + power);
+        target.takeDamage(power);           // which takeDamage runs depends on the object
+        if (!target.isAlive()) {
+            score += 100;
+            System.out.println(target.getName() + &quot; destroyed! Score &quot; + score);
+        }
+    }
+
+    @Override
+    public void describe() {
+        System.out.println(&quot;Player &quot; + name + &quot; (&quot; + health + &quot; HP, score &quot; + score + &quot;)&quot;);
+    }
+}</pre><pre class="run-file" data-file="Enemy.java" hidden>public class Enemy extends GameCharacter {
+    protected int damage;
+
+    public Enemy(String name, int health, int damage) {
+        super(name, health);
+        this.damage = damage;
+    }
+
+    // Every enemy can attack; subclasses override how
+    public void attack(GameCharacter target) {
+        target.takeDamage(damage);
+        System.out.println(name + &quot; attacks &quot; + target.getName() + &quot; for &quot; + damage);
+    }
+
+    @Override
+    public void describe() {
+        System.out.println(&quot;Enemy &quot; + name + &quot; (&quot; + health + &quot; HP, &quot; + damage + &quot; damage)&quot;);
+    }
+}</pre><pre class="run-file" data-file="Drone.java" hidden>public class Drone extends Enemy {
+
+    public Drone(String name) {
+        super(name, 30, 5);                 // light and weak
+    }
+
+    @Override
+    public void attack(GameCharacter target) {
+        target.takeDamage(damage);
+        System.out.println(name + &quot; dives at &quot; + target.getName() + &quot;! -&quot; + damage);
+    }
+}</pre><pre class="run-file" data-file="Tank.java" hidden>public class Tank extends Enemy {
+    private int armor;
+
+    public Tank(String name, int armor) {
+        super(name, 120, 20);               // slow, tough and hits hard
+        this.armor = armor;
+    }
+
+    @Override
+    public void attack(GameCharacter target) {
+        target.takeDamage(damage);
+        System.out.println(name + &quot; fires a shell at &quot; + target.getName() + &quot;! -&quot; + damage);
+    }
+
+    // Armor blocks part of every hit, then the inherited version does the rest
+    @Override
+    public void takeDamage(int amount) {
+        int blocked = Math.min(armor, amount);
+        System.out.println(&quot;  &quot; + name + &quot;&#x27;s armor blocks &quot; + blocked);
+        super.takeDamage(amount - blocked);
+    }
+
+    // Only tanks have this method
+    public void raiseShield() {
+        armor += 10;
+        System.out.println(name + &quot; raises its shield: armor &quot; + armor);
+    }
+
+    @Override
+    public void describe() {
+        super.describe();                   // reuse Enemy&#x27;s version, then add more
+        System.out.println(&quot;  armor &quot; + armor);
+    }
+}</pre><pre class="run-file" data-file="Sniper.java" hidden>public class Sniper extends Enemy {
+
+    public Sniper(String name) {
+        super(name, 50, 35);                // fragile, but every shot hurts
+    }
+
+    @Override
+    public void attack(GameCharacter target) {
+        target.takeDamage(damage);
+        System.out.println(name + &quot; takes aim... headshot on &quot; + target.getName() + &quot;! -&quot; + damage);
+    }
+
+    // Only snipers have this method
+    public void aim() {
+        System.out.println(name + &quot; steadies the rifle (red laser on)&quot;);
+    }
+}</pre></div>
 </div></section>
 <section class="slide " data-title="Game task 1: A Boss enemy" aria-label="Game task 1: A Boss enemy" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Game practice · 1 of 3</p><h2>Game task 1: A Boss enemy</h2><div class="ex task g-task"><div class="qq">An enemy with two phases.</div>
