@@ -24,8 +24,6 @@ I18N_BN_ADD({
 "<code>hits / shotsFired</code> is 0 with two ints. Cast one of them first: <code>(double) hits / shotsFired * 100</code>.": "দুটি int হলে <code>hits / shotsFired</code> হয় 0। আগে একটিকে cast করুন: <code>(double) hits / shotsFired * 100</code>।",
 "<code>if</code> runs a block only when its condition is <code>true</code>.": "শর্ত <code>true</code> হলেই কেবল <code>if</code> তার block চালায়।",
 "<code>int hit = (int) 12.75;</code> gives 12. Why not 13?": "<code>int hit = (int) 12.75;</code> দেয় 12। 13 কেন নয়?",
-"<code>java Hello</code> starts the JVM, which runs <code>main</code>.": "<code>java Hello</code> JVM চালু করে, যা <code>main</code> চালায়।",
-"<code>javac Hello.java</code> compiles it to bytecode, <code>Hello.class</code>.": "<code>javac Hello.java</code> এটিকে bytecode-এ কম্পাইল করে, <code>Hello.class</code>।",
 "<code>main</code> starts with an empty stack frame.": "<code>main</code> একটি খালি stack frame দিয়ে শুরু হয়।",
 "<code>switch</code> picks one <code>case</code> by the value of a variable.": "<code>switch</code> একটি variable-এর মান দেখে একটি <code>case</code> বেছে নেয়।",
 "<code>while</code> tests first (may run zero times); <code>do-while</code> tests after (runs at least once).": "<code>while</code> আগে পরীক্ষা করে (একবারও না চলতে পারে); <code>do-while</code> পরে পরীক্ষা করে (অন্তত একবার চলে)।",
@@ -61,7 +59,6 @@ I18N_BN_ADD({
 "Cast a 12.75 hit to a whole number": "12.75 আঘাতকে পূর্ণসংখ্যায় cast করা",
 "Casting the damage": "damage-কে cast করা",
 "Chapter at a glance": "এক নজরে অধ্যায়",
-"Class name <code>Lab1Demo</code> → <b>Finish</b>. The file name always matches the class name.": "Class-এর নাম <code>Lab1Demo</code> → <b>Finish</b>। ফাইলের নাম সবসময় class-এর নামের সাথে মেলে।",
 "ClassCastException: the program stops here": "ClassCastException: প্রোগ্রাম এখানেই থেমে যায়",
 "Classify a number (positive/zero/negative) and a BMI with if-else": "if-else দিয়ে একটি সংখ্যা (ধনাত্মক/শূন্য/ঋণাত্মক) ও একটি BMI শ্রেণিভুক্ত করুন",
 "Clear": "মুছুন",
@@ -251,7 +248,6 @@ I18N_BN_ADD({
 "Turn a <code>double</code> hit into <code>int</code> health with a cast": "cast দিয়ে একটি <code>double</code> আঘাতকে <code>int</code> health-এ বদলান",
 "Type": "ধরন",
 "Type casting: damage into health": "Type casting: damage থেকে health",
-"Type the project name, e.g. <b>Lab1</b>, keep the location, and click <b>Finish</b>.": "Project-এর নাম লিখুন, যেমন <b>Lab1</b>, location যেমন আছে রাখুন, এবং <b>Finish</b> ক্লিক করুন।",
 "Use <code>double</code> variables for all temperatures": "সব তাপমাত্রার জন্য <code>double</code> variable ব্যবহার করুন",
 "Use <code>if / else if / else</code>": "<code>if / else if / else</code> ব্যবহার করুন",
 "Use <code>switch ((int) accuracy / 10)</code> to print S (90+), A (80s), B (70s) or C": "<code>switch ((int) accuracy / 10)</code> দিয়ে S (90+), A (80-এর ঘর), B (70-এর ঘর) বা C ছাপুন",
@@ -390,7 +386,11 @@ I18N_BN_ADD({
 "⬇ NetBeans Java Quick Start (official tutorial)": "⬇ NetBeans Java Quick Start (অফিসিয়াল টিউটোরিয়াল)",
 "⬇ Open oracle.com/java": "⬇ oracle.com/java খুলুন",
 "Every game you have played is secretly a spreadsheet in a hurry. Behind the explosions, the computer is just updating a few numbers, sixty times a second.": "আপনি যত গেম খেলেছেন, সবই আসলে তাড়াহুড়োয় থাকা একটি spreadsheet। বিস্ফোরণের পেছনে computer শুধু কয়েকটি সংখ্যা update করছে, সেকেন্ডে ষাটবার।",
-"Health 100, ammo 5, score 0, name “Ranger”: in Java each one lives in a <b>variable</b> with a <b>type</b>. Add <code>if</code> and <code>switch</code> to make decisions and loops to repeat them, and the numbers start to fight back.": "Health 100, ammo 5, score 0, নাম “Ranger”: Java-তে প্রতিটি থাকে একটি <b>type</b> সহ <b>variable</b>-এ। সিদ্ধান্তের জন্য <code>if</code> আর <code>switch</code>, পুনরাবৃত্তির জন্য loop যোগ করুন, আর সংখ্যাগুলো পাল্টা লড়াই শুরু করে।"
+"Health 100, ammo 5, score 0, name “Ranger”: in Java each one lives in a <b>variable</b> with a <b>type</b>. Add <code>if</code> and <code>switch</code> to make decisions and loops to repeat them, and the numbers start to fight back.": "Health 100, ammo 5, score 0, নাম “Ranger”: Java-তে প্রতিটি থাকে একটি <b>type</b> সহ <b>variable</b>-এ। সিদ্ধান্তের জন্য <code>if</code> আর <code>switch</code>, পুনরাবৃত্তির জন্য loop যোগ করুন, আর সংখ্যাগুলো পাল্টা লড়াই শুরু করে।",
+"<code>javac GameBasics.java</code> compiles it to bytecode, <code>GameBasics.class</code>.": "<code>javac GameBasics.java</code> এটিকে bytecode-এ কম্পাইল করে, <code>GameBasics.class</code>।",
+"<code>java GameBasics</code> starts the JVM, which runs <code>main</code>.": "<code>java GameBasics</code> JVM চালু করে, যা <code>main</code> চালায়।",
+"Type the project name, e.g. <b>CodeCommando</b>, keep the location, and click <b>Finish</b>.": "Project-এর নাম লিখুন, যেমন <b>CodeCommando</b>, location যেমন আছে রাখুন, এবং <b>Finish</b> ক্লিক করুন।",
+"Class name <code>GameBasics</code> → <b>Finish</b>. The file name always matches the class name.": "Class-এর নাম <code>GameBasics</code> → <b>Finish</b>। ফাইলের নাম সবসময় class-এর নামের সাথে মেলে।"
 });
 /* Bengali patterns for text with changing numbers or file names on the v2 decks (appended to each deck's file) */
 I18N_BN_PATTERNS([

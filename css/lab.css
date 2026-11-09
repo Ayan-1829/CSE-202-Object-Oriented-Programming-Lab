@@ -55,6 +55,9 @@
 .slide .os-steps.pick li{cursor:pointer;padding:6px 10px;border-radius:8px;color:var(--ink-3);margin-bottom:6px}
 .slide .os-steps.pick li.on{color:var(--ink);background:var(--ac-soft)}
 .os-nav{display:flex;gap:10px;align-items:center;margin-top:10px}
+.os-right{display:flex;flex-direction:column;gap:10px;min-width:0}
+.os-right .os-nav.os-nav-top{margin:0;justify-content:center;gap:14px}
+.os-right .os-nav.os-nav-top .os-count{flex:none;margin:0}
 .os-count{font:600 16px var(--f-head);color:var(--ink-3);flex:1;text-align:center}
 .os-zoom{display:block;padding:0;border:0;background:none;cursor:zoom-in;width:100%}
 .os-lightbox{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.82);display:flex;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}

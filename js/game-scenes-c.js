@@ -266,6 +266,7 @@ DEMOS['g-hero'] = (root) => {
   const run = gRun(c.cvs, () => {
     if (s.over) { if (++overT > 150 || keys.restart) { s = newBattle({ seed: s.t + 7 }); overT = 0; keys.restart = false; } return; }
     battleStep(s, manual() ? { dx: (keys.right ? 1 : 0) - (keys.left ? 1 : 0), dy: (keys.down ? 1 : 0) - (keys.up ? 1 : 0), fire: keys.fire } : null);
+    if (window.G_PROMO) s.player.hp = Math.max(s.player.hp, 60);   // promo recordings only: never GAME OVER
     if (s.t > 5400 && !manual()) s = newBattle({ seed: s.t });
   }, () => {
     battleDraw(c.g, s);

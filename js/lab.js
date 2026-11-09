@@ -239,9 +239,9 @@ DEMOS['lab10-balls'] = (root) => {
         credit: 'Screenshots: Apache NetBeans Java Quick Start tutorial (Apache License 2.0), marks added.',
         steps: [
           ['<b>File → New Project…</b> Choose <b>Java with Maven</b> → <b>Java Application</b>, then <b>Next</b>.', '../img/setup/nbp-1.jpg'],
-          ['Type the project name, e.g. <b>Lab1</b>, keep the location, and click <b>Finish</b>.', '../img/setup/nbp-2.jpg'],
+          ['Type the project name, e.g. <b>CodeCommando</b>, keep the location, and click <b>Finish</b>.', '../img/setup/nbp-2.jpg'],
           ['Add a class: in <b>Source Packages</b>, right-click your package → <b>New → Java Class…</b>', '../img/setup/nbp-3.jpg'],
-          ['Class name <code>Lab1Demo</code> → <b>Finish</b>. The file name always matches the class name.', '../img/setup/nbp-4.jpg'],
+          ['Class name <code>GameBasics</code> → <b>Finish</b>. The file name always matches the class name.', '../img/setup/nbp-4.jpg'],
           ['Write <code>public static void main(String[] args)</code> and put your code inside it.', '../img/setup/nbp-5.jpg'],
           ['Run with the green <b>▶ Run Project</b> button or <kbd>F6</kbd> (one file: <kbd>Shift</kbd>+<kbd>F6</kbd>). Your output and <b>BUILD SUCCESS</b> appear in the <b>Output</b> window.', '../img/setup/nbp-6.jpg']] },
     },
@@ -273,10 +273,16 @@ DEMOS['lab10-balls'] = (root) => {
       if (stepper) {
         const cur = Math.min(o.cur || 0, o.steps.length - 1);
         body.innerHTML = '<div><ol class="os-steps pick">' + o.steps.map(([t], k) => '<li class="' + (k === cur ? 'on' : '') + '" data-k="' + k + '">' + t + '</li>').join('') + '</ol>'
-          + '<div class="os-nav"><button type="button" class="btn sm" data-d="-1"' + (cur ? '' : ' disabled') + '>← Previous step</button><span class="os-count">Step ' + (cur + 1) + ' of ' + o.steps.length + '</span><button type="button" class="btn pri sm" data-d="1"' + (cur < o.steps.length - 1 ? '' : ' disabled') + '>Next step →</button></div></div>'
+          + '</div>'
           + shotHtml(o.steps[cur][1], 'Step ' + (cur + 1) + (o.credit ? '. ' + o.credit : ''));
         body.querySelectorAll('.os-steps li').forEach((li) => { li.onclick = () => { o.cur = +li.dataset.k; show(); }; });
-        body.querySelectorAll('.os-nav button').forEach((b) => { b.onclick = () => { o.cur = cur + +b.dataset.d; show(); }; });
+        /* the step buttons sit centred at the top of the screenshot column, so they stay on screen */
+        const nav = h('div', { class: 'os-nav os-nav-top' },
+          h('button', { type: 'button', class: 'btn sm', disabled: cur ? null : true, onclick: () => { o.cur = cur - 1; show(); } }, '← Previous step'),
+          h('span', { class: 'os-count' }, 'Step ' + (cur + 1) + ' of ' + o.steps.length),
+          h('button', { type: 'button', class: 'btn pri sm', disabled: cur < o.steps.length - 1 ? null : true, onclick: () => { o.cur = cur + 1; show(); } }, 'Next step →'));
+        const shot = body.querySelector('.os-shot');
+        if (shot) { const right = h('div', { class: 'os-right' }); shot.before(right); right.append(nav, shot); }
       } else {
         body.innerHTML = '<ol class="os-steps">' + o.steps.map((t) => '<li>' + t + '</li>').join('') + '</ol>' + (o.shot ? shotHtml(o.shot[0], o.shot[1]) : '');
       }
