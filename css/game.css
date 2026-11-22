@@ -238,3 +238,14 @@ html.g-noscroll,html.g-noscroll body{overflow:hidden}
 @media (max-width:900px){.g-run .g-run-body{grid-template-columns:1fr}.slide .g-run .g-run-code,.slide .g-run .g-run-out,.g-run .g-run-code,.g-run .g-run-out{height:min(34vh,300px)}}
 .g-run-tabs button{font-size:14px;padding:4px 9px}
 body.deck-page .slide .g-run :where(.g-run-code,.g-run-code .cl,.g-run-out){font-size:calc(var(--pj-code) * .84)!important}
+/* ===== Phones: code and its output / preview stack top-to-bottom =====
+   Applies below 900px wide, and on phones turned sideways (a touch screen no taller than 540px):
+   big phones are 850-950px wide in landscape, so a width test alone kept the panes side by side.
+   Laptops, desktops and tablets keep the side-by-side layout. */
+@media (max-width:900px),(pointer:coarse) and (max-height:540px){
+  .g-run .g-run-body,.g-codeside,.g-codeside.g-topic,.g-split,.walk-side,.walk-side.g-walk,.os-grid{grid-template-columns:1fr}
+}
+@media (pointer:coarse) and (max-height:540px){
+  .slide .g-run .g-run-code,.slide .g-run .g-run-out,.g-run .g-run-code,.g-run .g-run-out{height:60vh}
+  .slide .g-side pre.code{max-height:60vh}
+}
