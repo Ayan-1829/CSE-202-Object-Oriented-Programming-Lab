@@ -107,7 +107,7 @@ System.out.println(&quot;drone2 health: &quot; + drone2.getHealth());</pre></div
 }</pre><ul class="pts"><li><b>Fields</b> are the variables inside an object.</li><li>A <b>constructor</b> has the class name and no return type; it fills the fields when <code>new</code> runs.</li><li><code>this.health</code> means “this object’s field” when a parameter has the same name.</li><li><b>Fields</b> hold each object’s state.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Player: fields and a static counter" aria-label="Player: fields and a static counter" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 2 of 6 · our game program · 1 of 2 · <span class="walk-file">Player.java</span></p><h2>Player: fields and a static counter</h2><div class="walk-side g-walk"><pre class="code walk-code">public class Player {
+<p class="kicker">Topic 2 of 6 · our game program · 1 of 2 · <span class="walk-file">Player.java</span></p><h2>Player: fields and a static counter</h2><div data-demo="g-explain" data-steps="[{&quot;l&quot;:[[1,1]],&quot;t&quot;:&quot;&lt;code&gt;class Player&lt;/code&gt; is the blueprint of a player. It is not a player yet: &lt;code&gt;new Player(...)&lt;/code&gt; makes one later.&quot;},{&quot;l&quot;:[[3,6]],&quot;t&quot;:&quot;Four &lt;b&gt;fields&lt;/b&gt;: the data every player carries. &lt;code&gt;private&lt;/code&gt; means only code inside this class can touch them.&quot;},{&quot;l&quot;:[[9,9]],&quot;t&quot;:&quot;&lt;code&gt;static&lt;/code&gt; makes one counter for the whole class instead of one per player. It starts at 0.&quot;},{&quot;l&quot;:[[1,9]],&quot;t&quot;:&quot;Picture two Player objects: each has its own name, health, ammo and score, but both share the one &lt;code&gt;playersCreated&lt;/code&gt;.&quot;}]"><pre class="run-file" hidden>public class Player {
     // Fields: every Player object gets its own copy
     private String name;
     private int health;
@@ -118,7 +118,7 @@ System.out.println(&quot;drone2 health: &quot; + drone2.getHealth());</pre></div
     private static int playersCreated = 0;</pre><ul class="walk-notes"><li>Four private fields: every Player object gets its own.</li><li><code>playersCreated</code> is static: shared by all players.</li></ul></div>
 </div></section>
 <section class="slide " data-title="The Player constructor" aria-label="The Player constructor" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 2 of 6 · our game program · 2 of 2 · <span class="walk-file">Player.java</span></p><h2>The Player constructor</h2><div class="walk-side g-walk"><pre class="code walk-code">// Constructor: runs once for each new Player
+<p class="kicker">Topic 2 of 6 · our game program · 2 of 2 · <span class="walk-file">Player.java</span></p><h2>The Player constructor</h2><div data-demo="g-explain" data-steps="[{&quot;l&quot;:[[2,2]],&quot;t&quot;:&quot;The &lt;b&gt;constructor&lt;/b&gt; has the class’s name and no return type. It runs once each time &lt;code&gt;new Player(\&quot;Ranger\&quot;, 100, 5)&lt;/code&gt; is written; the three values arrive here as &lt;code&gt;name&lt;/code&gt;, &lt;code&gt;health&lt;/code&gt; and &lt;code&gt;ammo&lt;/code&gt;.&quot;},{&quot;l&quot;:[[3,3]],&quot;t&quot;:&quot;Two things are called &lt;code&gt;name&lt;/code&gt;: the parameter that just arrived and the field. &lt;code&gt;this.name&lt;/code&gt; means “the field of this object”, so the line copies the parameter into the field.&quot;},{&quot;l&quot;:[[4,4]],&quot;t&quot;:&quot;Health is not copied straight in: &lt;code&gt;setHealth&lt;/code&gt; checks it first (a later slide shows how).&quot;},{&quot;l&quot;:[[5,6]],&quot;t&quot;:&quot;Ammo is copied as given, and every new player starts with a score of 0.&quot;},{&quot;l&quot;:[[7,7]],&quot;t&quot;:&quot;Add 1 to the shared counter, so the class knows how many players have been made.&quot;}]"><pre class="run-file" hidden>// Constructor: runs once for each new Player
 public Player(String name, int health, int ammo) {
     this.name = name;
     setHealth(health);
@@ -138,7 +138,7 @@ if (!target.isAlive()) {
 }</pre><ul class="pts"><li>A <b>method</b> is something an object can do.</li><li>It may take parameters and may <code>return</code> a value (<code>void</code> returns nothing).</li><li>Call it on an object: <code>c.increment()</code>.</li><li>A method is called on an object: <code>ranger.shoot(…)</code>.</li></ul></div>
 </div></section>
 <section class="slide " data-title="shoot(): one object acts on another" aria-label="shoot(): one object acts on another" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 3 of 6 · our game program · 1 of 4 · <span class="walk-file">Player.java</span></p><h2>shoot(): one object acts on another</h2><div class="walk-side g-walk"><pre class="code walk-code wide">public void shoot(Enemy target) {
+<p class="kicker">Topic 3 of 6 · our game program · 1 of 4 · <span class="walk-file">Player.java</span></p><h2>shoot(): one object acts on another</h2><div data-demo="g-explain" data-steps="[{&quot;l&quot;:[[1,1]],&quot;t&quot;:&quot;&lt;code&gt;shoot&lt;/code&gt; is given the enemy to shoot, called &lt;code&gt;target&lt;/code&gt; inside the method. &lt;code&gt;void&lt;/code&gt; means it gives nothing back.&quot;},{&quot;l&quot;:[[2,5]],&quot;t&quot;:&quot;&lt;code&gt;!&lt;/code&gt; means “not”. If the target is already destroyed, print a message and &lt;code&gt;return&lt;/code&gt;: the method ends there, and nothing below it runs.&quot;},{&quot;l&quot;:[[6,9]],&quot;t&quot;:&quot;The same idea for an empty clip: print “click!” and stop.&quot;},{&quot;l&quot;:[[10,11]],&quot;t&quot;:&quot;Getting this far means the shot is fine: use one bullet (&lt;code&gt;ammo--&lt;/code&gt;), then call &lt;code&gt;takeDamage(25)&lt;/code&gt; on the &lt;b&gt;enemy&lt;/b&gt; object. The player’s own health does not change.&quot;},{&quot;l&quot;:[[12,12]],&quot;t&quot;:&quot;Ask the enemy for its type and its new health, and print them.&quot;},{&quot;l&quot;:[[13,16]],&quot;t&quot;:&quot;Did that shot destroy it? If so, add the enemy’s points to this player’s score (&lt;code&gt;score += …&lt;/code&gt; means &lt;code&gt;score = score + …&lt;/code&gt;).&quot;}]"><pre class="run-file" hidden>public void shoot(Enemy target) {
     if (!target.isAlive()) {
         System.out.println(name + &quot; holds fire: &quot; + target.getType() + &quot; is already destroyed&quot;);
         return;
@@ -157,7 +157,7 @@ if (!target.isAlive()) {
 }</pre><ul class="walk-notes"><li>Two early <code>return</code>s: a destroyed target, an empty clip.</li><li><code>target.takeDamage(25)</code> changes the drone, not the player.</li><li>Points are added only when the shot destroys it.</li></ul></div>
 </div></section>
 <section class="slide " data-title="takeDamage(), isAlive() and showStatus()" aria-label="takeDamage(), isAlive() and showStatus()" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 3 of 6 · our game program · 2 of 4 · <span class="walk-file">Player.java</span></p><h2>takeDamage(), isAlive() and showStatus()</h2><pre class="code walk-code wide">public void takeDamage(int amount) {
+<p class="kicker">Topic 3 of 6 · our game program · 2 of 4 · <span class="walk-file">Player.java</span></p><h2>takeDamage(), isAlive() and showStatus()</h2><div data-demo="g-explain" data-steps="[{&quot;l&quot;:[[1,3]],&quot;t&quot;:&quot;To lose health, the player calls its own setter with the lower value. The setter keeps health at 0 or above, so it can never go negative.&quot;},{&quot;l&quot;:[[5,7]],&quot;t&quot;:&quot;&lt;code&gt;health &amp;gt; 0&lt;/code&gt; is either true or false, so the method returns a &lt;code&gt;boolean&lt;/code&gt;: alive or not.&quot;},{&quot;l&quot;:[[9,11]],&quot;t&quot;:&quot;Print the player’s current data on one line. Each object prints its own values.&quot;}]"><pre class="run-file" hidden>public void takeDamage(int amount) {
     setHealth(health - amount);
 }
 
@@ -167,10 +167,10 @@ public boolean isAlive() {
 
 public void showStatus() {
     System.out.println(&quot;[&quot; + name + &quot;] health &quot; + health + &quot; | ammo &quot; + ammo + &quot; | score &quot; + score);
-}</pre><ul class="walk-notes"><li>takeDamage reuses the setter, so health never goes below 0.</li></ul>
+}</pre><ul class="walk-notes"><li>takeDamage reuses the setter, so health never goes below 0.</li></ul></div>
 </div></section>
-<section class="slide " data-title="Enemy: its methods" aria-label="Enemy: its methods" tabindex="-1"><div style="zoom:0.98;" class="slide-inner">
-<p class="kicker">Topic 3 of 6 · our game program · 3 of 4 · <span class="walk-file">Enemy.java</span></p><h2>Enemy: its methods</h2><div class="walk-side g-walk"><pre class="code walk-code wide">public String getType() { return type; }
+<section class="slide " data-title="Enemy: its methods" aria-label="Enemy: its methods" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Topic 3 of 6 · our game program · 3 of 4 · <span class="walk-file">Enemy.java</span></p><h2>Enemy: its methods</h2><div data-demo="g-explain" data-steps="[{&quot;l&quot;:[[1,4]],&quot;t&quot;:&quot;Getters, as in Player.&quot;},{&quot;l&quot;:[[6,8]],&quot;t&quot;:&quot;An enemy is alive while its health is above 0.&quot;},{&quot;l&quot;:[[10,15]],&quot;t&quot;:&quot;Take the damage, then stop health from going below 0.&quot;},{&quot;l&quot;:[[17,22]],&quot;t&quot;:&quot;&lt;code&gt;attack&lt;/code&gt; is given a Player. If this enemy is still alive, it calls &lt;code&gt;takeDamage(10)&lt;/code&gt; on that player: one object changing another through its methods.&quot;}]"><pre class="run-file" hidden>public String getType() { return type; }
 public int getHealth()  { return health; }
 public int getPoints()  { return points; }
 public static int getEnemiesSpawned() { return enemiesSpawned; }
@@ -194,7 +194,7 @@ public void attack(Player target) {
 }</pre><ul class="walk-notes"><li><code>attack</code> calls a method on the Player it is given.</li></ul></div>
 </div></section>
 <section class="slide " data-title="BattleDemo: the fight" aria-label="BattleDemo: the fight" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 3 of 6 · our game program · 4 of 4 · <span class="walk-file">BattleDemo.java</span></p><h2>BattleDemo: the fight</h2><pre class="code walk-code">System.out.println(&quot;\n=== The fight: objects calling each other&#x27;s methods ===&quot;);
+<p class="kicker">Topic 3 of 6 · our game program · 4 of 4 · <span class="walk-file">BattleDemo.java</span></p><h2>BattleDemo: the fight</h2><div data-demo="g-explain" data-steps="[{&quot;l&quot;:[[2,2]],&quot;t&quot;:&quot;drone2 zaps the ranger: health 100 → 90.&quot;},{&quot;l&quot;:[[3,3]],&quot;t&quot;:&quot;The ranger shoots drone1 again. It had 15 left from the first shot, so it is destroyed and the ranger scores 50.&quot;},{&quot;l&quot;:[[4,5]],&quot;t&quot;:&quot;drone2 zaps again (health 80), and the ranger shoots drone2 (40 → 15).&quot;},{&quot;l&quot;:[[6,6]],&quot;t&quot;:&quot;drone1 is already destroyed, so &lt;code&gt;shoot&lt;/code&gt; stops at its first &lt;code&gt;return&lt;/code&gt; and no bullet is used.&quot;},{&quot;l&quot;:[[7,8]],&quot;t&quot;:&quot;drone2 goes from 15 to 0: destroyed, +50. The next shot at it is refused, like line 6.&quot;},{&quot;l&quot;:[[9,9]],&quot;t&quot;:&quot;The status line: health 80, ammo 1, score 100. Five bullets, four shots fired, two refused.&quot;}]"><pre class="run-file" hidden>System.out.println(&quot;\n=== The fight: objects calling each other&#x27;s methods ===&quot;);
 drone2.attack(ranger);
 ranger.shoot(drone1);
 drone2.attack(ranger);
@@ -202,7 +202,7 @@ ranger.shoot(drone2);
 ranger.shoot(drone1);
 ranger.shoot(drone2);
 ranger.shoot(drone2);
-ranger.showStatus();</pre><ul class="walk-notes"><li>Objects take turns calling each other’s methods.</li><li>Shooting a destroyed drone is refused, so no ammo is wasted.</li></ul>
+ranger.showStatus();</pre><ul class="walk-notes"><li>Objects take turns calling each other’s methods.</li><li>Shooting a destroyed drone is refused, so no ammo is wasted.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Encapsulation" aria-label="Encapsulation" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 4 of 6</p><h2>Encapsulation</h2><div class="g-ingame"><div>In the game:</div><div>Encapsulation: private fields and a validating setter</div></div><div class="g-codeside"><pre class="code small-code">private int health;
@@ -220,7 +220,7 @@ public void setHealth(int health) {
 }</pre><ul class="pts"><li>Make fields <code>private</code>: only the class itself can touch them.</li><li>Give controlled access with public <b>getters</b> and <b>setters</b>.</li><li>A setter can refuse bad values.</li><li><code>private</code>: only code inside the class can touch the field.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Getters and the validating setter" aria-label="Getters and the validating setter" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 4 of 6 · our game program · 1 of 1 · <span class="walk-file">Player.java</span></p><h2>Getters and the validating setter</h2><div class="walk-side g-walk"><pre class="code walk-code">// Getters: read-only access to private fields
+<p class="kicker">Topic 4 of 6 · our game program · 1 of 1 · <span class="walk-file">Player.java</span></p><h2>Getters and the validating setter</h2><div data-demo="g-explain" data-steps="[{&quot;l&quot;:[[2,5]],&quot;t&quot;:&quot;&lt;b&gt;Getters&lt;/b&gt;: the fields are private, so other classes ask for a value through these methods. They can read it, but not change it.&quot;},{&quot;l&quot;:[[6,6]],&quot;t&quot;:&quot;A &lt;code&gt;static&lt;/code&gt; getter belongs to the class, so it is called as &lt;code&gt;Player.getPlayersCreated()&lt;/code&gt;, without any player object.&quot;},{&quot;l&quot;:[[9,9]],&quot;t&quot;:&quot;The &lt;b&gt;setter&lt;/b&gt; is the only way to change health from outside the class.&quot;},{&quot;l&quot;:[[10,15]],&quot;t&quot;:&quot;It fixes a bad value first: below 0 becomes 0, above 100 becomes 100.&quot;},{&quot;l&quot;:[[16,16]],&quot;t&quot;:&quot;Only then is the value stored. So &lt;code&gt;setHealth(250)&lt;/code&gt; stores 100.&quot;}]"><pre class="run-file" hidden>// Getters: read-only access to private fields
 public String getName() { return name; }
 public int getHealth()  { return health; }
 public int getAmmo()    { return ammo; }
@@ -250,7 +250,7 @@ public Enemy(String type, int health, int points) {
 int n = Enemy.getEnemiesSpawned();       // called on the class</pre><ul class="pts"><li>An <b>instance</b> field: every object has its own copy (each drone’s health).</li><li>A <code>static</code> field: one copy shared by the whole class (how many enemies were spawned).</li><li>Use a static member through the class name: <code>Enemy.enemiesSpawned</code>.</li><li>An <b>instance</b> field belongs to each object.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Enemy: fields, counter and constructor" aria-label="Enemy: fields, counter and constructor" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 5 of 6 · our game program · 1 of 1 · <span class="walk-file">Enemy.java</span></p><h2>Enemy: fields, counter and constructor</h2><div class="walk-side g-walk"><pre class="code walk-code">public class Enemy {
+<p class="kicker">Topic 5 of 6 · our game program · 1 of 1 · <span class="walk-file">Enemy.java</span></p><h2>Enemy: fields, counter and constructor</h2><div data-demo="g-explain" data-steps="[{&quot;l&quot;:[[1,4]],&quot;t&quot;:&quot;Enemy follows the same plan as Player: private fields for its type, its health and the points it is worth.&quot;},{&quot;l&quot;:[[7,7]],&quot;t&quot;:&quot;A static counter, shared by all enemies.&quot;},{&quot;l&quot;:[[9,14]],&quot;t&quot;:&quot;The constructor copies the three values into the fields and adds 1 to the counter. &lt;code&gt;new Enemy(\&quot;Drone-1\&quot;, 40, 50)&lt;/code&gt; makes a drone with 40 health, worth 50 points.&quot;}]"><pre class="run-file" hidden>public class Enemy {
     private String type;
     private int health;
     private int points;

@@ -603,3 +603,57 @@ DEMOS['g-run'] = (root) => {
   }
   show(0);
 };
+
+/* ---------- "Read it line by line": a walkthrough slide's code, explained a few lines at a time ----------
+   <div data-demo="g-explain" data-steps='[{"l": [[from, to], ...], "t": "html"}, ...]'>
+   holds <pre class="run-file" hidden> (the code) and <ul class="walk-notes"> (the slide's short notes,
+   shown as the last step, "In short"). Steps come from tools/v3/explain.py. */
+DEMOS['g-explain'] = (root) => {
+  const pre = root.querySelector('pre.run-file'), notes = root.querySelector('ul.walk-notes');
+  if (!pre) return;
+  const src = pre.textContent.replace(/^\n/, ''), steps = JSON.parse(root.getAttribute('data-steps') || '[]');
+  pre.remove();
+  if (notes) { notes.remove(); steps.push({ l: [], t: '', sum: notes }); }
+  const v = codeView(src); v.el.classList.add('trace-code', 'g-ex-code');
+  const lines = (st) => { const s = []; (st.l || []).forEach(([a, b]) => { for (let n = a; n <= b; n++) s.push(n); }); return s; };
+  const label = (st) => (st.l || []).map(([a, b]) => (a === b ? 'line ' + a : 'lines ' + a + '–' + b)).join(', ');
+  let cur = 0, all = false;
+  const where = h('p', { class: 'g-ex-where' }), text = h('div', { class: 'g-ex-text', role: 'status', 'aria-live': 'polite' });
+  const counter = h('span', { class: 'trace-count' });
+  const backBtn = h('button', { type: 'button', class: 'btn sm', onclick: () => show(cur - 1) }, '◀ Back');
+  const nextBtn = h('button', { type: 'button', class: 'btn sm pri', onclick: () => show(cur + 1) }, 'Next ▶');
+  const allBtn = h('button', { type: 'button', class: 'btn sm', onclick: () => (all ? show(cur) : showAll()) }, 'Show all');
+  const panel = h('div', { class: 'g-ex-panel' }, h('div', { class: 'trace-ctl g-ex-ctl' }, backBtn, nextBtn, allBtn, counter), where, text);
+  root.append(h('div', { class: 'g-explain' }, v.el, panel));
+
+  function say(st) {
+    if (st.sum) { const d = h('div', { class: 'g-ex-sum' }, h('b', null, 'In short')); d.append(st.sum); return d; }
+    const d = h('div'); d.innerHTML = st.t; return d;
+  }
+  function show(i) {
+    all = false; allBtn.textContent = 'Show all';
+    cur = Math.max(0, Math.min(steps.length - 1, i));
+    const st = steps[cur];
+    v.mark(lines(st), 'cur');
+    where.textContent = st.sum ? '' : label(st);
+    where.hidden = !!st.sum;
+    text.replaceChildren(say(st));
+    counter.textContent = 'Step ' + (cur + 1) + ' of ' + steps.length;
+    backBtn.disabled = cur === 0;
+    nextBtn.disabled = cur >= steps.length - 1;
+  }
+  function showAll() {
+    all = true; allBtn.textContent = 'One step at a time';
+    v.mark([], 'cur');
+    where.hidden = true;
+    const ol = h('ol', { class: 'g-ex-all' });
+    steps.forEach((st, k) => {
+      const li = h('li', null, st.sum ? '' : h('button', { type: 'button', class: 'g-ex-jump', onclick: () => show(k) }, label(st)), say(st));
+      ol.append(li);
+    });
+    text.replaceChildren(ol);
+    counter.textContent = steps.length + ' steps';
+    backBtn.disabled = nextBtn.disabled = true;
+  }
+  show(0);
+};

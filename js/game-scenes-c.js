@@ -309,7 +309,7 @@ DEMOS['g-hero'] = (root) => {
     const pw = Math.round(Math.max(GW, w) * dpr), ph = Math.round(pw * GH / GW);
     if (c.cvs.width !== pw) { c.cvs.width = pw; c.cvs.height = ph; c.g.setTransform(pw / GW, 0, 0, ph / GH, 0, 0); battleDraw(c.g, s); }
   }
-  const fsBtn = h('button', { type: 'button', class: 'btn pri g-enter', onclick: () => (isFs() ? exitFs() : enterFs()) }, '▶ ' + gT('Enter'));
+  const fsBtn = h('button', { type: 'button', class: 'btn pri g-enter', onclick: () => (isFs() ? exitFs() : enterFs()) }, '▶ ' + gT('Play Code Commando'));
   ['fullscreenchange', 'webkitfullscreenchange'].forEach((ev) => document.addEventListener(ev, () => { requestAnimationFrame(fit); if (!fsEl()) Object.keys(keys).forEach((k) => press(k, false)); }));
   window.addEventListener('resize', () => { if (isFs()) requestAnimationFrame(fit); });
 

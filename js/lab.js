@@ -242,8 +242,9 @@ DEMOS['lab10-balls'] = (root) => {
           ['Type the project name, e.g. <b>CodeCommando</b>, keep the location, and click <b>Finish</b>.', '../img/setup/nbp-2.jpg'],
           ['Add a class: in <b>Source Packages</b>, right-click your package → <b>New → Java Class…</b>', '../img/setup/nbp-3.jpg'],
           ['Class name <code>GameBasics</code> → <b>Finish</b>. The file name always matches the class name.', '../img/setup/nbp-4.jpg'],
-          ['Write <code>public static void main(String[] args)</code> and put your code inside it.', '../img/setup/nbp-5.jpg'],
-          ['Run with the green <b>▶ Run Project</b> button or <kbd>F6</kbd> (one file: <kbd>Shift</kbd>+<kbd>F6</kbd>). Your output and <b>BUILD SUCCESS</b> appear in the <b>Output</b> window.', '../img/setup/nbp-6.jpg']] },
+          ['Inside the class, add <code>main</code> with one line: <code>System.out.println("Mission start!");</code>', '../img/setup/nbp-5.jpg'],
+          ['In <code>GameBasics.java</code>, press <kbd>Shift</kbd>+<kbd>F6</kbd> (<b>Run File</b>). It worked if <b>Output</b> shows <code>Mission start!</code>', '../img/setup/nbp-6.jpg'],
+          ['Change the message, press <kbd>Shift</kbd>+<kbd>F6</kbd> again, and look for your edit: then you know you ran the right file.', '../img/setup/nbp-6.jpg']] },
     },
   };
 

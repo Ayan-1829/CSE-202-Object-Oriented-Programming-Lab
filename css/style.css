@@ -1062,6 +1062,8 @@ pre.code{border-radius:4px;border-left:1px solid var(--line)}
 .jr-ex{display:block;margin-top:3px;font-size:var(--text-small,16px);line-height:1.45;color:var(--ink-2);text-decoration:none}
 .jr-ex:hover{color:var(--ac-ink);text-decoration:underline;text-underline-offset:3px}
 @media (max-width:820px){.journey{grid-template-columns:1fr;gap:18px}}
+/* a line under the home-page buttons (Thesis: what the worked thesis offers) */
+.toolbar-links+.tl-note{margin:10px 0 0;font-size:15px;color:var(--ink-2)}
 /* a menu button beside "Start" on a home page (CSE-308: the example documents) */
 .docmenu{position:relative;display:inline-block}
 .docmenu>summary{list-style:none;cursor:pointer;gap:9px}

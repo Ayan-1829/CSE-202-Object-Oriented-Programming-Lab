@@ -53,6 +53,8 @@ I18N_BN_ADD({
   "Step": "এক ধাপ",
   "Run all": "সব চালান",
   "Show all": "সব দেখান",
+  "One step at a time": "এক ধাপ করে",
+  "In short": "সংক্ষেপে",
   "Start again": "আবার শুরু",
   "Previous": "আগের",
   "Next": "পরের",
