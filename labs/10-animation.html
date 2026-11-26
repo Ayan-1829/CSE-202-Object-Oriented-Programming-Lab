@@ -71,7 +71,7 @@
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Chapter 10 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=35">Run the game</a></li><li><a href="#s=36">Game practice tasks</a></li><li><a href="#s=39">The official lab program</a></li><li><a href="#s=45">Official in-lab tasks</a></li><li><a href="#s=49">Lab report exercises</a></li><li><a href="#s=52">Viva questions and quiz</a></li></ol>
 </div></section>
-<section class="slide " data-title="Today’s build" aria-label="Today’s build" tabindex="-1"><div class="slide-inner">
+<section class="slide " data-title="Today’s build" aria-label="Today’s build" tabindex="-1"><div style="zoom:0.95;" class="slide-inner">
 <p class="kicker">Build the game · Chapter 10</p><h2>Today’s build</h2><ul class="pts"><li>Ten files: the abstract <code>GameObject</code> with <code>Player</code>, <code>Bullet</code>, <code>Explosion</code> and the abstract <code>Enemy</code> (<code>Drone</code>, <code>Tank</code>). <code>GamePanel</code> runs the loop, <code>CodeCommando</code> opens the window, <code>Sprites</code> comes from Chapter 9.</li></ul>
 <div class="cols wl"><div><h3>What the program does</h3><ol class="flow"><li>Open the window and start the GameLoop thread</li><li>Each frame: move the player from the keys, fire when Space is held</li><li>Spawn a drone or a tank now and then, faster as the score grows</li><li>Move every enemy, bullet and explosion</li><li>Check bullets against enemies and the player, and enemies against the player</li><li>Remove finished objects; GAME OVER at 0 HP; R restarts</li></ol></div><div><h3>Files</h3><ul class="g-files"><li><code>GameObject.java</code> <span class="muted">(30 lines)</span></li><li><code>Bullet.java</code> <span class="muted">(27 lines)</span></li><li><code>Player.java</code> <span class="muted">(47 lines)</span></li><li><code>Enemy.java</code> <span class="muted">(35 lines)</span></li><li><code>Drone.java</code> <span class="muted">(24 lines)</span></li><li><code>Tank.java</code> <span class="muted">(30 lines)</span></li><li><code>GamePanel.java</code> <span class="muted">(213 lines)</span></li><li><code>Explosion.java</code> <span class="muted">(22 lines)</span></li><li><code>Sprites.java</code> <span class="muted">(112 lines)</span></li><li><code>CodeCommando.java</code> <span class="muted">(19 lines)</span></li></ul><p class="muted">559 lines in all. Each topic below shows the part of the program that uses it.</p></div></div>
 </div></section>
@@ -518,7 +518,7 @@ protected void paintComponent(Graphics g0) {
 <section class="slide " data-title="How the whole course fits together (in code)" aria-label="How the whole course fits together (in code)" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 6 of 6 · in the game, in code</p><h2>How the whole course fits together</h2><div class="scrollx"><table class="doc"><thead><tr><th>Chapter</th><th>Where it is in the game</th></tr></thead><tbody><tr><td>1 Variables, loops</td><td>health, score, the while (running) loop</td></tr><tr><td>2–3 Classes, constructors</td><td>Player, Bullet, Drone, Tank objects</td></tr><tr><td>4 Inheritance</td><td>Drone and Tank extend Enemy, Enemy extends GameObject</td></tr><tr><td>5 Abstract classes</td><td>GameObject with abstract update() and draw()</td></tr><tr><td>6 Exceptions</td><td>InterruptedException in the loop</td></tr><tr><td>7 Threads</td><td>the GameLoop thread</td></tr><tr><td>8 Synchronization</td><td>the lock shared by update() and paintComponent()</td></tr><tr><td>9 Swing</td><td>GamePanel, keys, Graphics drawing</td></tr></tbody></table></div>
 </div></section>
-<section class="slide " data-title="The complete game program" aria-label="The complete game program" tabindex="-1"><div style="zoom:0.96;" class="slide-inner">
+<section class="slide " data-title="The complete game program" aria-label="The complete game program" tabindex="-1"><div style="zoom:0.93;" class="slide-inner">
 <p class="kicker">Build the game · 10 files</p><h2>The complete game program</h2><div class="codeview"><pre class="code small-code" data-file="GameObject.java">import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
@@ -1477,6 +1477,6 @@ public class Lab10Demo {
         data-endpoint="https://analytics-proxy.ayansarkar1829.workers.dev"
         data-project="CSE-202 OOP Lab"></script>
 <script src="../js/course-events.js"></script>
-<!-- help --><script src="../js/help-data.js"></script><script src="../js/help.js"></script><!-- /help -->
+<!-- help --><script src="../js/help-data.js"></script><script src="../js/help.js"></script><script src="../js/feedback.js"></script><script src="../js/progress.js"></script><!-- /help -->
 </body>
 </html>
