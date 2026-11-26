@@ -30,7 +30,7 @@
 <meta name="twitter:description" content="One class is the blueprint; every drone built from it keeps its own health.">
 <meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/02-classes-and-objects.png?v=2">
 <meta name="twitter:image:alt" content="Chapter 2 of 10: Classes, Objects, Instances &amp; Methods – CSE 202 Object Oriented Programming Lab">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Classes, Objects, Instances & Methods", "description": "One class is the blueprint; every drone built from it keeps its own health.", "position": 2, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 42, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/02-classes-and-objects.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/02-classes-and-objects.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Classes, Objects, Instances & Methods", "description": "One class is the blueprint; every drone built from it keeps its own health.", "position": 2, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 38, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/02-classes-and-objects.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/02-classes-and-objects.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
 <title>Chapter 2: Classes, Objects, Instances &amp; Methods | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,9 +67,10 @@
 <section class="slide " data-title="Chapter at a glance" aria-label="Chapter at a glance" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Chapter 2 of 10</p><h2>Chapter at a glance</h2><div class="cols wl"><div><h3>After this chapter you can</h3><ul class=""><li>Explain class and object with the Enemy blueprint and its drones</li><li>Write fields, a constructor and methods for <code>Player</code> and <code>Enemy</code></li><li>Protect fields with <code>private</code> and a validating setter</li><li>Tell instance members from static members (<code>enemiesSpawned</code>)</li><li>Follow references from stack variables to heap objects</li></ul></div>
 <div><h3>Before you start</h3><ul class=""><li>Chapter 1: variables, if and loops</li><li>Compile and run a program with several files: <code>javac *.java</code></li></ul></div></div>
+<p class="note-line"><b>What is marked:</b> the 3 lab tasks (show them during the lab) and the 2 report exercises. The game tasks are practice.</p>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Chapter 2 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=23">Run the game</a></li><li><a href="#s=24">Game practice tasks</a></li><li><a href="#s=27">The official lab program</a></li><li><a href="#s=32">Official in-lab tasks</a></li><li><a href="#s=36">Lab report exercises</a></li><li><a href="#s=39">Viva questions and quiz</a></li></ol>
+<p class="kicker">Chapter 2 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=23">Run the game</a></li><li><a href="#s=24">Game practice tasks</a></li><li><a href="#s=27">Lab tasks</a></li><li><a href="#s=32">Lab report exercises</a></li><li><a href="#s=35">Viva questions and quiz</a></li></ol>
 </div></section>
 <section class="slide " data-title="Today’s build" aria-label="Today’s build" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Build the game · Chapter 2</p><h2>Today’s build</h2><ul class="pts"><li>Three files: <code>Player</code> and <code>Enemy</code> are the blueprints; <code>BattleDemo</code> builds the objects and runs a small fight.</li><li>Compile all three together: <code>javac *.java</code>, then <code>java BattleDemo</code>.</li></ul>
@@ -582,202 +583,25 @@ System.out.println(&quot;Enemies spawned is still &quot; + Enemy.getEnemiesSpawn
 <p class="kicker">Game practice · 3 of 3</p><h2>Game task 3: A second player</h2><div class="ex task g-task"><div class="qq">Two players, one game.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g2t2r0" data-key="g2t2r0"><label for="g2t2r0">Create two Player objects with different names</label></li><li><input type="checkbox" id="g2t2r1" data-key="g2t2r1"><label for="g2t2r1">Let the same drone attack both</label></li><li><input type="checkbox" id="g2t2r2" data-key="g2t2r2"><label for="g2t2r2">Print both statuses: each keeps its own health</label></li><li><input type="checkbox" id="g2t2r3" data-key="g2t2r3"><label for="g2t2r3">Print <code>Player.getPlayersCreated()</code></label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans"><code>playersCreated</code> is static, so it counts both players; health is not static.</div></details></div>
 </div></section>
-<section class="slide " data-title="The official lab program" aria-label="The official lab program" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official lab · from the lab manual</p><h2>The official lab program</h2>
-<p class="g-official">The graded in-lab tasks and report exercises build on this program, not on the game. Read it and run it before you start them.</p>
-<ol class="flow"><li>Create two Car objects; the constructor increments the static count</li><li>Print the count with <code>Car.getCount()</code></li><li>Accelerate and brake car1, showing state after each call (speed never goes below 0)</li><li>Accelerate and refuel car2 (fuel never exceeds 100)</li><li>Read with getters, change make with a setter</li><li>Alias car3 = car1 and show the shared speed</li><li>Print the final count</li></ol><p class="note-line"><code>Car</code> defines state and behaviour; <code>Lab2Demo</code> only tests it.</p>
+<section class="slide " data-title="Lab tasks" aria-label="Lab tasks" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Practice · lab tasks</p><h2>Lab tasks</h2>
+<p>These tasks come from the lab manual. They start from its program, not from the game: save these files in one folder, then make the changes each task asks for.</p>
+<ul class="g-files"><li><a href="../starter/lab02/Car.java" download><code>Car.java</code></a></li><li><a href="../starter/lab02/Lab2Demo.java" download><code>Lab2Demo.java</code></a></li></ul><p class="muted">Compile and run: <code>javac *.java</code> → <code>java Lab2Demo</code></p>
 </div></section>
-<section class="slide " data-title="Trace: objects, references and a static counter" aria-label="Trace: objects, references and a static counter" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
-<p class="kicker">Official lab · step through the code · 1 of 2</p><h2>Trace: objects, references and a static counter</h2><p class="muted">See the objects on the heap, the references on the stack, and the one shared <code>count</code>.</p><div data-trace="lab2-car"></div>
-</div></section>
-<section class="slide " data-title="Trace: methods that guard the object" aria-label="Trace: methods that guard the object" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
-<p class="kicker">Official lab · step through the code · 2 of 2</p><h2>Trace: methods that guard the object</h2><p class="muted">Each call works on the object <code>this</code> points to. Watch brake(100) and refuel(5.0) refuse to break the rules.</p><div data-trace="lab2-methods"></div>
-</div></section>
-<section class="slide " data-title="The official program" aria-label="The official program" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official lab · 2 files</p><h2>The official program</h2><div class="codeview"><pre class="code small-code" data-file="Car.java">public class Car {
-
-    // Private instance fields
-    private String make;
-    private int speed;
-    private double fuelLevel;
-
-    // Static field shared by all Car objects
-    private static int count = 0;
-
-    public Car(String make, double fuelLevel) {
-        this.make = make;
-        this.speed = 0;
-        if (fuelLevel &gt;= 0.0 &amp;&amp; fuelLevel &lt;= 100.0) {
-            this.fuelLevel = fuelLevel;
-        } else {
-            this.fuelLevel = 0.0;
-        }
-        count++;
-    }
-
-    public void accelerate(int delta) {
-        if (delta &gt; 0) {
-            this.speed = this.speed + delta;
-        }
-    }
-
-    public void brake(int delta) {
-        if (delta &gt; 0) {
-            this.speed = Math.max(0, this.speed - delta);
-        }
-    }
-
-    public void refuel(double amount) {
-        if (amount &gt; 0.0) {
-            this.fuelLevel = Math.min(100.0, this.fuelLevel + amount);
-        }
-    }
-
-    public void display() {
-        System.out.println(&quot;-------------------------------&quot;);
-        System.out.println(&quot;Make      : &quot; + make);
-        System.out.println(&quot;Speed     : &quot; + speed + &quot; km/h&quot;);
-        System.out.printf(&quot;Fuel Level: %.1f%%%n&quot;, fuelLevel);
-        System.out.println(&quot;-------------------------------&quot;);
-    }
-
-    // Getter methods
-    public String getMake() { return make; }
-    public int getSpeed() { return speed; }
-    public double getFuelLevel() { return fuelLevel; }
-
-    // Setter methods
-    public void setMake(String make) { this.make = make; }
-
-    public void setFuelLevel(double fuelLevel) {
-        if (fuelLevel &gt;= 0.0 &amp;&amp; fuelLevel &lt;= 100.0) {
-            this.fuelLevel = fuelLevel;
-        }
-    }
-
-    // Static method
-    public static int getCount() { return count; }
-}</pre><pre class="code small-code" data-file="Lab2Demo.java">public class Lab2Demo {
-
-    public static void main(String[] args) {
-
-        // 1. Object Creation
-        System.out.println(&quot;=== Object Creation ===&quot;);
-        Car car1 = new Car(&quot;Sedan&quot;, 80.5);
-        Car car2 = new Car(&quot;SUV&quot;, 100.0);
-        System.out.println(&quot;Total Car objects created: &quot; + Car.getCount());
-
-        // 2. Method Invocation on car1
-        System.out.println(&quot;\n=== car1 initial state ===&quot;);
-        car1.display();
-        car1.accelerate(30);
-        System.out.println(&quot;After accelerate(30):&quot;);
-        car1.display();
-        car1.brake(10);
-        System.out.println(&quot;After brake(10):&quot;);
-        car1.display();
-        car1.brake(100);
-        System.out.println(&quot;After brake(100):&quot;);
-        car1.display();
-
-        // 3. Method Invocation on car2
-        System.out.println(&quot;\n=== car2 initial state ===&quot;);
-        car2.display();
-        car2.accelerate(60);
-        car2.refuel(5.0);
-        System.out.println(&quot;After accelerate(60) and refuel(5.0):&quot;);
-        car2.display();
-
-        // 4. Getters and Setters
-        System.out.println(&quot;\n=== Getters and Setters ===&quot;);
-        System.out.println(&quot;car1 make via getter : &quot; + car1.getMake());
-        System.out.println(&quot;car2 speed via getter: &quot; + car2.getSpeed());
-        car1.setMake(&quot;Hatchback&quot;);
-        System.out.println(&quot;car1 make after setter: &quot; + car1.getMake());
-
-        // 5. Reference Semantics
-        System.out.println(&quot;\n=== Reference Semantics ===&quot;);
-        Car car3 = car1;
-        car3.accelerate(20);
-        System.out.println(&quot;car1.getSpeed() = &quot; + car1.getSpeed());
-        System.out.println(&quot;car3.getSpeed() = &quot; + car3.getSpeed());
-        System.out.println(&quot;car1 and car3 refer to the same object.&quot;);
-
-        // 6. Static Member
-        System.out.println(&quot;\n=== Static Member ===&quot;);
-        System.out.println(&quot;Total Car objects ever created: &quot; + Car.getCount());
-    }
-}</pre></div><p class="muted">Compile and run: <code>javac *.java</code> → <code>java Lab2Demo</code></p>
-</div></section>
-<section class="slide " data-title="Official program: expected output" aria-label="Official program: expected output" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official lab</p><h2>Official program: expected output</h2><div class="runbox" data-cmd="java Lab2Demo"><pre class="run-src" hidden>=== Object Creation ===
-Total Car objects created: 2
-
-=== car1 initial state ===
--------------------------------
-Make      : Sedan
-Speed     : 0 km/h
-Fuel Level: 80.5%
--------------------------------
-After accelerate(30):
--------------------------------
-Make      : Sedan
-Speed     : 30 km/h
-Fuel Level: 80.5%
--------------------------------
-After brake(10):
--------------------------------
-Make      : Sedan
-Speed     : 20 km/h
-Fuel Level: 80.5%
--------------------------------
-After brake(100):
--------------------------------
-Make      : Sedan
-Speed     : 0 km/h
-Fuel Level: 80.5%
--------------------------------
-
-=== car2 initial state ===
--------------------------------
-Make      : SUV
-Speed     : 0 km/h
-Fuel Level: 100.0%
--------------------------------
-After accelerate(60) and refuel(5.0):
--------------------------------
-Make      : SUV
-Speed     : 60 km/h
-Fuel Level: 100.0%
--------------------------------
-
-=== Getters and Setters ===
-car1 make via getter : Sedan
-car2 speed via getter: 60
-car1 make after setter: Hatchback
-
-=== Reference Semantics ===
-car1.getSpeed() = 20
-car3.getSpeed() = 20
-car1 and car3 refer to the same object.
-
-=== Static Member ===
-Total Car objects ever created: 2</pre></div><p class="note-line">car3 = car1 creates no object, so the count stays 2 and both variables report speed 20.</p>
-</div></section>
-<section class="slide " data-title="Task 1: Extend the Car class" aria-label="Task 1: Extend the Car class" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official in-lab task 1 of 3</p><h2>Task 1: Extend the Car class</h2><div class="ex task"><div class="qq">Add an engine to the car: it may only accelerate while the engine is on.</div>
+<section class="slide " data-title="Lab task 1: Extend the Car class" aria-label="Lab task 1: Extend the Car class" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab task 1 of 3</p><h2>Lab task 1: Extend the Car class</h2><div class="ex task"><div class="qq">Add an engine to the car: it may only accelerate while the engine is on.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l2t0r0" data-key="l2t0r0"><label for="l2t0r0">Add a private boolean field <code>engineOn</code>, false in the constructor</label></li><li><input type="checkbox" id="l2t0r1" data-key="l2t0r1"><label for="l2t0r1">Add <code>startEngine()</code> and <code>stopEngine()</code></label></li><li><input type="checkbox" id="l2t0r2" data-key="l2t0r2"><label for="l2t0r2">Make <code>accelerate()</code> work only when the engine is on</label></li><li><input type="checkbox" id="l2t0r3" data-key="l2t0r3"><label for="l2t0r3">Print a message when accelerating with the engine off</label></li><li><input type="checkbox" id="l2t0r4" data-key="l2t0r4"><label for="l2t0r4">Demonstrate it from <code>main</code></label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Wrap the existing body of <code>accelerate</code> in <code>if (engineOn) { … } else { System.out.println(…); }</code>.</div></details></div>
 </div></section>
-<section class="slide " data-title="Task 2: Design a BankAccount class" aria-label="Task 2: Design a BankAccount class" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official in-lab task 2 of 3</p><h2>Task 2: Design a BankAccount class</h2><div class="ex task"><div class="qq">A simple account with an owner, a balance and a count of all accounts.</div>
+<section class="slide " data-title="Lab task 2: Design a BankAccount class" aria-label="Lab task 2: Design a BankAccount class" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab task 2 of 3</p><h2>Lab task 2: Design a BankAccount class</h2><div class="ex task"><div class="qq">A simple account with an owner, a balance and a count of all accounts.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l2t1r0" data-key="l2t1r0"><label for="l2t1r0">Fields: <code>private String owner</code>, <code>private double balance</code>, <code>private static int totalAccounts</code></label></li><li><input type="checkbox" id="l2t1r1" data-key="l2t1r1"><label for="l2t1r1">Constructor, <code>deposit</code>, <code>withdraw</code>, <code>getBalance</code>, <code>display</code>, <code>static getTotalAccounts</code></label></li><li><input type="checkbox" id="l2t1r2" data-key="l2t1r2"><label for="l2t1r2">Reject negative deposits and withdrawals larger than the balance</label></li><li><input type="checkbox" id="l2t1r3" data-key="l2t1r3"><label for="l2t1r3">Create at least three accounts and print the total</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Increment <code>totalAccounts</code> in the constructor, exactly like <code>count</code> in Car.</div></details></div>
 </div></section>
-<section class="slide " data-title="Task 3: Demonstrate reference sharing" aria-label="Task 3: Demonstrate reference sharing" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official in-lab task 3 of 3</p><h2>Task 3: Demonstrate reference sharing</h2><div class="ex task"><div class="qq">Show that two variables can refer to one BankAccount.</div>
+<section class="slide " data-title="Lab task 3: Demonstrate reference sharing" aria-label="Lab task 3: Demonstrate reference sharing" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab task 3 of 3</p><h2>Lab task 3: Demonstrate reference sharing</h2><div class="ex task"><div class="qq">Show that two variables can refer to one BankAccount.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l2t2r0" data-key="l2t2r0"><label for="l2t2r0">Create <code>account1</code></label></li><li><input type="checkbox" id="l2t2r1" data-key="l2t2r1"><label for="l2t2r1">Assign it to <code>account2</code></label></li><li><input type="checkbox" id="l2t2r2" data-key="l2t2r2"><label for="l2t2r2">Deposit through <code>account2</code></label></li><li><input type="checkbox" id="l2t2r3" data-key="l2t2r3"><label for="l2t2r3">Print the balance through both</label></li><li><input type="checkbox" id="l2t2r4" data-key="l2t2r4"><label for="l2t2r4">Add a comment explaining why both balances are the same</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Draw the stack and heap first: two arrows, one object.</div></details></div>
 </div></section>
 <section class="slide " data-title="Show your work" aria-label="Show your work" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official in-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
+<p class="kicker">Lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
 </div></section>
 <section class="slide " data-title="Report exercise 1" aria-label="Report exercise 1" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Lab report · exercise 1 of 2</p><h2>University student registration</h2><div class="ex task report"><div class="qq">Classes <code>Student</code>, <code>Course</code> and <code>Enrollment</code> (a student enrolled in a course for a semester, with a grade).</div>
@@ -805,7 +629,7 @@ Total Car objects ever created: 2</pre></div><p class="note-line">car3 = car1 cr
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 42</span>
+  <span class="counter" id="counter">1 / 38</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this chapter</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>

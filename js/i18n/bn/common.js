@@ -95,5 +95,7 @@ I18N_BN_PATTERNS([
   [/^Part (\d+) of (\d+)$/, 'অংশ $1 / $2'],
   [/^Outline · chapter (\d+)$/, 'রূপরেখা · অধ্যায় $1'],
   [/^Chapter (\d+) of (\d+) · Part A · The research process$/, 'অধ্যায় $1 / $2 · পর্ব A · গবেষণা প্রক্রিয়া'],
-  [/^Chapter (\d+) of (\d+) · Part B · Research fields$/, 'অধ্যায় $1 / $2 · পর্ব B · গবেষণা ক্ষেত্র']
+  [/^Chapter (\d+) of (\d+) · Part B · Research fields$/, 'অধ্যায় $1 / $2 · পর্ব B · গবেষণা ক্ষেত্র'],
+  [/^Chapter (\d+) of (\d+) · Part C · Research skills$/, 'অধ্যায় $1 / $2 · পর্ব C · গবেষণার দক্ষতা'],
+  [/^Section (\d+) of (\d+)$/, 'বিভাগ $1 / $2']
 ]);

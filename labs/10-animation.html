@@ -30,7 +30,7 @@
 <meta name="twitter:description" content="The finished game: a game loop, collisions and smooth animation, built from every chapter.">
 <meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/10-animation.png?v=2">
 <meta name="twitter:image:alt" content="Chapter 10 of 10: Animation with Threads – CSE 202 Object Oriented Programming Lab">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Animation with Threads", "description": "The finished game: a game loop, collisions and smooth animation, built from every chapter.", "position": 10, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 55, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/10-animation.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/10-animation.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Animation with Threads", "description": "The finished game: a game loop, collisions and smooth animation, built from every chapter.", "position": 10, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 50, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/10-animation.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/10-animation.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
 <title>Chapter 10: Animation with Threads | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,9 +67,10 @@
 <section class="slide " data-title="Chapter at a glance" aria-label="Chapter at a glance" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Chapter 10 of 10</p><h2>Chapter at a glance</h2><div class="cols wl"><div><h3>After this chapter you can</h3><ul class=""><li>Explain frame-based animation and the game loop</li><li>Run the loop on a worker thread and paint on the Event Dispatch Thread</li><li>Share the game objects safely between the two threads</li><li>Detect collisions with Rectangle.intersects</li><li>Explain double buffering</li><li>Read and extend the complete Code Commando program</li></ul></div>
 <div><h3>Before you start</h3><ul class=""><li>Every earlier chapter: this one uses classes, inheritance, abstract classes, threads, synchronization and Swing</li></ul></div></div>
+<p class="note-line"><b>What is marked:</b> the 3 lab tasks (show them during the lab) and the 2 report exercises. The game tasks are practice.</p>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Chapter 10 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=35">Run the game</a></li><li><a href="#s=36">Game practice tasks</a></li><li><a href="#s=39">The official lab program</a></li><li><a href="#s=45">Official in-lab tasks</a></li><li><a href="#s=49">Lab report exercises</a></li><li><a href="#s=52">Viva questions and quiz</a></li></ol>
+<p class="kicker">Chapter 10 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=35">Run the game</a></li><li><a href="#s=36">Game practice tasks</a></li><li><a href="#s=39">Lab tasks</a></li><li><a href="#s=44">Lab report exercises</a></li><li><a href="#s=47">Viva questions and quiz</a></li></ol>
 </div></section>
 <section class="slide " data-title="Today’s build" aria-label="Today’s build" tabindex="-1"><div style="zoom:0.95;" class="slide-inner">
 <p class="kicker">Build the game · Chapter 10</p><h2>Today’s build</h2><ul class="pts"><li>Ten files: the abstract <code>GameObject</code> with <code>Player</code>, <code>Bullet</code>, <code>Explosion</code> and the abstract <code>Enemy</code> (<code>Drone</code>, <code>Tank</code>). <code>GamePanel</code> runs the loop, <code>CodeCommando</code> opens the window, <code>Sprites</code> comes from Chapter 9.</li></ul>
@@ -518,7 +519,7 @@ protected void paintComponent(Graphics g0) {
 <section class="slide " data-title="How the whole course fits together (in code)" aria-label="How the whole course fits together (in code)" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 6 of 6 · in the game, in code</p><h2>How the whole course fits together</h2><div class="scrollx"><table class="doc"><thead><tr><th>Chapter</th><th>Where it is in the game</th></tr></thead><tbody><tr><td>1 Variables, loops</td><td>health, score, the while (running) loop</td></tr><tr><td>2–3 Classes, constructors</td><td>Player, Bullet, Drone, Tank objects</td></tr><tr><td>4 Inheritance</td><td>Drone and Tank extend Enemy, Enemy extends GameObject</td></tr><tr><td>5 Abstract classes</td><td>GameObject with abstract update() and draw()</td></tr><tr><td>6 Exceptions</td><td>InterruptedException in the loop</td></tr><tr><td>7 Threads</td><td>the GameLoop thread</td></tr><tr><td>8 Synchronization</td><td>the lock shared by update() and paintComponent()</td></tr><tr><td>9 Swing</td><td>GamePanel, keys, Graphics drawing</td></tr></tbody></table></div>
 </div></section>
-<section class="slide " data-title="The complete game program" aria-label="The complete game program" tabindex="-1"><div style="zoom:0.93;" class="slide-inner">
+<section class="slide " data-title="The complete game program" aria-label="The complete game program" tabindex="-1"><div style="zoom:0.94;" class="slide-inner">
 <p class="kicker">Build the game · 10 files</p><h2>The complete game program</h2><div class="codeview"><pre class="code small-code" data-file="GameObject.java">import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
@@ -1085,339 +1086,25 @@ public class CodeCommando {
 <p class="kicker">Game practice · 3 of 3</p><h2>Game task 3: Levels and a high score</h2><div class="ex task g-task"><div class="qq">Game rules on top of the loop.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g10t2r0" data-key="g10t2r0"><label for="g10t2r0">Every 1500 points, show “LEVEL n” for two seconds and make enemies 10% faster</label></li><li><input type="checkbox" id="g10t2r1" data-key="g10t2r1"><label for="g10t2r1">Keep the best score while the program runs</label></li><li><input type="checkbox" id="g10t2r2" data-key="g10t2r2"><label for="g10t2r2">Show both on the HUD</label></li><li><input type="checkbox" id="g10t2r3" data-key="g10t2r3"><label for="g10t2r3">Use a custom exception if a level file cannot be loaded (Chapter 6)</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Store a speed multiplier in GamePanel and pass it to the enemies when they are created.</div></details></div>
 </div></section>
-<section class="slide " data-title="The official lab program" aria-label="The official lab program" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official lab · from the lab manual</p><h2>The official lab program</h2>
-<p class="g-official">The graded in-lab tasks and report exercises build on this program, not on the game. Read it and run it before you start them.</p>
-<ol class="flow"><li>main creates AnimationApp on the EDT</li><li>AnimationApp builds the panel and buttons and starts a daemon AnimationThread</li><li>The thread loops: updateAnimation(), repaint(), sleep the rest of the 16 ms frame</li><li>updateAnimation moves balls only while running and handles collisions</li><li>Start / Pause flip the running flag; Reset restores the three balls</li><li>Closing the window ends the program (the thread is a daemon)</li></ol><p class="note-line">Ball = model, AnimationPanel = rendering + state, AnimationThread = loop, AnimationApp = controls.</p>
+<section class="slide " data-title="Lab tasks" aria-label="Lab tasks" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Practice · lab tasks</p><h2>Lab tasks</h2>
+<p>These tasks come from the lab manual. They start from its program, not from the game: save these files in one folder, then make the changes each task asks for.</p>
+<ul class="g-files"><li><a href="../starter/lab10/Ball.java" download><code>Ball.java</code></a></li><li><a href="../starter/lab10/AnimationPanel.java" download><code>AnimationPanel.java</code></a></li><li><a href="../starter/lab10/AnimationThread.java" download><code>AnimationThread.java</code></a></li><li><a href="../starter/lab10/AnimationApp.java" download><code>AnimationApp.java</code></a></li><li><a href="../starter/lab10/Lab10Demo.java" download><code>Lab10Demo.java</code></a></li></ul><p class="muted">Compile and run: <code>javac *.java</code> → <code>java Lab10Demo</code></p>
 </div></section>
-<section class="slide " data-title="Trace: one animation frame" aria-label="Trace: one animation frame" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official lab · step through the code · 1 of 2</p><h2>Trace: one animation frame</h2><p class="muted">Move, bounce off the wall, detect a collision and swap velocities.</p>
-</div></section>
-<section class="slide " data-title="Trace: one animation frame (cont.)" aria-label="Trace: one animation frame (cont.)" tabindex="-1"><div style="zoom:0.93;" class="slide-inner">
-<p class="kicker">Official lab · step through the code · 1 of 2</p><h2>Trace: one animation frame (cont.)</h2><div data-trace="lab10-ball"></div>
-</div></section>
-<section class="slide " data-title="Trace: the animation thread and the EDT" aria-label="Trace: the animation thread and the EDT" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official lab · step through the code · 2 of 2</p><h2>Trace: the animation thread and the EDT</h2><p class="muted">The Animator moves the balls, the EDT draws them. The panel’s lock makes sure the EDT never paints a half-moved frame.</p>
-</div></section>
-<section class="slide " data-title="Trace: the animation thread and the EDT (cont.)" aria-label="Trace: the animation thread and the EDT (cont.)" tabindex="-1"><div style="zoom:0.90;" class="slide-inner">
-<p class="kicker">Official lab · step through the code · 2 of 2</p><h2>Trace: the animation thread and the EDT (cont.)</h2><div data-trace="lab10-worker"></div>
-</div></section>
-<section class="slide " data-title="The official program" aria-label="The official program" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official lab · 5 files</p><h2>The official program</h2><div class="codeview"><pre class="code small-code" data-file="Ball.java">import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Graphics2D;
-
-public class Ball {
-
-    private double x;
-    private double y;
-    private double vx;
-    private double vy;
-    private int radius;
-    private Color colour;
-
-    public Ball(double x, double y, double vx, double vy, int radius, Color colour) {
-        this.x = x;
-        this.y = y;
-        this.vx = vx;
-        this.vy = vy;
-        this.radius = (radius &gt; 0) ? radius : 15;
-        this.colour = colour;
-    }
-
-    public void update(int panelWidth, int panelHeight) {
-        x = x + vx;
-        y = y + vy;
-        if (x - radius &lt; 0 || x + radius &gt; panelWidth) {
-            vx = -vx;
-            x = Math.max(radius, Math.min(panelWidth - radius, x));
-        }
-        if (y - radius &lt; 0 || y + radius &gt; panelHeight) {
-            vy = -vy;
-            y = Math.max(radius, Math.min(panelHeight - radius, y));
-        }
-    }
-
-    public void draw(Graphics2D g) {
-        int diameter = 2 * radius;
-        g.setColor(colour);
-        g.fillOval((int) (x - radius), (int) (y - radius), diameter, diameter);
-        g.setColor(Color.BLACK);
-        g.setStroke(new BasicStroke(2));
-        g.drawOval((int) (x - radius), (int) (y - radius), diameter, diameter);
-    }
-
-    public boolean collidesWith(Ball other) {
-        double dx = this.x - other.x;
-        double dy = this.y - other.y;
-        double distance = Math.sqrt(dx * dx + dy * dy);
-        return distance &lt;= this.radius + other.radius;
-    }
-
-    public void bounceOff(Ball other) {
-        double tempVx = this.vx;
-        double tempVy = this.vy;
-        this.vx = other.vx;
-        this.vy = other.vy;
-        other.vx = tempVx;
-        other.vy = tempVy;
-    }
-
-    public double getX() { return x; }
-    public double getY() { return y; }
-    public int getRadius() { return radius; }
-}</pre><pre class="code small-code" data-file="AnimationPanel.java">import javax.swing.JPanel;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-
-public class AnimationPanel extends JPanel {
-
-    private ArrayList&lt;Ball&gt; balls;
-    private boolean running;
-
-    public AnimationPanel() {
-        balls = new ArrayList&lt;Ball&gt;();
-        running = false;
-        initializeBalls();
-        setBackground(Color.WHITE);
-    }
-
-    private void initializeBalls() {
-        balls.clear();
-        balls.add(new Ball(100, 100, 3.0, 2.0, 15, Color.RED));
-        balls.add(new Ball(300, 150, -2.5, 3.5, 15, Color.BLUE));
-        balls.add(new Ball(200, 300, 2.0, -2.0, 15, Color.GREEN));
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        if (getWidth() &lt;= 0 || getHeight() &lt;= 0) {
-            return;
-        }
-        BufferedImage buffer = new BufferedImage(getWidth(), getHeight(),
-                BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2d = buffer.createGraphics();
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setColor(Color.WHITE);
-        g2d.fillRect(0, 0, getWidth(), getHeight());
-        drawGrid(g2d);
-
-        synchronized (this) {
-            for (Ball ball : balls) {
-                ball.draw(g2d);
-            }
-            g2d.setColor(Color.BLACK);
-            g2d.drawString(&quot;Balls: &quot; + balls.size() + &quot; | &quot;
-                    + (running ? &quot;Running&quot; : &quot;Paused&quot;), 10, getHeight() - 10);
-        }
-        g.drawImage(buffer, 0, 0, null);
-        g2d.dispose();
-    }
-
-    private void drawGrid(Graphics2D g2d) {
-        g2d.setColor(new Color(220, 220, 220));
-        for (int x = 0; x &lt; getWidth(); x += 50) {
-            g2d.drawLine(x, 0, x, getHeight());
-        }
-        for (int y = 0; y &lt; getHeight(); y += 50) {
-            g2d.drawLine(0, y, getWidth(), y);
-        }
-    }
-
-    public synchronized void updateAnimation() {
-        if (!running) {
-            return;
-        }
-        int width = getWidth();
-        int height = getHeight();
-        if (width &lt;= 0 || height &lt;= 0) {
-            return;
-        }
-        for (Ball ball : balls) {
-            ball.update(width, height);
-        }
-        for (int i = 0; i &lt; balls.size(); i++) {
-            for (int j = i + 1; j &lt; balls.size(); j++) {
-                Ball first = balls.get(i);
-                Ball second = balls.get(j);
-                if (first.collidesWith(second)) {
-                    first.bounceOff(second);
-                }
-            }
-        }
-    }
-
-    public synchronized void startAnimation() { running = true; }
-
-    public synchronized void pauseAnimation() { running = false; }
-
-    public synchronized void resetAnimation() {
-        running = false;
-        initializeBalls();
-        repaint();
-    }
-
-    public synchronized boolean isRunning() { return running; }
-
-    public synchronized int getBallCount() { return balls.size(); }
-}</pre><pre class="code small-code" data-file="AnimationThread.java">public class AnimationThread implements Runnable {
-
-    private AnimationPanel panel;
-
-    private static final int TARGET_FPS = 60;
-    private static final long FRAME_TIME_MS = 1000 / TARGET_FPS;
-
-    public AnimationThread(AnimationPanel panel) {
-        this.panel = panel;
-    }
-
-    @Override
-    public void run() {
-        while (true) {
-            long frameStartTime = System.currentTimeMillis();
-
-            panel.updateAnimation();
-            panel.repaint();
-
-            long elapsedTime = System.currentTimeMillis() - frameStartTime;
-            long sleepTime = FRAME_TIME_MS - elapsedTime;
-            if (sleepTime &gt; 0) {
-                try {
-                    Thread.sleep(sleepTime);
-                } catch (InterruptedException e) {
-                    System.out.println(&quot;Animation thread interrupted.&quot;);
-                    Thread.currentThread().interrupt();
-                    break;
-                }
-            }
-        }
-    }
-}</pre><pre class="code small-code" data-file="AnimationApp.java">import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-public class AnimationApp extends JFrame {
-
-    private AnimationPanel animationPanel;
-    private JButton startButton;
-    private JButton pauseButton;
-    private JButton resetButton;
-    private JLabel statusLabel;
-    private Thread animationThread;
-
-    public AnimationApp() {
-        setTitle(&quot;Bouncing Balls Animation&quot;);
-        setSize(800, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setupUI();
-        addActionListeners();
-        startWorkerThread();
-        setVisible(true);
-    }
-
-    private void setupUI() {
-        JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel titleLabel = new JLabel(&quot;Bouncing Balls Animation&quot;);
-        titleLabel.setFont(new Font(&quot;Arial&quot;, Font.BOLD, 16));
-        topPanel.add(titleLabel);
-
-        animationPanel = new AnimationPanel();
-        animationPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-
-        JPanel controlPanel = new JPanel(new BorderLayout());
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        startButton = new JButton(&quot;Start&quot;);
-        pauseButton = new JButton(&quot;Pause&quot;);
-        resetButton = new JButton(&quot;Reset&quot;);
-        buttonPanel.add(startButton);
-        buttonPanel.add(pauseButton);
-        buttonPanel.add(resetButton);
-
-        statusLabel = new JLabel(&quot;Status: Initialized&quot;);
-        controlPanel.add(buttonPanel, BorderLayout.CENTER);
-        controlPanel.add(statusLabel, BorderLayout.SOUTH);
-
-        mainPanel.add(topPanel, BorderLayout.NORTH);
-        mainPanel.add(animationPanel, BorderLayout.CENTER);
-        mainPanel.add(controlPanel, BorderLayout.SOUTH);
-        setContentPane(mainPanel);
-    }
-
-    private void addActionListeners() {
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                animationPanel.startAnimation();
-                updateStatus(&quot;Running&quot;);
-            }
-        });
-        pauseButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                animationPanel.pauseAnimation();
-                updateStatus(&quot;Paused&quot;);
-            }
-        });
-        resetButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                animationPanel.resetAnimation();
-                updateStatus(&quot;Reset&quot;);
-            }
-        });
-    }
-
-    private void startWorkerThread() {
-        animationThread = new Thread(new AnimationThread(animationPanel));
-        animationThread.setDaemon(true);
-        animationThread.start();
-    }
-
-    private void updateStatus(String status) {
-        statusLabel.setText(&quot;Status: &quot; + status + &quot; | Balls: &quot; + animationPanel.getBallCount());
-    }
-}</pre><pre class="code small-code" data-file="Lab10Demo.java">import javax.swing.SwingUtilities;
-
-public class Lab10Demo {
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new AnimationApp();
-            }
-        });
-    }
-}</pre></div><p class="muted">Compile and run: <code>javac *.java</code> → <code>java Lab10Demo</code></p>
-</div></section>
-<section class="slide " data-title="Official program: expected output" aria-label="Official program: expected output" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official lab</p><h2>Official program: expected output</h2><p>The program opens a window. When it works you should see:</p><ul class=""><li>A window titled “Bouncing Balls Animation” with a gridded white panel and three coloured balls</li><li>Start moves the balls; they bounce off the walls and swap directions when they collide</li><li>Pause freezes them; Reset puts them back and pauses</li><li>The panel shows the ball count and Running / Paused</li></ul>
-</div></section>
-<section class="slide " data-title="Try the bouncing balls" aria-label="Try the bouncing balls" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official lab · in the browser</p><h2>Try the bouncing balls</h2><div data-demo="lab10-balls"></div>
-</div></section>
-<section class="slide " data-title="Task 1: Add a fourth ball" aria-label="Task 1: Add a fourth ball" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official in-lab task 1 of 3</p><h2>Task 1: Add a fourth ball</h2><div class="ex task"><div class="qq">One more ball in the simulation.</div>
+<section class="slide " data-title="Lab task 1: Add a fourth ball" aria-label="Lab task 1: Add a fourth ball" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab task 1 of 3</p><h2>Lab task 1: Add a fourth ball</h2><div class="ex task"><div class="qq">One more ball in the simulation.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l10t0r0" data-key="l10t0r0"><label for="l10t0r0">Add it in <code>initializeBalls()</code></label></li><li><input type="checkbox" id="l10t0r1" data-key="l10t0r1"><label for="l10t0r1">Use a new colour (yellow or orange)</label></li><li><input type="checkbox" id="l10t0r2" data-key="l10t0r2"><label for="l10t0r2">Give it its own start position and velocity</label></li><li><input type="checkbox" id="l10t0r3" data-key="l10t0r3"><label for="l10t0r3">Check it moves, bounces and collides</label></li><li><input type="checkbox" id="l10t0r4" data-key="l10t0r4"><label for="l10t0r4">Show the correct ball count</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Start it away from the other balls so it does not overlap at frame 0.</div></details></div>
 </div></section>
-<section class="slide " data-title="Task 2: Velocity damping" aria-label="Task 2: Velocity damping" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official in-lab task 2 of 3</p><h2>Task 2: Velocity damping</h2><div class="ex task"><div class="qq">Make the balls slow down gradually.</div>
+<section class="slide " data-title="Lab task 2: Velocity damping" aria-label="Lab task 2: Velocity damping" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab task 2 of 3</p><h2>Lab task 2: Velocity damping</h2><div class="ex task"><div class="qq">Make the balls slow down gradually.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l10t1r0" data-key="l10t1r0"><label for="l10t1r0">A damping factor such as 0.99</label></li><li><input type="checkbox" id="l10t1r1" data-key="l10t1r1"><label for="l10t1r1">Multiply vx and vy by it after each update</label></li><li><input type="checkbox" id="l10t1r2" data-key="l10t1r2"><label for="l10t1r2">Observe the slowdown</label></li><li><input type="checkbox" id="l10t1r3" data-key="l10t1r3"><label for="l10t1r3">Stop balls whose speed becomes tiny</label></li><li><input type="checkbox" id="l10t1r4" data-key="l10t1r4"><label for="l10t1r4">Explain how damping models friction or air resistance</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">After damping: <code>if (Math.abs(vx) &lt; 0.05) vx = 0;</code> and the same for vy.</div></details></div>
 </div></section>
-<section class="slide " data-title="Task 3: Frame-rate display" aria-label="Task 3: Frame-rate display" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official in-lab task 3 of 3</p><h2>Task 3: Frame-rate display</h2><div class="ex task"><div class="qq">Show the actual frames per second.</div>
+<section class="slide " data-title="Lab task 3: Frame-rate display" aria-label="Lab task 3: Frame-rate display" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab task 3 of 3</p><h2>Lab task 3: Frame-rate display</h2><div class="ex task"><div class="qq">Show the actual frames per second.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l10t2r0" data-key="l10t2r0"><label for="l10t2r0">Count frames and track elapsed time</label></li><li><input type="checkbox" id="l10t2r1" data-key="l10t2r1"><label for="l10t2r1">Compute FPS with <code>System.currentTimeMillis()</code></label></li><li><input type="checkbox" id="l10t2r2" data-key="l10t2r2"><label for="l10t2r2">Show it on the panel or status label</label></li><li><input type="checkbox" id="l10t2r3" data-key="l10t2r3"><label for="l10t2r3">Observe it while running</label></li><li><input type="checkbox" id="l10t2r4" data-key="l10t2r4"><label for="l10t2r4">Explain why actual FPS can differ from the target</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Every second: fps = frames counted during that second; then reset the counter.</div></details></div>
 </div></section>
 <section class="slide " data-title="Show your work" aria-label="Show your work" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official in-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
+<p class="kicker">Lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
 </div></section>
 <section class="slide " data-title="Report exercise 1" aria-label="Report exercise 1" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Lab report · exercise 1 of 2</p><h2>Physics: gravity and bounce</h2><div class="ex task report"><div class="qq">Add gravity and energy loss.</div>
@@ -1445,7 +1132,7 @@ public class Lab10Demo {
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 55</span>
+  <span class="counter" id="counter">1 / 50</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this chapter</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>

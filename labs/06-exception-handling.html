@@ -30,7 +30,7 @@
 <meta name="twitter:description" content="When the gun runs dry or a level is missing, exceptions let the game recover and keep running.">
 <meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/06-exception-handling.png?v=2">
 <meta name="twitter:image:alt" content="Chapter 6 of 10: Exception Handling &amp; Custom Exceptions – CSE 202 Object Oriented Programming Lab">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Exception Handling & Custom Exceptions", "description": "When the gun runs dry or a level is missing, exceptions let the game recover and keep running.", "position": 6, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 43, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/06-exception-handling.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/06-exception-handling.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Exception Handling & Custom Exceptions", "description": "When the gun runs dry or a level is missing, exceptions let the game recover and keep running.", "position": 6, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 38, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/06-exception-handling.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/06-exception-handling.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
 <title>Chapter 6: Exception Handling &amp; Custom Exceptions | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,9 +67,10 @@
 <section class="slide " data-title="Chapter at a glance" aria-label="Chapter at a glance" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Chapter 6 of 10</p><h2>Chapter at a glance</h2><div class="cols wl"><div><h3>After this chapter you can</h3><ul class=""><li>Explain what an exception is and how it travels up the call stack</li><li>Read the exception hierarchy: Throwable, Exception, RuntimeException</li><li>Tell checked from unchecked exceptions</li><li>Use try, catch, finally, throw and throws</li><li>Write custom exceptions for the game, and wrap a lower-level cause</li></ul></div>
 <div><h3>Before you start</h3><ul class=""><li>Chapters 2–5: classes and inheritance (custom exceptions are classes)</li></ul></div></div>
+<p class="note-line"><b>What is marked:</b> the 3 lab tasks (show them during the lab) and the 2 report exercises. The game tasks are practice.</p>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Chapter 6 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=23">Run the game</a></li><li><a href="#s=24">Game practice tasks</a></li><li><a href="#s=27">The official lab program</a></li><li><a href="#s=33">Official in-lab tasks</a></li><li><a href="#s=37">Lab report exercises</a></li><li><a href="#s=40">Viva questions and quiz</a></li></ol>
+<p class="kicker">Chapter 6 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=23">Run the game</a></li><li><a href="#s=24">Game practice tasks</a></li><li><a href="#s=27">Lab tasks</a></li><li><a href="#s=32">Lab report exercises</a></li><li><a href="#s=35">Viva questions and quiz</a></li></ol>
 </div></section>
 <section class="slide " data-title="Today’s build" aria-label="Today’s build" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Build the game · Chapter 6</p><h2>Today’s build</h2><ul class="pts"><li>Six files: three exception classes (<code>GameException</code> and two subclasses), <code>Gun</code>, <code>LevelLoader</code> and <code>ExceptionDemo</code>.</li></ul>
@@ -510,300 +511,25 @@ public class GameException extends Exception {
 <p class="kicker">Game practice · 3 of 3</p><h2>Game task 3: Save the high score</h2><div class="ex task g-task"><div class="qq">finally in action.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g6t2r0" data-key="g6t2r0"><label for="g6t2r0">A method <code>saveHighScore(int score)</code> that throws <code>GameException</code> for negative scores</label></li><li><input type="checkbox" id="g6t2r1" data-key="g6t2r1"><label for="g6t2r1">Call it with 1200 and with -5</label></li><li><input type="checkbox" id="g6t2r2" data-key="g6t2r2"><label for="g6t2r2">A finally block that always prints "save attempt finished"</label></li><li><input type="checkbox" id="g6t2r3" data-key="g6t2r3"><label for="g6t2r3">Print the exception message in the catch</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">throw new GameException("score cannot be negative: " + score);</div></details></div>
 </div></section>
-<section class="slide " data-title="The official lab program" aria-label="The official lab program" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official lab · from the lab manual</p><h2>The official lab program</h2>
-<p class="g-official">The graded in-lab tasks and report exercises build on this program, not on the game. Read it and run it before you start them.</p>
-<ol class="flow"><li>Create two valid accounts inside try-catch</li><li>Try invalid accounts (empty number, negative balance) and catch the checked exception</li><li>Withdraw too much and catch the unchecked exception</li><li>Do valid deposits and withdrawals</li><li>Show that finally always runs</li><li>Transfer successfully, then fail a transfer and read the wrapped cause</li><li>Reject negative amounts and print the final balances</li></ol><p class="note-line">Three custom exceptions make each failure self-explaining; transfer() wraps lower-level failures.</p>
+<section class="slide " data-title="Lab tasks" aria-label="Lab tasks" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Practice · lab tasks</p><h2>Lab tasks</h2>
+<p>These tasks come from the lab manual. They start from its program, not from the game: save these files in one folder, then make the changes each task asks for.</p>
+<ul class="g-files"><li><a href="../starter/lab06/InvalidAccountException.java" download><code>InvalidAccountException.java</code></a></li><li><a href="../starter/lab06/InsufficientFundsException.java" download><code>InsufficientFundsException.java</code></a></li><li><a href="../starter/lab06/TransactionException.java" download><code>TransactionException.java</code></a></li><li><a href="../starter/lab06/BankAccount.java" download><code>BankAccount.java</code></a></li><li><a href="../starter/lab06/Lab6Demo.java" download><code>Lab6Demo.java</code></a></li></ul><p class="muted">Compile and run: <code>javac *.java</code> → <code>java Lab6Demo</code></p>
 </div></section>
-<section class="slide " data-title="Trace: a constructor that throws" aria-label="Trace: a constructor that throws" tabindex="-1"><div style="zoom:0.91;" class="slide-inner">
-<p class="kicker">Official lab · step through the code · 1 of 3</p><h2>Trace: a constructor that throws</h2><p class="muted">Pick an input. An invalid account is never created and never counted.</p><div data-trace="lab6-create"></div>
-</div></section>
-<section class="slide " data-title="Trace: withdraw, catch and finally" aria-label="Trace: withdraw, catch and finally" tabindex="-1"><div style="zoom:0.91;" class="slide-inner">
-<p class="kicker">Official lab · step through the code · 2 of 3</p><h2>Trace: withdraw, catch and finally</h2><p class="muted">Pick an amount and follow the exception (if any) to its catch block.</p><div data-trace="lab6-withdraw"></div>
-</div></section>
-<section class="slide " data-title="Trace: wrapping an exception with its cause" aria-label="Trace: wrapping an exception with its cause" tabindex="-1"><div style="zoom:0.94;" class="slide-inner">
-<p class="kicker">Official lab · step through the code · 3 of 3</p><h2>Trace: wrapping an exception with its cause</h2><p class="muted">A low-level InsufficientFundsException becomes a TransactionException. Follow the cause arrow back to the original.</p><div data-trace="lab6-wrap"></div>
-</div></section>
-<section class="slide " data-title="The official program" aria-label="The official program" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official lab · 5 files</p><h2>The official program</h2><div class="codeview"><pre class="code small-code" data-file="InvalidAccountException.java">public class InvalidAccountException extends Exception {
-
-    public InvalidAccountException(String message) {
-        super(message);
-    }
-
-    public InvalidAccountException(String message, Throwable cause) {
-        super(message, cause);
-    }
-}</pre><pre class="code small-code" data-file="InsufficientFundsException.java">public class InsufficientFundsException extends RuntimeException {
-
-    public InsufficientFundsException(String message) {
-        super(message);
-    }
-
-    public InsufficientFundsException(String message, Throwable cause) {
-        super(message, cause);
-    }
-}</pre><pre class="code small-code" data-file="TransactionException.java">public class TransactionException extends Exception {
-
-    public TransactionException(String message) {
-        super(message);
-    }
-
-    public TransactionException(String message, Throwable cause) {
-        super(message, cause);
-    }
-}</pre><pre class="code small-code" data-file="BankAccount.java">public class BankAccount {
-
-    private String accountNumber;
-    private String owner;
-    private double balance;
-
-    private static int totalAccounts = 0;
-
-    public BankAccount(String accountNumber, String owner, double initialBalance)
-            throws InvalidAccountException {
-
-        if (accountNumber == null || accountNumber.trim().isEmpty()) {
-            throw new InvalidAccountException(&quot;Account number cannot be null or empty.&quot;);
-        }
-        if (owner == null || owner.trim().isEmpty()) {
-            throw new InvalidAccountException(&quot;Owner name cannot be null or empty.&quot;);
-        }
-        if (initialBalance &lt; 0.0) {
-            throw new InvalidAccountException(
-                    &quot;Initial balance cannot be negative. Provided: &quot; + initialBalance);
-        }
-        this.accountNumber = accountNumber;
-        this.owner = owner;
-        this.balance = initialBalance;
-        totalAccounts++;
-    }
-
-    public void deposit(double amount) throws InvalidAccountException {
-        if (amount &lt;= 0.0) {
-            throw new InvalidAccountException(
-                    &quot;Deposit amount must be positive. Provided: &quot; + amount);
-        }
-        balance = balance + amount;
-        System.out.println(&quot;[&quot; + accountNumber + &quot;] Deposit: &quot; + amount
-                + &quot; | New balance: &quot; + balance);
-    }
-
-    public void withdraw(double amount) throws InvalidAccountException {
-        if (amount &lt;= 0.0) {
-            throw new InvalidAccountException(
-                    &quot;Withdrawal amount must be positive. Provided: &quot; + amount);
-        }
-        if (amount &gt; balance) {
-            throw new InsufficientFundsException(
-                    &quot;Insufficient funds. Requested: &quot; + amount + &quot;, Available: &quot; + balance);
-        }
-        balance = balance - amount;
-        System.out.println(&quot;[&quot; + accountNumber + &quot;] Withdrawal: &quot; + amount
-                + &quot; | New balance: &quot; + balance);
-    }
-
-    public void transfer(BankAccount target, double amount) throws TransactionException {
-        if (target == null) {
-            throw new TransactionException(&quot;Transfer failed: target account is null.&quot;);
-        }
-        try {
-            System.out.println(&quot;--- Starting transfer ---&quot;);
-            System.out.println(&quot;From: &quot; + this.accountNumber + &quot; | To: &quot;
-                    + target.accountNumber + &quot; | Amount: &quot; + amount);
-            this.withdraw(amount);
-            target.deposit(amount);
-            System.out.println(&quot;Transfer completed successfully.&quot;);
-        } catch (InsufficientFundsException e) {
-            throw new TransactionException(
-                    &quot;Transfer failed: insufficient funds in source account.&quot;, e);
-        } catch (InvalidAccountException e) {
-            throw new TransactionException(
-                    &quot;Transfer failed: invalid transaction amount.&quot;, e);
-        }
-    }
-
-    public String getAccountNumber() { return accountNumber; }
-    public String getOwner() { return owner; }
-    public double getBalance() { return balance; }
-    public static int getTotalAccounts() { return totalAccounts; }
-
-    public void display() {
-        System.out.println(&quot;Account: &quot; + accountNumber + &quot; | Owner: &quot; + owner
-                + &quot; | Balance: &quot; + balance);
-    }
-}</pre><pre class="code small-code" data-file="Lab6Demo.java">public class Lab6Demo {
-
-    public static void main(String[] args) {
-
-        // 1. Creating Bank Accounts
-        System.out.println(&quot;=== Creating Bank Accounts ===&quot;);
-        BankAccount account1 = null;
-        BankAccount account2 = null;
-        try {
-            account1 = new BankAccount(&quot;ACC001&quot;, &quot;Alice&quot;, 5000.0);
-            System.out.println(&quot;Account 1 created successfully.&quot;);
-        } catch (InvalidAccountException e) {
-            System.out.println(&quot;Error creating account 1: &quot; + e.getMessage());
-        }
-        try {
-            account2 = new BankAccount(&quot;ACC002&quot;, &quot;Bob&quot;, 3000.0);
-            System.out.println(&quot;Account 2 created successfully.&quot;);
-        } catch (InvalidAccountException e) {
-            System.out.println(&quot;Error creating account 2: &quot; + e.getMessage());
-        }
-
-        // 2. Invalid Account Creation
-        System.out.println(&quot;\n=== Invalid Account Creation ===&quot;);
-        try {
-            BankAccount invalidAccount = new BankAccount(&quot;&quot;, &quot;Charlie&quot;, 1000.0);
-        } catch (InvalidAccountException e) {
-            System.out.println(&quot;Caught checked exception: &quot; + e.getMessage());
-        }
-        try {
-            BankAccount invalidAccount = new BankAccount(&quot;ACC003&quot;, &quot;Diana&quot;, -500.0);
-        } catch (InvalidAccountException e) {
-            System.out.println(&quot;Caught checked exception: &quot; + e.getMessage());
-        }
-
-        // 3. Insufficient Funds
-        System.out.println(&quot;\n=== Insufficient Funds Example ===&quot;);
-        try {
-            account1.withdraw(10000.0);
-        } catch (InsufficientFundsException e) {
-            System.out.println(&quot;Caught unchecked exception: &quot; + e.getMessage());
-        } catch (InvalidAccountException e) {
-            System.out.println(&quot;Caught checked exception: &quot; + e.getMessage());
-        }
-
-        // 4. Valid Deposit and Withdrawal
-        System.out.println(&quot;\n=== Valid Transactions ===&quot;);
-        try {
-            account1.display();
-            account1.deposit(2000.0);
-            account1.withdraw(1500.0);
-            account1.display();
-        } catch (InvalidAccountException e) {
-            System.out.println(&quot;Transaction error: &quot; + e.getMessage());
-        }
-
-        // 5. try-catch-finally
-        System.out.println(&quot;\n=== try-catch-finally Example ===&quot;);
-        try {
-            System.out.println(&quot;Attempting to withdraw 500 from account1...&quot;);
-            account1.withdraw(500.0);
-            System.out.println(&quot;Withdrawal successful.&quot;);
-        } catch (InsufficientFundsException e) {
-            System.out.println(&quot;Caught InsufficientFundsException: &quot; + e.getMessage());
-        } catch (InvalidAccountException e) {
-            System.out.println(&quot;Caught InvalidAccountException: &quot; + e.getMessage());
-        } finally {
-            System.out.println(&quot;Finally block: cleanup or logging code runs.&quot;);
-            account1.display();
-        }
-
-        // 6. Successful Transfer
-        System.out.println(&quot;\n=== Successful Transfer ===&quot;);
-        try {
-            account1.transfer(account2, 1000.0);
-        } catch (TransactionException e) {
-            System.out.println(&quot;Caught TransactionException: &quot; + e.getMessage());
-            System.out.println(&quot;Cause: &quot; + e.getCause().getMessage());
-        }
-
-        // 7. Failed Transfer
-        System.out.println(&quot;\n=== Failed Transfer ===&quot;);
-        try {
-            account2.transfer(account1, 5000.0);
-        } catch (TransactionException e) {
-            System.out.println(&quot;Caught TransactionException: &quot; + e.getMessage());
-            System.out.println(&quot;Root cause: &quot; + e.getCause().getMessage());
-        }
-
-        // 8. Invalid Transaction Amounts
-        System.out.println(&quot;\n=== Invalid Transaction Amounts ===&quot;);
-        try {
-            account1.deposit(-100.0);
-        } catch (InvalidAccountException e) {
-            System.out.println(&quot;Caught deposit error: &quot; + e.getMessage());
-        }
-        try {
-            account1.withdraw(-50.0);
-        } catch (InsufficientFundsException e) {
-            System.out.println(&quot;Caught insufficient funds error: &quot; + e.getMessage());
-        } catch (InvalidAccountException e) {
-            System.out.println(&quot;Caught withdrawal error: &quot; + e.getMessage());
-        }
-
-        // 9. Final Account States
-        System.out.println(&quot;\n=== Final Account States ===&quot;);
-        account1.display();
-        account2.display();
-        System.out.println(&quot;Total accounts created: &quot; + BankAccount.getTotalAccounts());
-    }
-}</pre></div><p class="muted">Compile and run: <code>javac *.java</code> → <code>java Lab6Demo</code></p>
-</div></section>
-<section class="slide " data-title="Official program: expected output" aria-label="Official program: expected output" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official lab</p><h2>Official program: expected output</h2><div class="runbox" data-cmd="java Lab6Demo"><pre class="run-src" hidden>=== Creating Bank Accounts ===
-Account 1 created successfully.
-Account 2 created successfully.
-
-=== Invalid Account Creation ===
-Caught checked exception: Account number cannot be null or empty.
-Caught checked exception: Initial balance cannot be negative. Provided: -500.0
-
-=== Insufficient Funds Example ===
-Caught unchecked exception: Insufficient funds. Requested: 10000.0, Available: 5000.0
-
-=== Valid Transactions ===
-Account: ACC001 | Owner: Alice | Balance: 5000.0
-[ACC001] Deposit: 2000.0 | New balance: 7000.0
-[ACC001] Withdrawal: 1500.0 | New balance: 5500.0
-Account: ACC001 | Owner: Alice | Balance: 5500.0
-
-=== try-catch-finally Example ===
-Attempting to withdraw 500 from account1...
-[ACC001] Withdrawal: 500.0 | New balance: 5000.0
-Withdrawal successful.
-Finally block: cleanup or logging code runs.
-Account: ACC001 | Owner: Alice | Balance: 5000.0
-
-=== Successful Transfer ===
---- Starting transfer ---
-From: ACC001 | To: ACC002 | Amount: 1000.0
-[ACC001] Withdrawal: 1000.0 | New balance: 4000.0
-[ACC002] Deposit: 1000.0 | New balance: 4000.0
-Transfer completed successfully.
-
-=== Failed Transfer ===
---- Starting transfer ---
-From: ACC002 | To: ACC001 | Amount: 5000.0
-Caught TransactionException: Transfer failed: insufficient funds in source account.
-Root cause: Insufficient funds. Requested: 5000.0, Available: 4000.0
-
-=== Invalid Transaction Amounts ===
-Caught deposit error: Deposit amount must be positive. Provided: -100.0
-Caught withdrawal error: Withdrawal amount must be positive. Provided: -50.0
-
-=== Final Account States ===
-Account: ACC001 | Owner: Alice | Balance: 4000.0
-Account: ACC002 | Owner: Bob | Balance: 4000.0
-Total accounts created: 2</pre></div><p class="note-line">Only 2 accounts are counted: the constructor throws before <code>totalAccounts++</code> for the invalid ones.</p>
-</div></section>
-<section class="slide " data-title="Task 1: Add a FrozenAccountException" aria-label="Task 1: Add a FrozenAccountException" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official in-lab task 1 of 3</p><h2>Task 1: Add a FrozenAccountException</h2><div class="ex task"><div class="qq">Accounts can be frozen; a frozen account rejects all money movement.</div>
+<section class="slide " data-title="Lab task 1: Add a FrozenAccountException" aria-label="Lab task 1: Add a FrozenAccountException" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab task 1 of 3</p><h2>Lab task 1: Add a FrozenAccountException</h2><div class="ex task"><div class="qq">Accounts can be frozen; a frozen account rejects all money movement.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l6t0r0" data-key="l6t0r0"><label for="l6t0r0">Create the unchecked <code>FrozenAccountException</code></label></li><li><input type="checkbox" id="l6t0r1" data-key="l6t0r1"><label for="l6t0r1">Add <code>private boolean isFrozen</code> with <code>freeze()</code> and <code>unfreeze()</code></label></li><li><input type="checkbox" id="l6t0r2" data-key="l6t0r2"><label for="l6t0r2">deposit() and withdraw() throw it when the account is frozen</label></li><li><input type="checkbox" id="l6t0r3" data-key="l6t0r3"><label for="l6t0r3">Demonstrate that a frozen account rejects both operations</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Check the frozen flag first in each method, before validating the amount.</div></details></div>
 </div></section>
-<section class="slide " data-title="Task 2: Amount validation utility" aria-label="Task 2: Amount validation utility" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official in-lab task 2 of 3</p><h2>Task 2: Amount validation utility</h2><div class="ex task"><div class="qq">One static method validates every amount.</div>
+<section class="slide " data-title="Lab task 2: Amount validation utility" aria-label="Lab task 2: Amount validation utility" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab task 2 of 3</p><h2>Lab task 2: Amount validation utility</h2><div class="ex task"><div class="qq">One static method validates every amount.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l6t1r0" data-key="l6t1r0"><label for="l6t1r0"><code>static void validateAmount(double amount)</code> throws InvalidAccountException</label></li><li><input type="checkbox" id="l6t1r1" data-key="l6t1r1"><label for="l6t1r1">Reject amounts ≤ 0 and amounts > 100000</label></li><li><input type="checkbox" id="l6t1r2" data-key="l6t1r2"><label for="l6t1r2">Use it in deposit() and withdraw()</label></li><li><input type="checkbox" id="l6t1r3" data-key="l6t1r3"><label for="l6t1r3">Test valid, zero, negative and too-large amounts</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Because it throws a checked exception, its header needs <code>throws InvalidAccountException</code>.</div></details></div>
 </div></section>
-<section class="slide " data-title="Task 3: Transaction history" aria-label="Task 3: Transaction history" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official in-lab task 3 of 3</p><h2>Task 3: Transaction history</h2><div class="ex task"><div class="qq">Record what actually happened to an account.</div>
+<section class="slide " data-title="Lab task 3: Transaction history" aria-label="Lab task 3: Transaction history" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab task 3 of 3</p><h2>Lab task 3: Transaction history</h2><div class="ex task"><div class="qq">Record what actually happened to an account.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l6t2r0" data-key="l6t2r0"><label for="l6t2r0">Add a history array or list</label></li><li><input type="checkbox" id="l6t2r1" data-key="l6t2r1"><label for="l6t2r1">Record successful deposits, withdrawals and transfers</label></li><li><input type="checkbox" id="l6t2r2" data-key="l6t2r2"><label for="l6t2r2">Do <b>not</b> record failed ones</label></li><li><input type="checkbox" id="l6t2r3" data-key="l6t2r3"><label for="l6t2r3">Implement <code>printTransactionHistory()</code></label></li><li><input type="checkbox" id="l6t2r4" data-key="l6t2r4"><label for="l6t2r4">Demonstrate after a mix of successful and failed operations</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Add the record as the last line of each method: if an exception is thrown earlier, that line never runs.</div></details></div>
 </div></section>
 <section class="slide " data-title="Show your work" aria-label="Show your work" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official in-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
+<p class="kicker">Lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
 </div></section>
 <section class="slide " data-title="Report exercise 1" aria-label="Report exercise 1" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Lab report · exercise 1 of 2</p><h2>Robust CSV file processing</h2><div class="ex task report"><div class="qq">Read student records (ID,Name,GPA) from a CSV file with custom exceptions.</div>
@@ -831,7 +557,7 @@ Total accounts created: 2</pre></div><p class="note-line">Only 2 accounts are co
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 43</span>
+  <span class="counter" id="counter">1 / 38</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this chapter</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>

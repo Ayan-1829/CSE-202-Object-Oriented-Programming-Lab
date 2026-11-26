@@ -35,10 +35,11 @@ Each chapter has:
 - the ideas, shown with animated and interactive game scenes;
 - the chapter's game program, walked through section by section, with its real output;
 - game practice tasks with hints;
-- the **official lab program, in-lab tasks and report exercises**, unchanged from the lab manual;
+- the **in-lab tasks and report exercises**, unchanged from the lab manual (Code Commando is the only code example on the slides);
 - viva questions, a quiz and a summary.
 
 The Java sources of every chapter are in [`game/`](game/): each folder compiles on its own with `javac *.java`.
+The lab manual's programs, which the lab tasks start from, are in [`starter/`](starter/).
 
 ## ⌨️ Using the slides
 

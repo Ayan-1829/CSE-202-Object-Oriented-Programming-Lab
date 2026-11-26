@@ -30,7 +30,7 @@
 <meta name="twitter:description" content="Meet Code Commando. Its health, ammo and score are variables; decisions and loops make it react.">
 <meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/01-java-basics.png?v=2">
 <meta name="twitter:image:alt" content="Chapter 1 of 10: Java Syntax, Data Types &amp; Control Flow – CSE 202 Object Oriented Programming Lab">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Java Syntax, Data Types & Control Flow", "description": "Meet Code Commando. Its health, ammo and score are variables; decisions and loops make it react.", "position": 1, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 50, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/01-java-basics.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/01-java-basics.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Java Syntax, Data Types & Control Flow", "description": "Meet Code Commando. Its health, ammo and score are variables; decisions and loops make it react.", "position": 1, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 44, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/01-java-basics.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/01-java-basics.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
 <title>Chapter 1: Java Syntax, Data Types &amp; Control Flow | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,12 +67,13 @@
 <section class="slide " data-title="Your mission (cont.)" aria-label="Your mission (cont.)" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Mission 1 · The numbers behind the game</p><h2>Your mission (cont.)</h2><div data-demo="g-intro"></div>
 </div></section>
-<section class="slide " data-title="Chapter at a glance" aria-label="Chapter at a glance" tabindex="-1"><div class="slide-inner">
+<section class="slide " data-title="Chapter at a glance" aria-label="Chapter at a glance" tabindex="-1"><div style="zoom:0.95;" class="slide-inner">
 <p class="kicker">Chapter 1 of 10</p><h2>Chapter at a glance</h2><div class="cols wl"><div><h3>After this chapter you can</h3><ul class=""><li>Set up and check a JDK with an IDE (NetBeans, Eclipse or IntelliJ IDEA)</li><li>Explain how <code>GameBasics.java</code> becomes bytecode that the JVM runs</li><li>Store game data in the eight primitive types and <code>String</code></li><li>Turn a <code>double</code> hit into <code>int</code> health with a cast</li><li>Make game decisions with <code>if / else if / else</code> and <code>switch</code></li><li>Repeat actions with <code>for</code>, <code>while</code> and <code>do-while</code>, steered by <code>break</code> and <code>continue</code></li></ul></div>
-<div><h3>Before you start</h3><ul class=""><li>Create folders and save files</li><li>A basic idea of variables, input and output</li><li>JDK 11 or later and an IDE installed (the setup slides help)</li></ul></div></div>
+<div><h3>Before you start</h3><ul class=""><li>Create folders and save files</li><li>No Java yet: this chapter starts from zero</li><li>JDK 11 or later and an IDE installed (the setup slides help)</li><li>The lab tasks also read keyboard input (<code>Scanner</code>) and use a first array: their hints show how</li></ul></div></div>
+<p class="note-line"><b>What is marked:</b> the 4 lab tasks (show them during the lab) and the 2 report exercises. The game tasks are practice.</p>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Chapter 1 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Install Java and NetBeans</a></li><li><a href="#s=9">Today’s build: the game program</a></li><li><a href="#s=10">The topics: the idea, then the game</a></li><li><a href="#s=29">Run the game</a></li><li><a href="#s=30">Game practice tasks</a></li><li><a href="#s=33">The official lab program</a></li><li><a href="#s=39">Official in-lab tasks</a></li><li><a href="#s=44">Lab report exercises</a></li><li><a href="#s=47">Viva questions and quiz</a></li></ol>
+<p class="kicker">Chapter 1 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Install Java and NetBeans</a></li><li><a href="#s=9">Today’s build: the game program</a></li><li><a href="#s=10">The topics: the idea, then the game</a></li><li><a href="#s=29">Run the game</a></li><li><a href="#s=30">Game practice tasks</a></li><li><a href="#s=33">Lab tasks</a></li><li><a href="#s=38">Lab report exercises</a></li><li><a href="#s=41">Viva questions and quiz</a></li></ol>
 </div></section>
 <section class="slide " data-title="Which Java do you need?" aria-label="Which Java do you need?" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Setting up · 1 of 4</p><h2>Which Java do you need?</h2><ul class="big-list"><li>A <b>JDK</b> (Java Development Kit): it contains the compiler <code>javac</code> and the runtime <code>java</code>. A JRE alone cannot compile.</li><li>Use the current <b>LTS</b> release, <b>JDK 25</b>, from the official Java site <code>oracle.com/java</code>. These labs need JDK 11 or later.</li><li>Install the JDK <b>first</b>, then the IDE: this course uses <b>Apache NetBeans</b>.</li><li>On the next slides, pick your operating system: each slide has direct download links, the steps and a YouTube video link.</li></ul>
@@ -107,13 +108,13 @@ int health = 100;
 int ammo = 5;
 double damage = 12.75;
 boolean alive = true;
-System.out.println(name + &quot; | health &quot; + health + &quot; | ammo &quot; + ammo + &quot; | alive &quot; + alive);</pre></div><ul class="pts"><li>A <b>variable</b> is a named box that holds one value.</li><li>Its <b>type</b> decides what may go in: whole numbers, decimals, one character, true/false or text.</li><li>Declare it once with its type, then use it by name.</li><li>Five variables, five types: String, int, int, double, boolean.</li></ul></div>
+System.out.println(name + &quot; | health &quot; + health + &quot; | ammo &quot; + ammo + &quot; | alive &quot; + alive);</pre></div><ul class="pts"><li>A <b>variable</b> is a named box that holds one value.</li><li>Its <b>type</b> decides what may go in: whole numbers, decimals, one character, true/false or text.</li><li>Declare it once with its type, then use it by name.</li><li>Five variables, four types: <code>health</code> and <code>ammo</code> are both <code>int</code>, and still hold different values.</li></ul></div>
 </div></section>
 <section class="slide " data-title="Variables: the numbers on the screen" aria-label="Variables: the numbers on the screen" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 2 of 6 · in the game</p><h2>Variables: the numbers on the screen</h2><div data-demo="g-hud"></div>
 </div></section>
 <section class="slide " data-title="Variables: the numbers on the screen (in code)" aria-label="Variables: the numbers on the screen (in code)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Topic 2 of 6 · in the game, in code</p><h2>Variables: the numbers on the screen</h2><div class="scrollx"><table class="doc"><thead><tr><th>Type</th><th>In the game</th><th>Example</th></tr></thead><tbody><tr><td>byte / short</td><td>small whole numbers</td><td><code>byte lives = 3;</code> · <code>short level = 1;</code></td></tr><tr><td>int</td><td>most whole numbers</td><td><code>int health = 100;</code></td></tr><tr><td>long</td><td>huge whole numbers (suffix L)</td><td><code>long highScore = 2500000000L;</code></td></tr><tr><td>float</td><td>decimals, less precise (suffix f)</td><td><code>float speed = 2.5f;</code></td></tr><tr><td>double</td><td>decimals, the usual choice</td><td><code>double damage = 12.75;</code></td></tr><tr><td>char</td><td>one character</td><td><code>char rank = 'B';</code></td></tr><tr><td>boolean</td><td>true or false</td><td><code>boolean alive = true;</code></td></tr><tr><td>String</td><td>text (a class, not a primitive)</td><td><code>String name = "Ranger";</code></td></tr></tbody></table></div><ul class="pts"><li>Pick the smallest type that is safe; <code>int</code> and <code>double</code> are the everyday choices.</li></ul>
+<p class="kicker">Topic 2 of 6 · in the game, in code</p><h2>Variables: the numbers on the screen</h2><div class="scrollx"><table class="doc"><thead><tr><th>Type</th><th>In the game</th><th>Example</th></tr></thead><tbody><tr><td>byte / short</td><td>small whole numbers</td><td><code>byte lives = 3;</code> · <code>short level = 1;</code></td></tr><tr><td>int</td><td>most whole numbers</td><td><code>int health = 100;</code></td></tr><tr><td>long</td><td>huge whole numbers (suffix L)</td><td><code>long highScore = 2500000000L;</code></td></tr><tr><td>float</td><td>decimals, less precise (suffix f)</td><td><code>float speed = 2.5f;</code></td></tr><tr><td>double</td><td>decimals, the usual choice</td><td><code>double damage = 12.75;</code></td></tr><tr><td>char</td><td>one character</td><td><code>char rank = 'B';</code></td></tr><tr><td>boolean</td><td>true or false</td><td><code>boolean alive = true;</code></td></tr><tr><td>String</td><td>text (a class, not a primitive)</td><td><code>String name = "Ranger";</code></td></tr></tbody></table></div><ul class="pts"><li>Use <code>int</code> for whole numbers and <code>double</code> for decimals. Reach for the others only with a reason, such as <code>long</code> for a number too big for <code>int</code>.</li></ul>
 </div></section>
 <section class="slide " data-title="Type casting" aria-label="Type casting" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Topic 3 of 6</p><h2>Type casting</h2><div class="g-ingame"><div>In the game:</div><div>Type casting: damage into health</div></div><div class="g-codeside g-topic"><pre class="code small-code">int hit = (int) damage;                 // narrowing: 12.75 -&gt; 12
@@ -337,7 +338,7 @@ do {
 </div></section>
 <section class="slide " data-title="Game task 1: Add a shield" aria-label="Game task 1: Add a shield" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Game practice · 1 of 3</p><h2>Game task 1: Add a shield</h2><div class="ex task g-task"><div class="qq">Give the commando a shield that soaks up damage first.</div>
-<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g1t0r0" data-key="g1t0r0"><label for="g1t0r0">Declare <code>int shield = 30;</code> and print it with the stats</label></li><li><input type="checkbox" id="g1t0r1" data-key="g1t0r1"><label for="g1t0r1">When a hit arrives, take it from the shield first; only the rest reduces health</label></li><li><input type="checkbox" id="g1t0r2" data-key="g1t0r2"><label for="g1t0r2">Use an <code>if</code> so the shield never goes below 0</label></li><li><input type="checkbox" id="g1t0r3" data-key="g1t0r3"><label for="g1t0r3">Print shield and health after a hit of 45</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Work out <code>int overflow = hit - shield;</code> first. If it is positive the shield is gone and health loses <code>overflow</code>.</div></details></div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g1t0r0" data-key="g1t0r0"><label for="g1t0r0">Declare <code>int shield = 30;</code> and print it with the stats</label></li><li><input type="checkbox" id="g1t0r1" data-key="g1t0r1"><label for="g1t0r1">When a hit arrives, take it from the shield first; only the rest reduces health</label></li><li><input type="checkbox" id="g1t0r2" data-key="g1t0r2"><label for="g1t0r2">Use an <code>if</code> so the shield never goes below 0</label></li><li><input type="checkbox" id="g1t0r3" data-key="g1t0r3"><label for="g1t0r3">Print shield and health after a hit of 45</label></li><li><input type="checkbox" id="g1t0r4" data-key="g1t0r4"><label for="g1t0r4">Check, each time from 100 health and 30 shield: a hit of 10 leaves 20 shield, 100 health; 30 leaves 0 shield, 100 health; 45 leaves 0 shield, 85 health</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Work out <code>int overflow = hit - shield;</code> first. If it is positive the shield is gone and health loses <code>overflow</code>.</div></details></div>
 </div></section>
 <section class="slide " data-title="Game task 2: A fourth weapon" aria-label="Game task 2: A fourth weapon" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Game practice · 2 of 3</p><h2>Game task 2: A fourth weapon</h2><div class="ex task g-task"><div class="qq">Add key 4: a Laser with 40 damage.</div>
@@ -345,219 +346,26 @@ do {
 </div></section>
 <section class="slide " data-title="Game task 3: Accuracy grade" aria-label="Game task 3: Accuracy grade" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Game practice · 3 of 3</p><h2>Game task 3: Accuracy grade</h2><div class="ex task g-task"><div class="qq">Grade the player from shots fired and hits.</div>
-<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g1t2r0" data-key="g1t2r0"><label for="g1t2r0"><code>int shotsFired = 40, hits = 31;</code></label></li><li><input type="checkbox" id="g1t2r1" data-key="g1t2r1"><label for="g1t2r1">Work out the accuracy as a percentage in a double (watch out for integer division)</label></li><li><input type="checkbox" id="g1t2r2" data-key="g1t2r2"><label for="g1t2r2">Use <code>switch ((int) accuracy / 10)</code> to print S (90+), A (80s), B (70s) or C</label></li><li><input type="checkbox" id="g1t2r3" data-key="g1t2r3"><label for="g1t2r3">Print the accuracy with <code>printf</code> and one decimal place</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans"><code>hits / shotsFired</code> is 0 with two ints. Cast one of them first: <code>(double) hits / shotsFired * 100</code>.</div></details></div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g1t2r0" data-key="g1t2r0"><label for="g1t2r0"><code>int shotsFired = 40, hits = 31;</code></label></li><li><input type="checkbox" id="g1t2r1" data-key="g1t2r1"><label for="g1t2r1">Work out the accuracy as a percentage in a double (watch out for integer division)</label></li><li><input type="checkbox" id="g1t2r2" data-key="g1t2r2"><label for="g1t2r2">Use <code>switch ((int) accuracy / 10)</code> to print S (90+), A (80s), B (70s) or C</label></li><li><input type="checkbox" id="g1t2r3" data-key="g1t2r3"><label for="g1t2r3">Print the accuracy with <code>printf</code> and one decimal place</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans"><code>hits / shotsFired</code> is 0 with two ints. Cast one of them first: <code>(double) hits / shotsFired * 100</code>. In <code>printf</code>, <code>%.1f</code> is replaced by a double with one decimal place and <code>%n</code> ends the line.</div></details></div>
 </div></section>
-<section class="slide " data-title="The official lab program" aria-label="The official lab program" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official lab · from the lab manual</p><h2>The official lab program</h2>
-<p class="g-official">The graded in-lab tasks and report exercises build on this program, not on the game. Read it and run it before you start them.</p>
-<ol class="flow"><li>Declare and print the eight primitive variables and a String</li><li>Widen an int to double, narrow a double to int, convert char ↔ int</li><li>Classify a number (positive/zero/negative) and a BMI with if-else</li><li>Assign a letter grade with switch</li><li>Sum 1..10 with for; print even numbers using continue and break</li><li>Reverse digits with while</li><li>Print the Collatz sequence of 27 with do-while</li></ol><p class="note-line">Single class, everything inside <code>main</code>: the focus is syntax, not objects.</p>
+<section class="slide " data-title="Lab task 1: Temperature converter" aria-label="Lab task 1: Temperature converter" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab task 1 of 4</p><h2>Lab task 1: Temperature converter</h2><div class="ex task"><div class="qq">Read a temperature in Celsius and convert it to Fahrenheit, Kelvin and Rankine: F = C × 1.8 + 32, K = C + 273.15, R = F + 459.67.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l1t0r0" data-key="l1t0r0"><label for="l1t0r0">Use <code>double</code> variables for all temperatures</label></li><li><input type="checkbox" id="l1t0r1" data-key="l1t0r1"><label for="l1t0r1">Print every converted value with a clear label</label></li><li><input type="checkbox" id="l1t0r2" data-key="l1t0r2"><label for="l1t0r2">Use meaningful variable names</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Put <code>import java.util.Scanner;</code> above the class, then read with <code>Scanner sc = new Scanner(System.in); double c = sc.nextDouble();</code>. Compute F first, because R depends on it. Check: 0 °C gives 32 °F, 273.15 K and 491.67 °R.</div></details></div>
 </div></section>
-<section class="slide " data-title="Trace: widening and narrowing" aria-label="Trace: widening and narrowing" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
-<p class="kicker">Official lab · step through the code · 1 of 3</p><h2>Trace: widening and narrowing</h2><p class="muted">Watch each variable appear in main’s stack frame and see exactly what a cast keeps.</p><div data-trace="lab1-cast"></div>
+<section class="slide " data-title="Lab task 2: FizzBuzz extended" aria-label="Lab task 2: FizzBuzz extended" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab task 2 of 4</p><h2>Lab task 2: FizzBuzz extended</h2><div class="ex task"><div class="qq">Print 1 to 50: FizzBuzz if divisible by 3 and 5, Fizz for 3, Buzz for 5, Boom for 7, otherwise the number.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l1t1r0" data-key="l1t1r0"><label for="l1t1r0">Use a <code>for</code> loop</label></li><li><input type="checkbox" id="l1t1r1" data-key="l1t1r1"><label for="l1t1r1">Use <code>if / else if / else</code></label></li><li><input type="checkbox" id="l1t1r2" data-key="l1t1r2"><label for="l1t1r2">Test “3 and 5” <b>before</b> 3 or 5 alone</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Order matters: once one branch of an if-else chain matches, the rest are skipped. Use <code>i % 15 == 0</code> or <code>i % 3 == 0 && i % 5 == 0</code> first. The task does not say what 21, 35 and 42 (7 and also 3 or 5) should print: ask your instructor, or pick a rule (for example, test 7 last, so 21 prints Fizz), write it as a comment and say it in your report.</div></details></div>
 </div></section>
-<section class="slide " data-title="Trace: reversing the digits" aria-label="Trace: reversing the digits" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
-<p class="kicker">Official lab · step through the code · 2 of 3</p><h2>Trace: reversing the digits</h2><p class="muted">Follow temp, digit and reversed through every pass of the while loop.</p><div data-trace="lab1-reverse"></div>
+<section class="slide " data-title="Lab task 3: Number system classifier" aria-label="Lab task 3: Number system classifier" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab task 3 of 4</p><h2>Lab task 3: Number system classifier</h2><div class="ex task"><div class="qq">Read an integer and classify it by the remainder when divided by 4: 0 → Divisible by 4, 1 or 3 → Odd, 2 → Even, not divisible by 4.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l1t2r0" data-key="l1t2r0"><label for="l1t2r0">Read input with <code>Scanner</code></label></li><li><input type="checkbox" id="l1t2r1" data-key="l1t2r1"><label for="l1t2r1">Use a traditional <code>switch</code></label></li><li><input type="checkbox" id="l1t2r2" data-key="l1t2r2"><label for="l1t2r2">Print the number and its classification</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Read with <code>Scanner</code> (put <code>import java.util.Scanner;</code> above the class). <code>case 1: case 3:</code> can share one body. Careful with negative numbers: <code>-3 % 4</code> is <code>-3</code> in Java.</div></details></div>
 </div></section>
-<section class="slide " data-title="Trace: switch, case by case" aria-label="Trace: switch, case by case" tabindex="-1"><div style="zoom:0.91;" class="slide-inner">
-<p class="kicker">Official lab · step through the code · 3 of 3</p><h2>Trace: switch, case by case</h2><p class="muted">Pick a score. See which case the switch jumps to, how 100 falls through into case 9, and what break does.</p><div data-trace="lab1-switch"></div>
-</div></section>
-<section class="slide " data-title="The official program" aria-label="The official program" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official lab · 1 file</p><h2>The official program</h2><div class="codeview"><pre class="code small-code" data-file="Lab1Demo.java">public class Lab1Demo {
-    public static void main(String[] args) {
-
-        // 1. Primitive Data Types and String
-        byte byteVal = 100;
-        short shortVal = 30000;
-        int age = 21;
-        long bigNum = 9876543210L;
-        float gpa = 3.75f;
-        double height = 5.91;
-        char initial = &#x27;A&#x27;;
-        boolean isStudent = true;
-        String name = &quot;Mozdaher Abdul Quader&quot;;
-
-        System.out.println(&quot;=== Primitive Data Types and String ===&quot;);
-        System.out.println(&quot;byte    : &quot; + byteVal);
-        System.out.println(&quot;short   : &quot; + shortVal);
-        System.out.println(&quot;int     : &quot; + age);
-        System.out.println(&quot;long    : &quot; + bigNum);
-        System.out.println(&quot;float   : &quot; + gpa);
-        System.out.println(&quot;double  : &quot; + height);
-        System.out.println(&quot;char    : &quot; + initial + &quot; (Unicode = &quot; + (int) initial + &quot;)&quot;);
-        System.out.println(&quot;boolean : &quot; + isStudent);
-        System.out.println(&quot;String  : &quot; + name);
-
-        // 2. Type Casting
-        System.out.println(&quot;\n=== Type Casting ===&quot;);
-        double ageAsDouble = age;
-        System.out.println(&quot;int &quot; + age + &quot; widened to double: &quot; + ageAsDouble);
-
-        double pi = 3.14159;
-        int piTruncated = (int) pi;
-        System.out.println(&quot;double &quot; + pi + &quot; narrowed to int: &quot; + piTruncated);
-
-        char letter = &#x27;Z&#x27;;
-        int code = letter;
-        char nextChar = (char) (code + 1);
-        System.out.println(&quot;char &#x27;Z&#x27; as int: &quot; + code + &quot; | next char: &quot; + nextChar);
-
-        // 3. Conditional Statement
-        System.out.println(&quot;\n=== Conditional Statement ===&quot;);
-        int n = 42;
-        if (n &gt; 0) {
-            System.out.println(n + &quot; is Positive&quot;);
-        } else if (n == 0) {
-            System.out.println(n + &quot; is Zero&quot;);
-        } else {
-            System.out.println(n + &quot; is Negative&quot;);
-        }
-
-        double weightKg = 70.0;
-        double heightM = 1.75;
-        double bmi = weightKg / (heightM * heightM);
-        System.out.printf(&quot;BMI = %.2f =&gt; &quot;, bmi);
-        if (bmi &lt; 18.5) {
-            System.out.println(&quot;Underweight&quot;);
-        } else if (bmi &lt; 25.0) {
-            System.out.println(&quot;Normal weight&quot;);
-        } else if (bmi &lt; 30.0) {
-            System.out.println(&quot;Overweight&quot;);
-        } else {
-            System.out.println(&quot;Obese&quot;);
-        }
-
-        // 4. Switch Statement
-        System.out.println(&quot;\n=== Switch Statement: Grade Classifier ===&quot;);
-        int score = 85;
-        char grade;
-        switch (score / 10) {
-            case 10:
-            case 9:
-                grade = &#x27;A&#x27;;
-                break;
-            case 8:
-                grade = &#x27;B&#x27;;
-                break;
-            case 7:
-                grade = &#x27;C&#x27;;
-                break;
-            case 6:
-                grade = &#x27;D&#x27;;
-                break;
-            default:
-                grade = &#x27;F&#x27;;
-        }
-        System.out.println(&quot;Score: &quot; + score + &quot; =&gt; Grade: &quot; + grade);
-
-        // 5. For Loop
-        System.out.println(&quot;\n=== For Loop: Summation 1 to n ===&quot;);
-        int upperBound = 10;
-        int sum = 0;
-        for (int i = 1; i &lt;= upperBound; i++) {
-            sum = sum + i;
-        }
-        System.out.println(&quot;Sum of 1 to &quot; + upperBound + &quot; = &quot; + sum);
-
-        System.out.print(&quot;Even numbers from 1 to 20, skipping multiples of 6: &quot;);
-        for (int i = 1; i &lt;= 20; i++) {
-            if (i % 6 == 0) {
-                continue;
-            }
-            if (i &gt; 18) {
-                break;
-            }
-            if (i % 2 == 0) {
-                System.out.print(i + &quot; &quot;);
-            }
-        }
-        System.out.println();
-
-        // 6. While Loop
-        System.out.println(&quot;\n=== While Loop: Reverse Digits ===&quot;);
-        int number = 12345;
-        int temp = number;
-        int reversed = 0;
-        while (temp != 0) {
-            int digit = temp % 10;
-            reversed = reversed * 10 + digit;
-            temp = temp / 10;
-        }
-        System.out.println(&quot;Original number: &quot; + number);
-        System.out.println(&quot;Reversed number: &quot; + reversed);
-
-        // 7. Do-While Loop
-        System.out.println(&quot;\n=== Do-While Loop: Collatz Sequence ===&quot;);
-        long collatz = 27;
-        int steps = 0;
-        System.out.print(&quot;Sequence: &quot;);
-        do {
-            System.out.print(collatz + &quot; &quot;);
-            if (collatz % 2 == 0) {
-                collatz = collatz / 2;
-            } else {
-                collatz = 3 * collatz + 1;
-            }
-            steps++;
-        } while (collatz != 1);
-        System.out.println(&quot;1&quot;);
-        System.out.println(&quot;Steps to reach 1: &quot; + steps);
-    }
-}</pre></div><p class="muted">Compile and run: <code>javac *.java</code> → <code>java Lab1Demo</code></p>
-</div></section>
-<section class="slide " data-title="Official program: expected output" aria-label="Official program: expected output" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official lab</p><h2>Official program: expected output</h2><div class="runbox" data-cmd="java Lab1Demo"><pre class="run-src" hidden>=== Primitive Data Types and String ===
-byte    : 100
-short   : 30000
-int     : 21
-long    : 9876543210
-float   : 3.75
-double  : 5.91
-char    : A (Unicode = 65)
-boolean : true
-String  : Mozdaher Abdul Quader
-
-=== Type Casting ===
-int 21 widened to double: 21.0
-double 3.14159 narrowed to int: 3
-char &#x27;Z&#x27; as int: 90 | next char: [
-
-=== Conditional Statement ===
-42 is Positive
-BMI = 22.86 =&gt; Normal weight
-
-=== Switch Statement: Grade Classifier ===
-Score: 85 =&gt; Grade: B
-
-=== For Loop: Summation 1 to n ===
-Sum of 1 to 10 = 55
-Even numbers from 1 to 20, skipping multiples of 6: 2 4 8 10 14 16 18
-
-=== While Loop: Reverse Digits ===
-Original number: 12345
-Reversed number: 54321
-
-=== Do-While Loop: Collatz Sequence ===
-Sequence: 27 82 41 124 62 31 94 47 142 71 214 107 322 161 484 242 121 364 182 91 274 137 412 206 103 310 155 466 233 700 350 175 526 263 790 395 1186 593 1780 890 445 1336 668 334 167 502 251 754 377 1132 566 283 850 425 1276 638 319 958 479 1438 719 2158 1079 3238 1619 4858 2429 7288 3644 1822 911 2734 1367 4102 2051 6154 3077 9232 4616 2308 1154 577 1732 866 433 1300 650 325 976 488 244 122 61 184 92 46 23 70 35 106 53 160 80 40 20 10 5 16 8 4 2 1
-Steps to reach 1: 111</pre></div><p class="note-line">Why is the next char after Z a “[”? Characters are numbers: 'Z' is 90, and 91 is '['.</p>
-</div></section>
-<section class="slide " data-title="Task 1: Temperature converter" aria-label="Task 1: Temperature converter" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official in-lab task 1 of 4</p><h2>Task 1: Temperature converter</h2><div class="ex task"><div class="qq">Read a temperature in Celsius and convert it to Fahrenheit, Kelvin and Rankine: F = C × 1.8 + 32, K = C + 273.15, R = F + 459.67.</div>
-<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l1t0r0" data-key="l1t0r0"><label for="l1t0r0">Use <code>double</code> variables for all temperatures</label></li><li><input type="checkbox" id="l1t0r1" data-key="l1t0r1"><label for="l1t0r1">Print every converted value with a clear label</label></li><li><input type="checkbox" id="l1t0r2" data-key="l1t0r2"><label for="l1t0r2">Use meaningful variable names</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Read with <code>Scanner sc = new Scanner(System.in); double c = sc.nextDouble();</code> and compute F first, because R depends on it.</div></details></div>
-</div></section>
-<section class="slide " data-title="Task 2: FizzBuzz extended" aria-label="Task 2: FizzBuzz extended" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official in-lab task 2 of 4</p><h2>Task 2: FizzBuzz extended</h2><div class="ex task"><div class="qq">Print 1 to 50: FizzBuzz if divisible by 3 and 5, Fizz for 3, Buzz for 5, Boom for 7, otherwise the number.</div>
-<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l1t1r0" data-key="l1t1r0"><label for="l1t1r0">Use a <code>for</code> loop</label></li><li><input type="checkbox" id="l1t1r1" data-key="l1t1r1"><label for="l1t1r1">Use <code>if / else if / else</code></label></li><li><input type="checkbox" id="l1t1r2" data-key="l1t1r2"><label for="l1t1r2">Test “3 and 5” <b>before</b> 3 or 5 alone</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Order matters: once one branch of an if-else chain matches, the rest are skipped. Use <code>i % 15 == 0</code> or <code>i % 3 == 0 && i % 5 == 0</code> first.</div></details></div>
-</div></section>
-<section class="slide " data-title="Task 3: Number system classifier" aria-label="Task 3: Number system classifier" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official in-lab task 3 of 4</p><h2>Task 3: Number system classifier</h2><div class="ex task"><div class="qq">Read an integer and classify it by the remainder when divided by 4: 0 → Divisible by 4, 1 or 3 → Odd, 2 → Even, not divisible by 4.</div>
-<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l1t2r0" data-key="l1t2r0"><label for="l1t2r0">Read input with <code>Scanner</code></label></li><li><input type="checkbox" id="l1t2r1" data-key="l1t2r1"><label for="l1t2r1">Use a traditional <code>switch</code></label></li><li><input type="checkbox" id="l1t2r2" data-key="l1t2r2"><label for="l1t2r2">Print the number and its classification</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans"><code>case 1: case 3:</code> can share one body. Careful with negative numbers: <code>-3 % 4</code> is <code>-3</code> in Java.</div></details></div>
-</div></section>
-<section class="slide " data-title="Task 4: Digit frequency counter" aria-label="Task 4: Digit frequency counter" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official in-lab task 4 of 4</p><h2>Task 4: Digit frequency counter</h2><div class="ex task"><div class="qq">Read a positive integer and count how often each digit 0–9 appears.</div>
-<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l1t3r0" data-key="l1t3r0"><label for="l1t3r0">Repeat input with <code>do-while</code> until the number is positive</label></li><li><input type="checkbox" id="l1t3r1" data-key="l1t3r1"><label for="l1t3r1">Store counts in an <code>int[10]</code></label></li><li><input type="checkbox" id="l1t3r2" data-key="l1t3r2"><label for="l1t3r2">Extract digits with a <code>while</code> loop</label></li><li><input type="checkbox" id="l1t3r3" data-key="l1t3r3"><label for="l1t3r3">Print the frequency of each digit</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Inside the loop: <code>freq[n % 10]++; n /= 10;</code>. Use <code>long</code> if you want very large inputs.</div></details></div>
+<section class="slide " data-title="Lab task 4: Digit frequency counter" aria-label="Lab task 4: Digit frequency counter" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab task 4 of 4</p><h2>Lab task 4: Digit frequency counter</h2><div class="ex task"><div class="qq">Read a positive integer and count how often each digit 0–9 appears.</div>
+<div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l1t3r0" data-key="l1t3r0"><label for="l1t3r0">Repeat input with <code>do-while</code> until the number is positive</label></li><li><input type="checkbox" id="l1t3r1" data-key="l1t3r1"><label for="l1t3r1">Store counts in an <code>int[10]</code></label></li><li><input type="checkbox" id="l1t3r2" data-key="l1t3r2"><label for="l1t3r2">Extract digits with a <code>while</code> loop</label></li><li><input type="checkbox" id="l1t3r3" data-key="l1t3r3"><label for="l1t3r3">Print the frequency of each digit</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans"><code>int[] freq = new int[10];</code> is ten counters, <code>freq[0]</code> to <code>freq[9]</code>. <code>n % 10</code> is the last digit and <code>n / 10</code> drops it. Try 1002 on paper first: which counter goes up at each step, and when does the loop stop? Use <code>long</code> for very large inputs.</div></details></div>
 </div></section>
 <section class="slide " data-title="Show your work" aria-label="Show your work" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official in-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
+<p class="kicker">Lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
 </div></section>
 <section class="slide " data-title="Report exercise 1" aria-label="Report exercise 1" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Lab report · exercise 1 of 2</p><h2>Student grade management system</h2><div class="ex task report"><div class="qq">Manage the marks of five students in Mathematics, Physics and Chemistry.</div>
@@ -574,7 +382,7 @@ Steps to reach 1: 111</pre></div><p class="note-line">Why is the next char after
 <p class="kicker">Discussion</p><h2>Viva questions (1 of 2)</h2><div class="ex"><div class="qq">Why is <code>long highScore = 2500000000L;</code> written with an L?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">The number is too big for an int. Without the L, Java reads it as an int and refuses to compile.</div></details></div><div class="ex"><div class="qq"><code>int hit = (int) 12.75;</code> gives 12. Why not 13?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">A cast to int truncates: it drops the fraction. Use <code>Math.round</code> to round.</div></details></div>
 </div></section>
 <section class="slide " data-title="Viva questions (2 of 2)" aria-label="Viva questions (2 of 2)" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Discussion</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq">What happens if you remove the <code>break</code> after <code>case 2</code>?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Execution falls through into case 3, so key 2 ends up selecting the Rocket.</div></details></div><div class="ex"><div class="qq">When would a game use do-while instead of while?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">When the body must run at least once, such as showing the menu or playing the first wave before checking whether to go on.</div></details></div>
+<p class="kicker">Discussion</p><h2>Viva questions (2 of 2)</h2><div class="ex"><div class="qq">What happens if you remove the <code>break</code> after <code>case 2</code>?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">Execution falls through into <code>default</code>, so key 2 prints “Weapon: Rifle” and then “Weapon: Fists”.</div></details></div><div class="ex"><div class="qq">When would a game use do-while instead of while?</div><details class="reveal"><summary>Show the answer</summary><div class="ans">When the body must run at least once, such as showing the menu or playing the first wave before checking whether to go on.</div></details></div>
 </div></section>
 <section class="slide " data-title="Quiz" aria-label="Quiz" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Check yourself</p><h2>Quiz</h2><div><div class="quiz-host" data-quiz-key="game1"></div><script type="application/json" class="quiz-json">[{"q": "Which type fits <code>alive<\/code> (is the player still in the game)?", "o": ["int", "char", "boolean", "String"], "a": 2, "w": "boolean holds true or false."}, {"q": "<code>double damage = 12.75; int hit = (int) damage;<\/code> What is hit?", "o": ["13", "12", "12.75", "a compile error"], "a": 1, "w": "A cast to int cuts off the fraction."}, {"q": "A switch has no <code>break<\/code> after case 1, and key is 1. Which code runs?", "o": ["only case 1", "case 1 and the cases below it, until a break", "only default", "nothing"], "a": 1, "w": "Without break, execution falls through."}, {"q": "Which loop always runs its body at least once?", "o": ["for", "while", "do-while", "none of them"], "a": 2, "w": "do-while tests after the body."}, {"q": "Inside a loop, <code>continue<\/code>\u2026", "o": ["ends the program", "leaves the loop", "skips to the next round of the loop", "restarts the loop from the beginning"], "a": 2, "w": "break leaves the loop; continue skips the rest of this round."}]</script></div>
@@ -585,7 +393,7 @@ Steps to reach 1: 111</pre></div><p class="note-line">Why is the next char after
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 50</span>
+  <span class="counter" id="counter">1 / 44</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this chapter</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>

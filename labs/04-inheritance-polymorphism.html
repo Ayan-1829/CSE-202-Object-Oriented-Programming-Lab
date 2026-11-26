@@ -30,7 +30,7 @@
 <meta name="twitter:description" content="Drones, tanks and snipers are all enemies: shared code, their own attacks, one loop for the wave.">
 <meta name="twitter:image" content="https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/04-inheritance-polymorphism.png?v=2">
 <meta name="twitter:image:alt" content="Chapter 4 of 10: Inheritance, Polymorphism &amp; Overriding – CSE 202 Object Oriented Programming Lab">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Inheritance, Polymorphism & Overriding", "description": "Drones, tanks and snipers are all enemies: shared code, their own attacks, one loop for the wave.", "position": 4, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 45, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/04-inheritance-polymorphism.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/04-inheritance-polymorphism.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Inheritance, Polymorphism & Overriding", "description": "Drones, tanks and snipers are all enemies: shared code, their own attacks, one loop for the wave.", "position": 4, "educationalLevel": "Undergraduate", "learningResourceType": "Lab session slides", "inLanguage": "en", "numberOfItems": 41, "isAccessibleForFree": true, "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/labs/04-inheritance-polymorphism.html", "image": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/img/og/04-inheritance-polymorphism.png", "isPartOf": {"@type": "Course", "name": "Object Oriented Programming Lab", "courseCode": "CSE 202", "url": "https://ayan-1829.github.io/CSE-202-Object-Oriented-Programming-Lab/"}}</script>
 <title>Chapter 4: Inheritance, Polymorphism &amp; Overriding | OOP Lab (CSE 202)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,9 +67,10 @@
 <section class="slide " data-title="Chapter at a glance" aria-label="Chapter at a glance" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Chapter 4 of 10</p><h2>Chapter at a glance</h2><div class="cols wl"><div><h3>After this chapter you can</h3><ul class=""><li>Build a class hierarchy with <code>extends</code>: GameCharacter → Enemy → Drone, Tank, Sniper</li><li>Use <code>super(…)</code> for the inherited part and <code>protected</code> to share fields</li><li>Override <code>attack()</code>, <code>takeDamage()</code> and <code>describe()</code>; tell overriding from overloading</li><li>Run a mixed wave through Enemy references (polymorphism)</li><li>Use <code>instanceof</code> before casting to reach Tank- or Sniper-only methods</li></ul></div>
 <div><h3>Before you start</h3><ul class=""><li>Chapters 2–3: classes, constructors and overloading</li><li>Arrays and the for-each loop</li></ul></div></div>
+<p class="note-line"><b>What is marked:</b> the 3 lab tasks (show them during the lab) and the 2 report exercises. The game tasks are practice.</p>
 </div></section>
 <section class="slide " data-title="Contents" aria-label="Contents" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Chapter 4 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=26">Run the game</a></li><li><a href="#s=27">Game practice tasks</a></li><li><a href="#s=30">The official lab program</a></li><li><a href="#s=35">Official in-lab tasks</a></li><li><a href="#s=39">Lab report exercises</a></li><li><a href="#s=42">Viva questions and quiz</a></li></ol>
+<p class="kicker">Chapter 4 of 10</p><h2>Contents</h2><p class="muted">Select a part to jump to it.</p><ol class="outline-list"><li><a href="#s=5">Today’s build: the game program</a></li><li><a href="#s=6">The topics: the idea, then the game</a></li><li><a href="#s=26">Run the game</a></li><li><a href="#s=27">Game practice tasks</a></li><li><a href="#s=30">Lab tasks</a></li><li><a href="#s=35">Lab report exercises</a></li><li><a href="#s=38">Viva questions and quiz</a></li></ol>
 </div></section>
 <section class="slide " data-title="Today’s build" aria-label="Today’s build" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Build the game · Chapter 4</p><h2>Today’s build</h2><ul class="pts"><li>Seven files: the hierarchy <code>GameCharacter</code> → <code>Player</code>, <code>Enemy</code> → <code>Drone</code>, <code>Tank</code>, <code>Sniper</code>, and <code>WaveDemo</code> to run it.</li></ul>
@@ -653,319 +654,25 @@ System.out.println(&quot;c instanceof Drone : &quot; + (c instanceof Drone));</p
 <p class="kicker">Game practice · 3 of 3</p><h2>Game task 3: Count by type</h2><div class="ex task g-task"><div class="qq">Report on a mixed wave.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="g4t2r0" data-key="g4t2r0"><label for="g4t2r0">Build an Enemy[] with 2 drones, 2 tanks and 1 sniper</label></li><li><input type="checkbox" id="g4t2r1" data-key="g4t2r1"><label for="g4t2r1">Loop once and count each type with instanceof</label></li><li><input type="checkbox" id="g4t2r2" data-key="g4t2r2"><label for="g4t2r2">Raise every tank’s shield through a safe cast</label></li><li><input type="checkbox" id="g4t2r3" data-key="g4t2r3"><label for="g4t2r3">Print the counts and the total health of the wave</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">If you ever add a subclass of Tank, test the most specific class first.</div></details></div>
 </div></section>
-<section class="slide " data-title="The official lab program" aria-label="The official lab program" tabindex="-1"><div style="zoom:0.99;" class="slide-inner">
-<p class="kicker">Official lab · from the lab manual</p><h2>The official lab program</h2>
-<p class="g-official">The graded in-lab tasks and report exercises build on this program, not on the game. Read it and run it before you start them.</p>
-<ol class="flow"><li>Create a Vehicle, a Car, a Motorcycle and an ElectricCar</li><li>Call display() on each directly</li><li>Store them in a Vehicle[] and display them polymorphically</li><li>Call inherited accelerate() and brake()</li><li>Call subclass-only refuel(), wheelie() and charge()</li><li>Test instanceof and cast a Vehicle reference to Car</li><li>Verify overriding through Vehicle references</li><li>Show brake() never makes speed negative</li></ol><p class="note-line">Common state in Vehicle; each subclass adds fields and overrides display().</p>
+<section class="slide " data-title="Lab tasks" aria-label="Lab tasks" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Practice · lab tasks</p><h2>Lab tasks</h2>
+<p>These tasks come from the lab manual. They start from its program, not from the game: save these files in one folder, then make the changes each task asks for.</p>
+<ul class="g-files"><li><a href="../starter/lab04/Vehicle.java" download><code>Vehicle.java</code></a></li><li><a href="../starter/lab04/Car.java" download><code>Car.java</code></a></li><li><a href="../starter/lab04/Motorcycle.java" download><code>Motorcycle.java</code></a></li><li><a href="../starter/lab04/ElectricCar.java" download><code>ElectricCar.java</code></a></li><li><a href="../starter/lab04/Lab4Demo.java" download><code>Lab4Demo.java</code></a></li></ul><p class="muted">Compile and run: <code>javac *.java</code> → <code>java Lab4Demo</code></p>
 </div></section>
-<section class="slide " data-title="Trace: super(…) and dynamic dispatch" aria-label="Trace: super(…) and dynamic dispatch" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
-<p class="kicker">Official lab · step through the code · 1 of 2</p><h2>Trace: super(…) and dynamic dispatch</h2><p class="muted">Watch super(…) build the inherited part, then one call site run two different display() methods.</p><div data-trace="lab4-dispatch"></div>
-</div></section>
-<section class="slide " data-title="Trace: instanceof before every cast" aria-label="Trace: instanceof before every cast" tabindex="-1"><div style="zoom:0.97;" class="slide-inner">
-<p class="kicker">Official lab · step through the code · 2 of 2</p><h2>Trace: instanceof before every cast</h2><p class="muted">One loop over a Vehicle[]: the check decides whether the cast is safe. The last line shows what happens without it.</p><div data-trace="lab4-cast"></div>
-</div></section>
-<section class="slide " data-title="The official program" aria-label="The official program" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official lab · 5 files</p><h2>The official program</h2><div class="codeview"><pre class="code small-code" data-file="Vehicle.java">public class Vehicle {
-
-    // Protected fields are accessible in subclasses
-    protected String make;
-    protected int year;
-    protected int speed;
-
-    public Vehicle(String make, int year) {
-        this.make = make;
-        this.year = year;
-        this.speed = 0;
-    }
-
-    public void accelerate(int delta) {
-        if (delta &gt; 0) {
-            this.speed = this.speed + delta;
-        }
-    }
-
-    public void brake(int delta) {
-        if (delta &gt; 0) {
-            this.speed = Math.max(0, this.speed - delta);
-        }
-    }
-
-    public void display() {
-        System.out.println(&quot;------- Vehicle -------&quot;);
-        System.out.println(&quot;Make  : &quot; + make);
-        System.out.println(&quot;Year  : &quot; + year);
-        System.out.println(&quot;Speed : &quot; + speed + &quot; km/h&quot;);
-        System.out.println(&quot;-----------------------&quot;);
-    }
-
-    public int getYear() {
-        return year;
-    }
-}</pre><pre class="code small-code" data-file="Car.java">public class Car extends Vehicle {
-
-    private int numDoors;
-    private double fuelLevel;
-
-    public Car(String make, int year, int numDoors, double fuelLevel) {
-        super(make, year);
-        if (numDoors &gt; 0) {
-            this.numDoors = numDoors;
-        } else {
-            this.numDoors = 4;
-        }
-        if (fuelLevel &gt;= 0.0 &amp;&amp; fuelLevel &lt;= 100.0) {
-            this.fuelLevel = fuelLevel;
-        } else {
-            this.fuelLevel = 0.0;
-        }
-    }
-
-    public void refuel(double amount) {
-        if (amount &gt; 0.0) {
-            this.fuelLevel = Math.min(100.0, this.fuelLevel + amount);
-        }
-    }
-
-    @Override
-    public void display() {
-        System.out.println(&quot;------- Car -------&quot;);
-        System.out.println(&quot;Make      : &quot; + make);
-        System.out.println(&quot;Year      : &quot; + year);
-        System.out.println(&quot;Speed     : &quot; + speed + &quot; km/h&quot;);
-        System.out.println(&quot;Doors     : &quot; + numDoors);
-        System.out.printf(&quot;Fuel Level: %.1f%%%n&quot;, fuelLevel);
-        System.out.println(&quot;-------------------&quot;);
-    }
-
-    public int getNumDoors() { return numDoors; }
-    public double getFuelLevel() { return fuelLevel; }
-}</pre><pre class="code small-code" data-file="Motorcycle.java">public class Motorcycle extends Vehicle {
-
-    private boolean hasStorage;
-
-    public Motorcycle(String make, int year, boolean hasStorage) {
-        super(make, year);
-        this.hasStorage = hasStorage;
-    }
-
-    public void wheelie() {
-        System.out.println(make + &quot; is performing a wheelie!&quot;);
-    }
-
-    @Override
-    public void display() {
-        System.out.println(&quot;------- Motorcycle -------&quot;);
-        System.out.println(&quot;Make        : &quot; + make);
-        System.out.println(&quot;Year        : &quot; + year);
-        System.out.println(&quot;Speed       : &quot; + speed + &quot; km/h&quot;);
-        System.out.println(&quot;Has Storage : &quot; + (hasStorage ? &quot;Yes&quot; : &quot;No&quot;));
-        System.out.println(&quot;--------------------------&quot;);
-    }
-
-    public boolean hasStorage() { return hasStorage; }
-}</pre><pre class="code small-code" data-file="ElectricCar.java">public class ElectricCar extends Car {
-
-    private double batteryCapacity;
-    private double chargeLevel;
-
-    public ElectricCar(String make, int year, int numDoors,
-                       double batteryCapacity, double chargeLevel) {
-        super(make, year, numDoors, 100.0);
-        if (batteryCapacity &gt; 0.0) {
-            this.batteryCapacity = batteryCapacity;
-        } else {
-            this.batteryCapacity = 50.0;
-        }
-        if (chargeLevel &gt;= 0.0 &amp;&amp; chargeLevel &lt;= 100.0) {
-            this.chargeLevel = chargeLevel;
-        } else {
-            this.chargeLevel = 0.0;
-        }
-    }
-
-    public void charge(double amount) {
-        if (amount &gt; 0.0) {
-            this.chargeLevel = Math.min(100.0, this.chargeLevel + amount);
-        }
-    }
-
-    @Override
-    public void display() {
-        System.out.println(&quot;------- Electric Car -------&quot;);
-        System.out.println(&quot;Make             : &quot; + make);
-        System.out.println(&quot;Year             : &quot; + year);
-        System.out.println(&quot;Speed            : &quot; + speed + &quot; km/h&quot;);
-        System.out.println(&quot;Doors            : &quot; + getNumDoors());
-        System.out.printf(&quot;Battery Capacity : %.1f kWh%n&quot;, batteryCapacity);
-        System.out.printf(&quot;Charge Level     : %.1f%%%n&quot;, chargeLevel);
-        System.out.println(&quot;----------------------------&quot;);
-    }
-
-    public double getBatteryCapacity() { return batteryCapacity; }
-    public double getChargeLevel() { return chargeLevel; }
-}</pre><pre class="code small-code" data-file="Lab4Demo.java">public class Lab4Demo {
-
-    static void displayVehicle(Vehicle vehicle) {
-        vehicle.display();
-    }
-
-    public static void main(String[] args) {
-
-        // 1. Object Creation
-        System.out.println(&quot;=== Object Creation ===&quot;);
-        Vehicle vehicle = new Vehicle(&quot;Generic Vehicle&quot;, 2020);
-        Car car = new Car(&quot;Toyota Camry&quot;, 2022, 4, 75.0);
-        Motorcycle motorcycle = new Motorcycle(&quot;Yamaha YZF&quot;, 2021, true);
-        ElectricCar electricCar = new ElectricCar(&quot;Tesla Model 3&quot;, 2023, 4, 75.0, 85.0);
-
-        // 2. Direct Method Calls
-        System.out.println(&quot;\n=== Direct Method Calls ===&quot;);
-        vehicle.display();
-        car.display();
-        motorcycle.display();
-        electricCar.display();
-
-        // 3. Polymorphism with Superclass References
-        System.out.println(&quot;\n=== Polymorphic Dispatch ===&quot;);
-        Vehicle[] vehicles = {vehicle, car, motorcycle, electricCar};
-        for (int i = 0; i &lt; vehicles.length; i++) {
-            System.out.println(&quot;vehicles[&quot; + i + &quot;]:&quot;);
-            displayVehicle(vehicles[i]);
-        }
-
-        // 4. Inherited Methods
-        System.out.println(&quot;\n=== Inherited Methods ===&quot;);
-        car.accelerate(50);
-        System.out.println(&quot;After car.accelerate(50):&quot;);
-        car.display();
-        motorcycle.accelerate(80);
-        System.out.println(&quot;After motorcycle.accelerate(80):&quot;);
-        motorcycle.display();
-        electricCar.accelerate(40);
-        System.out.println(&quot;After electricCar.accelerate(40):&quot;);
-        electricCar.display();
-
-        // 5. Subclass-Specific Methods
-        System.out.println(&quot;\n=== Subclass-Specific Methods ===&quot;);
-        car.refuel(20.0);
-        System.out.println(&quot;After car.refuel(20.0):&quot;);
-        car.display();
-        motorcycle.wheelie();
-        electricCar.charge(15.0);
-        System.out.println(&quot;After electricCar.charge(15.0):&quot;);
-        electricCar.display();
-
-        // 6. instanceof and Safe Casting
-        System.out.println(&quot;\n=== instanceof and Safe Casting ===&quot;);
-        Vehicle v = new Car(&quot;Honda Civic&quot;, 2021, 2, 60.0);
-        System.out.println(&quot;v instanceof Vehicle    : &quot; + (v instanceof Vehicle));
-        System.out.println(&quot;v instanceof Car        : &quot; + (v instanceof Car));
-        System.out.println(&quot;v instanceof Motorcycle : &quot; + (v instanceof Motorcycle));
-        if (v instanceof Car) {
-            Car castedCar = (Car) v;
-            System.out.println(&quot;Number of doors after casting: &quot; + castedCar.getNumDoors());
-        }
-
-        // 7. Method Overriding Verification
-        System.out.println(&quot;\n=== Method Overriding Verification ===&quot;);
-        Vehicle ref1 = new Car(&quot;Ford Mustang&quot;, 2020, 2, 50.0);
-        Vehicle ref2 = new Motorcycle(&quot;Harley-Davidson&quot;, 2022, false);
-        Vehicle ref3 = new ElectricCar(&quot;Nissan Leaf&quot;, 2023, 4, 62.0, 70.0);
-        ref1.display();
-        ref2.display();
-        ref3.display();
-
-        // 8. Inherited brake() Method
-        System.out.println(&quot;\n=== Inherited brake() Method ===&quot;);
-        Car testCar = new Car(&quot;Subaru Outback&quot;, 2019, 5, 45.0);
-        testCar.accelerate(100);
-        System.out.println(&quot;After testCar.accelerate(100):&quot;);
-        testCar.display();
-        testCar.brake(30);
-        System.out.println(&quot;After testCar.brake(30):&quot;);
-        testCar.display();
-        testCar.brake(200);
-        System.out.println(&quot;After testCar.brake(200):&quot;);
-        testCar.display();
-    }
-}</pre></div><p class="muted">Compile and run: <code>javac *.java</code> → <code>java Lab4Demo</code></p>
-</div></section>
-<section class="slide " data-title="Official program: expected output" aria-label="Official program: expected output" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official lab</p><h2>Official program: expected output</h2><div class="runbox" data-cmd="java Lab4Demo"><pre class="run-src" hidden>=== Object Creation ===
-
-=== Direct Method Calls ===
-------- Vehicle -------
-Make  : Generic Vehicle
-Year  : 2020
-Speed : 0 km/h
------------------------
-------- Car -------
-Make      : Toyota Camry
-Year      : 2022
-Speed     : 0 km/h
-Doors     : 4
-Fuel Level: 75.0%
--------------------
-------- Motorcycle -------
-Make        : Yamaha YZF
-Year        : 2021
-Speed       : 0 km/h
-Has Storage : Yes
---------------------------
-------- Electric Car -------
-Make             : Tesla Model 3
-Year             : 2023
-Speed            : 0 km/h
-Doors            : 4
-Battery Capacity : 75.0 kWh
-Charge Level     : 85.0%
-----------------------------
-
-=== Polymorphic Dispatch ===
-vehicles[0]:
-------- Vehicle -------
-  … (the same four blocks again, one per array element)
-
-=== Inherited Methods ===
-After car.accelerate(50):            Speed : 50 km/h
-After motorcycle.accelerate(80):     Speed : 80 km/h
-After electricCar.accelerate(40):    Speed : 40 km/h
-
-=== Subclass-Specific Methods ===
-After car.refuel(20.0):              Fuel Level: 95.0%
-Yamaha YZF is performing a wheelie!
-After electricCar.charge(15.0):      Charge Level : 100.0%
-
-=== instanceof and Safe Casting ===
-v instanceof Vehicle    : true
-v instanceof Car        : true
-v instanceof Motorcycle : false
-Number of doors after casting: 2
-
-=== Method Overriding Verification ===
-------- Car -------          (Ford Mustang)
-------- Motorcycle -------   (Harley-Davidson, Has Storage : No)
-------- Electric Car -------  (Nissan Leaf, 62.0 kWh, 70.0%)
-
-=== Inherited brake() Method ===
-After testCar.accelerate(100):  Speed : 100 km/h
-After testCar.brake(30):        Speed : 70 km/h
-After testCar.brake(200):       Speed : 0 km/h</pre></div><p class="note-line">Shortened: repeated display blocks are summarised. Run the program to see every block in full.</p>
-</div></section>
-<section class="slide " data-title="Task 1: Add a Bus class" aria-label="Task 1: Add a Bus class" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official in-lab task 1 of 3</p><h2>Task 1: Add a Bus class</h2><div class="ex task"><div class="qq">A new Vehicle subclass that sells tickets.</div>
+<section class="slide " data-title="Lab task 1: Add a Bus class" aria-label="Lab task 1: Add a Bus class" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab task 1 of 3</p><h2>Lab task 1: Add a Bus class</h2><div class="ex task"><div class="qq">A new Vehicle subclass that sells tickets.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l4t0r0" data-key="l4t0r0"><label for="l4t0r0">Private fields <code>numSeats</code> and <code>ticketPrice</code> with getters</label></li><li><input type="checkbox" id="l4t0r1" data-key="l4t0r1"><label for="l4t0r1">Constructor that calls <code>super(make, year)</code></label></li><li><input type="checkbox" id="l4t0r2" data-key="l4t0r2"><label for="l4t0r2">Override <code>display()</code></label></li><li><input type="checkbox" id="l4t0r3" data-key="l4t0r3"><label for="l4t0r3"><code>calculateRevenue(int passengersBoarded)</code></label></li><li><input type="checkbox" id="l4t0r4" data-key="l4t0r4"><label for="l4t0r4">Demonstrate accelerate/brake, display and revenue in Lab4Demo</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Cap revenue at the number of seats: <code>Math.min(passengersBoarded, numSeats) * ticketPrice</code>.</div></details></div>
 </div></section>
-<section class="slide " data-title="Task 2: Create a HybridCar class" aria-label="Task 2: Create a HybridCar class" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official in-lab task 2 of 3</p><h2>Task 2: Create a HybridCar class</h2><div class="ex task"><div class="qq">A Car subclass that can run on fuel or battery.</div>
+<section class="slide " data-title="Lab task 2: Create a HybridCar class" aria-label="Lab task 2: Create a HybridCar class" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab task 2 of 3</p><h2>Lab task 2: Create a HybridCar class</h2><div class="ex task"><div class="qq">A Car subclass that can run on fuel or battery.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l4t1r0" data-key="l4t1r0"><label for="l4t1r0">Fields <code>batteryLevel</code> and <code>currentMode</code></label></li><li><input type="checkbox" id="l4t1r1" data-key="l4t1r1"><label for="l4t1r1"><code>useBattery(double)</code> and <code>switchMode(String)</code> ("Fuel" / "Battery")</label></li><li><input type="checkbox" id="l4t1r2" data-key="l4t1r2"><label for="l4t1r2">Override <code>display()</code></label></li><li><input type="checkbox" id="l4t1r3" data-key="l4t1r3"><label for="l4t1r3">Store it in a Vehicle reference and call display()</label></li><li><input type="checkbox" id="l4t1r4" data-key="l4t1r4"><label for="l4t1r4">Cast to HybridCar to call its own methods</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Calling <code>v.switchMode("Battery")</code> on a Vehicle reference will not compile — that is the point of the cast.</div></details></div>
 </div></section>
-<section class="slide " data-title="Task 3: Test instanceof and casting" aria-label="Task 3: Test instanceof and casting" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official in-lab task 3 of 3</p><h2>Task 3: Test instanceof and casting</h2><div class="ex task"><div class="qq">Process a mixed array safely.</div>
+<section class="slide " data-title="Lab task 3: Test instanceof and casting" aria-label="Lab task 3: Test instanceof and casting" tabindex="-1"><div class="slide-inner">
+<p class="kicker">Lab task 3 of 3</p><h2>Lab task 3: Test instanceof and casting</h2><div class="ex task"><div class="qq">Process a mixed array safely.</div>
 <div class="chk-head"><span>Requirements</span><span class="chk-count"></span></div><ul class="chk-list"><li><input type="checkbox" id="l4t2r0" data-key="l4t2r0"><label for="l4t2r0">Array with Car, Motorcycle, ElectricCar and Bus objects</label></li><li><input type="checkbox" id="l4t2r1" data-key="l4t2r1"><label for="l4t2r1">Loop over it</label></li><li><input type="checkbox" id="l4t2r2" data-key="l4t2r2"><label for="l4t2r2">Identify each actual type with <code>instanceof</code></label></li><li><input type="checkbox" id="l4t2r3" data-key="l4t2r3"><label for="l4t2r3">Call type-specific methods after a safe cast</label></li><li><input type="checkbox" id="l4t2r4" data-key="l4t2r4"><label for="l4t2r4">Print clear output</label></li></ul><details class="reveal"><summary>Show a hint</summary><div class="ans">Test the most specific type first: an ElectricCar is also a Car.</div></details></div>
 </div></section>
 <section class="slide " data-title="Show your work" aria-label="Show your work" tabindex="-1"><div class="slide-inner">
-<p class="kicker">Official in-lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
+<p class="kicker">Lab tasks</p><h2>Show your work during the lab</h2><p>For each task, show the instructor:</p><ul class="big-list"><li>the source code</li><li>a successful compilation</li><li>the running output</li><li>a short explanation of the logic you used</li></ul>
 </div></section>
 <section class="slide " data-title="Report exercise 1" aria-label="Report exercise 1" tabindex="-1"><div class="slide-inner">
 <p class="kicker">Lab report · exercise 1 of 2</p><h2>Employee hierarchy and payroll</h2><div class="ex task report"><div class="qq">Employee with Manager, Developer and Intern subclasses.</div>
@@ -993,7 +700,7 @@ After testCar.brake(200):       Speed : 0 km/h</pre></div><p class="note-line">S
 </main>
 <footer class="deck-foot">
   <button type="button" class="btn" id="prev">Previous</button>
-  <span class="counter" id="counter">1 / 45</span>
+  <span class="counter" id="counter">1 / 41</span>
   <button type="button" class="btn pri" id="next">Next</button>
 </footer>
 <aside id="slide-menu" hidden aria-label="Slide list"><div class="menu-head"><h3>Slides in this chapter</h3><button type="button" id="btn-menu-close" class="menu-close" aria-label="Close slide list">&#10005;</button></div></aside>
